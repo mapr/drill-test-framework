@@ -1,3 +1,4 @@
+#!/bin/bash
 stopFile=/tmp/stopFile
 if [ -f $stopFile ]
   then

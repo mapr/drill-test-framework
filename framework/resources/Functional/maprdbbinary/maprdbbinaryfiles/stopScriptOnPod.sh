@@ -1,3 +1,4 @@
+#!/bin/bash
 #$1 the name of the pod to run a script on
 #$2 the name of the script to be run
 cname=`./getDPName.sh`

@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ -f maprticket_5000 ]
   then
   cat maprticket_5000 | cut -d " " -f 1
