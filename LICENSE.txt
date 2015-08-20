@@ -1,0 +1,7 @@
+This is a placeholder license file. 
+
+We need to include the following details: 
+
+- The license under whice we plan to distribute the source (including any data & binaries). Example: The Apache license.
+
+- Cite, acknowledge & provide credit to related projects, datasets, ...
