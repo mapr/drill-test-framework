@@ -1,0 +1,4 @@
+-- Non correlated
+-- Inequality
+-- MAX returns NON null result
+select count(*) from j1 where c_date <> (select min(c_date) from j7 where c_bigint is null);

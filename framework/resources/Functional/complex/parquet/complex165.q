@@ -1,0 +1,1 @@
+select b.id, a.ooos.oa.oab.oabc, b.ooos.oa.oab.oabc from `complex.json` a inner join `complex.json` b on a.ooos.oa.oab.oabc=b.ooos.oa.oab.oabc where b.id in (1,2,3,4,5,100,3000,55555,1000000,1000001) order by b.id;

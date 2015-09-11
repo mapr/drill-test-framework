@@ -1,0 +1,566 @@
+{"id":1,
+ "kpis":[
+    {
+        "key": "cdr_orig_call_compl_ratio",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.24
+            },
+            "weight": {
+                "member1": 55.07
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "cdr_orig_call_drop_ratio",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.2
+            },
+            "weight": {
+                "member1": 18.27
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "staple_rtt_term",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 1.33
+            },
+            "weight": {
+                "member1": 70.69
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "cdr_n_term_call_drop",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 53
+            },
+            "weight": {
+                "member1": 0
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "ran_ul_iub_usage",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.35
+            },
+            "weight": {
+                "member1": 63.7
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "staple_ftp_dl_tp",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 284543.59
+            },
+            "weight": {
+                "member1": 15.94
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "traf_bytes_ul",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 168517.68
+            },
+            "weight": {
+                "member1": 0
+            },
+            "dimensions": {
+                "protocol": "ICMP",
+                "functionality": "file sharing",
+                "encryption": "TLS-SSL",
+                "service_provider": "Facebook",
+                "client_application": "Internet",
+                "traffic_category": "Chrome"
+            }
+        }
+    },
+    {
+        "key": "ran_admission errors",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.31
+            },
+            "weight": {
+                "member1": 80.5
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "ran_ul_credits",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.06
+            },
+            "weight": {
+                "member1": 21.15
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "ran_attach",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.99
+            },
+            "weight": {
+                "member1": 59.1
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "ran_rscp",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": -58
+            },
+            "weight": {
+                "member1": 67.54
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "ran_pdp_act",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.91
+            },
+            "weight": {
+                "member1": 79.57
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "cdr_sms_orig_ratio",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 1
+            },
+            "weight": {
+                "member1": 38.24
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "staple_video_rebuf",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.14
+            },
+            "weight": {
+                "member1": 17.51
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "ran_dl_non_hs_tx_power",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 43.84
+            },
+            "weight": {
+                "member1": 36.64
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "cdr_n_call_fwd_drop",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 71
+            },
+            "weight": {
+                "member1": 0
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "ran_n_voice_drop",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0
+            },
+            "weight": {
+                "member1": 0
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "staple_web_tp",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 2441994.01
+            },
+            "weight": {
+                "member1": 69.54
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "staple_ftp_acc_succ",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.9
+            },
+            "weight": {
+                "member1": 21.48
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "cdr_orig_emergency_call_drop_ratio",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.66
+            },
+            "weight": {
+                "member1": 14.36
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "cdr_sms_term_ratio",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.96
+            },
+            "weight": {
+                "member1": 59.8
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "ran_n_ps_drop",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0
+            },
+            "weight": {
+                "member1": 0
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "staple_video_mos",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 4
+            },
+            "weight": {
+                "member1": 62.17
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "ran_ecn0",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": -8.74
+            },
+            "weight": {
+                "member1": 59.79
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "cdr_call_fwd_succ_ratio",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.27
+            },
+            "weight": {
+                "member1": 61.21
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "ran_dl_credits",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 7.77
+            },
+            "weight": {
+                "member1": 87.92
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "cdr_term_call_compl_ratio",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.44
+            },
+            "weight": {
+                "member1": 62.13
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "cdr_n_call_fwd_attempt",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 23
+            },
+            "weight": {
+                "member1": 0
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "ran_ul_interference",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": -79.03
+            },
+            "weight": {
+                "member1": 73.1
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "cdr_n_orig_emergency_call_attempt",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 1291
+            },
+            "weight": {
+                "member1": 0
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "ran_IRAT success rate",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.86
+            },
+            "weight": {
+                "member1": 95.61
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "ran_n_hsusers",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 13.19
+            },
+            "weight": {
+                "member1": 96.95
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "staple_ftp_succ",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.91
+            },
+            "weight": {
+                "member1": 53.24
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "cdr_term_call_drop_ratio",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.58
+            },
+            "weight": {
+                "member1": 77.54
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "cdr_call_fwd_drop_ratio",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.77
+            },
+            "weight": {
+                "member1": 80.79
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "staple_video_qoe",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 4.75
+            },
+            "weight": {
+                "member1": 66.28
+            },
+            "dimensions": {}
+        }
+    },
+    {
+        "key": "ran_hs_ho",
+        "value": {
+            "rat": "3G",
+            "location_identifier": "rnccid_REVAN05_56603",
+            "bid": 1,
+            "value": {
+                "member1": 0.94
+            },
+            "weight": {
+                "member1": 39.89
+            },
+            "dimensions": {}
+        }
+    }
+]
+}

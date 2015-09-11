@@ -1,0 +1,1 @@
+select t.id, mod(t.ooa[1].fl.f2, t.soa[2].fl) from `complex.json` t order by t.id limit 11;

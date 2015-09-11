@@ -1,0 +1,1 @@
+select t.gbyi, count(t.id), max(t.id), min(t.id), avg(t.id) from `complex.json` t where t.gbyi <= 5 and t.gbyi >= 11 group by t.gbyi order by t.gbyi;

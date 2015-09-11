@@ -1,0 +1,27 @@
+{
+    "testId": "aggregate1parquet",
+    "type": "group",
+    "description": "Test aggregate queries via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "regression"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirAggregate1parquet",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/parquet/tpcds_sf1/",
+            "dest": "tpcds/parquet/s1"
+        }
+    ]
+}

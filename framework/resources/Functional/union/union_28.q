@@ -1,0 +1,1 @@
+SELECT avg(c1),c4 FROM `union_01.parquet` WHERE c4 IS NOT null group BY c4  UNION SELECT avg(c1),c3 FROM `union_02.parquet` WHERE c3 IS NOT null group BY c3;

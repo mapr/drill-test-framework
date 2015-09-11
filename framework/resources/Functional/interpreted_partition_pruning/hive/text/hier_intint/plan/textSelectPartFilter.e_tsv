@@ -1,0 +1,3 @@
+.*
+Filter.condition=.AND.=.*1993.* >.*29600.*=.*11.*
+inputSplits=.*drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intint/1993/11/lineitemak.tbl:0\+107985.*

@@ -1,0 +1,15 @@
+{
+	 "firstName": "John",
+	 "lastName": "Doe",
+	 "age": 39,
+	 "sex": "Male",
+	 "salary": 2147483647,
+	 "wealth": 1.7976931348623157e+30,
+	 "registered": true,
+	 "favorites": {
+	  "color": "Blue",
+	  "sport": null,
+	  "number":13,
+	  "food": "Spaghetti"
+	}
+}

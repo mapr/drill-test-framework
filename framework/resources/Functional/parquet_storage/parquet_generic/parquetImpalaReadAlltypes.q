@@ -1,0 +1,1 @@
+select * from `parquet_storage/customer_alltypes.plain.parquet`;

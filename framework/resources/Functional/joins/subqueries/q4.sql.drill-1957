@@ -1,0 +1,38 @@
+-- Left outer join 
+-- Join column is a "group by column" in both subqueries
+-- Join column is the same type
+-- Projected columns are fed into NOT IN
+-- NULLs are not filtered out
+
+select 
+	*
+from
+	j4 
+where c_date not in (
+		select 
+			-- This side will project nulls
+			sq2.x
+		from
+			(
+			select 
+				c_date,
+				avg(c_integer)
+			from
+				j1
+			group by
+				c_date
+			) as sq1(x, y)
+
+		left outer join
+			(
+			select
+				c_date,
+				avg(c_integer)
+			from 
+				j3
+			group by
+				c_date	
+			) as sq2(x, y)
+		on  (sq1.x = sq2.x and sq2.y < 0)
+		)
+;

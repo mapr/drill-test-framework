@@ -1,0 +1,26 @@
+{
+    "testId": "FlattenOperators100000Rows",
+    "type": "group",
+    "description": "Test flatten with operators",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.flatten_operators_100000rows",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/flatten_operators/100000rows",
+          "dest": "flatten_operators/100000rows"
+    	}
+    ]
+}

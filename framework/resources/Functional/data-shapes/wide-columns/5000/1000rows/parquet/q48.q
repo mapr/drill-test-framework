@@ -1,0 +1,1 @@
+select ws.*, sub.str_var_null_empty str_var_null_empty1 from widestrings ws INNER JOIN (select str_var_null_empty, max(tinyint_var) max_ti from widestrings group by str_var_null_empty) sub on ws.tinyint_var = sub.max_ti;

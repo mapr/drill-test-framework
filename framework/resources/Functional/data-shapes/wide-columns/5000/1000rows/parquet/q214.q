@@ -1,0 +1,1 @@
+select ws2.str_var_null_empty, max(ws1.tinyint_var) from widestrings ws1 INNER JOIN widestrings ws2 on ws1.str_fixed=ws2.str_var_null_empty group by ws2.str_var_null_empty order by lower(ws2.str_var_null_empty) limit 100;

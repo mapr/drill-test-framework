@@ -1,0 +1,4 @@
+1	{"trans_id":"t1","amount":100,"trans_time":7777777,"type":"sports"}
+2	{"trans_id":"t1","amount":100,"trans_time":7777777,"type":"sports"}
+1	{"trans_id":"t2","amount":1000,"trans_time":8888888,"type":"groceries"}
+2	{"trans_id":"t2","amount":1000,"trans_time":8888888,"type":"groceries"}

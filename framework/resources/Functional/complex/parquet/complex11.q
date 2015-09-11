@@ -1,0 +1,1 @@
+select t.gbyi, stddev(t.fl), stddev_pop(t.fl), stddev_samp(t.fl) from `complex.json` t where t.nul is not null group by t.gbyi order by t.gbyi;

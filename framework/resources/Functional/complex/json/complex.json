@@ -1,0 +1,32 @@
+{
+    "testId": "complex_type",
+    "type": "group",
+    "description": "Test ericsson queries via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "regression"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirComplexJson",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/complex/json/complexga100k.json",
+          "dest": "complex/json/complex.json"
+    	},
+	{
+	  "mode": "cp",
+	  "src": "Datasources/complex/json/singlewide.json",
+	  "dest": "complex/json/singlewide.json"
+	}
+    ]
+}

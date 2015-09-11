@@ -1,0 +1,2 @@
+This suite can't run with hash join disabled.
+DRILL-1059 tracking: Full outer join not currently supported with hash join disabled

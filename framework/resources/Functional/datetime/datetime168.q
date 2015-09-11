@@ -1,0 +1,1 @@
+select extract(hour from now())=extract(hour from localtimestamp) from sys.drillbits limit 1;

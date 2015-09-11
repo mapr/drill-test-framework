@@ -1,0 +1,21 @@
+Negative Tests :
+select * from data1.json order by flatten(events); -- DRILL-2181
+select flatten(uid) from `data1.json`; -- DRILL-2182
+select * from `data1.json` order by flatten(uid); -- DRILL-2182
+select flatten(map) from `data1.json`; -- DRILL-2182
+select uid , flatten(field_not_present) from `data1.json`; -- DRILL-2183
+select flatten(*) from `data1.json`; -- DRILL-2185
+select flatten(empty) from `data1.json`; -- DRILL-2217
+select flatten(empty[0]) from `data1.json`; -- DRILL-2217
+select flatten(empty[1][0]) from `data1.json`; -- DRILL-2217
+select flatten(empty[1][0]) from `data1.json` order by flatten(empty[0]); -- DRILL-2217
+select flatten(empty[1][0]) from `data1.json` order by flatten(empty[1][0]); -- DRILL-2217
+select flatten(empty[1][0]) from `data1.json` group by flatten(empty[1][0]); -- DRILL-2217
+select flatten(MAX(lst_lst[0][0])) from `data1.json` group by uid; --DRILL-2182
+
+
+ 
+select kvgen(d.map1) from `DRILL-2200.json` d;  -- verify that the sqlline output contains " kvgen function only supports Simple maps as input"
+select kvgen(d.map.abcd) from `DRILL-2200.json` d; -- verify that the sqlline output contains " kvgen function only supports Simple maps as input"
+select kvgen(d.map1) from `DRILL-2200.parquet` d;  -- verify that the sqlline output contains " kvgen function only supports Simple maps as input"
+select kvgen(d.map.abcd) from `DRILL-2200.parquet` d; -- DRILL-2200

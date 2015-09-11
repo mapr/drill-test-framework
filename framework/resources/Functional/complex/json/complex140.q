@@ -1,0 +1,1 @@
+select mod(trunc(t.ooof.oa.oab.oabc),10) ooofmod, avg(t.ooof.oa.oab.oabc) ooofavg from `complex.json` t group by mod(trunc(t.ooof.oa.oab.oabc),10) order by mod(trunc(t.ooof.oa.oab.oabc),10);

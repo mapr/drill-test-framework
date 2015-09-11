@@ -1,0 +1,4 @@
+-- Non correlated
+-- Greater than
+-- Multiple avg expresssions
+select count(*) from j1 where c_integer > (select trunc(avg(distinct c_bigint) - avg(distinct c_double)) from j2 where c_bigint is not null);

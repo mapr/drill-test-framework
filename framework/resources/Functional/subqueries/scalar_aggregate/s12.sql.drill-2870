@@ -1,0 +1,4 @@
+-- Non correlated
+-- Less than or equal
+-- MIN returns NULL
+select count(*) from j2 where c_bigint <= (select max(c_bigint) from j3 where c_integer = 0 );

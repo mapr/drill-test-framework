@@ -1,0 +1,61 @@
+{
+    "testId": "text-tpch-decimal",
+    "type": "group",
+    "description": "Test tpch queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirTpch01Text",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/text/customer.tbl",
+            "dest": "Tpch0.01/text/customer.tbl"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/text/lineitem.tbl",
+            "dest": "Tpch0.01/text/lineitem.tbl"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/text/nation.tbl",
+            "dest": "Tpch0.01/text/nation.tbl"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/text/region.tbl",
+            "dest": "Tpch0.01/text/region.tbl"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/text/part.tbl",
+            "dest": "Tpch0.01/text/part.tbl"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/text/partsupp.tbl",
+            "dest": "Tpch0.01/text/partsupp.tbl"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/text/supplier.tbl",
+            "dest": "Tpch0.01/text/supplier.tbl"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/text/orders.tbl",
+            "dest": "Tpch0.01/text/orders.tbl"
+        }
+    ]
+}

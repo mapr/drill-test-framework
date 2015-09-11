@@ -1,0 +1,17 @@
+select 
+		SUM(
+			CASE 	WHEN j1.c_integer IS NULL THEN 0 
+				WHEN j1.c_integer >= 0 THEN j2.c_integer*1.2 + 100
+				WHEN j1.c_integer < 0 THEN -1
+			END
+		   )
+from
+        j2 RIGHT OUTER JOIN j1 ON
+        (j1.d9 = j2.d9)
+	   RIGHT OUTER JOIN j3 ON
+	(j1.d9 = j3.d9)
+	   RIGHT OUTER JOIN j4 ON
+	(j1.d9 = j4.d9)
+where
+	j1.d9 IS NOT NULL
+;

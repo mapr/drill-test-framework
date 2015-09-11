@@ -1,0 +1,90 @@
+Executed with:
+
+#Mon Apr 06 22:37:56 EDT 2015
+git.commit.id.abbrev=f066786
+
+./ctas_t5/0_0_0.parquet
+message root {
+  required int64 count_star;
+  optional int32 max_j1_c_int;
+  optional int32 min_j2_c_int;
+  optional double avg_j1_c_int;
+  optional double avg_j2_c_int;
+}
+
+-- This table was created from drill parquet table where all columns are of required type
+./ctas_t12/0_0_0.parquet
+message root {
+  required int64 c1;
+  required int64 c2;
+  required int64 c3;
+}
+
+-- This is the result of concat function that in the case when all operands are null returns empty string and not null
+-- This is correct
+./ctas_t4/0_0_0.parquet
+message root {
+  required binary c1 (UTF8);
+}
+
+./ctas_t13/0_0_0.parquet
+message root {
+  required int64 c1;
+  optional double c2;
+}
+
+./ctas_t2/0_0_0.parquet
+message root {
+  optional int64 c1;
+  optional int64 c2;
+}
+
+./ctas_t3/0_0_0.parquet
+message root {
+  optional binary c1 (UTF8);
+}
+
+./ctas_t9/0_0_0.parquet
+message root {
+  optional int32 c1;
+  required int64 c2;
+}
+
+./ctas_t8/0_0_0.parquet
+message root {
+  optional int32 c1;
+}
+
+./ctas_t14/0_0_0.parquet
+message root {
+  required int32 x (DATE);
+  required int64 y;
+}
+
+./ctas_t15/0_0_0.parquet
+message root {
+  required int64 count_distinct_1;
+  required int64 count_distinct_2;
+  required int64 count_distinct_3;
+}
+
+./ctas_t11/0_0_0.parquet
+message root {
+  required int64 count_distinct_d9;
+  optional double sum_d9;
+}
+
+./ctas_t10/0_0_0.parquet
+message root {
+  required int64 c1;
+  optional int64 c2;
+}
+
+./ctas_t1/0_0_0.parquet
+message root {
+  optional binary c1 (UTF8);
+  optional binary c2 (UTF8);
+  optional int32 c3 (DATE);
+  optional int32 c4 (DATE);
+}
+

@@ -1,0 +1,1 @@
+select t.trans_id, t.user_info.cust_id as cust_id, t.user_info.device as device, t.user_info.state as state, t.marketing_info.camp_id as camp_id, t.marketing_info.searchwords, t.trans_info.prod_id as prod_id, t.trans_info.purch_flag as purch_flag from `json_storage/DRILL-1250.json` t;

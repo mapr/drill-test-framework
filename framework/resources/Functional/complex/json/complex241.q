@@ -1,0 +1,1 @@
+select t.id, power(t.ooof.oa.oab.oabc, t.soa[1].fl) from `complex.json` t order by t.id limit 11;

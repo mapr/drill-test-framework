@@ -1,0 +1,30 @@
+{
+    "rownum": 1,
+    "varcharcol": {
+        "varchar_1": "abc",
+        "varchar_2": "def",
+        "key": "value"
+    }
+}
+{
+    "rownum": 2,
+    "varcharcol": {
+        "varchar_1": null,
+        "varchar_2": ""
+    }
+}
+{
+    "rownum": 3,
+    "varcharcol": {
+        "varchar_1": null,
+        "varchar_2": "",
+        "varchar_2": null,
+        "varchar_2": "hello",
+        "varchar_2": "how"
+    }
+}
+{
+    "rownum": 2,
+    "varcharcol": {
+    }
+}

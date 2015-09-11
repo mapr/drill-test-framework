@@ -1,0 +1,7 @@
+{ "CustomerId": "100", "cityId": 10 }
+{ "CustomerId": "101", "cityId": 10 }
+{ "CustomerId": "102", "cityId": 10 }
+{ "CustomerId": "103", "cityId": 20 }
+{ "CustomerId": "104", "cityId": 30 }
+{ "CustomerId": "105", "cityId": null }
+{ "CustomerId": null,  "cityId": 50 }

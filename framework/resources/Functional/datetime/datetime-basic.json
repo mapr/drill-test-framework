@@ -1,0 +1,42 @@
+{
+    "testId": "datetime-basic",
+    "type": "group",
+    "description": "Test datetime queries via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",            
+            "schema": "dfs.drillTestDirDatetime",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/datetime/basic",
+            "dest": "datetime/datasources/basic"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/datetime/data",
+            "dest": "datetime/datasources/data"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/datetime/tz.json",
+            "dest": "datetime/datasources/tz.json"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/datetime/interval.json",
+            "dest": "datetime/datasources/interval.json"
+        }
+    ]
+}

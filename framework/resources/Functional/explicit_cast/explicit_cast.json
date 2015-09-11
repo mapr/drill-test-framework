@@ -1,0 +1,27 @@
+{
+    "testId": "explicit_cast",
+    "type": "group",
+    "description": "Test explicit cast queries via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirNumerical",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/explicit_cast/",
+            "dest": "numerical"
+        }
+    ]
+}

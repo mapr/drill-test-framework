@@ -1,0 +1,1 @@
+select salary,interests[0] from `json_storage/employeeNestedArray.json`;

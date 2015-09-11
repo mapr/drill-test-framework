@@ -1,0 +1,36 @@
+{
+    "testId": "FlattenOperatorsGeneral",
+    "type": "group",
+    "description": "Test flatten with operators",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.flatten_operators",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/flatten_operators/2rows",
+          "dest": "flatten_operators/2rows"
+    	},
+        {
+            "mode": "cp",
+            "src": "Datasources/views/rankings.txt",
+            "dest": "views/dfs/text/rankings/rankings.tbl"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/flatten_operators/jira-1679",
+          "dest": "flatten_operators/jira1679"
+        }
+    ]
+}

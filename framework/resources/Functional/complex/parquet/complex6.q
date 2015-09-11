@@ -1,0 +1,1 @@
+select count(t.nul) from `complex.json` t where t.nul is not null;

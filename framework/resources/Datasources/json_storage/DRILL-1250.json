@@ -1,0 +1,5 @@
+{"trans_id":49995,"date":"07/30/2013","time":"17:29:20","user_info":{"cust_id":6112,"device":"IOS5","state":"tx"},"marketing_info":{"camp_id":7,"searchwords":["sad"]},"trans_info":{"prod_id":[338],"purch_flag":"false"}}
+{"trans_id":49996,"date":"05/18/2013","time":"22:34:58","user_info":{"cust_id":85,"device":"AOS4.2","state":"pa"},"marketing_info":{"camp_id":2,"searchwords":["happy"]},"trans_info":{"prod_id":[143,330,65,12],"purch_flag":"false"}}
+{"trans_id":49997,"date":"08/04/2012","time":"13:19:58","user_info":{"cust_id":14,"device":"AOS4.4","state":"tx"},"marketing_info":{"camp_id":10,"searchwords":["none"]},"trans_info":{"prod_id":[0],"purch_flag":"false"}}
+{"trans_id":49998,"date":"07/19/2013","time":"21:33:09","user_info":{"cust_id":168,"device":"IOS5","state":"tx"},"marketing_info":{"camp_id":7,"searchwords":["sad"]},"trans_info":{"prod_id":[0],"purch_flag":"true"}}
+{"trans_id":49999,"date":"01/29/2013","time":"15:24:21","user_info":{"cust_id":9780,"device":"IOS5","state":"ca"},"marketing_info":{"camp_id":1,"searchwords":["none"]},"trans_info":{"prod_id":[30,149],"purch_flag":"false"}}

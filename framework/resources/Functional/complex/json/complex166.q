@@ -1,0 +1,1 @@
+select a.id, a.oooa.oa.oab.oabc[0].rowId, b.oooa.oa.oab.oabc[1].rowValue2 from `complex.json` a inner join `complex.json` b on a.oooa.oa.oab.oabc[0].rowId=b.oooa.oa.oab.oabc[1].rowValue2 where a.id in (1,2,3,4,5,100,3000,55555,1000000,1000001) order by a.id;
