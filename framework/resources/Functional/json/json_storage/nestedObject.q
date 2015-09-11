@@ -1,0 +1,1 @@
+select firstName, `favorites.color` from `json_storage/employeeNestedObject.json`;

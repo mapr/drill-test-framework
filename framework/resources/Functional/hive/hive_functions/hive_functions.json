@@ -1,0 +1,62 @@
+{
+    "testId": "hiveFileFormats_functions",
+    "type": "group",
+    "description": "Test hive file formats and queries",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "hive",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/cross-sources",
+            "dest": "cross-sources"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/hive_storage/sample.json",
+            "dest": "hive_storage/sample.json"
+        },
+        {
+           "mode": "gen",
+           "src": "bin/execHive.sh resources/Datasources/hive_storage/sample.ddl",
+           "dest": ""
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/hive_storage/tpch0.01/lineitem_nodate.parquet",
+            "dest": "hive_storage/tpch0.01/lineitem_nodate.parquet"
+        },
+        {
+           "mode": "gen",
+           "src": "bin/execHive.sh resources/Datasources/hive_storage/tpch0.01/tpch.ddl",
+           "dest": ""
+        },
+        {
+           "mode": "gen",
+           "src": "bin/execHive.sh resources/Datasources/cross-sources/hive.ddl",
+           "dest": ""
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/text/tpcds/sf1",
+            "dest": "tpcds_sf1/text"
+        },
+        {
+            "mode": "gen",
+            "src": "bin/execHive.sh resources/Datasources/hive_storage/tpcds01_text.ddl",
+            "dest": ""
+        }
+      ]
+}

@@ -1,0 +1,25 @@
+{
+    "testId": "joins_left_outer",
+    "type": "group",
+    "description": "Left outer join tests",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.joins",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/joins",
+            "dest": "joins"
+        }
+    ]
+}
+

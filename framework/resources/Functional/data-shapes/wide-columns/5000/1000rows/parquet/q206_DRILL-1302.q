@@ -1,0 +1,1 @@
+select * from (select str_fixed_null_empty, str_var_null_empty, tinyint_var from widestrings order by  lower(str_var_null_empty), lower(str_null)) sub order by tinyint_var, lower(sub.str_fixed_null_empty);

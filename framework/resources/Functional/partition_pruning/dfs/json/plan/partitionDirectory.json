@@ -1,0 +1,31 @@
+{
+    "testId": "partitionDirectoryJsonPlan",
+    "type": "group",
+    "description": "Test partition directory queries",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+		"mode": "cp",
+		"src": "Datasources/partition_pruning/dfs",
+		"dest": "partition_pruning/dfs"
+	},
+        {
+                "mode": "cp",
+                "src": "Datasources/partition_pruning/hive",
+                "dest": "partition_pruning/hive"
+        }
+    ]
+}

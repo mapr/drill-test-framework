@@ -1,0 +1,27 @@
+{
+    "testId": "identfiers",
+    "type": "group",
+    "description": "Test rules for query identifiers: case sensitivity",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.identifiers",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/identifiers",
+            "dest": "identifiers"
+        }
+    ]
+}
+

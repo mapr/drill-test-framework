@@ -1,0 +1,1 @@
+select variance(t.sfa[3]) from `complex.json` t;

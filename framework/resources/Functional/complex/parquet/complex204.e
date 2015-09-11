@@ -1,0 +1,10 @@
+id	5555
+oooa	5563
+nul	5572
+ooof	5579
+str	5585
+saa	5599
+sia	5607
+sfa	5614
+ooos	5639
+soa	5649

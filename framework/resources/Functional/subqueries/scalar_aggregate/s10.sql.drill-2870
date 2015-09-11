@@ -1,0 +1,4 @@
+-- Non correlated
+-- Greater than or equal
+-- MIN returns NULL
+select * from j2 where c_double >= (select min(c_double) from j7 where c_varchar like '%DRILL%');

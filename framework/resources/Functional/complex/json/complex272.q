@@ -1,0 +1,1 @@
+select * from (select t.id, t.nul, t.oooa from `complex.json` t order by t.id limit 10) tt;

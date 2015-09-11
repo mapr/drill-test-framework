@@ -1,0 +1,1 @@
+select name, count(voter_id) over(partition by registration) as voterid_cnt,sum(contributions) over(partition by registration) tot_count from voter_hive order by name nulls first, voterid_cnt, tot_count;

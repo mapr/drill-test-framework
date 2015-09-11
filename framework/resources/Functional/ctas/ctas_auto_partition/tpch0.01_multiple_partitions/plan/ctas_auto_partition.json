@@ -1,0 +1,26 @@
+{
+    "testId": "ctas_multiple_partitions_plan",
+    "type": "group",
+    "description": "Test tpch queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.ctasAutoPartition",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "gen",
+            "src": "Datasources/ctas_auto_partition/ctas_tpch_multiple_partitions.sh",
+            "dest": ""
+        }
+    ]
+}

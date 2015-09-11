@@ -1,0 +1,22 @@
+select
+	distinct a1
+from
+	t1
+where 	not exists 
+	(
+	select 
+		* 
+	from 
+		t2 
+	where not exists 
+		(
+		select 
+			* 
+		from 	
+			t3 
+		where 
+			t3.b3 = t2.b2 and
+			t3.a3 = t1.a1
+		)
+	)
+;

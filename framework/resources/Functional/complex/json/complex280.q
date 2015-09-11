@@ -1,0 +1,1 @@
+select count(*) from (select t.soa[0] soa0, t.soa[1] soa1, t.soa[2] soa2 from `complex.json` t limit 200000) tt;

@@ -1,0 +1,1 @@
+select  mod(t.oooa.oa.oab.oabc[1].rowValue2,10) oooamod, avg(t.oooa.oa.oab.oabc[0].rowId) oooaavg from `complex.json` t group by mod(t.oooa.oa.oab.oabc[1].rowValue2,10) order by mod(t.oooa.oa.oab.oabc[1].rowValue2,10);

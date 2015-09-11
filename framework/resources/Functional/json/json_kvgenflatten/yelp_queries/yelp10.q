@@ -1,0 +1,1 @@
+select name,repeated_count(categories) as categorycount, categories from `json_kvgenflatten/yelp_academic_dataset_business.json` where true=repeated_contains(categories,'Restaurants') order by repeated_count(categories) desc;

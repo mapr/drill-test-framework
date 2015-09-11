@@ -1,0 +1,26 @@
+{
+    "testId": "no-extension-json-tpch",
+    "type": "group",
+    "description": "Test no extension - json tpch queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.NoExtJson",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/no-extension",
+            "dest": "no-extension"
+        }
+    ]
+}

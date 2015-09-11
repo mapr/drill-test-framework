@@ -1,0 +1,49 @@
+DATA:
+----
+
+j1 - parquet table generated using CTAS from j1.csv file in drill
+	-- 10,000 rows
+	-- 99 parquet files 
+	-- 5000 unique values
+	-- 200 NULL values
+	-- all columns are of optional data type
+
+j2 - parquet table generated using CTAS from j2.csv file in drill
+	-- 10 rows
+	-- 1 parquet file 
+	-- All values are unique and have corresponding values in j1
+	-- 1 NULL value
+	-- all columns are of optional data type
+
+j3 - parquet table generated using CTAS from j3.csv file in drill
+	-- 100 rows
+	-- 1 parquet file 
+	-- All values are unique and have corresponding values in j1
+	-- NO NULL values
+	-- all columns are of required data type
+
+j4 - parquet table generated using CTAS from j4.csv file in drill
+        -- 1000 rows
+        -- 1 parquet file
+        -- All values are unique and have corresponding values in j1
+        -- NO NULL values
+        -- all columns are of required data type
+
+cast_tbl_1 - table used for implicit/explicit cast testing
+cast_tbl_2 - table used for implicit/explicit cast testing
+
+test - table used for coalesce testing, sparse data with lots of nulls
+
+TODO:
+	* convert cast_tbl_1 to required type
+	* Do we want to run ALL the tests against views ?
+              Created views with explicit types on top of j1[234] files and ran all the tests with 0.8.0 rc2
+              Only one bug was found: drill-2627
+	* Add tests for running with hash/merge join (alter session ...) if "permutations" feature is not added to
+          framework by 04/10/15 : see individual README files for each suite
+	* Add plan testing for order_by queries, after drill-2655 is fixed
+	* Add some joins with correlation and inequality, was not in the original plan
+	* Check in sql scripts that we used to generate postgres tables
+	* Check in sql scripts that we used to generate drill tables
+	* When decimal type is reintroduced, it will be sufficient to regenerate all the data again 
+          and rerun all the tests. Columns: d9,d18,d28,d38 were planned to be of decimal type, currently they are all double.

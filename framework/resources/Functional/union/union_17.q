@@ -1,0 +1,1 @@
+SELECT c7 FROM `union_01.parquet` UNION SELECT c7 FROM `union_02.parquet`;

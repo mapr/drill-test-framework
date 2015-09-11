@@ -1,0 +1,1 @@
+select tt.gbyi, sum(tt.id), avg(tt.fl), count(tt.nul), count(tt.bool) from (select t.id, t.gbyi, t.fl, t.nul, t.bool from `complex.json` t where t.bool is true) tt where tt.bool is false group by tt.gbyi order by tt.gbyi;

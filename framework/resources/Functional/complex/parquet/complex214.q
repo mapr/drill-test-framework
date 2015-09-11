@@ -1,0 +1,1 @@
+select t.gbyt, min(t.oooa.oa.oab.oabc[1].rowValue1) minoooa from `complex.json` t group by t.gbyt having min(t.oooa.oa.oab.oabc[1].rowValue1) in (1, 2, 3, 14, 33, 41, 50) order by minoooa;

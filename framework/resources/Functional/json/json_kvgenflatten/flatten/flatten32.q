@@ -1,0 +1,1 @@
+select count(*) from (select id, flatten(evnts1), flatten(evnts2), flatten(evnts3), flatten(evnts4), flatten(evnts5), flatten(evnts6), flatten(evnts7), flatten(evnts8), flatten(evnts9), flatten(evnts10), flatten(evnts11) from `json_kvgenflatten/many-arrays-50.json`) ;

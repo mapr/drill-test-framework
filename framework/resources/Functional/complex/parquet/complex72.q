@@ -1,0 +1,1 @@
+select t.id, t.ooos, t.ooos.oa.oab.oabc from `complex.json` t where length(t.ooos.oa.oab.oabc) < 14 or length(t.ooos.oa.oab.oabc) > 16 order by t.ooos.oa.oab.oabc limit 50;

@@ -1,0 +1,4 @@
+[{"key":"varchar_1","value":"abc"},{"key":"varchar_2","value":"def"},{"key":"varchar_3","value":"xyz"}]
+[{"key":"varchar_1","value":"abcd"}]
+[{"key":"varchar_1","value":"abcde"},{"key":"varchar_3","value":"xyz"},{"key":"varchar_4","value":"xyz2"}]
+[{"key":"varchar_1","value":"abc"},{"key":"varchar_2","value":"def"}]

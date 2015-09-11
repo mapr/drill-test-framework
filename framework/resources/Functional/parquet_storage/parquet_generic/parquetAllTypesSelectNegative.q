@@ -1,0 +1,1 @@
+select BIGINT_col,DECIMAL28SPARSE_col,DECIMAL38SPARSE_col,VARCHAR_col,VAR16CHAR_col,non_exist_col from `parquet_storage/parquet_all_types.parquet`;

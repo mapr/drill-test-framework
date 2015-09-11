@@ -1,0 +1,36 @@
+{
+    "testId": "testJsonGeneric",
+    "type": "group",
+    "description": "Test generic json queries",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	    {
+        "mode": "cp",
+        "src": "Datasources/json_storage",
+        "dest": "json_storage"
+    	},
+    	{
+        "mode": "cp",
+        "src": "Datasources/json_storage/employeeNestedObject.json",
+        "dest": "json_storage/testDirEmployeeNested/employeeNestedObject.json"
+    	},
+    	{
+        "mode": "cp",
+        "src": "Datasources/json_storage/employeeObject.json",
+        "dest": "json_storage/testDirEmployee/employeeObject.json"
+    	}   	
+    ]
+}

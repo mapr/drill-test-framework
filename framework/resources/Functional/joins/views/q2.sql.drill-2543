@@ -1,0 +1,32 @@
+create or replace view v2_joins (a, b, c, d)
+as
+select sq1.x, sq1.y, sq2.x, sq2.y 
+from
+	(
+	select   c_date, 
+         	 avg(c_integer) 
+	from     j1 
+	group by 
+		c_date 
+	) sq1(x, y) 
+	left outer join 
+	( 
+	select  c_date, 
+		avg(c_integer) 
+	from    j3 
+	group by c_date ) as sq2(x, y) 
+on ( sq1.x = sq2.x and sq2.y < 0 ) 
+where 
+	sq2.x is not null 
+	and sq2.y is not null;
+
+select j2.c_varchar, count(*) from  j2 where j2.c_date not in (select a from v2_joins where j2.c_integer = v2_joins.b) group by j2.c_varchar order by j2.c_varchar;
+
+
+create table t1(a1, b1, c1) as
+select
+        case when columns[0] = '' then cast(null as integer) else cast(columns[0] as integer) end,
+        case when columns[1] = '' then cast(null as date) else cast(columns[1] as date) end,
+        case when columns[2] = '' then cast(null as varchar(255)) else cast(columns[2] as varchar(255)) end
+from `t1.csv`;
+

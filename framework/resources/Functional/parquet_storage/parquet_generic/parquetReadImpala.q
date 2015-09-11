@@ -1,0 +1,1 @@
+select * from `parquet_storage/customer.impala.parquet`;

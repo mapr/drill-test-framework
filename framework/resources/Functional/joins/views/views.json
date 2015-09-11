@@ -1,0 +1,25 @@
+{
+    "testId": "joins_views",
+    "type": "group",
+    "description": "Joins with views",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.joins",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/joins",
+            "dest": "joins"
+        }
+    ]
+}
+

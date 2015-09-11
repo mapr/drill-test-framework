@@ -1,0 +1,9 @@
+.*
+StreamAgg.*
+Sort.*
+Filter.*AND\(=.*1992-01-01.*=.*1992-01-01\).*
+Scan.*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart_ordered/0_0_1.parquet.*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart_ordered/0_0_84.parquet.*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart_ordered/0_0_167.parquet.*selectionRoot.*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart_ordered.*numFiles=3.*columns=\[`l_moddate`.*`l_shipdate`.*`l_modline`\].*
+
+
+
+

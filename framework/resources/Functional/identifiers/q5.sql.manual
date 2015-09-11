@@ -1,0 +1,23 @@
+-- In CTAS: verify that any case can be used in querying the table
+-- Can't run this test because:
+--       not repeatable ( drop table is not supported )
+
+create table test_case as 
+select * from
+	(
+	select 	customerid, 	
+		CityId
+	from 	
+		`customer.json`
+	where 
+		CUSTOMERID is not null
+	);
+
+-- case 1: star query
+select * from test_case order by customerid desc;
+
+-- case 2: columns are all upper case in projection list, lower case in order by
+select CUSTOMERID, CITYID from test_case order by customerid desc;
+
+-- case 3: mixed case 
+select custOMErID, citYId from test_case order by cusTOMERid desc;

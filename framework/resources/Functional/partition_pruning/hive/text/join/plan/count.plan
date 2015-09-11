@@ -1,0 +1,164 @@
+tableName: orders_text_partitioned_hive,
+dbName: default,
+owner: root,
+createTime: 1415036399,
+lastAccessTime: 0,
+retention: 0,
+sd: StorageDescriptor(cols: [
+    FieldSchema(name: o_orderkey,
+    type: int,
+    comment: null),
+    FieldSchema(name: o_custkey,
+    type: int,
+    comment: null),
+    FieldSchema(name: o_orderstatus,
+    type: string,
+    comment: null),
+    FieldSchema(name: o_totalprice,
+    type: double,
+    comment: null),
+    FieldSchema(name: o_orderdate,
+    type: string,
+    comment: null),
+    FieldSchema(name: o_orderpriority,
+    type: string,
+    comment: null),
+    FieldSchema(name: o_clerk,
+    type: string,
+    comment: null),
+    FieldSchema(name: o_shippriority,
+    type: int,
+    comment: null),
+    FieldSchema(name: o_comment,
+    type: string,
+    comment: null)
+],
+location: maprfs: /drill/testdata/partition_pruning/hive/text/orderspart,
+inputFormat: org.apache.hadoop.mapred.TextInputFormat,
+outputFormat: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat,
+compressed: false,
+numBuckets: -1,
+serdeInfo: SerDeInfo(name: null,
+serializationLib: org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe,
+parameters: {
+    serialization.format=|,
+    field.delim=|
+}),
+bucketCols: [
+    
+],
+sortCols: [
+    
+],
+parameters: {
+    
+},
+skewedInfo: SkewedInfo(skewedColNames: [
+    
+],
+skewedColValues: [
+    
+],
+skewedColValueLocationMaps: {
+    
+}),
+storedAsSubDirectories: false),
+partitionKeys: [
+    FieldSchema(name: year,
+    type: int,
+    comment: null)
+],
+parameters: {
+    EXTERNAL=TRUE,
+    transient_lastDdlTime=1415036399
+},
+viewOriginalText: null,
+viewExpandedText: null,
+tableType: EXTERNAL_TABLE),
+inputSplits=[
+    maprfs: /drill/testdata/partition_pruning/hive/text/orderspart/1992/orders2.txt: 0+220615
+],
+columns=[
+    SchemaPath[
+        `o_orderkey`
+    ],
+    SchemaPath[
+        `year`
+    ]
+],
+partitions=[
+    Partition(values: [
+        1992
+    ],
+    dbName: default,
+    tableName: orders_text_partitioned_hive,
+    createTime: 1415036408,
+    lastAccessTime: 0,
+    sd: StorageDescriptor(cols: [
+        FieldSchema(name: o_orderkey,
+        type: int,
+        comment: null),
+        FieldSchema(name: o_custkey,
+        type: int,
+        comment: null),
+        FieldSchema(name: o_orderstatus,
+        type: string,
+        comment: null),
+        FieldSchema(name: o_totalprice,
+        type: double,
+        comment: null),
+        FieldSchema(name: o_orderdate,
+        type: string,
+        comment: null),
+        FieldSchema(name: o_orderpriority,
+        type: string,
+        comment: null),
+        FieldSchema(name: o_clerk,
+        type: string,
+        comment: null),
+        FieldSchema(name: o_shippriority,
+        type: int,
+        comment: null),
+        FieldSchema(name: o_comment,
+        type: string,
+        comment: null)
+    ],
+    location: maprfs: /drill/testdata/partition_pruning/hive/text/orderspart/1992,
+    inputFormat: org.apache.hadoop.mapred.TextInputFormat,
+    outputFormat: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat,
+    compressed: false,
+    numBuckets: -1,
+    serdeInfo: SerDeInfo(name: null,
+    serializationLib: org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe,
+    parameters: {
+        serialization.format=|,
+        field.delim=|
+    }),
+    bucketCols: [
+        
+    ],
+    sortCols: [
+        
+    ],
+    parameters: {
+        
+    },
+    skewedInfo: SkewedInfo(skewedColNames: [
+        
+    ],
+    skewedColValues: [
+        
+    ],
+    skewedColValueLocationMaps: {
+        
+    }),
+    storedAsSubDirectories: false),
+    parameters: {
+        numFiles=1,
+        transient_lastDdlTime=1415036408,
+        COLUMN_STATS_ACCURATE=false,
+        totalSize=220615,
+        numRows=-1,
+        rawDataSize=-1
+    })
+]
