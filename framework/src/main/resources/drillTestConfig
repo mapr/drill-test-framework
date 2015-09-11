@@ -2,7 +2,7 @@
 DRILLBITS=IPADDR1,IPADDR2,IPADDR3,IPADDR4
 
 # Path to where Drill binaries are installed 
-DRILL_HOME=/opt/drill/drill-DRILL_VER/
+DRILL_HOME=/opt/drill/
 
 # Parent directory of test suites.  Relative path to the framework directory
 DRILL_TEST_DATA_DIR=resources
@@ -28,3 +28,5 @@ TIME_OUT_SECONDS=1200
 # Tests run as the following user
 USERNAME=root
 PASSWORD=
+
+export DRILL_HOME
