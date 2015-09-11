@@ -1,0 +1,6 @@
+{"trans_id":0,"date":"10/24/2012","time":"06:14:07","cust_id":3,"device":"IOS5","state":"nj","camp_id":4,"keywords":["the"],"prod_id":[],"purch_flag":"true"}
+{"trans_id":1,"date":"06/07/2013","time":"12:29:37","cust_id":111464,"device":"IOS5","state":"va","camp_id":4,"keywords":[],"prod_id":[78,116,18,508,28,309,149,80,360,6,28,52,235],"purch_flag":"false"}
+{"trans_id":2,"date":"05/16/2013","time":"04:55:41","cust_id":2817,"device":"IOS5","state":"sc","camp_id":10,"keywords":[],"prod_id":[179,247],"purch_flag":"false"}
+{"trans_id":3,"date":"06/03/2013","time":"08:14:23","cust_id":14085,"device":"IOS6","state":"oh","camp_id":6,"keywords":["steal"],"prod_id":[510,142,18],"purch_flag":"false"}
+{"trans_id":4,"date":"04/10/2013","time":"06:32:31","cust_id":1044,"device":"IOS6","state":"il","camp_id":16,"keywords":[],"prod_id":[25,28,316],"purch_flag":"false"}
+{"trans_id":5,"date":"07/27/2013","time":"10:02:24","cust_id":13,"device":"IOS5","state":"oh","camp_id":4,"keywords":["town","you"],"prod_id":[4,1,79,449],"purch_flag":"false"}

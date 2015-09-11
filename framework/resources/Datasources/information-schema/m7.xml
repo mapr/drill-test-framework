@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+
+<!-- mytable1 => /user/aaa/mytable1 -->
+<!-- mytable2 => /user/bbb/mynewtable -->
+<!-- yourtable => /tables_dir/yourtable -->
+<!-- theirtable => /tables_dir/theirtable -->
+
+  <property>
+    <name>hbase.table.namespace.mappings</name>
+    <value>*:/drill/testdata/information-schema/</value>
+  </property>
+
+</configuration>

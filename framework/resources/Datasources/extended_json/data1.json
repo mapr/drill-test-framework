@@ -1,0 +1,10 @@
+{
+  "int_col" : {"$numberLong": 1},
+  "date_col" : {"$dateDay": "2012-05-22"},
+  "time_col"  : {"$time": "19:20:30.45Z"},
+  "date_array" : [{"$dateDay" : "2012-08-01"}, {"$dateDay" : "2033-11-28"}],
+  "time_array" : [{"$time": "19:20:30.45Z"}, {"$time": "11:25:01.45Z"}],
+  "int_array" : [{"$numberLong": 1}, {"$numberLong": 2}, {"$numberLong": 3}],
+  "complex_col1" : {"int_col" : {"$numberLong": 1},"date_col" : {"$dateDay": "2012-05-22"},"time_col"  : {"$time": "19:20:30.45Z"}}
+}
+ 

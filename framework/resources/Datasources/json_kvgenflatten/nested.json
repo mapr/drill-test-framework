@@ -1,0 +1,38 @@
+{
+    "type": "FeatureCollection",
+    "maps" : [
+        {"m1":"val1", "m2":"val2"},
+        {"m3": {"m4":"val4"}}
+    ],
+    "metadata": {
+        "generated": 1406245017000,
+        "url": "http://comcat.cr.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2000-07-24%2000%3A00%3A00&minmagnitude=6&endtime=2014-07-24%2023%3A59%3A59&orderby=time",
+        "title": "USGS Earthquakes",
+        "status": 200,
+        "api": "1.0.13",
+        "count": 2184
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "mag": 6.9,
+                "time": 1405954481000,
+                "updated": 1405983436259
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": "100,90"
+            },
+            "id": "usb000ruzk",
+            "location": {
+                "zip": "95134",
+                "street": "zanker",
+                "bldgs": {
+                    "bldg1" : "HQ1",
+                    "bldg2" : "HQ2"
+                }
+            }
+        }
+    ]
+}

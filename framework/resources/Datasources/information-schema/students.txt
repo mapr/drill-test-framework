@@ -1,0 +1,3 @@
+1,name1,street1,0,city1,89.54
+2,name2,street2,00001,city2,95.23
+3,name3,,00002,city3,99.9

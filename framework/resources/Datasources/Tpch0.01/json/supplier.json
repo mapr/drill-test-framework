@@ -1,0 +1,900 @@
+  {
+    "S_SUPPKEY":1,
+    "S_NAME":"Supplier#000000001",
+    "S_ADDRESS":" N kD4on9OM Ipw3,gf0JBoQDd7tgrzrddZ",
+    "S_NATIONKEY":17,
+    "S_PHONE":"27-918-335-1736",
+    "S_ACCTBAL":5755.94,
+    "S_COMMENT":"each slyly above the careful"
+  }
+  {
+    "S_SUPPKEY":2,
+    "S_NAME":"Supplier#000000002",
+    "S_ADDRESS":"89eJ5ksX3ImxJQBvxObC,",
+    "S_NATIONKEY":5,
+    "S_PHONE":"15-679-861-2259",
+    "S_ACCTBAL":4032.68,
+    "S_COMMENT":" slyly bold instructions. idle dependen"
+  }
+  {
+    "S_SUPPKEY":3,
+    "S_NAME":"Supplier#000000003",
+    "S_ADDRESS":"q1,G3Pj6OjIuUYfUoH18BFTKP5aU9bEV3",
+    "S_NATIONKEY":1,
+    "S_PHONE":"11-383-516-1199",
+    "S_ACCTBAL":4192.40,
+    "S_COMMENT":"blithely silent requests after the express dependencies are sl"
+  }
+  {
+    "S_SUPPKEY":4,
+    "S_NAME":"Supplier#000000004",
+    "S_ADDRESS":"Bk7ah4CK8SYQTepEmvMkkgMwg",
+    "S_NATIONKEY":15,
+    "S_PHONE":"25-843-787-7479",
+    "S_ACCTBAL":4641.08,
+    "S_COMMENT":"riously even requests above the exp"
+  }
+  {
+    "S_SUPPKEY":5,
+    "S_NAME":"Supplier#000000005",
+    "S_ADDRESS":"Gcdm2rJRzl5qlTVzc",
+    "S_NATIONKEY":11,
+    "S_PHONE":"21-151-690-3663",
+    "S_ACCTBAL":-283.84,
+    "S_COMMENT":". slyly regular pinto bea"
+  }
+  {
+    "S_SUPPKEY":6,
+    "S_NAME":"Supplier#000000006",
+    "S_ADDRESS":"tQxuVm7s7CnK",
+    "S_NATIONKEY":14,
+    "S_PHONE":"24-696-997-4969",
+    "S_ACCTBAL":1365.79,
+    "S_COMMENT":"final accounts. regular dolphins use against the furiously ironic decoys. "
+  }
+  {
+    "S_SUPPKEY":7,
+    "S_NAME":"Supplier#000000007",
+    "S_ADDRESS":"s,4TicNGB4uO6PaSqNBUq",
+    "S_NATIONKEY":23,
+    "S_PHONE":"33-990-965-2201",
+    "S_ACCTBAL":6820.35,
+    "S_COMMENT":"s unwind silently furiously regular courts. final requests are deposits. requests wake quietly blit"
+  }
+  {
+    "S_SUPPKEY":8,
+    "S_NAME":"Supplier#000000008",
+    "S_ADDRESS":"9Sq4bBH2FQEmaFOocY45sRTxo6yuoG",
+    "S_NATIONKEY":17,
+    "S_PHONE":"27-498-742-3860",
+    "S_ACCTBAL":7627.85,
+    "S_COMMENT":"al pinto beans. asymptotes haggl"
+  }
+  {
+    "S_SUPPKEY":9,
+    "S_NAME":"Supplier#000000009",
+    "S_ADDRESS":"1KhUgZegwM3ua7dsYmekYBsK",
+    "S_NATIONKEY":10,
+    "S_PHONE":"20-403-398-8662",
+    "S_ACCTBAL":5302.37,
+    "S_COMMENT":"s. unusual, even requests along the furiously regular pac"
+  }
+  {
+    "S_SUPPKEY":10,
+    "S_NAME":"Supplier#000000010",
+    "S_ADDRESS":"Saygah3gYWMp72i PY",
+    "S_NATIONKEY":24,
+    "S_PHONE":"34-852-489-8585",
+    "S_ACCTBAL":3891.91,
+    "S_COMMENT":"ing waters. regular requests ar"
+  }
+  {
+    "S_SUPPKEY":11,
+    "S_NAME":"Supplier#000000011",
+    "S_ADDRESS":"JfwTs,LZrV, M,9C",
+    "S_NATIONKEY":18,
+    "S_PHONE":"28-613-996-1505",
+    "S_ACCTBAL":3393.08,
+    "S_COMMENT":"y ironic packages. slyly ironic accounts affix furiously; ironically unusual excuses across the flu"
+  }
+  {
+    "S_SUPPKEY":12,
+    "S_NAME":"Supplier#000000012",
+    "S_ADDRESS":"aLIW  q0HYd",
+    "S_NATIONKEY":8,
+    "S_PHONE":"18-179-925-7181",
+    "S_ACCTBAL":1432.69,
+    "S_COMMENT":"al packages nag alongside of the bold instructions. express, daring accounts"
+  }
+  {
+    "S_SUPPKEY":13,
+    "S_NAME":"Supplier#000000013",
+    "S_ADDRESS":"HK71HQyWoqRWOX8GI FpgAifW,2PoH",
+    "S_NATIONKEY":3,
+    "S_PHONE":"13-727-620-7813",
+    "S_ACCTBAL":9107.22,
+    "S_COMMENT":"requests engage regularly instructions. furiously special requests ar"
+  }
+  {
+    "S_SUPPKEY":14,
+    "S_NAME":"Supplier#000000014",
+    "S_ADDRESS":"EXsnO5pTNj4iZRm",
+    "S_NATIONKEY":15,
+    "S_PHONE":"25-656-247-5058",
+    "S_ACCTBAL":9189.82,
+    "S_COMMENT":"l accounts boost. fluffily bold warhorses wake"
+  }
+  {
+    "S_SUPPKEY":15,
+    "S_NAME":"Supplier#000000015",
+    "S_ADDRESS":"olXVbNBfVzRqgokr1T,Ie",
+    "S_NATIONKEY":8,
+    "S_PHONE":"18-453-357-6394",
+    "S_ACCTBAL":308.56,
+    "S_COMMENT":" across the furiously regular platelets wake even deposits. quickly express she"
+  }
+  {
+    "S_SUPPKEY":16,
+    "S_NAME":"Supplier#000000016",
+    "S_ADDRESS":"YjP5C55zHDXL7LalK27zfQnwejdpin4AMpvh",
+    "S_NATIONKEY":22,
+    "S_PHONE":"32-822-502-4215",
+    "S_ACCTBAL":2972.26,
+    "S_COMMENT":"ously express ideas haggle quickly dugouts? fu"
+  }
+  {
+    "S_SUPPKEY":17,
+    "S_NAME":"Supplier#000000017",
+    "S_ADDRESS":"c2d,ESHRSkK3WYnxpgw6aOqN0q",
+    "S_NATIONKEY":19,
+    "S_PHONE":"29-601-884-9219",
+    "S_ACCTBAL":1687.81,
+    "S_COMMENT":"eep against the furiously bold ideas. fluffily bold packa"
+  }
+  {
+    "S_SUPPKEY":18,
+    "S_NAME":"Supplier#000000018",
+    "S_ADDRESS":"PGGVE5PWAMwKDZw ",
+    "S_NATIONKEY":16,
+    "S_PHONE":"26-729-551-1115",
+    "S_ACCTBAL":7040.82,
+    "S_COMMENT":"accounts snooze slyly furiously bold "
+  }
+  {
+    "S_SUPPKEY":19,
+    "S_NAME":"Supplier#000000019",
+    "S_ADDRESS":"edZT3es,nBFD8lBXTGeTl",
+    "S_NATIONKEY":24,
+    "S_PHONE":"34-278-310-2731",
+    "S_ACCTBAL":6150.38,
+    "S_COMMENT":"refully final foxes across the dogged theodolites sleep slyly abou"
+  }
+  {
+    "S_SUPPKEY":20,
+    "S_NAME":"Supplier#000000020",
+    "S_ADDRESS":"iybAE,RmTymrZVYaFZva2SH,j",
+    "S_NATIONKEY":3,
+    "S_PHONE":"13-715-945-6730",
+    "S_ACCTBAL":530.82,
+    "S_COMMENT":"n, ironic ideas would nag blithely about the slyly regular accounts. silent, expr"
+  }
+  {
+    "S_SUPPKEY":21,
+    "S_NAME":"Supplier#000000021",
+    "S_ADDRESS":"81CavellcrJ0PQ3CPBID0Z0JwyJm0ka5igEs",
+    "S_NATIONKEY":2,
+    "S_PHONE":"12-253-590-5816",
+    "S_ACCTBAL":9365.80,
+    "S_COMMENT":"d. instructions integrate sometimes slyly pending instructions. accounts nag among the "
+  }
+  {
+    "S_SUPPKEY":22,
+    "S_NAME":"Supplier#000000022",
+    "S_ADDRESS":"okiiQFk 8lm6EVX6Q0,bEcO",
+    "S_NATIONKEY":4,
+    "S_PHONE":"14-144-830-2814",
+    "S_ACCTBAL":-966.20,
+    "S_COMMENT":" ironically among the deposits. closely expre"
+  }
+  {
+    "S_SUPPKEY":23,
+    "S_NAME":"Supplier#000000023",
+    "S_ADDRESS":"ssetugTcXc096qlD7 2TL5crEEeS3zk",
+    "S_NATIONKEY":9,
+    "S_PHONE":"19-559-422-5776",
+    "S_ACCTBAL":5926.41,
+    "S_COMMENT":"ges could have to are ironic deposits. regular, even request"
+  }
+  {
+    "S_SUPPKEY":24,
+    "S_NAME":"Supplier#000000024",
+    "S_ADDRESS":"C4nPvLrVmKPPabFCj",
+    "S_NATIONKEY":0,
+    "S_PHONE":"10-620-939-2254",
+    "S_ACCTBAL":9170.71,
+    "S_COMMENT":"usly pending deposits. slyly final accounts run "
+  }
+  {
+    "S_SUPPKEY":25,
+    "S_NAME":"Supplier#000000025",
+    "S_ADDRESS":"RCQKONXMFnrodzz6w7fObFVV6CUm2q",
+    "S_NATIONKEY":22,
+    "S_PHONE":"32-431-945-3541",
+    "S_ACCTBAL":9198.31,
+    "S_COMMENT":"ely regular deposits. carefully regular sauternes engage furiously above the regular accounts. idly "
+  }
+  {
+    "S_SUPPKEY":26,
+    "S_NAME":"Supplier#000000026",
+    "S_ADDRESS":"iV,MHzAx6Z939uzFNkq09M0a1 MBfH7",
+    "S_NATIONKEY":21,
+    "S_PHONE":"31-758-894-4436",
+    "S_ACCTBAL":21.18,
+    "S_COMMENT":" ideas poach carefully after the blithely bold asymptotes. furiously pending theodoli"
+  }
+  {
+    "S_SUPPKEY":27,
+    "S_NAME":"Supplier#000000027",
+    "S_ADDRESS":"lC4CjKwNHUr6L4xIpzOBK4NlHkFTg",
+    "S_NATIONKEY":18,
+    "S_PHONE":"28-708-999-2028",
+    "S_ACCTBAL":1887.62,
+    "S_COMMENT":"s according to the quickly regular hockey playe"
+  }
+  {
+    "S_SUPPKEY":28,
+    "S_NAME":"Supplier#000000028",
+    "S_ADDRESS":"GBhvoRh,7YIN V",
+    "S_NATIONKEY":0,
+    "S_PHONE":"10-538-384-8460",
+    "S_ACCTBAL":-891.99,
+    "S_COMMENT":"ld requests across the pinto beans are carefully against the quickly final courts. accounts sleep "
+  }
+  {
+    "S_SUPPKEY":29,
+    "S_NAME":"Supplier#000000029",
+    "S_ADDRESS":"658tEqXLPvRd6xpFdqC2",
+    "S_NATIONKEY":1,
+    "S_PHONE":"11-555-705-5922",
+    "S_ACCTBAL":-811.62,
+    "S_COMMENT":"y express ideas play furiously. even accounts sleep fluffily across the accounts. careful"
+  }
+  {
+    "S_SUPPKEY":30,
+    "S_NAME":"Supplier#000000030",
+    "S_ADDRESS":"84NmC1rmQfO0fj3zkobLT",
+    "S_NATIONKEY":16,
+    "S_PHONE":"26-940-594-4852",
+    "S_ACCTBAL":8080.14,
+    "S_COMMENT":"ias. carefully silent accounts cajole blithely. pending, special accounts cajole quickly above the f"
+  }
+  {
+    "S_SUPPKEY":31,
+    "S_NAME":"Supplier#000000031",
+    "S_ADDRESS":"fRJimA7zchyApqRLHcQeocVpP",
+    "S_NATIONKEY":16,
+    "S_PHONE":"26-515-530-4159",
+    "S_ACCTBAL":5916.91,
+    "S_COMMENT":"into beans wake after the special packages. slyly fluffy requests cajole furio"
+  }
+  {
+    "S_SUPPKEY":32,
+    "S_NAME":"Supplier#000000032",
+    "S_ADDRESS":"yvoD3TtZSx1skQNCK8agk5bZlZLug",
+    "S_NATIONKEY":23,
+    "S_PHONE":"33-484-637-7873",
+    "S_ACCTBAL":3556.47,
+    "S_COMMENT":"usly even depths. quickly ironic theodolites s"
+  }
+  {
+    "S_SUPPKEY":33,
+    "S_NAME":"Supplier#000000033",
+    "S_ADDRESS":"gfeKpYw3400L0SDywXA6Ya1Qmq1w6YB9f3R",
+    "S_NATIONKEY":7,
+    "S_PHONE":"17-138-897-9374",
+    "S_ACCTBAL":8564.12,
+    "S_COMMENT":"n sauternes along the regular asymptotes are regularly along the "
+  }
+  {
+    "S_SUPPKEY":34,
+    "S_NAME":"Supplier#000000034",
+    "S_ADDRESS":"mYRe3KvA2O4lL4HhxDKkkrPUDPMKRCSp,Xpa",
+    "S_NATIONKEY":10,
+    "S_PHONE":"20-519-982-2343",
+    "S_ACCTBAL":237.31,
+    "S_COMMENT":"eposits. slyly final deposits toward the slyly regular dependencies sleep among the excu"
+  }
+  {
+    "S_SUPPKEY":35,
+    "S_NAME":"Supplier#000000035",
+    "S_ADDRESS":"QymmGXxjVVQ5OuABCXVVsu,4eF gU0Qc6",
+    "S_NATIONKEY":21,
+    "S_PHONE":"31-720-790-5245",
+    "S_ACCTBAL":4381.41,
+    "S_COMMENT":" ironic deposits! final, bold platelets haggle quickly quickly pendin"
+  }
+  {
+    "S_SUPPKEY":36,
+    "S_NAME":"Supplier#000000036",
+    "S_ADDRESS":"mzSpBBJvbjdx3UKTW3bLFewRD78D91lAC879",
+    "S_NATIONKEY":13,
+    "S_PHONE":"23-273-493-3679",
+    "S_ACCTBAL":2371.51,
+    "S_COMMENT":"ular theodolites must haggle regular, bold accounts. slyly final pinto beans bo"
+  }
+  {
+    "S_SUPPKEY":37,
+    "S_NAME":"Supplier#000000037",
+    "S_ADDRESS":"cqjyB5h1nV",
+    "S_NATIONKEY":0,
+    "S_PHONE":"10-470-144-1330",
+    "S_ACCTBAL":3017.47,
+    "S_COMMENT":"iously final instructions. quickly special accounts hang fluffily above the accounts. deposits"
+  }
+  {
+    "S_SUPPKEY":38,
+    "S_NAME":"Supplier#000000038",
+    "S_ADDRESS":"xEcx45vD0FXHT7c9mvWFY",
+    "S_NATIONKEY":4,
+    "S_PHONE":"14-361-296-6426",
+    "S_ACCTBAL":2512.41,
+    "S_COMMENT":"ins. fluffily special accounts haggle slyly af"
+  }
+  {
+    "S_SUPPKEY":39,
+    "S_NAME":"Supplier#000000039",
+    "S_ADDRESS":"ZM, nSYpEPWr1yAFHaC91qjFcijjeU5eH",
+    "S_NATIONKEY":8,
+    "S_PHONE":"18-851-856-5633",
+    "S_ACCTBAL":6115.65,
+    "S_COMMENT":"le slyly requests. special packages shall are blithely. slyly unusual packages sleep "
+  }
+  {
+    "S_SUPPKEY":40,
+    "S_NAME":"Supplier#000000040",
+    "S_ADDRESS":"zyIeWzbbpkTV37vm1nmSGBxSgd2Kp",
+    "S_NATIONKEY":22,
+    "S_PHONE":"32-231-247-6991",
+    "S_ACCTBAL":-290.06,
+    "S_COMMENT":" final patterns. accounts haggle idly pas"
+  }
+  {
+    "S_SUPPKEY":41,
+    "S_NAME":"Supplier#000000041",
+    "S_ADDRESS":"G 1FKHR435 wMKFmyt",
+    "S_NATIONKEY":18,
+    "S_PHONE":"28-739-447-2525",
+    "S_ACCTBAL":6942.67,
+    "S_COMMENT":"odolites boost across the furiously regular fo"
+  }
+  {
+    "S_SUPPKEY":42,
+    "S_NAME":"Supplier#000000042",
+    "S_ADDRESS":"1Y5lwEgpe3j2vbUBYj3SwLhK62JlwEMtDC",
+    "S_NATIONKEY":22,
+    "S_PHONE":"32-698-298-6317",
+    "S_ACCTBAL":6565.11,
+    "S_COMMENT":" fluffily even requests cajole blithely fu"
+  }
+  {
+    "S_SUPPKEY":43,
+    "S_NAME":"Supplier#000000043",
+    "S_ADDRESS":"Z5mLuAoTUEeKY5v22VnnA4D87Ao6jF2LvMYnlX8h",
+    "S_NATIONKEY":12,
+    "S_PHONE":"22-421-568-4862",
+    "S_ACCTBAL":7773.41,
+    "S_COMMENT":"unts. unusual, final asymptotes "
+  }
+  {
+    "S_SUPPKEY":44,
+    "S_NAME":"Supplier#000000044",
+    "S_ADDRESS":"kERxlLDnlIZJdN66zAPHklyL",
+    "S_NATIONKEY":7,
+    "S_PHONE":"17-713-930-5667",
+    "S_ACCTBAL":9759.38,
+    "S_COMMENT":"x. carefully quiet account"
+  }
+  {
+    "S_SUPPKEY":45,
+    "S_NAME":"Supplier#000000045",
+    "S_ADDRESS":"LcKnsa8XGtIO0WYSB7hkOrH rnzRg1",
+    "S_NATIONKEY":9,
+    "S_PHONE":"19-189-635-8862",
+    "S_ACCTBAL":2944.23,
+    "S_COMMENT":"iously according to the ironic, silent accounts."
+  }
+  {
+    "S_SUPPKEY":46,
+    "S_NAME":"Supplier#000000046",
+    "S_ADDRESS":"e0URUXfDOYMdKe16Z5h5StMRbzGmTs,D2cjap",
+    "S_NATIONKEY":24,
+    "S_PHONE":"34-748-308-3215",
+    "S_ACCTBAL":3580.35,
+    "S_COMMENT":"gular, regular ideas across th"
+  }
+  {
+    "S_SUPPKEY":47,
+    "S_NAME":"Supplier#000000047",
+    "S_ADDRESS":"3XM1x,Pcxqw,HK4XNlgbnZMbLhBHLA",
+    "S_NATIONKEY":14,
+    "S_PHONE":"24-810-354-4471",
+    "S_ACCTBAL":2958.09,
+    "S_COMMENT":"sly ironic deposits sleep carefully along t"
+  }
+  {
+    "S_SUPPKEY":48,
+    "S_NAME":"Supplier#000000048",
+    "S_ADDRESS":"jg0U FNPMQDuyuKvTnLXXaLf3Wl6OtONA6mQlWJ",
+    "S_NATIONKEY":14,
+    "S_PHONE":"24-722-551-9498",
+    "S_ACCTBAL":5630.62,
+    "S_COMMENT":"xpress instructions affix. fluffily even requests boos"
+  }
+  {
+    "S_SUPPKEY":49,
+    "S_NAME":"Supplier#000000049",
+    "S_ADDRESS":"Nvq 6macF4GtJvz",
+    "S_NATIONKEY":24,
+    "S_PHONE":"34-211-567-6800",
+    "S_ACCTBAL":9915.24,
+    "S_COMMENT":"the finally bold dependencies. dependencies after the fluffily final foxes boost fluffi"
+  }
+  {
+    "S_SUPPKEY":50,
+    "S_NAME":"Supplier#000000050",
+    "S_ADDRESS":"rGobqSMMYz0ErrPhCGS",
+    "S_NATIONKEY":9,
+    "S_PHONE":"19-561-560-7437",
+    "S_ACCTBAL":4515.87,
+    "S_COMMENT":"warhorses. ironic, regular accounts detect slyly after the quickly f"
+  }
+  {
+    "S_SUPPKEY":51,
+    "S_NAME":"Supplier#000000051",
+    "S_ADDRESS":"rDkBXb01POIKjOwrij62uM8O4",
+    "S_NATIONKEY":9,
+    "S_PHONE":"19-475-537-1368",
+    "S_ACCTBAL":7241.40,
+    "S_COMMENT":"ges nag at the blithely busy instructions. fluffy packages wake quickly. even, ironic ideas boost b"
+  }
+  {
+    "S_SUPPKEY":52,
+    "S_NAME":"Supplier#000000052",
+    "S_ADDRESS":"WCk XCHYzBA1dvJDSol4ZJQQcQN,",
+    "S_NATIONKEY":19,
+    "S_PHONE":"29-974-934-4713",
+    "S_ACCTBAL":287.16,
+    "S_COMMENT":"dolites are slyly against the furiously regular packages. ironic, final deposits cajole quickly"
+  }
+  {
+    "S_SUPPKEY":53,
+    "S_NAME":"Supplier#000000053",
+    "S_ADDRESS":"i9v3 EsYCfLKFU6PIt8iihBOHBB37yR7b3GD7Rt",
+    "S_NATIONKEY":7,
+    "S_PHONE":"17-886-101-6083",
+    "S_ACCTBAL":6177.35,
+    "S_COMMENT":"onic, special deposits wake furio"
+  }
+  {
+    "S_SUPPKEY":54,
+    "S_NAME":"Supplier#000000054",
+    "S_ADDRESS":"J1s,Wxb5pg",
+    "S_NATIONKEY":12,
+    "S_PHONE":"22-966-435-7200",
+    "S_ACCTBAL":2733.69,
+    "S_COMMENT":"blithely pending dolphins. quickly regular theodolites haggle slyly"
+  }
+  {
+    "S_SUPPKEY":55,
+    "S_NAME":"Supplier#000000055",
+    "S_ADDRESS":"OqdYSiOQeG4eGi636Tj",
+    "S_NATIONKEY":24,
+    "S_PHONE":"34-876-912-6007",
+    "S_ACCTBAL":7162.15,
+    "S_COMMENT":"kages. blithely even foxes cajole special, final accounts. blithely even dependencies r"
+  }
+  {
+    "S_SUPPKEY":56,
+    "S_NAME":"Supplier#000000056",
+    "S_ADDRESS":"fUVtlUVal GiHBOuYoUQ XQ9NfNLQR3Gl",
+    "S_NATIONKEY":16,
+    "S_PHONE":"26-471-195-5486",
+    "S_ACCTBAL":-632.16,
+    "S_COMMENT":" sleep special deposits. unusual requests wake blithely slyly regular ideas. "
+  }
+  {
+    "S_SUPPKEY":57,
+    "S_NAME":"Supplier#000000057",
+    "S_ADDRESS":"bEWqUVRR f0mb2o18Y",
+    "S_NATIONKEY":17,
+    "S_PHONE":"27-681-514-6892",
+    "S_ACCTBAL":-831.07,
+    "S_COMMENT":"detect according to the furiously br"
+  }
+  {
+    "S_SUPPKEY":58,
+    "S_NAME":"Supplier#000000058",
+    "S_ADDRESS":"01dEADIZoCULZXg",
+    "S_NATIONKEY":16,
+    "S_PHONE":"26-659-969-5586",
+    "S_ACCTBAL":92.44,
+    "S_COMMENT":"refully final foxes are. even, express courts according to the b"
+  }
+  {
+    "S_SUPPKEY":59,
+    "S_NAME":"Supplier#000000059",
+    "S_ADDRESS":"N8lKbYjMnVlEHmTPRmBgtLiX8rrJx",
+    "S_NATIONKEY":17,
+    "S_PHONE":"27-249-395-9123",
+    "S_ACCTBAL":586.16,
+    "S_COMMENT":"ffily along the even decoys. final instructions abov"
+  }
+  {
+    "S_SUPPKEY":60,
+    "S_NAME":"Supplier#000000060",
+    "S_ADDRESS":"cb08ntDTARo47WmnBcYXu",
+    "S_NATIONKEY":8,
+    "S_PHONE":"18-550-360-2464",
+    "S_ACCTBAL":4515.80,
+    "S_COMMENT":"thely express ideas use blithely "
+  }
+  {
+    "S_SUPPKEY":61,
+    "S_NAME":"Supplier#000000061",
+    "S_ADDRESS":"Oz0M1qBR9I",
+    "S_NATIONKEY":8,
+    "S_PHONE":"18-396-489-9719",
+    "S_ACCTBAL":6096.58,
+    "S_COMMENT":"s the slyly regular ideas shall "
+  }
+  {
+    "S_SUPPKEY":62,
+    "S_NAME":"Supplier#000000062",
+    "S_ADDRESS":"bSmlFYUKBeRsqJxwC9 zS6xpFdEf5jNTb",
+    "S_NATIONKEY":19,
+    "S_PHONE":"29-603-653-2494",
+    "S_ACCTBAL":9202.57,
+    "S_COMMENT":"ts. furiously ironic pinto beans are permanently after the bold ideas. regular, express f"
+  }
+  {
+    "S_SUPPKEY":63,
+    "S_NAME":"Supplier#000000063",
+    "S_ADDRESS":"NlV0OQyIoPvPkw5AYuWGomX,hgqm1",
+    "S_NATIONKEY":5,
+    "S_PHONE":"15-781-401-3047",
+    "S_ACCTBAL":5742.03,
+    "S_COMMENT":"ar deposits. blithely bold accounts against the slyly final pinto beans sleep about the exp"
+  }
+  {
+    "S_SUPPKEY":64,
+    "S_NAME":"Supplier#000000064",
+    "S_ADDRESS":"w80JjnIP lGoLdUjRutbv81gGlqqpW4PQBeOtSYU",
+    "S_NATIONKEY":24,
+    "S_PHONE":"34-278-790-7004",
+    "S_ACCTBAL":1309.70,
+    "S_COMMENT":"uickly regular requests use. carefully i"
+  }
+  {
+    "S_SUPPKEY":65,
+    "S_NAME":"Supplier#000000065",
+    "S_ADDRESS":"BsAnHUmSFArppKrM",
+    "S_NATIONKEY":22,
+    "S_PHONE":"32-444-835-2434",
+    "S_ACCTBAL":-963.79,
+    "S_COMMENT":"l ideas wake carefully around the regular packages. furiously ruthless pinto bea"
+  }
+  {
+    "S_SUPPKEY":66,
+    "S_NAME":"Supplier#000000066",
+    "S_ADDRESS":"qYdruFJQJYYiKvnNVmYfCVydVB8bcW,AW,U6SOV3",
+    "S_NATIONKEY":23,
+    "S_PHONE":"33-300-836-9529",
+    "S_ACCTBAL":2455.98,
+    "S_COMMENT":"ar requests. express orbits de"
+  }
+  {
+    "S_SUPPKEY":67,
+    "S_NAME":"Supplier#000000067",
+    "S_ADDRESS":"7YrEKJncHFk5D W7ZaqfAXV",
+    "S_NATIONKEY":4,
+    "S_PHONE":"14-563-538-1657",
+    "S_ACCTBAL":3576.55,
+    "S_COMMENT":"ray slyly final foxes. furio"
+  }
+  {
+    "S_SUPPKEY":68,
+    "S_NAME":"Supplier#000000068",
+    "S_ADDRESS":"Ue6N50wH2CwE4PPgTGLmat,ibGYYlDoOb3xQwtgb",
+    "S_NATIONKEY":21,
+    "S_PHONE":"31-267-327-4328",
+    "S_ACCTBAL":5119.38,
+    "S_COMMENT":"inal requests. ruthlessly ironic packages cajole"
+  }
+  {
+    "S_SUPPKEY":69,
+    "S_NAME":"Supplier#000000069",
+    "S_ADDRESS":"T2Dl9,f97e333eRuMi2z ",
+    "S_NATIONKEY":4,
+    "S_PHONE":"14-491-707-8310",
+    "S_ACCTBAL":8466.50,
+    "S_COMMENT":"! carefully ironic instructions nag quickly pending requests. fluffily even deposits sleep a"
+  }
+  {
+    "S_SUPPKEY":70,
+    "S_NAME":"Supplier#000000070",
+    "S_ADDRESS":"INWNH2w,OOWgNDq0BRCcBwOMQc6PdFDc4",
+    "S_NATIONKEY":6,
+    "S_PHONE":"16-821-608-1166",
+    "S_ACCTBAL":9508.37,
+    "S_COMMENT":"ests sleep quickly express ideas. ironic ideas haggle about the final T"
+  }
+  {
+    "S_SUPPKEY":71,
+    "S_NAME":"Supplier#000000071",
+    "S_ADDRESS":"YFo8an7P6wi Q",
+    "S_NATIONKEY":1,
+    "S_PHONE":"11-743-919-7272",
+    "S_ACCTBAL":8179.68,
+    "S_COMMENT":" final accounts. bold, final escapades must have to cajole about the special platelets. fu"
+  }
+  {
+    "S_SUPPKEY":72,
+    "S_NAME":"Supplier#000000072",
+    "S_ADDRESS":"mKpAJojtawk2alqV4 ZEbJ3PH3wfYqy AM8rGq1",
+    "S_NATIONKEY":18,
+    "S_PHONE":"28-113-898-6643",
+    "S_ACCTBAL":7014.50,
+    "S_COMMENT":" theodolites sublate furiously about the regularly e"
+  }
+  {
+    "S_SUPPKEY":73,
+    "S_NAME":"Supplier#000000073",
+    "S_ADDRESS":"HBZA1NHvrswQCxTTjg 5XrfSOGgMRKNCe2ovE",
+    "S_NATIONKEY":16,
+    "S_PHONE":"26-758-310-7496",
+    "S_ACCTBAL":3793.13,
+    "S_COMMENT":". never pending asymptotes a"
+  }
+  {
+    "S_SUPPKEY":74,
+    "S_NAME":"Supplier#000000074",
+    "S_ADDRESS":"uM3yV5NOc6b5wNdpxF69CW 8QvDxqvKubRJtA",
+    "S_NATIONKEY":20,
+    "S_PHONE":"30-166-486-1559",
+    "S_ACCTBAL":4170.51,
+    "S_COMMENT":"carefully along the quickly regular sentiments. ironic accounts sleep. regular deposits are blith"
+  }
+  {
+    "S_SUPPKEY":75,
+    "S_NAME":"Supplier#000000075",
+    "S_ADDRESS":"7f3gN4rP1livII",
+    "S_NATIONKEY":18,
+    "S_PHONE":"28-716-704-8686",
+    "S_ACCTBAL":-224.84,
+    "S_COMMENT":"eans. even, silent packages c"
+  }
+  {
+    "S_SUPPKEY":76,
+    "S_NAME":"Supplier#000000076",
+    "S_ADDRESS":"JBhSBa3cLYvNgHUYtUHmtECCD",
+    "S_NATIONKEY":14,
+    "S_PHONE":"24-228-763-7840",
+    "S_ACCTBAL":2971.10,
+    "S_COMMENT":", even instructions. furiously unusual deposits wake slyly about the ev"
+  }
+  {
+    "S_SUPPKEY":77,
+    "S_NAME":"Supplier#000000077",
+    "S_ADDRESS":"wVtcr0uH3CyrSiWMLsqnB09Syo,UuZxPMeBghlY",
+    "S_NATIONKEY":7,
+    "S_PHONE":"17-281-345-4863",
+    "S_ACCTBAL":4186.95,
+    "S_COMMENT":"the slyly final asymptotes. blithely pending theodoli"
+  }
+  {
+    "S_SUPPKEY":78,
+    "S_NAME":"Supplier#000000078",
+    "S_ADDRESS":"9y3OZ2CV hGrsrQxzB7V3zTtygHVHlG3SD6yrz",
+    "S_NATIONKEY":5,
+    "S_PHONE":"15-670-998-6860",
+    "S_ACCTBAL":1044.10,
+    "S_COMMENT":", regular packages wake quickly bold requests. carefully unusual requests about the unusual request"
+  }
+  {
+    "S_SUPPKEY":79,
+    "S_NAME":"Supplier#000000079",
+    "S_ADDRESS":"p0u3tztSXUD2J8vFfLNFNKsrRRv7qyUtTBTA",
+    "S_NATIONKEY":14,
+    "S_PHONE":"24-402-227-9600",
+    "S_ACCTBAL":1191.94,
+    "S_COMMENT":"nto beans integrate slyly across the fluffily pending multipliers. carefully ste"
+  }
+  {
+    "S_SUPPKEY":80,
+    "S_NAME":"Supplier#000000080",
+    "S_ADDRESS":"cJ2MHSEJ13rIL2Wj3D5i6hRo30,ZiNUXhqn",
+    "S_NATIONKEY":21,
+    "S_PHONE":"31-646-289-1906",
+    "S_ACCTBAL":-40.45,
+    "S_COMMENT":"ackages. blithely bold requests wake quickly. carefully regular foxes are slyly instructions. caref"
+  }
+  {
+    "S_SUPPKEY":81,
+    "S_NAME":"Supplier#000000081",
+    "S_ADDRESS":"SLlacbhgpKmVa,gF3saYv12e0",
+    "S_NATIONKEY":12,
+    "S_PHONE":"22-535-310-6971",
+    "S_ACCTBAL":166.32,
+    "S_COMMENT":"oost carefully quickly regular packages. carefully final excuses sleep blithely slyly pendi"
+  }
+  {
+    "S_SUPPKEY":82,
+    "S_NAME":"Supplier#000000082",
+    "S_ADDRESS":"WyTKA7ZpF15t1aCNlT3",
+    "S_NATIONKEY":18,
+    "S_PHONE":"28-177-572-9691",
+    "S_ACCTBAL":-724.31,
+    "S_COMMENT":"xpress multipliers wake furiously even foxes. furiously iro"
+  }
+  {
+    "S_SUPPKEY":83,
+    "S_NAME":"Supplier#000000083",
+    "S_ADDRESS":"WRJUkzCn050seVz57oAfrbCuw",
+    "S_NATIONKEY":14,
+    "S_PHONE":"24-529-559-2461",
+    "S_ACCTBAL":1467.77,
+    "S_COMMENT":"ly pending courts would cajole enticingly even deposits. slyly express"
+  }
+  {
+    "S_SUPPKEY":84,
+    "S_NAME":"Supplier#000000084",
+    "S_ADDRESS":"DcYjWMiZGQqEKOJi4wAmIV08ikx",
+    "S_NATIONKEY":24,
+    "S_PHONE":"34-869-118-7803",
+    "S_ACCTBAL":4780.93,
+    "S_COMMENT":"even depths. regular foxes use slyly. theod"
+  }
+  {
+    "S_SUPPKEY":85,
+    "S_NAME":"Supplier#000000085",
+    "S_ADDRESS":"Ckls9RtlzKSF",
+    "S_NATIONKEY":7,
+    "S_PHONE":"17-167-806-8199",
+    "S_ACCTBAL":7174.74,
+    "S_COMMENT":"egular packages. bold pinto beans wake fur"
+  }
+  {
+    "S_SUPPKEY":86,
+    "S_NAME":"Supplier#000000086",
+    "S_ADDRESS":"J1fgg5QaqnN",
+    "S_NATIONKEY":19,
+    "S_PHONE":"29-903-665-7065",
+    "S_ACCTBAL":1883.37,
+    "S_COMMENT":"cajole furiously special, final requests: furiously spec"
+  }
+  {
+    "S_SUPPKEY":87,
+    "S_NAME":"Supplier#000000087",
+    "S_ADDRESS":"WCw7URDj8zoZ7tqC3cpm7",
+    "S_NATIONKEY":24,
+    "S_PHONE":"34-860-229-1674",
+    "S_ACCTBAL":4746.66,
+    "S_COMMENT":"all are quickly after the ironic platelets. pending dolphins are. final the"
+  }
+  {
+    "S_SUPPKEY":88,
+    "S_NAME":"Supplier#000000088",
+    "S_ADDRESS":"yOshY8wwzMgS",
+    "S_NATIONKEY":11,
+    "S_PHONE":"21-191-938-9469",
+    "S_ACCTBAL":3086.13,
+    "S_COMMENT":"furiously special excuses aff"
+  }
+  {
+    "S_SUPPKEY":89,
+    "S_NAME":"Supplier#000000089",
+    "S_ADDRESS":"fhtzZcSorhud1",
+    "S_NATIONKEY":9,
+    "S_PHONE":"19-259-876-1014",
+    "S_ACCTBAL":1638.02,
+    "S_COMMENT":"en instructions across the slyly ironic requests engage"
+  }
+  {
+    "S_SUPPKEY":90,
+    "S_NAME":"Supplier#000000090",
+    "S_ADDRESS":"bPE6Uhz1f2m3gwSGMrnRt,g,3gq37r5kxgphqss1",
+    "S_NATIONKEY":6,
+    "S_PHONE":"16-380-123-9217",
+    "S_ACCTBAL":6201.77,
+    "S_COMMENT":"hely fluffily regular theodoli"
+  }
+  {
+    "S_SUPPKEY":91,
+    "S_NAME":"Supplier#000000091",
+    "S_ADDRESS":"YV45D7TkfdQanOOZ7q9QxkyGUapU1oOWU6q3",
+    "S_NATIONKEY":3,
+    "S_PHONE":"13-604-986-9056",
+    "S_ACCTBAL":6255.87,
+    "S_COMMENT":"nstructions use carefully according to the special packages: quickly silent th"
+  }
+  {
+    "S_SUPPKEY":92,
+    "S_NAME":"Supplier#000000092",
+    "S_ADDRESS":"n48Wy4QI3lml8T217rk",
+    "S_NATIONKEY":2,
+    "S_PHONE":"12-701-432-8346",
+    "S_ACCTBAL":2470.84,
+    "S_COMMENT":" even theodolites wake against the blithely fluffy packages"
+  }
+  {
+    "S_SUPPKEY":93,
+    "S_NAME":"Supplier#000000093",
+    "S_ADDRESS":"wd1djjKXT,4zBm",
+    "S_NATIONKEY":16,
+    "S_PHONE":"26-528-528-1157",
+    "S_ACCTBAL":368.76,
+    "S_COMMENT":"yly final accounts could are carefully. fluffily ironic instruct"
+  }
+  {
+    "S_SUPPKEY":94,
+    "S_NAME":"Supplier#000000094",
+    "S_ADDRESS":"lK,pLPjAMVGJOXN80zPZuNQjpChliE",
+    "S_NATIONKEY":4,
+    "S_PHONE":"14-728-888-8882",
+    "S_ACCTBAL":2766.80,
+    "S_COMMENT":"usly. furiously slow theodolites could haggle carefully fina"
+  }
+  {
+    "S_SUPPKEY":95,
+    "S_NAME":"Supplier#000000095",
+    "S_ADDRESS":"p2 2hBfH5TD",
+    "S_NATIONKEY":19,
+    "S_PHONE":"29-142-539-1403",
+    "S_ACCTBAL":2588.83,
+    "S_COMMENT":"sual instructions cajole slyly with the final ac"
+  }
+  {
+    "S_SUPPKEY":96,
+    "S_NAME":"Supplier#000000096",
+    "S_ADDRESS":"Lbxp3WIipye o2wZme1i9iJx,xTt1Mp",
+    "S_NATIONKEY":12,
+    "S_PHONE":"22-888-654-7193",
+    "S_ACCTBAL":3437.24,
+    "S_COMMENT":"efully unusual excuses wake fluffily regular theodo"
+  }
+  {
+    "S_SUPPKEY":97,
+    "S_NAME":"Supplier#000000097",
+    "S_ADDRESS":"MrCQha2G6ndX1fp6CA",
+    "S_NATIONKEY":4,
+    "S_PHONE":"14-618-678-1789",
+    "S_ACCTBAL":6642.22,
+    "S_COMMENT":"s, regular accounts. furiously bold ideas u"
+  }
+  {
+    "S_SUPPKEY":98,
+    "S_NAME":"Supplier#000000098",
+    "S_ADDRESS":"ogHn8dpXB5Q",
+    "S_NATIONKEY":21,
+    "S_PHONE":"31-914-775-1978",
+    "S_ACCTBAL":5873.07,
+    "S_COMMENT":"esias use slyly under the ironic foxes. re"
+  }
+  {
+    "S_SUPPKEY":99,
+    "S_NAME":"Supplier#000000099",
+    "S_ADDRESS":"4SxkTHG28nZrtT0,MnVF9H",
+    "S_NATIONKEY":18,
+    "S_PHONE":"28-272-909-1617",
+    "S_ACCTBAL":3671.34,
+    "S_COMMENT":"nic dependencies dazzle flu"
+  }
+  {
+    "S_SUPPKEY":100,
+    "S_NAME":"Supplier#000000100",
+    "S_ADDRESS":"rIlN li8zvW22l2slbcx ECP4fL",
+    "S_NATIONKEY":21,
+    "S_PHONE":"31-351-324-5062",
+    "S_ACCTBAL":3191.70,
+    "S_COMMENT":"es. regular instructions sleep carefully. slyly ironic packages across the foxes boost "
+  }

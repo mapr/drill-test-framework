@@ -1,0 +1,252 @@
+{
+    "int_col":1,
+    "bigint_col":98723980547,
+    "date_col":null,
+    "time_col":"00:00:00",
+    "timestamp_col":null,
+    "interval_col":"P18582D",
+    "varchar_col":"jllkjsdhfg",
+    "float_col":2345.33,
+    "double_col":null,
+    "bool_col":false
+}
+{
+    "int_col":null,
+    "bigint_col":24509823475,
+    "date_col":null,
+    "time_col":"01:00:00",
+    "timestamp_col":"1997-01-02 00:00:00.0",
+    "interval_col":"P1DT9045S",
+    "varchar_col":"jhgduitweriuoert",
+    "float_col":3243.32,
+    "double_col":664522.332,
+    "bool_col":true
+}
+{
+    "int_col":3,
+    "bigint_col":3475789234,
+    "date_col":null,
+    "time_col":null,
+    "timestamp_col":null,
+    "interval_col":"P1DT9000S",
+    "varchar_col":"gfdstweopiu",
+    "float_col":234533.2,
+    "double_col":234522.3221,
+    "bool_col":true
+}
+{
+    "int_col":4,
+    "bigint_col":null,
+    "date_col":"1996-01-29",
+    "time_col":"11:59:00",
+    "timestamp_col":null,
+    "interval_col":"P10DT9000S",
+    "varchar_col":"gjklhsdfgkjhkASDF",
+    "float_col":null,
+    "double_col":2222234543245.44,
+    "bool_col":false
+}
+{
+    "int_col":5,
+    "bigint_col":39575748,
+    "date_col":"1996-03-01",
+    "time_col":"12:00:00",
+    "timestamp_col":"1997-02-10 17:32:00.0",
+    "interval_col":"P1DT9045.100S",
+    "varchar_col":"oieoiutriotureWERTgwgEWRg",
+    "float_col":23.5,
+    "double_col":654.4,
+    "bool_col":false
+}
+{
+    "int_col":6,
+    "bigint_col":47509823,
+    "date_col":"1996-03-02",
+    "time_col":"12:01:00",
+    "timestamp_col":"1997-02-11 17:32:01.0",
+    "interval_col":"P1Y2M",
+    "varchar_col":"gjkdfkjglfd",
+    "float_col":2345552345.5342,
+    "double_col":null,
+    "bool_col":false
+}
+{
+    "int_col":7,
+    "bigint_col":7520398475,
+    "date_col":"1997-02-28",
+    "time_col":"23:59:00",
+    "timestamp_col":"1997-02-12 17:32:01.0",
+    "interval_col":"P2Y",
+    "varchar_col":"ioerutklsdfASDgerGWEr",
+    "float_col":211.2,
+    "double_col":798276340.9,
+    "bool_col":true
+}
+{
+    "int_col":8,
+    "bigint_col":null,
+    "date_col":null,
+    "time_col":"23:59:59.990",
+    "timestamp_col":"1997-02-13 17:32:01.0",
+    "interval_col":null,
+    "varchar_col":"lkjgfiurtoUYFHfahui",
+    "float_col":9823.435,
+    "double_col":98723.879,
+    "bool_col":false
+}
+{
+    "int_col":9,
+    "bigint_col":509238475,
+    "date_col":"1997-03-01",
+    "time_col":"15:36:39",
+    "timestamp_col":null,
+    "interval_col":"P1DT9000S",
+    "varchar_col":"IOUfiuodsfIUfjkh",
+    "float_col":null,
+    "double_col":98273.455,
+    "bool_col":true
+}
+{
+    "int_col":10,
+    "bigint_col":4345234,
+    "date_col":"1997-03-02",
+    "time_col":"15:36:39",
+    "timestamp_col":"1997-02-15 17:32:01.0",
+    "interval_col":"P10DT9000S",
+    "varchar_col":"iweuoHUIhUwer",
+    "float_col":425.43,
+    "double_col":4756389.345,
+    "bool_col":false
+}
+{
+    "int_col":null,
+    "bigint_col":980347589,
+    "date_col":"2000-04-01",
+    "time_col":"00:01:00",
+    "timestamp_col":"1997-02-16 17:32:01.0",
+    "interval_col":"P1DT9045.100S",
+    "varchar_col":"KfijUIwre",
+    "float_col":3433.3,
+    "double_col":87364.5,
+    "bool_col":true
+}
+{
+    "int_col":12,
+    "bigint_col":859702345,
+    "date_col":"2000-04-03",
+    "time_col":null,
+    "timestamp_col":"1897-02-18 17:32:01.0",
+    "interval_col":"P1DT9045S",
+    "varchar_col":"dfgoiuert",
+    "float_col":34980.43,
+    "double_col":78346.3452,
+    "bool_col":false
+}
+{
+    "int_col":13,
+    "bigint_col":57784356923,
+    "date_col":"2038-04-08",
+    "time_col":"23:59:00",
+    "timestamp_col":"2002-02-14 17:32:01.0",
+    "interval_col":"P2Y",
+    "varchar_col":"uitreo",
+    "float_col":3425.543,
+    "double_col":765234.43,
+    "bool_col":null
+}
+{
+    "int_col":14,
+    "bigint_col":302,
+    "date_col":"2039-04-09",
+    "time_col":"12:03:00",
+    "timestamp_col":"1991-02-10 17:32:01.0",
+    "interval_col":"P1Y2M",
+    "varchar_col":"uigoMnvjjkdf",
+    "float_col":3654.43,
+    "double_col":763478.5623,
+    "bool_col":false
+}
+{
+    "int_col":15,
+    "bigint_col":2983475089,
+    "date_col":"2040-04-10",
+    "time_col":null,
+    "timestamp_col":"1900-02-16 17:32:01.0",
+    "interval_col":"P10DT9000S",
+    "varchar_col":"NvvdfHVG",
+    "float_col":5365.643,
+    "double_col":8767985.43,
+    "bool_col":true
+}
+{
+    "int_col":16,
+    "bigint_col":null,
+    "date_col":null,
+    "time_col":"19:59:00",
+    "timestamp_col":null,
+    "interval_col":"P18582D",
+    "varchar_col":null,
+    "float_col":4784.5735,
+    "double_col":2037598.58734,
+    "bool_col":null
+}
+{
+    "int_col":null,
+    "bigint_col":3750982435,
+    "date_col":"1999-02-08",
+    "time_col":"11:59:59.990",
+    "timestamp_col":"1897-02-16 17:32:01.0",
+    "interval_col":"P1DT9045S",
+    "varchar_col":"Nhkhuivb",
+    "float_col":6459.592,
+    "double_col":6538.7832,
+    "bool_col":false
+}
+{
+    "int_col":18,
+    "bigint_col":4582345,
+    "date_col":"1999-03-08",
+    "time_col":null,
+    "timestamp_col":"1997-02-16 17:32:01.0",
+    "interval_col":null,
+    "varchar_col":"uiuikjk",
+    "float_col":null,
+    "double_col":68791189.43,
+    "bool_col":null
+}
+{
+    "int_col":null,
+    "bigint_col":982,
+    "date_col":"1999-01-18",
+    "time_col":"15:36:39",
+    "timestamp_col":null,
+    "interval_col":"P1DT9045.100S",
+    "varchar_col":null,
+    "float_col":645.2321,
+    "double_col":87623.34,
+    "bool_col":true
+}
+{
+    "int_col":20,
+    "bigint_col":7893759083,
+    "date_col":"2003-01-02",
+    "time_col":"11:59:59.990",
+    "timestamp_col":"1996-02-28 17:32:01.0",
+    "interval_col":"P1DT9000S",
+    "varchar_col":"hjiwgh",
+    "float_col":345.543,
+    "double_col":8623.461,
+    "bool_col":false
+}
+{
+    "int_col":null,
+    "bigint_col":null,
+    "date_col":null,
+    "time_col":null,
+    "timestamp_col":null,
+    "interval_col":null,
+    "varchar_col":null,
+    "float_col":null,
+    "double_col":null,
+    "bool_col":null
+}

@@ -1,0 +1,8 @@
+{
+ "firstName": "Jimmy",
+ "lastName": null,
+ "age": 29,
+ "sex": "M",
+ "salary": 6300.10,
+ "registered": false
+}

@@ -1,0 +1,10 @@
+{
+"name":"test",
+"myarray":
+  { "key1":2, "key4":3, "key2":4 }
+}
+{
+"name":"mytest",
+"myarray":
+  { "key3":2, "key5":3, "key6":4 }
+}
