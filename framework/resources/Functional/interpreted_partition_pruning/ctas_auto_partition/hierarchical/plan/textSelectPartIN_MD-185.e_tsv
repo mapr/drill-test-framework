@@ -1,0 +1,3 @@
+Screen.*
+Project.*
+Scan.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring/0_0_28.parquet.*selectionRoot=.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring.*numFiles=1.*columns=.*dir0.*dir1.*`columns`\[0\], `columns`\[1\], `columns`\[4\], `columns`\[10\], `columns`\[13\]\]\]\].*

@@ -1,0 +1,61 @@
+{
+    "testId": "json-tpch",
+    "type": "group",
+    "description": "Test tpch queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirTpch01Json",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/json/customer.json",
+            "dest": "Tpch0.01/json/customer/customer.json"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/json/lineitem.json",
+            "dest": "Tpch0.01/json/lineitem/lineitem.json"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/json/nation.json",
+            "dest": "Tpch0.01/json/nation/nation.json"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/json/region.json",
+            "dest": "Tpch0.01/json/region/region.json"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/json/part.json",
+            "dest": "Tpch0.01/json/part/part.json"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/json/partsupp.json",
+            "dest": "Tpch0.01/json/partsupp/partsupp.json"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/json/supplier.json",
+            "dest": "Tpch0.01/json/supplier/supplier.json"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/json/orders.json",
+            "dest": "Tpch0.01/json/orders/orders.json"
+        }
+    ]
+}

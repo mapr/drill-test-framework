@@ -1,0 +1,1 @@
+select registration, age, name, sum(contributions) over w  from voter_hive window w AS (partition by registration order by registration nulls first range unbounded preceding) order by registration nulls first;

@@ -1,0 +1,5 @@
+-- create or replace view with the same case as in files
+
+create or replace view v1 as select * from ( select * from `customer.json` ) where CUSTOMERID >= 100 order by customerid;
+select * from v1;
+drop view v1;

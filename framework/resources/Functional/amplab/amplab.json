@@ -1,0 +1,32 @@
+{
+    "testId": "amplab",
+    "type": "group",
+    "description": "Test amplab queries via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirAmplab",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/amplab/rankings.parquet",
+            "dest": "amplab/rankings/rankings.parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/amplab/uservisits.parquet",
+            "dest": "amplab/uservisits/uservisits.parquet"
+        }
+    ]
+}

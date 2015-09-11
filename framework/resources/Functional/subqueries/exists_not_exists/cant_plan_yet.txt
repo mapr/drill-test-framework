@@ -1,0 +1,46 @@
+-----------------------------------------------------------------
+-- Support for correlation conditions of non-equijoins 
+-----------------------------------------------------------------
+select
+        a1
+from
+        t1
+where
+        exists
+        (
+        select
+                *
+        from
+                t2
+        where
+                t1.b1 <> t2.b2
+                --t1.b1 > t2.b2
+                --t1.b1 >= t2.b2
+                --t1.b1 < t2.b2
+                --t1.b1 <= t2.b2
+        )
+;
+
+----------------------------
+-- Skip level correlation --
+----------------------------
+select
+         distinct a1
+from
+         t1
+where   not exists
+         (
+         select
+                 *
+         from
+                 t2
+         where not exists
+                 (
+                 select
+                         *
+                 from
+                         t3
+                 where  t3.a3 = t1.a1
+                 )
+         )
+;

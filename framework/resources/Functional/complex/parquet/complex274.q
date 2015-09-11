@@ -1,0 +1,1 @@
+select tt.gbyi, sum(tt.id), avg(tt.fl), count(tt.nul) from (select t.id, t.gbyi, t.fl, t.nul from `complex.json` t where t.nul is not null) tt group by tt.gbyi order by tt.gbyi;

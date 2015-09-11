@@ -1,0 +1,4 @@
+.*
+  StreamAgg.*
+    Project.*
+      Scan.*selectionRoot=.*/drill/testdata/partition_pruning/dfs/lineitempart.*numFiles=1.*columns=\[`dir0`\].*files=.*/drill/testdata/partition_pruning/dfs/lineitempart/1991/lineitemaa.tbl.*

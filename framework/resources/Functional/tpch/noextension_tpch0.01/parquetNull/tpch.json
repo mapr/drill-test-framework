@@ -1,0 +1,26 @@
+{
+    "testId": "no-extension-parquet-null-tpch",
+    "type": "group",
+    "description": "Test no extension - parquet null tpch queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.NoExtParquetNull",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/no-extension",
+            "dest": "no-extension"
+        }
+    ]
+}

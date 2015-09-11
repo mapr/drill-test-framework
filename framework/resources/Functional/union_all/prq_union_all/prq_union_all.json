@@ -1,0 +1,27 @@
+{
+    "testId": "qres",
+    "type": "group",
+    "description": "Union All tests that use data from parquet files",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.union_all",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/union_all",
+            "dest": "union_all"
+        }
+    ]
+}

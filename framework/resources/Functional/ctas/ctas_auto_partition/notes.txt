@@ -1,0 +1,3 @@
+export REPL=existing_partition_pruning
+export REPL=existing_partition_pruning
+find . -type f -print0 | xargs -0 sed -i 's|'$REPL'|existing_partition_pruning|g'

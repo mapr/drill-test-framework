@@ -1,0 +1,1 @@
+select r.columns[1] from `/drill/testdata/text_storage/rankings.tbl` r, `/drill/testdata/text_storage/uservisits.tbl` u, `/drill/testdata/text_storage/DRILL-1421.tbl` t where r.columns[1]=u.columns[1] and r.columns[0] = t.columns[1];

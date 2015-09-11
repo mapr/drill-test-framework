@@ -1,0 +1,1 @@
+select tt.id, tt.soa0.`in`+tt.soa1.fl*tt.soa2.fl from (select t.id id, t.soa[0] soa0, t.soa[1] soa1, t.soa[2] soa2 from `complex.json` t) tt where tt.id <=10 or tt.id >= 999999;

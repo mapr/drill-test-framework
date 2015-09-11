@@ -1,0 +1,26 @@
+{
+    "testId": "textRead",
+    "type": "group",
+    "description": "Test text read queries",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+		"mode": "cp",
+		"src": "Datasources/text_storage",
+		"dest": "text_storage"
+	}
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "testId": "ctas_joins",
+    "type": "group",
+    "description": "ctas with joins",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.ctas_parquet",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/ctas",
+            "dest": "ctas"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/ctas/create_tables.sh",
+            "dest": ""
+        }
+
+    ]
+}
+

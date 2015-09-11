@@ -1,0 +1,1 @@
+select cast('0.00000000000000001' as decimal(18,18)) / cast('1234567890123456789.1234567890123456789' as decimal(38,19)) from data limit 1;

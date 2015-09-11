@@ -1,0 +1,32 @@
+{
+    "testId": "partitionDirectoryHive-HierarchicalPartitionDataIntString-text",
+    "type": "group",
+    "description": "Test partition directory queries",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+		"mode": "cp",
+		"src": "Datasources/partition_pruning/hive",
+		"dest": "partition_pruning/hive"
+	},
+        {
+           "mode": "gen",
+           "src": "bin/execHive.sh resources/Datasources/partition_pruning/hive/hive.ddl",
+           "dest": ""
+        }
+    ]
+}

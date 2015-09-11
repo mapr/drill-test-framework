@@ -1,0 +1,1 @@
+with a as ( select * from `test.json` ) select * from a, `test.json` b where a.CUSTOMERID = b.customerid;

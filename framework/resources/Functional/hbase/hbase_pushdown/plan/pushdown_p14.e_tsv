@@ -1,0 +1,3 @@
+    Screen
+      Project(row_key=[$0], fivecf=[$1], fourcf=[$2], onecf=[$3], threecf=[$4], twocf=[$5])
+        Scan(groupscan=[HBaseGroupScan [HBaseScanSpec=HBaseScanSpec [tableName=student, startRow=1, stopRow=2, filter=RowFilter (EQUAL, ^\x5CQ1\x5CE.*$)], columns=[`*`]]])

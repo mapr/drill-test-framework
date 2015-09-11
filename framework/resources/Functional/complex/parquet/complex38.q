@@ -1,0 +1,1 @@
+select t.gbyi, max(t.id) maxid, count(t.oooa.oa.oab.oabc[0].rowId) countid, min(t.oooa.oa.oab.oabc[1].rowValue1) minvalue, max(t.oooa.oa.oab.oabc[1].rowValue2) maxvalue from `complex.json` t group by t.gbyi order by t.gbyi;

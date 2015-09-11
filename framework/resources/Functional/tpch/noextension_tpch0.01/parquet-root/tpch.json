@@ -1,0 +1,26 @@
+{
+    "testId": "no-extension-parquet-tpch-root",
+    "type": "group",
+    "description": "Test no extension - parquet tpch queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.root",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/no-extension",
+            "dest": "no-extension"
+        }
+    ]
+}

@@ -1,0 +1,79 @@
+(1) Simple sanity test with all supported data types
+    	Test name : s1_<col>.sql
+	Query     : select count(*) from j1 where $col not in ( select $col from j2) ;
+
+		* table j2 does not have duplicates
+		* one null value in each column
+		* optional type
+		* j1 is 10,000 rows, 100 parquet files
+		* there are NO qualifying rows + NULL values, count(*) will return 0 in all cases
+
+(2) Same as #1, switch table in NOT IN clause to j1
+    	Test name : s2_<col>.sql
+	Query	  : select count(*) from j2 where $col not in ( select $col from j1) ;
+
+(3) Simple sanity test with all supported data types:
+    	Test name : s3_<col>.sql
+	Query     : select count(*) from j2 where $col not in ( select $col from j3) ;
+
+		* table j3 does not have NULL values
+		* table j3 does not have duplicates
+		* all the columns are of required type
+		* there are NO qualifying rows, count(*) will return 0 in all cases
+
+(3.1) Same as #3, switch tables
+	Test name : s3_1<col>.sql
+        Query     : select count(*) from j3 where $col not in ( select $col from j2) ;
+
+
+(4) Simple sanity test where all the rows qualify, but NULL values are going to disqualify all of them.
+    	Test name : s4_<col>.sql
+	Query     : select count(*) from j1 where $col not in ( select $col from j5) ;
+
+		* table j5 has 35 rows
+		* all columns are of optional type
+		* NULL values
+		* rows qualify, but NULL values will discqualify them, count(*) will return 0 in all cases
+
+(5) Simple sanity test where all the rows qualify and NO null values
+    	Test name : s5_<col>.sql
+	Query	  : select count(*) from j1 where $col not in ( select $col from j6) ;
+
+		* table j6 has NO NULL values
+		* all the rows qualify
+		* duplicate values
+		* optional data type
+
+(5.1) Same as #5, switch tables
+	Test name : s5_1<col>.sql
+        Query     : select count(*) from j6 where $col not in ( select $col from j1) ;
+
+
+(6) Simple sanity test where all the rows qualify and NO null values
+    	Test name : s6_<col>.sql
+	Query	  : select count(*) from j1 where $col not in ( select $col from j7) ;
+
+		* all the rows qualify
+		* table j7 has NO NULL values
+		* duplicate values
+		* required types
+
+(7) rest of the scenarios
+	Test name : q[1-17].sql
+
+Permutations:
+	* Important to run with planner.slice_target = 1;
+		Right now, the following tests are going to fail if hash join is disabled as well (drill-2967)
+			/root/drill-tests-vm/framework/resources/Functional/Passing/subqueries/not_in/s1_c_time.sql
+			/root/drill-tests-vm/framework/resources/Functional/Passing/subqueries/not_in/s1_c_varchar.sql
+			/root/drill-tests-vm/framework/resources/Functional/Passing/subqueries/not_in/s5_c_varchar.sql
+			/root/drill-tests-vm/framework/resources/Functional/Passing/subqueries/not_in/s4_c_date.sql
+			/root/drill-tests-vm/framework/resources/Functional/Passing/subqueries/not_in/s4_c_varchar.sql
+			/root/drill-tests-vm/framework/resources/Functional/Passing/subqueries/not_in/s5_c_timestamp.sql
+			/root/drill-tests-vm/framework/resources/Functional/Passing/subqueries/not_in/s1_c_timestamp.sql
+			/root/drill-tests-vm/framework/resources/Functional/Passing/subqueries/not_in/s4_c_timestamp.sql
+			/root/drill-tests-vm/framework/resources/Functional/Passing/subqueries/not_in/s1_c_date.sql
+			/root/drill-tests-vm/framework/resources/Functional/Passing/subqueries/not_in/s5_c_time.sql
+			/root/drill-tests-vm/framework/resources/Functional/Passing/subqueries/not_in/s4_c_time.sql
+			/root/drill-tests-vm/framework/resources/Functional/Passing/subqueries/not_in/s5_c_date.sql
+	* Only merge join enabled, only hash join enabled

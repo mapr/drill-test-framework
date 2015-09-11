@@ -1,0 +1,1 @@
+select extract(day from now())=extract(day from localtimestamp) from sys.drillbits limit 1;

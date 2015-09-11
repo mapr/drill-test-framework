@@ -1,0 +1,1 @@
+select t.gbyi, max(t.fl), min(t.fl), avg(t.fl), count(t.str) from `complex.json` t where t.bool is false group by t.gbyi order by t.gbyi;

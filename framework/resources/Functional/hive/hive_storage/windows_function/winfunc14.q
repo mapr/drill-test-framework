@@ -1,0 +1,1 @@
+select s.name, s.age,sum(v.contributions) over(partition by registration order by s.age nulls first) from voter_hive v inner join student_hive s on (s.name = v.name) where s.age < 30 order by s.name desc, s.age;

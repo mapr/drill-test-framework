@@ -1,0 +1,27 @@
+{
+    "testId": "aggregate1csv",
+    "type": "group",
+    "description": "Test aggregate queries via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "regression"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirAggregate1csv",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/text/tpcds/sf1",
+            "dest": "tpcds/csv/s1"
+        }
+    ]
+}

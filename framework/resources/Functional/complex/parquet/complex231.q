@@ -1,0 +1,1 @@
+select count(distinct t.soa[3].str) from `complex.json` t;

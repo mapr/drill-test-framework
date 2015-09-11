@@ -1,0 +1,1 @@
+(SELECT c2 FROM `union_01.parquet` ORDER BY c2 DESC nulls last) UNION (SELECT c2 FROM `union_02.parquet` ORDER BY c2 ASC nulls last);

@@ -1,0 +1,9 @@
+The purpose of this test suite is to test that query identifiers are case insensitive and case preserving.
+
+TODO: these test cases below should be added when bugs are fixed and design is solidified.
+	-- Hanifi is writing a document that should be referenced here.
+	-- Add test cases for aliases
+	-- Add cases for : DRILL-1911, DRILL-1913
+	-- Cases with the same column name after DRILL-2036 is fixed
+	-- Verify bugs when they are fixed (.fail files) 
+	-- manual test should be fixed to nuke table files from the file system

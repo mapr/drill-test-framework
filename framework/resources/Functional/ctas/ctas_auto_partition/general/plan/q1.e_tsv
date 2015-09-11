@@ -1,0 +1,3 @@
+.*
+Filter.*OR\(AND\(=.*1993\).*>.*29600\).*=.*1994.*>.*29700\).*
+Scan.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitempart.*selectionRoot.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitempart.*numFiles=1.*columns=\[`\*`\].*

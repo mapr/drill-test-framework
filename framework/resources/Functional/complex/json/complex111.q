@@ -1,0 +1,1 @@
+select t.id, t.oooa.oa.oab.oabc, t.oooa.oa.oab.oabc[1].rowValue2 from `complex.json` t order by t.oooa.oa.oab.oabc[1].rowValue2 limit 50;

@@ -1,0 +1,12 @@
+-- Correlation to the one of the tables outside that are part of the join
+-- greater than
+-- can't plan
+select
+        t1.a1, t1.b1
+from
+        t1,t2
+where
+        t1.a1 = t2.a2 and
+        t1.b1 >= (select min(t3.b3) from t3 where t3.a3 = t1.a1 and t3.c3 is not null)
+order by
+        a1, b1;

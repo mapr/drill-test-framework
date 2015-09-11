@@ -1,0 +1,26 @@
+{
+    "testId": "MoreFiles",
+    "type": "group",
+    "description": "Test flatten with operators",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.morefiles",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/morefiles",
+          "dest": "morefiles"
+    	}
+    ]
+}

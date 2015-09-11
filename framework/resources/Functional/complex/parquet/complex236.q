@@ -1,0 +1,1 @@
+select var_pop(t.ooa[1].fl.f1) from `complex.json` t;

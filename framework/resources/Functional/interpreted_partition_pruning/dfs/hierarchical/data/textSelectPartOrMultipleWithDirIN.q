@@ -1,0 +1,1 @@
+select columns[0], columns[1], columns[4], columns[10], columns[13], dir0, dir1 from `/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intstring` where (dir0 IN (1993) and dir1='oct') or (dir0 IN (1994) and dir1=concat(regexp_replace('mayor', 'yor', ''), 'y'));
