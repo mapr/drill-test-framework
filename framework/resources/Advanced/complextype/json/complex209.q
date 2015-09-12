@@ -1,0 +1,1 @@
+select t.gbyi, sum(t.ooa[1].fl.f1) sumooa from `complex.json` t group by t.gbyi having sum(t.ooa[1].fl.f1) > 0 order by sumooa;

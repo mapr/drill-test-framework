@@ -1,0 +1,1 @@
+select t.id, (t.ooa[1].fl.f2*t.ooa[1].fl.f1) from `complex.json` t order by t.id limit 11;

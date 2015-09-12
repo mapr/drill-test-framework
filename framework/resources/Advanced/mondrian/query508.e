@@ -1,0 +1,12 @@
+CA	Beverly Hills	1997	Drink	1945.0000
+CA	San Diego	1997	Food	18369.0000
+CA	Beverly Hills	1997	Non-Consumable	3950.0000
+CA	Los Angeles	1997	Non-Consumable	4947.0000
+CA	San Francisco	1997	Non-Consumable	387.0000
+CA	Los Angeles	1997	Drink	2422.0000
+CA	San Francisco	1997	Drink	175.0000
+CA	Los Angeles	1997	Food	18294.0000
+CA	San Francisco	1997	Food	1555.0000
+CA	Beverly Hills	1997	Food	15438.0000
+CA	San Diego	1997	Drink	2560.0000
+CA	San Diego	1997	Non-Consumable	4706.0000

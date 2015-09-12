@@ -1,0 +1,1 @@
+Small Grocery	No Promotion

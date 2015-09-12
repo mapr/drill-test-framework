@@ -1,0 +1,4 @@
+Store 6	1997	F	M	1821
+Store 24	1997	F	M	2007
+Store 7	1997	F	M	1920
+Store 14	1997	F	M	306

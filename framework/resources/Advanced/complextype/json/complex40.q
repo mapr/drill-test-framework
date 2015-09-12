@@ -1,0 +1,1 @@
+select t.id, kvgen(t.ooos) from `complex.json` t limit 1;

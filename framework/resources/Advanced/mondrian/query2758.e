@@ -1,0 +1,1 @@
+1997	CA	Los Angeles	2009.0000

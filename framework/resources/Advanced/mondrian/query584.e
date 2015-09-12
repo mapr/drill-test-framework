@@ -1,0 +1,1 @@
+USA	1997	Non-Consumable	107366.3300

@@ -1,0 +1,1 @@
+select mod(t.sia[0], 10) siamod, max(t.sia[0]) siamax, min(t.sia[1]) siamin, avg(t.sia[2]) siaavg, count(t.sia[3]) siacount from `complex.json` t group by mod(t.sia[0], 10) order by avg(t.sia[2]);

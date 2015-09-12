@@ -1,0 +1,4 @@
+Store 14	1997	M	133
+Store 24	1997	M	463
+Store 6	1997	M	530
+Store 7	1997	M	571

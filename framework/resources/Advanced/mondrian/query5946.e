@@ -1,0 +1,2 @@
+CA	Beverly Hills	1997	4	17	250.0000
+CA	San Diego	1997	4	17	451.0000

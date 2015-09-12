@@ -1,0 +1,1 @@
+select t.id, t.soa from `complex.json` t limit 10;

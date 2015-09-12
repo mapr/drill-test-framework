@@ -1,0 +1,1 @@
+select store.store_state as c0, store.store_city as c1, sum(inventory_fact_1997.supply_time) as m0 from store as store, inventory_fact_1997 as inventory_fact_1997 where inventory_fact_1997.store_id = store.store_id group by store.store_state, store.store_city;

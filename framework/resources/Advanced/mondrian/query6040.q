@@ -1,0 +1,1 @@
+select warehouse.warehouse_name as c0 from warehouse as warehouse where (warehouse.wa_address1 = '3377 Coachman Place' and warehouse.warehouse_fax = '971-555-6213') and UPPER(warehouse.warehouse_name) = UPPER('Jones International') group by warehouse.warehouse_name order by warehouse.warehouse_name ASC NULLS LAST;

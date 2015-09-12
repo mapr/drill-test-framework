@@ -1,0 +1,9 @@
+8	Kim Brunner	S	Store Manager	F	10000.0000	Bachelors Degree	Store Management
+9	Brenda Blumberg	M	Store Manager	F	17000.0000	Graduate Degree	Store Management
+11	Jonathan Murraiin	S	Store Manager	M	15000.0000	Graduate Degree	Store Management
+12	Jewel Creek	S	Store Manager	F	8500.0000	Graduate Degree	Store Management
+13	Peggy Medina	S	Store Manager	F	15000.0000	Bachelors Degree	Store Management
+14	Bryan Rutledge	M	Store Manager	M	17000.0000	Bachelors Degree	Store Management
+15	Walter Cavestany	M	Store Manager	M	12000.0000	Bachelors Degree	Store Management
+16	Peggy Planck	S	Store Manager	F	17000.0000	Bachelors Degree	Store Management
+17	Brenda Marshall	S	Store Manager	F	10000.0000	Partial College	Store Management

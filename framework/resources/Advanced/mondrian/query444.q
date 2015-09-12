@@ -1,0 +1,1 @@
+select product_class.product_family as c0, product_class.product_department as c1 from product_class as product_class group by product_class.product_family, product_class.product_department order by product_class.product_family ASC NULLS LAST, product_class.product_department ASC NULLS LAST;

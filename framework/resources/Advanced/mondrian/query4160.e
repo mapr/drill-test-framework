@@ -1,0 +1,12 @@
+64	Clayton Harris
+65	Whitney Contreras
+66	Boyd Pusedu
+74	Julie Walker
+75	Jay Jones
+76	Gayle Winfrey
+84	William Burger
+85	Lana Blau
+86	Donna Derby
+94	Susan Magenheim
+95	Nancy Hance
+96	Rhonda Mehlert

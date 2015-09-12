@@ -1,0 +1,31 @@
+{
+    "testId": "tpcds_original_parquet",
+    "type": "group",
+    "description": "Test TPCDS SF 1 queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.tpcds_parquet_sf1_v",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "gen",
+            "src": "Datasources/tpcds/createTablesParquet.sh",
+            "dest": ""
+        },
+	{
+            "mode": "gen",
+            "src": "Datasources/tpcds/createViewsParquet.sh",
+            "dest": ""
+        }
+    ]
+}

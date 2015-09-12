@@ -1,0 +1,1 @@
+select time_by_day.the_year as c0, time_by_day.quarter as c1, sum(inventory_fact_1997.store_invoice) as m0 from time_by_day as time_by_day, inventory_fact_1997 as inventory_fact_1997 where inventory_fact_1997.time_id = time_by_day.time_id and time_by_day.the_year = 1997 and time_by_day.quarter in ('Q3', 'Q4') group by time_by_day.the_year, time_by_day.quarter;

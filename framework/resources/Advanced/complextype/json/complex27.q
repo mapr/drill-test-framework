@@ -1,0 +1,1 @@
+select t.gbyt, count(t.id) countid, count(t.ooa[0].`in`) countzeroin, sum(t.ooa[1].fl.f1) sumflf1, avg(t.ooa[1].fl.f2) avgflf2, count(t.ooa[1].`in`) countonein, count(t.ooa[2].a.aa.aaa) countaaaaaa, max(t.ooa[2].b.bb.bbb) maxbbbbbb, min(t.ooa[2].b.c.cc) minbccc from `complex.json` t group by t.gbyt order by t.gbyt;

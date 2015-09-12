@@ -1,0 +1,4 @@
+Store 7	1997	M	4111
+Store 14	1997	M	617
+Store 6	1997	M	3412
+Store 24	1997	M	3914

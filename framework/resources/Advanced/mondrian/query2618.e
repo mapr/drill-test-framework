@@ -1,0 +1,3 @@
+CA	San Diego	1997	25635.0000
+CA	San Francisco	1997	2117.0000
+CA	Beverly Hills	1997	21333.0000

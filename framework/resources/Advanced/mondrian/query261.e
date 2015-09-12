@@ -1,0 +1,8 @@
+WA	Bellingham	1997	Q2	510.0000
+WA	Walla Walla	1997	Q3	509.0000
+WA	Bellingham	1997	Q3	497.0000
+WA	Walla Walla	1997	Q2	542.0000
+WA	Walla Walla	1997	Q1	500.0000
+WA	Walla Walla	1997	Q4	652.0000
+WA	Bellingham	1997	Q1	518.0000
+WA	Bellingham	1997	Q4	712.0000

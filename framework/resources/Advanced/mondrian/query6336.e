@@ -1,0 +1,11 @@
+1997	Drink	Beverages	Bag Stuffers	OR	Woodburn	5.0000
+1997	Drink	Beverages	Bag Stuffers	OR	Salem	3.0000
+1997	Drink	Beverages	Bag Stuffers	WA	Yakima	13.0000
+1997	Drink	Beverages	Bag Stuffers	OR	Lebanon	5.0000
+1997	Drink	Dairy	Bag Stuffers	OR	Lebanon	3.0000
+1997	Drink	Beverages	Bag Stuffers	WA	Bellingham	2.0000
+1997	Drink	Beverages	Bag Stuffers	OR	Corvallis	24.0000
+1997	Drink	Beverages	Bag Stuffers	OR	Albany	3.0000
+1997	Drink	Dairy	Bag Stuffers	OR	Woodburn	4.0000
+1997	Drink	Dairy	Bag Stuffers	WA	Bellingham	3.0000
+1997	Drink	Dairy	Bag Stuffers	OR	Corvallis	3.0000

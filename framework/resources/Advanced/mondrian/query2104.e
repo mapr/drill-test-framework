@@ -1,0 +1,6 @@
+1997	Food	Eggs	M	2131.0000
+1997	Food	Eggs	F	2001.0000
+1997	Drink	Dairy	M	2199.0000
+1997	Drink	Dairy	F	1987.0000
+1997	Food	Dairy	F	6513.0000
+1997	Food	Dairy	M	6372.0000

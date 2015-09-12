@@ -1,0 +1,1 @@
+select t.soa[2].nul, sum(t.soa[0].`in`), avg(t.soa[1].fl), count(t.soa[2].nul), count(t.soa[3].bool) from `complex.json` t group by t.soa[2].nul order by t.soa[2].nul;

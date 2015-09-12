@@ -1,0 +1,17 @@
+ooof	54991
+saa	55232
+bool	55261
+gbyi	55446
+gbyt	55451
+str	55502
+ooa	55503
+oooa	55520
+nul	55544
+soa	55548
+oooi	55553
+sfa	55611
+sia	55649
+id	55719
+fl	55750
+ooos	55855
+aaa	55870

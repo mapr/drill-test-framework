@@ -1,0 +1,1 @@
+CA	Los Angeles	1997	Q1	Drink	650.0000	1267.0400

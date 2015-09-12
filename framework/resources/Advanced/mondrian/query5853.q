@@ -1,0 +1,1 @@
+select promotion.media_type as c0, count(*) as m0 from promotion as promotion, sales_fact_1997 as sales_fact_1997 where sales_fact_1997.promotion_id = promotion.promotion_id and promotion.media_type = 'TV' group by promotion.media_type;

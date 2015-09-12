@@ -1,0 +1,1 @@
+USA	1997	Drink	Dairy	4186.0000

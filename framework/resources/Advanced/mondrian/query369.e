@@ -1,0 +1,4 @@
+CA	1997	Best Savings	1608.0000
+OR	1997	Bag Stuffers	617.0000
+WA	1997	Best Savings	473.0000
+WA	1997	Bag Stuffers	284.0000

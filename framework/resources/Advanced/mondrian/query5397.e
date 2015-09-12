@@ -1,0 +1,13 @@
+Canada	BC
+Israel	Israel
+Mexico	DF
+Mexico	Guerrero
+Mexico	Jalisco
+Mexico	Veracruz
+Mexico	Yucatan
+Mexico	Zacatecas
+USA	CA
+USA	OR
+USA	USA
+USA	WA
+Vatican	Vatican

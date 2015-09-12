@@ -1,0 +1,1 @@
+select t.gbyi, min(t.soa[1].fl) minsoa from `complex.json` t group by t.gbyi having min(t.soa[1].fl) <> 48.12345 order by minsoa;

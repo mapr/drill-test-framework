@@ -1,0 +1,1 @@
+select warehouse.warehouse_country as c0, warehouse.warehouse_state_province as c1 from warehouse as warehouse group by warehouse.warehouse_country, warehouse.warehouse_state_province order by warehouse.warehouse_country ASC NULLS LAST, warehouse.warehouse_state_province ASC NULLS LAST;

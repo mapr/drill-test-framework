@@ -1,0 +1,5 @@
+Store 3	39696
+Store 18	38382
+Store 9	36509
+Store 10	34791
+Store 20	34452

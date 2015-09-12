@@ -1,0 +1,1 @@
+select t.gbyi, sum(t.soa[0].`in`), avg(t.soa[1].fl), count(t.soa[2].nul), count(t.soa[3].bool) from `complex.json` t where t.soa[2].nul is not null and t.soa[3].bool is false group by t.gbyi order by t.gbyi;

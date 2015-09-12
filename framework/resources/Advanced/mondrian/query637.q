@@ -1,0 +1,1 @@
+select warehouse.warehouse_city as c0 from warehouse as warehouse where (warehouse.warehouse_state_province = 'WA') and UPPER(warehouse.warehouse_city) = UPPER('Seattle') group by warehouse.warehouse_city order by warehouse.warehouse_city ASC NULLS LAST;

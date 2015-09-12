@@ -1,0 +1,13 @@
+WA	Bellingham	1997	1380
+WA	Bremerton	1997	7876
+WA	Tacoma	1997	11184
+CA	Los Angeles	1997	8207
+OR	Portland	1997	8264
+CA	Beverly Hills	1997	6815
+CA	San Diego	1997	8095
+OR	Salem	1997	13347
+WA	Yakima	1997	3652
+WA	Walla Walla	1997	1339
+WA	Seattle	1997	7956
+CA	San Francisco	1997	1325
+WA	Spokane	1997	7397

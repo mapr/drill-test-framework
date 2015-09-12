@@ -1,0 +1,6 @@
+1997	Macias	10.0000
+1997	Macha	12.0000
+1997	Mabe	80.0000
+1997	MacDougal	34.0000
+1997	Mackin	73.0000
+1997	Maccietto	41.0000

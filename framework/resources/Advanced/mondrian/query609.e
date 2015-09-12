@@ -1,0 +1,13 @@
+Store 16	546
+Store 2	216
+Store 13	1650
+Store 11	401
+Store 17	1578
+Store 23	528
+Store 7	1279
+Store 6	559
+Store 3	1130
+Store 14	80
+Store 22	83
+Store 15	1193
+Store 24	1182

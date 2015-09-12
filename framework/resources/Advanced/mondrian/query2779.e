@@ -1,0 +1,4 @@
+CA	San Francisco	1997	F	S	548.0000
+CA	San Francisco	1997	M	S	554.0000
+CA	Los Angeles	1997	F	S	6088.0000
+CA	Los Angeles	1997	M	S	6775.0000

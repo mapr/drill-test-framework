@@ -1,0 +1,4 @@
+OR	1997	Q1	Food	Dairy	M	S	569.1200
+OR	1997	Q1	Food	Dairy	F	S	488.5700
+OR	1997	Q1	Food	Dairy	F	M	581.3100
+OR	1997	Q1	Food	Dairy	M	M	519.9400

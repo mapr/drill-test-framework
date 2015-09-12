@@ -1,0 +1,1 @@
+select ws.*, sub.str_var str_var1 from widestrings ws INNER JOIN (select str_var, max(tinyint_var) max_ti from widestrings where tinyint_var > 120 and length(str_var_null_empty) > 4990 group by str_var) sub on ws.tinyint_var = sub.max_ti and ws.str_var=sub.str_var where length(ws.str_var_null_empty) > 4995;
