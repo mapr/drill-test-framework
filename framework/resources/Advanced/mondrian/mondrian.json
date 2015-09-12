@@ -1,0 +1,27 @@
+{
+    "testId": "mondrian",
+    "type": "group",
+    "description": "Test mondrian queries via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "regression"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirMondrian",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/mondrian/parquet/",
+          "dest": "mondrian"
+    	}
+    ]
+}

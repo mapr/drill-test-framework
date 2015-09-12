@@ -1,0 +1,10 @@
+Veracruz	195
+BC	7700
+OR	4686
+CA	46965
+WA	32767
+Guerrero	228
+DF	1492
+Yucatan	229
+Zacatecas	1209
+Jalisco	206

@@ -1,0 +1,21 @@
+{
+    "testId": "tpch_sf100_parquet",
+    "type": "group",
+    "description": "Test tpch queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirTpch100Parquet",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+    ]
+}

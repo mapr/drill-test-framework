@@ -1,0 +1,1 @@
+select store.store_id as c0, store.store_name as c1 from store as store where (store.store_city = 'San Francisco' and store.store_state = 'CA') and UPPER(store.store_name) = UPPER('Store 14') group by store.store_id, store.store_name order by store.store_id ASC NULLS LAST;

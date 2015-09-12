@@ -1,0 +1,2 @@
+Haifa
+Tel Aviv

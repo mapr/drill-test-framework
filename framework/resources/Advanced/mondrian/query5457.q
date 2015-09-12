@@ -1,0 +1,1 @@
+select customer.country as c0 from customer as customer, sales_fact_1997 as sales_fact_1997, time_by_day as time_by_day where sales_fact_1997.customer_id = customer.customer_id and sales_fact_1997.time_id = time_by_day.time_id and time_by_day.the_year = 1997 group by customer.country order by sum(sales_fact_1997.unit_sales) DESC NULLS LAST, customer.country ASC NULLS LAST;

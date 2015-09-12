@@ -1,0 +1,1 @@
+select store.store_type as c0 from store as store where (store.store_city = 'Beverly Hills' and store.store_state = 'CA') and UPPER(store.store_type) = UPPER('Gourmet Supermarket') group by store.store_type order by store.store_type ASC NULLS LAST;

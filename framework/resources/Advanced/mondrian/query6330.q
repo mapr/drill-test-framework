@@ -1,0 +1,1 @@
+select customer.country as c0, customer.state_province as c1 from customer as customer, sales_fact_1997 as sales_fact_1997 where sales_fact_1997.customer_id = customer.customer_id and (1 = 0) and (customer.country = 'USA') group by customer.country, customer.state_province order by customer.country ASC NULLS LAST, customer.state_province ASC NULLS LAST;

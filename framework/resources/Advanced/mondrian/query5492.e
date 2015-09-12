@@ -1,0 +1,3 @@
+USA	CA
+USA	OR
+USA	WA

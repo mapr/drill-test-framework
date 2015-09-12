@@ -1,0 +1,1 @@
+select store.store_number as c0, store.store_name as c1 from store as store, sales_fact_1997 as sales_fact_1997 where sales_fact_1997.store_id = store.store_id group by store.store_number, store.store_name order by store.store_name ASC NULLS LAST;

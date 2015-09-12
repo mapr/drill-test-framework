@@ -1,0 +1,1 @@
+select store_ragged.store_id as c0, store_ragged.region_id as c1, store_ragged.store_id as c2 from store_ragged as store_ragged group by store_ragged.store_id, store_ragged.region_id order by store_ragged.region_id ASC NULLS LAST;

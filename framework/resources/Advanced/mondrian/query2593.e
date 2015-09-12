@@ -1,0 +1,2 @@
+USA	OR
+USA	WA

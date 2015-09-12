@@ -1,0 +1,1 @@
+select customer.gender as c0 from customer as customer, sales_fact_1997 as sales_fact_1997, store as store where sales_fact_1997.customer_id = customer.customer_id and sales_fact_1997.store_id = store.store_id and store.store_sqft is null group by customer.gender order by customer.gender ASC NULLS LAST;

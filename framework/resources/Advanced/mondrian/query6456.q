@@ -1,0 +1,1 @@
+select promotion.promotion_name as c0, sum(sales_fact_1997.unit_sales) as m0 from promotion as promotion, sales_fact_1997 as sales_fact_1997 where sales_fact_1997.promotion_id = promotion.promotion_id and promotion.promotion_name = 'Big Promo' group by promotion.promotion_name;

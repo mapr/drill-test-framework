@@ -1,0 +1,1 @@
+select agg_c_10_sales_fact_1997.quarter as c0 from agg_c_10_sales_fact_1997 as agg_c_10_sales_fact_1997 where agg_c_10_sales_fact_1997.the_year = 1998 group by agg_c_10_sales_fact_1997.quarter order by agg_c_10_sales_fact_1997.quarter ASC NULLS LAST;

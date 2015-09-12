@@ -1,0 +1,2 @@
+1997	Q4	12	Drink	Dairy	439.0000
+1997	Q4	12	Drink	Beverages	1299.0000

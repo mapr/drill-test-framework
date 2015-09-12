@@ -1,0 +1,25 @@
+0	HQ
+1	Store 1
+10	Store 10
+11	Store 11
+12	Store 12
+13	Store 13
+14	Store 14
+15	Store 15
+16	Store 16
+17	Store 17
+18	Store 18
+19	Store 19
+2	Store 2
+20	Store 20
+21	Store 21
+22	Store 22
+23	Store 23
+24	Store 24
+3	Store 3
+4	Store 4
+5	Store 5
+6	Store 6
+7	Store 7
+8	Store 8
+9	Store 9

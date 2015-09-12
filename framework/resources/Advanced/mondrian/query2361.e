@@ -1,0 +1,1 @@
+USA	Supermarket	1997	150555.0000

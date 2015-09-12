@@ -1,0 +1,1 @@
+select store.store_country as c0 from time_by_day as time_by_day, sales_fact_1997 as sales_fact_1997, store as store where sales_fact_1997.time_id = time_by_day.time_id and time_by_day.the_year = 1998 and sales_fact_1997.store_id = store.store_id group by store.store_country order by store.store_country ASC NULLS LAST;

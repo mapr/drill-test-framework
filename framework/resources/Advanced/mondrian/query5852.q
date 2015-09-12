@@ -1,0 +1,1 @@
+select product_class.product_family as c0, sum(sales_fact_1997.unit_sales) as m0 from product_class as product_class, product as product, sales_fact_1997 as sales_fact_1997 where sales_fact_1997.product_id = product.product_id and product.product_class_id = product_class.product_class_id group by product_class.product_family;

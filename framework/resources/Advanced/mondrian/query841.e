@@ -1,0 +1,3 @@
+Los Angeles	1997	25663.0000
+Beverly Hills	1997	21333.0000
+San Diego	1997	25635.0000

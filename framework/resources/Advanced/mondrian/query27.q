@@ -1,0 +1,1 @@
+select time_by_day.the_year as c0, time_by_day.week_of_year as c1, time_by_day.day_of_month as c2 from time_by_day as time_by_day group by time_by_day.the_year, time_by_day.week_of_year, time_by_day.day_of_month order by time_by_day.the_year ASC NULLS LAST, time_by_day.week_of_year ASC NULLS LAST, time_by_day.day_of_month ASC NULLS LAST;

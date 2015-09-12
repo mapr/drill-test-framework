@@ -1,0 +1,4 @@
+Bellingham
+Bremerton
+Seattle
+Spokane

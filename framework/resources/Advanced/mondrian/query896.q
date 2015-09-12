@@ -1,0 +1,1 @@
+select time_by_day.the_year as c0, sum(salary.salary_paid) as m0 from time_by_day as time_by_day, salary as salary where salary.pay_date = time_by_day.the_date and time_by_day.the_year = 1997 group by time_by_day.the_year;

@@ -1,0 +1,1 @@
+select count(*) as c0 from (select distinct product_class.product_category as c0, product_class.product_department as c1, product_class.product_family as c2 from product as product, product_class as product_class where product.product_class_id = product_class.product_class_id) as init;

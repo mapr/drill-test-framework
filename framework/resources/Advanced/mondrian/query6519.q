@@ -1,0 +1,1 @@
+select product_class.product_department as c0 from product_class as product_class where (product_class.product_family = 'Drink') group by product_class.product_department order by product_class.product_department ASC NULLS LAST;

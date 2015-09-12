@@ -1,0 +1,1 @@
+select customer.country as c0, customer.state_province as c1 from customer as customer group by customer.country, customer.state_province order by customer.country ASC NULLS LAST, customer.state_province ASC NULLS LAST;

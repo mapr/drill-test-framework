@@ -1,0 +1,26 @@
+WA	Walla Walla	1997	Q2	Food	416.0000
+OR	Salem	1997	Q2	Food	5866.0000
+WA	Yakima	1997	Q2	Food	2036.0000
+CA	San Diego	1997	Q3	Food	4648.0000
+CA	Beverly Hills	1997	Q3	Food	3462.0000
+WA	Walla Walla	1997	Q3	Food	369.0000
+OR	Portland	1997	Q3	Food	3972.0000
+CA	San Francisco	1997	Q3	Food	401.0000
+WA	Spokane	1997	Q3	Food	4335.0000
+CA	Los Angeles	1997	Q3	Food	4624.0000
+CA	San Diego	1997	Q2	Food	4382.0000
+WA	Bellingham	1997	Q2	Food	346.0000
+OR	Salem	1997	Q3	Food	8353.0000
+WA	Bremerton	1997	Q2	Food	4248.0000
+WA	Tacoma	1997	Q2	Food	5821.0000
+WA	Yakima	1997	Q3	Food	1698.0000
+CA	Beverly Hills	1997	Q2	Food	4269.0000
+WA	Seattle	1997	Q3	Food	4532.0000
+WA	Bellingham	1997	Q3	Food	359.0000
+WA	Bremerton	1997	Q3	Food	4378.0000
+WA	Tacoma	1997	Q3	Food	6309.0000
+OR	Portland	1997	Q2	Food	4860.0000
+CA	San Francisco	1997	Q2	Food	409.0000
+WA	Spokane	1997	Q2	Food	3907.0000
+CA	Los Angeles	1997	Q2	Food	4014.0000
+WA	Seattle	1997	Q2	Food	4251.0000

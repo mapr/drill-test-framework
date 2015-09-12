@@ -1,0 +1,3 @@
+Food	191940.0000
+Drink	24597.0000
+Non-Consumable	50236.0000

@@ -1,0 +1,2 @@
+CA	Los Angeles	1997	25663.0000
+CA	San Francisco	1997	2117.0000

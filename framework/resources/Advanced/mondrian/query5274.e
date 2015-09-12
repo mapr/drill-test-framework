@@ -1,0 +1,1 @@
+CA	Los Angeles	1997	Q2	4	Drink	141.0000	289.1600

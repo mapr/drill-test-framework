@@ -1,0 +1,1 @@
+select a.id, b.sia, a.sfa[0], b.soa[0].`in` from `complex.json` a inner join `complex.json` b on a.sia[2]=b.sia[3] order by a.id limit 20;

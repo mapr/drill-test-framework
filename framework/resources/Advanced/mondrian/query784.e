@@ -1,0 +1,9 @@
+USA	CA	Drink
+USA	CA	Food
+USA	CA	Non-Consumable
+USA	OR	Drink
+USA	OR	Food
+USA	OR	Non-Consumable
+USA	WA	Drink
+USA	WA	Food
+USA	WA	Non-Consumable

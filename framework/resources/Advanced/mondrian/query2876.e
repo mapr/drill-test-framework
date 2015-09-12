@@ -1,0 +1,3 @@
+Drink
+Food
+Non-Consumable

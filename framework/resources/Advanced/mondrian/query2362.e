@@ -1,0 +1,3 @@
+CA	Supermarket	1997	51298.0000
+WA	Supermarket	1997	73178.0000
+OR	Supermarket	1997	26079.0000

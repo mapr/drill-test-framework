@@ -1,0 +1,1 @@
+select store.store_country as c0 from store as store, sales_fact_1997 as sales_fact_1997 where sales_fact_1997.store_id = store.store_id and store.store_country = 'USA' and store.store_state = 'OR' and store.store_city in ('Portland', 'Salem') and store.store_name in ('Store 11', 'Store 13') group by store.store_country order by store.store_country ASC NULLS LAST;

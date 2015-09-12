@@ -1,0 +1,1 @@
+select t.sfa, t.sfa[0], t.sfa[1], t.sfa[2], t.sfa[3] from `complex.json` t order by t.sfa[1] desc limit 5;

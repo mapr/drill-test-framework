@@ -1,0 +1,1 @@
+select count(*) from (select t.nul from `complex.json` t) tt;
