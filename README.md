@@ -1,6 +1,8 @@
 # Test Framework for Apache Drill
 
-A JDBC Test Framework for Apache Drill (drill.apache.org). Includes test coverage for core drill functionality and the supported feature set.
+Test Framework for SQL on Hadoop technologies. Currently supports Apache Drill (drill.apache.org), a schema-free SQL query engine for Hadoop, NoSQL and cloud storage.
+
+The framework is built for regression, integration & sanity testing. Includes test coverage (with baselines) for core Drill functionality, and supported features. A subset of these tests are used by the Apache Drill community for pre-commit and pre-release criteria.
 
 ## Overview
  1. Clone the repository
@@ -17,10 +19,10 @@ Refer to https://help.github.com/articles/cloning-a-repository/ for details on h
 
 ### Configure test environment
  1. The test framework expects Drill services to be setup on a clustered environment. Refer to http://drill.apache.org/docs/installing-drill-in-distributed-mode for details on how to setup Drill.
- 2. Copy the `drillTestConfig` file from `framework/src/main/resources` to your home directory as `~/.drillTestConfig` Edit suitably, following instructions in the file.
+ 2. Copy the `drillTestConfig` file from `framework/src/main/resources` to your home directory as `~/.drillTestConfig`. Edit suitably, following instructions in the file.
  3. Source `.drillTestConfig`. Confirm `DRILL_HOME` and other required environment variables are set. 
- 4. Edit pom.xml inside the root source directory to point `<runtimeDepenencies>` to Drill configuration files and `<drill.version>` to Drill version. 
- 5. Optionally in pom.xml, include additional links to download large datasets in the `download-maven-plugin`. These are for test suites dependent on large datasets or expected result files which cannot be checked-in with the framework. 
+ 4. Edit `pom.xml` inside the root source directory to point `<runtimeDepenencies>` to Drill configuration files and `<drill.version>` to Drill version. 
+ 5. Optionally in `pom.xml`, include additional links to download large datasets in the `download-maven-plugin`. These are for test suites dependent on large datasets or expected result files which cannot be checked-in with the framework. 
 
 ### Review tests:
 
@@ -36,13 +38,13 @@ Refer to https://help.github.com/articles/cloning-a-repository/ for details on h
 </code></pre>
 
 #### Adding Tests
- 1. cd framework/resources
- 2. cd Functional or Advanced
- 3. Create a new directory for the test suite (or cd to an existing test suite, related to the new tests being added)
+ 1. `cd framework/resources`
+ 2. `cd Functional or Advanced`
+ 3. Create a new directory for the test suite (or `cd` to an existing test suite, related to the new tests being added)
  4. In the test suite directory, add testcases, expected results, and test definition file(s). Optionally include test suite sub directories to organize tests. 
- 5. Pairs of testcase (ex: query1.sql) and expected results (ex: query1.e_tsv) are co-located and share the same name. 
+ 5. Pairs of testcase (ex: `query1.sql`) and expected results (ex: `query1.e_tsv`) are co-located and share the same name. 
  6. You could generate expected result files using Postgres or any such database.
- 7. cd Datasources
+ 7. `cd Datasources`
  8. Create corresponding datasources directory and copy over any required data generation scripts and/or datasets
 
 #### Structure of test definiton files
@@ -95,7 +97,7 @@ Refer to https://help.github.com/articles/cloning-a-repository/ for details on h
 </code></pre>
 
 ### Build test framework
-In the framework directory, execute `mvn clean install` first, to build the project and also download any dependent datasets configured in pom.xml
+In the framework directory, execute `mvn clean install` first, to build the project and also download any dependent datasets configured in `pom.xml`
 
 ### Execute tests
 Execute the following command, to run tests:
