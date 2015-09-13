@@ -1,0 +1,1 @@
+select employee_closure.supervisor_id as c0, sum(salary_closure.salary_paid) as m0 from employee_closure as employee_closure, salary as salary_closure where salary_closure.employee_id = employee_closure.employee_id and employee_closure.supervisor_id in (20, 21, 22) group by employee_closure.supervisor_id;

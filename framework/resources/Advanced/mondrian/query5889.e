@@ -1,0 +1,2 @@
+1997	Curlew Lox	186.0000
+1997	Amigo Lox	175.0000

@@ -1,0 +1,2 @@
+CA	Los Angeles	1997	Q1	6373.0000
+CA	San Francisco	1997	Q1	439.0000

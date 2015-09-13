@@ -1,0 +1,22 @@
+963	Susan Chaw
+964	Steve Reitzel
+965	Edie Horbach
+966	Lois Knobel
+967	Rachel Hope
+980	M. Patricia Campbell
+981	Selene Watson
+982	Linda Anderson
+983	Elisabeth Duncan
+984	French Wilson
+985	Mildred Morrow
+996	William Murphy
+997	John Sweet
+998	Elizabeth Jantzer
+999	Beverly Dittmar
+1000	Miggs Gutirrez
+1013	Frederick Pigman
+1014	Ruth Minniear
+1015	Macario Robinson
+1016	Corrie Steger
+1017	Rebecca Lindsey
+1018	Dennis Larson

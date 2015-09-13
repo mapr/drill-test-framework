@@ -1,0 +1,2 @@
+1997	Food	Dairy	12885.0000
+1997	Drink	Dairy	4186.0000

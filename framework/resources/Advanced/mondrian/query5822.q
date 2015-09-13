@@ -1,0 +1,1 @@
+select region.sales_region as c0 from store as store, region as region where (store.store_country = 'USA') and store.region_id = region.region_id and UPPER(region.sales_region) = UPPER('South West') group by region.sales_region order by region.sales_region ASC NULLS LAST;

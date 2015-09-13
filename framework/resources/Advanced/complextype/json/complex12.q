@@ -1,0 +1,1 @@
+select t.gbyt, variance(t.fl), var_pop(t.fl), var_samp(t.fl) from `complex.json` t where t.nul is null group by t.gbyt order by t.gbyt;

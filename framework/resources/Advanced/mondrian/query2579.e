@@ -1,0 +1,3 @@
+CA	San Francisco	1997	CA	4441.1800
+CA	Beverly Hills	1997	CA	45750.2400
+CA	San Diego	1997	CA	54431.1400

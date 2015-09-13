@@ -1,0 +1,3 @@
+1997	Food	62445
+1997	Drink	7978
+1997	Non-Consumable	16414

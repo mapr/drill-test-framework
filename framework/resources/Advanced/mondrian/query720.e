@@ -1,0 +1,9 @@
+DF
+Guerrero
+Jalisco
+Mexico
+Oaxaca
+Sinaloa
+Veracruz
+Yucatan
+Zacatecas

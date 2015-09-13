@@ -1,0 +1,1 @@
+select customer.gender as c0, customer.marital_status as c1 from customer as customer, sales_fact_1997 as sales_fact_1997 where sales_fact_1997.customer_id = customer.customer_id group by customer.gender, customer.marital_status order by customer.gender ASC NULLS LAST, customer.marital_status ASC NULLS LAST;

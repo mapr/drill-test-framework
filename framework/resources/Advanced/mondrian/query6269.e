@@ -1,0 +1,2 @@
+No Promotion
+Shelf Emptiers

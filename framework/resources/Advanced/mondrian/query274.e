@@ -1,0 +1,2 @@
+USA	1997	Bag Stuffers	901.0000
+USA	1997	Best Savings	2081.0000

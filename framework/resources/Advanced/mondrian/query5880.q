@@ -1,0 +1,1 @@
+select product_class.product_family as c0 from product as product, store as store, product_class as product_class where store.region_id = product_class.product_class_id and product.product_class_id = store.store_id group by product_class.product_family order by product_class.product_family ASC NULLS LAST;

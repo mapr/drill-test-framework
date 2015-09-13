@@ -1,0 +1,44 @@
+1997	Q1	CA	Middle Management	275.4000	27	9
+1997	Q1	CA	Senior Management	837.0000	24	8
+1997	Q1	CA	Store Full Time Staf	1728.4471	357	119
+1997	Q1	CA	Store Management	473.0400	51	17
+1997	Q1	CA	Store Temp Staff	401.3468	120	40
+1997	Q1	OR	Store Full Time Staf	1343.6225	279	93
+1997	Q1	OR	Store Management	286.7400	30	10
+1997	Q1	OR	Store Temp Staff	333.1961	99	33
+1997	Q1	WA	Store Full Time Staf	2768.6028	579	193
+1997	Q1	WA	Store Management	736.2900	81	27
+1997	Q1	WA	Store Temp Staff	674.6975	201	67
+1997	Q2	CA	Middle Management	275.4000	27	9
+1997	Q2	CA	Senior Management	837.0000	24	8
+1997	Q2	CA	Store Full Time Staf	1727.0230	357	119
+1997	Q2	CA	Store Management	473.0400	51	17
+1997	Q2	CA	Store Temp Staff	405.7334	120	40
+1997	Q2	OR	Store Full Time Staf	1342.6116	279	93
+1997	Q2	OR	Store Management	286.7400	30	10
+1997	Q2	OR	Store Temp Staff	332.6519	99	33
+1997	Q2	WA	Store Full Time Staf	2769.1764	579	193
+1997	Q2	WA	Store Management	736.2900	81	27
+1997	Q2	WA	Store Temp Staff	674.5435	201	67
+1997	Q3	CA	Middle Management	275.4000	27	9
+1997	Q3	CA	Senior Management	837.0000	24	8
+1997	Q3	CA	Store Full Time Staf	1727.7210	357	119
+1997	Q3	CA	Store Management	473.0400	51	17
+1997	Q3	CA	Store Temp Staff	400.6065	120	40
+1997	Q3	OR	Store Full Time Staf	1342.5748	279	93
+1997	Q3	OR	Store Management	286.7400	30	10
+1997	Q3	OR	Store Temp Staff	331.2762	99	33
+1997	Q3	WA	Store Full Time Staf	2766.7802	579	193
+1997	Q3	WA	Store Management	736.2900	81	27
+1997	Q3	WA	Store Temp Staff	676.2550	201	67
+1997	Q4	CA	Middle Management	275.4000	27	9
+1997	Q4	CA	Senior Management	837.0000	24	8
+1997	Q4	CA	Store Full Time Staf	1726.5533	357	119
+1997	Q4	CA	Store Management	473.0400	51	17
+1997	Q4	CA	Store Temp Staff	402.3095	120	40
+1997	Q4	OR	Store Full Time Staf	1343.6522	279	93
+1997	Q4	OR	Store Management	286.7400	30	10
+1997	Q4	OR	Store Temp Staff	332.4274	99	33
+1997	Q4	WA	Store Full Time Staf	2769.5018	579	193
+1997	Q4	WA	Store Management	736.2900	81	27
+1997	Q4	WA	Store Temp Staff	676.4807	201	67

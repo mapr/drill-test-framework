@@ -1,0 +1,1 @@
+1997	USA	Washington	25635.0000

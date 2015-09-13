@@ -1,0 +1,77 @@
+{
+    "testId": "complex_type",
+    "type": "group",
+    "description": "Test ericsson queries via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "regression"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirAdvancedComplexJson",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+          "mode": "cp",
+          "src": "Datasources/complex/json/complex.json",
+          "dest": "complex_type/json/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/complex/json/complexga100k.json",
+          "dest": "complex_type/json/complexga100k.json"
+        },
+	{
+	  "mode": "cp",
+	  "src": "Datasources/complex/json/singlewide.json",
+	  "dest": "complex_type/json/singlewide.json"
+	},
+        {
+          "mode": "cp",
+          "src": "Datasources/complex/json/jira1893.json",
+          "dest": "complex_type/json/jira1893.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/complex/json/jira1894.json",
+          "dest": "complex_type/json/jira1894.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/complex/json/a.json",
+          "dest": "complex_type/json/schema/a.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/complex/json/b.json",
+          "dest": "complex_type/json/schema/b.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/complex/json/c.json",
+          "dest": "complex_type/json/schema/c.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/complex/json/d.json",
+          "dest": "complex_type/json/schema/d.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/complex/json/jira1962a.json",
+          "dest": "complex_type/json/jira1962a.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/complex/json/jira1962b.json",
+          "dest": "complex_type/json/jira1962b.json"
+        }
+    ]
+}

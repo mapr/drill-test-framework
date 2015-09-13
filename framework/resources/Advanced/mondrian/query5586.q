@@ -1,0 +1,1 @@
+select customer.gender as c0, sum(sales_fact_1997.store_sales) as m0, sum(sales_fact_1997.store_cost) as m1 from customer as customer, sales_fact_1997 as sales_fact_1997 where sales_fact_1997.customer_id = customer.customer_id group by customer.gender;

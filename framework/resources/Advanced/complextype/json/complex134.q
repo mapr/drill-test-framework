@@ -1,0 +1,1 @@
+select mod(t.soa[0].`in`,10) soamod, avg(t.soa[1].fl) soaavg, count(t.soa[2].nul) soacount, count(distinct(t.soa[3].bool)) soadist from `complex.json` t group by mod(t.soa[0].`in`,10) order by mod(t.soa[0].`in`,10);

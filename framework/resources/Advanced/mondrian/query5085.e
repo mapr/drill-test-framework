@@ -1,0 +1,12 @@
+1033	Andrea Shafer
+1034	Garrett Price
+1035	Betty Driscoll
+1043	Gayle Watson
+1044	Phyllis Ardell
+1045	Brian Nakauchi
+1053	Kiyo Fien
+1054	Brenda Stalker
+1055	Wei Fan
+1063	Gilbert Amper
+1064	Frances Hansen
+1065	Virginia Craycraft

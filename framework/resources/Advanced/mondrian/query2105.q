@@ -1,0 +1,1 @@
+select time_by_day.month_of_year as c0, time_by_day.the_month as c1 from time_by_day as time_by_day group by time_by_day.month_of_year, time_by_day.the_month order by time_by_day.the_month ASC NULLS LAST;

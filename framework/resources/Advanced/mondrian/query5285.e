@@ -1,0 +1,2 @@
+OR	1997	Q1	Food	Dairy	F	1069.8800
+OR	1997	Q1	Food	Dairy	M	1089.0600

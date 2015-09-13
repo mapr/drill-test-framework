@@ -1,0 +1,10 @@
+BC	Canada
+CA	USA
+DF	Mexico
+Guerrero	Mexico
+Jalisco	Mexico
+OR	USA
+Veracruz	Mexico
+WA	USA
+Yucatan	Mexico
+Zacatecas	Mexico

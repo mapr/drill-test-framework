@@ -1,0 +1,13 @@
+WA	Seattle	11517.1251
+CA	Beverly Hills	5132.8974
+WA	Tacoma	16100.8297
+CA	San Francisco	988.8204
+WA	Spokane	5781.9634
+WA	Yakima	5274.3375
+CA	Los Angeles	11634.9186
+OR	Portland	4042.9596
+CA	San Diego	11850.6630
+OR	Salem	16151.0411
+WA	Walla Walla	1093.7695
+WA	Bellingham	1049.4587
+WA	Bremerton	11659.6249

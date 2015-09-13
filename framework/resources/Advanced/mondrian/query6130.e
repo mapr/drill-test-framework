@@ -1,0 +1,1 @@
+USA	1997	Fast Raisins	152.0000

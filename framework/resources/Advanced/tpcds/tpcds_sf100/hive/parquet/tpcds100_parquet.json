@@ -1,0 +1,27 @@
+{
+    "testId": "tpcds_sf100_hive_original_parquet",
+    "type": "group",
+    "description": "Test hive TPCDS SF 100 queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "hive.tpcds100_parquet",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+            "mode": "gen",
+            "src": "Datasources/hive_storage/execHive.sh resources/Datasources/hive_storage/tpcds100/tpcds100_hive.ddl",
+            "dest": ""
+        }
+    ]
+}

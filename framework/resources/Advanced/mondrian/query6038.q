@@ -1,0 +1,1 @@
+select warehouse.warehouse_fax as c0 from warehouse as warehouse where UPPER(warehouse.warehouse_fax) = UPPER('971-555-6213') group by warehouse.warehouse_fax order by warehouse.warehouse_fax ASC NULLS LAST;

@@ -1,0 +1,1 @@
+select promotion.media_type as c0 from promotion as promotion, sales_fact_1997 as sales_fact_1997, time_by_day as time_by_day where sales_fact_1997.promotion_id = promotion.promotion_id and sales_fact_1997.time_id = time_by_day.time_id and time_by_day.the_year = 1997 group by promotion.media_type having (1 = 0) order by promotion.media_type ASC NULLS LAST;

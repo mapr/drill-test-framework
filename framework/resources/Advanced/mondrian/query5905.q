@@ -1,0 +1,1 @@
+select product_class.product_class_id as c0, product_class.product_subcategory as c1 from product as product, product_class as product_class where product.product_class_id = product_class.product_class_id group by product_class.product_class_id, product_class.product_subcategory order by product_class.product_class_id ASC NULLS LAST;

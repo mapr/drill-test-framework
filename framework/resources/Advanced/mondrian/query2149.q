@@ -1,0 +1,1 @@
+select employee.position_title as c0, employee.position_id as c1 from employee as employee where (employee.management_role = 'Store Management') group by employee.position_title, employee.position_id order by employee.position_id ASC NULLS LAST;

@@ -1,0 +1,1 @@
+select region.sales_region as c0 from customer as customer, region as region where (customer.country = 'USA') and customer.customer_region_id = region.region_id and UPPER(region.sales_region) = UPPER('South West') group by region.sales_region order by region.sales_region ASC NULLS LAST;

@@ -1,0 +1,1 @@
+select a.id, b.oooi.oa.oab.oabc, b.ooof.oa.oab, a.oooa.oa.oab.oabc[1].rowValue1, b.oooa.oa.oab.oabc[1].rowValue1 from `complex.json` a left outer join `complex.json` b on a.oooa.oa.oab.oabc[1].rowValue1=b.oooa.oa.oab.oabc[1].rowValue1 order by a.id limit 20;

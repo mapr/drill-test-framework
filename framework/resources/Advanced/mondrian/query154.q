@@ -1,0 +1,1 @@
+select store.store_country as c0, store.store_state as c1, store.store_city as c2 from store as store group by store.store_country, store.store_state, store.store_city order by store.store_country ASC NULLS LAST, store.store_state ASC NULLS LAST, store.store_city ASC NULLS LAST;

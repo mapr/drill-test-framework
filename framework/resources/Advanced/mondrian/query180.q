@@ -1,0 +1,1 @@
+select time_by_day.the_year as c0, sum(inventory_fact_1997.store_invoice) as m0, sum(inventory_fact_1997.supply_time) as m1 from time_by_day as time_by_day, inventory_fact_1997 as inventory_fact_1997 where inventory_fact_1997.time_id = time_by_day.time_id group by time_by_day.the_year;

@@ -1,0 +1,1 @@
+select employee.supervisor_id as c0, employee.employee_id as c1, employee.full_name as c2 from employee as employee group by employee.supervisor_id, employee.employee_id, employee.full_name order by employee.supervisor_id ASC NULLS FIRST, employee.employee_id ASC NULLS LAST;

@@ -1,0 +1,1 @@
+select t.gbyt, sum(t.fl) sumfl from `complex.json` t group by t.gbyt having sum(t.fl) < 27779157456 order by sumfl;

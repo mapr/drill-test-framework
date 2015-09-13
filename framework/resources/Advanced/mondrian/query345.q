@@ -1,0 +1,1 @@
+select store.store_country as c0, store.store_state as c1 from store as store, inventory_fact_1997 as inventory_fact_1997 where inventory_fact_1997.store_id = store.store_id group by store.store_country, store.store_state order by store.store_country ASC NULLS LAST, store.store_state ASC NULLS LAST;

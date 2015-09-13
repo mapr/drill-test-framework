@@ -1,0 +1,1 @@
+select product_class.product_family as c0 from product_class as product_class where UPPER(product_class.product_family) = UPPER('Drink') group by product_class.product_family order by product_class.product_family ASC NULLS LAST;

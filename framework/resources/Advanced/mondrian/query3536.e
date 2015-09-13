@@ -1,0 +1,16 @@
+60	Anderson	Lori Anderson	Lori
+72	Anderson	Laurie Anderson	Laurie
+62	Borden	Mary Borden	Mary
+71	Brockett	Donna Brockett	Donna
+91	Clark	Tricia Clark	Tricia
+81	Cohen	Kristin Cohen	Kristin
+61	Everson	Michael Everson	Michael
+80	Glass	Melvin Glass	Melvin
+93	Goldberg	Patricia Goldberg	Patricia
+73	Gomez	Louis Gomez	Louis
+82	Kharman	Susan Kharman	Susan
+83	Kirschner	Gordon Kirschner	Gordon
+90	Kouba	Geneva Kouba	Geneva
+92	Munn	Debi Munn	Debi
+70	Renfro	Leopoldo Renfro	Leopoldo
+63	Willson	Sue Willson	Sue

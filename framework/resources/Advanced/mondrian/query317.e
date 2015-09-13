@@ -1,0 +1,9 @@
+OR	Deluxe Supermarket	1997	OR	16151.0411	1650
+CA	Small Grocery	1997	CA	988.8204	80
+OR	Supermarket	1997	OR	4042.9596	401
+WA	Mid-Size Grocery	1997	WA	5274.3375	528
+CA	Gourmet Supermarket	1997	CA	5132.8974	559
+WA	Small Grocery	1997	WA	2143.2282	299
+WA	Supermarket	1997	WA	28958.7134	2869
+WA	Deluxe Supermarket	1997	WA	16100.8297	1578
+CA	Supermarket	1997	CA	23485.5816	2461

@@ -1,0 +1,22 @@
+{
+    "testId": "widestrings-parquet-5000width-100000rows",
+    "type": "group",
+    "description": "Test wide-columns in drill using parquet as the format ",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.wideStringsParquet5000Width100000rows",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+    ]
+}

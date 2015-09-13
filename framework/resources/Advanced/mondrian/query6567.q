@@ -1,0 +1,1 @@
+select store.store_state as c0, store.store_city as c1, store.store_id as c2, sum(store.store_sqft) as m0 from store as store where store.store_state in ('CA', 'OR') and store.store_city in ('Portland', 'San Francisco') and store.store_id in (11, 14) group by store.store_state, store.store_city, store.store_id;

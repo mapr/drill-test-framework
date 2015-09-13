@@ -1,0 +1,2 @@
+USA	1997	Q1	Food	Dairy	M	3835.7500
+USA	1997	Q1	Food	Dairy	F	3873.0000

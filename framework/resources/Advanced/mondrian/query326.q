@@ -1,0 +1,1 @@
+select store.store_type as c0 from store as store, inventory_fact_1997 as inventory_fact_1997, warehouse as warehouse where inventory_fact_1997.store_id = store.store_id and inventory_fact_1997.warehouse_id = warehouse.warehouse_id and warehouse.warehouse_country = 'Canada' group by store.store_type order by store.store_type ASC NULLS LAST;

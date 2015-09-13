@@ -1,0 +1,2 @@
+OR	1997	Q2	4	Food	Dairy	F	284.9100
+OR	1997	Q2	4	Food	Dairy	M	230.5700

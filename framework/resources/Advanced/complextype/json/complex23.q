@@ -1,0 +1,1 @@
+select t.gbyi, count(t.id) countid, sum(t.soa[0].`in`) sumin, avg(t.soa[1].fl) avgfl, count(t.soa[2].nul) countnul, count(t.soa[3].bool) countbool from `complex.json` t group by t.gbyi order by t.gbyi;

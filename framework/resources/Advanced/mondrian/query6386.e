@@ -1,0 +1,3 @@
+USA	1997	Drink	23114
+USA	1997	Non-Consumable	41347
+USA	1997	Food	162777

@@ -1,0 +1,1 @@
+select customer.city as c0 from customer as customer where (customer.state_province = 'Oaxaca') and UPPER(customer.city) = UPPER('Tlaxiaco') group by customer.city order by customer.city ASC NULLS LAST;

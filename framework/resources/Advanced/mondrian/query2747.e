@@ -1,0 +1,1 @@
+Supermarket	1997	WA	73178.0000

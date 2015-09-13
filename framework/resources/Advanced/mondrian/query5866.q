@@ -1,0 +1,1 @@
+select gender2.gender as c0, sum(sales_fact_1997_gender.unit_sales) as m0 from (SELECT * FROM customer) as gender2, sales_fact_1997 as sales_fact_1997_gender where sales_fact_1997_gender.customer_id = gender2.customer_id group by gender2.gender;
