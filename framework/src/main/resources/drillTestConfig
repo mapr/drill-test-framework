@@ -30,3 +30,4 @@ USERNAME=root
 PASSWORD=
 
 export DRILL_HOME
+export PASSWORD
