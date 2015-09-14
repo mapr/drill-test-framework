@@ -4,7 +4,7 @@ hadoop fs -mkdir /drill/testdata/ctas_auto_partition/tpch_single_partition
 hadoop fs -rmr /drill/testdata/ctas_auto_partition/tpch_single_partition1
 hadoop fs -mkdir /drill/testdata/ctas_auto_partition/tpch_single_partition1
 
-${DRILL_HOME}/bin/sqlline -n user1 -p mapr -u "jdbc:drill:schema=dfs.ctasAutoPartition;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=resources/Datasources/ctas_auto_partition/create_tables.ddl
+${DRILL_HOME}/bin/sqlline -n user1 -p ${PASSWORD} -u "jdbc:drill:schema=dfs.ctasAutoPartition;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=resources/Datasources/ctas_auto_partition/create_tables.ddl
 
 # it seems that sqlline does not exit, if one of the queries failed.
 if [ "$?" -eq 0 ]
