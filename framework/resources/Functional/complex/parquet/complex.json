@@ -1,7 +1,7 @@
 {
     "testId": "complex_type_parquet",
     "type": "group",
-    "description": "Test ericsson queries via jdbc",
+    "description": "Test queries via jdbc",
     "submit-type": "jdbc",
     "categories": [
         "regression"
