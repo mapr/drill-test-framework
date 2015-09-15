@@ -1,10 +1,10 @@
-# List of node IPs configured with drillbit services
+# List of IP addresses of nodes configured with drillbit services
 DRILLBITS=IPADDR1,IPADDR2,IPADDR3,IPADDR4
 
 # Path to where Drill binaries are installed 
 DRILL_HOME=/opt/drill/
 
-# Parent directory of test suites.  Relative path to the framework directory
+# Parent directory of test suites. Relative path to the framework directory
 DRILL_TEST_DATA_DIR=resources
 
 # Directory into which results from tests are written into
@@ -16,18 +16,20 @@ HADOOP_INSTALL_LOC=/opt/hadoop/hadoop-0.20.2
 # Path on the distributed system where test data is to be populated.
 DRILL_TESTDATA=/drill/testdata
 
-#  Zookeeper IP with port with path to drill node inside Zookeeper
+# Zookeeper node IP address with port and path to drill node inside Zookeeper
 ZOOKEEPERS=IPADDR1:5181/drill/drillbits1
 
-# IP address of the Zookeeper node 
+# Zookeeper node IP address 
 DRILL_STORAGE_PLUGIN_SERVER=IPADDR1
 
 # Timeout for each tests (seconds)
 TIME_OUT_SECONDS=1200
 
-# Tests run as the following user
-USERNAME=root
+# Tests run as the following user (provide valid login details)
+USERNAME=
 PASSWORD=
 
+# Export variables (need to source this file before running tests)
 export DRILL_HOME
 export PASSWORD
+export USERNAME
