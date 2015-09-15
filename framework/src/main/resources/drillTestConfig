@@ -4,11 +4,17 @@ DRILLBITS=IPADDR1,IPADDR2,IPADDR3,IPADDR4, ...
 # Path to where Drill binaries are installed 
 DRILL_HOME=/opt/drill/
 
+# Drill Version
+DRILL_VERSION=1.2.0-SNAPSHOT
+
 # Parent directory of test suites. Relative path to the framework directory
 DRILL_TEST_DATA_DIR=resources
 
 # Directory into which results from tests are written into
 DRILL_OUTPUT_DIR=drill-output
+
+# Hadoop Version (Please specify maven version for Hadoop Project (for groupId=org.apache.hadoop)
+HADOOP_VERSION=version
 
 # Path to where Hadoop binaries are installed
 HADOOP_INSTALL_LOC=/opt/hadoop/hadoop-0.20.2
@@ -31,5 +37,8 @@ PASSWORD=pass1
 
 # Export variables (need to source this file before running tests)
 export DRILL_HOME
+export USERNAME
 export PASSWORD
+export DRILL_VERSION
+export HADOOP_VERSION
 export USERNAME

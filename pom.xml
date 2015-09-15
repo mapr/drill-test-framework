@@ -31,9 +31,9 @@
       <jsontools.version>1.7</jsontools.version>
       <surefireoutputDir>${basedir}/../surefire-reports</surefireoutputDir>
       <google.common.version>16.0.1</google.common.version>
-      <drill.version>1.2.0-SNAPSHOT</drill.version>
-      <mapr.hadoop.version>1.0.3-mapr-3.0.2</mapr.hadoop.version>
-      <runtimeDepenencies>/opt/drill/conf</runtimeDepenencies>
+      <drill.version>${env.DRILL_VERSION}</drill.version>
+      <hadoop.version>${env.HADOOP_VERSION}</hadoop.version>
+      <runtimeDepenencies>${env.DRILL_HOME}/conf</runtimeDepenencies>
       <apache-httpcomponents.version>4.1.1</apache-httpcomponents.version>
    </properties>
    <dependencies>
@@ -75,7 +75,7 @@
       <dependency>
          <groupId>org.apache.hadoop</groupId>
          <artifactId>hadoop-core</artifactId>
-         <version>${mapr.hadoop.version}</version>
+         <version>${hadoop.version}</version>
          <exclusions>
             <exclusion>
                <groupId>org.slf4j</groupId>
