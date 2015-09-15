@@ -1,6 +1,6 @@
 # Test Framework for Apache Drill
 
-Test Framework for SQL on Hadoop technologies. Currently supports Apache Drill (drill.apache.org), a schema-free SQL query engine for Hadoop, NoSQL and cloud storage.
+Test Framework for SQL on Hadoop technologies. Currently supports [Apache Drill](http://drill.apache.org/), a schema-free SQL query engine for Hadoop, NoSQL and cloud storage.
 
 The framework is built for regression, integration & sanity testing. Includes test coverage (with baselines) for core Drill functionality, and supported features. A subset of these tests are used by the Apache Drill community for pre-commit and pre-release criteria.
 
@@ -15,10 +15,10 @@ The framework is built for regression, integration & sanity testing. Includes te
  <pre><code>
  git clone git@github.com:mapr/drill-test-framework.git
  </code></pre>
-Refer to https://help.github.com/articles/cloning-a-repository/ for details on how to clone a repository. 
+Refer to [Github documentation](https://help.github.com/articles/cloning-a-repository) on how to clone a repository. 
 
 ### Configure test environment
- 1. The test framework expects Drill services to be setup on a clustered environment. Refer to http://drill.apache.org/docs/installing-drill-in-distributed-mode for details on how to setup Drill.
+ 1. The test framework expects Drill services to be setup on a clustered environment. Refer to [Drill documentation](http://drill.apache.org/docs/installing-drill-in-distributed-mode) for details on how to setup Drill.
  2. Copy the `drillTestConfig` file from `framework/src/main/resources` to your home directory as `~/.drillTestConfig`. Edit suitably, following instructions in the file.
  3. Source `.drillTestConfig`. Confirm `DRILL_HOME` and other required environment variables are set. 
  4. Edit `pom.xml` inside the root source directory to point `<runtimeDepenencies>` to Drill configuration files and `<drill.version>` to Drill version. 

@@ -9,7 +9,7 @@ fi
 
 hadoop fs -mkdir /drill/testdata/ctas/parquet 
 
-${DRILL_HOME}/bin/sqlline -n root -p mapr -u "jdbc:drill:schema=dfs.ctas_parquet;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=resources/Datasources/ctas/create_tables_parquet.ddl
+${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.ctas_parquet;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=resources/Datasources/ctas/create_tables_parquet.ddl
 
 # TODO: it seems that sqlline does not exit, if one of the queries failed.
 if [ "$?" -eq 0 ]
