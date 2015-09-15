@@ -150,10 +150,6 @@ public class TestDriver {
 
     List<TestCaseModeler> testCases = JsonTestDataProvider.getData();
 
-    if (OPTIONS.generate) {
-      prepareData(testCases);
-    }
-
     CancelingExecutor executor = new CancelingExecutor(OPTIONS.threads, OPTIONS.timeout);
     ConnectionPool connectionPool = new ConnectionPool(Utils.getDrillTestProperties().get("ZOOKEEPERS"));
 
@@ -171,7 +167,10 @@ public class TestDriver {
     }
 
     for (int i = 1; i < OPTIONS.iterations+1; i++) {
-
+      if (OPTIONS.generate) {
+        prepareData(testCases);
+      }
+      
       Collections.shuffle(tests, new Random(12345));
       executor.executeAll(tests);
       
@@ -442,7 +441,8 @@ public class TestDriver {
 			"sum(jvm_direct_current) as jvm_direct_current from sys.memory";
 	if (connection == null) {
 	  try {
-	    connection = new ConnectionPool(Utils.getDrillTestProperties().get("ZOOKEEPERS")).getConnection();
+	    connection = new ConnectionPool(Utils.getDrillTestProperties().get("ZOOKEEPERS"))
+	      .getConnection(drillProperties.get("USERNAME"), drillProperties.get("PASSWORD"));
 	  } catch (Exception e) {
 		e.printStackTrace();
 	  }

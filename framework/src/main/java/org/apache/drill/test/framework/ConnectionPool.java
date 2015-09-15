@@ -76,7 +76,12 @@ public class ConnectionPool {
   }
   
   public Connection getConnection() throws SQLException {
-	  return DriverManager.getConnection(String.format(URL_STRING,
-				Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER")));
+	return DriverManager.getConnection(String.format(URL_STRING,
+	  Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER")));
+  }
+  
+  public Connection getConnection(String username, String password) throws SQLException {
+	return DriverManager.getConnection(String.format(URL_STRING,
+	  Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER")), username, password);
   }
 }
