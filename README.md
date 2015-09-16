@@ -101,8 +101,8 @@ In the `framework` directory, execute the following command to run tests:
 
 Example:
  <pre><code>
- 	./run.sh -s Functional/aggregates,Functional/joins -g smoke,regression -t 180 -n 2
- 	  -s suites
+ 	./run.sh -s `Functional/aggregates,Functional/joins` -g `smoke,regression` -t `180` -n `2`
+    -s suites
        Here `Functional/aggregates,Functional/joins` are directories inside `framework/resources/Functional`.
     -g groups
        Here `smoke, regression` are categories of tests to execute
