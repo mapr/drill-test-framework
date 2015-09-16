@@ -101,38 +101,16 @@ In the `framework` directory, execute the following command to run tests:
 
 Example:
  <pre><code>
- 	`./run.sh -s Functional/aggregates,Functional/joins -g smoke,regression -t 180 -n 2`
- 	`./run.sh -h`
- 	Usage: TestDriver [options]
-  Options:
-    -x, --exclude
-       Dependencies to exclude
-    -h, --help
-       show usage
-       Default: false
-    -c
-       percent of tests canceled
-       Default: 0
-    -d
-       generate data
-       Default: false
-    -g
-       groups (categories of tests. Ex: smoke, regression) 
-    -i
-       number of iterations
-       Default: 1
-    -m
-       track memory usage
-       Default: false
-    -n
-       number of threads
-       Default: 1
-    -s
-       sources (Test suite are directories inside `framework/resources/Functional` and `framework/resources/Advanced`
-    -t
-       timeout (in seconds)
-       Default: 120
-    -w
-       enable write actual query result to file
-       Default: false
+ 	./run.sh -s Functional/aggregates,Functional/joins -g smoke,regression -t 180 -n 2
+ 	
+ 	  -s suites
+       Here `Functional/aggregates,Functional/joins` are directories inside `framework/resources/Functional`.
+    -g groups
+       Here `smoke, regression` are categories of tests to execute
+    -t timeout
+       Here `180` seconds is the max time for a query to execute.
+    -n concurrency
+       Here `2` queries can execute concurrently.
+    -h help
+       Use this option to provide the usage of the command, which includes additional parameters.
 </code></pre>
