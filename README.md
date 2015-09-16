@@ -102,7 +102,6 @@ In the `framework` directory, execute the following command to run tests:
 Example:
  <pre><code>
  	./run.sh -s Functional/aggregates,Functional/joins -g smoke,regression -t 180 -n 2
- 	
  	  -s suites
        Here `Functional/aggregates,Functional/joins` are directories inside `framework/resources/Functional`.
     -g groups
@@ -112,5 +111,5 @@ Example:
     -n concurrency
        Here `2` queries can execute concurrently.
     -h help
-       Use this option to provide the usage of the command, which includes additional parameters.
+       Use this option to provide the usage of the command, which includes additional options.
 </code></pre>
