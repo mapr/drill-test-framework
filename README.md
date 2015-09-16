@@ -21,8 +21,6 @@ Refer to [Github documentation](https://help.github.com/articles/cloning-a-repos
  1. The test framework expects Drill services to be setup on a clustered environment. Refer to [Drill documentation](http://drill.apache.org/docs/installing-drill-in-distributed-mode) for details on how to setup Drill.
  2. Copy the `drillTestConfig` file from `framework/src/main/resources` to your home directory as `~/.drillTestConfig`. Edit suitably, following instructions in the file.
  3. Source `.drillTestConfig`. Confirm `DRILL_HOME` and other required environment variables are set. 
- 4. Edit `pom.xml` inside the root source directory to point `<runtimeDepenencies>` to Drill configuration files and `<drill.version>` to Drill version. 
- 5. Optionally in `pom.xml`, include additional links to download large datasets in the `download-maven-plugin`. These are for test suites dependent on large datasets or expected result files which cannot be checked-in with the framework. 
 
 ### Review tests:
 
@@ -101,10 +99,11 @@ In the framework directory, execute `mvn clean install` first, to build the proj
 
 ### Execute tests
 Execute the following command, to run tests:
+`./run.sh -s <suites> -g <groups> -t <Timeout> -n <Concurrency>`
+
+Example:
  <pre><code>
- `./run.sh -s <suites> -g <groups> -t <Timeout> -n <Concurrency>`
-  Example:
- 	`./run.sh -s Functional -g smoke,regression -t 180 -n 2`
+ 	`./run.sh -s Functional/aggregates,Functional/joins -g smoke,regression -t 180 -n 2`
  	`./run.sh -h`
  	Usage: TestDriver [options]
   Options:
@@ -120,7 +119,7 @@ Execute the following command, to run tests:
        generate data
        Default: false
     -g
-       groups
+       groups (categories of tests. Ex: smoke, regression) 
     -i
        number of iterations
        Default: 1
@@ -131,9 +130,9 @@ Execute the following command, to run tests:
        number of threads
        Default: 1
     -s
-       sources
+       sources (Test suite are directories inside `framework/resources/Functional` and `framework/resources/Advanced`
     -t
-       timeout
+       timeout (in seconds)
        Default: 120
     -w
        enable write actual query result to file
