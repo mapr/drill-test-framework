@@ -30,9 +30,8 @@ Refer to [Github documentation](https://help.github.com/articles/cloning-a-repos
      |_ framework
         |_ resources
            |_ Functional   (default location for test suites) 
-           |_ Advanced     (test suites requiring large datasets reside here)
+           |_ Advanced     (test suites requiring large datasets)
            |_ Datasources  (datasets and scripts)
-           |_ External     (external test repos can be cloned in here)
 </code></pre>
 
 #### Adding Tests
