@@ -18,9 +18,10 @@ The framework is built for regression, integration & sanity testing. Includes te
 Refer to [Github documentation](https://help.github.com/articles/cloning-a-repository) on how to clone a repository. 
 
 ### Configure test environment
- 1. The test framework expects Drill services to be setup on a clustered environment. Refer to [Drill documentation](http://drill.apache.org/docs/installing-drill-in-distributed-mode) for details on how to setup Drill.
- 2. Copy the `drillTestConfig` file from `framework/src/main/resources` to your home directory as `~/.drillTestConfig`. Edit suitably, following instructions in the file.
- 3. Source `.drillTestConfig`. Confirm `DRILL_HOME` and other required environment variables are set. 
+ 1. The test framework requires a distributed file system such as HDFS or MapR-FS to be configured. Hive and HBase are additional dependencies to run all tests (refer to the example in the Execute Tests section to exclude tests with dependencies).
+ 2. The test framework expects Drill services to be setup on a clustered environment. Refer to [Drill documentation](http://drill.apache.org/docs/installing-drill-in-distributed-mode) for details on how to setup Drill.
+ 3. Copy the `drillTestConfig` file from `framework/src/main/resources` to your home directory as `~/.drillTestConfig`. Edit suitably, following instructions in the file.
+ 4. Source `.drillTestConfig`. Confirm `DRILL_HOME` and other required environment variables are set. 
 
 ### Review tests:
 
@@ -96,19 +97,22 @@ In the `framework` directory, execute `mvn clean install` first, to build the pr
 ### Execute tests
 In the `framework` directory, execute the following command to run tests:
 
-`./run.sh -s <suites> -g <groups> -t <Timeout> -n <Concurrency>`
+`./run.sh -s <suites> -g <groups> -t <Timeout> -x <Exclude> -n <Concurrency>`
 
 Example:
  <pre><code>
- 	./run.sh -s `Functional/aggregates,Functional/joins` -g `smoke,regression` -t `180` -n `2`
-    -s suites
-       Here `Functional/aggregates,Functional/joins` are directories inside `framework/resources/Functional`.
-    -g groups
+ 	./run.sh -s `Functional/aggregates,Functional/joins` -g `smoke,regression` -x `hbase` -t `180` -n `2`
+    -s suites (required)
+       Here `Functional/aggregates,Functional/joins` are directories inside `framework/resources/Functional`. All test suites
+       and sub-suites within a directory are included.
+    -g groups (required)
        Here `smoke, regression` are categories of tests to execute
-    -t timeout
+    -t timeout (optional)
        Here `180` seconds is the max time for a query to execute.
-    -n concurrency
+    -n concurrency (optional)
        Here `2` queries can execute concurrently.
-    -h help
+    -x exclude dependencies (optional)
+       Here any `hbase` test suites within the specified directory are excluded.
+    -h help (optional)
        Use this option to provide the usage of the command, which includes additional options.
 </code></pre>
