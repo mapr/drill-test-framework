@@ -69,7 +69,7 @@ public class DrillTestJdbc implements DrillTest {
     int mainQueryIndex = 0;
     String[] queries = null;
     try {
-      connection = connectionPool.getConnection(modeler);
+      connection = connectionPool.getOrCreateConnection(modeler);
       LOG.info("running test " + matrix.inputFile + " " + connection.hashCode());
 
       executeSetupQuery(String.format("use `%s`", matrix.schema));
@@ -102,7 +102,7 @@ public class DrillTestJdbc implements DrillTest {
           executeSetupQuery(queries[i]);
         }
         Thread.sleep(1000);
-        connectionPool.release(modeler, connection);
+        connectionPool.releaseConnection(modeler, connection);
       } catch (Exception e) {
         LOG.error("Failed while running cleanup query. Not returning connection to pool.", e);
         try {
