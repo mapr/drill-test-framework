@@ -213,7 +213,7 @@ public class Utils {
    * @throws Exception
    */
   public static String getExistingDrillStoragePlugin(String ipAddress,
-      String pluginType) throws Exception {
+      String pluginType) throws IOException {
     StringBuilder builder = new StringBuilder();
     builder.append("http://" + ipAddress + ":8047/storage/" + pluginType);
     HttpUriRequest request = new HttpGet(builder.toString() + ".json");
@@ -234,7 +234,7 @@ public class Utils {
    * @return true if operation is successful
    */
   public static boolean updateDrillStoragePlugin(String filename,
-      String ipAddress, String pluginType, String fsMode) throws Exception {
+      String ipAddress, String pluginType, String fsMode) throws IOException {
     String content = getFileContent(filename);
     content = content.replace("localhost", Inet4Address.getLocalHost()
         .getHostAddress());
@@ -258,7 +258,7 @@ public class Utils {
    * @throws Exception
    */
   public static boolean postDrillStoragePlugin(String content,
-      String ipAddress, String pluginType) throws Exception {
+      String ipAddress, String pluginType) throws IOException {
       StringBuilder builder = new StringBuilder();
       builder.append("http://" + ipAddress + ":8047/storage/" + pluginType);
       HttpPost post = new HttpPost(builder.toString() + ".json");
@@ -269,14 +269,13 @@ public class Utils {
       return isResponseSuccessful(response);
   }
 
-  private static String getFileContent(String filename) throws Exception {
+  private static String getFileContent(String filename) throws IOException {
     String path = new File(filename).getAbsolutePath();
     byte[] encoded = Files.readAllBytes(Paths.get(path));
     return new String(encoded, "UTF-8");
   }
 
-  private static String getHttpResponseAsString(HttpResponse response)
-      throws Exception {
+  private static String getHttpResponseAsString(HttpResponse response) throws IOException {
     Reader reader = new BufferedReader(new InputStreamReader(response
         .getEntity().getContent(), "UTF-8"));
     StringBuilder builder = new StringBuilder();
@@ -289,8 +288,7 @@ public class Utils {
     return builder.toString();
   }
 
-  private static boolean isResponseSuccessful(HttpResponse response)
-      throws Exception {
+  private static boolean isResponseSuccessful(HttpResponse response) throws IOException {
     return getHttpResponseAsString(response).toLowerCase().contains(
         "\"result\" : \"success\"");
   }

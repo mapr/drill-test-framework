@@ -268,7 +268,7 @@ public class TestDriver {
     System.exit(totalExecutionFailure + totalVerificationFailure + totalTimeoutFailure);
   }
 
-  public void setup() throws Exception {
+  public void setup() throws IOException, InterruptedException {
     if (!new File(drillOutputDirName).exists()) {
       new File(drillOutputDirName).mkdir();
     }
