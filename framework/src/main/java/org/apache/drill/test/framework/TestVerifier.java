@@ -47,9 +47,8 @@ import org.apache.log4j.Logger;
  * 
  */
 public class TestVerifier {
+  private static final Logger LOG = Logger.getLogger(TestVerifier.class);
   private static final int MAX_MISMATCH_SIZE = 10;
-  protected static final Logger LOG = Logger.getLogger(Utils
-      .getInvokingClassName());
   public TestStatus testStatus = TestStatus.PENDING;
   private int mapSize = 0;
   private List<ColumnList> resultSet = null;

@@ -38,8 +38,7 @@ import java.util.List;
 import java.util.Random;
 
 public class DrillTestJdbc implements DrillTest {
-
-  protected static final Logger LOG = Logger.getLogger(Utils.getInvokingClassName());
+  private static final Logger LOG = Logger.getLogger(DrillTestJdbc.class);
 
   private ConnectionPool connectionPool;
   private Connection connection;
