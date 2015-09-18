@@ -49,8 +49,7 @@ public class JsonTestDataProvider {
    *         executed.
    * @throws Exception
    */
-  public static List<TestCaseModeler> getData()
-      throws Exception {
+  public static List<TestCaseModeler> getData() throws IOException {
     String[] testDefSources = null;
     try {
       testDefSources = TestDriver.OPTIONS.sources.split(",");

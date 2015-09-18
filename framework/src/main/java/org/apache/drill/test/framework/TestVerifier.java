@@ -20,8 +20,10 @@ package org.apache.drill.test.framework;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.file.Files;
@@ -81,13 +83,12 @@ public class TestVerifier {
    * @throws Exception
    */
   public TestStatus verifySqllineResult(String expectedOutput,
-      String actualOutput, boolean verifyOrderBy) throws Exception {
+      String actualOutput, boolean verifyOrderBy) throws IOException, VerificationException, IllegalAccessException {
     String cleanedUpFile = cleanUpSqllineOutputFile(actualOutput);
     return verifyResultSet(expectedOutput, cleanedUpFile, verifyOrderBy);
   }
 
-  private String cleanUpSqllineOutputFile(String actualOutput)
-      throws Exception {
+  private String cleanUpSqllineOutputFile(String actualOutput) throws IOException {
     String cleanedUpFile = actualOutput + "_cleaned";
     BufferedReader reader = new BufferedReader(new FileReader(new File(
         actualOutput)));
@@ -120,7 +121,7 @@ public class TestVerifier {
    * @throws Exception
    */
   public TestStatus verifyResultSet(String expectedOutput,
-      String actualOutput) throws Exception {
+      String actualOutput) throws IllegalAccessException, IOException, VerificationException {
     return verifyResultSet(expectedOutput, actualOutput, false);
   }
 
@@ -138,7 +139,7 @@ public class TestVerifier {
    * @throws Exception
    */
   public TestStatus verifyResultSet(String expectedOutput,
-      String actualOutput, boolean verifyOrderBy) throws Exception {
+      String actualOutput, boolean verifyOrderBy) throws IOException, VerificationException, IllegalAccessException {
     if (testStatus == TestStatus.EXECUTION_FAILURE 
     	|| testStatus == TestStatus.CANCELED) {
       return testStatus;
@@ -181,7 +182,7 @@ public class TestVerifier {
   }
 
   private Map<ColumnList, Integer> loadFromFileToMap(String filename)
-      throws Exception {
+    throws IOException, VerificationException, IllegalAccessException {
     return loadFromFileToMap(filename, false);
   }
 
@@ -194,7 +195,7 @@ public class TestVerifier {
    * @throws Exception
    */
   private Map<ColumnList, Integer> loadFromFileToMap(String filename,
-      boolean ordered) throws Exception {
+      boolean ordered) throws VerificationException, IOException, IllegalAccessException {
     if (types == null) {
       throw new VerificationException("Fatal: Types in the result set is null.  "
           + "This most likely resulted from failed execution.");
@@ -401,7 +402,7 @@ public class TestVerifier {
    */
   public TestStatus verifyResultSetOrders(String filename,
       List<String> columnLabels, Map<String, String> orderByColumns)
-      throws Exception {
+    throws IOException, VerificationException, IllegalAccessException {
     loadFromFileToMap(filename, true);
     Map<Integer, String> columnIndexAndOrder = getColumnIndexAndOrder(
         columnLabels, orderByColumns);
@@ -464,7 +465,7 @@ public class TestVerifier {
   }
 
   public TestStatus verifyTextPlan(String expectedOutput,
-      String actualOutput) throws Exception {
+      String actualOutput) throws IOException, VerificationException {
     if (testStatus == TestStatus.EXECUTION_FAILURE
     	|| testStatus == TestStatus.CANCELED) {
       return testStatus;
