@@ -1,0 +1,12 @@
+# IntelliJ stuff
+.idea/
+*.iml
+
+# Mac stuff
+*.DS_Store
+
+# Drill and Framework stuff
+*.class
+**/target/*
+*drill.log*
+**/drill-output
