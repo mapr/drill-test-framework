@@ -25,63 +25,73 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Queue;
 
-public class ConnectionPool {
-  protected static final Logger LOG = Logger.getLogger(Utils.getInvokingClassName());
+public class ConnectionPool implements AutoCloseable {
+  private static final Logger LOG = Logger.getLogger(ConnectionPool.class);
 
-  //private static final String URL_STRING = "jdbc:drill:zk=%s";
-  private static final String URL_STRING = "jdbc:drill:drillbit=%s";
+  private static final String URL_STRING = String.format("jdbc:drill:drillbit=%s",
+    Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER"));
 
-  private final String zkConnectString;
-  private HashMap<String, Queue<Connection>> hash;
+  private final Map<String, Queue<Connection>> connections;
 
-  public ConnectionPool(String zkConnectString) throws ClassNotFoundException {
+  public ConnectionPool() throws ClassNotFoundException {
     Class.forName("org.apache.drill.jdbc.Driver");
     Driver.load();
-    this.zkConnectString = zkConnectString;
-    hash = new HashMap();
+    connections = new HashMap<>();
   }
 
-  public synchronized Connection getConnection(TestCaseModeler test) throws SQLException {
-	String user = test.matrices.get(0).username;
-	String password = test.matrices.get(0).password;
-	String key = user + password;
-	Connection connection;
-	if (hash.containsKey(key)) {
-		connection = hash.get(key).poll();
-		if (connection == null) {
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			connection = DriverManager.getConnection(String.format(URL_STRING, 
-					Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER")), user, password);
-		}
-	} else {
-		Queue<Connection> connectionQueue = Queues.newLinkedBlockingQueue();
-		hash.put(key, connectionQueue);
-		connection = DriverManager.getConnection(String.format(URL_STRING,
-				Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER")), user, password);
-	}
-	return connection;
+  public Connection getOrCreateConnection(TestCaseModeler test) throws SQLException {
+    final String username = test.matrices.get(0).username;
+    final String password = test.matrices.get(0).password;
+    return getOrCreateConnection(username, password);
   }
 
-  public synchronized void release(TestCaseModeler test, Connection connection) {
-	String key = test.matrices.get(0).username + test.matrices.get(0).password;
-	if (hash.containsKey(key)) {
-		hash.get(key).add(connection);
-	} 
+  public void releaseConnection(TestCaseModeler test, Connection connection) {
+    releaseConnection(test.matrices.get(0).username, test.matrices.get(0).password, connection);
   }
-  
-  public Connection getConnection() throws SQLException {
-	return DriverManager.getConnection(String.format(URL_STRING,
-	  Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER")));
+
+  public synchronized Connection getOrCreateConnection(String username, String password) throws SQLException {
+    final String key = username + password;
+    if (connections.containsKey(key)) {
+      final Connection connection = connections.get(key).poll();
+      if (connection == null) {
+        return DriverManager.getConnection(URL_STRING, username, password);
+      } else {
+        return connection;
+      }
+    } else {
+      final Queue<Connection> connectionQueue = Queues.newLinkedBlockingQueue();
+      connections.put(key, connectionQueue);
+      return DriverManager.getConnection(URL_STRING, username, password);
+    }
   }
-  
-  public Connection getConnection(String username, String password) throws SQLException {
-	return DriverManager.getConnection(String.format(URL_STRING,
-	  Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER")), username, password);
+
+  public synchronized void releaseConnection(String username, String password, Connection connection) {
+    final String key = username + password;
+    if (connections.containsKey(key)) {
+      connections.get(key).add(connection);
+    } else {
+      LOG.warn("Unknown connection released to pool. Closing connection now.");
+      try {
+        connection.close();
+      } catch (SQLException e) {
+        LOG.warn("Error while closing connection.", e);
+      }
+    }
+  }
+
+  @Override
+  public void close() {
+    for (final Queue<Connection> queue : connections.values()) {
+      for (final Connection connection : queue) {
+        try {
+          connection.close();
+        } catch (final SQLException e) {
+          LOG.warn("Error while closing connection.", e);
+        }
+      }
+    }
   }
 }
