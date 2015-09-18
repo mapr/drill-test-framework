@@ -31,15 +31,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Types;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -54,9 +54,45 @@ import org.apache.log4j.Logger;
  * 
  */
 public class Utils {
+  private static final Logger LOG = Logger.getLogger(Utils.class);
+
   private static final String DRILL_TEST_CONFIG = "drillTestConfig";
-  protected static final Logger LOG = Logger.getLogger(Utils
-      .getInvokingClassName());
+
+  private static final Map<Integer, String> sqlTypes;
+
+  private static final Map<String, String> drillTestProperties;
+
+  static {
+    // setup sql types
+    final Map<Integer, String> map = Maps.newHashMap();
+    final Field[] fields = Types.class.getDeclaredFields();
+    for (Field field : fields) {
+      try {
+        map.put((Integer) field.get(Types.class), field.getName());
+      } catch (IllegalAccessException e) {
+        throw new RuntimeException("Error while initializing sql types.", e);
+      }
+    }
+    sqlTypes = ImmutableMap.copyOf(map);
+
+    // read configuration file
+    final Map<String, String> drillProperties = Maps.newHashMap();
+    final File overrideFile = new File(System.getProperty("user.home") + "/." + DRILL_TEST_CONFIG);
+    final ResourceBundle bundle;
+    if (overrideFile.exists() && !overrideFile.isDirectory()) {
+      try {
+        bundle = new PropertyResourceBundle(new FileInputStream(overrideFile));
+      } catch (IOException e) {
+        throw new RuntimeException("Error reading configuration file in root directory.", e);
+      }
+    } else {
+      bundle = ResourceBundle.getBundle(DRILL_TEST_CONFIG);
+    }
+    for (final String key : bundle.keySet()) {
+      drillProperties.put(key.trim(), bundle.getString(key).trim());
+    }
+    drillTestProperties = ImmutableMap.copyOf(drillProperties);
+  }
 
   /**
    * Computes difference between two dates
@@ -93,37 +129,10 @@ public class Utils {
    * Returns the map containing all properties in the drill test properties
    * file.
    * 
-   * @param drillPropertiesFilename
-   *          name of drill properties file
    * @return map containing all properties in the drill test properties file.
    */
   public static Map<String, String> getDrillTestProperties() {
-    Map<String, String> drillProperties = new HashMap<String, String>();
-    //ResourceBundle bundle = ResourceBundle.getBundle(DRILL_TEST_CONFIG);
-    ResourceBundle bundle = null;
-    try {
-      bundle = new PropertyResourceBundle(new FileInputStream(System.getProperty("user.home") + "/." +
-          DRILL_TEST_CONFIG));
-    } catch (IOException e) {
-        bundle = ResourceBundle.getBundle(DRILL_TEST_CONFIG);
-    }
-    Enumeration<String> keys = bundle.getKeys();
-    while (keys.hasMoreElements()) {
-      String key = keys.nextElement();
-      if (key != null) {
-        drillProperties.put(key.trim(), bundle.getString(key).trim());
-      }
-    }
-    return drillProperties;
-  }
-
-  /**
-   * Returns name of invoking class.
-   * 
-   * @return name of invoking class.
-   */
-  public static String getInvokingClassName() {
-    return new Throwable().getStackTrace()[1].getClassName();
+    return drillTestProperties;
   }
 
   /**
@@ -140,7 +149,7 @@ public class Utils {
     if (filename.startsWith("/")) {
       return filename;
     }
-    return Utils.getDrillTestProperties().get(propertyKey) + "/" + filename;
+    return drillTestProperties.get(propertyKey) + "/" + filename;
   }
 
   /**
@@ -171,16 +180,6 @@ public class Utils {
     return statements;
   }
 
-  private static final Map<Integer, String> getSqlTypesMap()
-      throws IllegalArgumentException, IllegalAccessException {
-    Map<Integer, String> map = new HashMap<Integer, String>();
-    Field[] fields = Types.class.getDeclaredFields();
-    for (int i = 0; i < fields.length; i++) {
-      map.put((Integer) fields[i].get(Types.class), fields[i].getName());
-    }
-    return map;
-  }
-
   /**
    * Turns a list of types in numerical values into one in strings with semantic
    * content.
@@ -193,11 +192,9 @@ public class Utils {
    */
   public static List<String> getTypesInStrings(List<Integer> typesInInteger)
       throws IllegalArgumentException, IllegalAccessException {
-    List<String> typesInStrings = new ArrayList<String>();
-    Map<Integer, String> map = getSqlTypesMap();
-    for (int i = 0; i < typesInInteger.size(); i++) {
-      Integer type = (Integer) typesInInteger.get(i);
-      typesInStrings.add(map.get(type));
+    final List<String> typesInStrings = Lists.newArrayList();
+    for (final Integer type : typesInInteger) {
+      typesInStrings.add(sqlTypes.get(type));
     }
     return typesInStrings;
   }

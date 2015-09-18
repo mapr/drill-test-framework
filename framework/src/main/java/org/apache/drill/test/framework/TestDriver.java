@@ -45,8 +45,7 @@ import java.sql.Types;
 public class TestDriver {
   public static final String LOCALFS = "local";
   public static final String DFS = "dfs";
-  protected static final Logger LOG = Logger.getLogger(Utils
-      .getInvokingClassName());
+  private static final Logger LOG = Logger.getLogger(TestDriver.class);
   private static final String LINE_BREAK = "----------------------------------------------------------------------------------------------------------------";
   protected static Map<String, String> drillProperties = Utils
       .getDrillTestProperties();
