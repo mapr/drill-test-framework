@@ -1,5 +1,3 @@
-/* Author: Abhishek Girish */
-
 drop view customer ; 
  
 drop view customer_address ;
