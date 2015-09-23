@@ -37,8 +37,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * 
  */
 public class JsonTestDataProvider {
-  private static final Logger LOG = Logger.getLogger(Utils
-      .getInvokingClassName());
+  private static final Logger LOG = Logger.getLogger(JsonTestDataProvider.class);
 
   /**
    * Constructs an iteration of test case definitions from various test data
@@ -49,8 +48,7 @@ public class JsonTestDataProvider {
    *         executed.
    * @throws Exception
    */
-  public static List<TestCaseModeler> getData()
-      throws Exception {
+  public static List<TestCaseModeler> getData() throws IOException {
     String[] testDefSources = null;
     try {
       testDefSources = TestDriver.OPTIONS.sources.split(",");
