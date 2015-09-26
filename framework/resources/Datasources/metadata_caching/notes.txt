@@ -1,0 +1,6 @@
+#9411 files block-size = 10307921;
+#20390 files block-size = 5030000;
+#50497 files block-size = 2030000;
+#99501 files block-size = 1030000;
+#146815 files block-size = 698000;
+#204938 files block-size = 500000;
