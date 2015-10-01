@@ -1,4 +1,4 @@
-/* Author: Abhishek Girish */
+use dfs.tpcds_sf1_json_views;
 
 create or replace view customer as select
 cast(c_customer_sk as integer)  as c_customer_sk,
