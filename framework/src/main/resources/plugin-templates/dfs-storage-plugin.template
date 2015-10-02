@@ -215,11 +215,6 @@
         "writable" : true,
         "defaultInputFormat" : null
       },
-      "cardlytics" : {
-        "location" : "/drill/testdata/cardlytics",
-        "writable" : true,
-        "defaultInputFormat" : "json"
-      },
       "identifiers" : {
         "location" : "/drill/testdata/identifiers",
         "writable" : true,
@@ -265,21 +260,6 @@
         "writable": true,
         "defaultInputFormat": "csv"
       },
-	"sandbox": {
-      "location": "/drill/testdata/sandbox",
-      "writable": true,
-      "defaultInputFormat": "parquet"
-    },
-    "sandbox-logs": {
-      "location": "/drill/testdata/sandbox/flat",
-      "writable": true,
-      "defaultInputFormat": "parquet"
-    },
-    "sandbox-json": {
-      "location": "/drill/testdata/sandbox/json",
-      "writable": true,
-      "defaultInputFormat": "parquet"
-    },
     "wideStringsJson5000Width1000rows": {
       "location": "/drill/testdata/data-shapes/wide-columns/5000/1000rows/json",
       "writable": true,
@@ -320,11 +300,6 @@
       "writable": true,
       "defaultInputFormat": "parquet"
     },
-    "yelp_tutorial": {
-      "location": "/drill/testdata/yelp_tutorial",
-      "writable": true,
-      "defaultInputFormat": "json"
-    },
     "tpcds_parquet_sf1": {
       "location": "/drill/testdata/tpcds/parquet/sf1",
       "writable": true,
@@ -354,11 +329,6 @@
       "location": "/drill/testdata/cross-sources",
       "writable": true,
       "defaultInputFormat": "json"
-    },
-    "tpch_sf0.01_maprdb": {
-      "location": "/drill/testdata/tpch_maprdb/sf0.01",
-      "writable": true,
-      "defaultInputFormat": null
     },
     "tpcds_sf1_parquet": {
       "location": "/drill/testdata/tpcds_sf1/parquet",
@@ -447,11 +417,6 @@
     },
     "extended_json": {
       "location": "/drill/testdata/extended_json",
-      "writable": true,
-      "defaultInputFormat": "parquet"
-    },
-    "tpch01_5000files": {
-      "location": "/drill/testdata/metadata_caching/tpch0.01_5000files",
       "writable": true,
       "defaultInputFormat": "parquet"
     },
