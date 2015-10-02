@@ -6,10 +6,10 @@
     "categories": [
         "regression"
     ],
-    "matrices": [
+	"matrices": [
         {
             "query-file": ".*.q",
-            "schema": "dfs.drillTestDirAggregate1csv",
+            "schema": "dfs.tpcds_sf1_text",
             "output-format": "tsv",
             "expected-file": ".*.e",
             "verification-type": [
@@ -21,7 +21,8 @@
         {
             "mode": "cp",
             "src": "Datasources/text/tpcds/sf1",
-            "dest": "tpcds/csv/s1"
+            "dest": "tpcds_sf1/text"
         }
     ]
 }
+
