@@ -419,6 +419,61 @@
       "location": "/drill/testdata/extended_json",
       "writable": true,
       "defaultInputFormat": "parquet"
+    },
+    "tpch100_5000files": {
+      "location": "/drill/testdata/tpch100_5000files",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "tpch100_10000files": {
+      "location": "/drill/testdata/tpch100_10000files",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "tpch100_20000files": {
+      "location": "/drill/testdata/tpch100_20000files",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "tpch100_50000files": {
+      "location": "/drill/testdata/tpch100_50000files",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+   "tpch100_100000files": {
+      "location": "/drill/testdata/tpch100_100000files",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "tpch100_150000files": {
+      "location": "/drill/testdata/tpch100_150000files",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "tpch100_200000files": {
+      "location": "/drill/testdata/tpch100_200000files",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "tpch100_autopartitioned_100000files": {
+      "location": "/drill/testdata/tpch100_autopartitioned_100000files",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "tpch100_dirpartitioned_200000files": {
+      "location": "/drill/testdata/tpch100_dir_partitioned_200000files",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "tpch100_dirpartitioned_50000files": {
+      "location": "/drill/testdata/tpch100_dir_partitioned_50000files",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "metadata_caching": {
+      "location": "/drill/testdata/metadata_caching",
+      "writable": true,
+      "defaultInputFormat": "parquet"
     }
     },
     "formats" : {
