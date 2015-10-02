@@ -11,7 +11,7 @@
             "query-file": ".*.q",
             "schema": "dfs.tpcds_sf1_text",
             "output-format": "tsv",
-            "expected-file": ".*.e_tsv",
+            "expected-file": ".*.e",
             "verification-type": [
                 "in-memory"
             ]
