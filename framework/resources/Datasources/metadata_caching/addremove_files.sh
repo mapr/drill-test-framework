@@ -6,7 +6,6 @@ hadoop fs -test -d /drill/testdata/metadata_caching/lineitem_adddir
 addDirExists=$?
 hadoop fs -test -d /drill/testdata/metadata_caching/lineitem_removedir
 removeDirExists=$?
-/drill/testdata/metadata_caching/lineitem_addautopartitioned_files
 hadoop fs -test -d /drill/testdata/metadata_caching/lineitem_addautopartitioned_files
 addAutoPartitionExists=$?
 hadoop fs -test -d /drill/testdata/metadata_caching/lineitem_removeautopartitioned_files
