@@ -1,0 +1,319 @@
+{
+  "metadata_version" : "v1",
+  "files" : [ {
+    "path" : "/drill/testdata/metadata_caching/lineitem/2006/1/lineitem_999.parquet",
+    "length" : 3064915,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 3063480,
+      "rowCount" : 60175,
+      "hostAffinity" : {
+        "qa-node190.qa.lab" : 1.0,
+        "qa-node191.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : "`l_orderkey`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 60000,
+        "min" : 1,
+        "nulls" : 0
+      }, {
+        "name" : "`l_partkey`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 2000,
+        "min" : 1,
+        "nulls" : 0
+      }, {
+        "name" : "`l_suppkey`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 100,
+        "min" : 1,
+        "nulls" : 0
+      }, {
+        "name" : "`l_linenumber`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 7,
+        "min" : 1,
+        "nulls" : 0
+      }, {
+        "name" : "`l_quantity`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 50.0,
+        "min" : 1.0,
+        "nulls" : 0
+      }, {
+        "name" : "`l_extendedprice`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 94949.5,
+        "min" : 904.0,
+        "nulls" : 0
+      }, {
+        "name" : "`l_discount`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 0.1,
+        "min" : 0.0,
+        "nulls" : 0
+      }, {
+        "name" : "`l_tax`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 0.08,
+        "min" : 0.0,
+        "nulls" : 0
+      }, {
+        "name" : "`l_returnflag`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "Ug=="
+        },
+        "min" : {
+          "bytes" : "QQ=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`l_linestatus`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "Tw=="
+        },
+        "min" : {
+          "bytes" : "Rg=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`l_shipdate`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "MTk5OC0xMS0yOQ=="
+        },
+        "min" : {
+          "bytes" : "MTk5Mi0wMS0wNA=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`l_commitdate`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "MTk5OC0xMC0yOA=="
+        },
+        "min" : {
+          "bytes" : "MTk5Mi0wMi0wMg=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`l_receiptdate`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "MTk5OC0xMi0yNQ=="
+        },
+        "min" : {
+          "bytes" : "MTk5Mi0wMS0wOQ=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`l_shipinstruct`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "VEFLRSBCQUNLIFJFVFVSTg=="
+        },
+        "min" : {
+          "bytes" : "Q09MTEVDVCBDT0Q="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`l_shipmode`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "VFJVQ0s="
+        },
+        "min" : {
+          "bytes" : "QUlS"
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`l_comment`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "enpsZTogcGVuZGluZyBp"
+        },
+        "min" : {
+          "bytes" : "IFRpcmVzaWFzIA=="
+        },
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/metadata_caching/lineitem/2007/1/1_0_1.parquet",
+    "length" : 168527,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 167065,
+      "rowCount" : 2928,
+      "hostAffinity" : {
+        "qa-node190.qa.lab" : 1.0,
+        "qa-node191.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : "`L_ORDERKEY`",
+        "primitiveType" : "INT64",
+        "originalType" : null,
+        "max" : 136171236,
+        "min" : 136168225,
+        "nulls" : 0
+      }, {
+        "name" : "`L_PARTKEY`",
+        "primitiveType" : "INT64",
+        "originalType" : null,
+        "max" : 19979548,
+        "min" : 17207,
+        "nulls" : 0
+      }, {
+        "name" : "`L_SUPPKEY`",
+        "primitiveType" : "INT64",
+        "originalType" : null,
+        "max" : 999953,
+        "min" : 490,
+        "nulls" : 0
+      }, {
+        "name" : "`L_LINENUMBER`",
+        "primitiveType" : "INT64",
+        "originalType" : null,
+        "max" : 7,
+        "min" : 1,
+        "nulls" : 0
+      }, {
+        "name" : "`L_QUANTITY`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 50.0,
+        "min" : 1.0,
+        "nulls" : 0
+      }, {
+        "name" : "`L_EXTENDEDPRICE`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 104768.0,
+        "min" : 943.17,
+        "nulls" : 0
+      }, {
+        "name" : "`L_DISCOUNT`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 0.1,
+        "min" : 0.0,
+        "nulls" : 0
+      }, {
+        "name" : "`L_TAX`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 0.08,
+        "min" : 0.0,
+        "nulls" : 0
+      }, {
+        "name" : "`L_RETURNFLAG`",
+        "primitiveType" : "BINARY",
+        "originalType" : null,
+        "max" : {
+          "bytes" : "Ug=="
+        },
+        "min" : {
+          "bytes" : "QQ=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`L_LINESTATUS`",
+        "primitiveType" : "BINARY",
+        "originalType" : null,
+        "max" : {
+          "bytes" : "Tw=="
+        },
+        "min" : {
+          "bytes" : "Rg=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`L_SHIPDATE`",
+        "primitiveType" : "BINARY",
+        "originalType" : null,
+        "max" : {
+          "bytes" : "MTk5OC0xMS0wNw=="
+        },
+        "min" : {
+          "bytes" : "MTk5Mi0wMS0wNQ=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`L_COMMITDATE`",
+        "primitiveType" : "BINARY",
+        "originalType" : null,
+        "max" : {
+          "bytes" : "MTk5OC0xMC0xMQ=="
+        },
+        "min" : {
+          "bytes" : "MTk5Mi0wMi0wNw=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`L_RECEIPTDATE`",
+        "primitiveType" : "BINARY",
+        "originalType" : null,
+        "max" : {
+          "bytes" : "MTk5OC0xMS0yOQ=="
+        },
+        "min" : {
+          "bytes" : "MTk5Mi0wMS0wNw=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`L_SHIPINSTRUCT`",
+        "primitiveType" : "BINARY",
+        "originalType" : null,
+        "max" : {
+          "bytes" : "VEFLRSBCQUNLIFJFVFVSTg=="
+        },
+        "min" : {
+          "bytes" : "Q09MTEVDVCBDT0Q="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`L_SHIPMODE`",
+        "primitiveType" : "BINARY",
+        "originalType" : null,
+        "max" : {
+          "bytes" : "VFJVQ0s="
+        },
+        "min" : {
+          "bytes" : "QUlS"
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`L_COMMENT`",
+        "primitiveType" : "BINARY",
+        "originalType" : null,
+        "max" : {
+          "bytes" : "enpsZSBzbHlseSBjYXJlZnVsbHkgcmVndWxhciBkbw=="
+        },
+        "min" : {
+          "bytes" : "IGFib3V0IHRoZSBjYXJlZnVsbHkgcmVndWxhciBpbnN0cnVj"
+        },
+        "nulls" : 0
+      } ]
+    } ]
+  } ],
+  "directories" : [ "maprfs:///drill/testdata/metadata_caching/lineitem/2006/1", "maprfs:///drill/testdata/metadata_caching/lineitem/2006", "maprfs:///drill/testdata/metadata_caching/lineitem/2007/1", "maprfs:///drill/testdata/metadata_caching/lineitem/2007" ]
+}
