@@ -1,4 +1,4 @@
-/* Author: Abhishek Girish */
+use dfs.tpcds_sf1_parquet;
 
 create table customer as select 
  case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as c_customer_sk, 
