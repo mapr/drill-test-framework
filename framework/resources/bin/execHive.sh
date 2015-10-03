@@ -3,23 +3,7 @@
 # The below command causes the shell to exit immediately if any command fails
 set -e
 mkdir -p /var/drillTestHiveLocks
-LOCKFILE="/var/drillTestHiveLocks/hivelock"
-LOCKFD=99
-
-# PRIVATE
-_lock()             { flock -$1 $LOCKFD; }
-_no_more_locking()  { _lock u; _lock xn && rm -f $LOCKFILE; }
-_prepare_locking()  { eval "exec $LOCKFD>\"$LOCKFILE\""; trap _no_more_locking EXIT; }
-
-# ON START
-_prepare_locking
-
-exlock()            { _lock x; }   # obtain an exclusive lock
-unlock()            { _lock u; }   # drop a lock
-
-# first obtain an exclusive lock
-exlock
-
+#
 # functions
 #
 usage()
@@ -54,6 +38,10 @@ done
 
 current_time=$(date "+%Y.%m.%d-%H.%M.%S");
 log_loc=$script-$current_time.log;
-hive -f $script_loc $parameters hive.log.file=$log_loc;
+(
+  # Wait for lock on /var/lock/.myscript.exclusivelock (fd 200) for 10 seconds
+  flock -x -w 1200 200 || exit 
+  hive -f $script_loc $parameters hive.log.file=$log_loc;
+) 200>/var/drillTestHiveLocks/.execHive.exclusivelock
 exit 0;
 
