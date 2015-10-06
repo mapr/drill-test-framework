@@ -41,4 +41,3 @@ export USERNAME
 export PASSWORD
 export DRILL_VERSION
 export HADOOP_VERSION
-export USERNAME

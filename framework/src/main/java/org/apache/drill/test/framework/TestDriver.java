@@ -45,8 +45,7 @@ import java.sql.Types;
 public class TestDriver {
   public static final String LOCALFS = "local";
   public static final String DFS = "dfs";
-  protected static final Logger LOG = Logger.getLogger(Utils
-      .getInvokingClassName());
+  private static final Logger LOG = Logger.getLogger(TestDriver.class);
   private static final String LINE_BREAK = "----------------------------------------------------------------------------------------------------------------";
   protected static Map<String, String> drillProperties = Utils
       .getDrillTestProperties();
@@ -151,7 +150,7 @@ public class TestDriver {
     List<TestCaseModeler> testCases = JsonTestDataProvider.getData();
 
     CancelingExecutor executor = new CancelingExecutor(OPTIONS.threads, OPTIONS.timeout);
-    ConnectionPool connectionPool = new ConnectionPool(Utils.getDrillTestProperties().get("ZOOKEEPERS"));
+    ConnectionPool connectionPool = new ConnectionPool();
 
     List<Cancelable> tests = Lists.newArrayList();
     for (TestCaseModeler testCase : testCases) {
@@ -163,7 +162,7 @@ public class TestDriver {
     int totalTimeoutFailure = 0; 
     
     if (OPTIONS.trackMemory) {
-  	  queryMemoryUsage();
+  	  queryMemoryUsage(connectionPool);
     }
 
     for (int i = 1; i < OPTIONS.iterations+1; i++) {
@@ -175,7 +174,7 @@ public class TestDriver {
       executor.executeAll(tests);
       
       if (OPTIONS.trackMemory) {
-    	  queryMemoryUsage();
+    	  queryMemoryUsage(connectionPool);
       }
 
       List<DrillTestJdbc> passingTests = Lists.newArrayList();
@@ -263,11 +262,12 @@ public class TestDriver {
     }
 
     executor.close();
+    connectionPool.close();
 
     System.exit(totalExecutionFailure + totalVerificationFailure + totalTimeoutFailure);
   }
 
-  public void setup() throws Exception {
+  public void setup() throws IOException, InterruptedException {
     if (!new File(drillOutputDirName).exists()) {
       new File(drillOutputDirName).mkdir();
     }
@@ -436,13 +436,12 @@ public class TestDriver {
     }
   }
   
-  private void queryMemoryUsage() throws SQLException, IOException {
+  private void queryMemoryUsage(ConnectionPool connectionPool) throws SQLException, IOException {
 	String query = "select sum(heap_current) as heap_current, sum(direct_current) as direct_current, " +
 			"sum(jvm_direct_current) as jvm_direct_current from sys.memory";
 	if (connection == null) {
 	  try {
-	    connection = new ConnectionPool(Utils.getDrillTestProperties().get("ZOOKEEPERS"))
-	      .getConnection(drillProperties.get("USERNAME"), drillProperties.get("PASSWORD"));
+	    connection = connectionPool.getOrCreateConnection(drillProperties.get("USERNAME"), drillProperties.get("PASSWORD"));
 	  } catch (Exception e) {
 		e.printStackTrace();
 	  }

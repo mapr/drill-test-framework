@@ -17,7 +17,7 @@
  */
 package org.apache.drill.test.framework;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -26,11 +26,13 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-public class CancelingExecutor {
-  final ExecutorService executor;
-  final ExecutorService runner = Executors.newCachedThreadPool();
-  final ExecutorService canceler = Executors.newCachedThreadPool();
-  final int timeout;
+public class CancelingExecutor implements AutoCloseable {
+
+  private final ExecutorService executor;
+  private final ExecutorService runner = Executors.newCachedThreadPool();
+  private final ExecutorService canceler = Executors.newCachedThreadPool();
+  private final int timeout;
+
   private CountDownLatch latch;
   private Exception exception;
   private Thread mainThread;
@@ -40,7 +42,7 @@ public class CancelingExecutor {
     this.timeout = timeout;
   }
 
-  public void executeAll(List<Cancelable> tasks) throws Exception {
+  public void executeAll(final Collection<? extends Cancelable> tasks) throws Exception {
     mainThread = Thread.currentThread();
     latch = new CountDownLatch(tasks.size());
     for (Cancelable task : tasks) {
@@ -49,6 +51,7 @@ public class CancelingExecutor {
     try {
       latch.await();
     } catch (InterruptedException e) {
+      Thread.currentThread().interrupt(); // preserve evidence that interrupt occurred
       if (exception != null) {
         throw exception;
       } else {
@@ -84,6 +87,7 @@ public class CancelingExecutor {
     });
   }
 
+  @Override
   public void close() {
     executor.shutdown();
     runner.shutdown();
