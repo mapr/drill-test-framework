@@ -2,7 +2,7 @@
 
 # The below command causes the shell to exit immediately if any command fails
 set -e
-
+mkdir -p /var/drillTestHiveLocks
 #
 # functions
 #
@@ -38,6 +38,10 @@ done
 
 current_time=$(date "+%Y.%m.%d-%H.%M.%S");
 log_loc=$script-$current_time.log;
-hive -f $script_loc $parameters hive.log.file=$log_loc;
+(
+  # Wait for lock on /var/lock/.myscript.exclusivelock (fd 200) for 10 seconds
+  flock -x -w 1200 200 || exit 
+  hive -f $script_loc $parameters hive.log.file=$log_loc;
+) 200>/var/drillTestHiveLocks/.execHive.exclusivelock
 exit 0;
 
