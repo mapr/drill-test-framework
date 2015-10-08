@@ -1,3 +1,3 @@
 0\t
-PARSE ERROR
-.*ROW/RANGE not allowed with RANK or DENSE_RANK functions
+VALIDATION ERROR
+.*ROW/RANGE not allowed with RANK, DENSE_RANK or ROW_NUMBER functions
