@@ -1,0 +1,2 @@
+-- DRILL-2182
+select flatten(uid) from `data1.json`;

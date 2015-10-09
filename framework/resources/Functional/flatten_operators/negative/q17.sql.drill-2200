@@ -1,0 +1,2 @@
+-- DRILL-2200
+select kvgen(d.map.abcd) from `DRILL-2200.parquet` d; 
