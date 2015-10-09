@@ -1,3 +1,3 @@
 0\t
-PARSE ERROR
-.*RANK or DENSE_RANK functions require ORDER BY clause in window specification
+UNSUPPORTED_OPERATION ERROR: This type of window frame is currently not supported 
+See Apache Drill JIRA: DRILL-3188

@@ -1,0 +1,26 @@
+{
+    "testId": "joins_implicit_cast_not_supported",
+    "type": "group",
+    "negative": true,
+    "description": "Implicit cast tests in joins: test cases that throw exception",
+    "categories": [ "negative" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.joins",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/joins",
+            "dest": "joins"
+        }
+    ]
+}
+

@@ -1,0 +1,26 @@
+{
+    "testId": "union_all_negative",
+    "type": "group",
+    "negative": true,
+    "description": "UNION ALL negative tests: throwing exceptions",
+    "categories": [ "negative" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.union_all",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/union_all",
+            "dest": "union_all"
+        }
+    ]
+}
+
