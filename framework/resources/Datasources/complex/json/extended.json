@@ -1,0 +1,5 @@
+{ "_id" : { "$oid" : "5501be17b22a06aab8557c2f" }, "name" : "y", "city" : "blr", "dob" : { "$date" : "2015-03-12T21:54:31.809+0530" } }
+{ "_id" : { "$oid" : "55362ba2d4c6782a8ec77551" }, "name" : "z", "email" : { "$binary" : "ASNFZ4mrze/+3LqYdlQyEA==", "$type" : "03" } }
+{ "_id" : { "$oid" : "5536309bd4c6782a8ec77554" }, "name" : "c", "since" : { "$timestamp" : { "t" : 1412180887, "i" : 1 } } }
+{ "_id" : { "$oid" : "553772b1d4c675cc20067d18" }, "name" : "d", "nosqltype" : { "$binary" : "bW9uZ28=", "$type" : "05" } }
+{ "_id" : { "$oid" : "55378343d4c675cc20067d1a" }, "name" : "e", "nosqltype" : { "$binary" : "MTAuODY=", "$type" : "01" } }
