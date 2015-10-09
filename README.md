@@ -116,3 +116,19 @@ Example:
     -h help (optional)
        Use this option to provide the usage of the command, which includes additional options.
 </code></pre>
+
+## Authors
+
+[Zhiyong](https://github.com/zhiyongliu)  
+[Chun](https://github.com/cchang738)  
+[Krystal](https://github.com/krystaln)  
+[Ramana](https://github.com/inramana)  
+[Abhishek](https://github.com/agirish)  
+[Vicky](https://github.com/vmarkman)  
+[Suresh](https://github.com/sollala)  
+[Khurram](https://github.com/kfaraaz)  
+[Rahul](https://github.com/rchallapalli)  
+[Steven](https://github.com/StevenMPhillips)  
+[Jacques](https://github.com/jacques-n)  
+[Jason](https://github.com/jaltekruse)  
+[Sudheesh](https://github.com/sudheeshkatkam)   
