@@ -1,0 +1,2 @@
+-- DRILL-2217
+select flatten(empty[0]) from `data1.json`; 
