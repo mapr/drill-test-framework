@@ -1,0 +1,4 @@
+    Screen
+      Project(EXPR$0=[CAST($0):VARCHAR(20) CHARACTER SET "ISO-8859-1" COLLATE "ISO-8859-1$en_US$primary" NOT NULL], name=[CAST($1):VARCHAR(30) CHARACTER SET "ISO-8859-1" COLLATE "ISO-8859-1$en_US$primary"])
+        Project(row_key=[$0], ITEM=[ITEM($1, 'name')])
+          Scan(groupscan=[HBaseGroupScan [HBaseScanSpec=HBaseScanSpec [tableName=student, startRow=1, stopRow=2, filter=FilterList AND (2/2): [RowFilter (EQUAL, ^\x5CQ1\x5CE.*$), RowFilter (NOT_EQUAL, 100)]], columns=[`row_key`, `onecf`.`name`]]])

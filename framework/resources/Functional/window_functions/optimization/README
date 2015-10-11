@@ -1,0 +1,3 @@
+1. 'pp' in test prefix stands for: projection pushdown (sick of q*)
+
+2. Tests from pp_01 through pp_13 are testing projection pushdown into window operator. See DRILL-3412

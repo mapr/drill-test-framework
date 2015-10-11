@@ -1,0 +1,2 @@
+-- DRILL-2185
+select flatten(*) from `data1.json`; 
