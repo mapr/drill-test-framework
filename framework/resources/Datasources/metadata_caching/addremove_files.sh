@@ -47,7 +47,7 @@ resources/Datasources/metadata_caching/delete_cache.sh /drill/testdata/metadata_
 resources/Datasources/metadata_caching/delete_cache.sh /drill/testdata/metadata_caching/lineitem_removedir
 resources/Datasources/metadata_caching/delete_cache.sh /drill/testdata/metadata_caching/lineitem_addautopartitioned_files
 resources/Datasources/metadata_caching/delete_cache.sh /drill/testdata/metadata_caching/lineitem_removeautopartitioned_files
-
+resources/Datasources/metadata_caching/delete_cache.sh /drill/testdata/metadata_caching/orders
 
 ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=resources/Datasources/metadata_caching/refresh_metadata_addremovefiles.ddl
 
