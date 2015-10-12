@@ -1,4 +1,4 @@
 .*
 HashAgg
 Filter.*=.*1992-01-01.*
-Scan.*selectionRoot.*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart.*numFiles=249.*columns=\[`l_shipdate`.*`l_modline`.*`l_moddate`\].*
+Scan.*selectionRoot.*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart.*numFiles=1.*columns=\[`l_shipdate`.*`l_modline`.*`l_moddate`\].*
