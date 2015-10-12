@@ -69,6 +69,10 @@ public class DrillTestJdbc implements DrillTest {
     String[] queries = null;
     try {
       connection = connectionPool.getOrCreateConnection(modeler);
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+    try {
       LOG.info("running test " + matrix.inputFile + " " + connection.hashCode());
 
       executeSetupQuery(String.format("use `%s`", matrix.schema));
