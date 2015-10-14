@@ -1,0 +1,2 @@
+.*
+HiveScan.*tableName:lineitem_text_partitioned_hive_hier_intint.*inputSplits=.*/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intint/1991/12/lineitemal.tbl:0\+11926.*

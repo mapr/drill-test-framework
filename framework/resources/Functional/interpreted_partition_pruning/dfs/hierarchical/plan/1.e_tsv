@@ -1,0 +1,2 @@
+.*
+EasyGroupScan.*selectionRoot=.*/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intint.*numFiles=2.*files.*/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intint/1993/11/lineitemak.tbl.*/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intint/1993/12/lineitemal.tbl.*
