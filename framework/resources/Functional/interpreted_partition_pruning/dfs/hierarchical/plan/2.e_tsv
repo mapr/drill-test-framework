@@ -1,0 +1,2 @@
+.*
+Scan.*selectionRoot=.*/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intstring.*numFiles=1.*files=.*/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intstring/1993/dec/lineitemal.tbl.*
