@@ -202,7 +202,7 @@
                      <url>https://s3.amazonaws.com/apache-drill/files/func-passing-widestrings-large.tgz</url>
                      <outputFileName>func-passing-widestrings-large.tgz</outputFileName>
                      <unpack>true</unpack>
-                     <outputDirectory>${project.basedir}/resources/Functional/Passing/data-shapes/wide-columns/5000/1000rows/parquet/</outputDirectory>
+                     <outputDirectory>${project.basedir}/resources/Functional/data-shapes/wide-columns/5000/1000rows/parquet/</outputDirectory>
                   </configuration>
                </execution>
                <execution>
@@ -228,20 +228,7 @@
                      <url>https://s3.amazonaws.com/apache-drill/files/func-passing-flatten-operators-large.tgz</url>
                      <outputFileName>func-passing-flatten-operators-large.tgz</outputFileName>
                      <unpack>true</unpack>
-                     <outputDirectory>${project.basedir}/resources/Functional/Passing/flatten_operators/100000rows/</outputDirectory>
-                  </configuration>
-               </execution>
-               <execution>
-                  <id>func-failing-flatten-operators-large</id>
-                  <phase>prepare-package</phase>
-                  <goals>
-                     <goal>wget</goal>
-                  </goals>
-                  <configuration>
-                     <url>https://s3.amazonaws.com/apache-drill/files/func-failing-flatten-operators-large.tgz</url>
-                     <outputFileName>func-failing-flatten-operators-large.tgz</outputFileName>
-                     <unpack>true</unpack>
-                     <outputDirectory>${project.basedir}/resources/Functional/Failing/flatten_operators/100000rows/</outputDirectory>
+                     <outputDirectory>${project.basedir}/resources/Functional/flatten_operators/100000rows/</outputDirectory>
                   </configuration>
                </execution>
                <execution>

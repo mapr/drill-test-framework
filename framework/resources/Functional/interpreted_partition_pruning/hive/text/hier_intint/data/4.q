@@ -1,0 +1,1 @@
+select l_orderkey, l_partkey, l_quantity, l_shipdate, l_shipinstruct from hive.lineitem_text_partitioned_hive_hier_intint where case when `month` > 11 then 2 else null end is not null and `year` = 1991;
