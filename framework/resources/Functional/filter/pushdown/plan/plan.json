@@ -1,0 +1,25 @@
+{
+    "testId": "filter_pushdown_plan",
+    "type": "group",
+    "description": "Filter pushdown tests: these tests verify query plans for the queries that are in ../data directory",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.subqueries",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/subqueries",
+            "dest": "subqueries"
+        }
+    ]
+}
+
