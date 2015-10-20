@@ -28,6 +28,11 @@
                 "dest": "partition_pruning/hive"
         },
         {
+                "mode": "cp",
+                "src": "Datasources/ctas_auto_partition/drill-3947",
+                "dest": "/drill/testdata/"
+        },
+        {
             "mode": "gen",
             "src": "Datasources/ctas_auto_partition/ctas_existing_partition_pruning.sh",
             "dest": ""

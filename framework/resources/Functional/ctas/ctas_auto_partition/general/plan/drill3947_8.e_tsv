@@ -1,0 +1,2 @@
+.*Filter.condition=.OR.=.*'2015-12-25'.*=.*42.*
+.*Scan.*selectionRoot=.*/drill/testdata/drill-3947.*numFiles=1.*
