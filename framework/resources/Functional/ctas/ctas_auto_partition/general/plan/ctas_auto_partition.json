@@ -30,7 +30,7 @@
         {
                 "mode": "cp",
                 "src": "Datasources/ctas_auto_partition/drill-3947",
-                "dest": "/drill/testdata/"
+                "dest": "/drill/testdata/drill-3947"
         },
         {
             "mode": "gen",
