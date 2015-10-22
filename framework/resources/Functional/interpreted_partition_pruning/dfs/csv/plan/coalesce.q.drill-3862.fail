@@ -1,0 +1,7 @@
+explain plan for
+select 
+	count(*)
+from
+	`/drill/testdata/partition_pruning/dfs/orders`	
+where
+	dir0 = coalesce(o_orderdate, '1993') and o_custkey >= 100;
