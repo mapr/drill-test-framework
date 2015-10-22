@@ -1,0 +1,9 @@
+.*Screen.*
+  .*Project.*
+    .*Project.*
+      .*Project.*
+        .*StreamAgg.*
+          .*Sort.*
+            .*Filter.*
+              .*Project.*
+                .*Scan.*
