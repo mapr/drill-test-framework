@@ -1,0 +1,1 @@
+.*Scan.*/drill/testdata/metadata_caching/fewtypes_datepartition/0_0_15.parquet.*selectionRoot=/drill/testdata/metadata_caching/fewtypes_datepartition.*numFiles=1.*usedMetadataFile=true.*
