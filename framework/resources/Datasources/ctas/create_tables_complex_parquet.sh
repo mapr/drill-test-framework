@@ -3,7 +3,7 @@
 hadoop fs -test -d /drill/testdata/complex/parquet/complex.json
 if [ "$?" -eq 0 ]
 then
-	hadoop fs -rmr /drill/testdata/complex/parquet/complex.json
+	hadoop fs -rm -r /drill/testdata/complex/parquet/complex.json
 fi
 
 hadoop fs -mkdir /drill/testdata/complex/parquet

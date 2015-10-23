@@ -4,7 +4,7 @@
 hadoop fs -test -d /drill/testdata/ctas/parquet 
 if [ "$?" -eq 0 ]
 then 
-	hadoop fs -rmr /drill/testdata/ctas/parquet 
+	hadoop fs -rm -r /drill/testdata/ctas/parquet 
 fi
 
 hadoop fs -mkdir /drill/testdata/ctas/parquet 
