@@ -1,3 +1,6 @@
+
+set -x
+
 #export MAVEN_OPTS=$MAVEN_OPTS" -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5006"
 
 ./scripts/runSQLScripts.sh scripts/sqlScripts/version
