@@ -1,13 +1,10 @@
 #!/bin/sh
 
-# If directory exists, remove it. note here 'complex.json' is actually a directory. 
-#I kept the name the same so I don't need to modify existing queries
-# due to a hadoop file system bug in version 4.0.2, we can't test if the dir exists
-#hadoop fs -test -d /drill/testdata/complex/parquet/complex.json
-#if [ "$?" -eq 0 ]
-#then
-	hadoop fs -rmr /drill/testdata/complex/parquet/complex.json
-#fi
+hadoop fs -test -d /drill/testdata/complex/parquet/complex.json
+if [ "$?" -eq 0 ]
+then
+	hadoop fs -rm -r /drill/testdata/complex/parquet/complex.json
+fi
 
 hadoop fs -mkdir /drill/testdata/complex/parquet
 hadoop fs -chmod 777 /drill/testdata/complex/parquet
