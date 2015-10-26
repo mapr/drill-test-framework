@@ -1,0 +1,8 @@
+.*Screen.*
+  .*Project.*
+    .*StreamAgg.*
+      .*Project.*
+       .*SelectionVectorRemover.*
+          .*Filter.*
+             .*Project.*
+               .*Scan.*/drill/testdata/partition_pruning/dfs/orders/1994/02.parquet.*/drill/testdata/partition_pruning/dfs/orders/1993/01.parquet.*/drill/testdata/partition_pruning/dfs/orders/1995/03.parquet.*numFiles=3.*columns=\[`dir0`, `o_orderdate`, `o_custkey`\]\]\]\).*

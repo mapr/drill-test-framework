@@ -1,0 +1,24 @@
+{
+    "testId": "subqueries_not_supported",
+    "type": "group",
+    "negative": true,
+    "description": "Queries that are not supported yet",
+    "categories": [ "negative" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.subqueries",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [ "regex" ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/subqueries",
+            "dest": "subqueries"
+        }
+    ]
+}
+
