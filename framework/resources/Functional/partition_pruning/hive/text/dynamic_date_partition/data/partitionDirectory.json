@@ -1,5 +1,5 @@
 {
-    "testId": "dynamicPartitionDirectoryHive-IntPartitionData",
+    "testId": "dynamicPartitionDirectoryHive-DatePartitionData",
     "type": "group",
     "description": "Test partition directory queries",
     "categories": [
@@ -25,7 +25,12 @@
 	},
         {
            "mode": "gen",
-           "src": "bin/execHive.sh resources/Datasources/partition_pruning/hive/hive_int_parquet.ddl",
+           "src": "bin/execHive.sh resources/Datasources/partition_pruning/hive/hive.ddl",
+           "dest": ""
+        },
+        {
+           "mode": "gen",
+           "src": "bin/execHive.sh resources/Datasources/partition_pruning/hive/hive_date_parquet.ddl",
            "dest": ""
         }
     ]

@@ -1,5 +1,5 @@
 {
-    "testId": "partitionDirectoryHive-StringPartitionData-text",
+    "testId": "dynamicPartitionDirectoryHive-StringPartitionData-text",
     "type": "group",
     "description": "Test partition directory queries",
     "categories": [

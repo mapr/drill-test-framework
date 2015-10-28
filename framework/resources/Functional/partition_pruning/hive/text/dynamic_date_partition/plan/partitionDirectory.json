@@ -1,5 +1,5 @@
 {
-    "testId": "dynamicPartitionDirectoryHive-IntPartitionData",
+    "testId": "partitionDirectoryHive-DatePartitionPlan",
     "type": "group",
     "description": "Test partition directory queries",
     "categories": [
@@ -13,7 +13,7 @@
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
             "verification-type": [
-                "in-memory"
+                "regex"
             ]
         }
     ],
@@ -25,7 +25,7 @@
 	},
         {
            "mode": "gen",
-           "src": "bin/execHive.sh resources/Datasources/partition_pruning/hive/hive_int_parquet.ddl",
+           "src": "bin/execHive.sh resources/Datasources/partition_pruning/hive/hive.ddl",
            "dest": ""
         }
     ]
