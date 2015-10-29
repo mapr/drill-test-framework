@@ -122,8 +122,8 @@ ALTER TABLE lineitem_parquet_partitioned_hive_hier_intstring ADD PARTITION (year
 ALTER TABLE lineitem_parquet_partitioned_hive_hier_intstring ADD PARTITION (year=1997, month='dec') location '/drill/testdata/partition_pruning/hive/parquet/lineitem_hierarchical_intstring/1997/dec';
 
 SET hive.exec.dynamic.partition.mode=true;
-set mapreduce.map.memory.mb=8096;
-set mapreduce.map.java.opts = "-Xmx8000m";
+--set mapreduce.map.memory.mb=8096;
+--set mapreduce.map.java.opts = "-Xmx8000m";
 CREATE DATABASE IF NOT EXISTS dynamic_partitions;
 USE dynamic_partitions;
 
