@@ -388,3 +388,57 @@ ALTER TABLE lineitem_text_partitioned_hive_hier_intint ADD PARTITION (year=1997,
 ALTER TABLE lineitem_text_partitioned_hive_hier_intint ADD PARTITION (year=1997, month=10) location '/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intint/1997/10';
 ALTER TABLE lineitem_text_partitioned_hive_hier_intint ADD PARTITION (year=1997, month=11) location '/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intint/1997/11';
 ALTER TABLE lineitem_text_partitioned_hive_hier_intint ADD PARTITION (year=1997, month=12) location '/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intint/1997/12';
+
+
+SET hive.exec.dynamic.partition.mode=true;
+set mapreduce.map.memory.mb=8096;
+set mapreduce.map.java.opts = "-Xmx8000m";
+CREATE DATABASE IF NOT EXISTS dynamic_partitions;
+USE dynamic_partitions;
+
+DROP TABLE IF EXISTS lineitem_text_partitioned_hive_hier_intstring;
+CREATE EXTERNAL TABLE IF NOT EXISTS lineitem_text_partitioned_hive_hier_intstring (
+    l_orderkey INT,
+    l_partkey INT,
+    l_suppkey INT,
+    l_linenumber INT,
+    l_quantity DOUBLE,
+    l_extendedprice DOUBLE,
+    l_discount DOUBLE,
+    l_tax DOUBLE,
+    l_returnflag STRING,
+    l_linestatus STRING,
+    l_shipdate DATE,
+    l_commitdate DATE,
+    l_receiptdate DATE,
+    l_shipinstruct STRING,
+    l_shipmode STRING,
+    l_comment STRING
+)
+PARTITIONED BY (year int, month string)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
+STORED AS TEXTFILE LOCATION "/drill/testdata/partition_pruning/hive/text/dynamic_lineitem_hierarchical_intstring";
+
+INSERT OVERWRITE TABLE lineitem_text_partitioned_hive_hier_intstring partition (year, month)
+SELECT
+    l_orderkey,
+    l_partkey,
+    l_suppkey,
+    l_linenumber,
+    l_quantity,
+    l_extendedprice,
+    l_discount,
+    l_tax,
+    l_returnflag,
+    l_linestatus,
+    l_shipdate,
+    l_commitdate,
+    l_receiptdate,
+    l_shipinstruct,
+    l_shipmode,
+    l_comment,
+    year,
+    month
+FROM DEFAULT.lineitem_text_partitioned_hive_hier_intstring;
+
+SET hive.exec.dynamic.partition.mode=strict;
