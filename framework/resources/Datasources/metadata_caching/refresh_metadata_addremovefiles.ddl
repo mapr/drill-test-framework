@@ -5,3 +5,14 @@ refresh table metadata dfs.`/drill/testdata/metadata_caching/lineitem_removedir`
 refresh table metadata dfs.`/drill/testdata/metadata_caching/lineitem_addautopartitioned_files`;
 refresh table metadata dfs.`/drill/testdata/metadata_caching/lineitem_removeautopartitioned_files`;
 refresh table metadata dfs.`/drill/testdata/metadata_caching/orders`;
+refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes`;
+refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_intpartition`;
+refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_bigintpartition`;
+refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_datepartition`;
+refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_timepartition`;
+refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_timestamppartition`;
+refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_intervalpartition`;
+refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_varcharpartition`;
+refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_floatpartition`;
+refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_doublepartition`;
+refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_boolpartition`;

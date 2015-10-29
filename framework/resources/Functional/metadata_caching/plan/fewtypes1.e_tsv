@@ -1,0 +1,1 @@
+.*Scan.*path=.*drill/testdata/metadata_caching/fewtypes/fewtypes.parquet.*selectionRoot=/drill/testdata/metadata_caching/fewtypes.*numFiles=1.*usedMetadataFile=false.*
