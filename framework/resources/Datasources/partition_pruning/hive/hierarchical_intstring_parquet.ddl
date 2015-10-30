@@ -1,5 +1,3 @@
-SET mapreduce.map.memory.mb=2048;
-SET mapreduce.reduce.memory.mb=2048;
 DROP TABLE IF EXISTS lineitem_parquet_partitioned_hive_hier_intstring;
 CREATE EXTERNAL TABLE IF NOT EXISTS lineitem_parquet_partitioned_hive_hier_intstring (
     l_orderkey INT,
