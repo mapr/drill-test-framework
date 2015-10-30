@@ -8,6 +8,12 @@ For the [TPC-H SF100 Parquet tests](tpch/tpch_sf100/parquet), download dataset f
 
 Extract this compressed file and copy over files to MapR-FS / HDFS into `/drill/testdata/tpch100/parquet`
 
+### TPC-DS SF 100
+
+For the [TPC-DS SF100 tests](tpcds/tpcds_sf100), download dataset from [Amazon S3](http://drill-public.s3.amazonaws.com/tpcds/sf100/parquet/tpcds_sf100_parquet.tgz) 
+
+Extract this compressed file and copy over files to MapR-FS / HDFS into `/drill/testdata/tpcds_sf100/parquet`
+
 ### Mondrian
 
 For the [Mondrian tests](mondrian), download dataset from [Amazon S3](http://drill-public.s3.amazonaws.com/mondrian/mondrian.tgz) 
