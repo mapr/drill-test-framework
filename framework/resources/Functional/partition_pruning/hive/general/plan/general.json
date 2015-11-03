@@ -1,0 +1,32 @@
+{
+    "testId": "sequenceFilePartitionPruningPlan",
+    "type": "group",
+    "description": "Test partition directory queries",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+		"mode": "cp",
+		"src": "Datasources/hive_storage/kv1.txt",
+		"dest": "hive_storage/kv1.txt"
+	},
+        {
+           "mode": "gen",
+           "src": "bin/execHive.sh resources/Datasources/hive_storage/sequenceFileFormat.q",
+           "dest": ""
+        }
+    ]
+}
