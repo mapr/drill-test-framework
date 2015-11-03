@@ -1,0 +1,21 @@
+{
+    "testId": "tpch_tpch_sf100_limit0",
+    "type": "group",
+    "description": "TPCH queries wrapped in LIMIT 0",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirTpch100Parquet",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+    ]
+}
