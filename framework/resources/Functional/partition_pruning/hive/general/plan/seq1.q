@@ -1,1 +1,1 @@
-explain plan for select * from hive.dest2 where key > 496;
+explain plan for select * from hive.rcformat_dp where key > 496;

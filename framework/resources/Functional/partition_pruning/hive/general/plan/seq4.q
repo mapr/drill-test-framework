@@ -1,1 +1,1 @@
-explain plan for select * from hive.dest2 where key is null;
+explain plan for select * from hive.rcformat_dp where key is null;
