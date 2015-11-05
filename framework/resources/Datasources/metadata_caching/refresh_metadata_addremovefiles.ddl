@@ -16,3 +16,5 @@ refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_varcharpar
 refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_floatpartition`;
 refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_doublepartition`;
 refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_boolpartition`;
+refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_varcharpartition`;
+refresh table metadata dfs.`/drill/testdata/metadata_caching/vc_part`;
