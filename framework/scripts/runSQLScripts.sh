@@ -1,12 +1,18 @@
 #!/bin/bash
 
-set -x
+if [ ! -f ~/.drillTestConfig ]
+then
+	printf "This script uses env variables configured in ~/.drillTestConfig. Please check if the file exists\n"
+fi
+
+source ~/.drillTestConfig
+
+if [ -z $1 ]
+then
+	printf "Usage:\nrunSQLScripts.sh <Path to SQL Script>\n"
+	exit
+fi
 
 optionsFile=$1
 
-if [[ $optionsFile == "NULL" ]]
-then
-  echo "No sql file to execute";
-else
-  $DRILL_HOME/bin/sqlline -u "jdbc:drill:drillbit=${DRILL_STORAGE_PLUGIN_SERVER}" -f $optionsFile
-fi
+$DRILL_HOME/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:drillbit=${DRILL_STORAGE_PLUGIN_SERVER}" -f $optionsFile
