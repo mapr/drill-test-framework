@@ -118,3 +118,56 @@ ALTER TABLE lineitem_parquet_partitioned_hive_hier_intstring ADD PARTITION (year
 ALTER TABLE lineitem_parquet_partitioned_hive_hier_intstring ADD PARTITION (year=1997, month='oct') location '/drill/testdata/partition_pruning/hive/parquet/lineitem_hierarchical_intstring/1997/oct';
 ALTER TABLE lineitem_parquet_partitioned_hive_hier_intstring ADD PARTITION (year=1997, month='nov') location '/drill/testdata/partition_pruning/hive/parquet/lineitem_hierarchical_intstring/1997/nov';
 ALTER TABLE lineitem_parquet_partitioned_hive_hier_intstring ADD PARTITION (year=1997, month='dec') location '/drill/testdata/partition_pruning/hive/parquet/lineitem_hierarchical_intstring/1997/dec';
+
+SET hive.exec.dynamic.partition.mode=true;
+--set mapreduce.map.memory.mb=8096;
+--set mapreduce.map.java.opts = "-Xmx8000m";
+CREATE DATABASE IF NOT EXISTS dynamic_partitions;
+USE dynamic_partitions;
+
+DROP TABLE IF EXISTS lineitem_parquet_partitioned_hive_hier_intstring;
+CREATE EXTERNAL TABLE IF NOT EXISTS lineitem_parquet_partitioned_hive_hier_intstring (
+    l_orderkey INT,
+    l_partkey INT,
+    l_suppkey INT,
+    l_linenumber INT,
+    l_quantity DOUBLE,
+    l_extendedprice DOUBLE,
+    l_discount DOUBLE,
+    l_tax DOUBLE,
+    l_returnflag STRING,
+    l_linestatus STRING,
+    l_shipdate STRING,
+    l_commitdate STRING,
+    l_receiptdate STRING,
+    l_shipinstruct STRING,
+    l_shipmode STRING,
+    l_comment STRING
+)
+PARTITIONED BY (year int, month string)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
+STORED AS PARQUET LOCATION "/drill/testdata/partition_pruning/hive/parquet/dynamic_lineitem_hierarchical_intstring";
+
+INSERT OVERWRITE TABLE lineitem_parquet_partitioned_hive_hier_intstring partition (year, month)
+SELECT 
+    l_orderkey,
+    l_partkey,
+    l_suppkey,
+    l_linenumber,
+    l_quantity,
+    l_extendedprice,
+    l_discount,
+    l_tax,
+    l_returnflag,
+    l_linestatus,
+    l_shipdate,
+    l_commitdate,
+    l_receiptdate,
+    l_shipinstruct,
+    l_shipmode,
+    l_comment,
+    year,
+    month
+FROM DEFAULT.lineitem_parquet_partitioned_hive_hier_intstring;
+
+SET hive.exec.dynamic.partition.mode=strict;

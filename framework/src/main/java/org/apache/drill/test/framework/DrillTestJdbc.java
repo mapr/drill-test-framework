@@ -17,9 +17,9 @@
  */
 package org.apache.drill.test.framework;
 
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import org.apache.drill.test.framework.TestCaseModeler.TestMatrix;
-import org.apache.drill.test.framework.TestDriver.Options;
 import org.apache.drill.test.framework.TestVerifier.TestStatus;
 import org.apache.drill.test.framework.TestVerifier.VerificationException;
 import org.apache.log4j.Logger;
@@ -63,6 +63,7 @@ public class DrillTestJdbc implements DrillTest {
   
  
   public void run() {
+    final Stopwatch stopwatch = Stopwatch.createStarted();
     this.thread = Thread.currentThread();
     setTestStatus(TestStatus.RUNNING);
     int mainQueryIndex = 0;
@@ -73,7 +74,7 @@ public class DrillTestJdbc implements DrillTest {
       throw new RuntimeException(e);
     }
     try {
-      LOG.info("running test " + matrix.inputFile + " " + connection.hashCode());
+      LOG.debug("Running test " + matrix.inputFile + " (connection: " + connection.hashCode() + ")");
 
       executeSetupQuery(String.format("use `%s`", matrix.schema));
 
@@ -117,7 +118,7 @@ public class DrillTestJdbc implements DrillTest {
       if (testStatus == TestStatus.PASS && !TestDriver.OPTIONS.outputQueryResult) {
     	Utils.deleteFile(outputFilename);
       }
-      LOG.info("Completed test " + matrix.inputFile + ". Status " + testStatus);
+      LOG.info(testStatus + " (" + stopwatch + ") " + matrix.inputFile + " (connection: " + connection.hashCode() + ")");
     }
   }
 
@@ -132,7 +133,7 @@ public class DrillTestJdbc implements DrillTest {
   private void executeSetupQuery(String query) throws SQLException {
     try {
       if (query.contains("alter")) {
-        LOG.info(query + " " + connection.hashCode());
+        LOG.debug(query + " " + connection.hashCode());
       }
       Statement statement = connection.createStatement();
       resultSet = statement.executeQuery(query);
