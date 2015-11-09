@@ -3,6 +3,7 @@
 if [ ! -f ~/.drillTestConfig ]
 then
 	printf "This script uses env variables configured in ~/.drillTestConfig. Please check if the file exists\n"
+	exit
 fi
 
 source ~/.drillTestConfig
