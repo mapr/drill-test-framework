@@ -1,7 +1,16 @@
+#!/bin/sh
 
 set -x
 
 #export MAVEN_OPTS=$MAVEN_OPTS" -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5006"
+
+if [ ! -f ~/.drillTestConfig ]
+then
+        printf "This script uses env variables configured in ~/.drillTestConfig. Please check if the file exists\n"
+	exit
+fi
+
+source ~/.drillTestConfig
 
 ./scripts/runSQLScripts.sh scripts/sqlScripts/version
 
