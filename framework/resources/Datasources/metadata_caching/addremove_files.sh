@@ -23,7 +23,7 @@ fi
 if [ $removeDirExists -eq 0 ]; then
   hadoop fs -rm -r /drill/testdata/metadata_caching/lineitem_removedir
 fi
-if [ addAutoPartitionExists= -eq 0 ]; then
+if [ addAutoPartitionExists -eq 0 ]; then
   hadoop fs -rm -r /drill/testdata/metadata_caching/lineitem_addautopartitioned_files
 fi
 if [ $removeAutoPartitionExists -eq 0 ]; then
