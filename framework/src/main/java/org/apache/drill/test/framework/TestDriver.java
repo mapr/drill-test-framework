@@ -145,6 +145,9 @@ public class TestDriver {
     @Parameter(names = {"-h", "--help"}, description = "show usage", help=true)
     public boolean help = false;
 
+    @Parameter(names = {"-e"}, description = "Exit on Failure", required=false)
+    public boolean exitOnFailure = false;
+
     @Parameter(names = {"-x", "--exclude"}, description = "Dependencies to exclude", required=false)
     public String excludeDependencies = null;
 
@@ -402,7 +405,7 @@ public class TestDriver {
   private static void runGenerateScript(DataSource datasource) {
     int exitCode = 0;
     String command = CWD + "/resources/" + datasource.src;
-    LOG.debug("Running command " + command);
+    LOG.info("Running command " + command);
     StringBuilder sb = new StringBuilder();
     try {
 

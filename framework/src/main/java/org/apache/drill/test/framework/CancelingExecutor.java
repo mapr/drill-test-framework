@@ -36,7 +36,6 @@ public class CancelingExecutor implements AutoCloseable {
   private CountDownLatch latch;
   private Exception exception;
   private Thread mainThread;
-
   public CancelingExecutor(int numberConcurrentTasks, int timeout) {
     executor = Executors.newFixedThreadPool(numberConcurrentTasks);
     this.timeout = timeout;
@@ -70,6 +69,12 @@ public class CancelingExecutor implements AutoCloseable {
           public void run() {
             try {
               future.get(timeout, TimeUnit.SECONDS);
+              if (task instanceof DrillTestJdbc) {
+                if (TestDriver.OPTIONS.exitOnFailure && ((DrillTestJdbc) task).getTestStatus() == TestVerifier.TestStatus.EXECUTION_FAILURE) {
+                  executor.shutdown();
+                  executor.shutdownNow();
+                }
+              }
             } catch (TimeoutException e) {
               task.cancel();
             } catch (ExecutionException | InterruptedException e) {
