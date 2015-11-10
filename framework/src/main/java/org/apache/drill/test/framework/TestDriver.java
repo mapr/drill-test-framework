@@ -20,6 +20,7 @@ package org.apache.drill.test.framework;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import org.apache.drill.test.framework.TestCaseModeler.DataSource;
 import org.apache.drill.test.framework.TestVerifier.TestStatus;
@@ -93,13 +94,24 @@ public class TestDriver {
       System.exit(0);
     }
 
-    TestDriver driver = new TestDriver();
+    final Stopwatch stopwatch = Stopwatch.createStarted();
+    final TestDriver driver = new TestDriver();
+    int errorCode;
     try {
-      driver.runTests();
+      LOG.info(LINE_BREAK); LOG.info(LINE_BREAK);
+      LOG.info("STARTING AT " + new Date());
+      LOG.info(LINE_BREAK);
+      errorCode = driver.runTests();
     } catch (Exception e) {
       LOG.error("Exiting due to uncaught exception", e);
-      System.exit(-1);
+      errorCode = -1;
+    } finally {
+      LOG.info(LINE_BREAK);
+      LOG.info("FINISHED AT " + new Date());
+      LOG.info("TOTAL DURATION: " + stopwatch);
+      LOG.info(LINE_BREAK); LOG.info(LINE_BREAK);
     }
+    System.exit(errorCode);
   }
 
   static class Options {
@@ -144,7 +156,9 @@ public class TestDriver {
     }
   }
 
-  public void runTests() throws Exception {
+  public int runTests() throws Exception {
+    final Stopwatch stopwatch = Stopwatch.createStarted();
+    LOG.info("> SETTING UP..");
     setup();
 
     List<TestCaseModeler> testCases = JsonTestDataProvider.getData();
@@ -159,20 +173,26 @@ public class TestDriver {
 
     int totalExecutionFailure = 0;
     int totalVerificationFailure = 0;
-    int totalTimeoutFailure = 0; 
-    
+    int totalTimeoutFailure = 0;
+    LOG.info("> TOOK " + stopwatch + " TO SETUP.");
+
     if (OPTIONS.trackMemory) {
   	  queryMemoryUsage(connectionPool);
     }
 
     for (int i = 1; i < OPTIONS.iterations+1; i++) {
+      stopwatch.reset().start();
+      LOG.info("> PREPARING DATA..");
       if (OPTIONS.generate) {
         prepareData(testCases);
       }
-      
+      LOG.info("> TOOK " + stopwatch + " TO PREPARE DATA.");
+      stopwatch.reset().start();
+
+      LOG.info("> RUNNING TESTS (ITERATION " + i + ")..");
       Collections.shuffle(tests, new Random(12345));
       executor.executeAll(tests);
-      
+
       if (OPTIONS.trackMemory) {
     	  queryMemoryUsage(connectionPool);
       }
@@ -207,7 +227,7 @@ public class TestDriver {
         }
       }
       LOG.info(LINE_BREAK);LOG.info(LINE_BREAK);
-      LOG.info("Tests completed for iteration: " + i);
+      LOG.info("Tests completed for iteration " + i + " in " + stopwatch);
       LOG.info(LINE_BREAK);
       LOG.info(LINE_BREAK);
       LOG.info("Results:");
@@ -264,7 +284,7 @@ public class TestDriver {
     executor.close();
     connectionPool.close();
 
-    System.exit(totalExecutionFailure + totalVerificationFailure + totalTimeoutFailure);
+    return totalExecutionFailure + totalVerificationFailure + totalTimeoutFailure;
   }
 
   public void setup() throws IOException, InterruptedException {
@@ -351,10 +371,16 @@ public class TestDriver {
       }
     }
 
+    final Stopwatch stopwatch = Stopwatch.createStarted();
+    LOG.info(">> COPYING DATA..");
     copyExecutor.executeAll(copyTasks);
     copyExecutor.close();
+    LOG.info(">> TOOK " + stopwatch + " TO COPY DATA.");
+    stopwatch.reset().start();
+    LOG.info(">> GENERATING DATA..");
     genExecutor.executeAll(genTasks);
-    genExecutor.close();;
+    genExecutor.close();
+    LOG.info(">> TOOK " + stopwatch + " TO GENERATE DATA.");
     if (restartDrillbits) {
       LOG.info("Restarting drillbits");
       int exitCode = 0;
@@ -376,7 +402,7 @@ public class TestDriver {
   private static void runGenerateScript(DataSource datasource) {
     int exitCode = 0;
     String command = CWD + "/resources/" + datasource.src;
-    LOG.info("Running command " + command);
+    LOG.debug("Running command " + command);
     StringBuilder sb = new StringBuilder();
     try {
 
@@ -390,7 +416,7 @@ public class TestDriver {
         sb.append(line + "\n");
       }
       exitCode = p.waitFor();
-      LOG.info(sb.toString());
+      LOG.debug(sb.toString());
     } catch (Exception e) {
       LOG.error("Error: Failed to execute the command " + command + ".");
       throw new RuntimeException(e);
@@ -403,7 +429,7 @@ public class TestDriver {
 
   private static void hdfsCopy(Path src, Path dest, boolean overWrite, String fsMode)
       throws IOException {
-    LOG.info("Copy "  + src + " to " + dest);
+    LOG.debug("Copy " + src + " to " + dest);
     FileSystem fs;
     if (fsMode.equals(LOCALFS)) {
       fs = FileSystem.getLocal(conf);
