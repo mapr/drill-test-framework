@@ -470,6 +470,11 @@
       "writable": true,
       "defaultInputFormat": "parquet"
     },
+    "drillTestDirImpersonation": {
+      "location": "/drill/testdata/impersonation",
+      "writable": true,
+      "defaultInputFormat": "json"
+    },
     "metadata_caching": {
       "location": "/drill/testdata/metadata_caching",
       "writable": true,
