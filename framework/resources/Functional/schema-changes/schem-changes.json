@@ -1,0 +1,26 @@
+{
+    "testId": "p1tests-regression",
+    "type": "group",
+    "description": "Test p1tests function queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirP1",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+      {
+         "mode": "cp",
+         "src": "Datasources/schema-changes",
+         "dest": "schema-changes"
+      } 
+    ]
+}
