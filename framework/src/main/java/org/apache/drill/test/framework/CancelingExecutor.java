@@ -70,7 +70,7 @@ public class CancelingExecutor implements AutoCloseable {
             try {
               future.get(timeout, TimeUnit.SECONDS);
               if (task instanceof DrillTestJdbc) {
-                if (((DrillTestJdbc) task).getTestStatus() == TestVerifier.TestStatus.EXECUTION_FAILURE) {
+                if (TestDriver.OPTIONS.exitOnFailure && ((DrillTestJdbc) task).getTestStatus() == TestVerifier.TestStatus.EXECUTION_FAILURE) {
                   executor.shutdown();
                   executor.shutdownNow();
                 }
