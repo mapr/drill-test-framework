@@ -490,6 +490,16 @@
       "writable": true,
       "defaultInputFormat": "json"
     },
+    "drillTestDirImpersonationThreecsvtables": {
+      "location": "/drill/testdata/impersonation/threecsvtables",
+      "writable": true,
+      "defaultInputFormat": "csv"
+    },
+    "drillTestDirImpersonationThreeparquettables": {
+      "location": "/drill/testdata/impersonation/threeparquettables",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
     "metadata_caching": {
       "location": "/drill/testdata/metadata_caching",
       "writable": true,
