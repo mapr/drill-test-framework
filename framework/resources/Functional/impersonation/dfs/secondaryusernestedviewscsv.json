@@ -1,7 +1,7 @@
 {
-    "testId": "impersonation-secondaryuserctas",
+    "testId": "impersonation-secondaryusernestedviewscsv",
     "type": "impersonation",
-    "description": "secondary group user create table on dfs json",
+    "description": "secondary group user create nested views on dfs csv",
     "submit-type": "jdbc",
     "negative": false,
     "categories": [
@@ -9,14 +9,14 @@
     ],
     "matrices": [
         {
-            "query-file": "secondaryuserctas.q",
+            "query-file": "secondaryusernestedviewscsv.q",
             "schema": "not used",
             "output-format": "tsv",
-            "expected-file": "secondaryuserctas.e",
+            "expected-file": "secondaryusernestedviewscsv.e",
             "username": "user1",
             "password": "mapr",
             "verification-type": [
-                "regex"
+                "in-memory"
             ]
         }
     ],
@@ -25,11 +25,6 @@
           "mode": "cp",
           "src": "Datasources/impersonation/dfs/data",
           "dest": "impersonation/data"
-    	},
-	{
-	  "mode": "gen",
-	  "src": "Datasources/impersonation/dfs/chmod777impersonation.sh",
-	  "dest": ""
-	}
+    	}
     ]
 }

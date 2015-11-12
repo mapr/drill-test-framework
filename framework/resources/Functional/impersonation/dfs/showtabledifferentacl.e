@@ -1,0 +1,4 @@
+dfs.drillTestDirImpersonationThreecsvtables	user1datav1
+dfs.drillTestDirImpersonationThreecsvtables	user1datav2
+dfs.drillTestDirImpersonationThreecsvtables	user1datav3
+dfs.drillTestDirImpersonationThreecsvtables	user1datav4
