@@ -1,0 +1,26 @@
+{
+    "testId": "parquetInNestedDir",
+    "type": "group",
+    "description": "Query parquet data that is stored in nested direcotries",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+                "mode": "cp",
+                "src": "Datasources/parquet/nested_dir/data/parquet/0_0_0.parquet",
+                "dest": "parquet/nested_dir/data/parquet/0_0_0.parquet"
+        }
+    ]
+}
