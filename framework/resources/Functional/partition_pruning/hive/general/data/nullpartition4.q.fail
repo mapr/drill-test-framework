@@ -1,0 +1,1 @@
+explain plan for select * from hive.empty_lengthy_p2 where varchar_col='jkdshgf jhg sdgj dlsg jsdgjg    jkdhgiergergd fgjgioug8945u irjfoiej0930j pofkqpgogogj dogj09g djvkldsjgjgirewoie dkflvsd vkdvskgjiwegjwe;sdkvjsdgfdgksdjgkdjkdjgksjg sdkjgdsjg skdjggj;sdgjd sk;gjsd';
