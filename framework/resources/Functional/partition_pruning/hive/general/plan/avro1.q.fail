@@ -1,0 +1,1 @@
+explain plan for select * from hive.episodes_partitioned where doctor_pt > 4;
