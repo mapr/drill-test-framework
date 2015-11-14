@@ -13,7 +13,7 @@
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
             "verification-type": [
-                "regex"
+                "in-memory"
             ]
         }
     ],
@@ -46,6 +46,11 @@
         {
            "mode": "gen",
            "src": "bin/execHive.sh resources/Datasources/hive_storage/rcFileFormat.q",
+           "dest": ""
+        },
+        {
+           "mode": "gen",
+           "src": "bin/execHive.sh resources/Datasources/partition_pruning/hive/empty_lengthy.ddl",
            "dest": ""
         }
     ]
