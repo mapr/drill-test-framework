@@ -5,7 +5,11 @@
     "submit-type": "jdbc",
     "negative": false,
     "categories": [
+<<<<<<< .merge_file_0zuQAp
         "impersonation"
+=======
+        "smoke"
+>>>>>>> .merge_file_UBGyG9
     ],
     "matrices": [
         {
