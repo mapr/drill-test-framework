@@ -5,7 +5,7 @@
     "submit-type": "jdbc",
     "negative": false,
     "categories": [
-        "smoke"
+        "impersonation"
     ],
     "matrices": [
         {
