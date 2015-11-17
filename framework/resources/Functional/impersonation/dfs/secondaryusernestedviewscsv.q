@@ -1,0 +1,15 @@
+use dfs.drillTestDirImpersonation;
+alter session set `store.format` = 'csv';
+create table secondarydata(c1, c2, c3, c4) as select c_row, c_int, c_float4, c_date from data;
+create or replace view secondaryv4(c1, c2, c3, c4) as select columns[0], columns[1], columns[2], columns[3] from secondarydata;
+create or replace view secondaryv3(c1, c2, c3) as select c1, c2, c3 from secondaryv4;
+create or replace view secondaryv2(c1, c2) as select c1, c2 from secondaryv3;
+create or replace view secondaryv1(c1) as select c1 from secondaryv2;
+select * from secondaryv1 order by c1;
+drop view secondaryv1;
+drop view secondaryv2;
+drop view secondaryv3;
+drop view secondaryv4;
+drop table secondarydata;
+alter session set `store.format` = 'parquet';
+use dfs.drillTestDirImpersonation;

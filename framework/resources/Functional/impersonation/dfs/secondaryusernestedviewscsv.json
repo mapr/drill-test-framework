@@ -1,0 +1,30 @@
+{
+    "testId": "impersonation-secondaryusernestedviewscsv",
+    "type": "impersonation",
+    "description": "secondary group user create nested views on dfs csv",
+    "submit-type": "jdbc",
+    "negative": false,
+    "categories": [
+        "impersonation"
+    ],
+    "matrices": [
+        {
+            "query-file": "secondaryusernestedviewscsv.q",
+            "schema": "not used",
+            "output-format": "tsv",
+            "expected-file": "secondaryusernestedviewscsv.e",
+            "username": "user1",
+            "password": "mapr",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/data",
+          "dest": "impersonation/data"
+    	}
+    ]
+}

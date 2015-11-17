@@ -1,0 +1,3 @@
+use dfs.drillTestDirImpersonationThreeparquettables;
+show files;
+use dfs.drillTestDirImpersonationThreeparquettables;

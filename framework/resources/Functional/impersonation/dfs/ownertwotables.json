@@ -1,0 +1,35 @@
+{
+    "testId": "impersonation-ownertwotables",
+    "type": "impersonation",
+    "description": "owner through JDBC query two tables of same acl on dfs parquet",
+    "submit-type": "jdbc",
+    "negative": false,
+    "categories": [
+        "impersonation"
+    ],
+    "matrices": [
+        {
+            "query-file": "ownertwotables.q",
+            "schema": "not used",
+            "output-format": "tsv",
+            "expected-file": "ownertwotables.e",
+            "username": "user1",
+            "password": "mapr",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/data",
+          "dest": "impersonation/t1.parquet"
+    	},
+        {
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/data",
+          "dest": "impersonation/t2.parquet"
+        }
+    ]
+}
