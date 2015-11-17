@@ -1,0 +1,15 @@
+use dfs.drillTestDirImpersonation;
+alter session set `store.format` = 'csv';
+create table rootdata(c1, c2, c3, c4) as select c_row, c_int, c_float4, c_date from data;
+create or replace view v4(c1, c2, c3, c4) as select columns[0], columns[1], columns[2], columns[3] from rootdata;
+create or replace view v3(c1, c2, c3) as select c1, c2, c3 from v4;
+create or replace view v2(c1, c2) as select c1, c2 from v3;
+create or replace view v1(c1) as select c1 from v2;
+select * from v1 order by c1;
+drop view v1;
+drop view v2;
+drop view v3;
+drop view v4;
+drop table rootdata;
+alter session set `store.format` = 'parquet';
+use dfs.drillTestDirImpersonation;

@@ -1,0 +1,35 @@
+{
+    "testId": "impersonation-secondaryuserctasparquet",
+    "type": "impersonation",
+    "description": "read only user create table on dfs parquet",
+    "submit-type": "jdbc",
+    "negative": false,
+    "categories": [
+        "impersonation"
+    ],
+    "matrices": [
+        {
+            "query-file": "secondaryuserctasparquet.q",
+            "schema": "not used",
+            "output-format": "tsv",
+            "expected-file": "secondaryuserctasparquet.e",
+            "username": "user1",
+            "password": "mapr",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/data",
+          "dest": "impersonation/data"
+    	},
+	{
+	  "mode": "gen",
+	  "src": "Datasources/impersonation/dfs/chmod777impersonation.sh",
+	  "dest": ""
+	}
+    ]
+}

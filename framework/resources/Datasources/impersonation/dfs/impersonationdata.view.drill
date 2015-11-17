@@ -1,0 +1,10 @@
+{
+  "name" : "impersonationdata",
+  "sql" : "SELECT *\nFROM `data`",
+  "fields" : [ {
+    "name" : "*",
+    "type" : "ANY",
+    "isNullable" : true
+  } ],
+  "workspaceSchemaPath" : [ "dfs", "drillTestDirImpersonation" ]
+}

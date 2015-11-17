@@ -1,0 +1,30 @@
+{
+    "testId": "impersonation-superusernestedviews",
+    "type": "impersonation",
+    "description": "super user use create nested views on dfs csv",
+    "submit-type": "jdbc",
+    "negative": false,
+    "categories": [
+        "impersonation"
+    ],
+    "matrices": [
+        {
+            "query-file": "superusernestedviews.q",
+            "schema": "not used",
+            "output-format": "tsv",
+            "expected-file": "superusernestedviews.e",
+            "username": "root",
+            "password": "mapr",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/data",
+          "dest": "impersonation/data"
+    	}
+    ]
+}
