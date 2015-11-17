@@ -38,6 +38,16 @@
         "src": "Datasources/hive_storage/doctors.avro",
         "dest": "hive_storage/doctors/doctors.avro"
     },
+    { 
+        "mode": "cp", 
+        "src": "Datasources/hive_storage/null_schemachange.tbl", 
+        "dest": "hive_storage/null_schemachange" 
+    },
+    {  
+        "mode": "cp",  
+        "src": "Datasources/hive_storage/onlynulls.tbl",  
+        "dest": "hive_storage/onlynulls.tbl"  
+    },
     {
         "mode": "cp",
         "src": "Datasources/information-schema/students.txt",
@@ -102,6 +112,11 @@
        "mode": "gen",
        "src": "bin/execHive.sh resources/Datasources/hive_storage/hive_hbase.q",
        "dest": ""
+    },
+    { 
+       "mode": "gen", 
+       "src": "bin/execHive.sh resources/Datasources/hive_storage/null_schemachange.ddl", 
+       "dest": "" 
     }
    ]
 }
