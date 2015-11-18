@@ -1,0 +1,30 @@
+{
+    "testId": "impersonation-unknownusercreatecsvtable",
+    "type": "impersonation",
+    "description": "unknown user create table csv",
+    "submit-type": "jdbc",
+    "negative": true,
+    "categories": [
+        "impersonation"
+    ],
+    "matrices": [
+        {
+            "query-file": "unknownusercreatecsvtable.q",
+            "schema": "not used",
+            "output-format": "tsv",
+            "expected-file": "unknownusercreatecsvtable.e",
+            "username": "unknown",
+            "password": "unknown",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/data",
+          "dest": "impersonation/data"
+    	}
+    ]
+}

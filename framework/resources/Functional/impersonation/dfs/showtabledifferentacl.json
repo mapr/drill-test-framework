@@ -1,0 +1,50 @@
+{
+    "testId": "impersonation-showtabledifferentacl",
+    "type": "impersonation",
+    "description": "show tables of different acl",
+    "submit-type": "jdbc",
+    "negative": false,
+    "categories": [
+        "impersonation"
+    ],
+    "matrices": [
+        {
+            "query-file": "showtabledifferentacl.q",
+            "schema": "not used",
+            "output-format": "tsv",
+            "expected-file": "showtabledifferentacl.e",
+            "username": "user1",
+            "password": "mapr",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/user1datav1.view.drill",
+          "dest": "impersonation/threecsvtables/user1datav1.view.drill"
+    	},
+	{
+	  "mode": "cp",
+	  "src": "Datasources/impersonation/dfs/user1datav2.view.drill",
+	  "dest": "impersonation/threecsvtables/user1datav2.view.drill"
+	},
+        {
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/user1datav3.view.drill",
+          "dest": "impersonation/threecsvtables/user1datav3.view.drill"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/user1datav4.view.drill",
+          "dest": "impersonation/threecsvtables/user1datav4.view.drill"
+        },
+        {
+          "mode": "gen",
+          "src": "Datasources/impersonation/dfs/showtabledifferentacl.sh",
+          "dest": ""
+        }
+    ]
+}

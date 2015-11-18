@@ -76,7 +76,9 @@ public class DrillTestJdbc implements DrillTest {
     try {
       LOG.debug("Running test " + matrix.inputFile + " (connection: " + connection.hashCode() + ")");
 
-      executeSetupQuery(String.format("use `%s`", matrix.schema));
+      if (!modeler.type.equalsIgnoreCase("impersonation")) {
+        executeSetupQuery(String.format("use `%s`", matrix.schema));
+      }
 
       queries = Utils.getSqlStatements(matrix.inputFile);
       mainQueryIndex = queries.length / 2; // Currently, the main query must be in the middle of the list of queries
