@@ -30,9 +30,10 @@ import java.util.Queue;
 
 public class ConnectionPool implements AutoCloseable {
   private static final Logger LOG = Logger.getLogger(ConnectionPool.class);
-
-  private static final String URL_STRING = String.format("jdbc:drill:drillbit=%s",
-    Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER"));
+  private static final String URL_STRING = String.format("jdbc:drill:zk=%s",
+    Utils.getDrillTestProperties().get("ZOOKEEPERS"));
+  //private static final String URL_STRING = String.format("jdbc:drill:drillbit=%s",
+   // Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER"));
 
   private final Map<String, Queue<Connection>> connections;
 
