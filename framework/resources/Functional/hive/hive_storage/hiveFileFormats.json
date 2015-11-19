@@ -30,6 +30,16 @@
     },
     {
         "mode": "cp",
+        "src": "Datasources/hive_storage/fewtypes_null.tbl.gz",
+        "dest": "hive_storage/fewtypes_null.tbl.gz"
+    },
+    {
+        "mode": "cp",
+        "src": "Datasources/hive_storage/fewtypes_null.tbl.bz2",
+        "dest": "hive_storage/fewtypes_null.tbl.bz2"
+    },
+    {
+        "mode": "cp",
         "src": "Datasources/hive_storage/episodes.avro",
         "dest": "hive_storage/episodes/episodes.avro"
     },
@@ -41,7 +51,7 @@
     { 
         "mode": "cp", 
         "src": "Datasources/hive_storage/null_schemachange.tbl", 
-        "dest": "hive_storage/null_schemachange" 
+        "dest": "hive_storage/null_schemachange.tbl" 
     },
     {  
         "mode": "cp",  
@@ -91,6 +101,11 @@
     {
        "mode": "gen",
        "src": "Datasources/hive_storage/execHive.sh resources/Datasources/hive_storage/sequenceFileFormat.q",
+       "dest": ""
+    },
+    {
+       "mode": "gen",
+       "src": "bin/execHive.sh resources/Datasources/hive_storage/fewtypes_null_compressed.ddl",
        "dest": ""
     },
     {
