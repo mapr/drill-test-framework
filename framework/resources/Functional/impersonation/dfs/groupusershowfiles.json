@@ -16,7 +16,7 @@
             "username": "user1",
             "password": "mapr",
             "verification-type": [
-                "in-memory"
+                "regex"
             ]
         }
     ],
