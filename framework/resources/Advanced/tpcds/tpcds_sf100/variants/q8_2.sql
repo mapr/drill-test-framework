@@ -4,7 +4,7 @@
 select 
    t.wr_returning_customer_sk,
    t.wr_returned_date_sk,
-   cast(sum(t.wr_return_amt)/sum(t.wr_return_quantity) as decimal(25,20)) as avg_return_amt
+   cast(sum(t.wr_return_amt)/sum(t.wr_return_quantity) as bigint) as avg_return_amt
  from web_returns t
  where (
      t.wr_item_sk in (select ws_item_sk from web_sales where ws_sales_price < 50 or ws_ext_sales_price < 1000) 

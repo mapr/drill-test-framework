@@ -1,0 +1,45 @@
+{
+    "testId": "impersonation-secondaryuserview",
+    "type": "impersonation",
+    "description": "secondary group user create view on dfs parquet and query the view",
+    "submit-type": "jdbc",
+    "negative": false,
+    "categories": [
+        "impersonation"
+    ],
+    "matrices": [
+        {
+            "query-file": "secondaryuserview.q",
+            "schema": "not used",
+            "output-format": "tsv",
+            "expected-file": "secondaryuserview.e",
+            "username": "user1",
+            "password": "mapr",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/data",
+          "dest": "impersonation/data.parquet"
+    	},
+        {
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/impersonationdata.view.drill",
+          "dest": "impersonation/impersonationdata.view.drill"
+        },
+	{
+	  "mode": "gen",
+	  "src": "Datasources/impersonation/dfs/chmod777impersonation.sh",
+	  "dest": ""
+	},
+        {
+          "mode": "gen",
+          "src": "Datasources/impersonation/dfs/chgrpimpersonation.sh",
+          "dest": ""
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+  "name" : "user1datav4",
+  "sql" : "SELECT `c_row`, `c_int`, `c_float4`, `c_date`\nFROM `data`",
+  "fields" : [ {
+    "name" : "c1",
+    "type" : "ANY",
+    "isNullable" : true
+  }, {
+    "name" : "c2",
+    "type" : "ANY",
+    "isNullable" : true
+  }, {
+    "name" : "c3",
+    "type" : "ANY",
+    "isNullable" : true
+  }, {
+    "name" : "c4",
+    "type" : "ANY",
+    "isNullable" : true
+  } ],
+  "workspaceSchemaPath" : [ "dfs", "drillTestDirImpersonationThreecsvtables" ]
+}
