@@ -81,9 +81,17 @@ public class TestDriver {
       jc.setProgramName("TestDriver");
     } catch (ParameterException e) {
       System.out.println(e.getMessage());
-      String[] valid = {"-s", "sources", "-g", "groups", "-t", "timeout", "-n", "number of threads",
-    		  "-i", "number of iterations", "-d", "generate data", "-m", "track memory usage",
-    		  "-c", "percent of tests canceled", "-w", "enable write actual query result to file",
+      String[] valid = {
+    		  "-s", "Tests to run. A comma-separated list of testcase definition files and directories",
+    		  "-g", "Test categories. A comma-separated list such as 'smoke,regression'", 
+    		  "-t", "timeout in seconds for each test", 
+    		  "-n", "number of concurrent threads running tests",
+    		  "-i", "number of iterations of running the test", 
+    		  "-f", "filename containing a list of queries to be executed before test run",
+    		  "-d", "generate data", 
+    		  "-m", "track memory usage",
+    		  "-c", "percent of tests attempted to be canceled", 
+    		  "-w", "enable write actual query result to file",
     		  "-h", "--help", "show usage"};
       new JCommander(OPTIONS, valid).usage();
 
@@ -130,6 +138,9 @@ public class TestDriver {
     @Parameter(names = {"-i"}, description = "number of iterations", required=false)
     public int iterations = 1;
     
+    @Parameter(names = {"-f"}, description = "filename", required=false)
+    public String beforeTestQueryFilename = "before-test.sql";
+    
     @Parameter(names = {"-d"}, description = "generate data", required=false)
     public boolean generate = false;
     
@@ -157,15 +168,14 @@ public class TestDriver {
   }
 
   public int runTests() throws Exception {
+	CancelingExecutor executor = new CancelingExecutor(OPTIONS.threads, OPTIONS.timeout);
+	ConnectionPool connectionPool = new ConnectionPool();
+
     final Stopwatch stopwatch = Stopwatch.createStarted();
     LOG.info("> SETTING UP..");
-    setup();
+    setup(connectionPool);
 
     List<TestCaseModeler> testCases = JsonTestDataProvider.getData();
-
-    CancelingExecutor executor = new CancelingExecutor(OPTIONS.threads, OPTIONS.timeout);
-    ConnectionPool connectionPool = new ConnectionPool();
-
     List<Cancelable> tests = Lists.newArrayList();
     for (TestCaseModeler testCase : testCases) {
       tests.add(getDrillTest(testCase, connectionPool));
@@ -287,13 +297,12 @@ public class TestDriver {
     return totalExecutionFailure + totalVerificationFailure + totalTimeoutFailure;
   }
 
-  public void setup() throws IOException, InterruptedException {
+  public void setup(ConnectionPool connectionPool) throws IOException, InterruptedException {
     if (!new File(drillOutputDirName).exists()) {
       new File(drillOutputDirName).mkdir();
     }
 
-    String templatePath = CWD
-        + "/src/main/resources/plugin-templates/";
+    String templatePath = CWD + "/src/main/resources/plugin-templates/";
     File[] templateFiles = new File(templatePath).listFiles();
     for (File templateFile : templateFiles) {
       String filename = templateFile.getName();
@@ -301,6 +310,25 @@ public class TestDriver {
       Utils.updateDrillStoragePlugin(templateFile.getAbsolutePath(),
           ipAddressPlugin, pluginType, fsMode);
       Thread.sleep(200);
+    }
+    
+    String[] setupQueries = Utils.getSqlStatements(CWD + OPTIONS.beforeTestQueryFilename);
+	if (connection == null) {
+	  try {
+		connection = connectionPool.getOrCreateConnection(drillProperties.get("USERNAME"), 
+				drillProperties.get("PASSWORD"));
+	  } catch (Exception e) {
+		e.printStackTrace();
+	  }
+	}
+    ResultSet resultSet = null;
+    try {
+      Statement statement = connection.createStatement();
+      for (String query : setupQueries) {
+        resultSet = statement.executeQuery(query);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
     Thread.sleep(1000);
 
