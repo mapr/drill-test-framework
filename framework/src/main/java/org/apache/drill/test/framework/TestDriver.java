@@ -312,7 +312,7 @@ public class TestDriver {
       Thread.sleep(200);
     }
     
-    String[] setupQueries = Utils.getSqlStatements(CWD + OPTIONS.beforeTestQueryFilename);
+    String[] setupQueries = Utils.getSqlStatements(OPTIONS.beforeTestQueryFilename);
 	if (connection == null) {
 	  try {
 		connection = connectionPool.getOrCreateConnection(drillProperties.get("USERNAME"), 
@@ -326,6 +326,7 @@ public class TestDriver {
       Statement statement = connection.createStatement();
       for (String query : setupQueries) {
         resultSet = statement.executeQuery(query);
+        LOG.info(Utils.getSqlResult(resultSet));
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -426,7 +427,7 @@ public class TestDriver {
       }
     }
   }
-
+  
   private static void runGenerateScript(DataSource datasource) {
     int exitCode = 0;
     String command = CWD + "/resources/" + datasource.src;
