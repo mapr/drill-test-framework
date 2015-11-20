@@ -4,7 +4,6 @@ select
   min(time_col), 
   min(timestamp_col), 
   min(date_sub(date_col, 365)), 
-  min(datediff(date_col, timestamp_col)), 
   min(length(varchar_col)), 
   avg(float_col/double_col), 
   sum(case when bool_col=true then 1 else 0 end), 
