@@ -1,0 +1,8 @@
+/*
+ * The below CTAS statement was used to create the
+ * parquet files used in the tests in the below directory.
+ * Functional/parquet_storage/parquet_autoPrtn
+ * Note that data is partitioned by column c1.
+ */
+
+CREATE TABLE inNstedDirAutoPrtn PARTITION BY(c1) AS SELECT cast(columns[0] AS INT) c1, cast(columns[1] AS BIGINT) c2, cast(columns[2] AS CHAR(2)) c3, cast(columns[3] AS VARCHAR(54)) c4, cast(columns[4] AS TIMESTAMP) c5, cast(columns[5] AS DATE) c6, cast(columns[6] as BOOLEAN) c7, cast(columns[7] as DOUBLE) c8, cast(columns[8] as TIME) c9 FROM `nested_dirs/data/csv/allData.csv`;
