@@ -25,6 +25,8 @@ DRILL_TESTDATA=/drill/testdata
 # Zookeeper node IP address with port and path to drill node inside Zookeeper
 ZOOKEEPERS=IPADDR1:5181/drill/drillbits1
 
+CONNECTION_STRING=jdbc:drill:zk\=x.x.x.x:5181/zk_root/cluster_id
+
 # Zookeeper node IP address 
 DRILL_STORAGE_PLUGIN_SERVER=IPADDR1
 
