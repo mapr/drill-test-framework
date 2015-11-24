@@ -1,0 +1,1 @@
+select * from hive.null_schemachange d, hive.onlynulls n where d.date_col = coalesce(n.date_col, date '2038-04-10', n.date_col) and (d.date_col is null or d.date_col > '2015-01-01');
