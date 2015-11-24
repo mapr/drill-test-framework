@@ -139,7 +139,7 @@ public class TestDriver {
     public int iterations = 1;
     
     @Parameter(names = {"-f"}, description = "filename", required=false)
-    public String beforeTestQueryFilename = "before-test.sql";
+    public String beforeRunQueryFilename = "before-run.sql";
     
     @Parameter(names = {"-d"}, description = "generate data", required=false)
     public boolean generate = false;
@@ -312,7 +312,7 @@ public class TestDriver {
       Thread.sleep(200);
     }
     
-    String[] setupQueries = Utils.getSqlStatements(OPTIONS.beforeTestQueryFilename);
+    String[] setupQueries = Utils.getSqlStatements(OPTIONS.beforeRunQueryFilename);
 	if (connection == null) {
 	  try {
 		connection = connectionPool.getOrCreateConnection(drillProperties.get("USERNAME"), 
