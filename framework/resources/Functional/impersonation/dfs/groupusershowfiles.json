@@ -1,0 +1,45 @@
+{
+    "testId": "impersonation-groupusershowfiles",
+    "type": "impersonation",
+    "description": "group user show files in '/specific/directory/path' on dfs parquet",
+    "submit-type": "jdbc",
+    "negative": false,
+    "categories": [
+        "impersonation"
+    ],
+    "matrices": [
+        {
+            "query-file": "groupusershowfiles.q",
+            "schema": "not used",
+            "output-format": "tsv",
+            "expected-file": "groupusershowfiles.e",
+            "username": "user1",
+            "password": "mapr",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/data",
+          "dest": "impersonation/threeparquettables/data1.parquet"
+    	},
+        {
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/data",
+          "dest": "impersonation/threeparquettables/data2.parquet"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/data",
+          "dest": "impersonation/threeparquettables/data3.parquet"
+        },
+        {
+          "mode": "gen",
+          "src": "Datasources/impersonation/dfs/groupusershowfiles.sh",
+          "dest": ""
+        }
+    ]
+}

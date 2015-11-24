@@ -37,6 +37,21 @@
             "mode": "cp",
             "src": "Datasources/datetime/interval.json",
             "dest": "datetime/datasources/interval.json"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/datetime/interval_data.csv",
+            "dest": "datetime/datasources/interval_data.csv"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/datetime/interval_data.parquet",
+            "dest": "datetime/datasources/interval_data.parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/datetime/interval_data.json",
+            "dest": "datetime/datasources/interval_data.json"
         }
     ]
 }

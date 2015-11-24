@@ -1,0 +1,57 @@
+{
+    "testId": "sequenceFilePartitionPruningData",
+    "type": "group",
+    "description": "Test partition directory queries",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+		"mode": "cp",
+		"src": "Datasources/hive_storage/kv1.txt",
+		"dest": "hive_storage/kv1.txt"
+	},
+        {
+                "mode": "cp",
+                "src": "Datasources/hive_storage/orc_create_people.txt",
+                "dest": "hive_storage/orc_create_people.txt"
+        },
+        {
+           "mode": "gen",
+           "src": "bin/execHive.sh resources/Datasources/hive_storage/sequenceFileFormat.q",
+           "dest": ""
+        },
+        {
+           "mode": "gen",
+           "src": "bin/execHive.sh resources/Datasources/hive_storage/sequenceFileFormat.q",
+           "dest": ""
+        },
+        {
+           "mode": "gen",
+           "src": "bin/execHive.sh resources/Datasources/hive_storage/orc_complex.q",
+           "dest": ""
+        },
+        {
+           "mode": "gen",
+           "src": "bin/execHive.sh resources/Datasources/hive_storage/rcFileFormat.q",
+           "dest": ""
+        },
+        {
+           "mode": "gen",
+           "src": "bin/execHive.sh resources/Datasources/partition_pruning/hive/empty_lengthy.ddl",
+           "dest": ""
+        }
+    ]
+}

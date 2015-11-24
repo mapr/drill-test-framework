@@ -1,0 +1,40 @@
+{
+    "testId": "impersonation-unknownuserthreetables",
+    "type": "impersonation",
+    "description": "unknown user query more than two tables of same acl on dfs json",
+    "submit-type": "jdbc",
+    "negative": true,
+    "categories": [
+        "impersonation"
+    ],
+    "matrices": [
+        {
+            "query-file": "unknownuserthreetables.q",
+            "schema": "dfs.drillTestDirImpersonation",
+            "output-format": "tsv",
+            "expected-file": "unknownuserthreetables.e",
+            "username": "unknown",
+            "password": "unknown",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/complexga100k.json",
+          "dest": "impersonation/threetables/complex1.json"
+    	},
+	{
+	  "mode": "cp",
+	  "src": "Datasources/impersonation/dfs/complexga100k.json",
+	  "dest": "impersonation/threetables/complex2.json"
+	},
+        {
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/complexga100k.json",
+          "dest": "impersonation/threetables/complex3.json"
+        }
+    ]
+}

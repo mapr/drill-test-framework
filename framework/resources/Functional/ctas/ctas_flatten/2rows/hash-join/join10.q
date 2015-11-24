@@ -4,4 +4,4 @@ inner join
   (select uid, flatten(transactions) transaction from `data.json`) t2 
 on t3.max_trans_amount = t2.transaction.amount;
 select * from dfs.ctas_flatten.`join10_ctas`;
-select 1 from sys.version;
+drop table dfs.ctas_flatten.`join10_ctas`;
