@@ -1,0 +1,1 @@
+select count(*) from hive.fewtypes_null_compressed_rc_snappy where cast(interval_col as interval day) is null;

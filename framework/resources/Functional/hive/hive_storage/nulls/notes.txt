@@ -1,0 +1,1 @@
+Tested nulls with text serde on integer, string, and date data types. Testing other datatypes in text and other serde's is altogether pending
