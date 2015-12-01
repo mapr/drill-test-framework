@@ -30,7 +30,10 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -180,6 +183,58 @@ public class Utils {
     return statements;
   }
 
+  public static String getSqlResult(ResultSet resultSet) throws SQLException {
+    StringBuffer stringBuffer = new StringBuffer();
+	List columnLabels = new ArrayList<String>();
+
+	try {
+	  int columnCount = resultSet.getMetaData().getColumnCount();
+	  for (int i = 1; i <= columnCount; i++) {
+	    columnLabels.add(resultSet.getMetaData().getColumnLabel(i));
+	  }
+	  List<Integer> types = Lists.newArrayList();
+	  for (int i = 1; i <= columnCount; i++) {
+	    types.add(resultSet.getMetaData().getColumnType(i));
+	  }
+
+	  LOG.debug("Result set data types:");
+	  LOG.debug(Utils.getTypesInStrings(types));
+	  stringBuffer.append(new ColumnList(types, columnLabels).toString() + "\n");
+
+	  while (resultSet.next()) {
+		List<Object> values = Lists.newArrayList();
+	    for (int i = 1; i <= columnCount; i++) {
+	      try {
+	        if (resultSet.getObject(i) == null) {
+	          values.add(null);
+	          continue;
+	        }
+	        if (resultSet.getMetaData().getColumnType(i) == Types.NVARCHAR) {
+	          values.add(new String(resultSet.getBytes(i), "UTF-16"));
+	        } else {
+	          values.add(new String(resultSet.getBytes(i), "UTF-8"));
+	        }
+	      } catch (Exception e) {
+	        if (resultSet.getMetaData().getColumnType(i) == Types.DATE) {
+	          values.add(resultSet.getDate(i));
+	        } else {
+	          values.add(resultSet.getObject(i));
+	        }
+	      }
+	    }
+		stringBuffer.append(new ColumnList(types, values).toString() + "\n");
+	  }
+	} catch (IllegalArgumentException | IllegalAccessException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	} finally {
+      if (resultSet != null) {
+        resultSet.close();
+      }
+    }
+	return stringBuffer.toString();
+  }
+  
   /**
    * Turns a list of types in numerical values into one in strings with semantic
    * content.
