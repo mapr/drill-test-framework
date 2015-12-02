@@ -40,6 +40,22 @@ public class TestCaseModeler {
   public List<DataSource> datasources;
   public List<String> dependencies;
 
+  public TestCaseModeler(TestCaseModeler moduler) {
+	testId = moduler.testId;
+	type = moduler.type;
+	negative = moduler.negative;
+	description = moduler.description;
+	submitType = moduler.submitType;
+	queryType = moduler.queryType;
+	timeout = moduler.timeout;
+	categories = moduler.categories;
+	dependencies = moduler.dependencies;
+	matrices = moduler.matrices;
+	datasources = moduler.datasources;
+  }
+  
+  private TestCaseModeler() {}
+  
   public static TestCaseModeler createTestCase(String testId, String type,
       boolean negative, String description, String submitType,
       String queryType, String timeout, List<String> categories, List<String> dependencies,

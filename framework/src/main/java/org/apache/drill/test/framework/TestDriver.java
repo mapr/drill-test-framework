@@ -175,12 +175,15 @@ public class TestDriver {
     LOG.info("> SETTING UP..");
     setup(connectionPool);
 
-    List<TestCaseModeler> testCases = JsonTestDataProvider.getData();
+//    List<TestCaseModeler> testCases = JsonTestDataProvider.getData();
+    List<DrillTestCase> drillTestCases = Utils.getDrillTestCases();
     List<Cancelable> tests = Lists.newArrayList();
-    for (TestCaseModeler testCase : testCases) {
+    for (DrillTestCase testCase : drillTestCases) {
       tests.add(getDrillTest(testCase, connectionPool));
     }
 
+
+    
     int totalExecutionFailure = 0;
     int totalVerificationFailure = 0;
     int totalTimeoutFailure = 0;
@@ -194,7 +197,7 @@ public class TestDriver {
       stopwatch.reset().start();
       LOG.info("> PREPARING DATA..");
       if (OPTIONS.generate) {
-        prepareData(testCases);
+        prepareData(drillTestCases);
       }
       LOG.info("> TOOK " + stopwatch + " TO PREPARE DATA.");
       stopwatch.reset().start();
@@ -335,23 +338,12 @@ public class TestDriver {
 
   }
 
-  private void prepareData(List<TestCaseModeler> tests) throws Exception {
+  private void prepareData(List<DrillTestCase> tests) throws Exception {
     Set<DataSource> dataSources = new HashSet<>();
     for (TestCaseModeler test : tests) {
-      boolean skipSuite = false;
-      for (String excludeDependency : OPTIONS.excludeDependenciesAsList()) {
-        if (test.dependencies != null) {
-          if (test.dependencies.contains(excludeDependency)) {
-            skipSuite = true;
-          }
-        }
-      }
-
-      if (!skipSuite) {
-        List<DataSource> dataSourceList = test.datasources;
-        if (dataSourceList != null) {
-          dataSources.addAll(test.datasources);
-        }
+      List<DataSource> dataSourceList = test.datasources;
+      if (dataSourceList != null) {
+        dataSources.addAll(test.datasources);
       }
     }
 
@@ -480,7 +472,7 @@ public class TestDriver {
     }
   }
 
-  private static DrillTest getDrillTest(TestCaseModeler modeler, ConnectionPool connectionPool) {
+  private static DrillTest getDrillTest(DrillTestCase modeler, ConnectionPool connectionPool) {
     switch(modeler.queryType) {
     case "sql":
       return new DrillTestJdbc(modeler, connectionPool);
