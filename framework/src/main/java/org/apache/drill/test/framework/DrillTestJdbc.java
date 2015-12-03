@@ -52,6 +52,7 @@ public class DrillTestJdbc implements DrillTest {
   private TestMatrix matrix;
   private Thread thread;
   private List<Integer> types;
+  private List<Integer> nullability;
   private List columnLabels = new ArrayList<String>();
   private Random rand = new Random();
 
@@ -90,12 +91,17 @@ public class DrillTestJdbc implements DrillTest {
       
       query = queries[mainQueryIndex];
       executeQuery(query);
-        
+      
       testVerifier = new TestVerifier(types, query, columnLabels, matrix.verificationTypes);
       if (query.startsWith("explain") || matrix.verificationTypes.get(0).equalsIgnoreCase("regex")) {
         setTestStatus(testVerifier.verifyTextPlan(matrix.expectedFile, outputFilename));
       } else {
         setTestStatus(testVerifier.verifyResultSet(matrix.expectedFile, outputFilename));
+      }
+      
+      if (modeler.type.equalsIgnoreCase("limit 0")) {
+    	  String limitZeroQuery = "select * from (" + query + ") t limit 0";
+    	  executeLimitZeroQuery(limitZeroQuery);
       }
     } catch (VerificationException e) {
       fail(TestStatus.VERIFICATION_FAILURE, e);
@@ -149,7 +155,6 @@ public class DrillTestJdbc implements DrillTest {
   }
 
   private void executeQuery(String query) throws IOException, SQLException {
-
     outputFilename = Utils.generateOutputFileName(matrix.inputFile, modeler.testId, false);
     BufferedWriter writer = new BufferedWriter(new FileWriter(new File(
             outputFilename)));
@@ -191,13 +196,13 @@ public class DrillTestJdbc implements DrillTest {
     }
     
     try {
+      types = Lists.newArrayList();
+      nullability = Lists.newArrayList();
       int columnCount = resultSet.getMetaData().getColumnCount();
       for (int i = 1; i <= columnCount; i++) {
         columnLabels.add(resultSet.getMetaData().getColumnLabel(i));
-      }
-      types = Lists.newArrayList();
-      for (int i = 1; i <= columnCount; i++) {
         types.add(resultSet.getMetaData().getColumnType(i));
+        nullability.add(resultSet.getMetaData().isNullable(i));
       }
 
       LOG.debug("Result set data types:");
@@ -241,6 +246,54 @@ public class DrillTestJdbc implements DrillTest {
     }
   }
 
+  private void executeLimitZeroQuery(String query) throws IOException, SQLException {
+	if (getTestStatus() == TestStatus.CANCELED || getTestStatus() == TestStatus.EXECUTION_FAILURE) {
+		return;
+	}
+	
+	BufferedWriter writer = new BufferedWriter(new FileWriter(new File(outputFilename),true));
+	
+    Statement statement = connection.createStatement();
+    ResultSet resultSet = statement.executeQuery(query);
+    
+    List columnLabels = new ArrayList<String>();
+    List<Integer> types = Lists.newArrayList();
+    List<Integer> nullability = Lists.newArrayList();
+    try {
+      int columnCount = resultSet.getMetaData().getColumnCount();
+      for (int i = 1; i <= columnCount; i++) {
+        columnLabels.add(resultSet.getMetaData().getColumnLabel(i));
+        types.add(resultSet.getMetaData().getColumnType(i));
+        nullability.add(resultSet.getMetaData().isNullable(i));
+      }
+      
+      String msg = "\n" + query + "\n" + columnLabels + "\n"
+    		  + this.columnLabels + "\n"
+    		  + "\n" + Utils.getTypesInStrings(types) + "\n"
+    		  + Utils.getTypesInStrings(this.types) + "\n"
+    		  + "\n" + nullability + "\n"
+    		  + this.nullability + "\n";
+      writer.append(msg);
+      
+      if (!columnLabels.equals(this.columnLabels) || !types.equals(this.types)
+    		  || !nullability.equals(this.nullability)) {
+        LOG.info(msg);
+        setTestStatus(TestStatus.VERIFICATION_FAILURE);
+        exception = exception == null? new VerificationException(msg)
+        	: new VerificationException(exception + "\n" + msg);
+      }
+    } catch (IllegalArgumentException | IllegalAccessException e1) {
+      LOG.warn(e1);
+    } finally {
+      if (resultSet != null) {
+        resultSet.close();
+      }
+      if (writer != null) {
+        writer.close();
+      }
+    }
+  }
+  
   @Override
   public void cancel() {
     thread.interrupt();
@@ -262,7 +315,8 @@ public class DrillTestJdbc implements DrillTest {
   }
   
   public synchronized void setTestStatus(TestStatus status) {
-	if (testStatus == TestStatus.CANCELED) return;
+	if (testStatus == TestStatus.CANCELED || testStatus == TestStatus.VERIFICATION_FAILURE) 
+	  return;
 	testStatus = status;
   }
 	 
