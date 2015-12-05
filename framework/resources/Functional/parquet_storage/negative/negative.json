@@ -1,0 +1,27 @@
+{
+    "testId": "prq_negative",
+    "type": "group",
+    "negative": true,    
+    "description": "Query over EMPTY directory, should return Table not found message",
+    "categories": [
+        "negative"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+           "mode": "gen",
+           "src": "Datasources/parquet/nested_dir/data/crtEmptyDir.sh",
+           "dest": ""
+        }
+    ]
+}

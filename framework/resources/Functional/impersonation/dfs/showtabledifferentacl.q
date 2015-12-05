@@ -1,0 +1,3 @@
+use dfs.drillTestDirImpersonationThreecsvtables;
+show tables;
+use dfs.drillTestDirImpersonationThreecsvtables;

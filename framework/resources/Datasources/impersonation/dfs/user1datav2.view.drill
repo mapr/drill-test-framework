@@ -1,0 +1,14 @@
+{
+  "name" : "user1datav2",
+  "sql" : "SELECT `c1`, `c2`\nFROM `user1datav3`",
+  "fields" : [ {
+    "name" : "c1",
+    "type" : "ANY",
+    "isNullable" : true
+  }, {
+    "name" : "c2",
+    "type" : "ANY",
+    "isNullable" : true
+  } ],
+  "workspaceSchemaPath" : [ "dfs", "drillTestDirImpersonationThreecsvtables" ]
+}

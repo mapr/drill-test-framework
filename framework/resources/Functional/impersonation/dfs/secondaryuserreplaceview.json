@@ -1,0 +1,35 @@
+{
+    "testId": "impersonation-secondaryuserreplaceview",
+    "type": "impersonation",
+    "description": "secondary group user replace view on dfs parquet",
+    "submit-type": "jdbc",
+    "negative": false,
+    "categories": [
+        "impersonation"
+    ],
+    "matrices": [
+        {
+            "query-file": "secondaryuserreplaceview.q",
+            "schema": "not used",
+            "output-format": "tsv",
+            "expected-file": "secondaryuserreplaceview.e",
+            "username": "user1",
+            "password": "mapr",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/data",
+          "dest": "impersonation/data"
+    	},
+	{
+	  "mode": "gen",
+	  "src": "Datasources/impersonation/dfs/chmod777impersonation.sh",
+	  "dest": ""
+	}
+    ]
+}
