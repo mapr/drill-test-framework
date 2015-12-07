@@ -1,0 +1,37 @@
+{
+    "testId": "hiveFileFormats_storage",
+    "type": "group",
+    "description": "Test hive file formats and queries",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "hive",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+    {
+        "mode": "cp",
+        "src": "Datasources/hive_storage/fewtypes_null.tbl",
+        "dest": "hive_storage/fewtypes_null.tbl"
+    },
+    {
+        "mode": "cp",
+        "src": "Datasources/hive_storage/add_remove_columns",
+        "dest": "hive_storage/add_remove_columns"
+    },
+    { 
+       "mode": "gen", 
+       "src": "Datasources/hive_storage/change_metadata.sh", 
+       "dest": "" 
+    }
+   ]
+}
