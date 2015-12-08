@@ -33,6 +33,7 @@ import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -58,11 +59,9 @@ import org.apache.log4j.Logger;
  */
 public class Utils {
   private static final Logger LOG = Logger.getLogger(Utils.class);
-
   private static final String DRILL_TEST_CONFIG = "drillTestConfig";
-
   private static final Map<Integer, String> sqlTypes;
-
+  private static final Map<Integer, String> sqlNullabilities;
   private static final Map<String, String> drillTestProperties;
 
   static {
@@ -78,6 +77,18 @@ public class Utils {
     }
     sqlTypes = ImmutableMap.copyOf(map);
 
+    // setup sql nullabilities
+    final Map<Integer, String> nullabilityMap = Maps.newHashMap();
+    final Field[] nullableFields = ResultSetMetaData.class.getDeclaredFields();
+    for (Field nullableField : nullableFields) {
+      try {
+    	nullabilityMap.put((Integer) nullableField.get(ResultSetMetaData.class), nullableField.getName()); 
+      } catch (IllegalAccessException e) {
+    	  throw new RuntimeException("Error while initializing sql nullabilities.", e);
+      }
+    }
+    sqlNullabilities = ImmutableMap.copyOf(nullabilityMap);
+    
     // read configuration file
     final Map<String, String> drillProperties = Maps.newHashMap();
     final File overrideFile = new File(System.getProperty("user.home") + "/." + DRILL_TEST_CONFIG);
@@ -254,6 +265,25 @@ public class Utils {
     return typesInStrings;
   }
 
+  /**
+   * Turns a list of nullabilities in numerical values into one in strings with semantic
+   * content.
+   * 
+   * @param nullabilitiesInInteger
+   *          list of types in numerical values.
+   * @return
+   * @throws IllegalArgumentException
+   * @throws IllegalAccessException
+   */
+  public static List<String> getNullabilitiesInStrings(List<Integer> nullabilitiesInInteger)
+      throws IllegalArgumentException, IllegalAccessException {
+    final List<String> nullabilitiesInStrings = Lists.newArrayList();
+    for (final Integer nullability : nullabilitiesInInteger) {
+      nullabilitiesInStrings.add(sqlNullabilities.get(nullability));
+    }
+    return nullabilitiesInStrings;
+  }
+  
   /**
    * Saves content of existing drill storage plugins.
    * 

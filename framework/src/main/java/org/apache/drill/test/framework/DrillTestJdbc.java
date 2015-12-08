@@ -51,8 +51,8 @@ public class DrillTestJdbc implements DrillTest {
   private TestCaseModeler modeler;
   private TestMatrix matrix;
   private Thread thread;
-  private List<Integer> types;
-  private List<Integer> nullability;
+  private List<Integer> columnTypes;
+  private List<Integer> columnNullabilities;
   private List columnLabels = new ArrayList<String>();
   private Random rand = new Random();
 
@@ -92,7 +92,7 @@ public class DrillTestJdbc implements DrillTest {
       query = queries[mainQueryIndex];
       executeQuery(query);
       
-      testVerifier = new TestVerifier(types, query, columnLabels, matrix.verificationTypes);
+      testVerifier = new TestVerifier(columnTypes, query, columnLabels, matrix.verificationTypes);
       if (query.startsWith("explain") || matrix.verificationTypes.get(0).equalsIgnoreCase("regex")) {
         setTestStatus(testVerifier.verifyTextPlan(matrix.expectedFile, outputFilename));
       } else {
@@ -196,17 +196,17 @@ public class DrillTestJdbc implements DrillTest {
     }
     
     try {
-      types = Lists.newArrayList();
-      nullability = Lists.newArrayList();
+      columnTypes = Lists.newArrayList();
+      columnNullabilities = Lists.newArrayList();
       int columnCount = resultSet.getMetaData().getColumnCount();
       for (int i = 1; i <= columnCount; i++) {
         columnLabels.add(resultSet.getMetaData().getColumnLabel(i));
-        types.add(resultSet.getMetaData().getColumnType(i));
-        nullability.add(resultSet.getMetaData().isNullable(i));
+        columnTypes.add(resultSet.getMetaData().getColumnType(i));
+        columnNullabilities.add(resultSet.getMetaData().isNullable(i));
       }
 
       LOG.debug("Result set data types:");
-      LOG.debug(Utils.getTypesInStrings(types));
+      LOG.debug(Utils.getTypesInStrings(columnTypes));
 
       while (resultSet.next()) {
         List<Object> values = Lists.newArrayList();
@@ -229,13 +229,13 @@ public class DrillTestJdbc implements DrillTest {
             }
           }
         }
-        ColumnList columnList = new ColumnList(types, values);
+        ColumnList columnList = new ColumnList(columnTypes, values);
         if (writer != null) {
           writer.write(columnList + "\n");
         }
       }
     } catch (IllegalArgumentException | IllegalAccessException | IOException e1) {
-		if (testStatus != TestStatus.CANCELED) LOG.warn(e1);
+		LOG.warn(e1);
 	} finally {
       if (resultSet != null) {
         resultSet.close();
@@ -251,32 +251,32 @@ public class DrillTestJdbc implements DrillTest {
 		return;
 	}
 	
-	BufferedWriter writer = new BufferedWriter(new FileWriter(new File(outputFilename),true));
-	
+	BufferedWriter writer = new BufferedWriter(new FileWriter(new File(outputFilename),true));	
     Statement statement = connection.createStatement();
     ResultSet resultSet = statement.executeQuery(query);
-    
     List columnLabels = new ArrayList<String>();
-    List<Integer> types = Lists.newArrayList();
-    List<Integer> nullability = Lists.newArrayList();
+    List<Integer> columnTypes = Lists.newArrayList();
+    List<Integer> columnNullabilities = Lists.newArrayList();
+    
     try {
       int columnCount = resultSet.getMetaData().getColumnCount();
       for (int i = 1; i <= columnCount; i++) {
         columnLabels.add(resultSet.getMetaData().getColumnLabel(i));
-        types.add(resultSet.getMetaData().getColumnType(i));
-        nullability.add(resultSet.getMetaData().isNullable(i));
+        columnTypes.add(resultSet.getMetaData().getColumnType(i));
+        columnNullabilities.add(resultSet.getMetaData().isNullable(i));
       }
       
-      String msg = "\n" + query + "\n" + columnLabels + "\n"
-    		  + this.columnLabels + "\n"
-    		  + "\n" + Utils.getTypesInStrings(types) + "\n"
-    		  + Utils.getTypesInStrings(this.types) + "\n"
-    		  + "\n" + nullability + "\n"
-    		  + this.nullability + "\n";
+      String msg = "\nlimit 0: " + query + "\n" 
+    		  + "limit 0: " + columnLabels + "\n" 
+    		  + "regular: " + this.columnLabels + "\n"
+    		  + "\nlimit 0: " + Utils.getTypesInStrings(columnTypes) + "\n"
+    		  + "regular: " + Utils.getTypesInStrings(this.columnTypes) + "\n"
+    		  + "\nlimit 0: " + Utils.getNullabilitiesInStrings(columnNullabilities) + "\n"
+    		  + "regular: " + Utils.getNullabilitiesInStrings(this.columnNullabilities) + "\n";
       writer.append(msg);
       
-      if (!columnLabels.equals(this.columnLabels) || !types.equals(this.types)
-    		  || !nullability.equals(this.nullability)) {
+      if (!columnLabels.equals(this.columnLabels) || !columnTypes.equals(this.columnTypes)
+    		  || !columnNullabilities.equals(this.columnNullabilities)) {
         LOG.info(msg);
         setTestStatus(TestStatus.VERIFICATION_FAILURE);
         exception = exception == null? new VerificationException(msg)
@@ -285,12 +285,8 @@ public class DrillTestJdbc implements DrillTest {
     } catch (IllegalArgumentException | IllegalAccessException e1) {
       LOG.warn(e1);
     } finally {
-      if (resultSet != null) {
-        resultSet.close();
-      }
-      if (writer != null) {
-        writer.close();
-      }
+      if (resultSet != null) resultSet.close();
+      if (writer != null) writer.close();
     }
   }
   
