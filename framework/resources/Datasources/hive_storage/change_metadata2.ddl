@@ -29,3 +29,17 @@ ALTER TABLE remove_columns2 REPLACE COLUMNS (
   timestamp_col timestamp,
   interval_col string
 );
+
+
+ALTER TABLE modify_columntypes1 REPLACE COLUMNS (
+  int_col string,
+  bigint_col varchar(50),
+  date_col int,
+  time_col bigint,
+  timestamp_col varchar(20),
+  interval_col date,
+  varchar_col int,
+  float_col int,
+  double_col float,
+  bool_col int
+);
