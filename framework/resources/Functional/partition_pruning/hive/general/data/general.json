@@ -31,7 +31,7 @@
         {
                 "mode": "cp",
                 "src": "Datasources/partition_pruning/hive/mktevents.tbl",
-                "dest": "hive_storage/orc_create_people.txt"
+                "dest": "hive_storage/mktevents.tbl"
         },
         {
            "mode": "gen",
