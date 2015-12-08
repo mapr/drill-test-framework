@@ -8,7 +8,7 @@
     "dependencies" : ["hive"],
     "matrices": [
         {
-            "query-file": ".*.sql",
+            "query-file": ".*.q",
             "schema": "hive",
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
