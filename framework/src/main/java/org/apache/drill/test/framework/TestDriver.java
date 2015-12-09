@@ -431,7 +431,7 @@ public class TestDriver {
   private static void runGenerateScript(DataSource datasource) {
     int exitCode = 0;
     String command = CWD + "/resources/" + datasource.src;
-    LOG.debug("Running command " + command);
+    LOG.info("Running command " + command);
     StringBuilder sb = new StringBuilder();
     try {
 
@@ -445,7 +445,7 @@ public class TestDriver {
         sb.append(line + "\n");
       }
       exitCode = p.waitFor();
-      LOG.debug(sb.toString());
+      LOG.info(sb.toString());
     } catch (Exception e) {
       LOG.error("Error: Failed to execute the command " + command + ".");
       throw new RuntimeException(e);
