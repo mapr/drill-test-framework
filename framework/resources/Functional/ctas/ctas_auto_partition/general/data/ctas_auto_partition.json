@@ -36,6 +36,11 @@
             "mode": "gen",
             "src": "Datasources/ctas_auto_partition/ctas_existing_partition_pruning.sh",
             "dest": ""
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/ctas_auto_partition/ctas_tpch_single_partition1.sh",
+            "dest": ""
         }
     ]
 }
