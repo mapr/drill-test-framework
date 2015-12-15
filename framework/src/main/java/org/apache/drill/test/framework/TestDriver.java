@@ -88,6 +88,7 @@ public class TestDriver {
     		  "-n", "number of concurrent threads running tests",
     		  "-i", "number of iterations of running the test", 
     		  "-f", "filename containing a list of queries to be executed before test run",
+    		  "-e", "filename containing a list of queries to be executed after test run",
     		  "-d", "generate data", 
     		  "-m", "track memory usage",
     		  "-c", "percent of tests attempted to be canceled", 
@@ -141,6 +142,9 @@ public class TestDriver {
     @Parameter(names = {"-f"}, description = "filename", required=false)
     public String beforeRunQueryFilename = "before-run.sql";
     
+    @Parameter(names = {"-e"}, description = "filename", required=false)
+    public String afterRunQueryFilename = "after-run.sql";
+    
     @Parameter(names = {"-d"}, description = "generate data", required=false)
     public boolean generate = false;
     
@@ -175,7 +179,6 @@ public class TestDriver {
     LOG.info("> SETTING UP..");
     setup(connectionPool);
 
-//    List<TestCaseModeler> testCases = JsonTestDataProvider.getData();
     List<DrillTestCase> drillTestCases = Utils.getDrillTestCases();
     List<Cancelable> tests = Lists.newArrayList();
     for (DrillTestCase testCase : drillTestCases) {
@@ -251,13 +254,13 @@ public class TestDriver {
         LOG.info("Query: \n" + test.getQuery());
         LOG.info("Failed with exception", test.getException());
       }
-      LOG.info("Verification Failures");
+      LOG.info("Verification Failures:");
       for (DrillTestJdbc test : verificationFailures) {
         LOG.info(test.getInputFile());
         LOG.info("Query: \n" + test.getQuery());
         LOG.info(test.getException().getMessage());
       }
-      LOG.info("Timeout Failures");
+      LOG.info("Timeout Failures:");
       for (DrillTestJdbc test : timeoutFailures) {
         LOG.info(test.getInputFile());
         LOG.info("Query: \n" + test.getQuery());
@@ -269,11 +272,11 @@ public class TestDriver {
       for (DrillTestJdbc test : executionFailures) {
         LOG.info(test.getInputFile());
       }
-      LOG.info("Verification Failures");
+      LOG.info("Verification Failures:");
       for (DrillTestJdbc test : verificationFailures) {
         LOG.info(test.getInputFile());
       }
-      LOG.info("Timeout Failures");
+      LOG.info("Timeout Failures:");
       for (DrillTestJdbc test : timeoutFailures) {
         LOG.info(test.getInputFile());
       }
@@ -294,6 +297,8 @@ public class TestDriver {
       totalTimeoutFailure += timeoutFailures.size();
     }
 
+    LOG.info("\n> TEARING DOWN..");
+    teardown(connectionPool);
     executor.close();
     connectionPool.close();
 
@@ -336,6 +341,26 @@ public class TestDriver {
     }
     Thread.sleep(1000);
 
+  }
+  
+  private void teardown(ConnectionPool connectionPool) {
+	try {
+	  String[] teardownQueries = Utils.getSqlStatements(OPTIONS.afterRunQueryFilename);
+	  if (connection == null) {
+		connection = connectionPool.getOrCreateConnection(drillProperties.get("USERNAME"), 
+					drillProperties.get("PASSWORD"));
+	  }
+      ResultSet resultSet = null;
+      Statement statement = connection.createStatement();
+      for (String query : teardownQueries) {
+        resultSet = statement.executeQuery(query);
+        LOG.info(Utils.getSqlResult(resultSet));
+      }
+    } catch (IOException e) {
+      LOG.warn("WARNING: " + OPTIONS.afterRunQueryFilename + " file does not exist.\n");
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
   }
 
   private void prepareData(List<DrillTestCase> tests) throws Exception {
