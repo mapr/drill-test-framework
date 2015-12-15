@@ -1,3 +1,3 @@
 .*
 Filter.*OR.*AND.*=.*2014-10-22.*>.*29600.*AND.*=.*2014-10-23.*>.*29700.*
-.*Scan.*tableName:lineitem_text_partitioned_hive_date.*inputSplits.*/drill/testdata/partition_pruning/hive/text/lineitem_datepart/2014\-10\-22/lineitemac.tbl:0\+1199494.*/drill/testdata/partition_pruning/hive/text/lineitem_datepart/2014\-10\-23/lineitemad.tbl:0\+1200607\].*columns=\[`l_orderkey`.*`l_partkey`.*`l_quantity`.*`l_shipdate`.*`l_shipinstruct`.*`dt`\].*partitions.*2014\-10\-22.*2014\-10\-23.*
+.*Scan.*tableName:lineitem_text_partitioned_hive_date.*columns=\[`l_orderkey`.*`l_partkey`.*`l_quantity`.*`l_shipdate`.*`l_shipinstruct`.*`dt`\].*partitions.*2014\-10\-22.*2014\-10\-23.*
