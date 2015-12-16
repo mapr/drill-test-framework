@@ -1,7 +1,7 @@
 {
-    "testId": "int96",
+    "testId": "int96_impala",
     "type": "group",
-    "description": "int96 tests",
+    "description": "int96 tests: parquet files are coming from impala",
     "categories": [ "smoke" ],
     "matrices": [
         {
