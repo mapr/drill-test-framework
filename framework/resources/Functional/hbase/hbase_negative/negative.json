@@ -1,0 +1,20 @@
+{
+    "testId": "hbase_negative",
+    "type": "group",
+    "negative": true,
+    "description": "Negative test cases for hbase",
+    "categories": [ "negative" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "hbase",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+    ]
+}
