@@ -1,1 +1,1 @@
-.*HiveScan.*tableName:lineitem_text_partitioned_hive_hier_intint.*inputSplits.*/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intint/1993/10/lineitemaj.tbl:0\+107386.*/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intint/1994/5/lineitemae.tbl:0\+107451.*partitions.*values.*1993.*10.*.*1994.*5.*
+.*HiveScan.*tableName:lineitem_text_partitioned_hive_hier_intint.*numPartitions=2, partitions= \[Partition\(values:\[1993, 10\]\), Partition\(values:\[1994, 5\]\)\]*
