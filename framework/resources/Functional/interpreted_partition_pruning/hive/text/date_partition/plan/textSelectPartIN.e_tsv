@@ -1,2 +1,2 @@
 .*
-.*Scan.*tableName:lineitem_text_partitioned_hive_date.*/drill/testdata/partition_pruning/hive/text/lineitem_datepart/2014-10-22/lineitemac.tbl:0\+1199494.*columns.*`l_orderkey`.*`dt`.*2014-10-22.*
+.*Scan.*tableName:lineitem_text_partitioned_hive_date.*columns.*`l_orderkey`.*`dt`.*2014-10-22.*
