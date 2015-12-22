@@ -61,6 +61,8 @@ public class TestDriver {
   private Connection connection = null;
   private long [][] memUsage = new long[2][3];
   private String memUsageFilename = null;
+
+  private static final int MAX_RETRY_ATTEMPTS=10;
  
   private static Configuration conf = new Configuration();
   public static final Options OPTIONS = new Options();
@@ -92,7 +94,7 @@ public class TestDriver {
     		  "-m", "track memory usage",
     		  "-c", "percent of tests attempted to be canceled", 
     		  "-w", "enable write actual query result to file",
-              "-r", "retry attempts for data generation scripts",
+    		  "-r", "retry attempts for data generation scripts",
     		  "-h", "--help", "show usage"};
       new JCommander(OPTIONS, valid).usage();
 
@@ -145,7 +147,7 @@ public class TestDriver {
     @Parameter(names = {"-d"}, description = "generate data", required=false)
     public boolean generate = false;
 
-    @Parameter(names = {"-r"}, description = "retry data generation scripts", required=false)
+    @Parameter(names = {"-r"}, description = "retry attempts for data generation scripts", required=false)
     public int retry = 1;
 
     @Parameter(names = {"-m"}, description = "track memory usage", required=false)
@@ -456,7 +458,7 @@ public class TestDriver {
         LOG.info(sb.toString());
 
         attempts++;
-      } while (exitCode != 0 && (attempts < OPTIONS.retry && OPTIONS.retry <10));
+      } while (exitCode != 0 && (attempts < OPTIONS.retry && attempts < MAX_RETRY_ATTEMPTS));
 
     } catch (Exception e) {
       LOG.error("Error: Failed to execute the command " + command + ".");
