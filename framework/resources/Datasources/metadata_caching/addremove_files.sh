@@ -59,7 +59,12 @@ hadoop fs -copyFromLocal resources/Datasources/metadata_caching/data/lineitem2.p
 hadoop fs -rm /drill/testdata/metadata_caching/lineitem_removeautopartitioned_files/lineitem2.parquet
 
 # copy the generated cache file and then validate its contents in the testcases
-hadoop fs -rm -r /drill/testdata/metadata_caching/generated_caches
+
+hadoop fs -test -d /drill/testdata/metadata_caching/generated_caches
+generatedCachesExists=$?
+if [ $generatedCachesExists -eq 0 ]; then
+  hadoop fs -rm -r /drill/testdata/metadata_caching/generated_caches
+fi
 hadoop fs -mkdir -p /drill/testdata/metadata_caching/generated_caches
 hadoop fs -cp /drill/testdata/metadata_caching/fewtypes/.drill.parquet_metadata /drill/testdata/metadata_caching/generated_caches/fewtypes_cache.json
 hadoop fs -cp /drill/testdata/metadata_caching/fewtypes_varcharpartition/.drill.parquet_metadata /drill/testdata/metadata_caching/generated_caches/fewtypes_varcharpartition_cache.json
