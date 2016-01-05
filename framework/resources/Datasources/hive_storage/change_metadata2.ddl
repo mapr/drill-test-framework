@@ -75,3 +75,4 @@ alter table seq_modify_columntypes1 replace columns (
     l_shipmode boolean,
     l_comment double
 );
+ALTER TABLE dpp_compressed_mktevents ADD COLUMNS (newcol STRING);

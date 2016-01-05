@@ -21,6 +21,16 @@
                 "mode": "cp",
                 "src": "Datasources/parquet/nested_dir/data/parquet/0_0_0.parquet",
                 "dest": "parquet/nested_dir/data/parquet/0_0_0.parquet"
+        },
+        {
+                "mode": "cp",
+                "src": "Datasources/parquet/nested_dir/data/drill4192_1",
+                "dest": "parquet/nested_dir/data/drill4192_1"
+        },
+        {
+                "mode": "cp",
+                "src": "Datasources/parquet/nested_dir/data/drill4192_2",
+                "dest": "parquet/nested_dir/data/drill4192_2"
         }
     ]
 }
