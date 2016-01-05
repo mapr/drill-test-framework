@@ -1,0 +1,3 @@
+0\t
+UNSUPPORTED_OPERATION ERROR: Grouping, Grouping_ID, Group_ID are not supported.
+See Apache Drill JIRA: DRILL-3962
