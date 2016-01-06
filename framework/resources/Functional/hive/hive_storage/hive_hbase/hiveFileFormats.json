@@ -1,0 +1,27 @@
+{
+    "testId": "hive_hbase",
+    "type": "group",
+    "description": "Test hive tables backed by hbase",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "hive",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+    {
+       "mode": "gen",
+       "src": "bin/execHive.sh resources/Datasources/hive_storage/hive_hbase.q",
+       "dest": ""
+    }
+   ]
+}
