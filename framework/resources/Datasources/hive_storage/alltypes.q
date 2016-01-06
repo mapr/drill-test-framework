@@ -114,6 +114,12 @@ create external table fewtypes_null_hive_orc (
   double_col double,
   bool_col boolean
 )
-STORED AS ORC;
+ROW FORMAT SERDE
+  'org.apache.hadoop.hive.ql.io.orc.OrcSerde'
+  STORED AS INPUTFORMAT
+  'org.apache.hadoop.hive.ql.io.orc.OrcInputFormat'
+  OUTPUTFORMAT
+  'org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat';
+
 
 insert overwrite table fewtypes_null_hive_orc select * from fewtypes_null_hive;
