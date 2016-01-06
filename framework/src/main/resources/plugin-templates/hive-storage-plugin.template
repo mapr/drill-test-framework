@@ -5,7 +5,9 @@
     "enabled" : true,
     "configProps" : {
       "hive.metastore.uris" : "thrift://localhost:9083",
-      "hive.metastore.sasl.enabled" : "false"
+      "hive.metastore.sasl.enabled" : "false",
+      "hbase.zookeeper.quorum": "localhost",
+      "hbase.zookeeper.property.clientPort": "5181"
     }
   }
 }

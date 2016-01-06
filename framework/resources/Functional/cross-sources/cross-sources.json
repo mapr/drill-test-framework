@@ -26,6 +26,11 @@
         },
         {
            "mode": "gen",
+           "src": "Datasources/cross-sources/hbase.sh",
+           "dest": ""
+        },
+        {
+           "mode": "gen",
            "src": "bin/execHive.sh resources/Datasources/cross-sources/hive.ddl",
            "dest": ""
         }
