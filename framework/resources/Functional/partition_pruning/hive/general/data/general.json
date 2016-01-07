@@ -30,8 +30,8 @@
         },
         {
                 "mode": "cp",
-                "src": "Datasources/partition_pruning/hive/mktevents.tbl",
-                "dest": "hive_storage/mktevents.tbl"
+                "src": "Datasources/hive_storage/mktevents1",
+                "dest": "hive_storage/mktevents1"
         },
         {
            "mode": "gen",

@@ -43,3 +43,5 @@ ALTER TABLE modify_columntypes1 REPLACE COLUMNS (
   double_col float,
   bool_col int
 );
+
+ALTER TABLE dpp_compressed_mktevents ADD COLUMNS (newcol STRING);
