@@ -18,7 +18,13 @@ CREATE TABLE orc_create_people (
   last_name string,
   address string)
 PARTITIONED BY (state string)
-STORED AS orc;
+ROW FORMAT SERDE
+  'org.apache.hadoop.hive.ql.io.orc.OrcSerde'
+  STORED AS INPUTFORMAT
+  'org.apache.hadoop.hive.ql.io.orc.OrcInputFormat'
+  OUTPUTFORMAT
+  'org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat';
+
 
 set hive.exec.dynamic.partition.mode=nonstrict;
 
@@ -31,7 +37,12 @@ CREATE EXTERNAL TABLE orc_create_people_dp (
   last_name string,
   address string)
 PARTITIONED BY (state string)
-STORED AS orc
+ROW FORMAT SERDE
+  'org.apache.hadoop.hive.ql.io.orc.OrcSerde'
+  STORED AS INPUTFORMAT
+  'org.apache.hadoop.hive.ql.io.orc.OrcInputFormat'
+  OUTPUTFORMAT
+  'org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat'
 LOCATION "/drill/testdata/hive_storage/orc_create_people_dp";
 
 set hive.exec.dynamic.partition.mode=true;
