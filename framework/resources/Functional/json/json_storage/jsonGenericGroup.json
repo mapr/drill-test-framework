@@ -22,6 +22,11 @@
         "src": "Datasources/json_storage",
         "dest": "json_storage"
     	},
+	{
+        "mode": "cp",
+        "src": "Datasources/json_storage/drill_4006/",
+        "dest": "drill_4006"
+    	},
     	{
         "mode": "cp",
         "src": "Datasources/json_storage/employeeNestedObject.json",
