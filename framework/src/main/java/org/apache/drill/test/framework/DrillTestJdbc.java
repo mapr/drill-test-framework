@@ -48,7 +48,7 @@ public class DrillTestJdbc implements DrillTest {
   private volatile TestStatus testStatus = TestStatus.PENDING;
   private Exception exception;
   private TestVerifier testVerifier;
-  private TestCaseModeler modeler;
+  private DrillTestCase modeler;
   private TestMatrix matrix;
   private Thread thread;
   private List<Integer> columnTypes;
@@ -56,7 +56,7 @@ public class DrillTestJdbc implements DrillTest {
   private List columnLabels = new ArrayList<String>();
   private Random rand = new Random();
 
-  public DrillTestJdbc(TestCaseModeler modeler, ConnectionPool connectionPool) {
+  public DrillTestJdbc(DrillTestCase modeler, ConnectionPool connectionPool) {
     this.modeler = modeler;
     this.connectionPool = connectionPool;
     this.matrix = modeler.matrices.get(0);
@@ -75,13 +75,13 @@ public class DrillTestJdbc implements DrillTest {
       throw new RuntimeException(e);
     }
     try {
-      LOG.debug("Running test " + matrix.inputFile + " (connection: " + connection.hashCode() + ")");
+      LOG.debug("Running test " + modeler.queryFilename + " (connection: " + connection.hashCode() + ")");
 
       if (!modeler.type.equalsIgnoreCase("impersonation")) {
         executeSetupQuery(String.format("use `%s`", matrix.schema));
       }
 
-      queries = Utils.getSqlStatements(matrix.inputFile);
+      queries = Utils.getSqlStatements(modeler.queryFilename);
       mainQueryIndex = queries.length / 2; // Currently, the main query must be in the middle of the list of queries
 
       for (int i = 0; i < mainQueryIndex; i++) {
@@ -94,9 +94,9 @@ public class DrillTestJdbc implements DrillTest {
       
       testVerifier = new TestVerifier(columnTypes, query, columnLabels, matrix.verificationTypes);
       if (query.startsWith("explain") || matrix.verificationTypes.get(0).equalsIgnoreCase("regex")) {
-        setTestStatus(testVerifier.verifyTextPlan(matrix.expectedFile, outputFilename));
+        setTestStatus(testVerifier.verifyTextPlan(modeler.expectedFilename, outputFilename));
       } else {
-        setTestStatus(testVerifier.verifyResultSet(matrix.expectedFile, outputFilename));
+        setTestStatus(testVerifier.verifyResultSet(modeler.expectedFilename, outputFilename));
       }
       
       if (modeler.type.equalsIgnoreCase("limit 0")) {
@@ -126,7 +126,7 @@ public class DrillTestJdbc implements DrillTest {
       if (testStatus == TestStatus.PASS && !TestDriver.OPTIONS.outputQueryResult) {
     	Utils.deleteFile(outputFilename);
       }
-      LOG.info(testStatus + " (" + stopwatch + ") " + matrix.inputFile + " (connection: " + connection.hashCode() + ")");
+      LOG.info(testStatus + " (" + stopwatch + ") " + modeler.queryFilename + " (connection: " + connection.hashCode() + ")");
     }
   }
 
@@ -155,7 +155,7 @@ public class DrillTestJdbc implements DrillTest {
   }
 
   private void executeQuery(String query) throws IOException, SQLException {
-    outputFilename = Utils.generateOutputFileName(matrix.inputFile, modeler.testId, false);
+    outputFilename = Utils.generateOutputFileName(modeler.queryFilename, modeler.testId, false);
     BufferedWriter writer = new BufferedWriter(new FileWriter(new File(
             outputFilename)));
     final boolean cancelQuery = rand.nextInt(100) < TestDriver.OPTIONS.cancelPercent;
@@ -170,25 +170,17 @@ public class DrillTestJdbc implements DrillTest {
       
     } catch (SQLException e) {
       writer.write(e.getErrorCode() + "\t" + e.getMessage());
-      if (writer != null) {
-          writer.close();
-        }
-      if (resultSet != null) {
-          resultSet.close();
-        }
-      if (modeler.negative) return;
+      if (writer != null) {writer.close();}
+      if (resultSet != null) {resultSet.close();}
+      if (modeler.negative) {return;}
       throw e;
     } finally {
       if (cancelQuery) {
     	try {
     	  c.join();
     	  if (testStatus == TestStatus.CANCELED) {
-    	    if (resultSet != null) {
-    	      resultSet.close();
-    	    }
-    	    if (writer != null) {
-    	      writer.close();
-    	    }
+    	    if (resultSet != null) {resultSet.close();}
+    	    if (writer != null) {writer.close();}
     		return;
     	  }
     	} catch (InterruptedException e) {return;}
@@ -328,7 +320,7 @@ public class DrillTestJdbc implements DrillTest {
 
   @Override
   public String getInputFile() {
-    return matrix.inputFile;
+    return modeler.queryFilename;
   }
 
   @Override
