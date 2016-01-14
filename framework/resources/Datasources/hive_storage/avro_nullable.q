@@ -51,13 +51,9 @@ CREATE TABLE as_avro
         { "name": "nullableint", "type": ["null", "int"] },
         { "name": "bytes1", "type": ["null", "bytes"] },
         { "name": "fixed1", "type": ["null", {"type": "fixed", "name": "threebytes", "size": 3}] }
-      ]
-    }'
-  )
-;
+      ] }');
 
 INSERT OVERWRITE TABLE as_avro SELECT * FROM test_serializer;
-
 
 DROP TABLE IF EXISTS as_avro1;
 CREATE TABLE as_avro1(string1 STRING,
@@ -72,6 +68,11 @@ CREATE TABLE as_avro1(string1 STRING,
                      nullableint INT,
                      bytes1 BINARY,
                      fixed1 BINARY)
-STORED AS AVRO;
+  ROW FORMAT
+  SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe'
+  STORED AS
+  INPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
+  OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
+;
 INSERT OVERWRITE TABLE as_avro1 SELECT string1, int1, tinyint1, smallint1, bigint1, boolean1, float1, double1, enum1, nullableInt, encode(string1, 'UTF-8'), encode(string1, 'UTF-8') FROM test_serializer;
 

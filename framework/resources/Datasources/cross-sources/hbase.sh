@@ -12,3 +12,4 @@ wait
 
 hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dmapred.map.tasks.speculative.execution=false -Dmapred.reduce.tasks.speculative.execution=false -Dimporttsv.columns=HBASE_ROW_KEY,types:int_col,types:bigint_col,types:date_col,types:time_col,types:timestamp_col,types:interval_col,types:varchar_col,types:float_col,types:double_col,types:bool_col fewtypes_null /drill/testdata/cross-sources/fewtypes_null_hbase.tsv
 
+resources/bin/execHive.sh resources/Datasources/cross-sources/hive.ddl
