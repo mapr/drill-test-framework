@@ -76,3 +76,23 @@ alter table seq_modify_columntypes1 replace columns (
     l_comment double
 );
 ALTER TABLE dpp_compressed_mktevents ADD COLUMNS (newcol STRING);
+
+ALTER TABLE changemetadata_orders_partitioned ADD COLUMNS (
+  o_clerk STRING,
+  o_shippriority INT, 
+  o_comment STRING
+);
+
+ALTER TABLE changemetadata_orders_partitioned ADD PARTITION (year=1997) location '/drill/testdata/hive_storage/orders_partitioned/1997';
+
+ALTER TABLE changemetadata_orders_partitioned1 replace columns (
+    o_orderkey INT,
+    o_custkey INT,
+    o_orderdate STRING,
+    o_orderpriority STRING,
+    o_clerk STRING,
+    o_shippriority INT,
+    o_comment STRING
+);
+
+ALTER TABLE changemetadata_orders_partitioned1 DROP IF EXISTS PARTITION(year=1994);
