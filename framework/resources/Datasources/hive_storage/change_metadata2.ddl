@@ -96,3 +96,16 @@ ALTER TABLE changemetadata_orders_partitioned1 replace columns (
 );
 
 ALTER TABLE changemetadata_orders_partitioned1 DROP IF EXISTS PARTITION(year=1994);
+
+
+ALTER TABLE changemetadata_orders_partitioned2 replace columns (
+    o_orderkey FLOAT,
+    o_custkey STRING,
+    o_orderstatus STRING,
+    o_totalprice DOUBLE,
+    o_orderdate BOOLEAN,
+    o_orderpriority VARCHAR(1),
+    o_clerk DOUBLE,
+    o_shippriority INT
+);
+ALTER TABLE changemetadata_orders_partitioned2 DROP IF EXISTS PARTITION(year=1990)

@@ -209,3 +209,29 @@ ALTER TABLE changemetadata_orders_partitioned1 ADD PARTITION (year=1994) locatio
 ALTER TABLE changemetadata_orders_partitioned1 ADD PARTITION (year=1995) location '/drill/testdata/hive_storage/orders_partitioned/1995';
 ALTER TABLE changemetadata_orders_partitioned1 ADD PARTITION (year=1996) location '/drill/testdata/hive_storage/orders_partitioned/1996';
 ALTER TABLE changemetadata_orders_partitioned1 ADD PARTITION (year=1997) location '/drill/testdata/hive_storage/orders_partitioned/1997';
+
+DROP TABLE IF EXISTS changemetadata_orders_partitioned2;
+CREATE EXTERNAL TABLE changemetadata_orders_partitioned2 (
+    o_orderkey INT,
+    o_custkey INT,
+    o_orderstatus STRING,
+    o_totalprice DOUBLE,
+    o_orderdate STRING,
+    o_orderpriority STRING,
+    o_clerk STRING,
+    o_shippriority INT,
+    o_comment STRING
+)
+PARTITIONED BY (year INT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
+STORED AS TEXTFILE LOCATION "/drill/testdata/hive_storage/orders_partitioned";
+
+--- ADD PARTITIONS ----
+ALTER TABLE changemetadata_orders_partitioned2 ADD PARTITION (year=1990) location '/drill/testdata/hive_storage/orders_partitioned/1990';
+ALTER TABLE changemetadata_orders_partitioned2 ADD PARTITION (year=1991) location '/drill/testdata/hive_storage/orders_partitioned/1991';
+ALTER TABLE changemetadata_orders_partitioned2 ADD PARTITION (year=1992) location '/drill/testdata/hive_storage/orders_partitioned/1992';
+ALTER TABLE changemetadata_orders_partitioned2 ADD PARTITION (year=1993) location '/drill/testdata/hive_storage/orders_partitioned/1993';
+ALTER TABLE changemetadata_orders_partitioned2 ADD PARTITION (year=1994) location '/drill/testdata/hive_storage/orders_partitioned/1994';
+ALTER TABLE changemetadata_orders_partitioned2 ADD PARTITION (year=1995) location '/drill/testdata/hive_storage/orders_partitioned/1995';
+ALTER TABLE changemetadata_orders_partitioned2 ADD PARTITION (year=1996) location '/drill/testdata/hive_storage/orders_partitioned/1996';
+ALTER TABLE changemetadata_orders_partitioned2 ADD PARTITION (year=1997) location '/drill/testdata/hive_storage/orders_partitioned/1997';
