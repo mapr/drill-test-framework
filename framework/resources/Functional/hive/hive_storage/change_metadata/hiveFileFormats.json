@@ -25,6 +25,16 @@
     },
     {
         "mode": "cp",
+        "src": "Datasources/hive_storage/orders_partitioned",
+        "dest": "hive_storage/orders_partitioned"
+    },
+    {
+        "mode": "cp",
+        "src": "Datasources/hive_storage/orc_lineitem/000000_0",
+        "dest": "hive_storage/orc_lineitem/000000_0"
+    },
+    {
+        "mode": "cp",
         "src": "Datasources/hive_storage/add_remove_columns",
         "dest": "hive_storage/add_remove_columns"
     },
