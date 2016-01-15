@@ -82,7 +82,7 @@ create external table if not exists tpch01_parquet_nodate.orders (
     o_comment string
 )
 STORED AS PARQUET
-LOCATION '/drill/testdata/hive_storage/tpch0.01/orders_nodate.parquet';
+LOCATION '/drill/testdata/hive_storage/tpch0.01/orders_nodate';
 
 create external table if not exists tpch01_parquet_nodate.lineitem (
     l_orderkey int,
@@ -103,4 +103,4 @@ create external table if not exists tpch01_parquet_nodate.lineitem (
     l_comment string
 )
 STORED AS PARQUET
-LOCATION '/drill/testdata/hive_storage/tpch0.01/lineitem_nodate.parquet';
+LOCATION '/drill/testdata/hive_storage/tpch0.01/lineitem_nodate';

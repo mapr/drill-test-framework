@@ -5,7 +5,7 @@
     "categories": [
         "smoke"
     ],
-    "dependencies" : ["hive"],
+    "dependencies" : ["hive","hbase"],
     "matrices": [
         {
             "query-file": ".*.q",
@@ -35,8 +35,13 @@
         },
 	{
             "mode": "cp",
-            "src": "Datasources/hive_storage/tpch0.01/lineitem_nodate.parquet",
-            "dest": "hive_storage/tpch0.01/lineitem_nodate.parquet"
+            "src": "Datasources/hive_storage/tpch0.01/lineitem_nodate",
+            "dest": "hive_storage/tpch0.01/lineitem_nodate"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/hive_storage/tpch0.01/orders_nodate",
+            "dest": "hive_storage/tpch0.01/orders_nodate"
         },
         {
            "mode": "gen",
