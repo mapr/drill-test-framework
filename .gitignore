@@ -10,3 +10,7 @@
 **/target/*
 *drill.log*
 **/drill-output
+
+# Hive stuff
+metastore_db
+derby.log
