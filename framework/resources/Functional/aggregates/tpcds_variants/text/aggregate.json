@@ -1,10 +1,10 @@
 {
-    "testId": "aggregate1csv",
+    "testId": "aggregates_tpcds_sf1_text",
     "type": "group",
     "description": "Test aggregate queries via jdbc",
     "submit-type": "jdbc",
     "categories": [
-        "regression"
+        "functional","smoke"
     ],
 	"matrices": [
         {
@@ -20,7 +20,7 @@
     "datasources": [
         {
             "mode": "cp",
-            "src": "Datasources/text/tpcds/sf1",
+            "src": "Datasources/tpcds/sf1/text",
             "dest": "tpcds_sf1/text"
         }
     ]
