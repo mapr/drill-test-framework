@@ -22,7 +22,7 @@ create external table tpcds01_text.customer
     c_last_review_date string
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/customer.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/customer'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.customer_address;
@@ -43,7 +43,7 @@ create external table tpcds01_text.customer_address
     ca_location_type string
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/customer_address.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/customer_address'
 TBLPROPERTIES ("serialization.null.format"="");
  
 
@@ -61,7 +61,7 @@ create external table tpcds01_text.customer_demographics
     cd_dep_college_count int
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/customer_demographics.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/customer_demographics'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.household_demographics;
@@ -74,7 +74,7 @@ create external table tpcds01_text.household_demographics
     hd_vehicle_count int
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/household_demographics.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/household_demographics'
 TBLPROPERTIES ("serialization.null.format"="");
 
 
@@ -105,7 +105,7 @@ create external table tpcds01_text.item
     i_product_name string
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/item.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/item'
 TBLPROPERTIES ("serialization.null.format"="");
 
 
@@ -133,7 +133,7 @@ create external table tpcds01_text.promotion
     p_discount_active string
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/promotion.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/promotion'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.time_dim;
@@ -150,7 +150,7 @@ create external table tpcds01_text.time_dim (
     t_meal_time string
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/time_dim.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/time_dim'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.date_dim;
@@ -185,7 +185,7 @@ create external table tpcds01_text.date_dim (
     d_current_year string
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/date_dim.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/date_dim'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.store;
@@ -221,7 +221,7 @@ create external table tpcds01_text.store (
     s_tax_precentage double
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/store.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/store'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.store_sales;
@@ -251,7 +251,7 @@ create external table tpcds01_text.store_sales (
     ss_net_profit double
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/store_sales.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/store_sales'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.warehouse;
@@ -272,7 +272,7 @@ create external table tpcds01_text.warehouse (
     w_gmt_offset double       
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/warehouse.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/warehouse'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.ship_mode;
@@ -285,7 +285,7 @@ create external table tpcds01_text.ship_mode (
     sm_contract string     
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/ship_mode.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/ship_mode'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.reason;
@@ -295,7 +295,7 @@ create external table tpcds01_text.reason (
     r_reason_desc string  
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/reason.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/reason'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.income_band;
@@ -305,7 +305,7 @@ create external table tpcds01_text.income_band (
     ib_upper_bound int         
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/income_band.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/income_band'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.call_center;
@@ -343,7 +343,7 @@ create external table tpcds01_text.call_center (
     cc_tax_percentage double 
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/call_center.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/call_center'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.web_site;
@@ -376,7 +376,7 @@ create external table tpcds01_text.web_site (
     web_tax_percentage double
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/web_site.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/web_site'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.store_returns;
@@ -403,7 +403,7 @@ create external table tpcds01_text.store_returns (
     sr_net_loss double    
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/store_returns.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/store_returns'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.web_page;
@@ -424,7 +424,7 @@ create external table tpcds01_text.web_page (
     wp_max_ad_count int         
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/web_page.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/web_page'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.catalog_page;
@@ -440,7 +440,7 @@ create external table tpcds01_text.catalog_page (
     cp_type string        
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/catalog_page.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/catalog_page'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.inventory;
@@ -451,7 +451,7 @@ create external table tpcds01_text.inventory (
     inv_quantity_on_hand int            
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/inventory.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/inventory'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.catalog_returns;
@@ -485,7 +485,7 @@ create external table tpcds01_text.catalog_returns (
     cr_net_loss double       
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/catalog_returns.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/catalog_returns'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.web_returns;
@@ -516,7 +516,7 @@ create external table tpcds01_text.web_returns (
      wr_net_loss double 
 )       
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/web_returns.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/web_returns'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.web_sales;
@@ -557,7 +557,7 @@ create external table tpcds01_text.web_sales (
     ws_net_profit double       
 )       
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/web_sales.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/web_sales'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds01_text.catalog_sales;
@@ -598,7 +598,7 @@ create external table tpcds01_text.catalog_sales (
     cs_net_profit double        
 )       
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf1/text/catalog_sales.dat'
+LOCATION '/drill/testdata/tpcds_sf1/text/catalog_sales'
 TBLPROPERTIES ("serialization.null.format"="");
 
 
