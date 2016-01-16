@@ -14,3 +14,17 @@
 # Hive stuff
 metastore_db
 derby.log
+
+# Large Datasets
+framework/resources/Datasources/complex/json/complex.json
+framework/resources/Datasources/complex/json/complexga100k.json
+framework/resources/Datasources/flatten_operators/100000rows/
+framework/resources/Datasources/json/
+framework/resources/Datasources/mondrian/
+framework/resources/Datasources/parquet/tpcds_sf1/
+framework/resources/Datasources/text/
+framework/resources/Datasources/tpcds/sf1/
+framework/resources/Functional/Failing/
+framework/resources/Functional/data-shapes/wide-columns/5000/1000rows/parquet/large/
+framework/resources/Functional/flatten_operators/100000rows/large/
+#
