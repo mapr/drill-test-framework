@@ -1,0 +1,32 @@
+{
+    "testId": "tpcds_sf1_hive0dot13_native",
+    "type": "group",
+    "description": "Test TPCDS SF 1 original queries on text (with views on top) via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "hive.tpcds1_hive0dot13",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+      {
+        "mode": "cp",
+        "src": "Datasources/tpcds_hivegenerated_parquet/tpcds1_hive0dot13_parquet",
+        "dest": "tpcds1_hive0dot13"
+      },
+      {
+       "mode": "gen",
+       "src": "bin/execHive.sh resources/Datasources/hive_storage/tpcds_parquet/tpcds1_hive0dot13.ddl",
+       "dest": ""
+      } 
+    ]
+}

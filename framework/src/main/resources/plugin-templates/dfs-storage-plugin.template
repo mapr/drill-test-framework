@@ -489,6 +489,26 @@
       "location": "/drill/testdata/metadata_caching",
       "writable": true,
       "defaultInputFormat": "parquet"
+    },
+    "tpcds1_hive1": {
+      "location": "/drill/testdata/tpcds1_hive1",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "tpcds1_hive1dot2": {
+      "location": "/drill/testdata/tpcds1_hive1dot2",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "tpcds1_hive0dot13": {
+      "location": "/drill/testdata/tpcds1_hive0dot13",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "hive_storage": {
+      "location": "/drill/testdata/hive_storage",
+      "writable": true,
+      "defaultInputFormat": "parquet"
     }
     },
     "formats" : {
