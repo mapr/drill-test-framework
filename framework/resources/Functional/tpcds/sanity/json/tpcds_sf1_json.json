@@ -1,0 +1,31 @@
+{
+    "testId": "tpcds_sf1_sanity_json",
+    "type": "group",
+    "description": "Test TPCDS SF 1 queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.tpcds_sf1_json_views",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/tpcds/sf1/json",
+            "dest": "tpcds_sf1/json"
+        },
+	{
+            "mode": "gen",
+            "src": "Datasources/tpcds/createViewsJson.sh",
+            "dest": ""
+        }
+    ]
+}

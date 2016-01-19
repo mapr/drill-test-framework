@@ -30,7 +30,7 @@
         },
 	{
             "mode": "cp",
-            "src": "Datasources/text/tpcds/sf1",
+            "src": "Datasources/tpcds/sf1/text",
             "dest": "tpcds_sf1/text"
         },
 	{
