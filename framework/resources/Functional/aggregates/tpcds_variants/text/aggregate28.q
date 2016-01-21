@@ -1,0 +1,1 @@
+select sum(cast(case columns[10] when '' then 0 else columns[10] end as int) * cast(case columns[12] when '' then 0.0 else columns[12] end as float)) as sales, count(cast(case columns[2] when '' then 0 else columns[2] end as int)) as itmes from store_sales;

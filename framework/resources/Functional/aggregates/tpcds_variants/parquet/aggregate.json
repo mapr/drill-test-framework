@@ -1,15 +1,15 @@
 {
-    "testId": "aggregate1parquet",
+    "testId": "aggregates_tpcds_sf1_parquet",
     "type": "group",
     "description": "Test aggregate queries via jdbc",
     "submit-type": "jdbc",
     "categories": [
-        "regression"
+        "functional","smoke"
     ],
     "matrices": [
         {
             "query-file": ".*.q",
-            "schema": "dfs.drillTestDirAggregate1parquet",
+            "schema": "dfs.tpcds_sf1_parquet",
             "output-format": "tsv",
             "expected-file": ".*.e",
             "verification-type": [
@@ -20,8 +20,8 @@
     "datasources": [
         {
             "mode": "cp",
-            "src": "Datasources/parquet/tpcds_sf1/",
-            "dest": "tpcds/parquet/s1"
+            "src": "Datasources/tpcds/sf1/parquet",
+            "dest": "tpcds_sf1/parquet"
         }
     ]
 }
