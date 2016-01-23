@@ -55,6 +55,28 @@ FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE 
 LOCATION '/drill/testdata/hive_storage/hive_maps.txt';
 
+DROP TABLE IF EXISTS lineitem_text_hive;
+CREATE EXTERNAL TABLE lineitem_text_hive (
+    l_orderkey INT,
+    l_partkey INT,
+    l_suppkey INT,
+    l_linenumber INT,
+    l_quantity DOUBLE,
+    l_extendedprice DOUBLE,
+    l_discount DOUBLE,
+    l_tax DOUBLE,
+    l_returnflag STRING,
+    l_linestatus STRING,
+    l_shipdate DATE,
+    l_commitdate DATE,
+    l_receiptdate DATE,
+    l_shipinstruct STRING,
+    l_shipmode STRING,
+    l_comment STRING
+)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
+STORED AS TEXTFILE LOCATION "/drill/testdata/partition_pruning/hive/text/lineitem";
+
 CREATE TABLE if not exists h1_testpart2(id INT) PARTITIONED BY(id2 int);
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE h1_testpart2 PARTITION(id2) SELECT 1 as id1 , 20150101 as id2 from lineitem_text_hive limit 1;
