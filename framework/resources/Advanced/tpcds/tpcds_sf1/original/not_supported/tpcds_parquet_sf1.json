@@ -18,7 +18,7 @@
     "datasources": [
         {
             "mode": "cp",
-            "src": "Datasources/parquet/tpcds_sf1",
+            "src": "Datasources/tpcds/sf1/parquet",
             "dest": "tpcds_sf1/parquet"
         },
 	{
