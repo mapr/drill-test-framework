@@ -35,12 +35,7 @@
     },
     {
        "mode": "gen",
-       "src": "Datasources/hive_storage/hbase/hbase.sh",
-       "dest": ""
-    },
-    {
-       "mode": "gen",
-       "src": "bin/execHive.sh resources/Datasources/hive_storage/hive_hbase.q",
+       "src": "Datasources/hive_storage/hbase/main.sh",
        "dest": ""
     }
    ]
