@@ -51,27 +51,33 @@ CREATE TABLE as_avro
         { "name": "nullableint", "type": ["null", "int"] },
         { "name": "bytes1", "type": ["null", "bytes"] },
         { "name": "fixed1", "type": ["null", {"type": "fixed", "name": "threebytes", "size": 3}] }
-      ]
-    }'
-  )
-;
+      ] }');
 
 INSERT OVERWRITE TABLE as_avro SELECT * FROM test_serializer;
 
-
 DROP TABLE IF EXISTS as_avro1;
-CREATE TABLE as_avro1(string1 STRING,
-                     int1 INT,
-                     tinyint1 TINYINT,
-                     smallint1 SMALLINT,
-                     bigint1 BIGINT,
-                     boolean1 BOOLEAN,
-                     float1 FLOAT,
-                     double1 DOUBLE,
-                     enum1 STRING,
-                     nullableint INT,
-                     bytes1 BINARY,
-                     fixed1 BINARY)
-STORED AS AVRO;
-INSERT OVERWRITE TABLE as_avro1 SELECT string1, int1, tinyint1, smallint1, bigint1, boolean1, float1, double1, enum1, nullableInt, encode(string1, 'UTF-8'), encode(string1, 'UTF-8') FROM test_serializer;
-
+CREATE TABLE as_avro1 ROW FORMAT
+  SERDE 'org.apache.hadoop.hive.serde2.avro.AvroSerDe'
+  STORED AS
+  INPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
+  OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
+  TBLPROPERTIES (
+    'avro.schema.literal'='{
+      "namespace": "com.howdy",
+      "name": "some_schema",
+      "type": "record",
+      "fields": [
+        { "name": "string1", "type": ["null", "string"] },
+        { "name": "int1", "type": ["null", "int"] },
+        { "name": "tinyint1", "type": ["null", "int"] },
+        { "name": "smallint1", "type": ["null", "int"] },
+        { "name": "bigint1", "type": ["null", "long"] },
+        { "name": "boolean1", "type": ["null", "boolean"] },
+        { "name": "float1", "type": ["null", "float"] },
+        { "name": "double1", "type": ["null", "double"] },
+        { "name": "enum1", "type": ["null", {"type": "enum", "name": "enum1_values", "symbols": ["BLUE", "RED", "GREEN"]}] },
+        { "name": "nullableint", "type": ["null", "int"] },
+        { "name": "bytes1", "type": ["null", "bytes"] },
+        { "name": "fixed1", "type": ["null", "bytes"] }
+      ] }');
+INSERT OVERWRITE TABLE as_avro1 SELECT string1, int1, tinyint1, smallint1, bigint1, boolean1, float1, double1, enum1, nullableInt, encode(string1, 'UTF-8'), encode(string1, 'UTF-8')  FROM test_serializer;

@@ -105,16 +105,6 @@
         "writable" : true,
         "defaultInputFormat" : "parquet"
       },
-      "drillTestDirTPCDS" : {
-        "location" : "/user/root/tpcds/parquet",
-        "writable" : true,
-        "defaultInputFormat" : "parquet"
-      },
-      "TPCDS" : {
-        "location" : "/drill/testdata/tpcds",
-        "writable" : true,
-        "defaultInputFormat" : "parquet"
-      },
       "drillMondrian" : {
         "location" : "/user/root/mondrian",
         "writable" : true,
@@ -175,21 +165,6 @@
         "writable" : true,
         "defaultInputFormat" : null
       },
-      "drillTestDirAggregate1parquet" : {
-        "location" : "/drill/testdata/tpcds/parquet/s1",
-        "writable" : true,
-        "defaultInputFormat" : null
-      },
-      "drillTestDirAggregate1csv" : {
-        "location" : "/drill/testdata/tpcds/csv/s1",
-        "writable" : true,
-        "defaultInputFormat" : null
-      },
-      "drillTestDirAggregate1json" : {
-        "location" : "/drill/testdata/tpcds/json/s1",
-        "writable" : true,
-        "defaultInputFormat" : null
-      },
       "drillTestDirMondrian" : {
         "location" : "/drill/testdata/mondrian",
         "writable" : true,
@@ -209,11 +184,6 @@
         "location" : "/drill/testdata/complex/parquet",
         "writable" : true,
         "defaultInputFormat" : "parquet"
-      },
-      "drillTestDirTpcdsImpalaSF1" : {
-        "location" : "/drill/testdata/tpcds-impala-sf1",
-        "writable" : true,
-        "defaultInputFormat" : null
       },
       "identifiers" : {
         "location" : "/drill/testdata/identifiers",
@@ -299,16 +269,6 @@
       "location": "/drill/testdata/flatten_operators/schema_changes",
       "writable": true,
       "defaultInputFormat": "parquet"
-    },
-    "tpcds_parquet_sf1": {
-      "location": "/drill/testdata/tpcds/parquet/sf1",
-      "writable": true,
-      "defaultInputFormat": "parquet"
-    },
-    "tpcds_text_sf1": {
-      "location": "/drill/testdata/tpcds/text/sf1",
-      "writable": true,
-      "defaultInputFormat": "psv"
     },
     "json_parquet_json": {
       "location": "/drill/testdata/json_parquet_json",

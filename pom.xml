@@ -251,10 +251,23 @@
                      <goal>wget</goal>
                   </goals>
                   <configuration>
-                     <url>https://s3.amazonaws.com/apache-drill/files/tpcds/tpcds_sf1_parquet.tgz</url>
+                     <url>https://s3.amazonaws.com/apache-drill/files/tpcds/tpcds_sf1_parquet.tar.gz</url>
                      <outputFileName>tpcds_sf1_parquet.tgz</outputFileName>
                      <unpack>true</unpack>
-                     <outputDirectory>${project.basedir}/resources/Datasources/parquet/tpcds_sf1</outputDirectory>
+                     <outputDirectory>${project.basedir}/resources/Datasources/tpcds/sf1/parquet</outputDirectory>
+                  </configuration>
+               </execution>
+	       <execution>
+                  <id>tpcds_sf1_json</id>
+                  <phase>prepare-package</phase>
+                  <goals>
+                     <goal>wget</goal>
+                  </goals>
+                  <configuration>
+                     <url>https://s3.amazonaws.com/apache-drill/files/tpcds/tpcds_sf1_json.tar.gz</url>
+                     <outputFileName>tpcds_sf1_json.tgz</outputFileName>
+                     <unpack>true</unpack>
+                     <outputDirectory>${project.basedir}/resources/Datasources/tpcds/sf1/json</outputDirectory>
                   </configuration>
                </execution>
                <execution>
@@ -264,10 +277,10 @@
                      <goal>wget</goal>
                   </goals>
                   <configuration>
-                     <url>https://s3.amazonaws.com/apache-drill/files/tpcds_text_sf1.tgz</url>
+                     <url>https://s3.amazonaws.com/apache-drill/files/tpcds/tpcds_sf1_text.tar.gz</url>
                      <outputFileName>tpcds_text_sf1.tgz</outputFileName>
                      <unpack>true</unpack>
-                     <outputDirectory>${project.basedir}/resources/Datasources/text/tpcds/sf1</outputDirectory>
+                     <outputDirectory>${project.basedir}/resources/Datasources/tpcds/sf1/text</outputDirectory>
                   </configuration>
                </execution>
                <execution>

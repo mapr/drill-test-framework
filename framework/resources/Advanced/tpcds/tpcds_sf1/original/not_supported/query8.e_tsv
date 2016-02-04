@@ -1,0 +1,3 @@
+0\t
+UNSUPPORTED_OPERATION ERROR: INTERSECT is not supported
+See Apache Drill JIRA: DRILL-1921

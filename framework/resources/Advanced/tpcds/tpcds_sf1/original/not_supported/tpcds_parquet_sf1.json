@@ -1,0 +1,30 @@
+{
+    "testId": "tpcds_sf1_original_parquet_not_supported",
+    "type": "group",
+    "negative": true,
+    "description": "Test TPCDS SF 1 queries via jdbc",
+    "categories": [ "negative" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.tpcds_sf1_parquet_views",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/tpcds/sf1/parquet",
+            "dest": "tpcds_sf1/parquet"
+        },
+	{
+            "mode": "gen",
+            "src": "Datasources/tpcds/createViewsParquet.sh",
+            "dest": ""
+        }
+    ]
+}
