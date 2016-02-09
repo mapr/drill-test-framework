@@ -30,8 +30,10 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
@@ -48,6 +50,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import org.apache.drill.test.framework.TestCaseModeler.DataSource;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -67,7 +71,9 @@ public class Utils {
   private static final Map<Integer, String> sqlTypes;
   private static final Map<Integer, String> sqlNullabilities;
   private static final Map<String, String> drillTestProperties;
-
+  private static final String CWD = System.getProperty("user.dir");
+  private static final ConnectionPool connectionPool;
+  
   static {
     // setup sql types
     final Map<Integer, String> map = Maps.newHashMap();
@@ -110,8 +116,15 @@ public class Utils {
       drillProperties.put(key.trim(), bundle.getString(key).trim());
     }
     drillTestProperties = ImmutableMap.copyOf(drillProperties);
+    
+    // connection pool
+    connectionPool = new ConnectionPool();
   }
 
+  public static ConnectionPool getConnectionPool() {
+	return connectionPool;
+  }
+  
   /**
    * Constructs an iteration of test case definitions from various test data
    * sources, obtained from the mvn command line option. See README.md for more
@@ -305,6 +318,8 @@ public class Utils {
     return statements;
   }
 
+  // this function should only be used while the sql resultset is still valid,
+  // i.e. the connection related to the resultset is still valid (not closed)
   public static String getSqlResult(ResultSet resultSet) throws SQLException {
     StringBuffer stringBuffer = new StringBuffer();
 	List columnLabels = new ArrayList<String>();
@@ -519,6 +534,74 @@ public class Utils {
 		Files.delete(path);
 	} catch (IOException e) {
 		e.printStackTrace();
+	}
+  }
+  
+  public static int getNumberOfClusterNodes() {
+	if (drillTestProperties.containsKey("NUMBER_OF_CLUSTER_NODES")) { 
+	  return Integer.parseInt(drillTestProperties.get("NUMBER_OF_CLUSTER_NODES"));
+	}
+	return 0;
+  }
+  
+  public static int getNumberOfDrillbits(Connection connection) {
+	String query = "select count(*) from sys.drillbits";
+	int numberOfDrillbits = 0;
+	try {
+	  ResultSet resultSet = execSQL(query, connection);
+	  resultSet.next();
+	  numberOfDrillbits = resultSet.getInt(1);
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return numberOfDrillbits;
+  }
+  
+
+  public static CmdConsOut execCmd(String cmd){
+	CmdConsOut cmdConsOut = new CmdConsOut();
+	cmdConsOut.cmd = cmd;
+	int exitCode = -1;
+	        
+	StringBuffer stringBuffer = new StringBuffer();
+	try{
+	  Process p = Runtime.getRuntime().exec(cmd);
+//	  InputStreamReader isr = new InputStreamReader(p.getInputStream());
+	  InputStreamReader isr = new InputStreamReader(p.getErrorStream());
+	  BufferedReader br = new BufferedReader(isr);
+	  String line=null;
+	  while ((line = br.readLine()) != null) {
+        stringBuffer.append(line + "\n");
+	  }
+	  br.close();
+	  exitCode = p.waitFor();
+	} catch (Exception e) {
+	  e.printStackTrace();
+	} finally {
+	  cmdConsOut.exitCode = exitCode;
+	  cmdConsOut.consoleOut = stringBuffer.toString();
+	}
+
+	if (cmdConsOut.exitCode == 0) {
+	  LOG.debug("Command " + cmd + " successful.\n" + cmdConsOut.consoleOut);
+	} else {
+	  LOG.debug("Command " + cmd + " failed.\n" + cmdConsOut.consoleOut);
+	}
+	return cmdConsOut;
+  }
+  
+  public static ResultSet execSQL(String sql, Connection connection) throws SQLException {
+	try {
+	  Statement statement = connection.createStatement();
+	  return statement.executeQuery(sql);
+	} catch (SQLException e) {
+	  e.printStackTrace();
+      try {
+		connection.close();
+	  } catch (SQLException e1) {
+		e1.printStackTrace();
+	  }
+      throw e;
 	}
   }
 }
