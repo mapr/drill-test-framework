@@ -141,6 +141,19 @@
             <version>1.2.0</version>
             <executions>
                <execution>
+                  <id>install-tpcds-hivegenerate-parquet</id>
+                  <phase>prepare-package</phase>
+                  <goals>
+                     <goal>wget</goal>
+                  </goals>
+                  <configuration>
+                     <url>http://apache-drill.s3.amazonaws.com/files/tpcds_hivegenerated_parquet.tgz</url>
+                     <outputFileName>tpcds_hivegenerated_parquet.tgz</outputFileName>
+                     <unpack>true</unpack>
+                     <outputDirectory>${project.basedir}/resources/Datasources</outputDirectory>
+                  </configuration>
+               </execution> 
+               <execution>
                   <id>install-complexga100k-tgz-json</id>
                   <phase>prepare-package</phase>
                   <goals>

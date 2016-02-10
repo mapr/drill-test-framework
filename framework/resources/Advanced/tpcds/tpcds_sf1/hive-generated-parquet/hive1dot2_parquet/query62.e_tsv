@@ -1,0 +1,100 @@
+Bad cards must make.	EXPRESS	site_0	290	294	255	280	0
+Bad cards must make.	EXPRESS	site_1	278	237	283	267	0
+Bad cards must make.	EXPRESS	site_2	303	300	289	308	0
+Bad cards must make.	EXPRESS	site_3	286	287	276	295	0
+Bad cards must make.	EXPRESS	site_4	302	326	272	302	0
+Bad cards must make.	LIBRARY	site_0	247	226	230	252	0
+Bad cards must make.	LIBRARY	site_1	223	230	199	210	0
+Bad cards must make.	LIBRARY	site_2	193	185	188	172	0
+Bad cards must make.	LIBRARY	site_3	174	202	229	189	0
+Bad cards must make.	LIBRARY	site_4	211	238	250	250	0
+Bad cards must make.	NEXT DAY	site_0	276	331	266	271	0
+Bad cards must make.	NEXT DAY	site_1	291	299	306	303	0
+Bad cards must make.	NEXT DAY	site_2	292	278	320	298	0
+Bad cards must make.	NEXT DAY	site_3	287	337	340	306	0
+Bad cards must make.	NEXT DAY	site_4	259	272	273	281	0
+Bad cards must make.	OVERNIGHT	site_0	223	222	206	230	0
+Bad cards must make.	OVERNIGHT	site_1	231	237	242	258	0
+Bad cards must make.	OVERNIGHT	site_2	233	236	233	241	0
+Bad cards must make.	OVERNIGHT	site_3	171	250	218	218	0
+Bad cards must make.	OVERNIGHT	site_4	200	164	201	154	0
+Bad cards must make.	REGULAR	site_0	205	218	212	210	0
+Bad cards must make.	REGULAR	site_1	151	191	178	169	0
+Bad cards must make.	REGULAR	site_2	201	224	222	212	0
+Bad cards must make.	REGULAR	site_3	230	247	232	243	0
+Bad cards must make.	REGULAR	site_4	245	246	226	235	0
+Bad cards must make.	TWO DAY	site_0	225	218	263	207	0
+Bad cards must make.	TWO DAY	site_1	257	218	251	228	0
+Bad cards must make.	TWO DAY	site_2	221	201	215	208	0
+Bad cards must make.	TWO DAY	site_3	173	166	183	179	0
+Bad cards must make.	TWO DAY	site_4	189	211	197	217	0
+Conventional childr	EXPRESS	site_0	293	289	323	317	0
+Conventional childr	EXPRESS	site_1	257	250	260	287	0
+Conventional childr	EXPRESS	site_2	251	272	282	259	0
+Conventional childr	EXPRESS	site_3	315	287	316	291	0
+Conventional childr	EXPRESS	site_4	285	267	313	291	0
+Conventional childr	LIBRARY	site_0	230	216	243	238	0
+Conventional childr	LIBRARY	site_1	198	260	262	242	0
+Conventional childr	LIBRARY	site_2	222	215	202	197	0
+Conventional childr	LIBRARY	site_3	150	203	170	190	0
+Conventional childr	LIBRARY	site_4	206	198	202	209	0
+Conventional childr	NEXT DAY	site_0	264	257	277	289	0
+Conventional childr	NEXT DAY	site_1	278	252	293	253	0
+Conventional childr	NEXT DAY	site_2	280	287	307	310	0
+Conventional childr	NEXT DAY	site_3	250	302	305	302	0
+Conventional childr	NEXT DAY	site_4	303	284	314	305	0
+Conventional childr	OVERNIGHT	site_0	187	171	163	189	0
+Conventional childr	OVERNIGHT	site_1	204	217	239	210	0
+Conventional childr	OVERNIGHT	site_2	223	252	248	255	0
+Conventional childr	OVERNIGHT	site_3	230	238	236	241	0
+Conventional childr	OVERNIGHT	site_4	214	224	204	201	0
+Conventional childr	REGULAR	site_0	222	240	239	217	0
+Conventional childr	REGULAR	site_1	227	197	197	202	0
+Conventional childr	REGULAR	site_2	175	185	175	209	0
+Conventional childr	REGULAR	site_3	215	206	198	192	0
+Conventional childr	REGULAR	site_4	244	240	220	227	0
+Conventional childr	TWO DAY	site_0	221	208	235	213	0
+Conventional childr	TWO DAY	site_1	251	232	259	241	0
+Conventional childr	TWO DAY	site_2	236	252	259	251	0
+Conventional childr	TWO DAY	site_3	213	211	210	212	0
+Conventional childr	TWO DAY	site_4	171	177	175	206	0
+Doors canno	EXPRESS	site_0	293	276	292	312	0
+Doors canno	EXPRESS	site_1	275	292	291	327	0
+Doors canno	EXPRESS	site_2	271	267	280	263	0
+Doors canno	EXPRESS	site_3	275	271	278	270	0
+Doors canno	EXPRESS	site_4	276	287	281	288	0
+Doors canno	LIBRARY	site_0	201	194	220	212	0
+Doors canno	LIBRARY	site_1	251	237	256	259	0
+Doors canno	LIBRARY	site_2	239	260	237	223	0
+Doors canno	LIBRARY	site_3	211	211	198	218	0
+Doors canno	LIBRARY	site_4	178	188	186	186	0
+Doors canno	NEXT DAY	site_0	318	282	278	318	0
+Doors canno	NEXT DAY	site_1	243	278	253	277	0
+Doors canno	NEXT DAY	site_2	259	256	263	237	0
+Doors canno	NEXT DAY	site_3	277	300	276	290	0
+Doors canno	NEXT DAY	site_4	275	307	297	299	0
+Doors canno	OVERNIGHT	site_0	199	225	204	197	0
+Doors canno	OVERNIGHT	site_1	176	175	190	165	0
+Doors canno	OVERNIGHT	site_2	216	200	187	208	0
+Doors canno	OVERNIGHT	site_3	233	221	267	250	0
+Doors canno	OVERNIGHT	site_4	263	245	225	232	0
+Doors canno	REGULAR	site_0	245	236	242	233	0
+Doors canno	REGULAR	site_1	252	246	268	235	0
+Doors canno	REGULAR	site_2	234	213	221	191	0
+Doors canno	REGULAR	site_3	192	174	184	193	0
+Doors canno	REGULAR	site_4	214	218	199	218	0
+Doors canno	TWO DAY	site_0	191	182	183	197	0
+Doors canno	TWO DAY	site_1	228	213	199	209	0
+Doors canno	TWO DAY	site_2	236	247	232	225	0
+Doors canno	TWO DAY	site_3	250	228	245	264	0
+Doors canno	TWO DAY	site_4	217	225	202	235	0
+Important issues liv	EXPRESS	site_0	260	291	328	264	0
+Important issues liv	EXPRESS	site_1	303	285	301	298	0
+Important issues liv	EXPRESS	site_2	293	297	282	262	0
+Important issues liv	EXPRESS	site_3	293	293	295	291	0
+Important issues liv	EXPRESS	site_4	257	242	264	284	0
+Important issues liv	LIBRARY	site_0	214	208	199	231	0
+Important issues liv	LIBRARY	site_1	167	185	163	212	0
+Important issues liv	LIBRARY	site_2	214	221	203	229	0
+Important issues liv	LIBRARY	site_3	248	249	252	264	0
+Important issues liv	LIBRARY	site_4	231	263	217	247	0
