@@ -1,0 +1,25 @@
+{
+    "testId": "int96_hive",
+    "type": "group",
+    "description": "int96 tests: parquet files are coming from hive",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.subqueries",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/subqueries",
+            "dest": "subqueries"
+        }
+    ]
+}
+

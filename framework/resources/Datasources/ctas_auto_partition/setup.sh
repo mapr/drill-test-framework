@@ -1,8 +1,6 @@
 hadoop fs -mkdir /drill/testdata/ctas_auto_partition
 hadoop fs -rmr /drill/testdata/ctas_auto_partition/tpch_single_partition
 hadoop fs -mkdir /drill/testdata/ctas_auto_partition/tpch_single_partition
-hadoop fs -rmr /drill/testdata/ctas_auto_partition/tpch_single_partition1
-hadoop fs -mkdir /drill/testdata/ctas_auto_partition/tpch_single_partition1
 
 ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.ctasAutoPartition;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=resources/Datasources/ctas_auto_partition/create_tables.ddl
 

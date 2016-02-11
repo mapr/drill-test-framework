@@ -1,0 +1,3 @@
+DRILL-4337 : Add tests by joining on timestamp between parquet files using dfs plugin and hive table on top of the same parquet file.
+Explore more on the timestamp column
+

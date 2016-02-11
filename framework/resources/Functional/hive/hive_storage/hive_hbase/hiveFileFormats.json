@@ -5,7 +5,7 @@
     "categories": [
         "smoke"
     ],
-    "dependencies" : ["hive"],
+    "dependencies" : ["hive","hbase"],
     "matrices": [
         {
             "query-file": ".*.sql",
@@ -19,8 +19,23 @@
     ],
     "datasources": [
     {
+       "mode": "cp",
+       "src": "Datasources/hive_storage/voter.txt",
+       "dest": "hive_storage/voter_txt/voter.txt"
+    },
+    {
+       "mode": "cp",
+       "src": "Datasources/hive_storage/student.txt",
+       "dest": "hive_storage/student_txt/student.txt"
+    },
+    {
+       "mode": "cp",
+       "src": "Datasources/hive_storage/hbase/votertab",
+       "dest": "hive_storage/votertab"
+    },
+    {
        "mode": "gen",
-       "src": "bin/execHive.sh resources/Datasources/hive_storage/hive_hbase.q",
+       "src": "Datasources/hive_storage/hbase/main.sh",
        "dest": ""
     }
    ]
