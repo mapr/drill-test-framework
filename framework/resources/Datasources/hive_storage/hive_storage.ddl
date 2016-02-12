@@ -45,7 +45,7 @@ where int_col is not null and
 
 CREATE EXTERNAL TABLE IF NOT EXISTS hive_storage.json_table ( json string )
 STORED AS TEXTFILE
-LOCATION '/drill/testdata/hive_storage/sample.json';
+LOCATION '/drill/testdata/hive_storage/sample';
 
 create external table if not exists hive_storage.hive_maps (
     id string, m map<string, string>
