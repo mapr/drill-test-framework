@@ -30,13 +30,13 @@
     },
     {
         "mode": "cp",
-        "src": "Datasources/hive_storage/fewtypes_null.tbl.gz",
-        "dest": "hive_storage/fewtypes_null.tbl.gz"
+        "src": "Datasources/hive_storage/fewtypes_null_gz",
+        "dest": "hive_storage/fewtypes_null_gz"
     },
     {
         "mode": "cp",
-        "src": "Datasources/hive_storage/fewtypes_null.tbl.bz2",
-        "dest": "hive_storage/fewtypes_null.tbl.bz2"
+        "src": "Datasources/hive_storage/fewtypes_null_bz2",
+        "dest": "hive_storage/fewtypes_null_bz2"
     },
     {
         "mode": "cp",
@@ -50,13 +50,13 @@
     },
     { 
         "mode": "cp", 
-        "src": "Datasources/hive_storage/null_schemachange.tbl", 
-        "dest": "hive_storage/null_schemachange.tbl" 
+        "src": "Datasources/hive_storage/null_schemachange", 
+        "dest": "hive_storage/null_schemachange" 
     },
     {  
         "mode": "cp",  
-        "src": "Datasources/hive_storage/onlynulls.tbl",  
-        "dest": "hive_storage/onlynulls.tbl"  
+        "src": "Datasources/hive_storage/onlynulls",  
+        "dest": "hive_storage/onlynulls"  
     },
     {
         "mode": "cp",

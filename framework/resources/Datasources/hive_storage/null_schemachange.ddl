@@ -12,7 +12,7 @@ create external table null_schemachange (
   bool_col boolean
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
-LOCATION '/drill/testdata/hive_storage/null_schemachange.tbl'
+LOCATION '/drill/testdata/hive_storage/null_schemachange'
 TBLPROPERTIES ("serialization.null.format"="null");
 
 
@@ -30,5 +30,5 @@ create external table onlynulls (
   bool_col boolean 
 ) 
 ROW FORMAT DELIMITED FIELDS TERMINATED BY "|" 
-LOCATION '/drill/testdata/hive_storage/onlynulls.tbl' 
+LOCATION '/drill/testdata/hive_storage/onlynulls' 
 TBLPROPERTIES ("serialization.null.format"="null");

@@ -35,8 +35,8 @@
         },
         {
                 "mode": "cp",
-                "src": "Datasources/partition_pruning/hive/mktevents.tbl",
-                "dest": "hive_storage/mktevents.tbl"
+                "src": "Datasources/partition_pruning/hive/mktevents_tbl",
+                "dest": "hive_storage/mktevents_tbl"
         },
         {
            "mode": "gen",
@@ -51,11 +51,6 @@
         {
            "mode": "gen",
            "src": "bin/execHive.sh resources/Datasources/partition_pruning/hive/empty_lengthy.ddl",
-           "dest": ""
-        },
-        {
-           "mode": "gen",
-           "src": "bin/execHive.sh resources/Datasources/hive_storage/sequenceFileFormat.q",
            "dest": ""
         },
         {
