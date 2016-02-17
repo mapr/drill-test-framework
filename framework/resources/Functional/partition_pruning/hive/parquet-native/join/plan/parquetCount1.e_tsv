@@ -1,0 +1,3 @@
+.*HashJoin.*
+.*HiveDrillNativeParquetScan.*numPartitions=7.*
+.*HiveDrillNativeParquetScan.*numPartitions=8.*
