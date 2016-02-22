@@ -61,6 +61,8 @@ public class TestDriver {
   private Connection connection = null;
   private long [][] memUsage = new long[2][3];
   private String memUsageFilename = null;
+
+  private static final int MAX_RETRY_ATTEMPTS=10;
  
   private static Configuration conf = new Configuration();
   public static final Options OPTIONS = new Options();
@@ -93,6 +95,7 @@ public class TestDriver {
     		  "-m", "track memory usage",
     		  "-c", "percent of tests attempted to be canceled", 
     		  "-w", "enable write actual query result to file",
+    		  "-r", "retry attempts for data generation scripts",
     		  "-h", "--help", "show usage"};
       new JCommander(OPTIONS, valid).usage();
 
@@ -147,7 +150,10 @@ public class TestDriver {
     
     @Parameter(names = {"-d"}, description = "generate data", required=false)
     public boolean generate = false;
-    
+
+    @Parameter(names = {"-r"}, description = "retry attempts for data generation scripts", required=false)
+    public int retry = 1;
+
     @Parameter(names = {"-m"}, description = "track memory usage", required=false)
     public boolean trackMemory = false;
     
@@ -444,32 +450,40 @@ public class TestDriver {
       }
     }
   }
-  
+
   private static void runGenerateScript(DataSource datasource) {
+
     int exitCode = 0;
     String command = CWD + "/resources/" + datasource.src;
     LOG.info("Running command " + command);
     StringBuilder sb = new StringBuilder();
+
     try {
+      int attempts = 0;
+      do {
+        Process p = Runtime.getRuntime().exec(command);
 
-      Process p = Runtime.getRuntime().exec(command);
+        BufferedReader reader =
+                new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
-      BufferedReader reader =
-          new BufferedReader(new InputStreamReader(p.getErrorStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+          sb.append(line + "\n");
+        }
 
-      String line;
-      while ((line = reader.readLine())!= null) {
-        sb.append(line + "\n");
-      }
-      exitCode = p.waitFor();
-      LOG.info(sb.toString());
+        exitCode = p.waitFor();
+        LOG.info(sb.toString());
+
+        attempts++;
+      } while (exitCode != 0 && (attempts < OPTIONS.retry && attempts < MAX_RETRY_ATTEMPTS));
+
     } catch (Exception e) {
       LOG.error("Error: Failed to execute the command " + command + ".");
       throw new RuntimeException(e);
     }
     if (exitCode != 0) {
       throw new RuntimeException("Error executing the command " + command
-          + " has return code " + exitCode);
+              + " has return code " + exitCode);
     }
   }
 
@@ -591,3 +605,4 @@ public class TestDriver {
     }
   }
 }
+
