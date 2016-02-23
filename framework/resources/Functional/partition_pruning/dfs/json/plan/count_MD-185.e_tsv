@@ -1,4 +1,4 @@
 .*
   StreamAgg.*
     Project.*
-      Scan.*selectionRoot=.*/drill/testdata/partition_pruning/dfs/ordersjson.*numFiles=1.*columns=\[\].*files=.*/drill/testdata/partition_pruning/dfs/ordersjson/1993/xad.json.*
+      Scan.*selectionRoot=.*/drill/testdata/partition_pruning/dfs/ordersjson.*numFiles=1.*columns=\[`\*`\].*files=.*/drill/testdata/partition_pruning/dfs/ordersjson/1993/xad.json.*
