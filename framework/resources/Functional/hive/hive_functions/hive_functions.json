@@ -25,8 +25,8 @@
         },
         {
             "mode": "cp",
-            "src": "Datasources/hive_storage/sample.json",
-            "dest": "hive_storage/sample.json"
+            "src": "Datasources/hive_storage/sample",
+            "dest": "hive_storage/sample"
         },
 	{
             "mode": "cp",

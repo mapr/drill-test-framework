@@ -8,7 +8,7 @@ create external table if not exists add_columns1 (
   interval_col string
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
-LOCATION '/drill/testdata/hive_storage/fewtypes_null.tbl'
+LOCATION '/drill/testdata/hive_storage/fewtypes_null_tbl'
 TBLPROPERTIES ("serialization.null.format"="null");
 
 drop table if exists remove_columns1;
@@ -25,7 +25,7 @@ create external table if not exists remove_columns1 (
   bool_col boolean
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
-LOCATION '/drill/testdata/hive_storage/fewtypes_null.tbl'
+LOCATION '/drill/testdata/hive_storage/fewtypes_null_tbl'
 TBLPROPERTIES ("serialization.null.format"="null");
 
 drop table if exists add_columns2;
@@ -74,7 +74,7 @@ create external table if not exists modify_columntypes1 (
   bool_col boolean
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
-LOCATION '/drill/testdata/hive_storage/fewtypes_null.tbl'
+LOCATION '/drill/testdata/hive_storage/fewtypes_null_tbl'
 TBLPROPERTIES ("serialization.null.format"="null");
 
 drop table if exists modify_columntypes2;
@@ -91,7 +91,7 @@ create external table if not exists modify_columntypes2 (
   bool_col boolean
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
-LOCATION '/drill/testdata/hive_storage/fewtypes_null.tbl'
+LOCATION '/drill/testdata/hive_storage/fewtypes_null_tbl'
 TBLPROPERTIES ("serialization.null.format"="null");
 
 create external table if not exists orc_modify_columntypes_src (
@@ -147,7 +147,7 @@ CREATE EXTERNAL TABLE IF NOT EXISTS mktevents(
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
 STORED AS TEXTFILE
-LOCATION '/drill/testdata/hive_storage/mktevents.tbl';
+LOCATION '/drill/testdata/hive_storage/mktevents_tbl';
 
 DROP TABLE IF EXISTS dpp_compressed_mktevents;
 CREATE TABLE IF NOT EXISTS dpp_compressed_mktevents

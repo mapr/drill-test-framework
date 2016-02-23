@@ -20,8 +20,13 @@
     "datasources": [
     {
         "mode": "cp",
-        "src": "Datasources/hive_storage/fewtypes_null.tbl",
-        "dest": "hive_storage/fewtypes_null.tbl"
+        "src": "Datasources/hive_storage/fewtypes_null_tbl",
+        "dest": "hive_storage/fewtypes_null_tbl"
+    },
+    {
+        "mode": "cp",
+        "src": "Datasources/hive_storage/mktevents_tbl",
+        "dest": "hive_storage/mktevents_tbl"
     },
     {
         "mode": "cp",

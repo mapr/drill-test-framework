@@ -12,7 +12,7 @@ create external table fewtypes_null_compressed_gz (
   bool_col boolean
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
-LOCATION '/drill/testdata/hive_storage/fewtypes_null.tbl.gz'
+LOCATION '/drill/testdata/hive_storage/fewtypes_null_gz'
 TBLPROPERTIES ("serialization.null.format"="null");
 
 drop table if exists fewtypes_null_compressed_bz2;
@@ -29,7 +29,7 @@ create external table fewtypes_null_compressed_bz2 (
   bool_col boolean
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
-LOCATION '/drill/testdata/hive_storage/fewtypes_null.tbl.bz2'
+LOCATION '/drill/testdata/hive_storage/fewtypes_null_bz2'
 TBLPROPERTIES ("serialization.null.format"="null");
 
 
