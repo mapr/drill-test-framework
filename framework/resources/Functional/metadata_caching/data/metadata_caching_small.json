@@ -17,11 +17,11 @@
         }
     ],
     "datasources": [
-	{
-          "mode": "cp",
-          "src": "Datasources/metadata_caching/data/",
-          "dest": "metadata_caching/"
-    	},
+        {
+           "mode": "gen",
+           "src": "Datasources/metadata_caching/copy_data.sh",
+           "dest": ""
+        },
         {
            "mode": "gen",
            "src": "Datasources/metadata_caching/delete_cache.sh /drill/testdata/metadata_caching/nation",
