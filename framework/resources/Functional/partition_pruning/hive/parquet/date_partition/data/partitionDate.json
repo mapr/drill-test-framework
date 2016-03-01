@@ -25,7 +25,7 @@
 	},
         {
            "mode": "gen",
-           "src": "bin/execHive.sh resources/Datasources/partition_pruning/hive/hive_date_parquet.ddl",
+           "src": "bin/execHive.sh framework/resources/Datasources/partition_pruning/hive/hive_date_parquet.ddl",
            "dest": ""
         }
     ]

@@ -36,7 +36,7 @@
         },
         {
           "mode": "gen",
-          "src": "bin/execHive.sh resources/Datasources/hive_storage/hive_native/hive_native.ddl",
+          "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/hive_native/hive_native.ddl",
           "dest": ""
         }
     ]

@@ -1,0 +1,6 @@
+#export MAVEN_OPTS=$MAVEN_OPTS" -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5006"
+bin=`dirname "${BASH_SOURCE-$0}"`
+bin=`cd "$bin">/dev/null; pwd`
+cd ${bin}/../framework
+source ../conf/drillTestConfig.properties
+mvn install

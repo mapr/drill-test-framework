@@ -25,7 +25,7 @@
 	},
         {
            "mode": "gen",
-           "src": "bin/execHive.sh resources/Datasources/partition_pruning/hive/hierarchical_intstring_parquet.ddl",
+           "src": "bin/execHive.sh framework/resources/Datasources/partition_pruning/hive/hierarchical_intstring_parquet.ddl",
            "dest": ""
         }
     ]
