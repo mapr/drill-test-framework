@@ -268,7 +268,7 @@ public class DrillTestJdbc implements DrillTest {
       writer.append(msg);
       
       if (!columnLabels.equals(this.columnLabels) || !columnTypes.equals(this.columnTypes)
-    		  || !columnNullabilities.equals(this.columnNullabilities)) {
+          || !isNullabilityCompatible(columnNullabilities, this.columnNullabilities))  {
         LOG.info(msg);
         setTestStatus(TestStatus.VERIFICATION_FAILURE);
         exception = exception == null? new VerificationException(msg)
@@ -280,6 +280,22 @@ public class DrillTestJdbc implements DrillTest {
       if (resultSet != null) resultSet.close();
       if (writer != null) writer.close();
     }
+  }
+
+  private boolean isNullabilityCompatible(List<Integer> limitZero, List<Integer> regular) {
+    for(int i = 0; i < limitZero.size(); ++i) {
+      final int nullabilityLimitZero = limitZero.get(i);
+      final int nullabilityRegular = regular.get(i);
+
+      // Going from NoNullable (for schema) to Nullable (for regular)
+      // will lead to incorrect result
+      if(nullabilityLimitZero == 0
+          && nullabilityRegular == 1) {
+        return false;
+      }
+    }
+
+    return true;
   }
   
   @Override
