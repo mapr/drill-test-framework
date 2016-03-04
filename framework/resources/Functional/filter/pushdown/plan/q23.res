@@ -11,5 +11,4 @@
                     .*Scan
                     .*SelectionVectorRemover
                        .*Filter
-                        .*Project
-                          .*Scan
+                        .*Scan
