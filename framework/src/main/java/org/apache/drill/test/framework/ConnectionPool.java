@@ -36,8 +36,14 @@ public class ConnectionPool implements AutoCloseable {
 
   private final Map<String, Queue<Connection>> connections;
 
-  public ConnectionPool() throws ClassNotFoundException {
-    Class.forName("org.apache.drill.jdbc.Driver");
+  public ConnectionPool() {
+    try {
+		Class.forName("org.apache.drill.jdbc.Driver");
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		System.exit(-1);
+	}
     Driver.load();
     connections = new HashMap<>();
   }
