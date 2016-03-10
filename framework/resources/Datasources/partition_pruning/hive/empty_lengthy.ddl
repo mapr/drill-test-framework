@@ -4,7 +4,7 @@ CREATE EXTERNAL TABLE empty_lengthy (
     varchar_col STRING
    )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
-STORED AS TEXTFILE LOCATION "/drill/testdata/partition_pruning/hive/empty_lengthy_partitions.tbl";
+STORED AS TEXTFILE LOCATION "/drill/testdata/partition_pruning/hive/empty_lengthy_partitions";
 
 DROP TABLE IF EXISTS empty_lengthy1;
 CREATE EXTERNAL TABLE empty_lengthy1 (
@@ -12,7 +12,7 @@ CREATE EXTERNAL TABLE empty_lengthy1 (
     varchar_col STRING
    )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
-STORED AS TEXTFILE LOCATION "/drill/testdata/partition_pruning/hive/empty_lengthy_partitions.tbl"
+STORED AS TEXTFILE LOCATION "/drill/testdata/partition_pruning/hive/empty_lengthy_partitions"
 TBLPROPERTIES ("serialization.null.format"="?");
 
 

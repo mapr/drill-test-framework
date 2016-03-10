@@ -1,0 +1,37 @@
+{
+    "testId": "hivegeneratedparquet_native",
+    "type": "group",
+    "description": "Test hive file formats and queries",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "hive",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+    {
+        "mode": "cp",
+        "src": "Datasources/hive_storage/hive1_fewtypes_null",
+        "dest": "hive_storage/hive1_fewtypes_null"
+    },
+    {
+        "mode": "cp",
+        "src": "Datasources/cross-sources/fewtypes_null.json",
+        "dest": "cross-sources/fewtypes_null.json"
+    },
+    {
+       "mode": "gen",
+       "src": "Datasources/hive_storage/execHive.sh resources/Datasources/hive_storage/hivegenerated_parquet.ddl",
+       "dest": ""
+    }
+   ]
+}

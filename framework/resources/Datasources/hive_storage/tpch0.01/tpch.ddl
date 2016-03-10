@@ -6,7 +6,7 @@ create external table if not exists tpch01_parquet_nodate.nation (
     n_comment string
 )
 STORED AS PARQUET
-LOCATION '/drill/testdata/Tpch0.01/parquet/nation/nation.parquet';
+LOCATION '/drill/testdata/Tpch0.01/parquet/nation';
 
 
 create external table if not exists tpch01_parquet_nodate.region (
@@ -15,7 +15,7 @@ create external table if not exists tpch01_parquet_nodate.region (
     r_comment string
 )
 STORED AS PARQUET
-LOCATION '/drill/testdata/Tpch0.01/parquet/region/region.parquet';
+LOCATION '/drill/testdata/Tpch0.01/parquet/region';
 
 
 create external table if not exists tpch01_parquet_nodate.part (
@@ -30,7 +30,7 @@ create external table if not exists tpch01_parquet_nodate.part (
     p_comment string
 )
 STORED AS PARQUET
-LOCATION '/drill/testdata/Tpch0.01/parquet/part/part.parquet';
+LOCATION '/drill/testdata/Tpch0.01/parquet/part';
 
 
 create external table if not exists tpch01_parquet_nodate.supplier (
@@ -43,7 +43,7 @@ create external table if not exists tpch01_parquet_nodate.supplier (
     s_comment string
 )
 STORED AS PARQUET
-LOCATION '/drill/testdata/Tpch0.01/parquet/supplier/supplier.parquet';
+LOCATION '/drill/testdata/Tpch0.01/parquet/supplier';
 
 
 create external table if not exists tpch01_parquet_nodate.partsupp (
@@ -54,7 +54,7 @@ create external table if not exists tpch01_parquet_nodate.partsupp (
     ps_comment string
 )
 STORED AS PARQUET
-LOCATION '/drill/testdata/Tpch0.01/parquet/partsupp/partsupp.parquet';
+LOCATION '/drill/testdata/Tpch0.01/parquet/partsupp';
 
 
 create external table if not exists tpch01_parquet_nodate.customer (
@@ -68,7 +68,7 @@ create external table if not exists tpch01_parquet_nodate.customer (
     c_comment string
 )
 STORED AS PARQUET
-LOCATION '/drill/testdata/Tpch0.01/parquet/customer/customer.parquet';
+LOCATION '/drill/testdata/Tpch0.01/parquet/customer';
 
 create external table if not exists tpch01_parquet_nodate.orders (
     o_orderkey int,

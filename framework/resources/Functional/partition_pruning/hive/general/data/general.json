@@ -25,6 +25,11 @@
 	},
         {
                 "mode": "cp",
+                "src": "Datasources/partition_pruning/hive",
+                "dest": "partition_pruning/hive"
+        },
+        {
+                "mode": "cp",
                 "src": "Datasources/hive_storage/orc_create_people.txt",
                 "dest": "hive_storage/orc_create_people.txt"
         },
@@ -36,11 +41,6 @@
         {
            "mode": "gen",
            "src": "bin/execHive.sh resources/Datasources/partition_pruning/hive/compressed_partition_pruning.ddl",
-           "dest": ""
-        },
-        {
-           "mode": "gen",
-           "src": "bin/execHive.sh resources/Datasources/hive_storage/sequenceFileFormat.q",
            "dest": ""
         },
         {

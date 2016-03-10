@@ -1,0 +1,9 @@
+1	98723980547	null	00:00:00	P18582D	jllkjsdhfg	2345.33	null	false
+null	24509823475	null	01:00:00	P1DT9045S	jhgduitweriuoert	3243.32	664522.332	true
+3	3475789234	null	null	P1DT9000S	gfdstweopiu	234533.2	234522.3221	true
+8	null	null	23:59:59.990	null	lkjgfiurtoUYFHfahui	9823.435	98723.879	false
+13	57784356923	2038-04-08	23:59:00	P2Y	uitreo	3425.543	765234.43	null
+14	302	2039-04-09	12:03:00	P1Y2M	uigoMnvjjkdf	3654.43	763478.5623	false
+15	2983475089	2040-04-10	null	P10DT9000S	NvvdfHVG	5365.643	8767985.43	true
+16	null	null	19:59:00	P18582D	null	4784.5737	2037598.58734	null
+null	null	null	null	null	null	null	null	null
