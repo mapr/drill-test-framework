@@ -1,3 +1,6 @@
+#!/bin/sh
+source conf/drillTestConfig.properties
+
 while read line
 do
     array[ $i ]="$line"

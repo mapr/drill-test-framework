@@ -40,27 +40,27 @@
         },
         {
            "mode": "gen",
-           "src": "bin/execHive.sh resources/Datasources/partition_pruning/hive/compressed_partition_pruning.ddl",
+           "src": "bin/execHive.sh framework/resources/Datasources/partition_pruning/hive/compressed_partition_pruning.ddl",
            "dest": ""
         },
         {
            "mode": "gen",
-           "src": "bin/execHive.sh resources/Datasources/hive_storage/sequenceFileFormat.q",
+           "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/sequenceFileFormat.q",
            "dest": ""
         },
         {
            "mode": "gen",
-           "src": "bin/execHive.sh resources/Datasources/partition_pruning/hive/empty_lengthy.ddl",
+           "src": "bin/execHive.sh framework/resources/Datasources/partition_pruning/hive/empty_lengthy.ddl",
            "dest": ""
         },
         {
            "mode": "gen",
-           "src": "bin/execHive.sh resources/Datasources/hive_storage/orc_complex.q",
+           "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/orc_complex.q",
            "dest": ""
         },
         {
            "mode": "gen",
-           "src": "bin/execHive.sh resources/Datasources/hive_storage/rcFileFormat.q",
+           "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/rcFileFormat.q",
            "dest": ""
         }
     ]

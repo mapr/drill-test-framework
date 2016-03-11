@@ -25,7 +25,7 @@
       },
       {
        "mode": "gen",
-       "src": "bin/execHive.sh resources/Datasources/hive_storage/tpcds_parquet/tpcds1_hive1.ddl",
+       "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/tpcds_parquet/tpcds1_hive1.ddl",
        "dest": ""
       } 
     ]

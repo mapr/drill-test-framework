@@ -9,7 +9,7 @@ CREATE TABLE orc_create_people_staging (
   address string,
   state string);
 
-LOAD DATA LOCAL INPATH 'resources/Datasources/hive_storage/orc_create_people.txt' 
+LOAD DATA LOCAL INPATH 'framework/resources/Datasources/hive_storage/orc_create_people.txt' 
 OVERWRITE INTO TABLE orc_create_people_staging;
 
 CREATE TABLE orc_create_people (

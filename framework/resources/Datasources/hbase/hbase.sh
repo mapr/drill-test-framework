@@ -1,9 +1,10 @@
 #!/bin/bash
+source conf/drillTestConfig.properties
 
 set -x
 set -e
 
-resources/Datasources/hbase/createHbaseTables.sh
+${DRILL_TEST_DATA_DIR}/Datasources/hbase/createHbaseTables.sh
 
 wait
 

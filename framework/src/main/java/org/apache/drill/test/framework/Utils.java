@@ -101,13 +101,13 @@ public class Utils {
     
     // read configuration file
     final Map<String, String> drillProperties = Maps.newHashMap();
-    final File overrideFile = new File(System.getProperty("user.home") + "/." + DRILL_TEST_CONFIG);
+    final File overrideFile = new File(CWD + "/conf/" + DRILL_TEST_CONFIG);
     final ResourceBundle bundle;
     if (overrideFile.exists() && !overrideFile.isDirectory()) {
       try {
         bundle = new PropertyResourceBundle(new FileInputStream(overrideFile));
       } catch (IOException e) {
-        throw new RuntimeException("Error reading configuration file in root directory.", e);
+        throw new RuntimeException("Error reading configuration file " + overrideFile.getPath(), e);
       }
     } else {
       bundle = ResourceBundle.getBundle(DRILL_TEST_CONFIG);
@@ -287,7 +287,7 @@ public class Utils {
     if (filename.startsWith("/")) {
       return filename;
     }
-    return drillTestProperties.get(propertyKey) + "/" + filename;
+    return CWD + "/" + drillTestProperties.get(propertyKey) + "/" + filename;
   }
 
   /**
