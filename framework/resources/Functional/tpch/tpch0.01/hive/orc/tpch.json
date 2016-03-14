@@ -60,7 +60,7 @@
        },
        {
            "mode": "gen",
-           "src": "bin/execHive.sh resources/Datasources/Tpch0.01/orc/orc.ddl",
+           "src": "bin/execHive.sh framework/resources/Datasources/Tpch0.01/orc/orc.ddl",
            "dest": ""
        }
     ]

@@ -70,62 +70,62 @@
     },
     {
        "mode": "gen",
-       "src": "bin/execHive.sh resources/Datasources/hive_storage/hive_storage.ddl",
+       "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/hive_storage.ddl",
        "dest": ""
     },
     {
        "mode": "gen",
-       "src": "bin/execHive.sh resources/Datasources/hive_storage/unionall.ddl",
+       "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/unionall.ddl",
        "dest": ""
     },
     {
        "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh resources/Datasources/hive_storage/avro_nullable.q",
+       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/avro_nullable.q",
        "dest": ""
     },
     {
        "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh resources/Datasources/hive_storage/avro_partitioned.q",
+       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/avro_partitioned.q",
        "dest": ""
     },
     {
        "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh resources/Datasources/hive_storage/hive_avro.q",
+       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/hive_avro.q",
        "dest": ""
     },
     {
        "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh resources/Datasources/hive_storage/orc_complex.q",
+       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/orc_complex.q",
        "dest": ""
     },
     {
        "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh resources/Datasources/hive_storage/sequenceFileFormat.q",
+       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/sequenceFileFormat.q",
        "dest": ""
     },
     {
        "mode": "gen",
-       "src": "bin/execHive.sh resources/Datasources/hive_storage/fewtypes_null_compressed.ddl",
+       "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/fewtypes_null_compressed.ddl",
        "dest": ""
     },
     {
        "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh resources/Datasources/hive_storage/sequenceInput.q",
+       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/sequenceInput.q",
        "dest": ""
     },
     {
        "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh resources/Datasources/hive_storage/rcFileFormat.q",
+       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/rcFileFormat.q",
        "dest": ""
     },
     {
        "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh resources/Datasources/hive_storage/alltypes.q",
+       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/alltypes.q",
        "dest": ""
     },
     { 
        "mode": "gen", 
-       "src": "bin/execHive.sh resources/Datasources/hive_storage/null_schemachange.ddl", 
+       "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/null_schemachange.ddl", 
        "dest": "" 
     }
    ]
