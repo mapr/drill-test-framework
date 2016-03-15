@@ -12,7 +12,7 @@ export DRILL_HOME=/opt/drill
 ########################################
 # Drill test data dir
 ########################################
-DRILL_TEST_DATA_DIR=resources
+DRILL_TEST_DATA_DIR=framework/resources
 
 ########################################
 # Drill actual resultset dir
