@@ -96,7 +96,13 @@ A test definition file is a JSON file that defines one or a set of tests within 
 </code></pre>
 
 ### Build test framework
-In the root directory of you repository, issue `bin/build_framework` to build the project and also download any dependent datasets configured in `pom.xml`
+In the root directory of you repository, issue 
+
+`bin/build_framework -Pdownload` 
+
+to build the project and also download any dependent datasets configured in `pom.xml`. If you already downloaded the dependent datasets, you can simply issue
+
+`bin/build_framework`
 
 ### Execute tests
 In the root directory of your repository, execute the following command to run tests:
