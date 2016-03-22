@@ -1,4 +1,3 @@
 .*
   Filter.*OR.*AND.*=.*1993.*>.*19500.*=.*1994.*
-    .*
-      Scan.*path=.*/drill/testdata/partition_pruning/dfs/orders/1994/02.parquet.*path=.*/drill/testdata/partition_pruning/dfs/orders/1993/01.parquet.*selectionRoot=.*/drill/testdata/partition_pruning/dfs/orders.*numFiles=2.*columns=\[`dir0`, `o_orderkey`, `O_CUSTKEY`, `O_CLERK`, `O_COMMENT`\].*
+    Scan.*path=.*/drill/testdata/partition_pruning/dfs/orders/1994/02.parquet.*path=.*/drill/testdata/partition_pruning/dfs/orders/1993/01.parquet.*selectionRoot=.*/drill/testdata/partition_pruning/dfs/orders.*numFiles=2.*columns=\[`dir0`, `o_orderkey`, `O_CUSTKEY`, `O_CLERK`, `O_COMMENT`\].*

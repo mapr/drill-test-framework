@@ -14,7 +14,7 @@ create table alltypes
          c19 binary,
          c20 date);
          
-load data local inpath 'resources/Datasources/hive_storage/datatypes.txt' into table alltypes;
+load data local inpath 'framework/resources/Datasources/hive_storage/datatypes.txt' into table alltypes;
          
 create table alldrilltypes 
          (c1 int, c2 boolean, c3 double, c4 string,

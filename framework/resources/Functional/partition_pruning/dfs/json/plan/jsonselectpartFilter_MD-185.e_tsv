@@ -1,4 +1,3 @@
 .*
   Filter.*AND.*=.*1993.*>.*40000.*
-    .*
-      Scan.*selectionRoot=.*/drill/testdata/partition_pruning/dfs/ordersjson.*numFiles=1.*columns=\[`dir0`, `O_TOTALPRICE`, `O_ORDERKEY`, `O_CUSTKEY`, `O_CLERK`, `O_COMMENT`\].*files=.*/drill/testdata/partition_pruning/dfs/ordersjson/1993/xad.json.*
+    Scan.*selectionRoot=.*/drill/testdata/partition_pruning/dfs/ordersjson.*numFiles=1.*columns=\[`dir0`, `O_TOTALPRICE`, `O_ORDERKEY`, `O_CUSTKEY`, `O_CLERK`, `O_COMMENT`\].*files=.*/drill/testdata/partition_pruning/dfs/ordersjson/1993/xad.json.*

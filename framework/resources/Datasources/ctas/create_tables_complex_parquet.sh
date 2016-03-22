@@ -1,4 +1,5 @@
 #!/bin/sh
+source conf/drillTestConfig.properties
 
 hadoop fs -test -d /drill/testdata/complex/parquet/complex.json
 if [ "$?" -eq 0 ]
@@ -9,7 +10,7 @@ fi
 hadoop fs -mkdir /drill/testdata/complex/parquet
 hadoop fs -chmod 777 /drill/testdata/complex/parquet
 
-${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.drillTestDirComplexParquet;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=resources/Datasources/ctas/create_tables_complex_parquet.ddl
+${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.drillTestDirComplexParquet;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/ctas/create_tables_complex_parquet.ddl
 
 # TODO: it seems that sqlline does not exit, if one of the queries failed.
 if [ "$?" -eq 0 ]

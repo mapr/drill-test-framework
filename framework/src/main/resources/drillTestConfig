@@ -1,6 +1,9 @@
 # List of IP addresses of nodes configured with drillbit services
 DRILLBITS=IPADDR1,IPADDR2,IPADDR3,IPADDR4, ...
 
+# Number of cluster nodes in the cluster, will be matched with number of drillbits
+NUMBER_OF_CLUSTER_NODES=4
+
 # Path to where Drill binaries are installed 
 DRILL_HOME=/opt/drill/
 

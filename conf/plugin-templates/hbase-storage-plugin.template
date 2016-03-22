@@ -1,0 +1,12 @@
+{
+  "name" : "hbase",
+  "config" : {
+    "type" : "hbase",
+    "config" : {
+      "hbase.zookeeper.quorum" : "localhost",
+      "hbase.zookeeper.property.clientPort" : "5181"
+    },
+    "size.calculator.enabled" : false,
+    "enabled" : true
+  }
+}

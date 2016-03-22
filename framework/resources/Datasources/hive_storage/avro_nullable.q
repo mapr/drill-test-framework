@@ -17,7 +17,7 @@ CREATE TABLE test_serializer(string1 STRING,
  ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' COLLECTION ITEMS TERMINATED BY ':' MAP KEYS TERMINATED BY '#' LINES TERMINATED BY '\n'
  STORED AS TEXTFILE;
 
-LOAD DATA LOCAL INPATH 'resources/Datasources/hive_storage/csv.txt' INTO TABLE test_serializer;
+LOAD DATA LOCAL INPATH 'framework/resources/Datasources/hive_storage/csv.txt' INTO TABLE test_serializer;
 
 DROP TABLE IF EXISTS as_avro;
 CREATE TABLE as_avro

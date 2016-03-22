@@ -5,5 +5,4 @@
         .*StreamAgg.*
           .*Sort.*
              .*Filter.*
-              .*Project.*
-                .*Scan.*
+              .*Scan.*
