@@ -1,0 +1,15 @@
+explain plan for select * from (
+-- scalar count distinct with aggregate functions
+-- drill-658
+select 
+	count(distinct a1), 
+	max(a1),
+	min(a1),
+	avg(a1),
+	sum(a1),
+	max(b1),
+	min(b1),
+	min(c1),
+	max(c1)
+from 
+	t1_v t1) t limit 0;

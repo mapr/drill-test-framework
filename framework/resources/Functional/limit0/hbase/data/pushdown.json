@@ -1,0 +1,37 @@
+{
+    "testId": "hbase_limit0_query-Regression",
+    "type": "limit 0",
+    "description": "Test hbase queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hbase"],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "hbase",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+       {
+           "mode": "cp",
+           "src": "Datasources/hbase/studenttab",
+           "dest": "hbase/studenttab"
+       },
+       {
+           "mode": "cp",
+           "src": "Datasources/hbase/votertab",
+           "dest": "hbase/votertab"
+       },
+       {
+           "mode": "gen",
+           "src": "Datasources/hbase/hbase.sh",
+           "dest": ""
+       }
+   ]
+}

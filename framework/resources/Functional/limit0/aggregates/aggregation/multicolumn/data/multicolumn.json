@@ -1,0 +1,30 @@
+{
+    "testId": "aggregation_multicolumn_limit0_data",
+    "type": "limit 0",
+    "description": "Group by on more than 6 columns",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.aggregation",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/aggregation",
+            "dest": "aggregation"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/limit0/aggregates/aggregation/multicolumn/create_multicolumn_views.sh",
+            "dest": ""
+        }
+    ]
+}
+

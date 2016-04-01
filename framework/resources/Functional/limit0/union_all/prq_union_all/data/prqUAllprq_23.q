@@ -1,0 +1,1 @@
+select col_int, col_bgint, col_dbl from `prqUnAll_0_v` union all select col_int, col_bgint, col_dbl from `prqUnAll_1_v`;

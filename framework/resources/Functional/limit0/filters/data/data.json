@@ -1,0 +1,30 @@
+{
+    "testId": "filter_pushdown_limit0_data",
+    "type": "limit 0",
+    "description": "Filter pushdown tests: these tests verify query correctness",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.subqueries",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/subqueries",
+            "dest": "subqueries"
+        },
+        {
+         "mode": "gen",
+         "src": "Datasources/limit0/filters/create_filters_views.sh",
+         "dest": ""
+      }
+    ]
+}
+

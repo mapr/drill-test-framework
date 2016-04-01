@@ -1,0 +1,29 @@
+{
+    "testId": "aggregation_sanity_limit0_data",
+    "type": "limit 0",
+    "description": "Sanity tests for aggregation",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.aggregation",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/aggregation",
+            "dest": "aggregation"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/limit0/aggregates/aggregation/sanity/create_sanity_views.sh",
+            "dest": ""
+        }
+    ]
+}

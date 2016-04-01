@@ -1,0 +1,1 @@
+explain plan for select * from ( select date_add(create_time, interval '1' YEAR), date_add(create_time, interval '4' MONTH),date_add(create_time, interval '3' DAY),date_add(create_time,interval '3' HOUR),date_add(create_time, interval '55' MINUTE),date_add(create_time, interval '55' SECOND) from voter_parquet_v where voter_id=10 ) t limit 0;

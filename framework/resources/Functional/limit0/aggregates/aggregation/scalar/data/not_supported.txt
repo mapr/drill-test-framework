@@ -1,0 +1,28 @@
+0: jdbc:drill:schema=dfs> explain plan for select * from j2 where c_bigint > (select max(c_integer)+1 from j3);
+Query failed: SYSTEM ERROR: Non-scalar sub-query used in an expression
+See Apache Drill JIRA: DRILL-1937
+[74a2db66-5e4a-47cd-a816-eb86f849ae6d on atsqa4-133.qa.lab:31010]
+Error: exception while executing query: Failure while executing query. (state=,code=0)
+
+0: jdbc:drill:schema=dfs> explain plan for select * from j2 where c_bigint > (select c_integer j3 from j4 limit 1);
+Query failed: SYSTEM ERROR: Non-scalar sub-query used in an expression
+See Apache Drill JIRA: DRILL-1937
+[17555d42-4362-4e24-bf74-8d062a0a58bb on atsqa4-133.qa.lab:31010]
+Error: exception while executing query: Failure while executing query. (state=,code=0)
+
+
+0: jdbc:drill:schema=dfs> select * from t1 where a1 = ( select distinct 1 from sys.options );
+Query failed: SYSTEM ERROR: Non-scalar sub-query used in an expression
+See Apache Drill JIRA: DRILL-1937
+[93e98706-3b7b-4306-9933-df671a55c400 on atsqa4-133.qa.lab:31010]
+Error: exception while executing query: Failure while executing query. (state=,code=0)
+
+
+0: jdbc:drill:schema=dfs> select * from t1 where c1 > (select current_date from sys.options);
+Query failed: SYSTEM ERROR: Non-scalar sub-query used in an expression
+See Apache Drill JIRA: DRILL-1937
+[e1ace021-5b0b-414f-9cbc-2b9a133f4dd3 on atsqa4-133.qa.lab:31010]
+Error: exception while executing query: Failure while executing query. (state=,code=0)
+
+
+max(dir)

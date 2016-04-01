@@ -1,0 +1,2 @@
+explain plan for select * from (
+select substr(convert_from(v.onecf.name, 'UTF8'), 5, 8) from voter v where cast(v.twocf.age as int) < 20) t limit 0;

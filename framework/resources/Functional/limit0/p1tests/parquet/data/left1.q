@@ -1,0 +1,1 @@
+select `left`(voter_id, 1), `left`(name, -5), `left`(age, 1),`left`(registration,3),`left`(contributions, 3),`left`(voterzone, 4), `left`(create_time,10),`left`(isVote,3) from voter_parquet_v where voter_id=10;
