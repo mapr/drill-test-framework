@@ -5,5 +5,4 @@
         .*HashAgg.*
           .*SelectionVectorRemover.*
             .*Filter.*
-              .*Project.*
-                .*Scan.*
+              .*Scan.*

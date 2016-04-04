@@ -7,5 +7,4 @@
                    .*Project.*
                      .*HashJoin.*
                        .*Scan.*
-                       .*Project.*
-                         .*Scan.*
+                       .*Scan.*

@@ -11,7 +11,5 @@
                      .*Project.*
                        .*Project.*
                         .*HashJoin.*
-                          .*Project.*
-                            .*Scan.*
-                          .*Project.*
-                            .*Scan.*
+                          .*Scan.*
+                          .*Scan.*

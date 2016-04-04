@@ -30,7 +30,7 @@
     },
     {
        "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh resources/Datasources/hive_storage/windows_functions.ddl",
+       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/windows_functions.ddl",
        "dest": ""
      }
    ]

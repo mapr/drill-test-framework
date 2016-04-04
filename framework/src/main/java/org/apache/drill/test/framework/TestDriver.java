@@ -77,26 +77,14 @@ public class TestDriver {
   }
 
   public static void main(String[] args) throws Exception {
-    JCommander jc = null;
+    JCommander jc = new JCommander(OPTIONS);
+    jc.setProgramName("TestDriver");
     try {
-      jc = new JCommander(OPTIONS, args);
-      jc.setProgramName("TestDriver");
+      jc.parse(args);
+      
     } catch (ParameterException e) {
-      System.out.println(e.getMessage());
-      String[] valid = {
-    		  "-s", "Tests to run. A comma-separated list of testcase definition files and directories",
-    		  "-g", "Test categories. A comma-separated list such as 'smoke,regression'", 
-    		  "-t", "timeout in seconds for each test", 
-    		  "-n", "number of concurrent threads running tests",
-    		  "-i", "number of iterations of running the test", 
-    		  "-f", "filename containing a list of queries to be executed before test run",
-    		  "-e", "filename containing a list of queries to be executed after test run",
-    		  "-d", "generate data", 
-    		  "-m", "track memory usage",
-    		  "-c", "percent of tests attempted to be canceled", 
-    		  "-w", "enable write actual query result to file",
-    		  "-h", "--help", "show usage"};
-      new JCommander(OPTIONS, valid).usage();
+      System.out.println("\n" + e.getMessage() + "\n");
+      jc.usage();
 
       System.exit(-1);
     }
@@ -335,7 +323,8 @@ public class TestDriver {
       new File(drillOutputDirName).mkdir();
     }
 
-    String templatePath = CWD + "/src/main/resources/plugin-templates/";
+    String templatePath = CWD + "/conf/plugin-templates/";
+    LOG.info(templatePath);
     File[] templateFiles = new File(templatePath).listFiles();
     for (File templateFile : templateFiles) {
       String filename = templateFile.getName();
@@ -344,8 +333,9 @@ public class TestDriver {
           ipAddressPlugin, pluginType, fsMode);
       Thread.sleep(200);
     }
+    String beforeRunQueryFilename = CWD + "/" + OPTIONS.beforeRunQueryFilename;
     try {
-      String[] setupQueries = Utils.getSqlStatements(OPTIONS.beforeRunQueryFilename);
+      String[] setupQueries = Utils.getSqlStatements(beforeRunQueryFilename);
 	  connection = connectionPool.getOrCreateConnection(drillProperties.get("USERNAME"), 
   				drillProperties.get("PASSWORD"));
       for (String query : setupQueries) {
@@ -354,7 +344,7 @@ public class TestDriver {
       connectionPool.releaseConnection(drillProperties.get("USERNAME"), 
     		  drillProperties.get("PASSWORD"), connection);
     } catch (IOException e) {
-      LOG.warn("WARNING: " + OPTIONS.beforeRunQueryFilename + " file does not exist.\n");
+      LOG.warn("WARNING: " + beforeRunQueryFilename + " file does not exist.\n");
     } catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -369,16 +359,16 @@ public class TestDriver {
   }
   
   private void teardown() {
-
+	String afterRunQueryFilename = CWD + "/" + OPTIONS.afterRunQueryFilename;
 	try {
 	  connection = connectionPool.getOrCreateConnection(drillProperties.get("USERNAME"),
 				drillProperties.get("PASSWORD"));
-	  String[] teardownQueries = Utils.getSqlStatements(OPTIONS.afterRunQueryFilename);
+	  String[] teardownQueries = Utils.getSqlStatements(afterRunQueryFilename);
       for (String query : teardownQueries) {
         LOG.info(Utils.getSqlResult(Utils.execSQL(query, connection)));
       }
     } catch (IOException e) {
-      LOG.warn("WARNING: " + OPTIONS.afterRunQueryFilename + " file does not exist.\n");
+      LOG.warn("WARNING: " + afterRunQueryFilename + " file does not exist.\n");
     } catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -420,7 +410,7 @@ public class TestDriver {
           @Override
           public void run() {
             try {
-              Path src = new Path(CWD + "/resources", datasource.src);
+              Path src = new Path(CWD + "/" + Utils.getDrillTestProperties().get("DRILL_TEST_DATA_DIR"), datasource.src);
               Path dest = new Path(drillTestData, datasource.dest);
               hdfsCopy(src, dest, false, fsMode);
             } catch (IOException e) {
@@ -501,7 +491,7 @@ public class TestDriver {
   }
 
   public static void runGenerateScript(DataSource datasource) {
-	String command = CWD + "/resources/" + datasource.src;
+	String command = CWD + "/" + Utils.getDrillTestProperties().get("DRILL_TEST_DATA_DIR") + "/" + datasource.src;
 	LOG.info("Running command " + command);
 	CmdConsOut cmdConsOut = null;
 	try {
