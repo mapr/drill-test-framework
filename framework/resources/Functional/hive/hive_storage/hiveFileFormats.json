@@ -68,64 +68,9 @@
         "src": "Datasources/information-schema/students.txt",
         "dest": "hive_storage/students2/students.txt"
     },
-    {
-       "mode": "gen",
-       "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/hive_storage.ddl",
-       "dest": ""
-    },
-    {
-       "mode": "gen",
-       "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/unionall.ddl",
-       "dest": ""
-    },
-    {
-       "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/avro_nullable.q",
-       "dest": ""
-    },
-    {
-       "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/avro_partitioned.q",
-       "dest": ""
-    },
-    {
-       "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/hive_avro.q",
-       "dest": ""
-    },
-    {
-       "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/orc_complex.q",
-       "dest": ""
-    },
-    {
-       "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/sequenceFileFormat.q",
-       "dest": ""
-    },
-    {
-       "mode": "gen",
-       "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/fewtypes_null_compressed.ddl",
-       "dest": ""
-    },
-    {
-       "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/sequenceInput.q",
-       "dest": ""
-    },
-    {
-       "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/rcFileFormat.q",
-       "dest": ""
-    },
-    {
-       "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/alltypes.q",
-       "dest": ""
-    },
     { 
        "mode": "gen", 
-       "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/null_schemachange.ddl", 
+       "src": "Datasources/hive_storage/gen.sh", 
        "dest": "" 
     }
    ]
