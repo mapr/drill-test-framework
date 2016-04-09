@@ -6,3 +6,4 @@ create table `tpch_single_partition1/supplier` partition by (dbl_nationkey) as s
 create table `tpch_single_partition1/nation` partition by (n_regionkey) as select * from cp.`tpch/nation.parquet` n;
 create table `tpch_single_partition1/region` partition by (c1) as select r.*, case when r_regionkey < 3 then time '12:12:12.12' else time '14:13:12.00' end c1 from cp.`tpch/region.parquet` r;
 create table `tpch_single_partition1/customer` partition by (c_bool) as select c.*, case when c_mktsegment = 'MACHINERY' then true else false end as c_bool from cp.`tpch/customer.parquet` c;
+create table `tpch_single_partition1/drill4449` partition by (l_discount) as select * from cp.`tpch/lineitem.parquet`;
