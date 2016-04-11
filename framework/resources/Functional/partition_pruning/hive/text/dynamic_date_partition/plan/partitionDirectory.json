@@ -25,8 +25,8 @@
 	},
         {
            "mode": "gen",
-           "src": "bin/execHive.sh framework/resources/Datasources/partition_pruning/hive/hive.ddl",
+           "src": "Datasources/partition_pruning/hive/dynamic_date_partition_gen.sh",
            "dest": ""
-        }
+        } 
     ]
 }
