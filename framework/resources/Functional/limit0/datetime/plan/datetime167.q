@@ -1,1 +1,0 @@
-explain plan for select * from ( select extract(day from now())=extract(day from localtimestamp) from sys.drillbits limit 1 ) t limit 0;

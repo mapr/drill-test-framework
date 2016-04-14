@@ -1,1 +1,0 @@
-SELECT col_bgint, MAX(col_bgint) OVER (ORDER by col_bgint) max_bgint FROM `smlTbl_v`;

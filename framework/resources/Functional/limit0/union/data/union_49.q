@@ -1,1 +1,0 @@
-(SELECT c2 FROM `union_01_v` ORDER BY c2 DESC nulls last) UNION (SELECT c2 FROM `union_02_v` ORDER BY c2 ASC nulls last);

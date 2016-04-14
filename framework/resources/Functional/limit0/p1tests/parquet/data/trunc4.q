@@ -1,1 +1,0 @@
-select trunc(student_id,1),trunc(age,1), trunc(gpa,1),trunc(studentnum,5) from student_parquet_v where student_id=10;
