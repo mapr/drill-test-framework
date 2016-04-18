@@ -1,0 +1,1 @@
+.*NumberFormatException.*Hive table property skip.header.line.count value '' is non-numeric
