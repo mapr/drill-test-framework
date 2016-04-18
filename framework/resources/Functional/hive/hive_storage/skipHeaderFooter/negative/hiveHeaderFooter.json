@@ -4,7 +4,7 @@
     "negative": true,
     "description": "Test hive skip header and footer",
     "categories": [
-        "smoke"
+        "negative"
     ],
     "dependencies" : ["hive"],
     "matrices": [
