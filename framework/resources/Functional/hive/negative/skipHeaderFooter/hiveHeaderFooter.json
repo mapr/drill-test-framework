@@ -1,0 +1,28 @@
+{
+    "testId": "hiveHeaderFooter_storage",
+    "type": "group",
+    "negative": true,
+    "description": "Test hive skip header and footer",
+    "categories": [
+        "negative"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "hive",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+    { 
+       "mode": "gen", 
+       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/skipHeaderFooter/skipHeaderFooter_neg.ddl", 
+       "dest": "" 
+    }
+   ]
+}
