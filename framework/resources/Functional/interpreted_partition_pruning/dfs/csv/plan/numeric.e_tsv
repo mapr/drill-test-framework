@@ -4,4 +4,4 @@
       .*Project.*
        .*SelectionVectorRemover.*
          .*Filter.*
-           .*Scan.*/drill/testdata/partition_pruning/dfs/orders/1993/01.parquet.*/drill/testdata/partition_pruning/dfs/orders/1995/03.parquet.*/drill/testdata/partition_pruning/dfs/orders.*numFiles=2.*columns=\[`dir0`, `o_custkey`\]\]\]\)
+           .*Scan.*numFiles=2.*columns=\[`dir0`, `o_custkey`\]\]\]\)
