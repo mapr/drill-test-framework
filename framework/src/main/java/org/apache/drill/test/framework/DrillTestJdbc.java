@@ -36,6 +36,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DrillTestJdbc implements DrillTest {
   private static final Logger LOG = Logger.getLogger(DrillTestJdbc.class);
@@ -55,6 +56,8 @@ public class DrillTestJdbc implements DrillTest {
   private List<Integer> columnNullabilities;
   private List columnLabels = new ArrayList<String>();
   private Random rand = new Random();
+  private Statement statement = null;
+  private AtomicBoolean doneProcessingResultSet = new AtomicBoolean(false);
 
   public DrillTestJdbc(DrillTestCase modeler, ConnectionPool connectionPool) {
     this.modeler = modeler;
@@ -143,7 +146,7 @@ public class DrillTestJdbc implements DrillTest {
       if (query.contains("alter")) {
         LOG.debug(query + " " + connection.hashCode());
       }
-      Statement statement = connection.createStatement();
+      statement = connection.createStatement();
       resultSet = statement.executeQuery(query);
     } finally {
       if (resultSet != null) {
@@ -161,7 +164,7 @@ public class DrillTestJdbc implements DrillTest {
     final boolean cancelQuery = rand.nextInt(100) < TestDriver.OPTIONS.cancelPercent;
     CancelQuery c = null;
     try {
-      Statement statement = connection.createStatement();
+      statement = connection.createStatement();
       resultSet = statement.executeQuery(query);      
       if (cancelQuery) {
     	c = new CancelQuery(statement);
@@ -226,9 +229,11 @@ public class DrillTestJdbc implements DrillTest {
           writer.write(columnList + "\n");
         }
       }
+
     } catch (IllegalArgumentException | IllegalAccessException | IOException e1) {
 		LOG.warn(e1);
 	} finally {
+	  doneProcessingResultSet.set(true);
       if (resultSet != null) {
         resultSet.close();
       }
@@ -244,7 +249,7 @@ public class DrillTestJdbc implements DrillTest {
 	}
 	
 	BufferedWriter writer = new BufferedWriter(new FileWriter(new File(outputFilename),true));	
-    Statement statement = connection.createStatement();
+    statement = connection.createStatement();
     ResultSet resultSet = statement.executeQuery(query);
     List columnLabels = new ArrayList<String>();
     List<Integer> columnTypes = Lists.newArrayList();
@@ -300,8 +305,30 @@ public class DrillTestJdbc implements DrillTest {
   
   @Override
   public void cancel() {
-    thread.interrupt();
-    setTestStatus(TestStatus.TIMEOUT);
+	setTestStatus(TestStatus.TIMEOUT);
+	if (statement != null) {
+	  try {
+		statement.cancel();
+	  } catch (SQLException e) {
+		LOG.warn("Cancel after timeout failed!");
+		e.printStackTrace();
+	  }
+	}
+	int i = 0;
+	while (!doneProcessingResultSet.get() && i < 10) {
+	  try {
+		Thread.currentThread().sleep(1000);
+	  } catch (InterruptedException e) {
+		e.printStackTrace();
+		return;
+	  }
+	  i++;
+	}
+	if (!doneProcessingResultSet.get()) {
+      
+	  LOG.warn("Cancel after timeout may have failed!");
+	  thread.interrupt();
+	}
   }
 
   private class CancelQuery extends Thread {
