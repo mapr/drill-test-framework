@@ -86,3 +86,34 @@ create table if not exists hier_null_partitions(col3 INT) PARTITIONED BY(col1 in
 insert overwrite table hier_null_partitions partition(col1, col2) select 1 as col3, 2 as col2, 3 as col1 from lineitem_text_hive limit 1;
 insert overwrite table hier_null_partitions partition(col1, col2) select 1 as col3, 2 as col2, null as col1 from lineitem_text_hive limit 1;
 insert overwrite table hier_null_partitions partition(col1, col2) select 1 as col3, null as col2, null as col1 from lineitem_text_hive limit 1;
+
+drop table if exists voter_text;
+create table voter_text (
+   VOTER_ID SMALLINT,
+   NAME VARCHAR(40),
+   AGE TINYINT,
+   REGISTRATION CHAR(11),
+   CONTRIBUTIONS float,
+   VOTERZONE INT,
+   CREATE_TIMESTAMP TIMESTAMP,
+   create_date date
+)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
+STORED AS TEXTFILE;
+
+load data local inpath 'framework/resources/Datasources/hive_storage/voterhive.txt' into table voter_text;
+
+drop table if exists voter_parquet;
+create table voter_parquet (
+   VOTER_ID SMALLINT,
+   NAME VARCHAR(40),
+   AGE TINYINT,
+   REGISTRATION CHAR(11),
+   CONTRIBUTIONS float,
+   VOTERZONE INT,
+   CREATE_TIMESTAMP TIMESTAMP,
+   create_date date
+)
+STORED AS PARQUET;
+
+FROM voter_text insert overwrite table voter_parquet select voter_id,name,age,registration,contributions,voterzone,create_timestamp,create_date;
