@@ -99,9 +99,9 @@ create table voter_text (
    create_date date
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
-STORED AS TEXTFILE;
+STORED AS TEXTFILE TBLPROPERTIES('serialization.null.format'='');
 
-load data local inpath 'framework/resources/Datasources/hive_storage/voterhive.txt' into table voter_text;
+load data local inpath 'framework/resources/Datasources/hive_storage/voterhive.tsv' into table voter_text;
 
 drop table if exists voter_parquet;
 create table voter_parquet (
