@@ -153,6 +153,9 @@ public class TestDriver {
     @Parameter(names = {"-x", "--exclude"}, description = "Dependencies to exclude", required=false)
     public String excludeDependencies = null;
 
+    @Parameter(names = {"-cc"}, description = "No of times to clone each query", required=false)
+    public int cloneCount = 1;
+
     public List<String> excludeDependenciesAsList() {
       if (excludeDependencies == null) {
         return new ArrayList<String>();
@@ -195,7 +198,9 @@ public class TestDriver {
     List<DrillTestCase> drillTestCases = Utils.getDrillTestCases();
     List<Cancelable> tests = Lists.newArrayList();
     for (DrillTestCase testCase : drillTestCases) {
-      tests.add(getDrillTest(testCase, connectionPool));
+      for (int i=1; i<=OPTIONS.cloneCount; i++) {
+        tests.add(getDrillTest(new ClonedDrillTestCase(testCase, i), connectionPool));
+      }
     }
 
 
@@ -385,10 +390,10 @@ public class TestDriver {
 
   private void prepareData(List<DrillTestCase> tests) throws Exception {
     Set<DataSource> dataSources = new HashSet<>();
-    for (TestCaseModeler test : tests) {
-      List<DataSource> dataSourceList = test.datasources;
+    for (TestCase test : tests) {
+      List<DataSource> dataSourceList = test.getTestCaseModeler().datasources;
       if (dataSourceList != null) {
-        dataSources.addAll(test.datasources);
+        dataSources.addAll(test.getTestCaseModeler().datasources);
       }
     }
 
@@ -507,14 +512,14 @@ public class TestDriver {
 	}
   }
   
-  private static DrillTest getDrillTest(DrillTestCase modeler, ConnectionPool connectionPool) {
-    switch(modeler.queryType) {
+  private static DrillTest getDrillTest(ClonedDrillTestCase testCase, ConnectionPool connectionPool) {
+    switch(testCase.getTestCaseModeler().queryType) {
     case "sql":
-      return new DrillTestJdbc(modeler, connectionPool);
+      return new DrillTestJdbc(testCase, connectionPool);
     case "system":
       return null;
     default:
-      throw new UnsupportedOperationException("Unknown query type: " + modeler.queryType);
+      throw new UnsupportedOperationException("Unknown query type: " + testCase.getTestCaseModeler().queryType);
     }
   }
   

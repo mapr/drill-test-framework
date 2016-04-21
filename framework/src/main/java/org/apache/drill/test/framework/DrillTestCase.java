@@ -17,26 +17,34 @@
  */
 package org.apache.drill.test.framework;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Drill test case from test definition json file.
  * 
  * 
  */
-public class DrillTestCase extends TestCaseModeler {
-  public String queryFilename;
-  public String expectedFilename;
-	
+public class DrillTestCase implements TestCase {
+  private final String queryFilename;
+  private final String expectedFilename;
+  private TestCaseModeler modeler;
   public DrillTestCase(TestCaseModeler modeler, String queryFilename, String expectedFilename) {
-	super(modeler);
+	this.modeler = modeler;
 	this.queryFilename = queryFilename;
 	this.expectedFilename = expectedFilename;
   }
-  
-  public DrillTestCase(TestCaseModeler modeler) {
-	this(modeler, modeler.matrices.get(0).inputFile, modeler.matrices.get(0).expectedFile);
+
+  public String getQueryFilename() {
+    return queryFilename;
+  }
+
+  public String getExpectedFilename() {
+    return expectedFilename;
+  }
+
+  public TestCaseModeler getTestCaseModeler() {
+    return modeler;
+  }
+
+  public String getOutputFileName() {
+    return getQueryFilename();
   }
 }
