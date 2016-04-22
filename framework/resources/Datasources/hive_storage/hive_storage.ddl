@@ -118,7 +118,8 @@ STORED AS PARQUET;
 
 FROM voter_text insert overwrite table voter_parquet select voter_id,name,age,registration,contributions,voterzone,create_timestamp,create_date;
 
-drop table if exists voter_avro (
+drop table if exists voter_avro;
+create table voter_avro (
     voter_id smallint,
     name varchar(40),
     age TINYINT,
@@ -131,7 +132,8 @@ STORED AS AVRO;
 
 FROM voter_text insert overwrite table voter_avro PARTITION (registration) select voter_id,name,age,contributions,voterzone,create_timestamp,create_date,registration;
 
-drop table if exists voter_orc (
+drop table if exists voter_orc;
+create table voter_orc (
     voter_id smallint,
     name varchar(40),
     age TINYINT,
