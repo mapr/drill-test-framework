@@ -1,0 +1,1 @@
+select `right`(voter_id, '-1'),`right`(name, '8'),`right`(age,'1'),`right`(registration,'-4'),`right`(contributions,'-2'),`right`(voterzone,'-2'),`right`(create_time,'-11') from voter_parquet_v where voter_id=10;

@@ -1,0 +1,42 @@
+{
+    "testId": "convert_limit0_data",
+    "type": "limit 0",
+    "description": "Test explicit cast queries via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirConvert",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/convert/data",
+            "dest": "convert/data"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/convert/tbl_int_be/0_0_0.parquet",
+            "dest": "convert/tbl_int_be/0_0_0.parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/convert/input2.json",
+            "dest": "convert/input2.json"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/convert/vvtypes.json",
+            "dest": "convert/vvtypes.json"
+        }
+    ]
+}

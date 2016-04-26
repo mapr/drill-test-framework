@@ -1,0 +1,22 @@
+explain plan for select * from (
+-- group by column that is not in projection list
+-- use distinct with count(distinct ...) 
+-- subquery has no correlation
+
+select 	distinct 
+	count(distinct a1) 
+from 
+	t1_v t1 
+where 
+	a1 in 	(	
+		select 	distinct 
+			count(distinct b2) 
+		from 	
+			t2_v t2 
+		group by 
+			a2, c2
+		) 
+group by 
+	a1, c1 
+order by 
+	1) t limit 0;

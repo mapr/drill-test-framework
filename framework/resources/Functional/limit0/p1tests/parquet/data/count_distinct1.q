@@ -1,0 +1,1 @@
+select count(distinct(voter_id)), count(distinct(name)), count(distinct(age)), count(distinct(registration)), count(distinct(contributions)), count(distinct(voterzone)), count(distinct(create_time)),count(isVote) from voter_parquet_v where name like '%van%';

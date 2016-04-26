@@ -1,0 +1,2 @@
+explain plan for select * from (
+select encode(varchar_col, 'UTF-8') from hive.crosssources.fewtypes_null_hive) t limit 0;

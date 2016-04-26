@@ -1,0 +1,33 @@
+{
+    "testId": "wind_fn_aggregates_limit0_plan",
+    "type": "group",
+    "description": "Functional tests to verify Window Functions",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.window_functions",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/window_functions",
+            "dest": "window_functions"
+        },
+        {
+           "mode": "gen",
+           "src": "Datasources/limit0/window_functions/aggregates/create_wf_aggregates_views.sh",
+           "dest": ""
+        }
+    ]
+}
+

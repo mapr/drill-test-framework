@@ -1,0 +1,38 @@
+{
+    "testId": "hive_native_merge_join_limit0_plan",
+    "type": "group",
+    "description": "Test drill queries involving data from different sources",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive", "hbase"],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources" : [
+       {
+            "mode": "cp",
+            "src": "Datasources/cross-sources",
+            "dest": "cross-sources"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/hive_storage/hive_native/drillgen_fewtypes_null.parquet",
+            "dest": "hive_storage/hive_native/drillgen_fewtypes_null/drillgen_fewtypes_null.parquet"
+        },
+        {
+           "mode": "gen",
+           "src": "Datasources/hive_storage/hive_native_gen.sh",
+           "dest": ""
+        } 
+    ]
+}

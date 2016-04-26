@@ -1,0 +1,77 @@
+{
+    "testId": "hiveFileFormats_storage_limit0_plan",
+    "type": "group",
+    "description": "Test hive file formats and queries",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "hive",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+    {
+        "mode": "cp",
+        "src": "Datasources/cross-sources/fewtypes.parquet",
+        "dest": "hive_storage/fewtypes_parquet/fewtypes.parquet"
+    },
+    {
+        "mode": "cp",
+        "src": "Datasources/cross-sources/fewtypes_null.parquet",
+        "dest": "hive_storage/fewtypes_null_parquet/fewtypes_null.parquet"
+    },
+    {
+        "mode": "cp",
+        "src": "Datasources/hive_storage/fewtypes_null_gz",
+        "dest": "hive_storage/fewtypes_null_gz"
+    },
+    {
+        "mode": "cp",
+        "src": "Datasources/hive_storage/fewtypes_null_bz2",
+        "dest": "hive_storage/fewtypes_null_bz2"
+    },
+    {
+        "mode": "cp",
+        "src": "Datasources/hive_storage/episodes.avro",
+        "dest": "hive_storage/episodes/episodes.avro"
+    },
+    {
+        "mode": "cp",
+        "src": "Datasources/hive_storage/doctors.avro",
+        "dest": "hive_storage/doctors/doctors.avro"
+    },
+    { 
+        "mode": "cp", 
+        "src": "Datasources/hive_storage/null_schemachange", 
+        "dest": "hive_storage/null_schemachange" 
+    },
+    {  
+        "mode": "cp",  
+        "src": "Datasources/hive_storage/onlynulls",  
+        "dest": "hive_storage/onlynulls"  
+    },
+    {
+        "mode": "cp",
+        "src": "Datasources/information-schema/students.txt",
+        "dest": "hive_storage/students1/students.txt"
+    },
+    {
+        "mode": "cp",
+        "src": "Datasources/information-schema/students.txt",
+        "dest": "hive_storage/students2/students.txt"
+    },
+    { 
+       "mode": "gen", 
+       "src": "Datasources/hive_storage/gen.sh", 
+       "dest": "" 
+    }
+   ]
+}

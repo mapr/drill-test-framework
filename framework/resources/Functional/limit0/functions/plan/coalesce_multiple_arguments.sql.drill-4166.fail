@@ -1,0 +1,12 @@
+select 
+        coalesce(o.c_varchar, r.c_varchar, r.c_varchar, o.c_varchar, 'abc')	as b,
+        coalesce(o.c_integer, r.c_integer, r.c_integer, o.c_integer, o.c_bigint, r.c_bigint, r.c_bigint, o.c_bigint, 1000)	as f,
+        coalesce(o.c_date, r.c_date, r.c_date, o.c_date, o.c_timestamp, r.c_timestamp, r.c_timestamp, o.c_timestamp)	as l,
+        coalesce(o.c_boolean, r.c_boolean, r.c_boolean, o.c_boolean, true ) as m, 
+        coalesce(r.c_float, o.c_float, o.c_double, r.c_double, r.c_double, o.c_double, 100.25)	as r
+from 
+        optional_type_v as o,
+        required_type_v as r
+where
+        o.c_date = r.c_date
+order by b,f,l,m,r

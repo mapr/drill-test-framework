@@ -1,0 +1,52 @@
+{
+    "testId": "hiveFileFormats_functions_limit0_data",
+    "type": "limit 0",
+    "description": "Test hive file formats and queries",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive","hbase"],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "hive",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/cross-sources",
+            "dest": "cross-sources"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/hive_storage/sample",
+            "dest": "hive_storage/sample"
+        },
+	{
+            "mode": "cp",
+            "src": "Datasources/tpcds/sf1/text",
+            "dest": "tpcds_sf1/text"
+        },
+	{
+            "mode": "cp",
+            "src": "Datasources/hive_storage/tpch0.01/lineitem_nodate",
+            "dest": "hive_storage/tpch0.01/lineitem_nodate"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/hive_storage/tpch0.01/orders_nodate",
+            "dest": "hive_storage/tpch0.01/orders_nodate"
+        },
+        {
+           "mode": "gen",
+           "src": "Datasources/hive_storage/hive_functions_gen.sh",
+           "dest": ""
+        }
+      ]
+}

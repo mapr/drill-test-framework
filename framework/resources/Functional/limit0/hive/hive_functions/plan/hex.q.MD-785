@@ -1,0 +1,2 @@
+explain plan for select * from (
+select hex(l_suppkey) from hive.tpch01_parquet_nodate.lineitem) t limit 0;

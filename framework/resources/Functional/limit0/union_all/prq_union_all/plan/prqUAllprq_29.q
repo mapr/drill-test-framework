@@ -1,0 +1,1 @@
+explain plan for select * from ( select col_tmstmp, col_date, col_boln from `prqUnAll_0_v` union all select col_date, col_tmstmp, col_boln from `prqUnAll_1_v` ) t limit 0;

@@ -1,0 +1,1 @@
+select sum(cast(c_int as int)), sum(cast(c_bigint as bigint)), sum(cast(c_float4 as float)), sum(cast(c_float8 as double)), sum(cast(c_decimal9 as decimal(18,9))), sum(cast(c_decimal18 as decimal(38,18))) from data;
