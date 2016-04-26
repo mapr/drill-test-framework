@@ -1,0 +1,1 @@
+explain plan for select * from ( select cast(c_groupby as varchar(4)), max(distinct(cast(c_int as int))), max(distinct(cast(c_bigint as bigint))), max(distinct(cast(c_float4 as float))), max(distinct(cast(c_float8 as double))) from data group by c_groupby ) t limit 0;

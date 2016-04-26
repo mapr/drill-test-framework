@@ -1,0 +1,1 @@
+explain plan for select * from ( select cast(c_groupby as varchar(4)), avg(distinct(cast(c_int as int))), avg(distinct(cast(c_bigint as bigint))), avg(distinct(cast(c_float4 as float))), avg(distinct(cast(c_float8 as double))) from data where cast(c_row as int) <> 6 and cast(c_row as int) <> 7 group by c_groupby ) t limit 0;

@@ -1,0 +1,2 @@
+explain plan for select * from (
+select * from hive.hivestudents1 union all select * from hive.hivestudents2) t limit 0;

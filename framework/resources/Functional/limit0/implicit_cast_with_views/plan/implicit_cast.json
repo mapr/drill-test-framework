@@ -1,0 +1,30 @@
+{
+    "testId": "limit0_implicit_cast_with_views_plan",
+    "type": "group",
+    "description": "Implicit cast tests in joins with views",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.joins",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/joins",
+            "dest": "joins"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/limit0/implicit_cast_with_views/create_implicit_cast_views.sh",
+            "dest": ""
+        }
+    ]
+}
+

@@ -1,0 +1,27 @@
+{
+    "testId": "aggregate_limit0_plan",
+    "type": "group",
+    "description": "Test explicit cast queries via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirNumerical",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/aggregate/",
+            "dest": "numerical"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "testId": "aggregation_count_distinct_limit0_plan",
+    "type": "group",
+    "description": "count distinct tests",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.aggregation",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/aggregation",
+            "dest": "aggregation"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/limit0/aggregates/aggregation/count_distinct/create_count_distinct_views.sh",
+            "dest": ""
+        }
+    ]
+}
+

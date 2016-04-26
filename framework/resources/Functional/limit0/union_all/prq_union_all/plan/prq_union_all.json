@@ -1,0 +1,32 @@
+{
+    "testId": "qres_limit0_plan",
+    "type": "group",
+    "description": "Union All tests that use data from parquet files",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.union_all",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/union_all",
+            "dest": "union_all"
+        },
+        {
+           "mode": "gen",
+           "src": "Datasources/limit0/union_all/create_union_all_views.sh",
+           "dest": ""
+        }
+    ]
+}

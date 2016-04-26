@@ -1,0 +1,31 @@
+{
+    "testId": "limit0_functions_plan",
+    "type": "group",
+    "description": "Tests calcite functions and Drill UDFs with views on top of parquet with required and optional fields",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.subqueries",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/subqueries",
+            "dest": "subqueries"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/subqueries/create_views.sh",
+            "dest": ""
+        }
+
+    ]
+}
+

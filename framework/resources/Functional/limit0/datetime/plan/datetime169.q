@@ -1,0 +1,1 @@
+explain plan for select * from ( select extract(minute from now())=extract(minute from localtimestamp) from sys.drillbits limit 1 ) t limit 0;

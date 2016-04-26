@@ -1,0 +1,36 @@
+{
+    "testId": "p1tests-regression_text_limit0_plan",
+    "type": "group",
+    "description": "Test p1tests function queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirP1",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+      {
+         "mode": "cp",
+         "src": "Datasources/limit0/p1tests/voter.csv",
+         "dest": "p1tests/voter.csv"
+      },
+      {
+         "mode": "cp",
+         "src": "Datasources/limit0/p1tests/student.csv",
+         "dest": "p1tests/student.csv"
+      },
+      {
+         "mode": "gen",
+         "src": "Datasources/limit0/p1tests/create_p1tests_csv_views.sh",
+         "dest": ""
+      }
+    ]
+}
