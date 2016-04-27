@@ -1,0 +1,26 @@
+{
+    "testId": "nw_heavy_q1",
+    "type": "group",
+    "description": "Test generic json queries",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.concurrency",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+     {
+       "mode": "gen",
+       "src": "Datasources/concurrency/tpchsf100_views.sh",
+       "dest": ""
+     } 
+   ]
+}
