@@ -1,0 +1,1 @@
+explain plan for select * from ( select extract(hour from now())=extract(hour from current_time) from sys.drillbits limit 1 ) t limit 0;

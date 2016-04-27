@@ -1,0 +1,30 @@
+{
+    "testId": "aggregation_group_by_limit0_plan",
+    "type": "group",
+    "description": "case in group by",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.aggregation",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/aggregation",
+            "dest": "aggregation"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/limit0/aggregates/aggregation/group_by_case/create_groupByCase_views.sh",
+            "dest": ""
+        }
+    ]
+}
+

@@ -1,0 +1,2 @@
+explain plan for select * from (
+select floor(24710.35) from hive.tpch01_parquet_nodate.lineitem limit 1) t limit 0;

@@ -1,0 +1,32 @@
+{
+    "testId": "aggregates_tpcds_sf1_parquet_limit0_data",
+    "type": "limit 0",
+    "description": "Test aggregate queries via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "functional","smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.tpcds_sf1_parquet",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/tpcds/sf1/parquet",
+            "dest": "tpcds_sf1/parquet"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/limit0/aggregates/tpcds_variants/parquet/create_tpcdsVariants_views.sh",
+            "dest": ""
+        }
+    ]
+}

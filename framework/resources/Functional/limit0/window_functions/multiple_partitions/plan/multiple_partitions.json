@@ -1,0 +1,30 @@
+{
+    "testId": "window_functions_multiple_partitions_limit0_data",
+    "type": "group",
+    "description": "Window function tests: multiple partitions",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.subqueries",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/subqueries",
+            "dest": "subqueries"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/limit0/window_functions/multiple_partitions/create_wf_multiple_partitions_views.sh",
+            "dest": ""
+        }
+    ]
+}
+

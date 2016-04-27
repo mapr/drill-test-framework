@@ -1,0 +1,1 @@
+explain plan for select * from ( (SELECT c2 FROM `union_01_v` ORDER BY c5 DESC nulls last) UNION (SELECT c2 FROM `union_02_v` ORDER BY c5 ASC nulls last) ) t limit 0;
