@@ -1,0 +1,2 @@
+explain plan for select * from (
+SELECT MIN(col_int) OVER (PARTITION BY col_tmstmp) min_int, col_tmstmp, col_int FROM `smlTbl_v` WHERE col_vchar_52 = 'HXXXXXXXXXXXXXXXXXXXXXXXXXIXXXXXXXXXXXXXXXXXXXXXXXXJ') t limit 0;

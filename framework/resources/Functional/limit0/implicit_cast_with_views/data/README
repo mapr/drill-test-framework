@@ -1,0 +1,11 @@
+* This suite is meant to be executed with: 
+	alter system set `planner.enable_hashjoin_swap` = false;
+	alter system set `planner.enable_mergejoin` = false;
+
+* Make sure suite is run with additional permutations:
+        * only hash/merge join enabled at a time
+        * To generate distributed plan:
+		alter system set `planner.slice_target` = 1;
+		alter system set `planner.enable_broadcast_join` = false;
+
+Not supported CAST test cases: not_supported_cast.txt

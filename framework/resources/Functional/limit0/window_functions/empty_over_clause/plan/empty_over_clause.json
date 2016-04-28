@@ -1,0 +1,30 @@
+{
+    "testId": "window_functions_empty_over_clause",
+    "type": "group",
+    "description": "Window function tests: empty over clause",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.subqueries",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/subqueries",
+            "dest": "subqueries"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/limit0/window_functions/empty_over_clause/create_wf_empty_over_clause_views.sh",
+            "dest": ""
+        }
+    ]
+}
+

@@ -1,0 +1,74 @@
+{
+    "testId": "views-dfs-parquet_limit0_plan",
+    "type": "group",
+    "description": "Test views in drill using parquet as the format ",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirViews",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/views/rankings.parquet",
+            "dest": "views/dfs/parquet/rankings/rankings.parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/views/uservisits.parquet",
+            "dest": "views/dfs/parquet/uservisits/uservisits.parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/views/rankings.json",
+            "dest": "views/dfs/json/rankings/rankings.json"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/views/uservisits.json",
+            "dest": "views/dfs/json/uservisits/uservisits.json"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/views/rankings.txt",
+            "dest": "views/hive/rankings/rankings.txt"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/views/uservisits.txt",
+            "dest": "views/hive/uservisits/uservisits.txt"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/views/pages.txt",
+            "dest": "views/hive/pages/pages.txt"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/views/rankings.txt",
+            "dest": "views/dfs/text/rankings/rankings.tbl"
+        },
+        {
+           "mode": "gen",
+           "src": "bin/execHive.sh framework/resources/Datasources/views/hive.ddl",
+           "dest": ""
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/views/voter.txt",
+            "dest": "views/hive/voter/voter.txt"
+        }
+  
+    ]
+}

@@ -1,0 +1,1 @@
+explain plan for select * from ( SELECT c1 FROM `union_01_v` UNION SELECT c1 FROM `union_02_v` WHERE c1 IS NOT null ) t limit 0;

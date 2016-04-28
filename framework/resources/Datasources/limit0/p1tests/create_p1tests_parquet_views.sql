@@ -1,0 +1,3 @@
+create or replace view `dfs.drillTestDirP1`.voter_parquet_v as select cast(voter_id as int) voter_id, cast(name as varchar(30)) as name, cast(age as integer) age, cast(registration as character varying(20)) registration, cast(contributions as double) contributions, cast(voterzone as integer) voterzone, cast(create_time as timestamp) create_time,cast(isVote as boolean) isVote from `dfs.drillTestDirP1`.`voter1.parquet`;
+
+create or replace view `dfs.drillTestDirP1`.student_parquet_v as select cast(student_id as integer) student_id, cast(name as character(30)) name, cast(age as integer) age, cast(gpa as float) gpa, cast(studentnum as bigint) studentnum, cast(create_time as timestamp) create_time from `dfs.drillTestDirP1`.student;

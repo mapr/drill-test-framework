@@ -1,0 +1,9 @@
+Nick Miller	Green
+Ulysses White	Green
+Holly Garcia	Democrat
+Victor Thompson	Independent
+Luke Allen	Socialist
+Luke Garcia	Democrat
+Sarah Garcia	Republican
+Luke Davidson	Libertarian
+Xavier White	Independent

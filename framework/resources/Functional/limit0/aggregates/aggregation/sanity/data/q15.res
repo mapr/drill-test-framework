@@ -1,0 +1,10 @@
+aaaaa	1	1	1	1	1
+bbbbb	1	2	1	1	1
+ccccc	1	3	1	1	1
+eeeee	1	5	1	1	1
+fffff	1	6	1	1	1
+ggggg	1	7	1	1	1
+hhhhh	0	null	1	1	1
+iiiii	1	9	1	0	1
+jjjjj	1	10	1	1	1
+null	1	4	0	1	1
