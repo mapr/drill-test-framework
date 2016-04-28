@@ -1,0 +1,1 @@
+select extract(year from now())=extract(year from localtimestamp) from sys.drillbits limit 1;

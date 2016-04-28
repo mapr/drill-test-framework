@@ -1,0 +1,2 @@
+explain plan for select * from (
+SELECT c1, row_num FROM (SELECT c1, row_number() OVER ( PARTITION BY c2 ORDER BY c1 ASC nulls last ) row_num FROM `tblWnulls_v`) sub_query WHERE row_num > 3) t limit 0;

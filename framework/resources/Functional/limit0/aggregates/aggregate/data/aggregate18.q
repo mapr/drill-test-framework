@@ -1,0 +1,1 @@
+select min(cast(c_int as int)), min(cast(c_bigint as bigint)), min(cast(c_float4 as float)), min(cast(c_float8 as double)), min(cast(c_float4 as decimal(9,3))), min(cast(c_decimal9 as decimal(28,9))), min(cast(c_decimal18 as decimal(38,18))) from data where cast(c_row as int) <> 5 and cast(c_row as int) <> 14 and cast(c_row as int) <> 19;

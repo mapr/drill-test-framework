@@ -1,0 +1,1 @@
+select extract(minute from now())=extract(minute from localtimestamp) from sys.drillbits limit 1;

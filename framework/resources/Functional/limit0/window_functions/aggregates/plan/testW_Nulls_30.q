@@ -1,0 +1,2 @@
+explain plan for select * from (
+SELECT c1, prct_rnk FROM ( SELECT c1, percent_rank() OVER ( PARTITION BY c2 ORDER BY c1 ASC nulls last ) prct_rnk FROM `tblWnulls_v`) sub_query WHERE c1 IS NOT null) t limit 0;

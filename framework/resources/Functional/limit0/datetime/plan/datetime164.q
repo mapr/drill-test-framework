@@ -1,0 +1,1 @@
+explain plan for select * from ( select now()=localtimestamp from sys.drillbits limit 1 ) t limit 0;

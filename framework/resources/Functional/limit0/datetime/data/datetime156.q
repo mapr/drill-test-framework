@@ -1,0 +1,1 @@
+select extract(second from now())=extract(second from current_time) from sys.drillbits limit 1;

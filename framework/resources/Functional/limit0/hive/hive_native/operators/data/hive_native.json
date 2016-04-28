@@ -1,0 +1,48 @@
+{
+    "testId": "hive_native_operators_limit0_data",
+    "type": "limit 0",
+    "description": "Test drill queries involving data from different sources",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources" : [
+       {
+            "mode": "cp",
+            "src": "Datasources/cross-sources",
+            "dest": "cross-sources"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/hive_storage/hive_native/drillgen_fewtypes_null.parquet",
+            "dest": "hive_storage/hive_native/drillgen_fewtypes_null/drillgen_fewtypes_null.parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/hive_storage/hive_native/hivegen_fewtypes_null.parquet",
+            "dest": "hive_storage/hive_native/hivegen_fewtypes_null/hivegen_fewtypes_null.parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/hive_storage/hive_native/allhivetypes.parquet",
+            "dest": "/drill/testdata/hive_storage/hive_native/drill_supported_hivetypes/allhivetypes.parquet"
+        },
+        {
+           "mode": "gen",
+           "src": "Datasources/hive_storage/hive_native_gen.sh",
+           "dest": ""
+        }    
+    ]
+}
