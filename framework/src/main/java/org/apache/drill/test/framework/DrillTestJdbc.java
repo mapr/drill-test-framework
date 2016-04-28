@@ -58,8 +58,10 @@ public class DrillTestJdbc implements DrillTest {
   private Random rand = new Random();
   private Statement statement = null;
   private AtomicBoolean doneProcessingResultSet = new AtomicBoolean(false);
+  private int id;
 
-  public DrillTestJdbc(DrillTestCase modeler, ConnectionPool connectionPool) {
+  public DrillTestJdbc(DrillTestCase modeler, ConnectionPool connectionPool, int id) {
+	this.id = id;
     this.modeler = modeler;
     this.connectionPool = connectionPool;
     this.matrix = modeler.matrices.get(0);
@@ -158,7 +160,7 @@ public class DrillTestJdbc implements DrillTest {
   }
 
   private void executeQuery(String query) throws IOException, SQLException {
-    outputFilename = Utils.generateOutputFileName(modeler.queryFilename, modeler.testId, false);
+    outputFilename = Utils.generateOutputFileName(modeler.queryFilename, modeler.testId, false) + "_" + id;
     BufferedWriter writer = new BufferedWriter(new FileWriter(new File(
             outputFilename)));
     final boolean cancelQuery = rand.nextInt(100) < TestDriver.OPTIONS.cancelPercent;

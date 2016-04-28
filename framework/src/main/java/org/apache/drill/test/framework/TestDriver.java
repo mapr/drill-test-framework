@@ -129,6 +129,9 @@ public class TestDriver {
     @Parameter(names = {"-i"}, description = "number of iterations", required=false)
     public int iterations = 1;
     
+    @Parameter(names = {"-j"}, description = "number of testcase clones", required=false)
+    public int clones = 1;
+    
     @Parameter(names = {"-f"}, description = "filename", required=false)
     public String beforeRunQueryFilename = "before-run.sql";
     
@@ -195,7 +198,9 @@ public class TestDriver {
     List<DrillTestCase> drillTestCases = Utils.getDrillTestCases();
     List<Cancelable> tests = Lists.newArrayList();
     for (DrillTestCase testCase : drillTestCases) {
-      tests.add(getDrillTest(testCase, connectionPool));
+      for (int j = 0; j < OPTIONS.clones; j++) {
+        tests.add(getDrillTest(testCase, connectionPool, j));
+      }
     }
 
 
@@ -507,10 +512,10 @@ public class TestDriver {
 	}
   }
   
-  private static DrillTest getDrillTest(DrillTestCase modeler, ConnectionPool connectionPool) {
+  private static DrillTest getDrillTest(DrillTestCase modeler, ConnectionPool connectionPool, int cloneId) {
     switch(modeler.queryType) {
     case "sql":
-      return new DrillTestJdbc(modeler, connectionPool);
+      return new DrillTestJdbc(modeler, connectionPool, cloneId);
     case "system":
       return null;
     default:
