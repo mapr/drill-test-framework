@@ -1,5 +1,5 @@
 {
-    "testId": "hiveFileFormats_storage",
+    "testId": "hiveChangeMetadata",
     "type": "group",
     "description": "Test hive file formats and queries",
     "categories": [

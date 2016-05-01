@@ -30,6 +30,16 @@
     },
     {
         "mode": "cp",
+        "src": "Datasources/cross-sources/fewtypes_null_hive/fewtypes_null.tbl",
+        "dest": "cross-sources/fewtypes_null_hive/fewtypes_null.tbl"
+    },
+    {
+        "mode": "cp",
+        "src": "Datasources/cross-sources/fewtypes_null_hbase.tsv",
+        "dest": "cross-sources/fewtypes_null_hbase.tsv"
+    },
+    {
+        "mode": "cp",
         "src": "Datasources/hive_storage/fewtypes_null_gz",
         "dest": "hive_storage/fewtypes_null_gz"
     },
@@ -68,10 +78,15 @@
         "src": "Datasources/information-schema/students.txt",
         "dest": "hive_storage/students2/students.txt"
     },
-    { 
-       "mode": "gen", 
-       "src": "Datasources/hive_storage/gen.sh", 
-       "dest": "" 
+    {
+        "mode": "cp",
+        "src": "Datasources/partition_pruning/hive/text/lineitem/lineitem.tbl",
+        "dest": "partition_pruning/hive/text/lineitem/lineitem.tbl"
+    },
+    {
+       "mode": "gen",
+       "src": "Datasources/hive_storage/gen.sh",
+       "dest": ""
     }
    ]
 }

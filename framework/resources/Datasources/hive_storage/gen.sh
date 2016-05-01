@@ -10,4 +10,4 @@ framework/resources/Datasources/hive_storage/execHive.sh framework/resources/Dat
 framework/resources/Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/rcFileFormat.q
 framework/resources/Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/alltypes.q
 framework/resources/Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/null_schemachange.ddl
-framework/resources/Datasources/hive_storage/execHive.sh framework/resources/Datasources/cross-sources/hive.ddl
+framework/resources/Datasources/cross-sources/cross-sources.sh
