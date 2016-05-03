@@ -1,5 +1,5 @@
 {
-    "testId": "union",
+    "testId": "union_limit0_data",
     "type": "limit 0",
     "description": "Functional tests to verify correctness of UNION operator",
     "submit-type": "jdbc",

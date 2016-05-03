@@ -1,5 +1,5 @@
 {
-    "testId": "hbase_limit0_query-Regression",
+    "testId": "hbase_limit0_query-Regression_plan",
     "type": "group",
     "description": "Test hbase queries via jdbc",
     "categories": [

@@ -1,5 +1,5 @@
 {
-    "testId": "hive_native_hash_join_plan",
+    "testId": "hive_native_hash_join_limit0_plan",
     "type": "group",
     "description": "Test drill queries involving data from different sources",
     "submit-type": "jdbc",

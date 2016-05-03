@@ -1,5 +1,5 @@
 {
-    "testId": "window_functions_empty_over_clause",
+    "testId": "window_functions_empty_over_clause_limit0_plan",
     "type": "group",
     "description": "Window function tests: empty over clause",
     "categories": [ "smoke" ],

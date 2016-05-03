@@ -48,4 +48,4 @@ from
 ) as dt
 order by 2 desc) t limit 0;
 
-alter session set `planner.enable_mergejoin` = true);
+alter session set `planner.enable_mergejoin` = true;
