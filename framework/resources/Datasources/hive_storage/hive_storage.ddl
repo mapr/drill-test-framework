@@ -87,61 +87,61 @@ insert overwrite table hier_null_partitions partition(col1, col2) select 1 as co
 insert overwrite table hier_null_partitions partition(col1, col2) select 1 as col3, 2 as col2, null as col1 from lineitem_text_hive limit 1;
 insert overwrite table hier_null_partitions partition(col1, col2) select 1 as col3, null as col2, null as col1 from lineitem_text_hive limit 1;
 
---drop table if exists voter_text;
---create table voter_text (
---   VOTER_ID SMALLINT,
---   NAME VARCHAR(40),
---   AGE TINYINT,
---   REGISTRATION CHAR(11),
---   CONTRIBUTIONS float,
---   VOTERZONE INT,
---   CREATE_TIMESTAMP TIMESTAMP,
---   create_date date
---)
---ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
---STORED AS TEXTFILE TBLPROPERTIES('serialization.null.format'='');
+drop table if exists voter_text;
+create table voter_text (
+   VOTER_ID SMALLINT,
+   NAME VARCHAR(40),
+   AGE TINYINT,
+   REGISTRATION CHAR(11),
+   CONTRIBUTIONS float,
+   VOTERZONE INT,
+   CREATE_TIMESTAMP TIMESTAMP,
+   create_date date
+)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
+STORED AS TEXTFILE TBLPROPERTIES('serialization.null.format'='');
 
---load data local inpath 'framework/resources/Datasources/hive_storage/voterhive.tsv' into table voter_text;
+load data local inpath 'framework/resources/Datasources/hive_storage/voterhive.tsv' into table voter_text;
 
---drop table if exists voter_parquet;
---create table voter_parquet (
---   VOTER_ID SMALLINT,
---   NAME VARCHAR(40),
---   AGE TINYINT,
---   REGISTRATION CHAR(11),
---   CONTRIBUTIONS float,
---   VOTERZONE INT,
---   CREATE_TIMESTAMP TIMESTAMP,
---   create_date date
---)
---STORED AS PARQUET;
+drop table if exists voter_parquet;
+create table voter_parquet (
+   VOTER_ID SMALLINT,
+   NAME VARCHAR(40),
+   AGE TINYINT,
+   REGISTRATION CHAR(11),
+   CONTRIBUTIONS float,
+   VOTERZONE INT,
+   CREATE_TIMESTAMP TIMESTAMP,
+   create_date date
+)
+STORED AS PARQUET;
 
---FROM voter_text insert overwrite table voter_parquet select voter_id,name,age,registration,contributions,voterzone,create_timestamp,create_date;
+FROM voter_text insert overwrite table voter_parquet select voter_id,name,age,registration,contributions,voterzone,create_timestamp,create_date;
 
---drop table if exists voter_avro;
---create table voter_avro (
---    voter_id smallint,
---    name varchar(40),
---    age TINYINT,
---    contributions float,
---    voterzone int,
---    create_timestamp timestamp,
---    create_date date)
---PARTITIONED BY (registration char(11))
---STORED AS AVRO;
+drop table if exists voter_avro;
+create table voter_avro (
+    voter_id smallint,
+    name varchar(40),
+    age TINYINT,
+    contributions float,
+    voterzone int,
+    create_timestamp timestamp,
+    create_date date)
+PARTITIONED BY (registration char(11))
+STORED AS AVRO;
 
---FROM voter_text insert overwrite table voter_avro PARTITION (registration) select voter_id,name,age,contributions,voterzone,create_timestamp,create_date,registration;
+FROM voter_text insert overwrite table voter_avro PARTITION (registration) select voter_id,name,age,contributions,voterzone,create_timestamp,create_date,registration;
 
---drop table if exists voter_orc;
---create table voter_orc (
---    voter_id smallint,
---    name varchar(40),
---    age TINYINT,
---    contributions float,
---    voterzone int,
---    create_timestamp timestamp,
---    create_date date)
---PARTITIONED BY (registration char(11))
---STORED AS ORC tblproperties ("orc.compress"="SNAPPY");
+drop table if exists voter_orc;
+create table voter_orc (
+    voter_id smallint,
+    name varchar(40),
+    age TINYINT,
+    contributions float,
+    voterzone int,
+    create_timestamp timestamp,
+    create_date date)
+PARTITIONED BY (registration char(11))
+STORED AS ORC tblproperties ("orc.compress"="SNAPPY");
 
---FROM voter_text insert overwrite table voter_orc PARTITION (registration) select voter_id,name,age,contributions,voterzone,create_timestamp,create_date,registration;
+FROM voter_text insert overwrite table voter_orc PARTITION (registration) select voter_id,name,age,contributions,voterzone,create_timestamp,create_date,registration;
