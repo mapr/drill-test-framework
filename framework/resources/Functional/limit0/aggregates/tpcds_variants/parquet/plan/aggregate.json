@@ -1,5 +1,5 @@
 {
-    "testId": "aggregates_tpcds_sf1_parquet",
+    "testId": "aggregates_tpcds_sf1_parquet_limit0_plan",
     "type": "group",
     "description": "Test aggregate queries via jdbc",
     "submit-type": "jdbc",

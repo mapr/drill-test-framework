@@ -1,5 +1,5 @@
 {
-    "testId": "decimal",
+    "testId": "decimal_limit0_data",
     "type": "limit 0",
     "description": "Test explicit cast queries via jdbc",
     "submit-type": "jdbc",
