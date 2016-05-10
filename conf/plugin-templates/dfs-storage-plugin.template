@@ -529,6 +529,11 @@
       "location": "/drill",
       "writable": true,
       "defaultInputFormat": "json"
+    },
+    "concurrency": {
+      "location": "/drill/testdata/concurrency",
+      "writable": true,
+      "defaultInputFormat": "parquet"
     }
     },
     "formats" : {

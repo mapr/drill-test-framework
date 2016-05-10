@@ -1,0 +1,21 @@
+{
+    "testId": "nw_heavy",
+    "type": "group",
+    "description": "Test generic json queries",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.concurrency",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+   ]
+}
