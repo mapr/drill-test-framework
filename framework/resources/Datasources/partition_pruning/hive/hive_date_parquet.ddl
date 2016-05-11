@@ -68,7 +68,7 @@ CREATE DATABASE IF NOT EXISTS dynamic_partitions;
 USE dynamic_partitions;
 
 DROP TABLE IF EXISTS lineitem_text_partitioned_hive_date;
-CREATE EXTERNAL TABLE lineitem_text_partitioned_hive_date (
+CREATE TABLE lineitem_text_partitioned_hive_date (
     l_orderkey INT,
     l_partkey INT,
     l_suppkey INT,
