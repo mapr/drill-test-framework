@@ -395,7 +395,7 @@ CREATE DATABASE IF NOT EXISTS dynamic_partitions;
 USE dynamic_partitions;
 
 DROP TABLE IF EXISTS lineitem_text_partitioned_hive_hier_intstring;
-CREATE EXTERNAL TABLE IF NOT EXISTS lineitem_text_partitioned_hive_hier_intstring (
+CREATE TABLE IF NOT EXISTS lineitem_text_partitioned_hive_hier_intstring (
     l_orderkey INT,
     l_partkey INT,
     l_suppkey INT,
@@ -440,7 +440,7 @@ SELECT
 FROM DEFAULT.lineitem_text_partitioned_hive_hier_intstring;
 
 DROP TABLE IF EXISTS lineitem_text_partitioned_hive_hier_intint;
-CREATE EXTERNAL TABLE IF NOT EXISTS lineitem_text_partitioned_hive_hier_intint (
+CREATE TABLE IF NOT EXISTS lineitem_text_partitioned_hive_hier_intint (
     l_orderkey INT,
     l_partkey INT,
     l_suppkey INT,
