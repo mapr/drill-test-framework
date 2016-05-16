@@ -1,9 +1,10 @@
 {
-    "testId": "textRead",
+    "testId": "textRead_negative",
     "type": "group",
+    "negative": true,
     "description": "Test text read queries",
     "categories": [
-        "smoke"
+        "negative"
     ],
     "matrices": [
         {
@@ -12,16 +13,16 @@
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
             "verification-type": [
-                "in-memory"
+                "regex"
             ]
         }
     ],
     "datasources": [
-	{
-		"mode": "cp",
-		"src": "Datasources/text_storage",
-		"dest": "text_storage"
-	},
+        {
+                "mode": "cp",
+                "src": "Datasources/text_storage",
+                "dest": "text_storage"
+        },
         {
          "mode": "gen",
          "src": "Datasources/text_storage/drill-4484.sh",
