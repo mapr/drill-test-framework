@@ -1,0 +1,1 @@
+false	Table json_folder does not support metadata refresh. Support is currently limited to directory-based Parquet tables.
