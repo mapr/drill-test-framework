@@ -1,0 +1,1 @@
+SELECT  DISTINCT id FROM (VALUES('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou'),('aeiou')) tbl(id);
