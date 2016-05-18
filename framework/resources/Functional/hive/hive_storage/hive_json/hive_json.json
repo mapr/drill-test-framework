@@ -1,0 +1,27 @@
+{
+    "testId": "hiveJson",
+    "type": "group",
+    "description": "Test hive json serde",
+    "categories": [
+        "smoke"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "hive",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+    { 
+       "mode": "gen", 
+       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/hive_json/hive_json.ddl", 
+       "dest": "" 
+    }
+   ]
+}
