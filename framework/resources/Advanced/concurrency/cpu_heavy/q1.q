@@ -14,6 +14,5 @@ select count(*) from (
       where
           position('...' in o_clerk) > 0
           and length(concat(enlarged_comment, o_clerk)) > 100
-      limit 5000000
   ) s1
 )s2 where max_length = 0;
