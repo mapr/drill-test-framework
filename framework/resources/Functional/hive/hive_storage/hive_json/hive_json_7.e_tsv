@@ -1,0 +1,2 @@
+{"DocId":"ABC","User":{"Id":1235,"Username":"fred1235","Name":"Fred","ShippingAddress":{"Address1":"456 Main St.","Address2":"","City":"Durham","State":"NC"}}}
+{"DocId":"ABC","User":{"Id":1236,"Username":"larry1236","Name":"Larry","ShippingAddress":{"Address1":"789 Main St.","Address2":"","City":"Durham","State":"NC","PostalCode":"27713"},"Orders":[{"ItemId":1111,"OrderDate":"11/11/2012","OrderPrice":120.88},{"ItemId":2222,"OrderDate":"12/12/2012","OrderPrice":200.00}]}}

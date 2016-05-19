@@ -1,0 +1,1 @@
+select get_json_object(hive_json.json, '$.User.Id'), get_json_object(hive_json.json, '$.User.Orders.ItemId[0]') from hive_json where get_json_object(hive_json.json, '$.User.Orders.ItemId[0]') is null;
