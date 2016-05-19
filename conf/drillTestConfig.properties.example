@@ -41,7 +41,21 @@ DRILL_TESTDATA=/drill/testdata
 ########################################
 ZOOKEEPERS=IPADDR1:5181/drill/drillbits1
 
+########################################
+# DRILL JDBC driver
+########################################
+#JDBC_DRIVER=com.mapr.drill.jdbc41.Driver
+JDBC_DRIVER=org.apache.drill.jdbc.Driver
+
+########################################
+# JDBC DRIVER CLASSPATH
+########################################
+#JDBC_DRIVER_CP=/root/DrillJDBC41/*
+JDBC_DRIVER_CP=${DRILL_HOME}/jars/jdbc-driver/*
+
+########################################
 # DRILL JDBC CONNECTION STRING
+########################################
 CONNECTION_STRING=jdbc:drill:zk\=x.x.x.x:5181/zk_root/cluster_id
 
 ########################################

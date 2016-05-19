@@ -18,9 +18,8 @@
 package org.apache.drill.test.framework;
 
 import com.google.common.collect.Queues;
-import org.apache.drill.jdbc.Driver;
+//import org.apache.drill.jdbc.Driver;
 import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -30,21 +29,29 @@ import java.util.Queue;
 
 public class ConnectionPool implements AutoCloseable {
   private static final Logger LOG = Logger.getLogger(ConnectionPool.class);
-  private static final String URL_STRING = Utils.getDrillTestProperties().get("CONNECTION_STRING");
+  private String URL_STRING = "jdbc:drill:drillbit=localhost";
+  private String JDBC_DRIVER = "org.apache.drill.jdbc.Driver";
+  //private static final String URL_STRING = Utils.getDrillTestProperties().get("CONNECTION_STRING");
   //private static final String URL_STRING = String.format("jdbc:drill:drillbit=%s",
-   // Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER"));
+  //  Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER"));
 
   private final Map<String, Queue<Connection>> connections;
 
   public ConnectionPool() {
+	if (Utils.getDrillTestProperties().containsKey("CONNECTION_STRING")) {
+	  URL_STRING = Utils.getDrillTestProperties().get("CONNECTION_STRING");
+	}
+	if (Utils.getDrillTestProperties().containsKey("JDBC_DRIVER")) {
+	  JDBC_DRIVER = Utils.getDrillTestProperties().get("JDBC_DRIVER");
+	}
     try {
-		Class.forName("org.apache.drill.jdbc.Driver");
+		Class.forName(JDBC_DRIVER);
 	} catch (ClassNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		System.exit(-1);
 	}
-    Driver.load();
+    //Driver.load();
     connections = new HashMap<>();
   }
 
