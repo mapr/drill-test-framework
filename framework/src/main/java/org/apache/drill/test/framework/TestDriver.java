@@ -571,6 +571,7 @@ public class TestDriver {
 				values.add(resultSet.getObject(i));
               }
 			} catch (SQLException e1) {
+			  LOG.error(e.getMessage());
 			  e1.printStackTrace();
 			}
           }
@@ -591,6 +592,7 @@ public class TestDriver {
     } catch (IOException e1) {
 	  e1.printStackTrace();
     } catch (SQLException e1) {
+      LOG.warn(e1.getMessage());
       e1.printStackTrace();
       connection.close();
     } finally {

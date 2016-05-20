@@ -77,6 +77,7 @@ public class DrillTestJdbc implements DrillTest {
     try {
       connection = connectionPool.getOrCreateConnection(modeler);
     } catch (SQLException e) {
+      LOG.error(e.getMessage());
       throw new RuntimeException(e);
     }
     try {
@@ -125,6 +126,7 @@ public class DrillTestJdbc implements DrillTest {
         try {
 			connection.close();
 		} catch (SQLException e1) {
+			LOG.warn(e.getMessage());
 			e1.printStackTrace();
 		}
       }
