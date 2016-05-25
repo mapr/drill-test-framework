@@ -1,0 +1,26 @@
+{
+    "testId": "dt_trunc",
+    "type": "group",
+    "description": "Test date_trunc() function",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+                "mode": "cp",
+                "src": "Datasources/parquet_storage",
+                "dest": "parquet_storage"
+        }
+    ]
+}
