@@ -54,7 +54,8 @@ A test definition file is a JSON file that defines one or a set of tests within 
    "type": "group",                    // Group of tests
    "negative": false,                  // Tests are positive or negative (expected success or expected failures)
    "description": "...",               // Description for test suites
-   "submit-type": "jdbc",              // Currently only support jdbc
+   "submit-type": "jdbc",              // Currently the support types: jdbc, odbc, script
+   "script": "Functional/script_location/script.sh paras" // Specify the test script to execute
    "queryType": "sql",              
    "timeout": null,
    "categories": [

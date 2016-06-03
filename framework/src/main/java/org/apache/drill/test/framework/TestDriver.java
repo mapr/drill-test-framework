@@ -196,15 +196,13 @@ public class TestDriver {
     setup();
 
     List<DrillTestCase> drillTestCases = Utils.getDrillTestCases();
-    List<Cancelable> tests = Lists.newArrayList();
+    List<DrillTest> tests = Lists.newArrayList();
     for (DrillTestCase testCase : drillTestCases) {
       for (int j = 0; j < OPTIONS.clones; j++) {
         tests.add(getDrillTest(testCase, connectionPool, j));
       }
     }
 
-
-    
     int totalExecutionFailure = 0;
     int totalVerificationFailure = 0;
     int totalTimeoutFailure = 0;
@@ -231,33 +229,32 @@ public class TestDriver {
     	  queryMemoryUsage();
       }
 
-      List<DrillTestJdbc> passingTests = Lists.newArrayList();
-      List<DrillTestJdbc> verificationFailures = Lists.newArrayList();
-      List<DrillTestJdbc> executionFailures = Lists.newArrayList();
-      List<DrillTestJdbc> timeoutFailures = Lists.newArrayList();
-      List<DrillTestJdbc> canceledTests = Lists.newArrayList();
+      List<DrillTest> passingTests = Lists.newArrayList();
+      List<DrillTest> verificationFailures = Lists.newArrayList();
+      List<DrillTest> executionFailures = Lists.newArrayList();
+      List<DrillTest> timeoutFailures = Lists.newArrayList();
+      List<DrillTest> canceledTests = Lists.newArrayList();
 
-      for (Cancelable test : tests) {
-        DrillTestJdbc drilTest = (DrillTestJdbc) test;
-        TestStatus testStatus = ((DrillTestJdbc) test).getTestStatus();
+      for (DrillTest test : tests) {
+        TestStatus testStatus = test.getTestStatus();
         switch (testStatus) {
         case PASS:
-          passingTests.add(drilTest);
+          passingTests.add(test);
           break;
         case VERIFICATION_FAILURE:
-          verificationFailures.add(drilTest);
+          verificationFailures.add(test);
           break;
         case EXECUTION_FAILURE:
-          executionFailures.add(drilTest);
+          executionFailures.add(test);
           break;
         case TIMEOUT:
-          timeoutFailures.add(drilTest);
+          timeoutFailures.add(test);
           break;
         case CANCELED:
-          canceledTests.add(drilTest);
+          canceledTests.add(test);
           break;
         default:
-          executionFailures.add(drilTest);
+          executionFailures.add(test);
         }
       }
       LOG.info(LINE_BREAK);LOG.info(LINE_BREAK);
@@ -267,19 +264,19 @@ public class TestDriver {
       LOG.info("Results:");
       LOG.info(LINE_BREAK);
       LOG.info("Execution Failures:");
-      for (DrillTestJdbc test : executionFailures) {
+      for (DrillTest test : executionFailures) {
         LOG.info(test.getInputFile());
         LOG.info("Query: \n" + test.getQuery());
         LOG.info("Failed with exception", test.getException());
       }
       LOG.info("Verification Failures:");
-      for (DrillTestJdbc test : verificationFailures) {
+      for (DrillTest test : verificationFailures) {
         LOG.info(test.getInputFile());
         LOG.info("Query: \n" + test.getQuery());
         LOG.info(test.getException().getMessage());
       }
       LOG.info("Timeout Failures:");
-      for (DrillTestJdbc test : timeoutFailures) {
+      for (DrillTest test : timeoutFailures) {
         LOG.info(test.getInputFile());
         LOG.info("Query: \n" + test.getQuery());
       }
@@ -287,15 +284,15 @@ public class TestDriver {
       LOG.info("Summary");
       LOG.info(LINE_BREAK);
       LOG.info("Execution Failures:");
-      for (DrillTestJdbc test : executionFailures) {
+      for (DrillTest test : executionFailures) {
         LOG.info(test.getInputFile());
       }
       LOG.info("Verification Failures:");
-      for (DrillTestJdbc test : verificationFailures) {
+      for (DrillTest test : verificationFailures) {
         LOG.info(test.getInputFile());
       }
       LOG.info("Timeout Failures:");
-      for (DrillTestJdbc test : timeoutFailures) {
+      for (DrillTest test : timeoutFailures) {
         LOG.info(test.getInputFile());
       }
       LOG.info(LINE_BREAK);
@@ -513,9 +510,13 @@ public class TestDriver {
   }
   
   private static DrillTest getDrillTest(DrillTestCase modeler, ConnectionPool connectionPool, int cloneId) {
-    switch(modeler.queryType) {
-    case "sql":
+    switch(modeler.submitType) {
+    case "jdbc":
       return new DrillTestJdbc(modeler, connectionPool, cloneId);
+    case "odbc":
+      return new DrillTestOdbc(modeler, cloneId);
+    case "script":
+      return new DrillTestScript(modeler, cloneId);
     case "system":
       return null;
     default:
