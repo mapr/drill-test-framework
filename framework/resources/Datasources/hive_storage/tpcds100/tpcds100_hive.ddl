@@ -865,7 +865,7 @@ create external table tpcds100_parquet.ship_mode (
 STORED AS PARQUET;
 
 drop table if exists tpcds100_parquet.reason;
-create  table tpcds100_parquet.reason (
+create external table tpcds100_parquet.reason (
     r_reason_sk int,
     r_reason_id string,
     r_reason_desc string  
