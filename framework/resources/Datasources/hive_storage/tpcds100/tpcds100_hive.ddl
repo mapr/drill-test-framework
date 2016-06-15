@@ -22,7 +22,7 @@ create external table tpcds100_text.customer
     c_last_review_date string
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/customer.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/customer'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.customer_address;
@@ -43,7 +43,7 @@ create external table tpcds100_text.customer_address
     ca_location_type string
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/customer_address.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/customer_address'
 TBLPROPERTIES ("serialization.null.format"="");
  
 
@@ -61,7 +61,7 @@ create external table tpcds100_text.customer_demographics
     cd_dep_college_count int
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/customer_demographics.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/customer_demographics'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.household_demographics;
@@ -74,7 +74,7 @@ create external table tpcds100_text.household_demographics
     hd_vehicle_count int
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/household_demographics.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/household_demographics'
 TBLPROPERTIES ("serialization.null.format"="");
 
 
@@ -105,7 +105,7 @@ create external table tpcds100_text.item
     i_product_name string
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/item.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/item'
 TBLPROPERTIES ("serialization.null.format"="");
 
 
@@ -133,7 +133,7 @@ create external table tpcds100_text.promotion
     p_discount_active string
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/promotion.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/promotion'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.time_dim;
@@ -150,7 +150,7 @@ create external table tpcds100_text.time_dim (
     t_meal_time string
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/time_dim.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/time_dim'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.date_dim;
@@ -185,7 +185,7 @@ create external table tpcds100_text.date_dim (
     d_current_year string
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/date_dim.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/date_dim'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.store;
@@ -221,7 +221,7 @@ create external table tpcds100_text.store (
     s_tax_precentage double
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/store.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/store'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.store_sales;
@@ -251,7 +251,7 @@ create external table tpcds100_text.store_sales (
     ss_net_profit double
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/store_sales.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/store_sales'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.warehouse;
@@ -272,7 +272,7 @@ create external table tpcds100_text.warehouse (
     w_gmt_offset double       
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/warehouse.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/warehouse'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.ship_mode;
@@ -285,7 +285,7 @@ create external table tpcds100_text.ship_mode (
     sm_contract string     
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/ship_mode.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/ship_mode'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.reason;
@@ -295,7 +295,7 @@ create external table tpcds100_text.reason (
     r_reason_desc string  
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/reason.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/reason'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.income_band;
@@ -305,7 +305,7 @@ create external table tpcds100_text.income_band (
     ib_upper_bound int         
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/income_band.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/income_band'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.call_center;
@@ -343,7 +343,7 @@ create external table tpcds100_text.call_center (
     cc_tax_percentage double 
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/call_center.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/call_center'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.web_site;
@@ -376,7 +376,7 @@ create external table tpcds100_text.web_site (
     web_tax_percentage double
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/web_site.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/web_site'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.store_returns;
@@ -403,7 +403,7 @@ create external table tpcds100_text.store_returns (
     sr_net_loss double    
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/store_returns.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/store_returns'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.web_page;
@@ -424,7 +424,7 @@ create external table tpcds100_text.web_page (
     wp_max_ad_count int         
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/web_page.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/web_page'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.catalog_page;
@@ -440,7 +440,7 @@ create external table tpcds100_text.catalog_page (
     cp_type string        
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/catalog_page.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/catalog_page'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.inventory;
@@ -451,7 +451,7 @@ create external table tpcds100_text.inventory (
     inv_quantity_on_hand int            
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/inventory.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/inventory'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.catalog_returns;
@@ -485,7 +485,7 @@ create external table tpcds100_text.catalog_returns (
     cr_net_loss double       
 )
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/catalog_returns.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/catalog_returns'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.web_returns;
@@ -516,7 +516,7 @@ create external table tpcds100_text.web_returns (
      wr_net_loss double 
 )       
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/web_returns.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/web_returns'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.web_sales;
@@ -557,7 +557,7 @@ create external table tpcds100_text.web_sales (
     ws_net_profit double       
 )       
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/web_sales.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/web_sales'
 TBLPROPERTIES ("serialization.null.format"="");
 
 drop table if exists tpcds100_text.catalog_sales;
@@ -598,12 +598,12 @@ create external table tpcds100_text.catalog_sales (
     cs_net_profit double        
 )       
 ROW FORMAT delimited fields terminated by '|' stored as textfile
-LOCATION '/drill/testdata/tpcds_sf100/text/catalog_sales.dat'
+LOCATION '/drill/testdata/tpcds_sf100/text/catalog_sales'
 TBLPROPERTIES ("serialization.null.format"="");
 
 create database if not exists tpcds100_parquet;
 drop table if exists tpcds100_parquet.customer;
-create table tpcds100_parquet.customer 
+create external table tpcds100_parquet.customer 
 (
     c_customer_sk int,
     c_customer_id string,
@@ -625,10 +625,9 @@ create table tpcds100_parquet.customer
     c_last_review_date string
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.customer select * from tpcds100_text.customer;
 
 drop table if exists tpcds100_parquet.customer_address;
-create table tpcds100_parquet.customer_address 
+create external table tpcds100_parquet.customer_address 
 (
     ca_address_sk int,
     ca_address_id string,
@@ -645,10 +644,9 @@ create table tpcds100_parquet.customer_address
     ca_location_type string
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.customer_address select * from tpcds100_text.customer_address; 
 
 drop table if exists tpcds100_parquet.customer_demographics;
-create table tpcds100_parquet.customer_demographics 
+create external table tpcds100_parquet.customer_demographics 
 (
     cd_demo_sk int,
     cd_gender string,
@@ -661,10 +659,9 @@ create table tpcds100_parquet.customer_demographics
     cd_dep_college_count int
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.customer_demographics select * from tpcds100_text.customer_demographics;
 
 drop table if exists tpcds100_parquet.household_demographics;
-create  table tpcds100_parquet.household_demographics 
+create external table tpcds100_parquet.household_demographics 
 (
     hd_demo_sk int,
     hd_income_band_sk int,
@@ -673,10 +670,9 @@ create  table tpcds100_parquet.household_demographics
     hd_vehicle_count int
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.household_demographics select * from tpcds100_text.household_demographics;
 
 drop table if exists tpcds100_parquet.item;
-create  table tpcds100_parquet.item 
+create external table tpcds100_parquet.item 
 (
     i_item_sk int,
     i_item_id string,
@@ -702,10 +698,9 @@ create  table tpcds100_parquet.item
     i_product_name string
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.item select * from tpcds100_text.item;
 
 drop table if exists tpcds100_parquet.promotion;
-create  table tpcds100_parquet.promotion 
+create external table tpcds100_parquet.promotion 
 (
     p_promo_sk int,
     p_promo_id string,
@@ -728,10 +723,9 @@ create  table tpcds100_parquet.promotion
     p_discount_active string
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.promotion select * from tpcds100_text.promotion;
 
 drop table if exists tpcds100_parquet.time_dim;
-create  table tpcds100_parquet.time_dim (
+create external table tpcds100_parquet.time_dim (
     t_time_sk int, 
     t_time_id string, 
     t_time int, 
@@ -744,10 +738,9 @@ create  table tpcds100_parquet.time_dim (
     t_meal_time string
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.time_dim select * from tpcds100_text.time_dim;
 
 drop table if exists tpcds100_parquet.date_dim;
-create  table tpcds100_parquet.date_dim (
+create external table tpcds100_parquet.date_dim (
     d_date_sk int, 
     d_date_id string, 
     d_date string, 
@@ -778,10 +771,9 @@ create  table tpcds100_parquet.date_dim (
     d_current_year string
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.date_dim select * from tpcds100_text.date_dim;
 
 drop table if exists tpcds100_parquet.store;
-create  table tpcds100_parquet.store ( 
+create external table tpcds100_parquet.store ( 
     s_store_sk int, 
     s_store_id string, 
     s_rec_start_date string, 
@@ -813,10 +805,9 @@ create  table tpcds100_parquet.store (
     s_tax_precentage double
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.store select * from tpcds100_text.store;
 
 drop table if exists tpcds100_parquet.store_sales;
-create  table tpcds100_parquet.store_sales ( 
+create external table tpcds100_parquet.store_sales ( 
     ss_sold_date_sk int, 
     ss_sold_time_sk int, 
     ss_item_sk int, 
@@ -842,10 +833,9 @@ create  table tpcds100_parquet.store_sales (
     ss_net_profit double
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.store_sales select * from tpcds100_text.store_sales;
 
 drop table if exists tpcds100_parquet.warehouse;
-create  table tpcds100_parquet.warehouse ( 
+create external table tpcds100_parquet.warehouse ( 
     w_warehouse_sk int,
     w_warehouse_id string,
     w_warehouse_name string,
@@ -862,10 +852,9 @@ create  table tpcds100_parquet.warehouse (
     w_gmt_offset double       
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.warehouse select * from tpcds100_text.warehouse;
 
 drop table if exists tpcds100_parquet.ship_mode;
-create  table tpcds100_parquet.ship_mode (
+create external table tpcds100_parquet.ship_mode (
     sm_ship_mode_sk int,
     sm_ship_mode_id string,
     sm_type string,
@@ -874,28 +863,25 @@ create  table tpcds100_parquet.ship_mode (
     sm_contract string     
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.ship_mode select * from tpcds100_text.ship_mode;
 
 drop table if exists tpcds100_parquet.reason;
-create  table tpcds100_parquet.reason (
+create external table tpcds100_parquet.reason (
     r_reason_sk int,
     r_reason_id string,
     r_reason_desc string  
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.reason select * from tpcds100_text.reason;
 
 drop table if exists tpcds100_parquet.income_band;
-create  table tpcds100_parquet.income_band ( 
+create external table tpcds100_parquet.income_band ( 
     ib_income_band_sk int,
     ib_lower_bound int,
     ib_upper_bound int         
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.income_band select * from tpcds100_text.income_band;
 
 drop table if exists tpcds100_parquet.call_center;
-create  table tpcds100_parquet.call_center ( 
+create external table tpcds100_parquet.call_center ( 
     cc_call_center_sk int,
     cc_call_center_id string,
     cc_rec_start_date string,
@@ -929,10 +915,9 @@ create  table tpcds100_parquet.call_center (
     cc_tax_percentage double 
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.call_center select * from tpcds100_text.call_center;
 
 drop table if exists tpcds100_parquet.web_site;
-create  table tpcds100_parquet.web_site (  
+create external table tpcds100_parquet.web_site (  
     web_site_sk int,
     web_site_id string,
     web_rec_start_date string,
@@ -961,10 +946,9 @@ create  table tpcds100_parquet.web_site (
     web_tax_percentage double
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.web_site select * from tpcds100_text.web_site;
 
 drop table if exists tpcds100_parquet.store_returns;
-create  table tpcds100_parquet.store_returns ( 
+create external table tpcds100_parquet.store_returns ( 
     sr_returned_date_sk int,
     sr_return_time_sk int,
     sr_item_sk int,
@@ -987,10 +971,9 @@ create  table tpcds100_parquet.store_returns (
     sr_net_loss double    
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.store_returns select * from tpcds100_text.store_returns;
 
 drop table if exists tpcds100_parquet.web_page;
-create  table tpcds100_parquet.web_page ( 
+create external table tpcds100_parquet.web_page ( 
     wp_web_page_sk int,
     wp_web_page_id string,
     wp_rec_start_date string,
@@ -1007,10 +990,9 @@ create  table tpcds100_parquet.web_page (
     wp_max_ad_count int         
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.web_page select * from tpcds100_text.web_page;
 
 drop table if exists tpcds100_parquet.catalog_page;
-create  table tpcds100_parquet.catalog_page (
+create external table tpcds100_parquet.catalog_page (
     cp_catalog_page_sk int,
     cp_catalog_page_id string,
     cp_start_date_sk int,
@@ -1022,20 +1004,18 @@ create  table tpcds100_parquet.catalog_page (
     cp_type string        
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.catalog_page select * from tpcds100_text.catalog_page;
 
 drop table if exists tpcds100_parquet.inventory;
-create  table tpcds100_parquet.inventory ( 
+create external table tpcds100_parquet.inventory ( 
     inv_date_sk int,
     inv_item_sk int,
     inv_warehouse_sk int,
     inv_quantity_on_hand int            
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.inventory select * from tpcds100_text.inventory;
 
 drop table if exists tpcds100_parquet.catalog_returns;
-create  table tpcds100_parquet.catalog_returns ( 
+create external table tpcds100_parquet.catalog_returns ( 
     cr_returned_date_sk int,
     cr_returned_time_sk int,
     cr_item_sk int,
@@ -1065,10 +1045,9 @@ create  table tpcds100_parquet.catalog_returns (
     cr_net_loss double       
 )
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.catalog_returns select * from tpcds100_text.catalog_returns;
 
 drop table if exists tpcds100_parquet.web_returns;
-create  table tpcds100_parquet.web_returns ( 
+create external table tpcds100_parquet.web_returns ( 
      wr_returned_date_sk int,
      wr_returned_time_sk int,
      wr_item_sk int,
@@ -1095,10 +1074,9 @@ create  table tpcds100_parquet.web_returns (
      wr_net_loss double 
 )       
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.web_returns select * from tpcds100_text.web_returns;
 
 drop table if exists tpcds100_parquet.web_sales;
-create  table tpcds100_parquet.web_sales (
+create external table tpcds100_parquet.web_sales (
     ws_sold_date_sk int,
     ws_sold_time_sk int,
     ws_ship_date_sk int,
@@ -1135,10 +1113,9 @@ create  table tpcds100_parquet.web_sales (
     ws_net_profit double       
 )       
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.web_sales select * from tpcds100_text.web_sales;
 
 drop table if exists tpcds100_parquet.catalog_sales;
-create table tpcds100_parquet.catalog_sales ( 
+create external table tpcds100_parquet.catalog_sales ( 
     cs_sold_date_sk int,
     cs_sold_time_sk int,
     cs_ship_date_sk int,
@@ -1175,4 +1152,3 @@ create table tpcds100_parquet.catalog_sales (
     cs_net_profit double        
 )       
 STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.catalog_sales select * from tpcds100_text.catalog_sales;
