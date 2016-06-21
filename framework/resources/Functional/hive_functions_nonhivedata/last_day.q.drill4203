@@ -1,0 +1,1 @@
+select last_day(create_date) from `voter1.parquet` where voter_id=138;

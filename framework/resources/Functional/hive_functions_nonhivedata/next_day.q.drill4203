@@ -1,0 +1,1 @@
+select next_day(cast(create_date as date),'WED') from `voter1.parquet` where voter_id=138;

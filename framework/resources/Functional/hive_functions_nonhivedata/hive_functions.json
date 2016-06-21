@@ -1,0 +1,26 @@
+{
+    "testId": "hiveFileFormats_functions",
+    "type": "group",
+    "description": "Test hive file formats and queries",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.hive_functions_nonhivedata",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/hive_functions_nonhivedata",
+            "dest": "hive_functions_nonhivedata"
+        }
+      ]
+}
