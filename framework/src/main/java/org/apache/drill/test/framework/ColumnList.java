@@ -95,20 +95,19 @@ public class ColumnList {
   }
 
   private boolean compare(ColumnList o1, ColumnList o2) {
-    boolean result = true;
     List<Object> list1 = o1.values;
     List<Object> list2 = o2.values;
+    if (list1.size() != list2.size()) return false;
     for (int i = 0; i < list1.size(); i++) {
       if (types == null || types.size() == 0) {
-        result = result && list1.get(i).equals(list2.get(i));
+        if (!list1.get(i).equals(list2.get(i))) return false;
         continue;
       }
       if (bothNull(list1.get(i), list2.get(i))) {
         continue;
       }
       if (oneNull(list1.get(i), list2.get(i))) {
-        result = false;
-        continue;
+        return false;
       }
       int type = (Integer) (types.get(i));
       try {
@@ -117,34 +116,34 @@ public class ColumnList {
           float f1 = (Float) list1.get(i);
           float f2 = (Float) list2.get(i);
           if ((f1 + f2) / 2 != 0) {
-            result = result && Math.abs(f1 - f2) / ((f1 + f2) / 2) < 1.0E-6;
+            if (!(Math.abs(f1 - f2) / ((f1 + f2) / 2) < 1.0E-6)) return false;
           } else if (f1 != 0) {
-            result = false;
+            return false;
           }
           break;
         case Types.DOUBLE:
           double d1 = (Double) list1.get(i);
           double d2 = (Double) list2.get(i);
           if ((d1 + d2) / 2 != 0) {
-            result = result && Math.abs(d1 - d2) / ((d1 + d2) / 2) < 1.0E-12;
+            if (!(Math.abs(d1 - d2) / ((d1 + d2) / 2) < 1.0E-12)) return false;
           } else if (d1 != 0) {
-            result = false;
+            return false;
           }
           break;
         case Types.DECIMAL:
           BigDecimal bd1 = (BigDecimal) list1.get(i);
           BigDecimal bd2 = (BigDecimal) list2.get(i);
-          result = result && bd1.compareTo(bd2) == 0;
+          if (!(bd1.compareTo(bd2) == 0)) return false;
           break;
         default:
-          result = result && list1.get(i).equals(list2.get(i));
+          if (!(list1.get(i).equals(list2.get(i)))) return false;
           break;
         }
       } catch (Exception e) {
-        result = result && list1.get(i).equals(list2.get(i));
+        if (!(list1.get(i).equals(list2.get(i)))) return false;
       }
     }
-    return result;
+    return true;
   }
 
   public static boolean bothNull(Object obj1, Object obj2) {

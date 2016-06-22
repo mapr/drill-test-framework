@@ -41,7 +41,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class DrillTestOdbc implements DrillTest{
   private static final Logger LOG = Logger.getLogger(DrillTestOdbc.class);
 
-  private String query;
+  private String query = null;
   private String outputFilename;
   private volatile TestStatus testStatus = TestStatus.PENDING;
   private Exception exception;
@@ -49,12 +49,10 @@ public class DrillTestOdbc implements DrillTest{
   private Stopwatch duration;
   private Thread thread;
   private int id;
-  private TestMatrix matrix;
   
   public DrillTestOdbc(DrillTestCase modeler, int id) {
 	this.id = id;
 	this.modeler = modeler;
-	this.matrix = modeler.matrices.get(0);
   }
   
   public void run() {
@@ -81,9 +79,12 @@ public class DrillTestOdbc implements DrillTest{
 
       switch (cmdConsOut.exitCode) {
       case 0:
-//    	TestVerifier testVerifier = new TestVerifier(false);
-//      setTestStatus(testVerifier.verifyResultSet(modeler.expectedFilename, outputFilename));
-    	setTestStatus(TestStatus.PASS);
+    	TestVerifier testVerifier = new TestVerifier();
+    	try {
+          setTestStatus(testVerifier.verifyResultSet(modeler.expectedFilename, outputFilename));
+    	} catch (VerificationException e) {
+    	  fail(TestStatus.VERIFICATION_FAILURE, e);
+    	};
         break;
       case 1:
         setTestStatus(TestStatus.EXECUTION_FAILURE);
@@ -151,6 +152,16 @@ public class DrillTestOdbc implements DrillTest{
 
   @Override
   public String getQuery() {
+	if (query == null) {
+	  String[] queries = null;
+	  try {
+		queries = Utils.getSqlStatements(modeler.queryFilename);
+	  } catch (IOException e) {
+		e.printStackTrace();
+	  }
+	  int mainQueryIndex = queries.length / 2; // Currently, the main query must be in the middle of the list of queries
+	  query = queries[mainQueryIndex];
+	}
     return query;
   }
 
