@@ -1,0 +1,26 @@
+{
+    "testId": "min_max_dir-regression",
+    "type": "group",
+    "description": "Test mindir and maxdir function queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+      {
+         "mode": "cp",
+         "src": "Datasources/min_max_dir/data",
+         "dest": "min_max_dir"
+      }
+    ]
+}
