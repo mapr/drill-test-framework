@@ -470,6 +470,11 @@
       "writable": true,
       "defaultInputFormat": "parquet"
     },
+    "hive_functions_nonhivedata": {
+      "location": "/drill/testdata/hive_functions_nonhivedata",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
     "drillMinMaxDir": {
       "location": "/drill/testdata/min_max_dir",
       "writable": true,
