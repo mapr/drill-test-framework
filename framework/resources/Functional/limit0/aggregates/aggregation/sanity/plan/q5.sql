@@ -1,0 +1,14 @@
+explain plan for select * from (
+-- group by 2 columns
+select 
+	count(distinct a1), 
+	sum(a1), 
+	count(b1)
+from 
+	t1_v t1 
+group by 
+	b1, 
+	c1 
+order by 
+	b1
+) t limit 0;

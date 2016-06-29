@@ -33,6 +33,7 @@ public class TestCaseModeler {
   public String description;
   @JsonProperty("submit-type")
   public String submitType = "jdbc";
+  public String script = null;
   public String queryType = "sql";
   public String timeout = null;
   public List<String> categories;
@@ -46,6 +47,7 @@ public class TestCaseModeler {
 	negative = moduler.negative;
 	description = moduler.description;
 	submitType = moduler.submitType;
+	script = moduler.script;
 	queryType = moduler.queryType;
 	timeout = moduler.timeout;
 	categories = moduler.categories;
@@ -57,7 +59,7 @@ public class TestCaseModeler {
   private TestCaseModeler() {}
   
   public static TestCaseModeler createTestCase(String testId, String type,
-      boolean negative, String description, String submitType,
+      boolean negative, String description, String submitType, String script,
       String queryType, String timeout, List<String> categories, List<String> dependencies,
       List<TestMatrix> matrices, List<DataSource> datasources) {
     TestCaseModeler testCase = new TestCaseModeler();
@@ -66,6 +68,7 @@ public class TestCaseModeler {
     testCase.negative = negative;
     testCase.description = description;
     testCase.submitType = submitType;
+    testCase.script = script;
     testCase.queryType = queryType;
     testCase.timeout = timeout;
     testCase.categories = categories;
@@ -178,6 +181,9 @@ public class TestCaseModeler {
         + "\nTest Description: " + description;
     if (submitType != null) {
       result += "\nSubmit Type: " + submitType;
+    }
+    if (script != null) {
+    	result += "\nScript run: " + script;
     }
     if (queryType != null) {
       result += "\nQuery Type: " + queryType;

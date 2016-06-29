@@ -19,3 +19,4 @@ refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_boolpartit
 refresh table metadata dfs.`/drill/testdata/metadata_caching/fewtypes_varcharpartition`;
 refresh table metadata dfs.`/drill/testdata/metadata_caching/vc_part`;
 refresh table metadata dfs.`/drill/testdata/metadata_caching/lineitem`;
+refresh table metadata dfs.`/drill/testdata/metadata_caching/lineitem_hierarchical_intint`;

@@ -552,6 +552,7 @@ public class Utils {
 	  resultSet.next();
 	  numberOfDrillbits = resultSet.getInt(1);
 	} catch (SQLException e) {
+		LOG.error(e.getMessage());
 		e.printStackTrace();
 	}
 	return numberOfDrillbits;
@@ -595,11 +596,12 @@ public class Utils {
 	  Statement statement = connection.createStatement();
 	  return statement.executeQuery(sql);
 	} catch (SQLException e) {
+	  LOG.error(e.getMessage());
 	  e.printStackTrace();
       try {
 		connection.close();
 	  } catch (SQLException e1) {
-		e1.printStackTrace();
+		LOG.error(e.getMessage());e1.printStackTrace();
 	  }
       throw e;
 	}

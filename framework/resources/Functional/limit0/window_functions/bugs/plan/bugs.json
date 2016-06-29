@@ -1,0 +1,30 @@
+{
+    "testId": "window_functions_bugs_limit0_plan",
+    "type": "group",
+    "description": "Window function tests: fixed bugs",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.subqueries",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/subqueries",
+            "dest": "subqueries"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/limit0/window_functions/bugs/create_wf_bugs_views.sh",
+            "dest": ""
+        }
+    ]
+}
+

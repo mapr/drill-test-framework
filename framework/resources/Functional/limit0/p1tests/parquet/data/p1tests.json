@@ -1,0 +1,36 @@
+{
+    "testId": "p1tests-regression_parquet_limit0_data",
+    "type": "limit 0",
+    "description": "Test p1tests function queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirP1",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+      {
+         "mode": "cp",
+         "src": "Datasources/p1tests/student",
+         "dest": "p1tests/student"
+      },
+      {
+         "mode": "cp",
+         "src": "Datasources/limit0/p1tests/voter1.parquet",
+         "dest": "p1tests/voter1.parquet"
+      },
+      {
+         "mode": "gen",
+         "src": "Datasources/limit0/p1tests/create_p1tests_parquet_views.sh",
+         "dest": ""
+      }
+    ]
+}

@@ -1,0 +1,1 @@
+explain plan for select * from ( SELECT c6 FROM `union_01_v` UNION SELECT c6 FROM `union_02_v` ) t limit 0;

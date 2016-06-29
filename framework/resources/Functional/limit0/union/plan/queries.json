@@ -1,0 +1,33 @@
+{
+    "testId": "union_limit0_plan",
+    "type": "group",
+    "description": "Functional tests to verify correctness of UNION operator",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.union",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/union",
+            "dest": "union"
+        },
+        {
+           "mode": "gen",
+           "src": "Datasources/limit0/union/create_union_views.sh",
+           "dest": ""
+        }
+    ]
+}
+

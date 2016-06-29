@@ -1,0 +1,1 @@
+select months_between(create_date, cast(convert_from(create_timestamp, 'TIMESTAMP_IMPALA') as date)) from `voter1.parquet` where voter_id=10;

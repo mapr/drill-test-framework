@@ -1,0 +1,9 @@
+explain plan for select * from (
+select
+        max(upper(c_varchar) || upper(c_varchar)) over(),
+        min(upper(c_varchar) || lower(c_varchar)) over(partition by c_date), 
+        max(concat(upper(c_varchar) , upper(c_varchar))) over(partition by c_date),
+        min(upper(c_varchar) || lower(c_varchar)) over(partition by c_boolean, c_date order by 1),
+        max(upper(c_varchar) || upper(c_varchar)) over(partition by c_date, c_date order by 1)
+from
+        j1_v) t limit 0;

@@ -18,10 +18,10 @@ The framework is built for regression, integration & sanity testing. Includes te
 Refer to [Github documentation](https://help.github.com/articles/cloning-a-repository) on how to clone a repository. 
 
 ### Configure test environment
- 1. The test framework requires a distributed file system such as HDFS or MapR-FS to be configured. Some of the tests can also be run against a local file system. By default, it's configured to run against MapR-FS. You can change the default behavior by modifying conf/core-site.xml. Refer to conf/core-site.xml.example for settings.
+ 1. The test framework requires a distributed file system such as HDFS or MapR-FS to be configured. Some of the tests can also be run against a local file system. By default, it's configured to run against MapR-FS. You can change the default behavior by modifying [conf/core-site.xml](conf/core-site.xml). Refer to [conf/core-site.xml.example](conf/core-site.xml.example) for settings.
  2. To run all tests, Hive and HBase needs to be installed and running. To exclude Hive and HBase tests, please refer to the example in the Execute Tests section.
  3. The test framework should be run on a Drill cluster node. Refer to [Drill documentation](http://drill.apache.org/docs/installing-drill-in-distributed-mode) for details on how to setup Drill. It can also be run on a client node with additional configuration required.
- 4. Cluster information are set in the `conf/drillTestConfig.properties` file. This is the main configuration file for the framework. It needs to be modified with local cluster info before compile the framework and run tests. 
+ 4. Cluster information are set in the [conf/drillTestConfig.properties](conf/drillTestConfig.properties) file. This is the main configuration file for the framework. It needs to be modified with local cluster info before compile the framework and run tests. 
 
 ### Review tests:
 
@@ -39,11 +39,12 @@ Refer to [Github documentation](https://help.github.com/articles/cloning-a-repos
 </code></pre>
 
 #### Adding Tests
- 1. In the `framework/resources/[Functional/Advanced]` directory, create a directory for a new test suite (or `cd` to an existing test suite).
+ 1. In the [Functional](framework/resources/Functional) / [Advanced](framework/resources/Advanced) directory, create a directory for a new test suite (or `cd` to an existing test suite).
  2. In the test suite directory, add testcases, expected results, and test definition file(s). Optionally include test suite sub directories to organize tests. 
  3. Pairs of testcase (ex: `query1.sql`) and expected result files (ex: `query1.e_tsv`) are co-located and share the same name.
  4. You could generate expected result files using Postgres or any such database.
- 5. In the `framework/resources/Datasources` directory, create corresponding datasource directories and copy over any required scripts and datasets required by the tests.
+ 5. In the [Datasources][framework/resources/Datasources] directory, create corresponding datasource directories and copy over any required scripts and datasets required by the tests.
+ 6. Refer to [README](framework/resources/Advanced/README.md) for downloading datasets required for the Advanced tests. 
 
 #### Structure of test definiton files. 
 A test definition file is a JSON file that defines one or a set of tests within a directory. The framework scans for files with .json extension in the specified location(s) and executes all test(s) defined. 
@@ -54,7 +55,8 @@ A test definition file is a JSON file that defines one or a set of tests within 
    "type": "group",                    // Group of tests
    "negative": false,                  // Tests are positive or negative (expected success or expected failures)
    "description": "...",               // Description for test suites
-   "submit-type": "jdbc",              // Currently only support jdbc
+   "submit-type": "jdbc",              // Currently the support types: jdbc, odbc, script
+   "script": "Functional/script_location/script.sh paras" // Specify the test script to execute
    "queryType": "sql",              
    "timeout": null,
    "categories": [

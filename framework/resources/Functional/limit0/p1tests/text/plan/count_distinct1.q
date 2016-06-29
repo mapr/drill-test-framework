@@ -1,0 +1,1 @@
+explain plan for select * from ( select count(distinct(voter_id)), count(distinct(name)), count(distinct(age)), count(distinct(registration)), count(distinct(contributions)), count(distinct(voterzone)), count(distinct(create_time)),count(isVote) from voter_csv_v where name like '%van%' ) t limit 0;

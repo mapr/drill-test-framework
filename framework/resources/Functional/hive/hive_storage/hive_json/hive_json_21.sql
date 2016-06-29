@@ -1,0 +1,1 @@
+select avg(cast(get_json_object(hive_json.json, '$.User.Id') as int)),avg(cast(get_json_object(hive_json.json, '$.User.Orders.OrderPrice[0]')as float)),avg(cast(get_json_object(hive_json.json, '$.User.Orders.OrderPrice[1]') as double)) from hive_json;

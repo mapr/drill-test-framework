@@ -68,7 +68,7 @@ CREATE DATABASE IF NOT EXISTS dynamic_partitions;
 USE dynamic_partitions;
 
 DROP TABLE IF EXISTS lineitem_parquet_partitioned_hive;
-CREATE EXTERNAL TABLE lineitem_parquet_partitioned_hive (
+CREATE TABLE lineitem_parquet_partitioned_hive (
     l_orderkey INT,
     l_partkey INT,
     l_suppkey INT,
@@ -112,7 +112,7 @@ SELECT
 FROM DEFAULT.lineitem_parquet_partitioned_hive;
 
 DROP TABLE IF EXISTS lineitem_text_partitioned_hive;
-CREATE EXTERNAL TABLE IF NOT EXISTS lineitem_text_partitioned_hive (
+CREATE TABLE IF NOT EXISTS lineitem_text_partitioned_hive (
     l_orderkey INT,
     l_partkey INT,
     l_suppkey INT,

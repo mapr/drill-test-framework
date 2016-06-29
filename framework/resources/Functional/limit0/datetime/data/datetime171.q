@@ -1,0 +1,1 @@
+select extract(hour from current_date)=0 from sys.drillbits limit 1;

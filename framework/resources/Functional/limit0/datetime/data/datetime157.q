@@ -1,0 +1,1 @@
+select now()=current_timestamp from sys.drillbits limit 1;

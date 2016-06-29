@@ -21,6 +21,11 @@
 		"mode": "cp",
 		"src": "Datasources/text_storage",
 		"dest": "text_storage"
-	}
+	},
+        {
+         "mode": "gen",
+         "src": "Datasources/text_storage/drill-4484.sh",
+         "dest": ""
+      }
     ]
 }

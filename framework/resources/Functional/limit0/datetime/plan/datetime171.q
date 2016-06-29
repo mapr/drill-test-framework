@@ -1,0 +1,1 @@
+explain plan for select * from ( select extract(hour from current_date)=0 from sys.drillbits limit 1 ) t limit 0;

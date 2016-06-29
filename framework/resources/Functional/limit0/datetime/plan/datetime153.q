@@ -1,0 +1,1 @@
+explain plan for select * from ( select extract(day from now())=extract(day from current_date) from sys.drillbits limit 1 ) t limit 0;

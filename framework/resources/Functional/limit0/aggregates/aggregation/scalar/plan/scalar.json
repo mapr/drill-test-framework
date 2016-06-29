@@ -1,0 +1,30 @@
+{
+    "testId": "aggregation_scalar_limit0_plan",
+    "type": "group",
+    "description": "Aggregation without groupping",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.aggregation",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/aggregation",
+            "dest": "aggregation"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/limit0/aggregates/aggregation/scalar/create_scalar_views.sh",
+            "dest": ""
+        }
+    ]
+}
+

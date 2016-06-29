@@ -1,0 +1,2 @@
+explain plan for select * from (
+select avg(c_bigint) over() from optional_type_v) t limit 0;

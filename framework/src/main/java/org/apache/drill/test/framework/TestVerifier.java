@@ -56,6 +56,7 @@ public class TestVerifier {
   private String query;
   private List<String> columnLabels;
   private List<String> verificationTypes;
+  private boolean checkType = true;
 
   public enum TestStatus {
     PENDING, RUNNING, PASS, EXECUTION_FAILURE, VERIFICATION_FAILURE, ORDER_MISMATCH, TIMEOUT,
@@ -69,6 +70,10 @@ public class TestVerifier {
     this.verificationTypes = verificationType;
   }
 
+  public TestVerifier(boolean checkType) {
+	this.checkType = checkType;
+  }
+  
   /**
    * Verifies query output from sqlline execution.
    * 
@@ -195,11 +200,12 @@ public class TestVerifier {
    */
   private Map<ColumnList, Integer> loadFromFileToMap(String filename,
       boolean ordered) throws VerificationException, IOException, IllegalAccessException {
-    if (types == null) {
+    if (checkType && types == null) {
       throw new VerificationException("Fatal: Types in the result set is null.  "
           + "This most likely resulted from failed execution.");
     }
-    int size = types.size();
+    int size = 0;
+    if (checkType) size = types.size();
     Map<ColumnList, Integer> map = null;
     if (ordered) {
       resultSet = new ArrayList<ColumnList>();
@@ -211,7 +217,7 @@ public class TestVerifier {
     mapSize = 0;
     while ((line = reader.readLine()) != null) {
       String[] fields = line.split("\t", -1);
-      if (fields.length != size) {
+      if (checkType && fields.length != size) {
         StringBuilder sb = new StringBuilder();
         sb.append("Error: expected data and actual data have different number of columns.");
         sb.append("\nNumber of columns in expected data: " + fields.length);
@@ -221,7 +227,7 @@ public class TestVerifier {
         throw new VerificationException(sb.toString());
       }
       List<Object> typedFields = Lists.newArrayList();
-      for (int i = 0; i < fields.length; i++) {
+      for (int i = 0; i < fields.length && checkType; i++) {
         if (types.size() == 0) {
           typedFields.add(fields[i]);
           continue;
