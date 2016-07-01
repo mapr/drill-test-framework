@@ -27,6 +27,11 @@
         "src": "Datasources/parquet_storage/nation.parquet", 
         "dest": "parquet_storage/testDir/nation.parquet" 
         },
+        { 
+        "mode": "cp", 
+        "src": "Datasources/parquet_storage/DRILL-4735", 
+        "dest": "DRILL-4735" 
+        },
         {
             "mode": "cp",
             "src": "Datasources/tpch-multi",
