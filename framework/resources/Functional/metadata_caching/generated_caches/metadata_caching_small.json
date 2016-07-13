@@ -1,5 +1,5 @@
 {
-    "testId": "Metadata_Caching_Small_Data",
+    "testId": "Metadata_Caching_GeneratedCaches",
     "type": "group",
     "description": "Metadata Caching Tests with smaller data sets",
     "categories": [

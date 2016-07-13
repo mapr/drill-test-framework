@@ -1,5 +1,5 @@
 {
-    "testId": "p1tests-regression",
+    "testId": "schema-changes",
     "type": "group",
     "description": "Test p1tests function queries via jdbc",
     "categories": [
