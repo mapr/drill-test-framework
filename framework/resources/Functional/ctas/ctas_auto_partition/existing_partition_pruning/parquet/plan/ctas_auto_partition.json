@@ -1,5 +1,5 @@
 {
-    "testId": "ctas_auto_partition_parquet_data",
+    "testId": "ctas_auto_partition_parquet_plan",
     "type": "group",
     "description": "Test tpch queries via jdbc",
     "categories": [

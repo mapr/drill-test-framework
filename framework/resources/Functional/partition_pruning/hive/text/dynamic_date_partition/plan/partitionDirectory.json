@@ -1,5 +1,5 @@
 {
-    "testId": "partitionDirectoryHive-DatePartitionPlan",
+    "testId": "dynamicPartitionDirectoryHive-DatePartitionPlan",
     "type": "group",
     "description": "Test partition directory queries",
     "categories": [
