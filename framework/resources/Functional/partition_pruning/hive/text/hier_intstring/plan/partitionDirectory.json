@@ -13,7 +13,7 @@
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
             "verification-type": [
-                "in-memory"
+                "regex"
             ]
         }
     ],
