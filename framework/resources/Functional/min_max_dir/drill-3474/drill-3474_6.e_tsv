@@ -1,0 +1,13 @@
+voter20.parquet	/drill/testdata/min_max_dir/1999/Apr/voter20/voter20.parquet	parquet	/drill/testdata/min_max_dir/1999/Apr/voter20	20
+voter15.parquet	/drill/testdata/min_max_dir/1999/MAR/voter15/voter15.parquet	parquet	/drill/testdata/min_max_dir/1999/MAR/voter15	15
+voter60.parquet	/drill/testdata/min_max_dir/1985/apr/voter60/voter60.parquet	parquet	/drill/testdata/min_max_dir/1985/apr/voter60	60
+voter70.parquet	/drill/testdata/min_max_dir/2016/jan/voter70/voter70.parquet	parquet	/drill/testdata/min_max_dir/2016/jan/voter70	70
+voter75	/drill/testdata/min_max_dir/2016/Jun/voter75/voter75		/drill/testdata/min_max_dir/2016/Jun/voter75	75
+voter55.parquet	/drill/testdata/min_max_dir/2016/Nov/voter55/voter55.parquet	parquet	/drill/testdata/min_max_dir/2016/Nov/voter55	55
+voter50.parquet	/drill/testdata/min_max_dir/2016/Oct/voter50/voter50.parquet	parquet	/drill/testdata/min_max_dir/2016/Oct/voter50	50
+voter60.parquet	/drill/testdata/min_max_dir/2016/dec/voter60/voter60.parquet	parquet	/drill/testdata/min_max_dir/2016/dec/voter60	60
+voter30.parquet	/drill/testdata/min_max_dir/2005/Jun/voter30/voter30.parquet	parquet	/drill/testdata/min_max_dir/2005/Jun/voter30	30
+voter25	/drill/testdata/min_max_dir/2005/May/voter25/voter25		/drill/testdata/min_max_dir/2005/May/voter25	25
+voter45.parquet	/drill/testdata/min_max_dir/2014/sep/voter45/voter45.parquet	parquet	/drill/testdata/min_max_dir/2014/sep/voter45	45
+voter40.parquet	/drill/testdata/min_max_dir/2014/Aug/voter40/voter40.parquet	parquet	/drill/testdata/min_max_dir/2014/Aug/voter40	40
+voter35.parquet	/drill/testdata/min_max_dir/2014/jul/voter35/voter35.parquet	parquet	/drill/testdata/min_max_dir/2014/jul/voter35	35

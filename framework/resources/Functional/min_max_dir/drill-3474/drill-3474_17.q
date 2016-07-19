@@ -1,0 +1,1 @@
+select voter_id, name, date_time from `min_max_dir` where fqn in ('/drill/testdata/min_max_dir/1985/Feb/voter10/voter10.parquet','/drill/testdata/min_max_dir/2005/May/voter25/voter25','/drill/testdata/min_max_dir/2016/Oct/voter5/voter5');
