@@ -1,5 +1,5 @@
 {
-    "testId": "hiveFileFormats_functions",
+    "testId": "hiveFileFormats_functions_nonhivedata",
     "type": "group",
     "description": "Test hive file formats and queries",
     "categories": [

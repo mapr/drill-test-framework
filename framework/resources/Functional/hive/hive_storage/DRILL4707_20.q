@@ -1,0 +1,1 @@
+SELECT h.c1 as Columnname, h.c2 as cOlumnname, h.c3 as coLumnname, h.c4 as colUmnname, h.c9 as coluMnname, h.c10 as columNname, h.c11 as columnnAme, h.c12 as columnnaMe, h.c19 as columnnamE, s.student_id as student, s.name as studenT, s.age as student, s.gpa as studenT, s.studentnum as student, s.create_time as studenT from student_hive s join alltypes h on (s.student_id = h.c1);
