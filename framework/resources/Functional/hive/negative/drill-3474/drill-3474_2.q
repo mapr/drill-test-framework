@@ -1,0 +1,1 @@
+select suffix from emptyheaderfooter;

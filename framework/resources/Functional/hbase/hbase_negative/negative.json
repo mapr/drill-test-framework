@@ -16,5 +16,20 @@
         }
     ],
     "datasources": [
+       {
+           "mode": "cp",
+           "src": "Datasources/hbase/studenttab",
+           "dest": "hbase/studenttab"
+       },
+       {
+           "mode": "cp",
+           "src": "Datasources/hbase/votertab",
+           "dest": "hbase/votertab"
+       },
+       {
+           "mode": "gen",
+           "src": "Datasources/hbase/hbase.sh",
+           "dest": ""
+       }
     ]
 }

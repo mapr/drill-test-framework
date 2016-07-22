@@ -1,8 +1,8 @@
 {
-    "testId": "Negative_hiveHeaderFooter_storage",
+    "testId": "Hive_negative_storage",
     "type": "group",
     "negative": true,
-    "description": "Test hive skip header and footer",
+    "description": "Test hive negative test cases",
     "categories": [
         "negative"
     ],

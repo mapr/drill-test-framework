@@ -21,6 +21,11 @@
          "mode": "cp",
          "src": "Datasources/min_max_dir/data",
          "dest": "min_max_dir"
+      },
+      {
+         "mode": "cp",
+         "src": "Datasources/min_max_dir/drill-3474",
+         "dest": "drill-3474"
       }
     ]
 }
