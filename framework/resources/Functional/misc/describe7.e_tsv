@@ -1,0 +1,54 @@
+dfs_describe.drillTestDirNull	\{
+  \"type\" : \"file\",
+  \"enabled\" : true,
+  \"connection\" : \"maprfs:///\",
+  \"config\" : null,
+  \"formats\" : \{
+    \"psv\" : \{
+      \"type\" : \"text\",
+      \"extensions\" : \[ \"tbl\" \],
+      \"quote\" : \"!\",
+      \"escape\" : \"`\",
+      \"comment\" : \"\^\",
+      \"skipFirstLine\" : true,
+      \"delimiter\" : \"|\"
+    \},
+    \"dsv\" : \{
+      \"type\" : \"text\",
+      \"extensions\" : \[ \"dat\" \],
+      \"quote\" : \"'\",
+      \"escape\" : \"!\",
+      \"comment\" : \"@\",
+      \"extractHeader\" : true,
+      \"delimiter\" : \"|\"
+    \},
+    \"csv\" : \{
+      \"type\" : \"text\",
+      \"extensions\" : \[ \"csv\" \],
+      \"quote\" : \"!\",
+      \"escape\" : \"`\",
+      \"comment\" : \"\^\",
+      \"skipFirstLine\" : true,
+      \"delimiter\" : \",\"
+    \},
+    \"tsv\" : \{
+      \"type\" : \"text\",
+      \"extensions\" : \[ \"tsv\" \],
+      \"quote\" : \"'\",
+      \"escape\" : \"!\",
+      \"comment\" : \"@\",
+      \"extractHeader\" : true,
+      \"delimiter\" : \"\\t\"
+    \},
+    \"parquet\" : \{
+      \"type\" : \"parquet\"
+    \},
+    \"json\" : \{
+      \"type\" : \"json\",
+      \"extensions\" : \[ \"json\" \]
+    \}
+  \},
+  \"location\" : \"/drill/testdata/describe/null\",
+  \"writable\" : true,
+  \"defaultInputFormat\" : null
+\}
