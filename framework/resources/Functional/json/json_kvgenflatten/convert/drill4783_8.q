@@ -1,0 +1,1 @@
+select d.id1 , flatten(d.j1.LIST), flatten(d.j2.map.rm) from (select convert_from(t1.columns[0], 'JSON') j1, t1.columns[1] id1, convert_from(t2.columns[0], 'JSON') j2, t2.columns[1] id2 from `json_kvgenflatten/convert4783_1.tbl` t1 JOIN `json_kvgenflatten/convert4783_2.tbl` t2 on t1.columns[1] = t2.columns[1] ) d;
