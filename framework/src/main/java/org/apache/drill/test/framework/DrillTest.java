@@ -17,6 +17,7 @@
  */
 package org.apache.drill.test.framework;
 
+import com.google.common.base.Stopwatch;
 import org.apache.drill.test.framework.TestVerifier.TestStatus;
 
 public interface DrillTest extends Cancelable {
@@ -24,4 +25,7 @@ public interface DrillTest extends Cancelable {
   public Exception getException();
   public String getInputFile();
   public String getQuery();
+  public String getTestId();
+  public int getCloneId();
+  public Stopwatch getDuration();
 }
