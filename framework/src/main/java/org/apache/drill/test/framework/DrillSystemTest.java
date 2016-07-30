@@ -26,6 +26,7 @@ public class DrillSystemTest implements DrillTest {
   private TestCaseModeler modeler;
   private TestMatrix matrix;
   private String query;
+  private String testId;
 
   public DrillSystemTest(TestCaseModeler modeler) {
     this.modeler = modeler;
@@ -49,6 +50,11 @@ public class DrillSystemTest implements DrillTest {
   @Override
   public String getQuery() {
     return query;
+  }
+
+  @Override
+  public String getTestId() {
+    return testId;
   }
 
   @Override

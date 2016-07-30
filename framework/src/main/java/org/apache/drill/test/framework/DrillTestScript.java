@@ -147,4 +147,9 @@ public class DrillTestScript implements DrillTest {
   public String getQuery() {
     return query;
   }
+
+  @Override
+  public String getTestId() {
+    return modeler.testId;
+  }
 }

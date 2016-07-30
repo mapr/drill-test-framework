@@ -374,4 +374,9 @@ public class DrillTestJdbc implements DrillTest {
   public String getQuery() {
     return query;
   }
+
+  @Override
+  public String getTestId() {
+    return modeler.testId;
+  }
 }
