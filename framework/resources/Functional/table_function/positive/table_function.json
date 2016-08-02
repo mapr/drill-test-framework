@@ -1,0 +1,26 @@
+{
+    "testId": "table_function-regression",
+    "type": "group",
+    "description": "Test table function queries via jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+      {
+         "mode": "cp",
+         "src": "Datasources/table_function",
+         "dest": "table_function/"
+      }
+    ]
+}
