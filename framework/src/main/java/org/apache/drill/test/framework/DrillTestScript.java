@@ -46,6 +46,7 @@ public class DrillTestScript implements DrillTest {
   private volatile TestStatus testStatus = TestStatus.PENDING;
   private Exception exception;
   private DrillTestCase modeler;
+  private Stopwatch duration;
   private Thread thread;
   private int id;
   private TestMatrix matrix;
@@ -103,6 +104,7 @@ public class DrillTestScript implements DrillTest {
     } catch (Exception e) {
       fail(TestStatus.EXECUTION_FAILURE, e);
 	} finally {
+      duration = stopwatch;
       LOG.info(testStatus + " (" + stopwatch + ") " + modeler.script + " " 
     		  			+ modeler.queryFilename);
     }
@@ -146,5 +148,20 @@ public class DrillTestScript implements DrillTest {
   @Override
   public String getQuery() {
     return query;
+  }
+
+  @Override
+  public String getTestId() {
+    return modeler.testId;
+  }
+
+  @Override
+  public int getCloneId() {
+    return id;
+  }
+ 
+  @Override
+  public Stopwatch getDuration() {
+    return duration;
   }
 }
