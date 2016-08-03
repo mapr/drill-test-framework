@@ -198,7 +198,7 @@ public class TestDriver {
         }else{
           document.set("errorMessage", "N/A");
         }
-        document.set("runtime", test.getDuration().toString());
+        document.set("queryExecutionTime", test.getDuration().toString());
         document.set("drillVersion", version);
         document.set("commitId", commitId);
         bufferedWriter.write(document.toString());
