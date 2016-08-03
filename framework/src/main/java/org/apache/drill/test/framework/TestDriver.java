@@ -29,6 +29,8 @@ import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.log4j.Logger;
+import org.ojai.Document;
+import org.ojai.json.Json;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -51,6 +53,7 @@ public class TestDriver {
   protected static Map<String, String> drillProperties = Utils
       .getDrillTestProperties();
   public static final String drillOutputDirName = drillProperties.get("DRILL_OUTPUT_DIR");
+  public static String drillReportDirName = drillProperties.get("DRILL_REPORT_DIR");
   private String restartDrillScript = drillProperties
       .get("RESTART_DRILL_SCRIPT");
   private String ipAddressPlugin = drillProperties
@@ -60,6 +63,8 @@ public class TestDriver {
   private String fsMode = drillProperties.get("FS_MODE");
   private Connection connection = null;
   private ConnectionPool connectionPool = null;
+  private String commitId;
+  private String version;
   private long [][] memUsage = new long[2][3];
   private String memUsageFilename = null;
  
@@ -156,11 +161,59 @@ public class TestDriver {
     @Parameter(names = {"-x", "--exclude"}, description = "Dependencies to exclude", required=false)
     public String excludeDependencies = null;
 
+    @Parameter(names = {"-r", "--report"}, description = "Generate json report", required=false)
+    public boolean generateReports = false;
+
     public List<String> excludeDependenciesAsList() {
       if (excludeDependencies == null) {
         return new ArrayList<String>();
       }
       return Arrays.asList(TestDriver.OPTIONS.excludeDependencies.split(","));
+    }
+  }
+
+  /**
+   * Logs summary of the executed tests to a json file
+   *
+   * @param tests
+   *          list of tests executed.
+   */
+  public void generateReports(List<DrillTest> tests) {
+    try{
+      File drillReportDir = new File(drillReportDirName);
+      if (!drillReportDir.exists()) {
+        if (!drillReportDir.mkdir()) {
+          LOG.debug("Cannot create directory " + drillReportDirName
+                  + ".  Using /tmp for drill output");
+          drillReportDirName = "/tmp";
+        }
+      }
+      File reportFile = new File(drillReportDirName + "/" + version + "_" + commitId + "." +
+              "report_" + new Date().toString().replace(' ', '_').replace(':','_') + ".json");
+      BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(reportFile));
+      Document document;
+      for (DrillTest test : tests) {
+        document = Json.newDocument();
+        document.set("_id", test.getTestId()+ "_" + new File(test.getInputFile()).getName());
+        document.set("testId", test.getTestId());
+        document.set("queryFilepath", test.getInputFile());
+        document.set("query", test.getQuery().replaceAll("\n", ""));
+        document.set("result", test.getTestStatus().toString());
+        if(test.getTestStatus().equals(TestStatus.EXECUTION_FAILURE) || test.getTestStatus().equals(TestStatus.VERIFICATION_FAILURE)) {
+          document.set("errorMessage", test.getException().toString().replaceAll("\n",""));
+        }else{
+          document.set("errorMessage", "N/A");
+        }
+        document.set("drillVersion", version);
+        document.set("commitId", commitId);
+        bufferedWriter.write(document.toString());
+        bufferedWriter.newLine();
+      }
+      bufferedWriter.flush();
+      bufferedWriter.close();
+    }
+    catch(Exception e){
+      e.printStackTrace();
     }
   }
 
@@ -264,6 +317,10 @@ public class TestDriver {
       LOG.info("Results:");
       LOG.info(LINE_BREAK);
       LOG.info("Execution Failures:");
+      if(OPTIONS.generateReports) {
+        LOG.info("Generating reports");
+        generateReports(tests);
+      }
       for (DrillTest test : executionFailures) {
         LOG.info(test.getInputFile());
         LOG.info("Query: \n" + test.getQuery());
@@ -340,6 +397,12 @@ public class TestDriver {
       String[] setupQueries = Utils.getSqlStatements(beforeRunQueryFilename);
 	  connection = connectionPool.getOrCreateConnection(drillProperties.get("USERNAME"), 
   				drillProperties.get("PASSWORD"));
+      String getCommitId = "SELECT version, commit_id from sys.version";
+      ResultSet resultSet = Utils.execSQL(getCommitId, connection);
+      while(resultSet.next()) {
+        commitId = resultSet.getString("commit_id");
+        version = resultSet.getString("version");
+      }
       for (String query : setupQueries) {
         LOG.info(Utils.getSqlResult(Utils.execSQL(query, connection)));
       }

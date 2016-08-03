@@ -7,7 +7,7 @@ NUMBER_OF_CLUSTER_NODES=4
 ########################################
 # Drill home
 ########################################
-export DRILL_HOME=/opt/drill
+DRILL_HOME=/opt/drill
 
 ########################################
 # Drill test data dir
@@ -18,6 +18,11 @@ DRILL_TEST_DATA_DIR=framework/resources
 # Drill actual resultset dir
 ########################################
 DRILL_OUTPUT_DIR=drill-output
+
+########################################
+# Drill report dir
+########################################
+DRILL_REPORT_DIR=drill-reports
 
 ########################################
 # Location of hadoop system drill is 
@@ -67,6 +72,7 @@ export ZK_ROOT=drill-ats-build
 export DRILL_USER=root
 export CLUSH_GROUP=all
 export DRILL_STORAGE_PLUGIN_SERVER
+export DRILL_HOME=/opt/drill
 
 export M2_HOME=/usr/local/apache-maven/apache-maven-3.1.1
 export M2=$M2_HOME/bin
