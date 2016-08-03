@@ -50,6 +50,7 @@ public class DrillTestJdbc implements DrillTest {
   private Exception exception;
   private TestVerifier testVerifier;
   private DrillTestCase modeler;
+  private Stopwatch duration;
   private TestMatrix matrix;
   private Thread thread;
   private List<Integer> columnTypes;
@@ -133,6 +134,7 @@ public class DrillTestJdbc implements DrillTest {
       if (testStatus == TestStatus.PASS && !TestDriver.OPTIONS.outputQueryResult) {
     	Utils.deleteFile(outputFilename);
       }
+      duration = stopwatch;
       LOG.info(testStatus + " (" + stopwatch + ") " + modeler.queryFilename + " (connection: " + connection.hashCode() + ")");
     }
   }
@@ -378,5 +380,15 @@ public class DrillTestJdbc implements DrillTest {
   @Override
   public String getTestId() {
     return modeler.testId;
+  }
+
+  @Override
+  public int getCloneId() {
+    return id;
+  }
+
+  @Override
+  public Stopwatch getDuration() {
+    return duration;
   }
 }

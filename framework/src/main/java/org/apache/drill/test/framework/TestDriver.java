@@ -160,7 +160,7 @@ public class TestDriver {
 
     @Parameter(names = {"-x", "--exclude"}, description = "Dependencies to exclude", required=false)
     public String excludeDependencies = null;
-
+    
     @Parameter(names = {"-r", "--report"}, description = "Generate json report", required=false)
     public boolean generateReports = false;
 
@@ -172,13 +172,7 @@ public class TestDriver {
     }
   }
 
-  /**
-   * Logs summary of the executed tests to a json file
-   *
-   * @param tests
-   *          list of tests executed.
-   */
-  public void generateReports(List<DrillTest> tests) {
+  public void generateReports(List<DrillTest> tests, int iteration) {
     try{
       File drillReportDir = new File(drillReportDirName);
       if (!drillReportDir.exists()) {
@@ -188,13 +182,13 @@ public class TestDriver {
           drillReportDirName = "/tmp";
         }
       }
-      File reportFile = new File(drillReportDirName + "/" + version + "_" + commitId + "." +
+      File reportFile = new File(drillReportDirName + "/" + version + "_" + commitId + "." + 
               "report_" + new Date().toString().replace(' ', '_').replace(':','_') + ".json");
       BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(reportFile));
       Document document;
       for (DrillTest test : tests) {
         document = Json.newDocument();
-        document.set("_id", test.getTestId()+ "_" + new File(test.getInputFile()).getName());
+        document.set("_id", test.getTestId()+ "_" + new File(test.getInputFile()).getName() + "_" + test.getCloneId() + "_" + iteration);
         document.set("testId", test.getTestId());
         document.set("queryFilepath", test.getInputFile());
         document.set("query", test.getQuery().replaceAll("\n", ""));
@@ -204,6 +198,7 @@ public class TestDriver {
         }else{
           document.set("errorMessage", "N/A");
         }
+        document.set("runtime", test.getDuration().toString());
         document.set("drillVersion", version);
         document.set("commitId", commitId);
         bufferedWriter.write(document.toString());
@@ -319,7 +314,7 @@ public class TestDriver {
       LOG.info("Execution Failures:");
       if(OPTIONS.generateReports) {
         LOG.info("Generating reports");
-        generateReports(tests);
+        generateReports(tests, i);
       }
       for (DrillTest test : executionFailures) {
         LOG.info(test.getInputFile());

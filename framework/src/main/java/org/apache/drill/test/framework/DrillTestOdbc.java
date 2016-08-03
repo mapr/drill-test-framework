@@ -46,6 +46,7 @@ public class DrillTestOdbc implements DrillTest{
   private volatile TestStatus testStatus = TestStatus.PENDING;
   private Exception exception;
   private DrillTestCase modeler;
+  private Stopwatch duration;
   private Thread thread;
   private int id;
   private TestMatrix matrix;
@@ -107,6 +108,7 @@ public class DrillTestOdbc implements DrillTest{
       if (testStatus == TestStatus.PASS && !TestDriver.OPTIONS.outputQueryResult) {
     	Utils.deleteFile(outputFilename);
       }
+      duration = stopwatch;
       LOG.info(testStatus + " (" + stopwatch + ") " + modeler.script + " " 
     		  			+ modeler.queryFilename);
     }
@@ -155,5 +157,15 @@ public class DrillTestOdbc implements DrillTest{
   @Override
   public String getTestId() {
     return modeler.testId;
+  }
+
+  @Override
+  public int getCloneId() {
+    return id;
+  }
+
+  @Override
+  public Stopwatch getDuration() {
+    return duration;
   }
 }
