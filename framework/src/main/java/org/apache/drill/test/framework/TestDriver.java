@@ -194,7 +194,11 @@ public class TestDriver {
         document.set("_id", test.getTestId()+ "_" + new File(test.getInputFile()).getName() + "_" + test.getCloneId() + "_" + iteration);
         document.set("testId", test.getTestId());
         document.set("queryFilepath", test.getInputFile());
-        document.set("query", test.getQuery().replaceAll("\n", ""));
+        String query = test.getQuery();
+        if(query != null){
+          query.replaceAll("\n", "");	
+        }
+        document.set("query", query);
         document.set("result", test.getTestStatus().toString());
         if(test.getTestStatus().equals(TestStatus.EXECUTION_FAILURE) || test.getTestStatus().equals(TestStatus.VERIFICATION_FAILURE)) {
           document.set("errorMessage", test.getException().toString().replaceAll("\n",""));
