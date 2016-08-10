@@ -17,6 +17,7 @@
  */
 package org.apache.drill.test.framework;
 
+import com.google.common.base.Stopwatch;
 import org.apache.drill.test.framework.TestCaseModeler.TestMatrix;
 import org.apache.drill.test.framework.TestVerifier.TestStatus;
 
@@ -26,6 +27,9 @@ public class DrillSystemTest implements DrillTest {
   private TestCaseModeler modeler;
   private TestMatrix matrix;
   private String query;
+  private String testId;
+  private Stopwatch duration;
+  private int cloneId;
 
   public DrillSystemTest(TestCaseModeler modeler) {
     this.modeler = modeler;
@@ -49,6 +53,21 @@ public class DrillSystemTest implements DrillTest {
   @Override
   public String getQuery() {
     return query;
+  }
+
+  @Override
+  public String getTestId() {
+    return testId;
+  }
+
+  @Override
+  public int getCloneId() {
+    return cloneId;
+  }
+
+  @Override
+  public Stopwatch getDuration() {
+    return duration;
   }
 
   @Override
