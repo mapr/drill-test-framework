@@ -1,0 +1,22 @@
+{
+    "testId": "metadata_cache_pruning_advanced_data",
+    "type": "group",
+    "description": "Test mondrian queries via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "regression"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+   ]
+}

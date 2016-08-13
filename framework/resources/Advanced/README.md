@@ -19,3 +19,7 @@ Extract this compressed file and copy over files to MapR-FS / HDFS into `/drill/
 For the [Mondrian tests](mondrian), download dataset from [Amazon S3](http://drill-public.s3.amazonaws.com/mondrian/mondrian.tgz) 
 
 Extract this compressed file and copy over files to MapR-FS / HDFS into `/drill/testdata/mondrian`
+
+### Metadata Caching
+Download the required data set from  https://s3.amazonaws.com/apache-drill/files/tpch100_dir_partitioned_50000files-lineitem.tgz
+Extract this compresses file and copy over files to "/drill/testdata/tpch100_dir_partitioned_50000files/lineitem"
