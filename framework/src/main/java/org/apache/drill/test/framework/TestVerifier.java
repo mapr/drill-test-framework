@@ -52,7 +52,7 @@ public class TestVerifier {
   public TestStatus testStatus = TestStatus.PENDING;
   private int mapSize = 0;
   private List<ColumnList> resultSet = null;
-  private List<Integer> types;
+  private List<Integer> types = null;
   private String query;
   private List<String> columnLabels;
   private List<String> verificationTypes;
@@ -70,8 +70,8 @@ public class TestVerifier {
     this.verificationTypes = verificationType;
   }
 
-  public TestVerifier(boolean checkType) {
-	this.checkType = checkType;
+  public TestVerifier() {
+	this.checkType = false;
   }
   
   /**
@@ -87,7 +87,8 @@ public class TestVerifier {
    * @throws Exception
    */
   public TestStatus verifySqllineResult(String expectedOutput,
-      String actualOutput, boolean verifyOrderBy) throws IOException, VerificationException, IllegalAccessException {
+      String actualOutput, boolean verifyOrderBy) throws IOException, VerificationException,
+      													 IllegalAccessException {
     String cleanedUpFile = cleanUpSqllineOutputFile(actualOutput);
     return verifyResultSet(expectedOutput, cleanedUpFile, verifyOrderBy);
   }
@@ -124,8 +125,8 @@ public class TestVerifier {
    * @return {@link TestStatus}
    * @throws Exception
    */
-  public TestStatus verifyResultSet(String expectedOutput,
-      String actualOutput) throws IllegalAccessException, IOException, VerificationException {
+  public TestStatus verifyResultSet(String expectedOutput, String actualOutput) 
+		  	throws IllegalAccessException, IOException, VerificationException {
     return verifyResultSet(expectedOutput, actualOutput, false);
   }
 
@@ -142,51 +143,55 @@ public class TestVerifier {
    * @return {@link TestStatus}
    * @throws Exception
    */
-  public TestStatus verifyResultSet(String expectedOutput,
-      String actualOutput, boolean verifyOrderBy) throws IOException, VerificationException, IllegalAccessException {
+  public TestStatus verifyResultSet(String expectedOutput, String actualOutput, boolean verifyOrderBy) 
+		  			throws IOException, VerificationException, IllegalAccessException {
     if (testStatus == TestStatus.EXECUTION_FAILURE 
     	|| testStatus == TestStatus.CANCELED) {
       return testStatus;
     }
+    
     Map<ColumnList, Integer> expectedMap = loadFromFileToMap(expectedOutput);
     if (expectedMap == null) {
       return TestStatus.EXECUTION_FAILURE;
     }
-
     int expectedCount = mapSize;
+    
     Map<ColumnList, Integer> actualMap = loadFromFileToMap(actualOutput);
     int actualCount = mapSize;
-    List<ColumnList> unexpectedList = new ArrayList<ColumnList>();
-    int unexpectedCount = 0;
-    Iterator<Map.Entry<ColumnList, Integer>> iterator = actualMap.entrySet()
-        .iterator();
-    while (iterator.hasNext()) {
-      Map.Entry<ColumnList, Integer> entry = iterator.next();
-      ColumnList cl = entry.getKey();
-      int count = entry.getValue();
-      while (count > 0 && check(expectedMap, cl)) {
-        count--;
+    
+    testStatus = expectedMap.equals(actualMap) ? TestStatus.PASS : TestStatus.VERIFICATION_FAILURE;
+    
+    if (testStatus == TestStatus.VERIFICATION_FAILURE) {
+      List<ColumnList> unexpectedList = new ArrayList<ColumnList>();
+      int unexpectedCount = 0;
+      Iterator<Map.Entry<ColumnList, Integer>> iterator = actualMap.entrySet().iterator();
+      while (iterator.hasNext()) {
+        Map.Entry<ColumnList, Integer> entry = iterator.next();
+        ColumnList cl = entry.getKey();
+        int count = entry.getValue();
+        while (count > 0 && check(expectedMap, cl)) {
+          count--;
+        }
+        if (count > 0) {
+          unexpectedList.add(cl);
+          unexpectedCount += count;
+        }
       }
-      if (count > 0) {
-        unexpectedList.add(cl);
-        unexpectedCount += count;
+      throw new VerificationException(printSummary(unexpectedList, unexpectedCount, 
+    		expectedMap, expectedCount, actualCount, verifyOrderBy));
+    }
+
+    if (checkType) {
+      Map<String,String> orderByColumns = getOrderByColumns(query, columnLabels);
+      if (orderByColumns != null) {
+        testStatus = verifyResultSetOrders(actualOutput, columnLabels, orderByColumns);
       }
-    }
-    testStatus = expectedMap.isEmpty() && unexpectedList.isEmpty() ? TestStatus.PASS
-        : TestStatus.VERIFICATION_FAILURE;
-    if (testStatus != TestStatus.PASS) {
-      throw new VerificationException(printSummary(unexpectedList, unexpectedCount, expectedMap, expectedCount,
-          actualCount, verifyOrderBy));
-    }
-    Map<String,String> orderByColumns = getOrderByColumns(query, columnLabels);
-    if (orderByColumns != null) {
-      testStatus = verifyResultSetOrders(actualOutput, columnLabels, orderByColumns);
     }
     return testStatus;
   }
 
   private Map<ColumnList, Integer> loadFromFileToMap(String filename)
-    throws IOException, VerificationException, IllegalAccessException {
+		  throws IOException, VerificationException, IllegalAccessException {
     return loadFromFileToMap(filename, false);
   }
 
@@ -198,8 +203,8 @@ public class TestVerifier {
    * @return map of result set
    * @throws Exception
    */
-  private Map<ColumnList, Integer> loadFromFileToMap(String filename,
-      boolean ordered) throws VerificationException, IOException, IllegalAccessException {
+  private Map<ColumnList, Integer> loadFromFileToMap(String filename, boolean ordered) 
+		  		throws VerificationException, IOException, IllegalAccessException {
     if (checkType && types == null) {
       throw new VerificationException("Fatal: Types in the result set is null.  "
           + "This most likely resulted from failed execution.");
@@ -227,8 +232,8 @@ public class TestVerifier {
         throw new VerificationException(sb.toString());
       }
       List<Object> typedFields = Lists.newArrayList();
-      for (int i = 0; i < fields.length && checkType; i++) {
-        if (types.size() == 0) {
+      for (int i = 0; i < fields.length; i++) {
+        if (!checkType || types.size() == 0) {
           typedFields.add(fields[i]);
           continue;
         }
