@@ -49,6 +49,11 @@
         "location" : "/drill/testdata/describe/csv",
         "writable" : true,
         "defaultInputFormat": "csv"
+      },
+      "drillReportJSON": {
+        "location" : "/drill/reports",
+        "writable" : true,
+        "defaultInputFormat": "json"
       }
     },
     "formats" : {

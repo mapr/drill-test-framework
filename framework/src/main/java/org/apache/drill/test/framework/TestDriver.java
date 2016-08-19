@@ -54,6 +54,7 @@ public class TestDriver {
       .getDrillTestProperties();
   public static final String drillOutputDirName = drillProperties.get("DRILL_OUTPUT_DIR");
   public static String drillReportDirName = drillProperties.get("DRILL_REPORT_DIR");
+  public static String drillDFSReportDirName = drillProperties.get("DRILL_REPORT_DFS_DIR");
   private String restartDrillScript = drillProperties
       .get("RESTART_DRILL_SCRIPT");
   private String ipAddressPlugin = drillProperties
@@ -213,6 +214,10 @@ public class TestDriver {
       }
       bufferedWriter.flush();
       bufferedWriter.close();
+      String copyToMFS = "hadoop fs -put " + reportFile + " " + drillDFSReportDirName + "/" + reportFile.getName().substring(0, reportFile.getName().length()-5);
+      String createPath = "hadoop fs -mkdir -p " + drillDFSReportDirName; 
+      Utils.execCmd(createPath);
+      Utils.execCmd(copyToMFS);
     }
     catch(Exception e){
       e.printStackTrace();
