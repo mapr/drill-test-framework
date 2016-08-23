@@ -38,15 +38,15 @@ public enum ShellRunner implements Closeable {
 		try {
 			process = Runtime.getRuntime().exec(cmd);
 			// create two stream consumers which are working simultaneously, one for consuming standard output stream, the other one for consuming error stream
-			Future<?>[] redirectTasks = createStreamConsumerTasks(process);
+			Future<String>[] redirectTasks = createStreamConsumerTasks(process);
 			exitCode = process.waitFor();
 			// check whether everything is ok for two stream consumers
-			String errorInfo = checkStreamConsumerTasks(redirectTasks);
+			String[] standardOutputAndError = fetchStandardOutputAndError(redirectTasks);
 			if(exitCode != 0) {
-				LOG.warn("Fail to run command {}, errMgs:\n {}", cmd, errorInfo);
+				LOG.warn("Fail to run command {}, errMgs:\n {}", cmd, standardOutputAndError[1]);
 			}
 			cmdConsOut.exitCode = exitCode;
-			cmdConsOut.consoleOut = errorInfo;
+			cmdConsOut.consoleOut = "standard output : \n" + standardOutputAndError[0] + "\n standard error: \n" + standardOutputAndError[1];
 			return cmdConsOut;
 		} catch (Throwable e) {
 			LOG.warn("Fail to run command " + cmd, e);
@@ -62,7 +62,7 @@ public enum ShellRunner implements Closeable {
 		}
 	}
 
-	private Future[] createStreamConsumerTasks(Process p) {
+	private Future<String>[] createStreamConsumerTasks(Process p) {
 		ProcessStreamConsumer outStreamConsumer = new ProcessStreamConsumer(p.getInputStream(), ProcessStreamConsumer.StreamType.OUT);
 		ProcessStreamConsumer errorStreamConsumer =
 				new ProcessStreamConsumer(p.getErrorStream(), ProcessStreamConsumer.StreamType.ERROR);
@@ -72,19 +72,16 @@ public enum ShellRunner implements Closeable {
 	}
 
 
-	private String checkStreamConsumerTasks(Future[] consumerTasks) throws InterruptedException {
-		try {
-			Future outputConsumerTask = consumerTasks[0];
-			outputConsumerTask.get();
-		} catch (ExecutionException e) {
-			throw new RuntimeException("error happened when consumer output log", e.getCause());
+	private String[] fetchStandardOutputAndError(Future<String>[] consumerTasks) throws Exception {
+		String[] standardOutputAndError = new String[consumerTasks.length];
+		for(int i = 0; i < consumerTasks.length; i++) {
+			try {
+				standardOutputAndError[i] = consumerTasks[i].get();
+			} catch (ExecutionException e) {
+				throw new RuntimeException("error happened when consumer standard output or standard error", e.getCause());
+			}
 		}
-		try {
-			Future errorConsumerTask = consumerTasks[1];
-			return (String) errorConsumerTask.get();
-		} catch (ExecutionException e) {
-			throw new RuntimeException("error happened when consumer error log", e.getCause());
-		}
+		return standardOutputAndError;
 	}
 
 	@Override
@@ -116,6 +113,7 @@ public enum ShellRunner implements Closeable {
 					switch (this.streamType) {
 						case OUT:
 							LOG.debug("out > {}", line);
+							sb.append(line + "\n");
 							break;
 						case ERROR:
 							LOG.debug("error > {}", line);
