@@ -560,35 +560,7 @@ public class Utils {
   
 
   public static CmdConsOut execCmd(String cmd){
-	CmdConsOut cmdConsOut = new CmdConsOut();
-	cmdConsOut.cmd = cmd;
-	int exitCode = -1;
-	        
-	StringBuffer stringBuffer = new StringBuffer();
-	try{
-	  Process p = Runtime.getRuntime().exec(cmd);
-//	  InputStreamReader isr = new InputStreamReader(p.getInputStream());
-	  InputStreamReader isr = new InputStreamReader(p.getErrorStream());
-	  BufferedReader br = new BufferedReader(isr);
-	  String line=null;
-	  while ((line = br.readLine()) != null) {
-        stringBuffer.append(line + "\n");
-	  }
-	  br.close();
-	  exitCode = p.waitFor();
-	} catch (Exception e) {
-	  e.printStackTrace();
-	} finally {
-	  cmdConsOut.exitCode = exitCode;
-	  cmdConsOut.consoleOut = stringBuffer.toString();
-	}
-
-	if (cmdConsOut.exitCode == 0) {
-	  LOG.debug("Command " + cmd + " successful.\n" + cmdConsOut.consoleOut);
-	} else {
-	  LOG.debug("Command " + cmd + " failed.\n" + cmdConsOut.consoleOut);
-	}
-	return cmdConsOut;
+	  return ShellRunner.INSTANCE.execCmd(cmd);
   }
   
   public static ResultSet execSQL(String sql, Connection connection) throws SQLException {
