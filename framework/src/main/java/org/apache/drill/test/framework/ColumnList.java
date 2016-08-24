@@ -117,7 +117,7 @@ public class ColumnList {
           float f1 = (Float) list1.get(i);
           float f2 = (Float) list2.get(i);
           if ((f1 + f2) / 2 != 0) {
-            result = result && Math.abs(f1 - f2) / ((f1 + f2) / 2) < 1.0E-6;
+            result = result && Math.abs((f1 - f2) / ((f1 + f2) / 2)) < 1.0E-6;
           } else if (f1 != 0) {
             result = false;
           }
@@ -126,7 +126,7 @@ public class ColumnList {
           double d1 = (Double) list1.get(i);
           double d2 = (Double) list2.get(i);
           if ((d1 + d2) / 2 != 0) {
-            result = result && Math.abs(d1 - d2) / ((d1 + d2) / 2) < 1.0E-12;
+            result = result && Math.abs((d1 - d2) / ((d1 + d2) / 2)) < 1.0E-12;
           } else if (d1 != 0) {
             result = false;
           }
