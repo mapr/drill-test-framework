@@ -1,0 +1,27 @@
+{
+    "testId": "drill-4664",
+    "type": "group",
+    "description": "Test extended json support via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "regression"
+    ],
+    "matrices": [
+        {
+            "query-file": "drill-4664.sql",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": "drill-4664.res",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+    {
+          "mode": "cp",
+          "src": "Datasources/complex/json/drill-4664.json",
+          "dest": "complex/drill-4664/drill-4664.json"
+        }
+    ]
+}
