@@ -197,6 +197,7 @@ public class DrillTestJdbc implements DrillTest {
     }
     
     try {
+      columnLabels = Lists.newArrayList();
       columnTypes = Lists.newArrayList();
       columnNullabilities = Lists.newArrayList();
       int columnCount = resultSet.getMetaData().getColumnCount();
