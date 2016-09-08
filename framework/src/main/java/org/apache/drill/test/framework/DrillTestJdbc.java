@@ -353,8 +353,6 @@ public class DrillTestJdbc implements DrillTest {
   }
   
   public synchronized void setTestStatus(TestStatus status) {
-	if (testStatus == TestStatus.CANCELED || testStatus == TestStatus.VERIFICATION_FAILURE) 
-	  return;
 	testStatus = status;
   }
 	 
