@@ -197,6 +197,7 @@ public class DrillTestJdbc implements DrillTest {
     }
     
     try {
+      columnLabels = Lists.newArrayList();
       columnTypes = Lists.newArrayList();
       columnNullabilities = Lists.newArrayList();
       int columnCount = resultSet.getMetaData().getColumnCount();
@@ -352,8 +353,6 @@ public class DrillTestJdbc implements DrillTest {
   }
   
   public synchronized void setTestStatus(TestStatus status) {
-	if (testStatus == TestStatus.CANCELED || testStatus == TestStatus.VERIFICATION_FAILURE) 
-	  return;
 	testStatus = status;
   }
 	 
