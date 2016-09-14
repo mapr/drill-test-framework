@@ -100,7 +100,8 @@ public class DrillTestJdbc implements DrillTest {
       executeQuery(query);
       
       testVerifier = new TestVerifier(columnTypes, query, columnLabels, matrix.verificationTypes);
-      if (query.startsWith("explain") || matrix.verificationTypes.get(0).equalsIgnoreCase("regex")) {
+      if (query.startsWith("explain") || matrix.verificationTypes.get(0).equalsIgnoreCase("regex") ||
+          matrix.verificationTypes.get(0).equalsIgnoreCase("filter-ratio")) {
         setTestStatus(testVerifier.verifyTextPlan(modeler.expectedFilename, outputFilename));
       } else {
         setTestStatus(testVerifier.verifyResultSet(modeler.expectedFilename, outputFilename));
