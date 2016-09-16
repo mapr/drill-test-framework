@@ -1,0 +1,21 @@
+{
+    "testId": "filter_selectivity_plan",
+    "type": "group",
+    "negative": true,
+    "description": "Filter selectivity tests",
+    "categories": [ "negative" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.drillTestDirTpch01Parquet",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+    ]
+}
+
