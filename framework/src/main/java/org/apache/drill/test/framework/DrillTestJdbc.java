@@ -100,7 +100,8 @@ public class DrillTestJdbc implements DrillTest {
       executeQuery(query);
       
       testVerifier = new TestVerifier(columnTypes, query, columnLabels, matrix.verificationTypes);
-      if (query.startsWith("explain") || matrix.verificationTypes.get(0).equalsIgnoreCase("regex")) {
+      if (query.startsWith("explain") || matrix.verificationTypes.get(0).equalsIgnoreCase("regex") ||
+          matrix.verificationTypes.get(0).equalsIgnoreCase("filter-ratio")) {
         setTestStatus(testVerifier.verifyTextPlan(modeler.expectedFilename, outputFilename));
       } else {
         setTestStatus(testVerifier.verifyResultSet(modeler.expectedFilename, outputFilename));
@@ -197,6 +198,7 @@ public class DrillTestJdbc implements DrillTest {
     }
     
     try {
+      columnLabels = Lists.newArrayList();
       columnTypes = Lists.newArrayList();
       columnNullabilities = Lists.newArrayList();
       int columnCount = resultSet.getMetaData().getColumnCount();
@@ -352,8 +354,6 @@ public class DrillTestJdbc implements DrillTest {
   }
   
   public synchronized void setTestStatus(TestStatus status) {
-	if (testStatus == TestStatus.CANCELED || testStatus == TestStatus.VERIFICATION_FAILURE) 
-	  return;
 	testStatus = status;
   }
 	 

@@ -486,6 +486,8 @@ public class TestVerifier {
     boolean verified = false;
     if (verificationTypes.get(0).equalsIgnoreCase("regex")) {
       verified = matchesAll(actual, expected);
+    } else if (verificationTypes.get(0).equalsIgnoreCase("filter-ratio")) {
+      verified = matchAndCompareAll(actual, expected);
     } else {
       verified = containsAll(actual, expected);
     }
@@ -526,6 +528,89 @@ public class TestVerifier {
         return false;
       } else {
         actual = actual.substring(idx + string.length()).trim();
+      }
+    }
+    return true;
+  }
+
+  /**
+   * Used to verify tests for DRILL-4743
+   * Verifies that rowcount for Filter step in the explain plan is
+   * reasonable by comparing the rowcount in the Filter step with
+   * the rowcount in the input step, which is the previous step.
+   * If minRowcountFraction is specified, then the filter rowcount >=
+   *                        minRowcountFraction * input rowcount
+   * If maxRowcountFraction is specified, then the filter rowcount <=
+   *                        maxRowcountFraction * input rowcount
+   * Expected results file looks like this:
+   *
+   *    min_selectivity_estimate_factor = 0.3
+   *    Filter.*?\n.*?\n
+   *
+   * min_selectivity_estimate_factor is stored in minRowcountFraction.
+   * The second line is the Java Pattern to grab the Filter step and
+   * the input step.  The rowcounts are extracted from the Filter step
+   * and the input step, and compared as described above.  This is
+   * repeated for each Filter step.
+   *
+   * @param actual
+   *          actual results
+   * @param expected
+   *          expected results
+   * @return true/false
+   */
+  private static boolean matchAndCompareAll(String actual, String expected) {
+    String[] expectedLines = expected.split("\n");
+    actual = actual.trim();
+    Double minRowcountFraction = 0.0;
+    Double maxRowcountFraction = 1.0;
+    for (int index = 0; index < expectedLines.length; index++) {
+      expectedLines[index] = expectedLines[index].trim();
+      String[] expectedStrings = expectedLines[index].split("=");
+      // check if minRowcountFraction is specified
+      if (expectedStrings[0].trim().equals("min_selectivity_estimate_factor")) {
+         minRowcountFraction = Double.parseDouble(expectedStrings[1].trim());
+         continue;
+      }
+      // check if maxRowcountFraction is specified
+      if (expectedStrings[0].trim().equals("max_selectivity_estimate_factor")) {
+         maxRowcountFraction = Double.parseDouble(expectedStrings[1].trim());
+         continue;
+      }
+      // check for Filter step in actual output
+      Matcher matcher = Pattern.compile(expectedStrings[0], Pattern.DOTALL).matcher(actual);
+      if (!matcher.find()) {
+        LOG.info("Did not find \'" + expectedStrings[0] + "\' in actual output");
+        return false;
+      }
+      matcher.reset();
+      while (matcher.find()) {
+        String matched = matcher.group();
+        // get rowcount values in Filter step and input step
+        Matcher matcher2 = Pattern.compile("(rowcount = \\d+\\.\\d*).*?\n.*?(rowcount = \\d+\\.\\d*)", Pattern.DOTALL).matcher(matched);
+        if (matcher2.find()) {
+          // get rowcount value for Filter step
+          String filterStep = matcher2.group(1);
+          String[] values = filterStep.split(" ");
+          double filterRowcount = Double.parseDouble(values[2]);
+          // get rowcount value for input step
+          String inputStep = matcher2.group(2);
+          values = inputStep.split(" ");
+          double inputRowcount = Double.parseDouble(values[2]);
+          // check if actual rowcount is too small
+          if (filterRowcount < (minRowcountFraction * inputRowcount)) {
+            LOG.info("Actual Filter rowcount " + filterRowcount + " < minFraction " + minRowcountFraction + " * input rowcount " + inputRowcount);
+            return false;
+          }
+          // check if actual rowcount is too large
+          if (filterRowcount > (maxRowcountFraction * inputRowcount)) {
+            LOG.info("Actual Filter rowcount " + filterRowcount + " > maxFraction " + maxRowcountFraction + " * input rowcount " + inputRowcount);
+            return false;
+          }
+        } else {
+          LOG.info("Did not find rowcount in \'" + matched + "\'");
+          return false;
+        }
       }
     }
     return true;
