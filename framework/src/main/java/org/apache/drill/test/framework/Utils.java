@@ -67,7 +67,7 @@ import org.apache.log4j.Logger;
  */
 public class Utils {
   private static final Logger LOG = Logger.getLogger(Utils.class);
-  private static final String DRILL_TEST_CONFIG = "drillTestConfig";
+  private static final String DRILL_TEST_CONFIG = "drillTestConfig.properties";
   private static final Map<Integer, String> sqlTypes;
   private static final Map<Integer, String> sqlNullabilities;
   private static final Map<String, String> drillTestProperties;

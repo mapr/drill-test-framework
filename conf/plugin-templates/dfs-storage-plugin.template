@@ -484,6 +484,11 @@
       "location": "/drill/testdata/min_max_dir/2016",
       "writable": true,
       "defaultInputFormat": "parquet"
+    },
+    "metadata_caching_pp": {
+      "location": "/drill/testdata/metadata_caching_pp",
+      "writable": true,
+      "defaultInputFormat": "parquet"
     }
     },
     "formats" : {

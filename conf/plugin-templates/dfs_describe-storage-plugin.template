@@ -1,0 +1,103 @@
+{
+  "name" : "dfs_describe",
+  "config" : {
+    "type" : "file",
+    "enabled" : true,
+    "connection" : "maprfs:///",
+    "workspaces" : {
+      "root" : {
+        "location" : "/",
+        "writable" : false,
+        "defaultInputFormat" : null
+      },
+      "tmp" : {
+        "location" : "/tmp",
+        "writable" : true,
+        "defaultInputFormat" : "csv"
+      },
+      "drillTestDir": {
+        "location": "/drill/testdata/",
+        "writable": true,
+        "defaultInputFormat": "parquet"
+      },
+      "drillTestDirParquet" : {
+        "location" : "/drill/testdata/describe/parquet",
+        "writable" : true,
+        "defaultInputFormat" : "parquet"
+      },
+      "drillTestDirJSON": {
+        "location" : "/drill/testdata/describe/json",
+        "writable" : true,
+        "defaultInputFormat": "json"
+      },
+      "drillTestDirDSV": {
+        "location" : "/drill/testdata/describe/dsv",
+        "writable" : true,
+        "defaultInputFormat": "dsv"
+      },
+      "drillTestDirNull" : {
+        "location" : "/drill/testdata/describe/null",
+        "writable" : true,
+        "defaultInputFormat" : null
+      },
+      "drillTestDirPSV" : {
+        "location" : "/drill/testdata/describe/psv",
+        "writable" : true,
+        "defaultInputFormat" : "psv"
+      },
+      "drillTestDirCSV": {
+        "location" : "/drill/testdata/describe/csv",
+        "writable" : true,
+        "defaultInputFormat": "csv"
+      }
+    },
+    "formats" : {
+      "psv" : {
+        "type" : "text",
+        "extensions" : [ "tbl" ],
+        "delimiter" : "|",
+        "quote" : "!",
+        "escape" : "`",
+        "comment" : "^",
+        "skipFirstLine" : true,
+        "extractHeader" : false
+      },
+      "dsv" : {
+        "type" : "text",
+        "extensions" : [ "dat" ],
+        "delimiter" : "|",
+        "quote" : "'",
+        "escape" : "!",
+        "comment" : "@",
+        "skipFirstLine" : false,
+        "extractHeader" : true
+      },
+      "csv" : {
+        "type" : "text",
+        "extensions" : [ "csv" ],
+        "delimiter" : ",",
+        "quote" : "!",
+        "escape" : "`",
+        "comment" : "^",
+        "skipFirstLine" : true,
+        "extractHeader" : false
+      },
+      "tsv" : {
+        "type" : "text",
+        "extensions" : [ "tsv" ],
+        "delimiter" : "\t",
+        "quote" : "'",
+        "escape" : "!",
+        "comment" : "@",
+        "skipFirstLine" : false,
+        "extractHeader" : true
+      },
+      "parquet" : {
+        "type" : "parquet"
+      },
+      "json" : {
+        "type" : "json"
+      }
+    }
+  }
+}

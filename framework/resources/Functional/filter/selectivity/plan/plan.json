@@ -1,0 +1,20 @@
+{
+    "testId": "filter_selectivity_plan",
+    "type": "group",
+    "description": "Filter selectivity tests",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.drillTestDirTpch01Parquet",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "filter-ratio"
+            ]
+        }
+    ],
+    "datasources": [
+    ]
+}
+

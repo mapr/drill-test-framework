@@ -1,1 +1,1 @@
-.*Scan.*ParquetGroupScan.*path=.*/drill/testdata/metadata_caching/lineitem_deletecache/2006/1/lineitem_999.parquet.*selectionRoot=.*/drill/testdata/metadata_caching/lineitem_deletecache.*numFiles=1.*usedMetadataFile=true.*columns.*l_linestatus.*dir0.*
+.*Scan.*ParquetGroupScan.*path=.*/drill/testdata/metadata_caching/lineitem_deletecache/2006/1/lineitem_999.parquet.*selectionRoot=.*/drill/testdata/metadata_caching/lineitem_deletecache.*numFiles=1.*usedMetadataFile=true.*columns.*l_linestatus.*

@@ -1,0 +1,34 @@
+cp_describe	\{
+  \"type\" : \"file\",
+  \"enabled\" : true,
+  \"connection\" : \"classpath:///\",
+  \"config\" : null,
+  \"formats\" : \{
+    \"csv\" : \{
+      \"type\" : \"text\",
+      \"extensions\" : \[ \"csv\" \],
+      \"delimiter\" : \",\"
+    \},
+    \"tsv\" : \{
+      \"type\" : \"text\",
+      \"extensions\" : \[ \"tsv\" \],
+      \"delimiter\" : \"\\t\"
+    \},
+    \"json\" : \{
+      \"type\" : \"json\",
+      \"extensions\" : \[ \"json\" \]
+    \},
+    \"parquet\" : \{
+      \"type\" : \"parquet\"
+    \},
+    \"avro\" : \{
+      \"type\" : \"avro\"
+    \},
+    \"csvh\" : \{
+      \"type\" : \"text\",
+      \"extensions\" : \[ \"csvh\" \],
+      \"extractHeader\" : true,
+      \"delimiter\" : \",\"
+    \}
+  \}
+\}

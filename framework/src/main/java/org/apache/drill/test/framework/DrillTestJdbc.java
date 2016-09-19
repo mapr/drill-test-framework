@@ -50,6 +50,7 @@ public class DrillTestJdbc implements DrillTest {
   private Exception exception;
   private TestVerifier testVerifier;
   private DrillTestCase modeler;
+  private Stopwatch duration;
   private TestMatrix matrix;
   private Thread thread;
   private List<Integer> columnTypes;
@@ -99,7 +100,8 @@ public class DrillTestJdbc implements DrillTest {
       executeQuery(query);
       
       testVerifier = new TestVerifier(columnTypes, query, columnLabels, matrix.verificationTypes);
-      if (query.startsWith("explain") || matrix.verificationTypes.get(0).equalsIgnoreCase("regex")) {
+      if (query.startsWith("explain") || matrix.verificationTypes.get(0).equalsIgnoreCase("regex") ||
+          matrix.verificationTypes.get(0).equalsIgnoreCase("filter-ratio")) {
         setTestStatus(testVerifier.verifyTextPlan(modeler.expectedFilename, outputFilename));
       } else {
         setTestStatus(testVerifier.verifyResultSet(modeler.expectedFilename, outputFilename));
@@ -133,6 +135,7 @@ public class DrillTestJdbc implements DrillTest {
       if (testStatus == TestStatus.PASS && !TestDriver.OPTIONS.outputQueryResult) {
     	Utils.deleteFile(outputFilename);
       }
+      duration = stopwatch;
       LOG.info(testStatus + " (" + stopwatch + ") " + modeler.queryFilename + " (connection: " + connection.hashCode() + ")");
     }
   }
@@ -195,6 +198,7 @@ public class DrillTestJdbc implements DrillTest {
     }
     
     try {
+      columnLabels = Lists.newArrayList();
       columnTypes = Lists.newArrayList();
       columnNullabilities = Lists.newArrayList();
       int columnCount = resultSet.getMetaData().getColumnCount();
@@ -350,8 +354,6 @@ public class DrillTestJdbc implements DrillTest {
   }
   
   public synchronized void setTestStatus(TestStatus status) {
-	if (testStatus == TestStatus.CANCELED || testStatus == TestStatus.VERIFICATION_FAILURE) 
-	  return;
 	testStatus = status;
   }
 	 
@@ -373,5 +375,20 @@ public class DrillTestJdbc implements DrillTest {
   @Override
   public String getQuery() {
     return query;
+  }
+
+  @Override
+  public String getTestId() {
+    return modeler.testId;
+  }
+
+  @Override
+  public int getCloneId() {
+    return id;
+  }
+
+  @Override
+  public Stopwatch getDuration() {
+    return duration;
   }
 }

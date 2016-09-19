@@ -1,0 +1,1 @@
+select a.columns[0], b.columns[1], a.columns[2],b.columns[2] from table(`table_function/cr_lf.csv`(type=>'text', lineDelimiter=>'\r\n', fieldDelimiter=>',')) a left outer join table(`table_function/lf_cr.tsv`(type=>'text', lineDelimiter=>'\n\r', fieldDelimiter=>'\t')) b on (a.columns[0]=b.columns[0]) where b.columns[2] <> '';

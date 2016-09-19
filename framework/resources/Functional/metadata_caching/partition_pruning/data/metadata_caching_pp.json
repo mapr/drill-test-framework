@@ -1,0 +1,26 @@
+{
+    "testId": "Metadata_Caching_Small_PP_data",
+    "type": "group",
+    "description": "Metadata Caching Tests with smaller data sets",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.metadata_caching_pp",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+      {
+          "mode": "cp",
+          "src": "Datasources/metadata_caching/data_pp/",
+          "dest": "metadata_caching_pp/"
+        } 
+    ]
+}

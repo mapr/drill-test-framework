@@ -1,0 +1,1 @@
+select flatten(d.j.LIST) from (select convert_from(columns[0], 'JSON') j, columns[1] id from `json_kvgenflatten/convert4783_1.tbl` where columns[1] > 10 union all  select convert_from(columns[0], 'JSON') j, columns[1] id from `json_kvgenflatten/convert4783_1.tbl` t2 where t2.columns[1]=-1) d;

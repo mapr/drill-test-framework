@@ -1,0 +1,1 @@
+select flatten(t2.rms.rptd) from (select flatten(t.d.map.rm) rms, t.id id from (select convert_from(columns[0], 'JSON') d, columns[1] id from `json_kvgenflatten/convert4783_2.tbl`) t) t2 where t2.id <> 10;

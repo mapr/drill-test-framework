@@ -1,0 +1,14 @@
+1	null
+1	null
+1	null
+1	null
+1	null
+1	null
+2	null
+3	null
+3	null
+3	null
+2	1
+3	1
+34	1
+39	1

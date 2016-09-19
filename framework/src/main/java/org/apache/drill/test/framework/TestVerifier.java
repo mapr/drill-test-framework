@@ -52,7 +52,7 @@ public class TestVerifier {
   public TestStatus testStatus = TestStatus.PENDING;
   private int mapSize = 0;
   private List<ColumnList> resultSet = null;
-  private List<Integer> types;
+  private List<Integer> types = null;
   private String query;
   private List<String> columnLabels;
   private List<String> verificationTypes;
@@ -70,8 +70,8 @@ public class TestVerifier {
     this.verificationTypes = verificationType;
   }
 
-  public TestVerifier(boolean checkType) {
-	this.checkType = checkType;
+  public TestVerifier() {
+	this.checkType = false;
   }
   
   /**
@@ -87,7 +87,8 @@ public class TestVerifier {
    * @throws Exception
    */
   public TestStatus verifySqllineResult(String expectedOutput,
-      String actualOutput, boolean verifyOrderBy) throws IOException, VerificationException, IllegalAccessException {
+      String actualOutput, boolean verifyOrderBy) throws IOException, VerificationException,
+      													 IllegalAccessException {
     String cleanedUpFile = cleanUpSqllineOutputFile(actualOutput);
     return verifyResultSet(expectedOutput, cleanedUpFile, verifyOrderBy);
   }
@@ -124,8 +125,8 @@ public class TestVerifier {
    * @return {@link TestStatus}
    * @throws Exception
    */
-  public TestStatus verifyResultSet(String expectedOutput,
-      String actualOutput) throws IllegalAccessException, IOException, VerificationException {
+  public TestStatus verifyResultSet(String expectedOutput, String actualOutput) 
+		  	throws IllegalAccessException, IOException, VerificationException {
     return verifyResultSet(expectedOutput, actualOutput, false);
   }
 
@@ -142,51 +143,55 @@ public class TestVerifier {
    * @return {@link TestStatus}
    * @throws Exception
    */
-  public TestStatus verifyResultSet(String expectedOutput,
-      String actualOutput, boolean verifyOrderBy) throws IOException, VerificationException, IllegalAccessException {
+  public TestStatus verifyResultSet(String expectedOutput, String actualOutput, boolean verifyOrderBy) 
+		  			throws IOException, VerificationException, IllegalAccessException {
     if (testStatus == TestStatus.EXECUTION_FAILURE 
     	|| testStatus == TestStatus.CANCELED) {
       return testStatus;
     }
+    
     Map<ColumnList, Integer> expectedMap = loadFromFileToMap(expectedOutput);
     if (expectedMap == null) {
       return TestStatus.EXECUTION_FAILURE;
     }
-
     int expectedCount = mapSize;
+    
     Map<ColumnList, Integer> actualMap = loadFromFileToMap(actualOutput);
     int actualCount = mapSize;
-    List<ColumnList> unexpectedList = new ArrayList<ColumnList>();
-    int unexpectedCount = 0;
-    Iterator<Map.Entry<ColumnList, Integer>> iterator = actualMap.entrySet()
-        .iterator();
-    while (iterator.hasNext()) {
-      Map.Entry<ColumnList, Integer> entry = iterator.next();
-      ColumnList cl = entry.getKey();
-      int count = entry.getValue();
-      while (count > 0 && check(expectedMap, cl)) {
-        count--;
+    
+    testStatus = expectedMap.equals(actualMap) ? TestStatus.PASS : TestStatus.VERIFICATION_FAILURE;
+    
+    if (testStatus == TestStatus.VERIFICATION_FAILURE) {
+      List<ColumnList> unexpectedList = new ArrayList<ColumnList>();
+      int unexpectedCount = 0;
+      Iterator<Map.Entry<ColumnList, Integer>> iterator = actualMap.entrySet().iterator();
+      while (iterator.hasNext()) {
+        Map.Entry<ColumnList, Integer> entry = iterator.next();
+        ColumnList cl = entry.getKey();
+        int count = entry.getValue();
+        while (count > 0 && check(expectedMap, cl)) {
+          count--;
+        }
+        if (count > 0) {
+          unexpectedList.add(cl);
+          unexpectedCount += count;
+        }
       }
-      if (count > 0) {
-        unexpectedList.add(cl);
-        unexpectedCount += count;
+      throw new VerificationException(printSummary(unexpectedList, unexpectedCount, 
+    		expectedMap, expectedCount, actualCount, verifyOrderBy));
+    }
+
+    if (checkType) {
+      Map<String,String> orderByColumns = getOrderByColumns(query, columnLabels);
+      if (orderByColumns != null) {
+        testStatus = verifyResultSetOrders(actualOutput, columnLabels, orderByColumns);
       }
-    }
-    testStatus = expectedMap.isEmpty() && unexpectedList.isEmpty() ? TestStatus.PASS
-        : TestStatus.VERIFICATION_FAILURE;
-    if (testStatus != TestStatus.PASS) {
-      throw new VerificationException(printSummary(unexpectedList, unexpectedCount, expectedMap, expectedCount,
-          actualCount, verifyOrderBy));
-    }
-    Map<String,String> orderByColumns = getOrderByColumns(query, columnLabels);
-    if (orderByColumns != null) {
-      testStatus = verifyResultSetOrders(actualOutput, columnLabels, orderByColumns);
     }
     return testStatus;
   }
 
   private Map<ColumnList, Integer> loadFromFileToMap(String filename)
-    throws IOException, VerificationException, IllegalAccessException {
+		  throws IOException, VerificationException, IllegalAccessException {
     return loadFromFileToMap(filename, false);
   }
 
@@ -198,8 +203,8 @@ public class TestVerifier {
    * @return map of result set
    * @throws Exception
    */
-  private Map<ColumnList, Integer> loadFromFileToMap(String filename,
-      boolean ordered) throws VerificationException, IOException, IllegalAccessException {
+  private Map<ColumnList, Integer> loadFromFileToMap(String filename, boolean ordered) 
+		  		throws VerificationException, IOException, IllegalAccessException {
     if (checkType && types == null) {
       throw new VerificationException("Fatal: Types in the result set is null.  "
           + "This most likely resulted from failed execution.");
@@ -227,8 +232,8 @@ public class TestVerifier {
         throw new VerificationException(sb.toString());
       }
       List<Object> typedFields = Lists.newArrayList();
-      for (int i = 0; i < fields.length && checkType; i++) {
-        if (types.size() == 0) {
+      for (int i = 0; i < fields.length; i++) {
+        if (!checkType || types.size() == 0) {
           typedFields.add(fields[i]);
           continue;
         }
@@ -481,6 +486,8 @@ public class TestVerifier {
     boolean verified = false;
     if (verificationTypes.get(0).equalsIgnoreCase("regex")) {
       verified = matchesAll(actual, expected);
+    } else if (verificationTypes.get(0).equalsIgnoreCase("filter-ratio")) {
+      verified = matchAndCompareAll(actual, expected);
     } else {
       verified = containsAll(actual, expected);
     }
@@ -521,6 +528,89 @@ public class TestVerifier {
         return false;
       } else {
         actual = actual.substring(idx + string.length()).trim();
+      }
+    }
+    return true;
+  }
+
+  /**
+   * Used to verify tests for DRILL-4743
+   * Verifies that rowcount for Filter step in the explain plan is
+   * reasonable by comparing the rowcount in the Filter step with
+   * the rowcount in the input step, which is the previous step.
+   * If minRowcountFraction is specified, then the filter rowcount >=
+   *                        minRowcountFraction * input rowcount
+   * If maxRowcountFraction is specified, then the filter rowcount <=
+   *                        maxRowcountFraction * input rowcount
+   * Expected results file looks like this:
+   *
+   *    min_selectivity_estimate_factor = 0.3
+   *    Filter.*?\n.*?\n
+   *
+   * min_selectivity_estimate_factor is stored in minRowcountFraction.
+   * The second line is the Java Pattern to grab the Filter step and
+   * the input step.  The rowcounts are extracted from the Filter step
+   * and the input step, and compared as described above.  This is
+   * repeated for each Filter step.
+   *
+   * @param actual
+   *          actual results
+   * @param expected
+   *          expected results
+   * @return true/false
+   */
+  private static boolean matchAndCompareAll(String actual, String expected) {
+    String[] expectedLines = expected.split("\n");
+    actual = actual.trim();
+    Double minRowcountFraction = 0.0;
+    Double maxRowcountFraction = 1.0;
+    for (int index = 0; index < expectedLines.length; index++) {
+      expectedLines[index] = expectedLines[index].trim();
+      String[] expectedStrings = expectedLines[index].split("=");
+      // check if minRowcountFraction is specified
+      if (expectedStrings[0].trim().equals("min_selectivity_estimate_factor")) {
+         minRowcountFraction = Double.parseDouble(expectedStrings[1].trim());
+         continue;
+      }
+      // check if maxRowcountFraction is specified
+      if (expectedStrings[0].trim().equals("max_selectivity_estimate_factor")) {
+         maxRowcountFraction = Double.parseDouble(expectedStrings[1].trim());
+         continue;
+      }
+      // check for Filter step in actual output
+      Matcher matcher = Pattern.compile(expectedStrings[0], Pattern.DOTALL).matcher(actual);
+      if (!matcher.find()) {
+        LOG.info("Did not find \'" + expectedStrings[0] + "\' in actual output");
+        return false;
+      }
+      matcher.reset();
+      while (matcher.find()) {
+        String matched = matcher.group();
+        // get rowcount values in Filter step and input step
+        Matcher matcher2 = Pattern.compile("(rowcount = \\d+\\.\\d*).*?\n.*?(rowcount = \\d+\\.\\d*)", Pattern.DOTALL).matcher(matched);
+        if (matcher2.find()) {
+          // get rowcount value for Filter step
+          String filterStep = matcher2.group(1);
+          String[] values = filterStep.split(" ");
+          double filterRowcount = Double.parseDouble(values[2]);
+          // get rowcount value for input step
+          String inputStep = matcher2.group(2);
+          values = inputStep.split(" ");
+          double inputRowcount = Double.parseDouble(values[2]);
+          // check if actual rowcount is too small
+          if (filterRowcount < (minRowcountFraction * inputRowcount)) {
+            LOG.info("Actual Filter rowcount " + filterRowcount + " < minFraction " + minRowcountFraction + " * input rowcount " + inputRowcount);
+            return false;
+          }
+          // check if actual rowcount is too large
+          if (filterRowcount > (maxRowcountFraction * inputRowcount)) {
+            LOG.info("Actual Filter rowcount " + filterRowcount + " > maxFraction " + maxRowcountFraction + " * input rowcount " + inputRowcount);
+            return false;
+          }
+        } else {
+          LOG.info("Did not find rowcount in \'" + matched + "\'");
+          return false;
+        }
       }
     }
     return true;
