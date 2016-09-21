@@ -1,0 +1,240 @@
+#!/bin/bash
+source conf/drillTestConfig.properties
+
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable
+
+#droptable1.q
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable1
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptable1
+${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptable1.ddl
+
+#droptableif1.q
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif1
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptableif1
+${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptableif1.ddl
+
+#droptable4.q
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable4
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptable4
+
+#droptableif4.q
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif4
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptableif4
+
+#droptable5.q
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable5
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/complex.json ${DRILL_TESTDATA}/droptable/droptable5
+
+#droptableif5.q
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif5
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/complex.json ${DRILL_TESTDATA}/droptable/droptableif5
+
+#droptable6.q
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable6
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable6/droptable6a
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptable6
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptable6/droptable6a
+
+#droptableif6.q
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif6
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif6/droptableif6a
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif6/droptableif6a/droptableif6aa
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptableif6
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptableif6/droptableif6a
+
+#droptable8.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable8
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable8
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptable8
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/complex.json ${DRILL_TESTDATA}/droptable/droptable8
+
+#droptableif8.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif8
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif8
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptableif8
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/complex.json ${DRILL_TESTDATA}/droptable/droptableif8
+
+#droptable10.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable10
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable10
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptable10
+hive -f ${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptable10.ddl
+
+#droptableif10.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif10
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif10
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptableif10
+hive -f ${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptableif10.ddl
+
+#droptable11.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable11
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable11
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/t.dat ${DRILL_TESTDATA}/droptable/droptable11/t.dat
+hadoop fs -touchz ${DRILL_TESTDATA}/droptable/droptable11/.hiden_file
+
+#droptableif11.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif11
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif11
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/t.dat ${DRILL_TESTDATA}/droptable/droptableif11/t.dat
+hadoop fs -touchz ${DRILL_TESTDATA}/droptable/droptableif11/.hiden_file
+
+#droptable12.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable12
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable12
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/complex.json ${DRILL_TESTDATA}/droptable/droptable12
+
+#droptableif12.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif12
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif12
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/complex.json ${DRILL_TESTDATA}/droptable/droptableif12
+
+#droptable13.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable13
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable13
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptable13
+hive -f ${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptable13.ddl
+
+#droptableif13.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif13
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif13
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptableif13
+hive -f ${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptableif13.ddl
+
+#droptable14.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable14
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable14
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/t.dat ${DRILL_TESTDATA}/droptable/droptable14/t.dat
+
+#droptableif14.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif14
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif14
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/t.dat ${DRILL_TESTDATA}/droptable/droptableif14/t.dat
+
+#droptable15.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable15
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable15
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/complex.json ${DRILL_TESTDATA}/droptable/droptable15/
+hadoop fs -touchz ${DRILL_TESTDATA}/droptable/droptable15/.hiden_file
+
+#droptableif15.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif15
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif15
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/complex.json ${DRILL_TESTDATA}/droptable/droptableif15/
+hadoop fs -touchz ${DRILL_TESTDATA}/droptable/droptableif15/.hiden_file
+
+#droptable16.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable16
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable16
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptable16
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/t.dat ${DRILL_TESTDATA}/droptable/droptable16
+
+#droptableif16.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif16
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif16
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptableif16
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/t.dat ${DRILL_TESTDATA}/droptable/droptableif16
+
+#droptable19.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable19
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable19
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptable19
+hive -f ${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptable19.ddl
+
+#droptableif19.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif19
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif19
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptableif19
+hive -f ${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptableif19.ddl
+
+#droptable23.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable23
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable23
+
+#droptableif23.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif23
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif23
+
+#droptable25.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable25
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable25
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptable25
+
+#droptableif25.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif25
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif25
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptableif25
+
+#droptable26.q
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable26
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable26/droptable26a
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/complex.json ${DRILL_TESTDATA}/droptable/droptable26
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptable26/droptable26a
+
+#droptableif26.q
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif26
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif26/droptableif26a
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif26/droptableif26a/droptableif26aa
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/complex.json ${DRILL_TESTDATA}/droptable/droptableif26
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/complex.json ${DRILL_TESTDATA}/droptable/droptableif26/droptableif26a
+
+#droptable27.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable27
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable27
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/complex.json ${DRILL_TESTDATA}/droptable/droptable27/
+hadoop fs -touchz ${DRILL_TESTDATA}/droptable/droptable27/.hiden_file
+
+#droptableif27.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif27
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif27
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/complex.json ${DRILL_TESTDATA}/droptable/droptableif27/
+hadoop fs -touchz ${DRILL_TESTDATA}/droptable/droptableif27/.hiden_file
+
+#droptable29.q
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable29
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable29/droptable29a
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/t.dat ${DRILL_TESTDATA}/droptable/droptable29
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/t.dat ${DRILL_TESTDATA}/droptable/droptable29/droptable29a
+
+#droptableif29.q
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif29
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif29/droptableif29a
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif29/droptableif29a/droptableif29aa
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/t.dat ${DRILL_TESTDATA}/droptable/droptableif29
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/t.dat ${DRILL_TESTDATA}/droptable/droptableif29/droptableif29a
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/t.dat ${DRILL_TESTDATA}/droptable/droptableif29/droptableif29a/droptableif29aa
+
+#droptable30.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable30
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable30
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptable30/
+hadoop fs -touchz ${DRILL_TESTDATA}/droptable/droptable30/.hiden_file
+
+#droptableif30.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif30
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif30
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptableif30/
+hadoop fs -touchz ${DRILL_TESTDATA}/droptable/droptableif30/.hiden_file
+
+#droptable31.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable31
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable31
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/t.dat ${DRILL_TESTDATA}/droptable/droptable31/
+
+#droptableif31.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif31
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif31
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/t.dat ${DRILL_TESTDATA}/droptable/droptableif31/
+
+#droptable32.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptable32
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptable32
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptable32/
+${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptable32.ddl
+
+#droptableif32.q
+hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif32
+hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif32
+hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/droptable/data ${DRILL_TESTDATA}/droptable/droptableif32/
+${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptableif32.ddl
+
+
