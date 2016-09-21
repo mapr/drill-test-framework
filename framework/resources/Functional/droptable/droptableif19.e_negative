@@ -1,0 +1,1 @@
+0.*PARSE ERROR: Unable to create or drop tables/views. Schema \[hive.droptable\] is immutable.

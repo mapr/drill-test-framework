@@ -485,6 +485,11 @@
       "writable": true,
       "defaultInputFormat": "parquet"
     },
+    "droptable": {
+      "location": "/drill/testdata/droptable",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
     "metadata_caching_pp": {
       "location": "/drill/testdata/metadata_caching_pp",
       "writable": true,
