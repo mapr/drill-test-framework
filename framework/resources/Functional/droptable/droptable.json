@@ -1,0 +1,302 @@
+{
+    "testId": "droptable",
+    "type": "group",
+    "description": "Test hive file formats and queries",
+    "submit-type": "jdbc",
+    "categories": [
+        "droptable"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.droptable",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptable1/data"
+    	},
+	{
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptableif1/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptable4/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptableif4/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/complex.json",
+          "dest": "droptable/droptable5/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/complex.json",
+          "dest": "droptable/droptableif5/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptable6/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptable6/droptable6a/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptableif6/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptableif6/droptableif6a/droptableif6aa/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptable8/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/complex.json",
+          "dest": "droptable/droptable8/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptableif8/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/complex.json",
+          "dest": "droptable/droptableif8/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptable10/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptableif10/data"
+        },
+	{
+          "mode": "cp",
+          "src": "Datasources/droptable/t.dat",
+          "dest": "droptable/droptable11/t.dat"
+        },
+	{
+          "mode": "cp",
+          "src": "Datasources/droptable/.hiden_file",
+          "dest": "droptable/droptable11/.hiden_file"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/t.dat",
+          "dest": "droptable/droptableif11/t.dat"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/.hiden_file",
+          "dest": "droptable/droptableif11/.hiden_file"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/complex.json",
+          "dest": "droptable/droptable12/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/complex.json",
+          "dest": "droptable/droptableif12/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptable13/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptableif13/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/t.dat",
+          "dest": "droptable/droptable14/t.dat"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/t.dat",
+          "dest": "droptable/droptableif14/t.dat"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/complex.json",
+          "dest": "droptable/droptable15/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/.hiden_file",
+          "dest": "droptable/droptable15/.hiden_file"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/complex.json",
+          "dest": "droptable/droptableif15/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/.hiden_file",
+          "dest": "droptable/droptableif15/.hiden_file"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptable19/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptableif19/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptable25/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptableif25/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/complex.json",
+          "dest": "droptable/droptable26/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/complex.json",
+          "dest": "droptable/droptable26/droptable26a/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/complex.json",
+          "dest": "droptable/droptableif26/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/complex.json",
+          "dest": "droptable/droptableif26/droptableif26a/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/complex.json",
+          "dest": "droptable/droptable27/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/.hiden_file",
+          "dest": "droptable/droptable27/.hiden_file"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/complex.json",
+          "dest": "droptable/droptableif27/complex.json"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/.hiden_file",
+          "dest": "droptable/droptableif27/.hiden_file"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/t.dat",
+          "dest": "droptable/droptable29/t.dat"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/t.dat",
+          "dest": "droptable/droptable29/droptable29a/t.dat"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/t.dat",
+          "dest": "droptable/droptableif29/t.dat"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/t.dat",
+          "dest": "droptable/droptableif29/droptableif29a/t.dat"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/t.dat",
+          "dest": "droptable/droptableif29/droptableif29a/droptableif29aa/t.dat"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptable30/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/.hiden_file",
+          "dest": "droptable/droptable30/.hiden_file"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptableif30/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/.hiden_file",
+          "dest": "droptable/droptableif30/.hiden_file"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/t.dat",
+          "dest": "droptable/droptable31/t.dat"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/t.dat",
+          "dest": "droptable/droptableif31/t.dat"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptable32/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptableif32/data"
+        },
+    	{	
+       	  "mode": "gen",
+          "src": "Datasources/droptable/droptablesetup.sh",
+          "dest": ""
+    	}
+   ]
+}

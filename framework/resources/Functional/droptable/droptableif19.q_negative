@@ -1,0 +1,1 @@
+drop table if exists hive.droptable.droptableif19_parquet;

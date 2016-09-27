@@ -1,0 +1,43 @@
+{
+    "testId": "droptable_negative",
+    "type": "group",
+    "negative": true,
+    "description": "Test hive file formats and queries",
+    "submit-type": "jdbc",
+    "categories": [
+        "droptable"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q_negative",
+            "schema": "dfs.droptable",
+            "output-format": "tsv",
+            "expected-file": ".*.e_negative",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptable16/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/t.dat",
+          "dest": "droptable/droptable16/t.dat"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/data",
+          "dest": "droptable/droptableif16/data"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/droptable/t.dat",
+          "dest": "droptable/droptableif16/t.dat"
+        }
+   ]
+}
