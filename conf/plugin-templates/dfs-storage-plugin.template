@@ -290,6 +290,21 @@
       "writable": true,
       "defaultInputFormat": "json"
     },
+    "tpch_sf1_parquet": {
+      "location": "/drill/testdata/tpch_sf1/parquet",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "tpch_sf1_json": {
+      "location": "/drill/testdata/tpch_sf1/json",
+      "writable": true,
+      "defaultInputFormat": "json"
+    },
+    "tpch_sf1_text": {
+      "location": "/drill/testdata/tpch_sf1/text",
+      "writable": true,
+      "defaultInputFormat": "dsv"
+    },
     "tpcds_sf1_parquet": {
       "location": "/drill/testdata/tpcds_sf1/parquet",
       "writable": true,
