@@ -1,0 +1,50 @@
+{
+  "metadata_version" : "v2",
+  "columnTypeInfo" : {
+    "c4" : {
+      "name" : [ "c4" ],
+      "primitiveType" : "INT32",
+      "originalType" : "DATE"
+    },
+    "c1" : {
+      "name" : [ "c1" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "c2" : {
+      "name" : [ "c2" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "c3" : {
+      "name" : [ "c3" ],
+      "primitiveType" : "INT32",
+      "originalType" : "DATE"
+    }
+  },
+  "files" : [ {
+    "path" : "/drill/testdata/mc1.6/ctas_t1/0_0_0.parquet",
+    "length" : 852,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 520,
+      "rowCount" : 10,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "c1" ]
+      }, {
+        "name" : [ "c2" ]
+      }, {
+        "name" : [ "c3" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "c4" ],
+        "nulls" : 0
+      } ]
+    } ]
+  } ],
+  "directories" : [ ]
+}

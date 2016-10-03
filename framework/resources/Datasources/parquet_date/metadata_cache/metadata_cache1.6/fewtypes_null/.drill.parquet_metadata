@@ -1,0 +1,97 @@
+{
+  "metadata_version" : "v2",
+  "columnTypeInfo" : {
+    "varchar_col" : {
+      "name" : [ "varchar_col" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "float_col" : {
+      "name" : [ "float_col" ],
+      "primitiveType" : "FLOAT",
+      "originalType" : null
+    },
+    "bigint_col" : {
+      "name" : [ "bigint_col" ],
+      "primitiveType" : "INT64",
+      "originalType" : null
+    },
+    "bool_col" : {
+      "name" : [ "bool_col" ],
+      "primitiveType" : "BOOLEAN",
+      "originalType" : null
+    },
+    "interval_col" : {
+      "name" : [ "interval_col" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "timestamp_col" : {
+      "name" : [ "timestamp_col" ],
+      "primitiveType" : "INT96",
+      "originalType" : null
+    },
+    "int_col" : {
+      "name" : [ "int_col" ],
+      "primitiveType" : "INT32",
+      "originalType" : null
+    },
+    "date_col" : {
+      "name" : [ "date_col" ],
+      "primitiveType" : "INT32",
+      "originalType" : "DATE"
+    },
+    "double_col" : {
+      "name" : [ "double_col" ],
+      "primitiveType" : "DOUBLE",
+      "originalType" : null
+    },
+    "time_col" : {
+      "name" : [ "time_col" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    }
+  },
+  "files" : [ {
+    "path" : "/drill/testdata/mc1.6/fewtypes_null/fewtypes_null.parquet",
+    "length" : 2569,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 1724,
+      "rowCount" : 21,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "int_col" ],
+        "nulls" : 5
+      }, {
+        "name" : [ "bigint_col" ],
+        "nulls" : 4
+      }, {
+        "name" : [ "date_col" ],
+        "nulls" : 6
+      }, {
+        "name" : [ "time_col" ]
+      }, {
+        "name" : [ "timestamp_col" ],
+        "nulls" : 7
+      }, {
+        "name" : [ "interval_col" ]
+      }, {
+        "name" : [ "varchar_col" ]
+      }, {
+        "name" : [ "float_col" ],
+        "nulls" : 4
+      }, {
+        "name" : [ "double_col" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "bool_col" ],
+        "nulls" : 4
+      } ]
+    } ]
+  } ],
+  "directories" : [ ]
+}
