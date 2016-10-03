@@ -1,0 +1,5610 @@
+{
+  "metadata_version" : "v2",
+  "columnTypeInfo" : {
+    "l_returnflag" : {
+      "name" : [ "l_returnflag" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "l_receiptdate" : {
+      "name" : [ "l_receiptdate" ],
+      "primitiveType" : "INT32",
+      "originalType" : "DATE"
+    },
+    "l_linenumber" : {
+      "name" : [ "l_linenumber" ],
+      "primitiveType" : "INT32",
+      "originalType" : null
+    },
+    "l_tax" : {
+      "name" : [ "l_tax" ],
+      "primitiveType" : "DOUBLE",
+      "originalType" : null
+    },
+    "l_suppkey" : {
+      "name" : [ "l_suppkey" ],
+      "primitiveType" : "INT32",
+      "originalType" : null
+    },
+    "l_shipdate" : {
+      "name" : [ "l_shipdate" ],
+      "primitiveType" : "INT32",
+      "originalType" : "DATE"
+    },
+    "l_shipmode" : {
+      "name" : [ "l_shipmode" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "l_orderkey" : {
+      "name" : [ "l_orderkey" ],
+      "primitiveType" : "INT32",
+      "originalType" : null
+    },
+    "l_partkey" : {
+      "name" : [ "l_partkey" ],
+      "primitiveType" : "INT32",
+      "originalType" : null
+    },
+    "l_moddate" : {
+      "name" : [ "l_moddate" ],
+      "primitiveType" : "INT32",
+      "originalType" : "DATE"
+    },
+    "l_quantity" : {
+      "name" : [ "l_quantity" ],
+      "primitiveType" : "DOUBLE",
+      "originalType" : null
+    },
+    "l_linestatus" : {
+      "name" : [ "l_linestatus" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "l_discount" : {
+      "name" : [ "l_discount" ],
+      "primitiveType" : "DOUBLE",
+      "originalType" : null
+    },
+    "l_extendedprice" : {
+      "name" : [ "l_extendedprice" ],
+      "primitiveType" : "DOUBLE",
+      "originalType" : null
+    },
+    "l_shipinstruct" : {
+      "name" : [ "l_shipinstruct" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "l_commitdate" : {
+      "name" : [ "l_commitdate" ],
+      "primitiveType" : "INT32",
+      "originalType" : "DATE"
+    },
+    "l_comment" : {
+      "name" : [ "l_comment" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    }
+  },
+  "files" : [ {
+    "path" : "/drill/testdata/lineitem_auto/0_0_31.parquet",
+    "length" : 41026,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 39491,
+      "rowCount" : 798,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890123,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_36.parquet",
+    "length" : 40783,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 39249,
+      "rowCount" : 797,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890276,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_44.parquet",
+    "length" : 38008,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36489,
+      "rowCount" : 757,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890519,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_68.parquet",
+    "length" : 38265,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36763,
+      "rowCount" : 758,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891250,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_10.parquet",
+    "length" : 37115,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 35584,
+      "rowCount" : 718,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889485,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_70.parquet",
+    "length" : 38866,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37316,
+      "rowCount" : 772,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891311,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_78.parquet",
+    "length" : 38590,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37047,
+      "rowCount" : 765,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891554,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_12.parquet",
+    "length" : 37857,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36317,
+      "rowCount" : 724,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889546,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_81.parquet",
+    "length" : 26560,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 25018,
+      "rowCount" : 492,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891646,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_32.parquet",
+    "length" : 39762,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 38251,
+      "rowCount" : 767,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890154,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_71.parquet",
+    "length" : 36026,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 34504,
+      "rowCount" : 709,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891342,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_72.parquet",
+    "length" : 37939,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36413,
+      "rowCount" : 741,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891372,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_13.parquet",
+    "length" : 39004,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37477,
+      "rowCount" : 758,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889577,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_26.parquet",
+    "length" : 38804,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37283,
+      "rowCount" : 751,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889973,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_61.parquet",
+    "length" : 40348,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 38817,
+      "rowCount" : 804,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891038,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_33.parquet",
+    "length" : 39399,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37888,
+      "rowCount" : 771,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890185,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_66.parquet",
+    "length" : 40017,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 38509,
+      "rowCount" : 798,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891189,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_47.parquet",
+    "length" : 37876,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36375,
+      "rowCount" : 747,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890611,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_60.parquet",
+    "length" : 40215,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 38679,
+      "rowCount" : 799,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891007,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_19.parquet",
+    "length" : 36885,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 35348,
+      "rowCount" : 712,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889758,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_76.parquet",
+    "length" : 36997,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 35491,
+      "rowCount" : 727,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891493,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_79.parquet",
+    "length" : 38783,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37269,
+      "rowCount" : 768,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891584,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_54.parquet",
+    "length" : 38621,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37102,
+      "rowCount" : 762,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890824,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_51.parquet",
+    "length" : 39142,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37634,
+      "rowCount" : 775,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890732,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_2.parquet",
+    "length" : 17006,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 15470,
+      "rowCount" : 283,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889242,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_18.parquet",
+    "length" : 36731,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 35226,
+      "rowCount" : 710,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889728,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_53.parquet",
+    "length" : 38117,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36586,
+      "rowCount" : 752,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890793,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_21.parquet",
+    "length" : 37385,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 35837,
+      "rowCount" : 720,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889820,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_14.parquet",
+    "length" : 32665,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 31157,
+      "rowCount" : 616,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889608,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_17.parquet",
+    "length" : 38021,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36480,
+      "rowCount" : 735,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889697,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_63.parquet",
+    "length" : 39796,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 38271,
+      "rowCount" : 787,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891097,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_22.parquet",
+    "length" : 42352,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 40822,
+      "rowCount" : 829,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889850,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_9.parquet",
+    "length" : 38330,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36804,
+      "rowCount" : 745,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889455,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_48.parquet",
+    "length" : 40309,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 38790,
+      "rowCount" : 802,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890641,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_80.parquet",
+    "length" : 32655,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 31137,
+      "rowCount" : 628,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891615,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_11.parquet",
+    "length" : 39309,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37783,
+      "rowCount" : 762,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889516,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_50.parquet",
+    "length" : 37345,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 35820,
+      "rowCount" : 737,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890703,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_28.parquet",
+    "length" : 40308,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 38775,
+      "rowCount" : 784,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890032,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_34.parquet",
+    "length" : 39813,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 38278,
+      "rowCount" : 776,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890215,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_25.parquet",
+    "length" : 44340,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 42784,
+      "rowCount" : 880,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889942,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_58.parquet",
+    "length" : 39405,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37868,
+      "rowCount" : 784,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890946,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_24.parquet",
+    "length" : 42032,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 40492,
+      "rowCount" : 826,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889911,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_37.parquet",
+    "length" : 37162,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 35642,
+      "rowCount" : 714,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890307,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_52.parquet",
+    "length" : 38865,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37347,
+      "rowCount" : 770,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890763,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_1.parquet",
+    "length" : 8565,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 7054,
+      "rowCount" : 108,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889211,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_3.parquet",
+    "length" : 26195,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 24670,
+      "rowCount" : 480,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889271,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_73.parquet",
+    "length" : 40087,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 38568,
+      "rowCount" : 797,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891403,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_4.parquet",
+    "length" : 36936,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 35397,
+      "rowCount" : 711,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889302,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_56.parquet",
+    "length" : 37270,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 35728,
+      "rowCount" : 736,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890885,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_55.parquet",
+    "length" : 40622,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 39100,
+      "rowCount" : 805,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890854,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_35.parquet",
+    "length" : 38322,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36805,
+      "rowCount" : 742,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890246,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_43.parquet",
+    "length" : 38483,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36966,
+      "rowCount" : 757,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890488,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_20.parquet",
+    "length" : 43234,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 41706,
+      "rowCount" : 848,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889789,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_29.parquet",
+    "length" : 41381,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 39841,
+      "rowCount" : 805,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890062,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_57.parquet",
+    "length" : 38748,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37188,
+      "rowCount" : 764,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890916,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_16.parquet",
+    "length" : 37073,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 35539,
+      "rowCount" : 716,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889667,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_23.parquet",
+    "length" : 40852,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 39332,
+      "rowCount" : 797,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889881,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_74.parquet",
+    "length" : 32724,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 31182,
+      "rowCount" : 633,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891434,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_82.parquet",
+    "length" : 17985,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 16480,
+      "rowCount" : 310,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891676,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_65.parquet",
+    "length" : 42750,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 41229,
+      "rowCount" : 858,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891158,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_40.parquet",
+    "length" : 37030,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 35513,
+      "rowCount" : 717,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890397,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_27.parquet",
+    "length" : 44148,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 42622,
+      "rowCount" : 869,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890001,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_15.parquet",
+    "length" : 38120,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36617,
+      "rowCount" : 742,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889636,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_45.parquet",
+    "length" : 36561,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 35029,
+      "rowCount" : 722,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890550,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_77.parquet",
+    "length" : 39854,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 38337,
+      "rowCount" : 797,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891523,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_69.parquet",
+    "length" : 36408,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 34885,
+      "rowCount" : 717,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891281,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_41.parquet",
+    "length" : 36308,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 34770,
+      "rowCount" : 692,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890427,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_64.parquet",
+    "length" : 39245,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37715,
+      "rowCount" : 774,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891128,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_83.parquet",
+    "length" : 8548,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 7071,
+      "rowCount" : 111,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891707,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_5.parquet",
+    "length" : 40542,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 38998,
+      "rowCount" : 789,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889332,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_30.parquet",
+    "length" : 38473,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36949,
+      "rowCount" : 744,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890093,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_7.parquet",
+    "length" : 41146,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 39643,
+      "rowCount" : 806,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889393,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_38.parquet",
+    "length" : 32609,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 31111,
+      "rowCount" : 617,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890338,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_75.parquet",
+    "length" : 40098,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 38575,
+      "rowCount" : 797,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891462,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_62.parquet",
+    "length" : 35283,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 33728,
+      "rowCount" : 684,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891069,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_39.parquet",
+    "length" : 39564,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 38046,
+      "rowCount" : 769,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890366,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_6.parquet",
+    "length" : 39698,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 38193,
+      "rowCount" : 778,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889363,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_42.parquet",
+    "length" : 38029,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36507,
+      "rowCount" : 726,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890458,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_8.parquet",
+    "length" : 41391,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 39871,
+      "rowCount" : 808,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "F",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4889424,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_59.parquet",
+    "length" : 37747,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36224,
+      "rowCount" : 744,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890977,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_49.parquet",
+    "length" : 39098,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37556,
+      "rowCount" : 772,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890672,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_46.parquet",
+    "length" : 38132,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 36591,
+      "rowCount" : 753,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4890580,
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/lineitem_auto/0_0_67.parquet",
+    "length" : 39260,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 37740,
+      "rowCount" : 770,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "l_orderkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_partkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_suppkey" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linenumber" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_quantity" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_extendedprice" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_discount" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_tax" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_returnflag" ],
+        "mxValue" : "N",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_linestatus" ],
+        "mxValue" : "O",
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_commitdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_receiptdate" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipinstruct" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_shipmode" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_comment" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "l_moddate" ],
+        "mxValue" : 4891219,
+        "nulls" : 0
+      } ]
+    } ]
+  } ],
+  "directories" : [ ]
+}

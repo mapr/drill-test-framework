@@ -60,6 +60,19 @@
                   <outputDirectory>${project.basedir}/resources/Datasources</outputDirectory>
                 </configuration>
               </execution>
+             <execution>
+                <id>install-tpcds1-hive1dot2-withdate</id>
+                <phase>prepare-package</phase>
+                <goals>
+                  <goal>wget</goal>
+                </goals>
+                <configuration>
+                  <url>http://apache-drill.s3.amazonaws.com/files/tpcds1_hive1dot2_withdate.tgz</url>
+                  <outputFileName>tpcds1_hive1dot2_withdate.tgz</outputFileName>
+                  <unpack>true</unpack>
+                  <outputDirectory>${project.basedir}/resources/Datasources</outputDirectory>
+                </configuration>
+              </execution> 
               <execution>
                 <id>install-complexga100k-tgz-json</id>
                 <phase>prepare-package</phase>

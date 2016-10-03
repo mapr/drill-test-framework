@@ -1,0 +1,25 @@
+{
+  "metadata_version" : "v1",
+  "files" : [ {
+    "path" : "/drill/testdata/date_nulls/0_0_0.parquet",
+    "length" : 140,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 35,
+      "rowCount" : 210042,
+      "hostAffinity" : {
+        "qa-node183.qa.lab" : 1.0,
+        "qa-node182.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : "`EXPR$0`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 0,
+        "min" : 0,
+        "nulls" : 210042
+      } ]
+    } ]
+  } ],
+  "directories" : [ ]
+}

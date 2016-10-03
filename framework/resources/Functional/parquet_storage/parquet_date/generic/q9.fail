@@ -1,0 +1,1 @@
+select l_shipdate from table(cp.`tpch/lineitem.parquet` (type => 'parquet', autoCorrectCorruptDates => false)) order by l_shipdate limit 10;

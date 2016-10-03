@@ -1,0 +1,32 @@
+{
+  "metadata_version" : "v1",
+  "files" : [ {
+    "path" : "/drill/testdata/ctas/parquet/ctas_t14/0_0_0.parquet",
+    "length" : 291,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 128,
+      "rowCount" : 10,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : "`x`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : 4879129,
+        "min" : 4879109,
+        "nulls" : 0
+      }, {
+        "name" : "`y`",
+        "primitiveType" : "INT64",
+        "originalType" : null,
+        "max" : 1,
+        "min" : 1,
+        "nulls" : 0
+      } ]
+    } ]
+  } ],
+  "directories" : [ ]
+}
