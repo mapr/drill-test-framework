@@ -127,6 +127,10 @@ Example:
        Here any `hbase` test suites within the specified directory are excluded.
     -h help (optional)
        Use this option to provide the usage of the command, which includes additional options.
+    -r report (optional)
+       Use this option to generate test reports in JSON format and copy it to DFS
+    -d data (optional)
+       Use this option to run data generation scripts
 </code></pre>
 
 ## Authors
