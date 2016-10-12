@@ -1,0 +1,32 @@
+{
+    "testId": "tpch_sf1_original_maprdb_json",
+    "type": "group",
+    "description": "Test TPC-H Original Queries on MapR-DB JSON Tables",
+    "categories": [
+        "functional_maprdb"
+    ],
+    "dependencies" : ["maprdb"],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "mfs.tpch_sf1_maprdb_json",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+            "mode": "cp",
+            "src": "Datasources/tpch/sf1/maprdb/json",
+            "dest": "tpch_sf1/maprdb/json/importFiles"
+        },
+	{
+            "mode": "gen",
+            "src": "Datasources/tpch/maprdb/json/importTables.sh 1",
+            "dest": ""
+        }
+    ]
+}
