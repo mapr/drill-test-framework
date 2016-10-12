@@ -1,0 +1,32 @@
+SELECT
+  NATION,
+  O_YEAR,
+  SUM(AMOUNT) AS SUM_PROFIT
+FROM
+  (
+    SELECT
+      N.N_NAME AS NATION,
+      EXTRACT(YEAR FROM O.O_ORDERDate) AS O_YEAR,
+      L.L_EXTENDEDPRICE * (1 - L.L_DISCOUNT) - PS.PS_SUPPLYCOST * L.L_QUANTITY AS AMOUNT
+    FROM
+      part P,
+      supplier S,
+      lineitem L,
+      partsupp PS,
+      orders O,
+      nation N
+    WHERE
+      S.S_SUPPKEY = L.L_SUPPKEY
+      AND PS.PS_SUPPKEY = L.L_SUPPKEY
+      AND PS.PS_PARTKEY = L.L_PARTKEY
+      AND P.P_PARTKEY = L.L_PARTKEY
+      AND O.O_ORDERKEY = L.L_ORDERKEY
+      AND S.S_NATIONKEY = N.N_NATIONKEY
+      AND P.P_NAME LIKE '%yellow%'
+  ) AS PROFIT
+GROUP BY
+  NATION,
+  O_YEAR
+ORDER BY
+  NATION,
+  O_YEAR DESC;
