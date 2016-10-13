@@ -1,0 +1,4 @@
+SELECT P_MFGR AS MFGR, COUNT(*) AS MYCOUNT 
+	FROM part 
+		WHERE P_MFGR = 'Manufacturer#3' 
+GROUP BY P_MFGR;
