@@ -45,9 +45,9 @@ public class ColumnList {
    * "loosened" logic to handle float, double and decimal types. The algorithm
    * used for the comparison follows:
    * 
-   * Floats: f1 equals f2 iff ((f1-f2)/(average(f1,f2))) < 0.000001
+   * Floats: f1 equals f2 iff |((f1-f2)/(average(f1,f2)))| < 0.000001
    * 
-   * Doubles: d1 equals d2 iff ((d1-d2)/(average(d1,d2))) < 0.000000000001
+   * Doubles: d1 equals d2 iff |((d1-d2)/(average(d1,d2)))| < 0.000000000001
    * 
    * Decimals: dec1 equals dec2 iff value(dec1) == value(dec2) and scale(dec1)
    * == scale(dec2)
