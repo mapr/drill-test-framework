@@ -45,9 +45,9 @@ public class ColumnList {
    * "loosened" logic to handle float, double and decimal types. The algorithm
    * used for the comparison follows:
    * 
-   * Floats: f1 equals f2 iff ((f1-f2)/(average(f1,f2))) < 0.000001
+   * Floats: f1 equals f2 iff |((f1-f2)/(average(f1,f2)))| < 0.000001
    * 
-   * Doubles: d1 equals d2 iff ((d1-d2)/(average(d1,d2))) < 0.000000000001
+   * Doubles: d1 equals d2 iff |((d1-d2)/(average(d1,d2)))| < 0.000000000001
    * 
    * Decimals: dec1 equals dec2 iff value(dec1) == value(dec2) and scale(dec1)
    * == scale(dec2)
@@ -116,7 +116,7 @@ public class ColumnList {
           float f1 = (Float) list1.get(i);
           float f2 = (Float) list2.get(i);
           if ((f1 + f2) / 2 != 0) {
-            if (!(Math.abs(f1 - f2) / ((f1 + f2) / 2) < 1.0E-6)) return false;
+            if (!(Math.abs((f1 - f2) / ((f1 + f2) / 2)) < 1.0E-6)) return false;
           } else if (f1 != 0) {
             return false;
           }
@@ -125,7 +125,7 @@ public class ColumnList {
           double d1 = (Double) list1.get(i);
           double d2 = (Double) list2.get(i);
           if ((d1 + d2) / 2 != 0) {
-            if (!(Math.abs(d1 - d2) / ((d1 + d2) / 2) < 1.0E-12)) return false;
+            if (!(Math.abs((d1 - d2) / ((d1 + d2) / 2)) < 1.0E-12)) return false;
           } else if (d1 != 0) {
             return false;
           }
