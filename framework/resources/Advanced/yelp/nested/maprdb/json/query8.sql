@@ -1,0 +1,1 @@
+select u.name as `user name`, b.name as `business name` from `user` u, `business` b where u.average_stars = b.stars and (b.categories[0] = 'Hotels & Travel' or b.categories[0] = 'Arts & Entertainment') order by `user name`, `business name` limit 20;

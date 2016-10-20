@@ -269,6 +269,32 @@
                 </configuration>
               </execution>
               <execution>
+                <id>yelp_maprdb_json</id>
+                <phase>prepare-package</phase>
+                <goals>
+                  <goal>wget</goal>
+                </goals>
+                <configuration>
+                  <url>https://s3-us-west-1.amazonaws.com/drill-public/yelp/yelp_maprdb_json.tar.gz</url>
+                  <outputFileName>yelp_maprdb_json.tgz</outputFileName>
+                  <unpack>true</unpack>
+                  <outputDirectory>${project.basedir}/resources/Datasources/yelp/maprdb/json</outputDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>yelp_json</id>
+                <phase>prepare-package</phase>
+                <goals>
+                  <goal>wget</goal>
+                </goals>
+                <configuration>
+                  <url>https://s3-us-west-1.amazonaws.com/drill-public/yelp/yelp_json.tar.gz</url>
+                  <outputFileName>yelp_json.tgz</outputFileName>
+                  <unpack>true</unpack>
+                  <outputDirectory>${project.basedir}/resources/Datasources/yelp/json</outputDirectory>
+                </configuration>
+              </execution>
+              <execution>
                 <id>json_fed</id>
                 <phase>prepare-package</phase>
                 <goals>

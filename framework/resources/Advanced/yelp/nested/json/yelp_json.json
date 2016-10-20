@@ -1,0 +1,26 @@
+{
+    "testId": "yelp_nested_json",
+    "type": "group",
+    "description": "Test Queries on Yelp JSON dataset",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.yelp_json",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+          "mode": "cp",
+          "src": "Datasources/yelp/json",
+          "dest": "yelp/json"
+        }	
+    ]
+}

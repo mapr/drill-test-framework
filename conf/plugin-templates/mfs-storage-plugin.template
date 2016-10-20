@@ -59,6 +59,11 @@
                 "location":"/drill/testdata/tpcds_sf100/maprdb/json/views",
                 "writable":true,
                 "defaultInputFormat":"maprdb"
+            },
+            "yelp_maprdb_json":{
+                "location":"/drill/testdata/yelp/maprdb/json",
+                "writable":true,
+                "defaultInputFormat":"maprdb"
             }
         },
         "formats":{

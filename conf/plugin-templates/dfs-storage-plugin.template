@@ -345,6 +345,11 @@
       "writable": true,
       "defaultInputFormat": "parquet"
     },
+    "yelp_json": {
+      "location": "/drill/testdata/yelp/json",
+      "writable": true,
+      "defaultInputFormat": "json"
+    },
     "kvgenflatten-nulls": {
       "location": "/drill/testdata/kvgenflatten-nulls",
       "writable": true,
