@@ -1,0 +1,26 @@
+{
+    "testId": "tpch_sf1_sql_math_json",
+    "type": "group",
+    "description": "Test Queries with SQL Math Functions on TPC-H SF1 JSON Dataset",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.tpch_sf1_json",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+            "mode": "cp",
+            "src": "Datasources/tpch/sf1/json",
+            "dest": "tpch_sf1/json"
+        }
+    ]
+}
