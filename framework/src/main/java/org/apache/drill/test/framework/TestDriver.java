@@ -259,16 +259,19 @@ public class TestDriver {
       }
     }
 
+    int totalPassingTest = 0;
     int totalExecutionFailure = 0;
     int totalVerificationFailure = 0;
+    int totalCanceledTest = 0;
     int totalTimeoutFailure = 0;
+    int i = 0;
     LOG.info("> TOOK " + stopwatch + " TO SETUP.");
 
     if (OPTIONS.trackMemory) {
   	  queryMemoryUsage();
     }
 
-    for (int i = 1; i < OPTIONS.iterations+1; i++) {
+    for (i = 1; i < OPTIONS.iterations+1; i++) {
       stopwatch.reset().start();
       LOG.info("> PREPARING DATA..");
       if (OPTIONS.generate) {
@@ -367,12 +370,20 @@ public class TestDriver {
     			memUsage[1][0], memUsage[1][1], memUsage[1][2]));
       }
 
+      totalPassingTest += passingTests.size();
       totalExecutionFailure += executionFailures.size();
       totalVerificationFailure += verificationFailures.size();
       totalTimeoutFailure += timeoutFailures.size();
+      totalCanceledTest += canceledTests.size(); 
     }
 
-    LOG.info("\n> TEARING DOWN..");
+    if (i > 2) {
+      LOG.info(LINE_BREAK);
+      LOG.info(String.format("\nCompleted %d iterations.\n  Passing tests: %d\n  Execution Failures: %d\n  VerificationFailures: %d" +
+    	  "\n  Timeouts: %d\n  Canceled: %d", i-1, totalPassingTest, totalExecutionFailure, 
+    	  totalVerificationFailure, totalTimeoutFailure, totalCanceledTest));
+      LOG.info("\n> TEARING DOWN..");
+    }
     teardown();
     executor.close();
     connectionPool.close();
