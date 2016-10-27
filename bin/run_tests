@@ -3,4 +3,10 @@ bin=`dirname "${BASH_SOURCE-$0}"`
 bin=`cd "$bin">/dev/null; pwd`
 source conf/drillTestConfig.properties
 cd ${bin}/../
+
+# when testing a JDBC driver other than the default apache JDBC driver, uncomment the following
+# and set ${JDBC_DRIVER_CP} inside conf/drillTestConfig.properties
+#java -cp conf/:${JDBC_DRIVER_CP}:framework/target/framework-1.0.0-SNAPSHOT-shaded.jar:${HADOOP_INSTALL_LOC}/lib/* org.apache.drill.test.framework.TestDriver $*
+
+# use the following line when testing apache drill JDBC driver
 java -cp conf/:${DRILL_HOME}/jars/jdbc-driver/drill-jdbc-all-${DRILL_VERSION}.jar:framework/target/framework-1.0.0-SNAPSHOT-shaded.jar:${HADOOP_INSTALL_LOC}/lib/* org.apache.drill.test.framework.TestDriver $*
