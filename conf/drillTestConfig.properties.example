@@ -44,7 +44,10 @@ ZOOKEEPERS=IPADDR1:5181/drill/drillbits1
 ########################################
 # DRILL JDBC driver
 ########################################
+# MapR DRILL JDBC driver
 #JDBC_DRIVER=com.mapr.drill.jdbc41.Driver
+
+# Apache DRILL JDBC driver
 JDBC_DRIVER=org.apache.drill.jdbc.Driver
 
 ########################################
