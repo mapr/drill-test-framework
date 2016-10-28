@@ -1,0 +1,32 @@
+{
+    "testId": "tpcds_sf1_sanity_maprdb_json",
+    "type": "group",
+    "description": "Test Sanity Queries on TPC-DS SF1 MapR-DB JSON Dataset",
+    "categories": [
+        "functional_maprdb"
+    ],
+    "dependencies" : ["maprdb"],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "mfs.tpcds_sf1_maprdb_json",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/tpcds/sf1/maprdb/json",
+            "dest": "tpcds_sf1/maprdb/json/importFiles"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/tpcds/maprdb/json/setupTables.sh 1",
+            "dest": ""
+        }
+    ]
+}
