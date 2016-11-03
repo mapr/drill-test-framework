@@ -45,6 +45,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.sql.DatabaseMetaData;
 
 public class TestDriver {
   public static final String LOCALFS = "local";
@@ -225,7 +226,6 @@ public class TestDriver {
 
     final Stopwatch stopwatch = Stopwatch.createStarted();
     LOG.info("> Pre-check..");
-    //Check number of drillbits equals number of cluster nodes
     try {
 		connection = connectionPool.getOrCreateConnection(drillProperties.get("USERNAME"), 
 				drillProperties.get("PASSWORD"));
@@ -234,6 +234,14 @@ public class TestDriver {
 		e.printStackTrace();
 		System.exit(-1);
 	}
+    //Record JDBC driver name and version
+    DatabaseMetaData dm = connection.getMetaData();
+    LOG.info("Product name = " + dm.getDatabaseProductName() + "\n"
+    		 + "Product version = " + dm.getDatabaseProductVersion() + "\n"
+    		 + "Driver name = " + dm.getDriverName() + "\n"
+    		 + "Driver version = " + dm.getDriverVersion() + "\n");
+    
+    //Check number of drillbits equals number of cluster nodes    
     int numberOfDrillbits = Utils.getNumberOfDrillbits(connection);
     connectionPool.releaseConnection(drillProperties.get("USERNAME"), 
     		drillProperties.get("PASSWORD"), connection);
