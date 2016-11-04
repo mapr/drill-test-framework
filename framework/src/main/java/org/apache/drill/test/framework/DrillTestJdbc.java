@@ -55,6 +55,7 @@ public class DrillTestJdbc implements DrillTest {
   private Thread thread;
   private List<Integer> columnTypes;
   private List<Integer> columnNullabilities;
+  private List<Integer> columnSizes;
   private List columnLabels = new ArrayList<String>();
   private Random rand = new Random();
   private Statement statement = null;
@@ -201,11 +202,13 @@ public class DrillTestJdbc implements DrillTest {
       columnLabels = Lists.newArrayList();
       columnTypes = Lists.newArrayList();
       columnNullabilities = Lists.newArrayList();
+      columnSizes = Lists.newArrayList();
       int columnCount = resultSet.getMetaData().getColumnCount();
       for (int i = 1; i <= columnCount; i++) {
         columnLabels.add(resultSet.getMetaData().getColumnLabel(i));
         columnTypes.add(resultSet.getMetaData().getColumnType(i));
         columnNullabilities.add(resultSet.getMetaData().isNullable(i));
+        columnSizes.add(resultSet.getMetaData().getColumnDisplaySize(i));
       }
 
       LOG.debug("Result set data types:");
@@ -262,6 +265,7 @@ public class DrillTestJdbc implements DrillTest {
     List columnLabels = new ArrayList<String>();
     List<Integer> columnTypes = Lists.newArrayList();
     List<Integer> columnNullabilities = Lists.newArrayList();
+    List<Integer> columnSizes = Lists.newArrayList();
     
     try {
       int columnCount = resultSet.getMetaData().getColumnCount();
@@ -269,6 +273,7 @@ public class DrillTestJdbc implements DrillTest {
         columnLabels.add(resultSet.getMetaData().getColumnLabel(i));
         columnTypes.add(resultSet.getMetaData().getColumnType(i));
         columnNullabilities.add(resultSet.getMetaData().isNullable(i));
+        columnSizes.add(resultSet.getMetaData().getColumnDisplaySize(i));
       }
       
       String msg = "\nlimit 0: " + query + "\n" 
@@ -277,11 +282,14 @@ public class DrillTestJdbc implements DrillTest {
     		  + "\nlimit 0: " + Utils.getTypesInStrings(columnTypes) + "\n"
     		  + "regular: " + Utils.getTypesInStrings(this.columnTypes) + "\n"
     		  + "\nlimit 0: " + Utils.getNullabilitiesInStrings(columnNullabilities) + "\n"
-    		  + "regular: " + Utils.getNullabilitiesInStrings(this.columnNullabilities) + "\n";
+    		  + "regular: " + Utils.getNullabilitiesInStrings(this.columnNullabilities) + "\n"
+    		  + "\nlimit 0: " + columnSizes + "\n"
+    		  + "regular: " + this.columnSizes + "\n";
       writer.append(msg);
       
       if (!columnLabels.equals(this.columnLabels) || !columnTypes.equals(this.columnTypes)
-          || !isNullabilityCompatible(columnNullabilities, this.columnNullabilities))  {
+          || !isNullabilityCompatible(columnNullabilities, this.columnNullabilities)
+          || !columnSizes.equals(this.columnSizes))  {
         LOG.info(msg);
         setTestStatus(TestStatus.VERIFICATION_FAILURE);
         exception = exception == null? new VerificationException(msg)
