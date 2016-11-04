@@ -236,10 +236,14 @@ public class TestDriver {
 	}
     //Record JDBC driver name and version
     DatabaseMetaData dm = connection.getMetaData();
-    LOG.info("Product name = " + dm.getDatabaseProductName() + "\n"
+    LOG.info("\nProduct name = " + dm.getDatabaseProductName() + "\n"
     		 + "Product version = " + dm.getDatabaseProductVersion() + "\n"
+    		 + "Product major version = " + dm.getDatabaseMajorVersion() + "\n"
+    		 + "Product minor version = " + dm.getDatabaseMinorVersion() + "\n"
     		 + "Driver name = " + dm.getDriverName() + "\n"
-    		 + "Driver version = " + dm.getDriverVersion() + "\n");
+    		 + "Driver version = " + dm.getDriverVersion() + "\n"
+    		 + "Driver major version = " + dm.getDriverMajorVersion() + "\n"
+    		 + "Driver minor version = " + dm.getDriverMinorVersion() + "\n");
     
     //Check number of drillbits equals number of cluster nodes    
     int numberOfDrillbits = Utils.getNumberOfDrillbits(connection);
