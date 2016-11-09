@@ -1,0 +1,26 @@
+{
+    "testId": "tpch_sf1_sanity_parquet",
+    "type": "group",
+    "description": "Test Sanity Queries on TPC-H SF1 Parquet Dataset",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.tpch_sf1_parquet",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+            "mode": "cp",
+            "src": "Datasources/tpch/sf1/parquet",
+            "dest": "tpch_sf1/parquet"
+        }
+    ]
+}

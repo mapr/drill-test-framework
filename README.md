@@ -109,24 +109,26 @@ to build the project and also download any dependent datasets configured in `pom
 ### Execute tests
 In the root directory of your repository, execute the following command to run tests:
 
-`bin/run_tests -s <suites> -g <groups> -t <Timeout> -x <Exclude> -n <Concurrency>`
+`bin/run_tests -s <suites> -g <groups> -t <Timeout> -x <Exclude> -n <Concurrency> -d`
 
 Example:
  <pre><code>
- 	bin/run_tests -s `Functional/aggregates,Functional/joins` -g `smoke,regression` -x `hbase` -t `180` -n `2`
+ 	bin/run_tests -s `Functional/aggregates,Functional/joins` -g `smoke,regression` -x `hbase` -t `180` -n `2` -d
     -s suites (required)
        Here `Functional/aggregates,Functional/joins` are directories inside `framework/resources/Functional`. All test suites
-       and sub-suites within a directory are included.
+       and sub-suites within a directory are included
     -g groups (required)
        Here `smoke, regression` are categories of tests to execute
     -t timeout (optional)
-       Here `180` seconds is the max time for a query to execute.
+       Here `180` seconds is the max time for a query to execute
+    -d data generation (required on first run and upon pulling in new changes. Optional otherwise)
+       Here it turns on data copy and data generation
     -n concurrency (optional)
-       Here `2` queries can execute concurrently.
+       Here `2` queries can execute concurrently
     -x exclude dependencies (optional)
-       Here any `hbase` test suites within the specified directory are excluded.
+       Here any `hbase` test suites within the specified directory are excluded
     -h help (optional)
-       Use this option to provide the usage of the command, which includes additional options.
+       Use this option to provide the usage of the command, which includes additional options
 </code></pre>
 
 ## Authors

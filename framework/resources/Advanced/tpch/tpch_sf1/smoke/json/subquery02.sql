@@ -1,0 +1,6 @@
+SELECT C.C_CUSTKEY 
+  FROM customer C, 
+          (SELECT O.O_CUSTKEY AS X 
+             FROM orders O 
+               WHERE O.O_TOTALPRICE BETWEEN 100000 AND 100100) AS TEMP 
+ WHERE C.C_CUSTKEY = TEMP.X;
