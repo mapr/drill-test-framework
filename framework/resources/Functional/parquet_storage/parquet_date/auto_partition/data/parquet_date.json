@@ -1,0 +1,36 @@
+{
+    "testId": "mcAutoPartitionParquetDate",
+    "type": "group",
+    "description": "Test drill's parquet date compatibility",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+                "mode": "cp",
+                "src": "Datasources/parquet_date",
+                "dest": "mc_parquet_date"
+        },
+        {
+                "mode": "cp",
+                "src": "Datasources/parquet_date",
+                "dest": "parquet_date"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/parquet_date/gen.sh",
+            "dest": ""
+        }
+    ]
+}

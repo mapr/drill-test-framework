@@ -509,6 +509,16 @@
       "location": "/drill/testdata/metadata_caching_pp",
       "writable": true,
       "defaultInputFormat": "parquet"
+    },
+    "tpcds1_hive1dot2_parquet_withdate": {
+      "location": "/drill/testdata/tpcds1_hive1dot2_parquet_withdate",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "tpcds1_hive1dot2_mc_withdate": { 
+      "location": "/drill/testdata/tpcds1_hive1dot2_mc_withdate", 
+      "writable": true, 
+      "defaultInputFormat": "parquet" 
     }
     },
     "formats" : {

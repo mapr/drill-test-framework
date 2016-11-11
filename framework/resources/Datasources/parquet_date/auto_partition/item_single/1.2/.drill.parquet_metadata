@@ -1,0 +1,1080 @@
+{
+  "metadata_version" : "v1",
+  "files" : [ {
+    "path" : "/drill/testdata/item_auto/0_0_2.parquet",
+    "length" : 156885,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 154878,
+      "rowCount" : 998,
+      "hostAffinity" : {
+        "qa-node183.qa.lab" : 1.0,
+        "qa-node182.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : "`i_item_sk`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 17999,
+        "min" : 12005,
+        "nulls" : 0
+      }, {
+        "name" : "`i_item_id`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "QUFBQUFBQUFPUFBDQUFBQQ=="
+        },
+        "min" : {
+          "bytes" : "QUFBQUFBQUFBQUFFQUFBQQ=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_rec_start_date`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : 10892,
+        "min" : 10892,
+        "nulls" : 0
+      }, {
+        "name" : "`i_rec_end_date`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : 11621,
+        "min" : 11621,
+        "nulls" : 0
+      }, {
+        "name" : "`i_item_desc`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "WW91bmcsIHNtYWxsIGdlbmVyYXRpb25zIG1hbmFnZSBub3cgbmF0aW9uYWwsIG5ldyBzZWN0b3JzLiBSZWd1bGFyLCBzaW1wbGUgcHJlcGE="
+        },
+        "min" : {
+          "bytes" : "QQ=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_current_price`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 99.1,
+        "min" : 0.09,
+        "nulls" : 1
+      }, {
+        "name" : "`i_wholesale_cost`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 80.74,
+        "min" : 0.02,
+        "nulls" : 1
+      }, {
+        "name" : "`i_brand_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 10016017,
+        "min" : 1001001,
+        "nulls" : 0
+      }, {
+        "name" : "`i_brand`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "dW5pdnVuaXZhbWFsZyAjNg=="
+        },
+        "min" : {
+          "bytes" : "YW1hbGdhbWFsZyAjMg=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_class_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 16,
+        "min" : 1,
+        "nulls" : 0
+      }, {
+        "name" : "`i_class`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "d29tZW5zIHdhdGNo"
+        },
+        "min" : {
+          "bytes" : "YWNjZW50"
+        },
+        "nulls" : 1
+      }, {
+        "name" : "`i_category_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 10,
+        "min" : 1,
+        "nulls" : 1
+      }, {
+        "name" : "`i_category`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "V29tZW4="
+        },
+        "min" : {
+          "bytes" : "Qm9va3M="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_manufact_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 1000,
+        "min" : 1,
+        "nulls" : 1
+      }, {
+        "name" : "`i_manufact`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "cHJpcHJpcHJp"
+        },
+        "min" : {
+          "bytes" : "YWJsZQ=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_size`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "c21hbGw="
+        },
+        "min" : {
+          "bytes" : "Ti9B"
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_formulation`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "eWVsbG93NDk0OTY1Mjc1NTgwMTM="
+        },
+        "min" : {
+          "bytes" : "MDAzMTkzMTY2NTNzZWFzaGVsbDk="
+        },
+        "nulls" : 1
+      }, {
+        "name" : "`i_color`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "eWVsbG93"
+        },
+        "min" : {
+          "bytes" : "YWxtb25k"
+        },
+        "nulls" : 1
+      }, {
+        "name" : "`i_units`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "VW5rbm93bg=="
+        },
+        "min" : {
+          "bytes" : "Qm94"
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_container`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "VW5rbm93bg=="
+        },
+        "min" : {
+          "bytes" : "VW5rbm93bg=="
+        },
+        "nulls" : 1
+      }, {
+        "name" : "`i_manager_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 100,
+        "min" : 1,
+        "nulls" : 0
+      }, {
+        "name" : "`i_product_name`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "cHJpcHJpcHJpZXNlb3VnaHQ="
+        },
+        "min" : {
+          "bytes" : "YW50aWFibGVhYmxlYXRpb25vdWdodA=="
+        },
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/item_auto/0_0_1.parquet",
+    "length" : 454722,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 452664,
+      "rowCount" : 2993,
+      "hostAffinity" : {
+        "qa-node183.qa.lab" : 1.0,
+        "qa-node182.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : "`i_item_sk`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 17998,
+        "min" : 12001,
+        "nulls" : 0
+      }, {
+        "name" : "`i_item_id`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "QUFBQUFBQUFQUE9DQUFBQQ=="
+        },
+        "min" : {
+          "bytes" : "QUFBQUFBQUFBQUFFQUFBQQ=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_rec_start_date`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : 10161,
+        "min" : 10161,
+        "nulls" : 0
+      }, {
+        "name" : "`i_rec_end_date`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : 11256,
+        "min" : 10891,
+        "nulls" : 997
+      }, {
+        "name" : "`i_item_desc`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "WW91bmcsIG5hdGlvbg=="
+        },
+        "min" : {
+          "bytes" : "QWJpbGl0aWVzIGFwcHJvYWNoLiBBZmZhaXJzIHN0dWR5IG5vdyByZW1hcmthYmxlIGZ1bmRzLiBQb2xpY2llcyBleGVyY2lzZSBjb25zaWRlcmFibGUsIHJlY2VudCA="
+        },
+        "nulls" : 3
+      }, {
+        "name" : "`i_current_price`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 99.96,
+        "min" : 0.09,
+        "nulls" : 3
+      }, {
+        "name" : "`i_wholesale_cost`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 87.36,
+        "min" : 0.02,
+        "nulls" : 4
+      }, {
+        "name" : "`i_brand_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 10016015,
+        "min" : 1001001,
+        "nulls" : 1
+      }, {
+        "name" : "`i_brand`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "dW5pdnVuaXZhbWFsZyAjOQ=="
+        },
+        "min" : {
+          "bytes" : "YW1hbGdhbWFsZyAjMQ=="
+        },
+        "nulls" : 2
+      }, {
+        "name" : "`i_class_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 16,
+        "min" : 1,
+        "nulls" : 1
+      }, {
+        "name" : "`i_class`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "d29tZW5zIHdhdGNo"
+        },
+        "min" : {
+          "bytes" : "YWNjZW50"
+        },
+        "nulls" : 2
+      }, {
+        "name" : "`i_category_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 10,
+        "min" : 1,
+        "nulls" : 3
+      }, {
+        "name" : "`i_category`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "V29tZW4="
+        },
+        "min" : {
+          "bytes" : "Qm9va3M="
+        },
+        "nulls" : 4
+      }, {
+        "name" : "`i_manufact_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 1000,
+        "min" : 1,
+        "nulls" : 3
+      }, {
+        "name" : "`i_manufact`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "cHJpcHJpcHJp"
+        },
+        "min" : {
+          "bytes" : "YWJsZQ=="
+        },
+        "nulls" : 4
+      }, {
+        "name" : "`i_size`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "c21hbGw="
+        },
+        "min" : {
+          "bytes" : "Ti9B"
+        },
+        "nulls" : 4
+      }, {
+        "name" : "`i_formulation`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "eWVsbG93NjI4MjQzMzUyODEzMjY="
+        },
+        "min" : {
+          "bytes" : "MDAwMzgxNnNsYXRlNTQ1NTA4MjQ="
+        },
+        "nulls" : 6
+      }, {
+        "name" : "`i_color`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "eWVsbG93"
+        },
+        "min" : {
+          "bytes" : "YWxtb25k"
+        },
+        "nulls" : 5
+      }, {
+        "name" : "`i_units`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "VW5rbm93bg=="
+        },
+        "min" : {
+          "bytes" : "Qm94"
+        },
+        "nulls" : 4
+      }, {
+        "name" : "`i_container`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "VW5rbm93bg=="
+        },
+        "min" : {
+          "bytes" : "VW5rbm93bg=="
+        },
+        "nulls" : 3
+      }, {
+        "name" : "`i_manager_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 100,
+        "min" : 1,
+        "nulls" : 3
+      }, {
+        "name" : "`i_product_name`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "cHJpcHJpcHJpcHJpb3VnaHQ="
+        },
+        "min" : {
+          "bytes" : "YWJsZWFibGVhYmxlYXRpb25vdWdodA=="
+        },
+        "nulls" : 4
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/item_auto/0_0_3.parquet",
+    "length" : 155212,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 153135,
+      "rowCount" : 995,
+      "hostAffinity" : {
+        "qa-node183.qa.lab" : 1.0,
+        "qa-node182.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : "`i_item_sk`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 17997,
+        "min" : 12003,
+        "nulls" : 0
+      }, {
+        "name" : "`i_item_id`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "QUFBQUFBQUFPUFBEQUFBQQ=="
+        },
+        "min" : {
+          "bytes" : "QUFBQUFBQUFBQUJFQUFBQQ=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_rec_start_date`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : 11257,
+        "min" : 11257,
+        "nulls" : 0
+      }, {
+        "name" : "`i_rec_end_date`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : 0,
+        "min" : 0,
+        "nulls" : 995
+      }, {
+        "name" : "`i_item_desc`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "WW91bmcgaXRlbXMgZ28gaGVyZSBsYXRlciBqYXBhbmVzZSB5ZWFycy4gRm9ybXMgbXVzdCBsb29rIG1vZGVsLCBleHBlcmltZW50"
+        },
+        "min" : {
+          "bytes" : "QWJsZSBmdW5kcyBtdXN0IG5vdCBpbnZlc3RpZ2F0ZSBkaXN0aW5jdCwgc2hvcnQtdGVybSBmb3VuZGF0aW9ucy4gU2FkLCBzb2Z0IGV4YW1wbGVzIGJlbGk="
+        },
+        "nulls" : 3
+      }, {
+        "name" : "`i_current_price`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 99.82,
+        "min" : 0.1,
+        "nulls" : 2
+      }, {
+        "name" : "`i_wholesale_cost`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 80.25,
+        "min" : 0.03,
+        "nulls" : 3
+      }, {
+        "name" : "`i_brand_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 10016014,
+        "min" : 1001001,
+        "nulls" : 3
+      }, {
+        "name" : "`i_brand`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "dW5pdnVuaXZhbWFsZyAjNA=="
+        },
+        "min" : {
+          "bytes" : "YW1hbGdhbWFsZyAjMg=="
+        },
+        "nulls" : 1
+      }, {
+        "name" : "`i_class_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 16,
+        "min" : 1,
+        "nulls" : 3
+      }, {
+        "name" : "`i_class`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "d29tZW5zIHdhdGNo"
+        },
+        "min" : {
+          "bytes" : "YWNjZW50"
+        },
+        "nulls" : 2
+      }, {
+        "name" : "`i_category_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 10,
+        "min" : 1,
+        "nulls" : 2
+      }, {
+        "name" : "`i_category`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "V29tZW4="
+        },
+        "min" : {
+          "bytes" : "Qm9va3M="
+        },
+        "nulls" : 1
+      }, {
+        "name" : "`i_manufact_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 995,
+        "min" : 1,
+        "nulls" : 3
+      }, {
+        "name" : "`i_manufact`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "cHJpcHJpcHJp"
+        },
+        "min" : {
+          "bytes" : "YWJsZQ=="
+        },
+        "nulls" : 2
+      }, {
+        "name" : "`i_size`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "c21hbGw="
+        },
+        "min" : {
+          "bytes" : "Ti9B"
+        },
+        "nulls" : 2
+      }, {
+        "name" : "`i_formulation`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "eWVsbG93NjI4MjQzMzUyODEzMjY="
+        },
+        "min" : {
+          "bytes" : "MDAxNTI2ZHJhYjA5NDk5MzE2OTU="
+        },
+        "nulls" : 1
+      }, {
+        "name" : "`i_color`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "eWVsbG93"
+        },
+        "min" : {
+          "bytes" : "YWxtb25k"
+        },
+        "nulls" : 1
+      }, {
+        "name" : "`i_units`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "VW5rbm93bg=="
+        },
+        "min" : {
+          "bytes" : "Qm94"
+        },
+        "nulls" : 2
+      }, {
+        "name" : "`i_container`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "VW5rbm93bg=="
+        },
+        "min" : {
+          "bytes" : "VW5rbm93bg=="
+        },
+        "nulls" : 1
+      }, {
+        "name" : "`i_manager_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 100,
+        "min" : 1,
+        "nulls" : 1
+      }, {
+        "name" : "`i_product_name`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "cHJpcHJpcHJpYW50aW91Z2h0"
+        },
+        "min" : {
+          "bytes" : "YW50aWFibGVhYmxlYWJsZW91Z2h0"
+        },
+        "nulls" : 2
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/item_auto/0_0_4.parquet",
+    "length" : 157018,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 155043,
+      "rowCount" : 1001,
+      "hostAffinity" : {
+        "qa-node183.qa.lab" : 1.0,
+        "qa-node182.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : "`i_item_sk`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 18000,
+        "min" : 12000,
+        "nulls" : 0
+      }, {
+        "name" : "`i_item_id`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "QUFBQUFBQUFPUFBDQUFBQQ=="
+        },
+        "min" : {
+          "bytes" : "QUFBQUFBQUFBQUFFQUFBQQ=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_rec_start_date`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : 11622,
+        "min" : 11622,
+        "nulls" : 0
+      }, {
+        "name" : "`i_rec_end_date`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : 0,
+        "min" : 0,
+        "nulls" : 1001
+      }, {
+        "name" : "`i_item_desc`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "WW91bmcsIHBvcHVsYXIgYWZmYWlycyB3aWxsIHRhbGsgd2VsbCBvdmVyIGEgY2hpbGRyZW4uIEhhcmRseSA="
+        },
+        "min" : {
+          "bytes" : "QQ=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_current_price`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 99.04,
+        "min" : 0.09,
+        "nulls" : 0
+      }, {
+        "name" : "`i_wholesale_cost`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 80.74,
+        "min" : 0.06,
+        "nulls" : 0
+      }, {
+        "name" : "`i_brand_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 10016017,
+        "min" : 1001001,
+        "nulls" : 0
+      }, {
+        "name" : "`i_brand`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "dW5pdnVuaXZhbWFsZyAjNw=="
+        },
+        "min" : {
+          "bytes" : "YW1hbGdhbWFsZyAjMQ=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_class_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 16,
+        "min" : 1,
+        "nulls" : 0
+      }, {
+        "name" : "`i_class`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "d29tZW5zIHdhdGNo"
+        },
+        "min" : {
+          "bytes" : "YWNjZW50"
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_category_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 10,
+        "min" : 1,
+        "nulls" : 0
+      }, {
+        "name" : "`i_category`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "V29tZW4="
+        },
+        "min" : {
+          "bytes" : "Qm9va3M="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_manufact_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 998,
+        "min" : 1,
+        "nulls" : 0
+      }, {
+        "name" : "`i_manufact`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "cHJpcHJpcHJp"
+        },
+        "min" : {
+          "bytes" : "YWJsZQ=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_size`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "c21hbGw="
+        },
+        "min" : {
+          "bytes" : "Ti9B"
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_formulation`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "eWVsbG93ODQwNjY2OTIyMTI3NjM="
+        },
+        "min" : {
+          "bytes" : "MDAwODk4Mzg3MTY1MG1hcm9vbjk="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_color`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "eWVsbG93"
+        },
+        "min" : {
+          "bytes" : "YWxtb25k"
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_units`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "VW5rbm93bg=="
+        },
+        "min" : {
+          "bytes" : "Qm94"
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_container`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "VW5rbm93bg=="
+        },
+        "min" : {
+          "bytes" : "VW5rbm93bg=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_manager_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 100,
+        "min" : 1,
+        "nulls" : 0
+      }, {
+        "name" : "`i_product_name`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "ZXNlcHJpcHJpZXNlb3VnaHQ="
+        },
+        "min" : {
+          "bytes" : "YWJsZWFibGVhYmxlYWJsZW91Z2h0"
+        },
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/item_auto/0_0_5.parquet",
+    "length" : 4974,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 2999,
+      "rowCount" : 14,
+      "hostAffinity" : {
+        "qa-node183.qa.lab" : 1.0,
+        "qa-node182.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : "`i_item_sk`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 17392,
+        "min" : 12205,
+        "nulls" : 0
+      }, {
+        "name" : "`i_item_id`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "QUFBQUFBQUFOS1BDQUFBQQ=="
+        },
+        "min" : {
+          "bytes" : "QUFBQUFBQUFBSEVEQUFBQQ=="
+        },
+        "nulls" : 0
+      }, {
+        "name" : "`i_rec_start_date`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : 0,
+        "min" : 0,
+        "nulls" : 14
+      }, {
+        "name" : "`i_rec_end_date`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : 11621,
+        "min" : 10891,
+        "nulls" : 8
+      }, {
+        "name" : "`i_item_desc`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "WW91bmcsIHBzeWNob2xvZ2ljYWwgY2FzZXMgaGFuZyBqb2JzOyBvdGhlciB2YXJpZXRpZXMgbXVzdCByZXByZXNlbnQgdA=="
+        },
+        "min" : {
+          "bytes" : "RW50aXJlLCByZWxhdGVkIGludGVyZXN0cyBvYnRhaW4gdHlwaWNhbGx5LiBOYXJyb3cgcGF0aWVudHMg"
+        },
+        "nulls" : 8
+      }, {
+        "name" : "`i_current_price`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 82.97,
+        "min" : 1.89,
+        "nulls" : 6
+      }, {
+        "name" : "`i_wholesale_cost`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 25.65,
+        "min" : 0.34,
+        "nulls" : 8
+      }, {
+        "name" : "`i_brand_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 10014017,
+        "min" : 1002002,
+        "nulls" : 6
+      }, {
+        "name" : "`i_brand`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "dW5pdmFtYWxnYW1hbGcgIzE="
+        },
+        "min" : {
+          "bytes" : "YW1hbGdlZHUgcGFjayAjMg=="
+        },
+        "nulls" : 8
+      }, {
+        "name" : "`i_class_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 14,
+        "min" : 1,
+        "nulls" : 7
+      }, {
+        "name" : "`i_class`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "d29tZW5z"
+        },
+        "min" : {
+          "bytes" : "YXV0b21vdGl2ZQ=="
+        },
+        "nulls" : 6
+      }, {
+        "name" : "`i_category_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 10,
+        "min" : 4,
+        "nulls" : 6
+      }, {
+        "name" : "`i_category`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "V29tZW4="
+        },
+        "min" : {
+          "bytes" : "Qm9va3M="
+        },
+        "nulls" : 6
+      }, {
+        "name" : "`i_manufact_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 958,
+        "min" : 43,
+        "nulls" : 5
+      }, {
+        "name" : "`i_manufact`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "cHJpZXNl"
+        },
+        "min" : {
+          "bytes" : "YWJsZWF0aW9uY2FsbHk="
+        },
+        "nulls" : 5
+      }, {
+        "name" : "`i_size`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "bGFyZ2U="
+        },
+        "min" : {
+          "bytes" : "Ti9B"
+        },
+        "nulls" : 6
+      }, {
+        "name" : "`i_formulation`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "cG93ZGVyOTQzNzQzNzU2MzA2Mzk="
+        },
+        "min" : {
+          "bytes" : "MDBzbGF0ZTc0ODE1ODQyODgyMjA="
+        },
+        "nulls" : 8
+      }, {
+        "name" : "`i_color`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "c21va2U="
+        },
+        "min" : {
+          "bytes" : "bGF3bg=="
+        },
+        "nulls" : 6
+      }, {
+        "name" : "`i_units`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "UG91bmQ="
+        },
+        "min" : {
+          "bytes" : "RG96ZW4="
+        },
+        "nulls" : 6
+      }, {
+        "name" : "`i_container`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "VW5rbm93bg=="
+        },
+        "min" : {
+          "bytes" : "VW5rbm93bg=="
+        },
+        "nulls" : 3
+      }, {
+        "name" : "`i_manager_id`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 60,
+        "min" : 14,
+        "nulls" : 5
+      }, {
+        "name" : "`i_product_name`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "b3VnaHRuIHN0b3VnaHRhbnRpb3VnaHQ="
+        },
+        "min" : {
+          "bytes" : "YWJsZWFudGlhYmxlY2FsbHlvdWdodA=="
+        },
+        "nulls" : 2
+      } ]
+    } ]
+  } ],
+  "directories" : [ ]
+}

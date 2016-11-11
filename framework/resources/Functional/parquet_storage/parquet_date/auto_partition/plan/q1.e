@@ -1,0 +1,1 @@
+.*ParquetGroupScan.*/drill/testdata/parquet_date/auto_partition/item_single_1\.2/0_0_3\.parquet.*numFiles=1.*usedMetadataFile=true.*cacheFileRoot=/drill/testdata/parquet_date/auto_partition/item_single_1\.2.*
