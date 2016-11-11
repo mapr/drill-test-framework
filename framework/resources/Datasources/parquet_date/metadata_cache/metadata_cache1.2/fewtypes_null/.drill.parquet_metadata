@@ -1,0 +1,104 @@
+{
+  "metadata_version" : "v1",
+  "files" : [ {
+    "path" : "/drill/testdata/fewtypes_null_parquet/000000_0",
+    "length" : 2569,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 1724,
+      "rowCount" : 21,
+      "hostAffinity" : {
+        "qa-node183.qa.lab" : 1.0,
+        "qa-node182.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : "`int_col`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : 20,
+        "min" : 1,
+        "nulls" : 5
+      }, {
+        "name" : "`bigint_col`",
+        "primitiveType" : "INT64",
+        "originalType" : null,
+        "max" : 98723980547,
+        "min" : 302,
+        "nulls" : 4
+      }, {
+        "name" : "`date_col`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : 25667,
+        "min" : 9524,
+        "nulls" : 6
+      }, {
+        "name" : "`time_col`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "MjM6NTk6NTkuOTkw"
+        },
+        "min" : {
+          "bytes" : "MDA6MDA6MDA="
+        },
+        "nulls" : 5
+      }, {
+        "name" : "`timestamp_col`",
+        "primitiveType" : "INT96",
+        "originalType" : null,
+        "max" : {
+          "bytes" : "AGo+dQUFAABhayUA"
+        },
+        "min" : {
+          "bytes" : "AKCjOQUFAAA7ZCUA"
+        },
+        "nulls" : 7
+      }, {
+        "name" : "`interval_col`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "UDJZ"
+        },
+        "min" : {
+          "bytes" : "UDEwRFQ5MDAwUw=="
+        },
+        "nulls" : 3
+      }, {
+        "name" : "`varchar_col`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : {
+          "bytes" : "dWl1aWtqaw=="
+        },
+        "min" : {
+          "bytes" : "SU9VZml1b2RzZklVZmpraA=="
+        },
+        "nulls" : 3
+      }, {
+        "name" : "`float_col`",
+        "primitiveType" : "FLOAT",
+        "originalType" : null,
+        "max" : 2.34555238E9,
+        "min" : 23.5,
+        "nulls" : 4
+      }, {
+        "name" : "`double_col`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : 2.22223454324544E12,
+        "min" : 654.4,
+        "nulls" : 3
+      }, {
+        "name" : "`bool_col`",
+        "primitiveType" : "BOOLEAN",
+        "originalType" : null,
+        "max" : true,
+        "min" : false,
+        "nulls" : 4
+      } ]
+    } ]
+  } ],
+  "directories" : [ ]
+}

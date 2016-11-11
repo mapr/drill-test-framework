@@ -1,0 +1,130 @@
+{
+  "metadata_version" : "v1",
+  "files" : [ {
+    "path" : "/drill/testdata/ctas/parquet/pre1.0lineitem_1.2mc/lineitem.parquet",
+    "length" : 2839887,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 2838800,
+      "rowCount" : 60175,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : "`l_orderkey`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_partkey`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_suppkey`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_linenumber`",
+        "primitiveType" : "INT32",
+        "originalType" : null,
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_quantity`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_extendedprice`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_discount`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_tax`",
+        "primitiveType" : "DOUBLE",
+        "originalType" : null,
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_returnflag`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_linestatus`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_shipdate`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_commitdate`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_receiptdate`",
+        "primitiveType" : "INT32",
+        "originalType" : "DATE",
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_shipinstruct`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_shipmode`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      }, {
+        "name" : "`l_comment`",
+        "primitiveType" : "BINARY",
+        "originalType" : "UTF8",
+        "max" : null,
+        "min" : null,
+        "nulls" : null
+      } ]
+    } ]
+  } ],
+  "directories" : [ ]
+}
