@@ -504,8 +504,6 @@ public class TestDriver {
             try {
               Path src = new Path(CWD + "/" + Utils.getDrillTestProperties().get("DRILL_TEST_DATA_DIR") + "/" + datasource.src);
               Path dest = new Path(drillTestData, datasource.dest);
-
-              LOG.debug("Copy " + src + " to " + dest);
               dfsCopy(src, dest, fsMode);
             } catch (IOException e) {
               throw new RuntimeException(e);
@@ -570,6 +568,8 @@ public class TestDriver {
     } else {
       fs = FileSystem.get(conf);
     }
+
+    LOG.debug("Copy " + src + " to " + dest);
 
     if (!fs.exists(dest)) {
       try {
