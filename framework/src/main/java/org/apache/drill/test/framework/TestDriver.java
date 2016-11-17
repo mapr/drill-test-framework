@@ -571,7 +571,7 @@ public class TestDriver {
 
     LOG.debug("Copy " + src + " to " + dest);
 
-    if (!fs.exists(dest)) {
+    if (!fs.exists(new Path(dest+src.getName()))) {
       try {
         FileUtil.copy(localFs, src, fs, dest, false, fs.getConf());
       } catch (FileAlreadyExistsException e) {
