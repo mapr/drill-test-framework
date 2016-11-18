@@ -519,6 +519,11 @@
       "location": "/drill/testdata/tpcds1_hive1dot2_mc_withdate", 
       "writable": true, 
       "defaultInputFormat": "parquet" 
+    },
+    "drill": {
+      "location": "/drill",
+      "writable": true,
+      "defaultInputFormat": "json"
     }
     },
     "formats" : {
