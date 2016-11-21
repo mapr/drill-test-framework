@@ -180,19 +180,19 @@ public class TestDriver {
         drillReportsDir = CWD;
       }
 
-      File drillReportDir = new File(TestDriver.drillReportsDir);
+      File drillReportDir = new File(drillReportsDir);
       FileSystem localFS = FileSystem.getLocal(conf);
       FileSystem DFS = FileSystem.get(conf);
 
       if (!drillReportDir.exists()) {
         if (!drillReportDir.mkdir()) {
-          LOG.debug("Cannot create directory " + TestDriver.drillReportsDir
+          LOG.debug("Cannot create directory " + drillReportsDir
                   + ".  Using current working directory for drill output");
-          TestDriver.drillReportsDir = CWD;
+          drillReportsDir = CWD;
         }
       }
 
-      File reportFile = new File(TestDriver.drillReportsDir + "/apache-drill-" + version + "_" + commitId + "_" +
+      File reportFile = new File(drillReportsDir + "/apache-drill-" + version + "_" + commitId + "_" +
               "report_" + new Date().toString().replace(' ', '_').replace(':','_') + ".json");
 
       BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(reportFile));
