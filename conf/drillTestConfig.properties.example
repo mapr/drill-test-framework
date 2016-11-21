@@ -22,7 +22,8 @@ DRILL_OUTPUT_DIR=drill-output
 ########################################
 # Drill report dir
 ########################################
-DRILL_REPORT_DIR=drill-reports
+DRILL_REPORTS_DIR=drill-reports
+DRILL_REPORTS_DFS_DIR=/drill/reports
 
 ########################################
 # Location of hadoop system drill is 
