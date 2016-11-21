@@ -1,0 +1,16 @@
+54.4514729294	54.4514729294
+49.8493609383	49.8493609383
+41.0176527556	41.0176527556
+null	null
+null	null
+null	null
+null	null
+3.147	3.147
+null	null
+null	null
+null	null
+null	null
+null	null
+null	null
+null	null
+null	null
