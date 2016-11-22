@@ -179,6 +179,9 @@ public class TestDriver {
       if(drillReportsDir == null){
         drillReportsDir = CWD;
       }
+      if(drillReportsDFSDir == null){
+        drillReportsDFSDir = "";
+      }
 
       File drillReportDir = new File(drillReportsDir);
       FileSystem localFS = FileSystem.getLocal(conf);
