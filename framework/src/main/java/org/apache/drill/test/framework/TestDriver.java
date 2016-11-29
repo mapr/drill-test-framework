@@ -223,7 +223,7 @@ public class TestDriver {
       bufferedWriter.close();
 
       // Upload report to DFS if the drillReportsDFSDir variable is set
-      if (!drillReportsDFSDir.isEmpty()){
+      if (drillReportsDFSDir != null){
         FileUtil.copy(localFS, new Path(reportFile.getAbsolutePath()), DFS, new Path (drillReportsDFSDir + "/" + reportFile.getName()), true, false, DFS.getConf());
       }
     }
