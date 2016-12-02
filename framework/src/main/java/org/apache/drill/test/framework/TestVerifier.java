@@ -486,6 +486,8 @@ public class TestVerifier {
     boolean verified = false;
     if (verificationTypes.get(0).equalsIgnoreCase("regex")) {
       verified = matchesAll(actual, expected);
+    } else if (verificationTypes.get(0).equalsIgnoreCase("regex-no-order")) {
+      verified = matchesAllNoOrder(actual, expected);
     } else if (verificationTypes.get(0).equalsIgnoreCase("filter-ratio")) {
       verified = matchAndCompareAll(actual, expected);
     } else {
@@ -512,6 +514,30 @@ public class TestVerifier {
         i = actual.indexOf(matched);
         actual = actual.substring(i + matched.length()).trim();
       } else {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * Check for regex matches.  The patterns can appear in any order in the
+   *  expected results file.
+   * 
+   * @param actual
+   *          string containing the actual results
+   * @param expected
+   *          string containing the expected results
+   * @return true or false to indicate if there is a match
+   */
+  private static boolean matchesAllNoOrder(String actual, String expected) {
+    String[] expectedLines = expected.split("\n");
+    actual = actual.trim();
+    int i = 0;
+    for (String string : expectedLines) {
+      string = string.trim();
+      Matcher matcher = Pattern.compile(string).matcher(actual);
+      if (!matcher.find()) {
         return false;
       }
     }
