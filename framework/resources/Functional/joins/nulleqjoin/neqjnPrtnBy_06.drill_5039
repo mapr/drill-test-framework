@@ -1,0 +1,3 @@
+SELECT t1.col_intrvl_yr, t2.col_intrvl_yr 
+FROM l_tblprtnby_intrvlyrcl t1, r_tblprtnby_intrvlyrcl t2 
+WHERE t1.col_intrvl_yr = t2.col_intrvl_yr OR (t1.col_intrvl_yr IS NULL AND t2.col_intrvl_yr IS NULL);

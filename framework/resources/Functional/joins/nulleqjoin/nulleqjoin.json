@@ -22,6 +22,11 @@
             "mode": "cp",
             "src": "Datasources/join",
             "dest": "join"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/join/crt_tbl_prtntd_tbl.sh",
+            "dest": ""
         }
     ]
 }
