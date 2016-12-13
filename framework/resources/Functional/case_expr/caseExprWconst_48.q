@@ -1,0 +1,1 @@
+SELECT (CASE WHEN (false) THEN null ELSE 1 END) res1, (CASE WHEN (false) THEN null ELSE CAST(0.1 as float) END) res2 FROM (VALUES(1)) test_tbl;
