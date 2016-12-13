@@ -1,0 +1,27 @@
+{
+    "testId": "casexpr",
+    "type": "group",
+    "description": "Test case expression with constants",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.Join",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/join",
+            "dest": "join"
+        }
+    ]
+}

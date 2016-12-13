@@ -1,0 +1,1 @@
+SELECT (CASE WHEN (CASE WHEN true THEN true ELSE false END) THEN true ELSE null END) FROM (VALUES(1)) test_tbl;
