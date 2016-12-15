@@ -151,6 +151,10 @@ public class Utils {
     for (String testDefSource : testDefSources) {
       testDefSource = Utils.getAbsolutePath(testDefSource, "DRILL_TEST_DATA_DIR");
       File testDefSourceFile = new File(testDefSource);
+      if (!testDefSourceFile.exists()) {
+    	  LOG.error("Directory " + testDefSourceFile.getAbsolutePath() + " does not exist!");
+    	  System.exit(-1);
+      }
       List<File> testDefFiles = searchFiles(testDefSourceFile, ".*.json");
       for (File testDefFile : testDefFiles) {
 //        try {
