@@ -1,0 +1,1 @@
+SELECT CAST(columns[0] AS integer) c1, CAST(columns[1] AS BOOLEAN) c2, CAST(columns[2] AS char(2)) c3, CAST(columns[3] AS varchar(64)) c4 FROM `bools.csv`;

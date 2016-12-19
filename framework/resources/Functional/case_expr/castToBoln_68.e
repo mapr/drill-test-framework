@@ -1,0 +1,14 @@
+1	false
+4	false
+6	false
+8	false
+10	false
+12	false
+14	false
+15	false
+18	false
+20	false
+22	false
+24	false
+26	false
+28	false

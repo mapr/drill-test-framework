@@ -1,0 +1,1 @@
+SELECT columns[1], (case WHEN CAST(columns[1] AS BOOLEAN) <> false THEN 'done' else 'not done' end) FROM `bools.csv`;

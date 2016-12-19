@@ -1,0 +1,14 @@
+1	false	a
+4	false	a
+6	false	c
+8	false	b
+10	false	a
+12	false	b
+14	false	b
+15	false	c
+18	false	a
+20	false	a
+22	false	b
+24	false	c
+26	false	a
+28	false	c

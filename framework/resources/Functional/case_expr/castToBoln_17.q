@@ -1,0 +1,1 @@
+SELECT CAST('t' AS BOOLEAN) bln FROM (VALUES(1)) test;

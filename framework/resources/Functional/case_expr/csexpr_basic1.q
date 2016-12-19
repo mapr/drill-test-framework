@@ -1,0 +1,1 @@
+SELECT (CASE WHEN true THEN 0.9999 ELSE 0 end) res FROM (VALUES(1)) foobar;

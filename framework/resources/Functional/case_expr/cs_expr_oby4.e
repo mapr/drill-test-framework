@@ -1,0 +1,10 @@
+0	false
+1	null
+19	true
+134	true
+2461	true
+2540	false
+3764	false
+4487	true
+4631	true
+4705	true
