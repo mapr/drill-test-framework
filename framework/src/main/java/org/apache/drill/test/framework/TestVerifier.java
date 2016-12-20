@@ -485,7 +485,9 @@ public class TestVerifier {
     String actual = new String(Files.readAllBytes(Paths.get(actualOutput)));
     boolean verified = false;
     if (verificationTypes.get(0).equalsIgnoreCase("regex")) {
-      verified = matchesAll(actual, expected);
+      verified = matchesAll(actual, expected, false);
+    } else if (verificationTypes.get(0).equalsIgnoreCase("regex-no-order")) {
+      verified = matchesAll(actual, expected, true);
     } else if (verificationTypes.get(0).equalsIgnoreCase("filter-ratio")) {
       verified = matchAndCompareAll(actual, expected);
     } else {
@@ -500,19 +502,23 @@ public class TestVerifier {
     throw new VerificationException(sb.toString());
   }
 
-  private static boolean matchesAll(String actual, String expected) {
+  private static boolean matchesAll(String actual, String expected,
+                                    boolean noOrder) {
     String[] expectedLines = expected.split("\n");
     actual = actual.trim();
     int i = 0;
     for (String string : expectedLines) {
       string = string.trim();
       Matcher matcher = Pattern.compile(string).matcher(actual);
-      if (matcher.find()) {
+      if (!matcher.find()) {
+        return false;
+      }
+      if (!noOrder) {
         String matched = matcher.group();
         i = actual.indexOf(matched);
         actual = actual.substring(i + matched.length()).trim();
       } else {
-        return false;
+        // do nothing.  check remaining expectedLines
       }
     }
     return true;
