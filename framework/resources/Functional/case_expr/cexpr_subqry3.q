@@ -1,0 +1,7 @@
+SELECT res, (CASE res WHEN 9223372036854775807 THEN true ELSE false END) res1
+FROM
+(   
+    SELECT
+    (CASE WHEN (false) THEN null ELSE CAST(9223372036854775807 as BIGINT) END) res
+    FROM (VALUES(1)) sbqry
+) subquery;

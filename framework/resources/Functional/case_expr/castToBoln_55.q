@@ -1,0 +1,1 @@
+SELECT CAST(columns[0] AS integer) c1, CAST(columns[1] AS BOOLEAN) c2, columns[2] c3, columns[3] c4 FROM `bools.csv` order by CAST(columns[1] AS BOOLEAN),CAST(columns[0] AS int);
