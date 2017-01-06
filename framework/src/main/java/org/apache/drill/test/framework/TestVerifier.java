@@ -486,6 +486,8 @@ public class TestVerifier {
     boolean verified = false;
     if (verificationTypes.get(0).equalsIgnoreCase("regex")) {
       verified = matchesAll(actual, expected);
+    } else if (verificationTypes.get(0).equalsIgnoreCase("regex-no-order")) {
+      verified = matchesAll(actual, expected, false);
     } else if (verificationTypes.get(0).equalsIgnoreCase("filter-ratio")) {
       verified = matchAndCompareAll(actual, expected);
     } else {
@@ -501,18 +503,31 @@ public class TestVerifier {
   }
 
   private static boolean matchesAll(String actual, String expected) {
+    return matchesAll(actual, expected, true);
+  }
+
+  /**
+   * checkOrder is set when the order of the regex patterns in the
+   * expected results file is the same as the order of the patterns
+   * in the actual output.
+   * Set checkOrder to be false if the two orders can be different.
+   */
+  private static boolean matchesAll(String actual, String expected,
+                                    boolean checkOrder) {
     String[] expectedLines = expected.split("\n");
     actual = actual.trim();
     int i = 0;
     for (String string : expectedLines) {
       string = string.trim();
       Matcher matcher = Pattern.compile(string).matcher(actual);
-      if (matcher.find()) {
+      if (!matcher.find()) {
+        return false;
+      }
+      // if checkOrder is false, do nothing.  check remaining expectedLines
+      if (checkOrder) {
         String matched = matcher.group();
         i = actual.indexOf(matched);
         actual = actual.substring(i + matched.length()).trim();
-      } else {
-        return false;
       }
     }
     return true;
