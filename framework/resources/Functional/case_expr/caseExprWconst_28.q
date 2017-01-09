@@ -1,0 +1,1 @@
+SELECT NULLIF(false,true) FROM (VALUES(1)) test_tbl;

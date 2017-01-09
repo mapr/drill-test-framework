@@ -1,0 +1,1 @@
+SELECT (CASE WHEN NULLIF(false,false) THEN true WHEN coalesce(false,false) THEN true ELSE false END) FROM (VALUES(1)) test_tbl;

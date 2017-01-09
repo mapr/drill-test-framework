@@ -1,0 +1,866 @@
+{
+  "metadata_version" : "v2",
+  "columnTypeInfo" : {
+    "i_wholesale_cost" : {
+      "name" : [ "i_wholesale_cost" ],
+      "primitiveType" : "DOUBLE",
+      "originalType" : null
+    },
+    "i_item_desc" : {
+      "name" : [ "i_item_desc" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "i_container" : {
+      "name" : [ "i_container" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "i_manufact_id" : {
+      "name" : [ "i_manufact_id" ],
+      "primitiveType" : "INT32",
+      "originalType" : null
+    },
+    "i_current_price" : {
+      "name" : [ "i_current_price" ],
+      "primitiveType" : "DOUBLE",
+      "originalType" : null
+    },
+    "i_brand_id" : {
+      "name" : [ "i_brand_id" ],
+      "primitiveType" : "INT32",
+      "originalType" : null
+    },
+    "i_manufact" : {
+      "name" : [ "i_manufact" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "i_size" : {
+      "name" : [ "i_size" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "i_item_sk" : {
+      "name" : [ "i_item_sk" ],
+      "primitiveType" : "INT32",
+      "originalType" : null
+    },
+    "i_formulation" : {
+      "name" : [ "i_formulation" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "i_class" : {
+      "name" : [ "i_class" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "i_manager_id" : {
+      "name" : [ "i_manager_id" ],
+      "primitiveType" : "INT32",
+      "originalType" : null
+    },
+    "i_item_id" : {
+      "name" : [ "i_item_id" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "i_rec_start_date" : {
+      "name" : [ "i_rec_start_date" ],
+      "primitiveType" : "INT32",
+      "originalType" : "DATE"
+    },
+    "i_brand" : {
+      "name" : [ "i_brand" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "i_category" : {
+      "name" : [ "i_category" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "i_category_id" : {
+      "name" : [ "i_category_id" ],
+      "primitiveType" : "INT32",
+      "originalType" : null
+    },
+    "i_units" : {
+      "name" : [ "i_units" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "i_rec_end_date" : {
+      "name" : [ "i_rec_end_date" ],
+      "primitiveType" : "INT32",
+      "originalType" : "DATE"
+    },
+    "i_class_id" : {
+      "name" : [ "i_class_id" ],
+      "primitiveType" : "INT32",
+      "originalType" : null
+    },
+    "i_color" : {
+      "name" : [ "i_color" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "i_product_name" : {
+      "name" : [ "i_product_name" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    }
+  },
+  "files" : [ {
+    "path" : "/drill/testdata/item_multidate/0_0_2.parquet",
+    "length" : 179495,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 177144,
+      "rowCount" : 1161,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "i_item_sk" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_item_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_start_date" ],
+        "mxValue" : 10161,
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_end_date" ],
+        "mxValue" : 11256,
+        "nulls" : 0
+      }, {
+        "name" : [ "i_item_desc" ],
+        "nulls" : 4
+      }, {
+        "name" : [ "i_current_price" ],
+        "nulls" : 4
+      }, {
+        "name" : [ "i_wholesale_cost" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_brand_id" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_brand" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_class_id" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_class" ],
+        "nulls" : 5
+      }, {
+        "name" : [ "i_category_id" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_category" ],
+        "nulls" : 4
+      }, {
+        "name" : [ "i_manufact_id" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_manufact" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_size" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_formulation" ],
+        "nulls" : 4
+      }, {
+        "name" : [ "i_color" ],
+        "nulls" : 5
+      }, {
+        "name" : [ "i_units" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_container" ],
+        "mxValue" : "Unknown",
+        "nulls" : 4
+      }, {
+        "name" : [ "i_manager_id" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_product_name" ],
+        "nulls" : 2
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/item_multidate/0_0_9.parquet",
+    "length" : 4881,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 2739,
+      "rowCount" : 11,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "i_item_sk" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_item_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_start_date" ],
+        "mxValue" : 0,
+        "nulls" : 11
+      }, {
+        "name" : [ "i_rec_end_date" ],
+        "mxValue" : 0,
+        "nulls" : 11
+      }, {
+        "name" : [ "i_item_desc" ],
+        "nulls" : 6
+      }, {
+        "name" : [ "i_current_price" ],
+        "nulls" : 7
+      }, {
+        "name" : [ "i_wholesale_cost" ],
+        "nulls" : 6
+      }, {
+        "name" : [ "i_brand_id" ],
+        "nulls" : 4
+      }, {
+        "name" : [ "i_brand" ],
+        "nulls" : 5
+      }, {
+        "name" : [ "i_class_id" ],
+        "nulls" : 4
+      }, {
+        "name" : [ "i_class" ],
+        "nulls" : 6
+      }, {
+        "name" : [ "i_category_id" ],
+        "nulls" : 7
+      }, {
+        "name" : [ "i_category" ],
+        "nulls" : 6
+      }, {
+        "name" : [ "i_manufact_id" ],
+        "nulls" : 7
+      }, {
+        "name" : [ "i_manufact" ],
+        "nulls" : 7
+      }, {
+        "name" : [ "i_size" ],
+        "nulls" : 4
+      }, {
+        "name" : [ "i_formulation" ],
+        "nulls" : 6
+      }, {
+        "name" : [ "i_color" ],
+        "nulls" : 5
+      }, {
+        "name" : [ "i_units" ],
+        "nulls" : 4
+      }, {
+        "name" : [ "i_container" ],
+        "mxValue" : "Unknown",
+        "nulls" : 5
+      }, {
+        "name" : [ "i_manager_id" ],
+        "nulls" : 6
+      }, {
+        "name" : [ "i_product_name" ],
+        "nulls" : 3
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/item_multidate/0_0_1.parquet",
+    "length" : 177985,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 175871,
+      "rowCount" : 1164,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "i_item_sk" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_item_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_start_date" ],
+        "mxValue" : 10161,
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_end_date" ],
+        "mxValue" : 10891,
+        "nulls" : 0
+      }, {
+        "name" : [ "i_item_desc" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_current_price" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_wholesale_cost" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_brand_id" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_brand" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_class_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_class" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_category_id" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_category" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_manufact_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_manufact" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_size" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_formulation" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_color" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_units" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_container" ],
+        "mxValue" : "Unknown",
+        "nulls" : 2
+      }, {
+        "name" : [ "i_manager_id" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_product_name" ],
+        "nulls" : 2
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/item_multidate/0_0_3.parquet",
+    "length" : 179648,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 177590,
+      "rowCount" : 1162,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "i_item_sk" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_item_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_start_date" ],
+        "mxValue" : 10161,
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_end_date" ],
+        "mxValue" : 0,
+        "nulls" : 1162
+      }, {
+        "name" : [ "i_item_desc" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_current_price" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_wholesale_cost" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_brand_id" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_brand" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_class_id" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_class" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_category_id" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_category" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_manufact_id" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_manufact" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_size" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_formulation" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_color" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_units" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_container" ],
+        "mxValue" : "Unknown",
+        "nulls" : 1
+      }, {
+        "name" : [ "i_manager_id" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_product_name" ],
+        "nulls" : 1
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/item_multidate/0_0_4.parquet",
+    "length" : 179061,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 176945,
+      "rowCount" : 1167,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "i_item_sk" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_item_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_start_date" ],
+        "mxValue" : 10892,
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_end_date" ],
+        "mxValue" : 11621,
+        "nulls" : 0
+      }, {
+        "name" : [ "i_item_desc" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_current_price" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_wholesale_cost" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_brand_id" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_brand" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_class_id" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_class" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_category_id" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_category" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_manufact_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_manufact" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_size" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_formulation" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_color" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_units" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_container" ],
+        "mxValue" : "Unknown",
+        "nulls" : 2
+      }, {
+        "name" : [ "i_manager_id" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_product_name" ],
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/item_multidate/0_0_5.parquet",
+    "length" : 181607,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 179439,
+      "rowCount" : 1165,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "i_item_sk" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_item_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_start_date" ],
+        "mxValue" : 11257,
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_end_date" ],
+        "mxValue" : 0,
+        "nulls" : 1165
+      }, {
+        "name" : [ "i_item_desc" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_current_price" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_wholesale_cost" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_brand_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_brand" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_class_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_class" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_category_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_category" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_manufact_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_manufact" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_size" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_formulation" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_color" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_units" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_container" ],
+        "mxValue" : "Unknown",
+        "nulls" : 0
+      }, {
+        "name" : [ "i_manager_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_product_name" ],
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/item_multidate/0_0_7.parquet",
+    "length" : 3580,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 1550,
+      "rowCount" : 3,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "i_item_sk" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_item_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_start_date" ],
+        "mxValue" : 0,
+        "nulls" : 3
+      }, {
+        "name" : [ "i_rec_end_date" ],
+        "mxValue" : 10891,
+        "nulls" : 0
+      }, {
+        "name" : [ "i_item_desc" ],
+        "mxValue" : "Inevitable paintings shall forget more front, mass reasons. Good records u",
+        "nulls" : 2
+      }, {
+        "name" : [ "i_current_price" ],
+        "mxValue" : 1.74,
+        "nulls" : 2
+      }, {
+        "name" : [ "i_wholesale_cost" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_brand_id" ],
+        "mxValue" : 6011007,
+        "nulls" : 2
+      }, {
+        "name" : [ "i_brand" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_class_id" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_class" ],
+        "mxValue" : "mattresses",
+        "nulls" : 2
+      }, {
+        "name" : [ "i_category_id" ],
+        "mxValue" : 6,
+        "nulls" : 2
+      }, {
+        "name" : [ "i_category" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_manufact_id" ],
+        "mxValue" : 986,
+        "nulls" : 2
+      }, {
+        "name" : [ "i_manufact" ],
+        "mxValue" : "callyeingn st",
+        "nulls" : 2
+      }, {
+        "name" : [ "i_size" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_formulation" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_color" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_units" ],
+        "mxValue" : "Bundle",
+        "nulls" : 2
+      }, {
+        "name" : [ "i_container" ],
+        "mxValue" : "Unknown",
+        "nulls" : 0
+      }, {
+        "name" : [ "i_manager_id" ],
+        "mxValue" : 5,
+        "nulls" : 2
+      }, {
+        "name" : [ "i_product_name" ],
+        "nulls" : 3
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/item_multidate/0_0_6.parquet",
+    "length" : 180054,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 177936,
+      "rowCount" : 1162,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "i_item_sk" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_item_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_start_date" ],
+        "mxValue" : 11622,
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_end_date" ],
+        "mxValue" : 0,
+        "nulls" : 1162
+      }, {
+        "name" : [ "i_item_desc" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_current_price" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_wholesale_cost" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_brand_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_brand" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_class_id" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_class" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_category_id" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_category" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_manufact_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_manufact" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_size" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_formulation" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_color" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_units" ],
+        "nulls" : 1
+      }, {
+        "name" : [ "i_container" ],
+        "mxValue" : "Unknown",
+        "nulls" : 2
+      }, {
+        "name" : [ "i_manager_id" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_product_name" ],
+        "nulls" : 1
+      } ]
+    } ]
+  }, {
+    "path" : "/drill/testdata/item_multidate/0_0_8.parquet",
+    "length" : 4241,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 2127,
+      "rowCount" : 6,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "i_item_sk" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_item_id" ],
+        "nulls" : 0
+      }, {
+        "name" : [ "i_rec_start_date" ],
+        "mxValue" : 0,
+        "nulls" : 6
+      }, {
+        "name" : [ "i_rec_end_date" ],
+        "mxValue" : 11256,
+        "nulls" : 0
+      }, {
+        "name" : [ "i_item_desc" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_current_price" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_wholesale_cost" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_brand_id" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_brand" ],
+        "nulls" : 4
+      }, {
+        "name" : [ "i_class_id" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_class" ],
+        "nulls" : 4
+      }, {
+        "name" : [ "i_category_id" ],
+        "nulls" : 2
+      }, {
+        "name" : [ "i_category" ],
+        "mxValue" : "Jewelry",
+        "nulls" : 5
+      }, {
+        "name" : [ "i_manufact_id" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_manufact" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_size" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_formulation" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_color" ],
+        "nulls" : 4
+      }, {
+        "name" : [ "i_units" ],
+        "mxValue" : "Ton",
+        "nulls" : 5
+      }, {
+        "name" : [ "i_container" ],
+        "mxValue" : "Unknown",
+        "nulls" : 2
+      }, {
+        "name" : [ "i_manager_id" ],
+        "nulls" : 3
+      }, {
+        "name" : [ "i_product_name" ],
+        "nulls" : 4
+      } ]
+    } ]
+  } ],
+  "directories" : [ ]
+}

@@ -1,0 +1,1 @@
+SELECT CAST('no' AS BOOLEAN) bln FROM (VALUES(1)) test;

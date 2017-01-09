@@ -1,0 +1,29 @@
+{
+  "metadata_version" : "v2",
+  "columnTypeInfo" : {
+    "EXPR$0" : {
+      "name" : [ "EXPR$0" ],
+      "primitiveType" : "INT32",
+      "originalType" : null
+    }
+  },
+  "files" : [ {
+    "path" : "/drill/testdata/mc1.6/date_nulls/0_0_0.parquet",
+    "length" : 140,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 35,
+      "rowCount" : 210042,
+      "hostAffinity" : {
+        "qa-node182.qa.lab" : 1.0,
+        "qa-node183.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "EXPR$0" ],
+        "mxValue" : 0,
+        "nulls" : 210042
+      } ]
+    } ]
+  } ],
+  "directories" : [ ]
+}

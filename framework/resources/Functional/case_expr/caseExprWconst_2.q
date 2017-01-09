@@ -1,0 +1,1 @@
+SELECT * FROM (VALUES((coalesce(1,0) IS NULL))) test_tbl;

@@ -1,0 +1,98 @@
+{
+  "metadata_version" : "v2",
+  "columnTypeInfo" : {
+    "varchar_col" : {
+      "name" : [ "varchar_col" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "timestamp_col" : {
+      "name" : [ "timestamp_col" ],
+      "primitiveType" : "INT96",
+      "originalType" : null
+    },
+    "time_col" : {
+      "name" : [ "time_col" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "bigint_col" : {
+      "name" : [ "bigint_col" ],
+      "primitiveType" : "INT64",
+      "originalType" : null
+    },
+    "date_col" : {
+      "name" : [ "date_col" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "int_col" : {
+      "name" : [ "int_col" ],
+      "primitiveType" : "INT32",
+      "originalType" : null
+    },
+    "interval_col" : {
+      "name" : [ "interval_col" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8"
+    },
+    "bool_col" : {
+      "name" : [ "bool_col" ],
+      "primitiveType" : "BOOLEAN",
+      "originalType" : null
+    },
+    "double_col" : {
+      "name" : [ "double_col" ],
+      "primitiveType" : "DOUBLE",
+      "originalType" : null
+    },
+    "float_col" : {
+      "name" : [ "float_col" ],
+      "primitiveType" : "FLOAT",
+      "originalType" : null
+    }
+  },
+  "files" : [ {
+    "path" : "/drill/testdata/temp/abc.parquet",
+    "length" : 1149285,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 1148340,
+      "rowCount" : 210042,
+      "hostAffinity" : {
+        "qa-node190.qa.lab" : 1.0,
+        "qa-node191.qa.lab" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "int_col" ],
+        "nulls" : 50010
+      }, {
+        "name" : [ "bigint_col" ],
+        "nulls" : 40008
+      }, {
+        "name" : [ "date_col" ]
+      }, {
+        "name" : [ "time_col" ]
+      }, {
+        "name" : [ "timestamp_col" ],
+        "nulls" : 70014
+      }, {
+        "name" : [ "interval_col" ]
+      }, {
+        "name" : [ "varchar_col" ]
+      }, {
+        "name" : [ "float_col" ],
+        "nulls" : 40008
+      }, {
+        "name" : [ "double_col" ],
+        "nulls" : 30006
+      }, {
+        "name" : [ "bool_col" ],
+        "nulls" : 40008
+      } ]
+    } ]
+  } ],
+  "directories" : [ ],
+  "drillVersion" : "1.9.0-SNAPSHOT",
+  "isDateCorrect" : true
+}

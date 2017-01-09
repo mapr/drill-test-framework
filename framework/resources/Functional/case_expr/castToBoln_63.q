@@ -1,0 +1,1 @@
+SELECT count(CAST(columns[0] AS integer)) count_c1, CAST(columns[1] AS BOOLEAN) c2 FROM `bools.csv` GROUP BY CAST(columns[1] AS BOOLEAN) ORDER BY CAST(columns[1] AS BOOLEAN);

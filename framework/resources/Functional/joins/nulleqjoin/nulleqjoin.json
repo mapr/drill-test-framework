@@ -1,0 +1,32 @@
+{
+    "testId": "nulleqjoin",
+    "type": "group",
+    "description": "Test null equality join queries",
+    "submit-type": "jdbc",
+    "categories": [
+        "smoke"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.Join",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/join",
+            "dest": "join"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/join/crt_tbl_prtntd_tbl.sh",
+            "dest": ""
+        }
+    ]
+}

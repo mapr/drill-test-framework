@@ -1,0 +1,1 @@
+SELECT (res1 = 22/09/2016) res2 FROM (SELECT (CASE WHEN (false) THEN null ELSE 22/09/2016 END) res1 FROM (VALUES(1)) sbqry) test_tbl;

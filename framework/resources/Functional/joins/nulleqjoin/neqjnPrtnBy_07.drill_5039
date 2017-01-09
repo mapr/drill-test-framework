@@ -1,0 +1,3 @@
+SELECT t1.col_intrvl_day, t2.col_intrvl_day 
+FROM l_tblprtnby_intrvldycl t1, r_tblprtnby_intrvldycl t2 
+WHERE t1.col_intrvl_day = t2.col_intrvl_day OR (t1.col_intrvl_day IS NULL AND t2.col_intrvl_day IS NULL);

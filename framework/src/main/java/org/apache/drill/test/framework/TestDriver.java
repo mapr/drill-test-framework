@@ -27,23 +27,21 @@ import org.apache.drill.test.framework.TestVerifier.TestStatus;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.FileUtil;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.mapred.FileAlreadyExistsException;
 import org.apache.log4j.Logger;
 import org.ojai.Document;
 import org.ojai.json.Json;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Types;
 import java.sql.DatabaseMetaData;
 
@@ -55,13 +53,14 @@ public class TestDriver {
   protected static Map<String, String> drillProperties = Utils
       .getDrillTestProperties();
   public static final String drillOutputDirName = drillProperties.get("DRILL_OUTPUT_DIR");
-  public static String drillReportDirName = drillProperties.get("DRILL_REPORT_DIR");
+  public static String drillReportsDir = drillProperties.get("DRILL_REPORTS_DIR");
+  public static String drillReportsDFSDir = drillProperties.get("DRILL_REPORTS_DFS_DIR");
   private String restartDrillScript = drillProperties
       .get("RESTART_DRILL_SCRIPT");
   private String ipAddressPlugin = drillProperties
       .get("DRILL_STORAGE_PLUGIN_SERVER");
   private static final String CWD = System.getProperty("user.dir");
-  private String drillTestData = drillProperties.get("DRILL_TESTDATA");
+  private static String drillTestData = drillProperties.get("DRILL_TESTDATA");
   private String fsMode = drillProperties.get("FS_MODE");
   private Connection connection = null;
   private ConnectionPool connectionPool = null;
@@ -175,33 +174,39 @@ public class TestDriver {
   }
 
   public void generateReports(List<DrillTest> tests, int iteration) {
+
     try{
-      if(drillReportDirName == null){
-        drillReportDirName = CWD;
+      if(drillReportsDir == null){
+        drillReportsDir = CWD;
       }
-      File drillReportDir = new File(drillReportDirName);
+
+      File drillReportDir = new File(drillReportsDir);
+      FileSystem localFS = FileSystem.getLocal(conf);
+      FileSystem DFS = FileSystem.get(conf);
+
       if (!drillReportDir.exists()) {
         if (!drillReportDir.mkdir()) {
-          LOG.debug("Cannot create directory " + drillReportDirName
+          LOG.debug("Cannot create directory " + drillReportsDir
                   + ".  Using current working directory for drill output");
-          drillReportDirName = CWD;
+          drillReportsDir = CWD;
         }
       }
-      File reportFile = new File(drillReportDirName + "/" + version + "_" + commitId + "." + 
+
+      File reportFile = new File(drillReportsDir + "/apache-drill-" + version + "_" + commitId + "_" +
               "report_" + new Date().toString().replace(' ', '_').replace(':','_') + ".json");
+
       BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(reportFile));
       Document document;
       for (DrillTest test : tests) {
         document = Json.newDocument();
         document.set("_id", test.getTestId()+ "_" + new File(test.getInputFile()).getName() + "_" + test.getCloneId() + "_" + iteration);
-        document.set("testId", test.getTestId());
-        document.set("queryFilepath", test.getInputFile());
+        document.set("queryFilepath", test.getInputFile().substring(test.getInputFile().indexOf("resources/")+10));
         String query = test.getQuery();
         if(query != null){
-          query.replaceAll("\n", "");	
+          query.replaceAll("\n", "");
         }
         document.set("query", query);
-        document.set("result", test.getTestStatus().toString());
+        document.set("status", test.getTestStatus().toString());
         if(test.getTestStatus().equals(TestStatus.EXECUTION_FAILURE) || test.getTestStatus().equals(TestStatus.VERIFICATION_FAILURE)) {
           document.set("errorMessage", test.getException().toString().replaceAll("\n",""));
         }else{
@@ -213,8 +218,14 @@ public class TestDriver {
         bufferedWriter.write(document.toString());
         bufferedWriter.newLine();
       }
+
       bufferedWriter.flush();
       bufferedWriter.close();
+
+      // Upload report to DFS if the drillReportsDFSDir variable is set
+      if (drillReportsDFSDir != null){
+        FileUtil.copy(localFS, new Path(reportFile.getAbsolutePath()), DFS, new Path (drillReportsDFSDir + "/" + reportFile.getName()), true, false, DFS.getConf());
+      }
     }
     catch(Exception e){
       e.printStackTrace();
@@ -501,9 +512,9 @@ public class TestDriver {
           @Override
           public void run() {
             try {
-              Path src = new Path(CWD + "/" + Utils.getDrillTestProperties().get("DRILL_TEST_DATA_DIR"), datasource.src);
+              Path src = new Path(CWD + "/" + Utils.getDrillTestProperties().get("DRILL_TEST_DATA_DIR") + "/" + datasource.src);
               Path dest = new Path(drillTestData, datasource.dest);
-              hdfsCopy(src, dest, false, fsMode);
+              dfsCopy(src, dest, fsMode);
             } catch (IOException e) {
               throw new RuntimeException(e);
             }
@@ -555,34 +566,41 @@ public class TestDriver {
       }
     }
   }
-  
 
-  private static void hdfsCopy(Path src, Path dest, boolean overWrite, String fsMode)
-      throws IOException {
-    LOG.debug("Copy " + src + " to " + dest);
+  private static void dfsCopy(Path src, Path dest, String fsMode)
+          throws IOException {
+
     FileSystem fs;
+    FileSystem localFs = FileSystem.getLocal(conf);
+
     if (fsMode.equals(LOCALFS)) {
       fs = FileSystem.getLocal(conf);
     } else {
       fs = FileSystem.get(conf);
     }
-    FileSystem localFs = FileSystem.getLocal(conf);
-    if (localFs.getFileStatus(src).isDir()) {
-      for (FileStatus file : localFs.listStatus(src)) {
-        Path newSrc = file.getPath();
-        Path newDest = new Path(dest, newSrc.getName());
-        hdfsCopy(file.getPath(), newDest, overWrite, fsMode);
+
+    try {
+      if (localFs.getFileStatus(src).isDirectory()) {
+        for (FileStatus file : localFs.listStatus(src)) {
+          Path srcChild = file.getPath();
+          Path newDest = new Path(dest + "/" + srcChild.getName());
+          dfsCopy(srcChild, newDest, fsMode);
+        }
+      } else {
+        if (!fs.exists(dest.getParent())) {
+          fs.mkdirs(dest.getParent());
+        }
+        if (!fs.exists(dest)) {
+          FileUtil.copy(localFs, src, fs, dest, false, fs.getConf());
+          LOG.debug("Copying file " + src + " to " + dest);
+        } else {
+          LOG.debug("File " + src + " already exists as " + dest);
+        }
       }
-    } else if (!fs.exists(dest) || overWrite) {
-      try {
-        fs.copyFromLocalFile(false, overWrite, src, dest);
-      } catch (FileAlreadyExistsException e) {
-    	LOG.debug("The source file " + src
-    	          + " already exists in destination.  Skipping the copy.");
-      }
-    } else {
-      LOG.debug("The source file " + src
-          + " already exists in destination.  Skipping the copy.");
+    } catch (FileAlreadyExistsException e) {
+      LOG.debug("File " + src + " already exists as " + dest);
+    } catch (IOException e) {
+      LOG.debug("File " + src + " already exists as " + dest);
     }
   }
 

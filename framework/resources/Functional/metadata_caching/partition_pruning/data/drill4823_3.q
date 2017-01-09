@@ -1,0 +1,1 @@
+select  '/'||dir0||'/'||dir1||'/'||dir2||'/'||dir3||'/'||dir4 , count(*) from ps_5level WHERE ('/'||dir0||'/'||dir1||'/'||dir2||'/'||dir3||'/'||dir4)  IN ('/2000/q1/jan/1/1.0','/2000/q2/jan/1/1.0', '/2000/q1/jan/1/2.0', '/2000/q1/jan/1/3.0', '/2000/q2/jan/2/4.0', '/2000/q1/jan/5/1.0', '/2000/q2/feb/1') group by   '/'||dir0||'/'||dir1||'/'||dir2||'/'||dir3||'/'||dir4 order by 1;
