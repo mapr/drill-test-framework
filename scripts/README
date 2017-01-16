@@ -1,0 +1,14 @@
+To run tests we just need run "run-scripts.sh" from this directory (example: bash run-scripts.sh).
+
+Note: We should run script only from this directopry (TEST_FRAMEWORK_HOME/scripts/). Script depends of current address.
+
+Note: If you have situation when the most of tests fall with with different random errors (especially if you run tests more then 1 time), please check DRILL_HOME/conf/drill-override.conf and DRILL_HOME/conf/drill-env.sh.
+
+To run this tests we need to make "ssh root@HOSTNAME" to all nodes without password to make restarting of drillbits.
+
+Information about single test we can see in TEST_FRAMEWORK_HOME/scripts/logs/ directory. Log file is named as a test-script.
+All errors we can see in $TEST_FRAMEWORK_HOME/scripts/logs/fails.log file.
+
+Progress of testing and summary we can see in output of screen and in  TEST_FRAMEWORK_HOME/scripts/results/result.log file
+
+Note: change_system_property_by_any_user test uses user "user1" with password "user1". We should change user (not admin) or password if there are different user in cluster.
