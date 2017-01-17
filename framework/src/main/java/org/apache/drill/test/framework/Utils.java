@@ -46,6 +46,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
@@ -582,4 +583,25 @@ public class Utils {
       throw e;
 	}
   }
+
+  /**
+   * Parses json string to get the node for a specified key
+   * 
+   * @param jsonString
+   *          json string to be parsed
+   * @param key
+   *          key for the value to be determined
+   * @return JsonNode
+   * @throws IOException if jsonString is not valid
+   */
+  public static JsonNode getJsonValue(String jsonString, String key)
+        throws IOException {
+        ObjectMapper oM = new ObjectMapper();
+        JsonNode rootNode = oM.readTree(jsonString);
+        // key has format key1.key2.key3
+        // change to format /key1/key2/key3
+        String ptrExpr = "/" + key.replace(".","/");
+        return rootNode.at(ptrExpr);
+  }
+
 }
