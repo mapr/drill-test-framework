@@ -33,6 +33,11 @@
         "dest": "DRILL-4735" 
         },
         {
+        "mode": "cp",
+        "src": "Datasources/parquet_storage/DRILL-4759.gz.parquet",
+        "dest": "DRILL-4759.gz.parquet"
+        },
+        {
             "mode": "cp",
             "src": "Datasources/tpch-multi",
             "dest": "parquet_storage/tpch-multi"
