@@ -1,0 +1,2 @@
+-- keep partition 1, 2, 3, 5.  count is 11976.
+explain plan for select count(*) from orders_parts where time_id is not null;

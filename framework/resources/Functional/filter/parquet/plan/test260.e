@@ -1,0 +1,9 @@
+Scan.*path=/drill/testdata/filter/orders_parts_auto/0_0_6.parquet.*numFiles=9.*\n
+Scan.*path=/drill/testdata/filter/orders_parts_auto/0_0_7.parquet.*numFiles=9.*\n
+Scan.*path=/drill/testdata/filter/orders_parts_auto/0_0_8.parquet.*numFiles=9.*\n
+Scan.*path=/drill/testdata/filter/orders_parts_auto/0_0_9.parquet.*numFiles=9.*\n
+Scan.*path=/drill/testdata/filter/orders_parts_auto/0_0_10.parquet.*numFiles=9.*\n
+Scan.*path=/drill/testdata/filter/orders_parts_auto/0_0_11.parquet.*numFiles=9.*\n
+Scan.*path=/drill/testdata/filter/orders_parts_auto/0_0_12.parquet.*numFiles=9.*\n
+Scan.*path=/drill/testdata/filter/orders_parts_auto/0_0_13.parquet.*numFiles=9.*\n
+Scan.*path=/drill/testdata/filter/orders_parts_auto/0_0_14.parquet.*numFiles=9.*\n

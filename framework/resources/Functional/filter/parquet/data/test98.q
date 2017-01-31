@@ -1,0 +1,2 @@
+-- keep partition 1, 5.  overlapping ranges.  count is 4500.
+select count(*) from orders_parts where (int_id > -3000 and int_id < -1999) or (bigint_id > -2500 and bigint_id < -1499) or (float_id > -2000.0 and float_id < -999.0) or (double_id > -1500.0 and double_id < -499.0) or (date_id > '2042-10-07' and date_id < '2045-07-04') or (timestamp_id > '2016-10-09 21:56:38.986' and timestamp_id < '2016-10-10 14:37:38.986') or (time_id > '04:14:14.827' and time_id < '04:30:55.827');
