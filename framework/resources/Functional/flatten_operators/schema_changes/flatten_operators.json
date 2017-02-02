@@ -26,6 +26,11 @@
           "mode": "cp",
           "src": "Datasources/flatten_operators/schema_changes",
           "dest": "flatten_operators/schema_changes/schema_changes"
+        },
+        {
+          "mode": "cp",
+          "src": "Datasources/flatten_operators/drill-5237",
+          "dest": "flatten_operators/schema_changes/drill-5237"
         }
     ]
 }
