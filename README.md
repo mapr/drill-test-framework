@@ -131,6 +131,11 @@ Example:
        Use this option to provide the usage of the command, which includes additional options
 </code></pre>
 
+### Special handling for Drill version in regex based baseline verification
+
+The Drill version in a regex based baseline file can be substituted with "{DRILL_VERSION}". 
+At runtime, it will be replaced with actual Drill version and verified against the running version.
+
 ### Special handling for order-by tests
 
 The Test Framework is able to verify the order in which rows are returned for
