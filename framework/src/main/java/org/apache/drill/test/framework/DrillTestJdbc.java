@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import org.apache.drill.test.framework.TestCaseModeler.TestMatrix;
 import org.apache.drill.test.framework.TestVerifier.TestStatus;
 import org.apache.drill.test.framework.TestVerifier.VerificationException;
+import org.apache.drill.test.framework.TestVerifier.OrderbyException;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
@@ -103,9 +104,17 @@ public class DrillTestJdbc implements DrillTest {
       testVerifier = new TestVerifier(columnTypes, query, columnLabels, matrix.verificationTypes);
       if (query.startsWith("explain") || matrix.verificationTypes.get(0).equalsIgnoreCase("regex") ||
           matrix.verificationTypes.get(0).equalsIgnoreCase("regex-no-order") ||
+               // for explain plans where the patterns may match in a different order than
+               // specified in the expected results file
           matrix.verificationTypes.get(0).equalsIgnoreCase("filter-ratio")) {
+               // special verification method for statistics feature implemented in
+               // Drill 1.9 where two steps in the explain plan have to be
+               // evaluated together
         setTestStatus(testVerifier.verifyTextPlan(modeler.expectedFilename, outputFilename));
+      } else if (matrix.verificationTypes.get(0).equalsIgnoreCase("text") ) {
+        setTestStatus(testVerifier.verifyText(modeler.expectedFilename, outputFilename));
       } else {
+        // "in-memory"
         setTestStatus(testVerifier.verifyResultSet(modeler.expectedFilename, outputFilename));
       }
       
@@ -115,6 +124,16 @@ public class DrillTestJdbc implements DrillTest {
       }
     } catch (VerificationException e) {
       fail(TestStatus.VERIFICATION_FAILURE, e);
+    } catch (OrderbyException e) {
+      // check if test is white-listed, in which case the orderby clause is not validated
+      if (!Utils.isOrderbyWhitelist(modeler.queryFilename)) {
+        // test is not white-listed, so the orderby clause needs to be validated
+        fail(TestStatus.ORDERBY_FAILURE, e);
+      } else {
+        // test is white-listed, so the orderby clause is not validated, and is skipped
+        // pass the test for now until the orderby clause can be validated
+        setTestStatus(TestStatus.PASS);
+      }
     } catch (Exception e) {
       fail(TestStatus.EXECUTION_FAILURE, e);
 	} finally {

@@ -98,6 +98,8 @@ public class DrillTestScript implements DrillTest {
         break;
       case 5:
     	setTestStatus(TestStatus.CANCELED);
+      case 6:
+    	setTestStatus(TestStatus.ORDERBY_FAILURE);
       default:
         setTestStatus(TestStatus.EXECUTION_FAILURE);
       }

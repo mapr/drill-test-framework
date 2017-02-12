@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import org.apache.drill.test.framework.TestCaseModeler.TestMatrix;
 import org.apache.drill.test.framework.TestVerifier.TestStatus;
 import org.apache.drill.test.framework.TestVerifier.VerificationException;
+import org.apache.drill.test.framework.TestVerifier.OrderbyException;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
@@ -84,6 +85,8 @@ public class DrillTestOdbc implements DrillTest{
           setTestStatus(testVerifier.verifyResultSet(modeler.expectedFilename, outputFilename));
     	} catch (VerificationException e) {
     	  fail(TestStatus.VERIFICATION_FAILURE, e);
+    	} catch (OrderbyException e) {
+    	  fail(TestStatus.ORDERBY_FAILURE, e);
     	};
         break;
       case 1:
@@ -100,6 +103,8 @@ public class DrillTestOdbc implements DrillTest{
         break;
       case 5:
     	setTestStatus(TestStatus.CANCELED);
+      case 6:
+    	setTestStatus(TestStatus.ORDERBY_FAILURE);
       default:
         setTestStatus(TestStatus.EXECUTION_FAILURE);
       }

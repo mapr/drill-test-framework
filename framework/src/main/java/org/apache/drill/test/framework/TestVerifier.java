@@ -62,7 +62,7 @@ public class TestVerifier {
 
   public enum TestStatus {
     PENDING, RUNNING, PASS, EXECUTION_FAILURE, VERIFICATION_FAILURE, ORDER_MISMATCH, TIMEOUT,
-    CANCELED
+    CANCELED, ORDERBY_FAILURE
   };
 
   public TestVerifier(List<Integer> types, String query, List<String> columnLabels, List<String> verificationType) {
@@ -70,6 +70,9 @@ public class TestVerifier {
     this.query = query;
     this.columnLabels = columnLabels;
     this.verificationTypes = verificationType;
+    if (verificationType.get(0).equalsIgnoreCase("text")) {
+      this.checkType = false;
+    }
   }
 
   public TestVerifier() {
@@ -90,7 +93,7 @@ public class TestVerifier {
    */
   public TestStatus verifySqllineResult(String expectedOutput,
       String actualOutput, boolean verifyOrderBy) throws IOException, VerificationException,
-      													 IllegalAccessException {
+      													 IllegalAccessException, OrderbyException {
     String cleanedUpFile = cleanUpSqllineOutputFile(actualOutput);
     return verifyResultSet(expectedOutput, cleanedUpFile, verifyOrderBy);
   }
@@ -128,7 +131,7 @@ public class TestVerifier {
    * @throws Exception
    */
   public TestStatus verifyResultSet(String expectedOutput, String actualOutput) 
-		  	throws IllegalAccessException, IOException, VerificationException {
+		  	throws IllegalAccessException, IOException, VerificationException, OrderbyException {
     return verifyResultSet(expectedOutput, actualOutput, false);
   }
 
@@ -146,7 +149,7 @@ public class TestVerifier {
    * @throws Exception
    */
   public TestStatus verifyResultSet(String expectedOutput, String actualOutput, boolean verifyOrderBy) 
-		  			throws IOException, VerificationException, IllegalAccessException {
+		  			throws IOException, VerificationException, IllegalAccessException, OrderbyException {
     if (testStatus == TestStatus.EXECUTION_FAILURE 
     	|| testStatus == TestStatus.CANCELED) {
       return testStatus;
@@ -540,7 +543,7 @@ public class TestVerifier {
    */
   public TestStatus verifyResultSetOrders(String filename,
       List<String> columnLabels, Map<String, String> orderByColumns)
-    throws IOException, VerificationException, IllegalAccessException {
+    throws IOException, VerificationException, IllegalAccessException, OrderbyException {
     loadFromFileToMap(filename, true);
     List<IndexAndOrder> columnIndexAndOrder = getColumnIndexAndOrderList(
         columnLabels, orderByColumns, true);
@@ -548,7 +551,7 @@ public class TestVerifier {
     // then skip this part of the verification.
     if (columnIndexAndOrder == null) {
       LOG.debug("skipping order verification");
-      return TestStatus.PASS;
+      throw new OrderbyException("Order mismatch ");
     }
     if (!isOrdered(columnIndexAndOrder, orderByColumns)) {
       LOG.info("\nOrder mismatch in actual result set.");
@@ -558,7 +561,7 @@ public class TestVerifier {
   }
 
   private Map<Integer, String> getColumnIndexAndOrder(
-      List<String> columnLabels, Map<String, String> orderByColumns) {
+      List<String> columnLabels, Map<String, String> orderByColumns) throws OrderbyException {
     List<IndexAndOrder> result = getColumnIndexAndOrderList(columnLabels,
                                                             orderByColumns, false);
     if (result == null) {
@@ -586,7 +589,7 @@ public class TestVerifier {
    */
   private List<IndexAndOrder> getColumnIndexAndOrderList(
       List<String> columnLabels, Map<String, String> orderByColumns,
-      boolean checkForFields) {
+      boolean checkForFields) throws OrderbyException {
     List<IndexAndOrder> columnIndexAndOrder = new ArrayList<IndexAndOrder>();
     List<Integer> indicesOfOrderByColumns = getIndicesOfOrderByColumns(
         columnLabels, orderByColumns, checkForFields);
@@ -603,7 +606,7 @@ public class TestVerifier {
   }
 
   private List<Integer> getIndicesOfOrderByColumns(
-      List<String> columnLabels, Map<String, String> orderByColumns) {
+      List<String> columnLabels, Map<String, String> orderByColumns) throws OrderbyException {
     return getIndicesOfOrderByColumns(columnLabels, orderByColumns, false);
   }
 
@@ -621,7 +624,7 @@ public class TestVerifier {
   private List<Integer> getIndicesOfOrderByColumns(
       List<String> columnLabels,
       Map<String, String> orderByColumns,
-      boolean checkForFields) {
+      boolean checkForFields) throws OrderbyException {
     List<Integer> indices = new ArrayList<Integer>();
     for (Map.Entry<String, String> entry : orderByColumns.entrySet()) {
       String entryKey = entry.getKey();
@@ -631,10 +634,10 @@ public class TestVerifier {
       }
       // verify that each order by column is present in the result set by
       // checking columnLabels, which represents the columns in the result set.
-      // if an order by column is not in the result set, return null.
+      // if an order by column is not in the result set, throw OrderbyException
       int index = columnLabels.indexOf(entryKey);
       if (index < 0) {
-        return null;
+        throw new OrderbyException ("Order by key " + entryKey + " is not projected.");
       }
       indices.add(index);
     }
@@ -832,6 +835,23 @@ public class TestVerifier {
     return true;
   }
 
+  public TestStatus verifyText(String expectedOutput,
+      String actualOutput) throws IOException, VerificationException {
+    if (testStatus == TestStatus.EXECUTION_FAILURE
+       || testStatus == TestStatus.CANCELED) {
+      return testStatus;
+    }
+    String expected = new String(Files.readAllBytes(Paths.get(expectedOutput)));
+    String actual = new String(Files.readAllBytes(Paths.get(actualOutput)));
+    if (!expected.equals(actual)) {
+      StringBuilder sb = new StringBuilder();
+      sb.append ("\nExpected and Actual output are different.\n");
+      throw new VerificationException(sb.toString());
+    } else {
+      return TestStatus.PASS;
+    }
+  }
+
   /**
    * Create a map containing the names of the columns in the order-by clause and
    * whether they are being ordered in ascending or descending order.
@@ -912,6 +932,13 @@ public class TestVerifier {
   public static class VerificationException extends Exception {
 
     public VerificationException(String message) {
+      super(message);
+    }
+  }
+
+  public static class OrderbyException extends Exception {
+
+    public OrderbyException(String message) {
       super(message);
     }
   }

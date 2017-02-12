@@ -68,6 +68,8 @@ public class TestDriver {
   private String version;
   private long [][] memUsage = new long[2][3];
   private String memUsageFilename = null;
+  private static String orderbyWhitelistFile = drillProperties.get("DRILL_ORDERBY_WHITELIST_FILE");
+  public static Set<String> orderbyWhitelist = null;
  
   private static Configuration conf = new Configuration();
   public static final Options OPTIONS = new Options();
@@ -207,7 +209,8 @@ public class TestDriver {
         }
         document.set("query", query);
         document.set("status", test.getTestStatus().toString());
-        if(test.getTestStatus().equals(TestStatus.EXECUTION_FAILURE) || test.getTestStatus().equals(TestStatus.VERIFICATION_FAILURE)) {
+        if(test.getTestStatus().equals(TestStatus.EXECUTION_FAILURE) || test.getTestStatus().equals(TestStatus.VERIFICATION_FAILURE) ||
+           test.getTestStatus().equals(TestStatus.ORDERBY_FAILURE)) {
           document.set("errorMessage", test.getException().toString().replaceAll("\n",""));
         }else{
           document.set("errorMessage", "N/A");
@@ -287,6 +290,7 @@ public class TestDriver {
     int totalVerificationFailure = 0;
     int totalCanceledTest = 0;
     int totalTimeoutFailure = 0;
+    int totalOrderbyFailure = 0;
     int i = 0;
     LOG.info("> TOOK " + stopwatch + " TO SETUP.");
 
@@ -316,6 +320,7 @@ public class TestDriver {
       List<DrillTest> executionFailures = Lists.newArrayList();
       List<DrillTest> timeoutFailures = Lists.newArrayList();
       List<DrillTest> canceledTests = Lists.newArrayList();
+      List<DrillTest> orderbyFailures = Lists.newArrayList();
 
       for (DrillTest test : tests) {
         TestStatus testStatus = test.getTestStatus();
@@ -334,6 +339,9 @@ public class TestDriver {
           break;
         case CANCELED:
           canceledTests.add(test);
+          break;
+        case ORDERBY_FAILURE:
+          orderbyFailures.add(test);
           break;
         default:
           executionFailures.add(test);
@@ -361,6 +369,12 @@ public class TestDriver {
         LOG.info("Query: \n" + test.getQuery());
         LOG.info(test.getException().getMessage());
       }
+      LOG.info("Orderby Failures:");
+      for (DrillTest test : orderbyFailures) {
+        LOG.info(test.getInputFile());
+        LOG.info("Query: \n" + test.getQuery());
+        LOG.info(test.getException().getMessage());
+      }
       LOG.info("Timeout Failures:");
       for (DrillTest test : timeoutFailures) {
         LOG.info(test.getInputFile());
@@ -377,14 +391,18 @@ public class TestDriver {
       for (DrillTest test : verificationFailures) {
         LOG.info(test.getInputFile());
       }
+      LOG.info("Orderby Failures:");
+      for (DrillTest test : orderbyFailures) {
+        LOG.info(test.getInputFile());
+      }
       LOG.info("Timeout Failures:");
       for (DrillTest test : timeoutFailures) {
         LOG.info(test.getInputFile());
       }
       LOG.info(LINE_BREAK);
-      LOG.info(String.format("\nPassing tests: %d\nExecution Failures: %d\nVerificationFailures: %d" +
-      	"\nTimeouts: %d\nCanceled: %d", passingTests.size(), executionFailures.size(), 
-      	verificationFailures.size(), timeoutFailures.size(), canceledTests.size()));
+      LOG.info(String.format("\nPassing tests: %d\nExecution Failures: %d\nVerification Failures: %d" +
+      	"\nTimeouts: %d\nCanceled: %d\nOrderby Failures: %d", passingTests.size(), executionFailures.size(), 
+      	verificationFailures.size(), timeoutFailures.size(), canceledTests.size(), orderbyFailures.size()));
       
       if (OPTIONS.trackMemory) {
     	LOG.info(LINE_BREAK);
@@ -398,25 +416,32 @@ public class TestDriver {
       totalVerificationFailure += verificationFailures.size();
       totalTimeoutFailure += timeoutFailures.size();
       totalCanceledTest += canceledTests.size(); 
+      totalOrderbyFailure += orderbyFailures.size(); 
     }
 
     if (i > 2) {
       LOG.info(LINE_BREAK);
-      LOG.info(String.format("\nCompleted %d iterations.\n  Passing tests: %d\n  Execution Failures: %d\n  VerificationFailures: %d" +
-    	  "\n  Timeouts: %d\n  Canceled: %d", i-1, totalPassingTest, totalExecutionFailure, 
-    	  totalVerificationFailure, totalTimeoutFailure, totalCanceledTest));
+      LOG.info(String.format("\nCompleted %d iterations.\n  Passing tests: %d\n  Execution Failures: %d\n  Verification Failures: %d" +
+    	  "\n  Timeouts: %d\n  Canceled: %d\n  Orderby Failures: %d", i-1, totalPassingTest, totalExecutionFailure, 
+    	  totalVerificationFailure, totalTimeoutFailure, totalCanceledTest, totalOrderbyFailure));
       LOG.info("\n> TEARING DOWN..");
     }
     teardown();
     executor.close();
     connectionPool.close();
 
-    return totalExecutionFailure + totalVerificationFailure + totalTimeoutFailure;
+    return totalExecutionFailure + totalVerificationFailure + totalTimeoutFailure + totalOrderbyFailure;
   }
 
   public void setup() throws IOException, InterruptedException {
     if (!new File(drillOutputDirName).exists()) {
       new File(drillOutputDirName).mkdir();
+    }
+    // Load orderby white-list file.  These tests have orderby clauses
+    // that cannot be validated.  Validation of the orderby clause will be
+    // skipped for now.
+    if (new File(orderbyWhitelistFile).exists()) {
+      orderbyWhitelist = Utils.readOrderbyWhitelistFile(orderbyWhitelistFile);
     }
 
     String templatePath = CWD + "/conf/plugin-templates/";
