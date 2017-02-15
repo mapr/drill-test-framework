@@ -1,0 +1,41 @@
+{
+    "testId": "xsort",
+    "type": "group",
+    "description": "Test TPCDS SF 1 queries via jdbc",
+    "categories": [
+        "long_running"
+    ],
+    "matrices": [
+        {   
+            "query-file": ".*.q",
+            "schema": "dfs.tpcds_sf1_parquet_views",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {   
+            "mode": "cp",
+            "src": "Datasources/tpcds/sf1/parquet",
+            "dest": "tpcds_sf1/parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/parquet_date/spark_generated/d4",
+            "dest": "resource-manager/d4"
+        },
+        {   
+            "mode": "gen",
+            "src": "Datasources/tpcds/createViewsParquet.sh",
+            "dest": ""
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/tpcds/createViewsParquet_sf1000.sh",
+            "dest": ""
+        }
+    ]
+}

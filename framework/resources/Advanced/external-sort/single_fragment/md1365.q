@@ -1,0 +1,11 @@
+ALTER SESSION SET `exec.sort.disable_managed` = false;
+alter session set `planner.disable_exchanges` = true;
+alter session set `planner.memory.max_query_memory_per_node` = 104857600;
+alter session set `planner.width.max_per_node` = 1;
+alter session set `planner.width.max_per_query` = 1;
+select max(col1), max(cs_sold_date_sk), max(cs_sold_time_sk), max(cs_ship_date_sk), max(cs_bill_customer_sk), max(cs_bill_cdemo_sk), max(cs_bill_hdemo_sk), max(cs_bill_addr_sk), max(cs_ship_customer_sk), max(cs_ship_cdemo_sk), max(cs_ship_hdemo_sk), max(cs_ship_addr_sk), max(cs_call_center_sk), max(cs_catalog_page_sk), max(cs_ship_mode_sk), min(cs_warehouse_sk), max(cs_item_sk), max(cs_promo_sk), max(cs_order_number), max(cs_quantity), max(cs_wholesale_cost), max(cs_list_price), max(cs_sales_price), max(cs_ext_discount_amt), min(cs_ext_sales_price), max(cs_ext_wholesale_cost), min(cs_ext_list_price), min(cs_ext_tax), min(cs_coupon_amt), max(cs_ext_ship_cost), max(cs_net_paid), max(cs_net_paid_inc_tax), min(cs_net_paid_inc_ship), min(cs_net_paid_inc_ship_tax), min(cs_net_profit), min(c_customer_sk), min(length(c_customer_id)), max(c_current_cdemo_sk), max(c_current_hdemo_sk), min(c_current_addr_sk), min(c_first_shipto_date_sk), min(c_first_sales_date_sk), min(length(c_salutation)), min(length(c_first_name)), min(length(c_last_name)), min(length(c_preferred_cust_flag)), max(c_birth_day), min(c_birth_month), min(c_birth_year), max(c_last_review_date), c_email_address  from (select cs_sold_date_sk+cs_sold_time_sk col1, * from dfs.`/drill/testdata/resource-manager/md1362` order by c_email_address nulls first) d where d.col1 > 2536816 and c_email_address is not null group by c_email_address;
+ALTER SESSION SET `exec.sort.disable_managed` = true;
+alter session set `planner.disable_exchanges` = false;
+alter session set `planner.memory.max_query_memory_per_node` = 2147483648;
+alter session set `planner.width.max_per_node` = 17;
+alter session set `planner.width.max_per_query` = 1000;

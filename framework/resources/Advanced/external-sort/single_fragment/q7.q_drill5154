@@ -1,0 +1,5 @@
+ALTER SESSION SET `exec.sort.disable_managed` = false;
+alter session set `planner.memory.max_query_memory_per_node` = 482344960;
+select * from (select * from dfs.`/drill/testdata/resource-manager/terasort-data/part-m-00000.tbl` order by columns[0]) d where d.columns[0] = 'null';
+ALTER SESSION SET `exec.sort.disable_managed` = true;
+alter session set `planner.memory.max_query_memory_per_node` = 2147483648;

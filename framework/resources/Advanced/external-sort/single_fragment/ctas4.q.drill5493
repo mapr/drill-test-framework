@@ -1,0 +1,7 @@
+ALTER SESSION SET `exec.sort.disable_managed` = false;
+alter session set `planner.width.max_per_query` = 17;
+create table dfs.drillTestDir.xsort_ctas4 partition by (col1) as select columns[0] as col1 from (select * from dfs.`/drill/testdata/resource-manager/wide-to-zero` order by columns[0]);
+select count(*) form dfs.drillTestDir.xsort_ctas4;
+drop table dfs.drillTestDir.xsort_ctas4;
+ALTER SESSION SET `exec.sort.disable_managed` = true;
+alter session set `planner.width.max_per_query` = 1000;

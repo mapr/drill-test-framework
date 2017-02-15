@@ -529,6 +529,16 @@
       "location": "/drill",
       "writable": true,
       "defaultInputFormat": "json"
+    },
+    "concurrency": {
+      "location": "/drill/testdata/concurrency",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
+    "tpcds_sf1000_parquet_views": {
+      "location": "/drill/testdata/tpcds/parquet/sf1000_views",
+      "writable": true,
+      "defaultInputFormat": "parquet"
     }
     },
     "formats" : {

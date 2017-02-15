@@ -1,0 +1,11 @@
+ALTER SESSION SET `exec.sort.disable_managed` = false;
+alter session set `planner.enable_decimal_data_type` = true;
+alter session set `planner.width.max_per_node` = 1;
+alter session set `planner.memory.max_query_memory_per_node` = 62600000;
+alter session set `planner.width.max_per_query` = 1;
+select count(*) from (select * from dfs.`/drill/testdata/data-shapes/wide-columns/5000/1000rows/parquet/widestrings` order by str_empty, str_fixed, str_var, str_null, str_empty_null, str_var_null_empty, str_fixed_null_empty) d where d.str_empyt = 'ajksfh';
+ALTER SESSION SET `exec.sort.disable_managed` = true;
+alter session set `planner.enable_decimal_data_type` = false;
+alter session set `planner.width.max_per_node` = 17;
+alter session set `planner.memory.max_query_memory_per_node` = 2147483648;
+alter session set `planner.width.max_per_query` = 1000;

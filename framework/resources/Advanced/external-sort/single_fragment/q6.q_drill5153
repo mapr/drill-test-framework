@@ -1,0 +1,3 @@
+ALTER SESSION SET `exec.sort.disable_managed` = false;
+select * from dfs.`/drill/testdata/resource-manager/terasort-data` order by columns[1];
+ALTER SESSION SET `exec.sort.disable_managed` = true;

@@ -1,0 +1,106 @@
+---- 2 nodes ----
+alter session set `planner.enable_decimal_data_type` = true;
+alter session set `planner.width.max_per_node` = 1;
+alter session set `planner.slice_target` = 300;
+alter session set `planner.memory.max_query_memory_per_node` = 43660445; (1 byte less produces OOM)
+select * from dfs.`/drill/testdata/data-shapes/wide-columns/5000/1000rows/parquet/widestrings` order by str_empty, str_fixed, str_var, str_null, str_empty_null, str_var_null_empty, str_fixed_null_empty;
+
+
+below all are single node : 
+----------------
+DRILL_MAX_DIRECT_MEMORY="24G"
+DRILL_MAX_HEAP="12G"
+alter session set `planner.memory.max_query_memory_per_node` = 8589934592;
+alter session set `planner.enable_decimal_data_type` = true;
+select * from dfs.`/drill/testdata/tpcds/parquet/sf1000/catalog_sales` order by cs_quantity, cs_wholesale_cost limit 1;
+
+
+alter session set `planner.memory.max_query_memory_per_node` = 1048576;
+select * from (select * from dfs.`/drill/testdata/resource-manager/nums.tbl` order by columns[0]) d where d.columns[0] = '4041054511';
+
+
+-------------------
+DRILL_MAX_DIRECT_MEMORY="16G"
+DRILL_MAX_HEAP="4G"
+select * from (select * from dfs.`/drill/testdata/resource-manager/terasort-data/part-m-00000.tbl` order by columns[0]) d where d.columns[0] = 'null'; DRILL-5154
+
+
+DRILL_MAX_DIRECT_MEMORY="16G"
+DRILL_MAX_HEAP="4G"
+alter session set `planner.memory.max_query_memory_per_node` = 482344960; (480 MB.  Each row in the data set is 100 bytes. So each record batch needs 64000 * 100 bytes and we should atleast have memory for 2 record batches which is equal to 12.8 MB)
+select * from (select * from dfs.`/drill/testdata/resource-manager/terasort-data/part-m-00000.tbl` order by columns[0]) d where d.columns[0] = 'null'; DRILL-5154
+
+
+DRILL_MAX_DIRECT_MEMORY="16G"
+DRILL_MAX_HEAP="4G"
+alter session set `planner.memory.max_query_memory_per_node` = 67108864;  (64 MB)
+select * from (select * from dfs.`/drill/testdata/resource-manager/terasort-data/part-m-00000.tbl` order by columns[0]) d where d.columns[0] = 'null'; DRILL-5154
+
+org.apache.drill.common.exceptions.UserException: RESOURCE ERROR: One or more nodes ran out of memory while executing the query.
+
+Unable to allocate sv2 for 1023 records, and not enough batchGroups to spill.
+batchGroups.size 0
+spilledBatchGroups.size 0
+allocated memory 20506240
+allocator limit 20000000
+
+[Error Id: f1888876-e776-47c0-a210-ecc47a437609 ]
+        at org.apache.drill.common.exceptions.UserException$Builder.build(UserException.java:544) ~[drill-common-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.physical.impl.xsort.ExternalSortBatch.newSV2(ExternalSortBatch.java:626) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.physical.impl.xsort.ExternalSortBatch.innerNext(ExternalSortBatch.java:365) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.record.AbstractRecordBatch.next(AbstractRecordBatch.java:162) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.physical.impl.validate.IteratorValidatorBatchIterator.next(IteratorValidatorBatchIterator.java:215) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.record.AbstractRecordBatch.next(AbstractRecordBatch.java:119) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.record.AbstractRecordBatch.next(AbstractRecordBatch.java:109) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.record.AbstractSingleRecordBatch.innerNext(AbstractSingleRecordBatch.java:51) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.physical.impl.svremover.RemovingRecordBatch.innerNext(RemovingRecordBatch.java:94) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.record.AbstractRecordBatch.next(AbstractRecordBatch.java:162) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.physical.impl.validate.IteratorValidatorBatchIterator.next(IteratorValidatorBatchIterator.java:215) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.physical.impl.BaseRootExec.next(BaseRootExec.java:104) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.physical.impl.SingleSenderCreator$SingleSenderRootExec.innerNext(SingleSenderCreator.java:92) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.physical.impl.BaseRootExec.next(BaseRootExec.java:94) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.work.fragment.FragmentExecutor$1.run(FragmentExecutor.java:232) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.exec.work.fragment.FragmentExecutor$1.run(FragmentExecutor.java:226) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at java.security.AccessController.doPrivileged(Native Method) [na:1.8.0_92]
+        at javax.security.auth.Subject.doAs(Subject.java:422) [na:1.8.0_92]
+        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1595) [hadoop-common-2.7.0-mapr-1607.jar:na]
+        at org.apache.drill.exec.work.fragment.FragmentExecutor.run(FragmentExecutor.java:226) [drill-java-exec-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at org.apache.drill.common.SelfCleaningRunnable.run(SelfCleaningRunnable.java:38) [drill-common-1.10.0-SNAPSHOT.jar:1.10.0-SNAPSHOT]
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_92]
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_92]
+        at java.lang.Thread.run(Thread.java:745) [na:1.8.0_92]
+
+-------------------------------------------------------
+
+DRILL_MAX_DIRECT_MEMORY="16G"
+DRILL_MAX_HEAP="4G
+select * from (select * from dfs.`/drill/testdata/resource-manager/ascending-col-length.tbl` order by columns[0])d where d.columns[0] = 'ljdfhwuehnoiueyf'; -- MD-1310
+
+
+DRILL_MAX_DIRECT_MEMORY="16G"
+DRILL_MAX_HEAP="4G
+select * from (select * from dfs.`/drill/testdata/resource-manager/descending-col-length.tbl` order by columns[0])d where d.columns[0] = 'ljdfhwuehnoiueyf'; -- MD-1311
+
+
+----- Merge Join ------
+******************************************************************** Tests with column width less than 256 characters *******************************************************
+
+ran 20 instances of the below query with a concurrency of 10 on both master and pauls branch. No issues found
+alter session set `planner.memory.max_query_memory_per_node` = 3221225472;
+select * from (select * from dfs.`/drill/testdata/resource-manager/250wide-5gb.tbl` order by columns[0])d where d.columns[0] = 'ljdfhwuehnoiueyf';
+
+*********** agg and sort
+
+
+************ flatten ***************
+-- test queries which have multiple sort statements
+-- test multiple operators feeding into sort
+-- test every operator that can feed to external sort and read from external sort
+-- test memory leaks in external sort
+-- test with multiple fragments and with exchanges
+-- observe the behavior when the spill directory does not have the right permissions
+-- test external sort when alternate record batches are empty
+
+*** tests after looking at the code ****
+-- test by playing with spill group size and spill threshhold
+-- make sure the first input batch is empty
