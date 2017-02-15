@@ -398,7 +398,6 @@ public class TestDriver implements DrillDefaults {
     connectionPool.close();
     restartDrill();
     return totalExecutionFailures + totalVerificationFailures + totalTimeoutFailures;
-
   }
 
   public void setup() throws IOException, InterruptedException {
@@ -745,7 +744,6 @@ public class TestDriver implements DrillDefaults {
 			
 	restartDrillScript = drillProperties.containsKey("RESTART_DRILL_SCRIPT") ?
 			drillProperties.get("RESTART_DRILL_SCRIPT") : RESTART_DRILL_SCRIPT;
-
   }
 
   private void generateReports(List<DrillTest> tests, int iteration) {
