@@ -66,14 +66,11 @@ import org.apache.log4j.Logger;
  * 
  * 
  */
-public class Utils {
+public class Utils implements DrillDefaults {
   private static final Logger LOG = Logger.getLogger(Utils.class);
-  private static final String DRILL_TEST_CONFIG = "drillTestConfig.properties";
-  private static final Map<Integer, String> sqlTypes;
-  private static final Map<Integer, String> sqlNullabilities;
-  private static final Map<String, String> drillTestProperties;
-  private static final String CWD = System.getProperty("user.dir");
-  private static final ConnectionPool connectionPool;
+  static final Map<Integer, String> sqlTypes;
+  static final Map<Integer, String> sqlNullabilities;
+  static final Map<String, String> drillProperties;
   
   static {
     // setup sql types
@@ -101,7 +98,7 @@ public class Utils {
     sqlNullabilities = ImmutableMap.copyOf(nullabilityMap);
     
     // read configuration file
-    final Map<String, String> drillProperties = Maps.newHashMap();
+    final Map<String, String> properties = Maps.newHashMap();
     final File overrideFile = new File(CWD + "/conf/" + DRILL_TEST_CONFIG);
     final ResourceBundle bundle;
     if (overrideFile.exists() && !overrideFile.isDirectory()) {
@@ -114,18 +111,11 @@ public class Utils {
       bundle = ResourceBundle.getBundle(DRILL_TEST_CONFIG);
     }
     for (final String key : bundle.keySet()) {
-      drillProperties.put(key.trim(), bundle.getString(key).trim());
+      properties.put(key.trim(), bundle.getString(key).trim());
     }
-    drillTestProperties = ImmutableMap.copyOf(drillProperties);
-    
-    // connection pool
-    connectionPool = new ConnectionPool();
+    drillProperties = ImmutableMap.copyOf(properties);
   }
 
-  public static ConnectionPool getConnectionPool() {
-	return connectionPool;
-  }
-  
   /**
    * Constructs an iteration of test case definitions from various test data
    * sources, obtained from the mvn command line option. See README.md for more
@@ -138,19 +128,19 @@ public class Utils {
   public static List<DrillTestCase> getDrillTestCases() throws IOException {
     String[] testDefSources = null;
     try {
-      testDefSources = TestDriver.OPTIONS.sources.split(",");
+      testDefSources = TestDriver.cmdParam.sources.split(",");
     } catch (Exception e) {
       testDefSources = new String[] { "" }; //Look at the default location for test definition files
     }
     String[] testGroups = null;
     try {
-      testGroups = TestDriver.OPTIONS.groups.split(",");
+      testGroups = TestDriver.cmdParam.groups.split(",");
     } catch (Exception e) {
       LOG.info("Test groups not specified.  Will run all collected tests.");
     }
     List<DrillTestCase> drillTestCases = new ArrayList<>();
     for (String testDefSource : testDefSources) {
-      testDefSource = Utils.getAbsolutePath(testDefSource, "DRILL_TEST_DATA_DIR");
+      testDefSource = getAbsolutePath(testDefSource, TestDriver.drillTestDataDir);
       File testDefSourceFile = new File(testDefSource);
       if (!testDefSourceFile.exists()) {
     	  LOG.error("Directory " + testDefSourceFile.getAbsolutePath() + " does not exist!");
@@ -183,7 +173,7 @@ public class Utils {
         boolean skipSuite = false;
         if (modeler.dependencies != null) {
          for (String dependency : modeler.dependencies) {
-           if (TestDriver.OPTIONS.excludeDependenciesAsList().contains(dependency)) {
+           if (TestDriver.cmdParam.excludeDependenciesAsList().contains(dependency)) {
              skipSuite = true;
            }
          }
@@ -269,30 +259,20 @@ public class Utils {
   }
 
   /**
-   * Returns the map containing all properties in the drill test properties
-   * file.
-   * 
-   * @return map containing all properties in the drill test properties file.
-   */
-  public static Map<String, String> getDrillTestProperties() {
-    return drillTestProperties;
-  }
-
-  /**
    * Constructs resolved path for a file. If the file starts with "/", it is
    * assumed to already be an absolute path.
    * 
    * @param filename
    *          name of file for which absolute path is being constructed.
-   * @param propertyKey
-   *          name of property to resolve absolute path from.
+   * @param dataDir
+   *          name of test data dir to resolve absolute path from.
    * @return absolute path for a file.
    */
-  public static String getAbsolutePath(String filename, String propertyKey) {
+  public static String getAbsolutePath(String filename, String dataDir) {
     if (filename.startsWith("/")) {
       return filename;
     }
-    return CWD + "/" + drillTestProperties.get(propertyKey) + "/" + filename;
+    return CWD + "/" + dataDir + "/" + filename;
   }
 
   /**
@@ -451,7 +431,7 @@ public class Utils {
     String content = getFileContent(filename);
     content = content.replace("localhost", Inet4Address.getLocalHost()
         .getHostAddress());
-    if (fsMode.equals(TestDriver.LOCALFS)) {
+    if (!fsMode.equals("dfs")) {
       content = content.replace("maprfs:", "file:");
       content = content.replaceAll("location\"\\s*:\\s*\"", "location\":\"" + System.getProperty("user.home"));
     }
@@ -508,10 +488,7 @@ public class Utils {
 
   public static String generateOutputFileName(String inputFileName,
                                         String testId, boolean isPlan) throws IOException {
-    String drillOutputDirName = TestDriver.drillOutputDirName;
-    if (drillOutputDirName == null) {
-      drillOutputDirName = "/tmp";
-    }
+	String drillOutputDirName = TestDriver.drillOutputDir;
     File drillOutputDirDir = new File(drillOutputDirName);
     if (!drillOutputDirDir.exists()) {
       if (!drillOutputDirDir.mkdir()) {
@@ -543,10 +520,8 @@ public class Utils {
   }
   
   public static int getNumberOfClusterNodes() {
-	if (drillTestProperties.containsKey("NUMBER_OF_CLUSTER_NODES")) { 
-	  return Integer.parseInt(drillTestProperties.get("NUMBER_OF_CLUSTER_NODES"));
-	}
-	return 0;
+	return drillProperties.containsKey("NUMBER_OF_CLUSTER_NODES") ?
+	  Integer.parseInt(drillProperties.get("NUMBER_OF_CLUSTER_NODES")) : 0;
   }
   
   public static int getNumberOfDrillbits(Connection connection) {

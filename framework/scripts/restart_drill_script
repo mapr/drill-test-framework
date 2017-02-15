@@ -1,0 +1,4 @@
+#!/bin/bash
+source ./conf/drillTestConfig.properties
+set -x
+clush -a ${DRILL_HOME}/bin/drillbit.sh restart

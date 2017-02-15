@@ -75,7 +75,7 @@ TIME_OUT_SECONDS=1200
 ########################################
 # Restart drill command
 ########################################
-RESTART_DRILL_SCRIPT=resources/bin/drill-restart.sh
+RESTART_DRILL_SCRIPT=framework/scripts/restart_drill_script
 
 ########################################
 ### Tests run as the following user

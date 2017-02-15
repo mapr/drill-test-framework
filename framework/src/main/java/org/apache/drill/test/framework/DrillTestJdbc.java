@@ -134,7 +134,7 @@ public class DrillTestJdbc implements DrillTest {
 			e1.printStackTrace();
 		}
       }
-      if (testStatus == TestStatus.PASS && !TestDriver.OPTIONS.outputQueryResult) {
+      if (testStatus == TestStatus.PASS && !TestDriver.cmdParam.outputQueryResult) {
     	Utils.deleteFile(outputFilename);
       }
       duration = stopwatch;
@@ -170,7 +170,7 @@ public class DrillTestJdbc implements DrillTest {
     outputFilename = Utils.generateOutputFileName(modeler.queryFilename, modeler.testId, false) + "_" + id;
     BufferedWriter writer = new BufferedWriter(new FileWriter(new File(
             outputFilename)));
-    final boolean cancelQuery = rand.nextInt(100) < TestDriver.OPTIONS.cancelPercent;
+    final boolean cancelQuery = rand.nextInt(100) < TestDriver.cmdParam.cancelPercent;
     CancelQuery c = null;
     try {
       statement = connection.createStatement();
