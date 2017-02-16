@@ -22,6 +22,8 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import org.apache.drill.test.framework.TestCaseModeler.DataSource;
 import org.apache.drill.test.framework.TestVerifier.TestStatus;
 import org.apache.hadoop.conf.Configuration;
@@ -66,6 +68,8 @@ public class TestDriver {
   private ConnectionPool connectionPool = null;
   private String commitId;
   private String version;
+  private String[] injectionKeys = {"DRILL_VERSION"};
+  public static Map<String,String> injections = Maps.newHashMap();
   private long [][] memUsage = new long[2][3];
   private String memUsageFilename = null;
  
@@ -434,15 +438,28 @@ public class TestDriver {
       String[] setupQueries = Utils.getSqlStatements(beforeRunQueryFilename);
 	  connection = connectionPool.getOrCreateConnection(drillProperties.get("USERNAME"), 
   				drillProperties.get("PASSWORD"));
+      for (String query : setupQueries) {
+        LOG.info(Utils.getSqlResult(Utils.execSQL(query, connection)));
+      }
+      
       String getCommitId = "SELECT version, commit_id from sys.version";
       ResultSet resultSet = Utils.execSQL(getCommitId, connection);
       while(resultSet.next()) {
         commitId = resultSet.getString("commit_id");
         version = resultSet.getString("version");
       }
-      for (String query : setupQueries) {
-        LOG.info(Utils.getSqlResult(Utils.execSQL(query, connection)));
+      
+      //setup injection map
+      for (int i = 0; i < injectionKeys.length; i++) {
+    	switch (injectionKeys[i]) {
+    	case "DRILL_VERSION":
+    	  injections.put(injectionKeys[i], version);
+    	  break;
+    	default:
+    	  LOG.fatal("Injection parameter not recognized!");
+    	}    	
       }
+
       connectionPool.releaseConnection(drillProperties.get("USERNAME"), 
     		  drillProperties.get("PASSWORD"), connection);
     } catch (IOException e) {

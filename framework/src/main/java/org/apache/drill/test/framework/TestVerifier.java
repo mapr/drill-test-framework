@@ -683,6 +683,12 @@ public class TestVerifier {
     }
     StringBuilder sb = new StringBuilder();
     String expected = new String(Files.readAllBytes(Paths.get(expectedOutput)));
+    
+    //replace injections
+    for (String key : TestDriver.injections.keySet()) {
+      expected = expected.replaceAll("\\{" + key + "\\}", TestDriver.injections.get(key));
+    }
+
     String actual = new String(Files.readAllBytes(Paths.get(actualOutput)));
     boolean verified = false;
     if (verificationTypes.get(0).equalsIgnoreCase("regex")) {
