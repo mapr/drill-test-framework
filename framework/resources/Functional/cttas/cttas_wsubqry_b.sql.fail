@@ -1,0 +1,9 @@
+CREATE TEMPORARY TABLE temp_tbl_sbqry_b 
+AS 
+SELECT * FROM 
+( 
+                SELECT col_int, col_chr, col_vrchr1, col_vrchr2, col_dt, col_bln FROM typeall_l 
+);
+SELECT * FROM temp_tbl_sbqry_b;
+DROP TABLE temp_tbl_sbqry_b;
+~

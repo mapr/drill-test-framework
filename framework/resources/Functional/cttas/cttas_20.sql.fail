@@ -1,0 +1,7 @@
+ALTER SESSION SET `store.format`='csv';
+CREATE TEMPORARY TABLE dfs.tmp.temp_tbl_20
+AS
+SELECT * FROM typeall_l;
+SELECT COUNT(*) FROM dfs.tmp.temp_tbl_20;
+DROP TABLE dfs.tmp.temp_tbl_20;
+ALTER SESSION SET `store.format`='parquet';
