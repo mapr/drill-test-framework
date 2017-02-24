@@ -1,0 +1,25 @@
+{
+    "testId": "cttas",
+    "type": "group",
+    "description": "CREATE TEMPORARY TABLE tests",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.Join",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/join",
+            "dest": "join"
+        }
+    ]
+}
+
