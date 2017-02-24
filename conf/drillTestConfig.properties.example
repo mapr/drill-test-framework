@@ -78,6 +78,11 @@ TIME_OUT_SECONDS=1200
 RESTART_DRILL_SCRIPT=resources/bin/drill-restart.sh
 
 ########################################
+# Whitelist for orderby tests that cannot be verified
+########################################
+DRILL_ORDERBY_WHITELIST_FILE=framework/orderbyWhitelist
+
+########################################
 ### Tests run as the following user
 ##########################################
 USERNAME=user1

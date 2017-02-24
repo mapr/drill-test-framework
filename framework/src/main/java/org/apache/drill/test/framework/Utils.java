@@ -38,12 +38,14 @@ import java.sql.Types;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Set;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -602,6 +604,29 @@ public class Utils {
         // change to format /key1/key2/key3
         String ptrExpr = "/" + key.replace(".","/");
         return rootNode.at(ptrExpr);
+  }
+
+  /**
+   * Load orderby tests from orderby white-list file
+   * These tests have orderby clauses which cannnot be validated and therefore need to be skipped.
+   * They will be passed for now until the orderby clause can be validated
+   */
+  public static Set<String> readOrderbyWhitelistFile(String whitelistFile) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(new File (whitelistFile)));
+        String line = null;
+        Set<String> whitelist = new HashSet<>();
+        while ((line = reader.readLine()) != null) {
+          whitelist.add(line);
+        }
+        return whitelist;
+  }
+
+  /**
+   * Check if this test is white-listed.
+   * If so, this test will be passed for now until the orderby clause can be validated
+   */
+  public static boolean isOrderbyWhitelist(String queryFile) {
+        return TestDriver.orderbyWhitelist.contains(queryFile);
   }
 
 }
