@@ -431,7 +431,7 @@ public class Utils implements DrillDefaults {
     String content = getFileContent(filename);
     content = content.replace("localhost", Inet4Address.getLocalHost()
         .getHostAddress());
-    if (!fsMode.equals("dfs")) {
+    if (!fsMode.equals("distributedFS")) {
       content = content.replace("maprfs:", "file:");
       content = content.replaceAll("location\"\\s*:\\s*\"", "location\":\"" + System.getProperty("user.home"));
     }
@@ -488,19 +488,18 @@ public class Utils implements DrillDefaults {
 
   public static String generateOutputFileName(String inputFileName,
                                         String testId, boolean isPlan) throws IOException {
-	String drillOutputDirName = TestDriver.drillOutputDir;
-    File drillOutputDirDir = new File(drillOutputDirName);
-    if (!drillOutputDirDir.exists()) {
-      if (!drillOutputDirDir.mkdir()) {
-        LOG.debug("Cannot create directory " + drillOutputDirName
+    File drillOutputDir = new File(TestDriver.drillOutputDir);
+    if (!drillOutputDir.exists()) {
+      if (!drillOutputDir.mkdir()) {
+        LOG.debug("Cannot create directory " + TestDriver.drillOutputDir
             + ".  Using /tmp for drill output");
-        drillOutputDirName = "/tmp";
+        TestDriver.drillOutputDir = "/tmp";
       }
     }
     int index = inputFileName.lastIndexOf('/');
     String queryName = inputFileName.substring(index + 1);
     queryName = queryName.split("\\.")[0];
-    String outputFileName = drillOutputDirName + "/" + testId + "_" + queryName;
+    String outputFileName = TestDriver.drillOutputDir + "/" + testId + "_" + queryName;
     if (isPlan) {
       outputFileName += ".plan";
     } else {

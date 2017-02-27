@@ -23,12 +23,12 @@ public interface DrillDefaults {
 	/**
 	 * Default drill home directory.
 	 */
-	static final String DRILL_HOME = "/opt/mapr/drill";
+	static final String DRILL_HOME = "/opt/drill";
 	
 	/**
 	 * Defines drill running on HDFS or local filesystem.
 	 */
-	static final String FS_MODE = "dfs";
+	static final String FS_MODE = "distributedFS";
 	
 	/**
 	 * Default line break for logging.

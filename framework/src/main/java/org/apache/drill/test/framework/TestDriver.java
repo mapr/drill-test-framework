@@ -440,10 +440,10 @@ public class TestDriver implements DrillDefaults {
     FileSystem fs;
     FileSystem localFs = FileSystem.getLocal(conf);
 
-    if (!fsMode.equals("dfs")) {
-      fs = FileSystem.getLocal(conf);
+    if (fsMode.equals("distributedFS")) {
+        fs = FileSystem.get(conf);
     } else {
-      fs = FileSystem.get(conf);
+        fs = FileSystem.getLocal(conf);
     }
 
     try {
@@ -592,13 +592,13 @@ public class TestDriver implements DrillDefaults {
 	fsMode = drillProperties.containsKey("FS_MODE") ? 
 			drillProperties.get("FS_MODE") : FS_MODE;
 	    
-	drillTestData = drillProperties.containsKey("DRILL_TESTDATA") ? 
-			drillProperties.get("DRILL_TESTDATA") : DRILL_TESTDATA;
-			
 	drillTestDataDir = drillProperties.containsKey("DRILL_TEST_DATA_DIR") ?
 			drillProperties.get("DRILL_TEST_DATA_DIR") : DRILL_TESTDATA_DIR;
 			
-	if (!fsMode.equals("dfs")) {
+	if (fsMode.equals("distributedFS")) {
+	  drillTestData = drillProperties.containsKey("DRILL_TESTDATA") ? 
+			drillProperties.get("DRILL_TESTDATA") : DRILL_TESTDATA;
+	} else {
 	  drillTestData = System.getProperty("user.home") + drillTestData;
 	}
 	    
@@ -654,7 +654,8 @@ public class TestDriver implements DrillDefaults {
       Document document;
       for (DrillTest test : tests) {
         document = Json.newDocument();
-        document.set("_id", test.getTestId()+ "_" + new File(test.getInputFile()).getName() + "_" + test.getCloneId() + "_" + iteration);
+        document.set("_id", test.getTestId()+ "_" + new File(test.getInputFile()).getName() + "_" 
+        		+ test.getCloneId() + "_" + iteration);
         document.set("queryFilepath", test.getInputFile().substring(test.getInputFile().indexOf("resources/")+10));
         String query = test.getQuery();
         if(query != null){
@@ -662,7 +663,8 @@ public class TestDriver implements DrillDefaults {
         }
         document.set("query", query);
         document.set("status", test.getTestStatus().toString());
-        if(test.getTestStatus().equals(TestStatus.EXECUTION_FAILURE) || test.getTestStatus().equals(TestStatus.VERIFICATION_FAILURE)) {
+        if(test.getTestStatus().equals(TestStatus.EXECUTION_FAILURE) 
+        		|| test.getTestStatus().equals(TestStatus.VERIFICATION_FAILURE)) {
           document.set("errorMessage", test.getException().toString().replaceAll("\n",""));
         }else{
           document.set("errorMessage", "N/A");
@@ -679,7 +681,8 @@ public class TestDriver implements DrillDefaults {
 
       // Upload report to DFS if the DRILL_REPORTS_DFS_DIR variable is set
       if (Utils.drillProperties.containsKey("DRILL_REPORTS_DFS_DIR")){
-        FileUtil.copy(localFS, new Path(reportFile.getAbsolutePath()), DFS, new Path (drillReportsDFSDir + "/" + reportFile.getName()), true, false, DFS.getConf());
+        FileUtil.copy(localFS, new Path(reportFile.getAbsolutePath()), DFS, 
+        		new Path (drillReportsDFSDir + "/" + reportFile.getName()), true, false, DFS.getConf());
       }
     }
     catch(Exception e){
@@ -689,17 +692,16 @@ public class TestDriver implements DrillDefaults {
   
   private int restartDrill() {
     int exitCode = 0;
-    String command = null;
-    try {
-      command = "/bin/bash " + CWD + "/" + restartDrillScript;
+    String command = CWD + "/" + restartDrillScript;
+    File commandFile = new File(command);
+    if (commandFile.exists() && commandFile.canExecute()) {
       LOG.info("Running command: " + command);
       exitCode = Utils.execCmd(command).exitCode;
-    } catch (Exception e) {
-      LOG.error("Error: Failed to execute the command " + command + ".");
-    }
-    if (exitCode != 0) {
-      throw new RuntimeException("Error executing the command " + command
-          + " has return code " + exitCode);
+      if (exitCode != 0) {
+        LOG.error("Error executing the command " + command + " has return code " + exitCode);
+      }
+    } else {
+      LOG.error("Restart Drillbit script " + command + " does not exist or can't be executed!");
     }
     return exitCode;
   }
