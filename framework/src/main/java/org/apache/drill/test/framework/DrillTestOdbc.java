@@ -67,7 +67,7 @@ public class DrillTestOdbc implements DrillTest{
     }
   	CmdConsOut cmdConsOut = null;
     String command = System.getProperty("user.dir") + "/" 
-    		+ Utils.getDrillTestProperties().get("DRILL_TEST_DATA_DIR") + "/" 
+    		+ TestDriver.drillTestDataDir + "/" 
     		+ modeler.script + " "
     		+ modeler.queryFilename + " "
     		+ outputFilename;
@@ -106,7 +106,7 @@ public class DrillTestOdbc implements DrillTest{
     } catch (Exception e) {
       fail(TestStatus.EXECUTION_FAILURE, e);
 	} finally {
-      if (testStatus == TestStatus.PASS && !TestDriver.OPTIONS.outputQueryResult) {
+      if (testStatus == TestStatus.PASS && !TestDriver.cmdParam.outputQueryResult) {
     	Utils.deleteFile(outputFilename);
       }
       duration = stopwatch;

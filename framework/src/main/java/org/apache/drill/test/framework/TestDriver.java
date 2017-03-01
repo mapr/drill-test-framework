@@ -47,47 +47,30 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.sql.DatabaseMetaData;
 
-public class TestDriver {
-  public static final String LOCALFS = "local";
-  public static final String DFS = "dfs";
+public class TestDriver implements DrillDefaults {
   private static final Logger LOG = Logger.getLogger(TestDriver.class);
-  private static final String LINE_BREAK = "----------------------------------------------------------------------------------------------------------------";
-  protected static Map<String, String> drillProperties = Utils
-      .getDrillTestProperties();
-  public static final String drillOutputDirName = drillProperties.get("DRILL_OUTPUT_DIR");
-  public static String drillReportsDir = drillProperties.get("DRILL_REPORTS_DIR");
-  public static String drillReportsDFSDir = drillProperties.get("DRILL_REPORTS_DFS_DIR");
-  private String restartDrillScript = drillProperties
-      .get("RESTART_DRILL_SCRIPT");
-  private String ipAddressPlugin = drillProperties
-      .get("DRILL_STORAGE_PLUGIN_SERVER");
-  private static final String CWD = System.getProperty("user.dir");
-  private static String drillTestData = drillProperties.get("DRILL_TESTDATA");
-  private String fsMode = drillProperties.get("FS_MODE");
   private Connection connection = null;
-  private ConnectionPool connectionPool = null;
-  private String commitId;
-  private String version;
+  public static String commitId, version, drillHome, fsMode;
+  public static String drillTestData, drillTestDataDir, drillOutputDir, drillStoragePluginServer;
+  public static String jdbcDriver, jdbcDriverCP, connectionString;
+  public static String drillReportsDir, drillReportsDFSDir, username, password, restartDrillScript;
   private String[] injectionKeys = {"DRILL_VERSION"};
   public static Map<String,String> injections = Maps.newHashMap();
   private long [][] memUsage = new long[2][3];
   private String memUsageFilename = null;
+  private ConnectionPool connectionPool;
  
   private static Configuration conf = new Configuration();
-  public static final Options OPTIONS = new Options();
+  public static final CmdParam cmdParam = new CmdParam();
 
+  static {loadConf();};
+  
   public TestDriver() {
-    if (fsMode == null) {
-      fsMode = TestDriver.DFS;
-    }
-    if (fsMode.equals(LOCALFS)) {
-      drillTestData = System.getProperty("user.home") + drillTestData;
-    }
-    connectionPool = Utils.getConnectionPool();
+	  connectionPool = new ConnectionPool(jdbcDriver);
   }
-
+  
   public static void main(String[] args) throws Exception {
-    JCommander jc = new JCommander(OPTIONS);
+    JCommander jc = new JCommander(cmdParam);
     jc.setProgramName("TestDriver");
     try {
       jc.parse(args);
@@ -95,22 +78,20 @@ public class TestDriver {
     } catch (ParameterException e) {
       System.out.println("\n" + e.getMessage() + "\n");
       jc.usage();
-
       System.exit(-1);
     }
-    if (OPTIONS.help) {
+    if (cmdParam.help) {
       jc.usage();
       System.exit(0);
     }
 
     final Stopwatch stopwatch = Stopwatch.createStarted();
-    final TestDriver driver = new TestDriver();
     int errorCode;
     try {
-      LOG.info(LINE_BREAK); LOG.info(LINE_BREAK);
+      LOG.info(LINE_BREAK + LINE_BREAK);
       LOG.info("STARTING AT " + new Date());
       LOG.info(LINE_BREAK);
-      errorCode = driver.runTests();
+      errorCode = new TestDriver().runTests();
     } catch (Exception e) {
       LOG.error("Exiting due to uncaught exception", e);
       errorCode = -1;
@@ -118,152 +99,39 @@ public class TestDriver {
       LOG.info(LINE_BREAK);
       LOG.info("FINISHED AT " + new Date());
       LOG.info("TOTAL DURATION: " + stopwatch);
-      LOG.info(LINE_BREAK); LOG.info(LINE_BREAK);
+      LOG.info(LINE_BREAK + LINE_BREAK);
     }
     System.exit(errorCode);
   }
 
-  static class Options {
-    @Parameter(names = {"-s"}, description = "sources", required=true)
-    public String sources = null;
 
-    @Parameter(names = {"-g"}, description = "groups", required=true)
-    public String groups = null;
-
-    @Parameter(names = {"-t"}, description = "timeout", required=false)
-    public int timeout = 120;
-
-    @Parameter(names = {"-n"}, description = "number of threads", required=false)
-    public int threads = 1;
-
-    @Parameter(names = {"-i"}, description = "number of iterations", required=false)
-    public int iterations = 1;
-    
-    @Parameter(names = {"-j"}, description = "number of testcase clones", required=false)
-    public int clones = 1;
-    
-    @Parameter(names = {"-f"}, description = "filename", required=false)
-    public String beforeRunQueryFilename = "before-run.sql";
-    
-    @Parameter(names = {"-e"}, description = "filename", required=false)
-    public String afterRunQueryFilename = "after-run.sql";
-    
-    @Parameter(names = {"-d"}, description = "generate data", required=false)
-    public boolean generate = false;
-    
-    @Parameter(names = {"-m"}, description = "track memory usage", required=false)
-    public boolean trackMemory = false;
-    
-    @Parameter(names = {"-c"}, description = "percent of tests canceled", required=false)
-    public int cancelPercent = 0;
-    
-    @Parameter(names = {"-w"}, description = "enable write actual query result to file", required=false)
-    public boolean outputQueryResult = false;
-
-    @Parameter(names = {"-h", "--help"}, description = "show usage", help=true)
-    public boolean help = false;
-
-    @Parameter(names = {"-x", "--exclude"}, description = "Dependencies to exclude", required=false)
-    public String excludeDependencies = null;
-    
-    @Parameter(names = {"-r", "--report"}, description = "Generate json report", required=false)
-    public boolean generateReports = false;
-
-    public List<String> excludeDependenciesAsList() {
-      if (excludeDependencies == null) {
-        return new ArrayList<String>();
-      }
-      return Arrays.asList(TestDriver.OPTIONS.excludeDependencies.split(","));
-    }
-  }
-
-  public void generateReports(List<DrillTest> tests, int iteration) {
-
-    try{
-      if(drillReportsDir == null){
-        drillReportsDir = CWD;
-      }
-
-      File drillReportDir = new File(drillReportsDir);
-      FileSystem localFS = FileSystem.getLocal(conf);
-      FileSystem DFS = FileSystem.get(conf);
-
-      if (!drillReportDir.exists()) {
-        if (!drillReportDir.mkdir()) {
-          LOG.debug("Cannot create directory " + drillReportsDir
-                  + ".  Using current working directory for drill output");
-          drillReportsDir = CWD;
-        }
-      }
-
-      File reportFile = new File(drillReportsDir + "/apache-drill-" + version + "_" + commitId + "_" +
-              "report_" + new Date().toString().replace(' ', '_').replace(':','_') + ".json");
-
-      BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(reportFile));
-      Document document;
-      for (DrillTest test : tests) {
-        document = Json.newDocument();
-        document.set("_id", test.getTestId()+ "_" + new File(test.getInputFile()).getName() + "_" + test.getCloneId() + "_" + iteration);
-        document.set("queryFilepath", test.getInputFile().substring(test.getInputFile().indexOf("resources/")+10));
-        String query = test.getQuery();
-        if(query != null){
-          query.replaceAll("\n", "");
-        }
-        document.set("query", query);
-        document.set("status", test.getTestStatus().toString());
-        if(test.getTestStatus().equals(TestStatus.EXECUTION_FAILURE) || test.getTestStatus().equals(TestStatus.VERIFICATION_FAILURE)) {
-          document.set("errorMessage", test.getException().toString().replaceAll("\n",""));
-        }else{
-          document.set("errorMessage", "N/A");
-        }
-        document.set("queryExecutionTime", test.getDuration().toString());
-        document.set("drillVersion", version);
-        document.set("commitId", commitId);
-        bufferedWriter.write(document.toString());
-        bufferedWriter.newLine();
-      }
-
-      bufferedWriter.flush();
-      bufferedWriter.close();
-
-      // Upload report to DFS if the drillReportsDFSDir variable is set
-      if (drillReportsDFSDir != null){
-        FileUtil.copy(localFS, new Path(reportFile.getAbsolutePath()), DFS, new Path (drillReportsDFSDir + "/" + reportFile.getName()), true, false, DFS.getConf());
-      }
-    }
-    catch(Exception e){
-      e.printStackTrace();
-    }
-  }
 
   public int runTests() throws Exception {
-	CancelingExecutor executor = new CancelingExecutor(OPTIONS.threads, OPTIONS.timeout);
+	CancelingExecutor executor = new CancelingExecutor(cmdParam.threads, cmdParam.timeout);
 
     final Stopwatch stopwatch = Stopwatch.createStarted();
     LOG.info("> Pre-check..");
     try {
-		connection = connectionPool.getOrCreateConnection(drillProperties.get("USERNAME"), 
-				drillProperties.get("PASSWORD"));
+		connection = connectionPool.getOrCreateConnection(username,password);
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 		System.exit(-1);
 	}
+    
     //Record JDBC driver name and version
     DatabaseMetaData dm = connection.getMetaData();
-    LOG.info("\nProduct name = " + dm.getDatabaseProductName() + "\n"
+    LOG.info(LINE_BREAK + "Product name = " + dm.getDatabaseProductName() + "\n"
     		 + "Product version = " + dm.getDatabaseProductVersion() + "\n"
     		 + "Product major version = " + dm.getDatabaseMajorVersion() + "\n"
     		 + "Product minor version = " + dm.getDatabaseMinorVersion() + "\n"
     		 + "Driver name = " + dm.getDriverName() + "\n"
     		 + "Driver version = " + dm.getDriverVersion() + "\n"
     		 + "Driver major version = " + dm.getDriverMajorVersion() + "\n"
-    		 + "Driver minor version = " + dm.getDriverMinorVersion() + "\n");
+    		 + "Driver minor version = " + dm.getDriverMinorVersion() + "\n" + LINE_BREAK);
     
     //Check number of drillbits equals number of cluster nodes    
     int numberOfDrillbits = Utils.getNumberOfDrillbits(connection);
-    connectionPool.releaseConnection(drillProperties.get("USERNAME"), 
-    		drillProperties.get("PASSWORD"), connection);
+    connectionPool.releaseConnection(username,password, connection);
     int numberOfClusterNodes = Utils.getNumberOfClusterNodes();
     if (numberOfClusterNodes != 0 && numberOfClusterNodes != numberOfDrillbits) {
     	LOG.error("\nPrecheck failed!\n\tNumber of cluster nodes = "
@@ -281,8 +149,8 @@ public class TestDriver {
     List<DrillTestCase> drillTestCases = Utils.getDrillTestCases();
     List<DrillTest> tests = Lists.newArrayList();
     for (DrillTestCase testCase : drillTestCases) {
-      for (int j = 0; j < OPTIONS.clones; j++) {
-        tests.add(getDrillTest(testCase, connectionPool, j));
+      for (int clone = 0; clone < cmdParam.clones; clone++) {
+        tests.add(getDrillTest(testCase, connectionPool, clone));
       }
     }
 
@@ -294,24 +162,24 @@ public class TestDriver {
     int i = 0;
     LOG.info("> TOOK " + stopwatch + " TO SETUP.");
 
-    if (OPTIONS.trackMemory) {
+    if (cmdParam.trackMemory) {
   	  queryMemoryUsage();
     }
 
-    for (i = 1; i < OPTIONS.iterations+1; i++) {
+    for (i = 1; i < cmdParam.iterations+1; i++) {
       stopwatch.reset().start();
       LOG.info("> PREPARING DATA..");
-      if (OPTIONS.generate) {
+      if (cmdParam.generate) {
         prepareData(drillTestCases);
       }
       LOG.info("> TOOK " + stopwatch + " TO PREPARE DATA.");
       stopwatch.reset().start();
 
       LOG.info("> RUNNING TESTS (ITERATION " + i + ")..");
-      Collections.shuffle(tests, new Random(12345));
+      Collections.shuffle(tests, new Random());
       executor.executeAll(tests);
 
-      if (OPTIONS.trackMemory) {
+      if (cmdParam.trackMemory) {
     	  queryMemoryUsage();
       }
 
@@ -343,14 +211,13 @@ public class TestDriver {
           executionFailures.add(test);
         }
       }
-      LOG.info(LINE_BREAK);LOG.info(LINE_BREAK);
+      LOG.info(LINE_BREAK + LINE_BREAK);
       LOG.info("Tests completed for iteration " + i + " in " + stopwatch);
-      LOG.info(LINE_BREAK);
-      LOG.info(LINE_BREAK);
+      LOG.info(LINE_BREAK + LINE_BREAK);
       LOG.info("Results:");
       LOG.info(LINE_BREAK);
       LOG.info("Execution Failures:");
-      if(OPTIONS.generateReports) {
+      if(cmdParam.generateReports) {
         LOG.info("Generating reports");
         generateReports(tests, i);
       }
@@ -390,7 +257,7 @@ public class TestDriver {
       	"\nTimeouts: %d\nCanceled: %d", passingTests.size(), executionFailures.size(), 
       	verificationFailures.size(), timeoutFailures.size(), canceledTests.size()));
       
-      if (OPTIONS.trackMemory) {
+      if (cmdParam.trackMemory) {
     	LOG.info(LINE_BREAK);
     	LOG.info(String.format("\nMemory Consumption:\n\t\theap(M)\t\tdirect(M)\tjvm_direct(M)\n" +
     			"  before:\t%d\t\t%d\t\t%d\n  after:\t%d\t\t%d\t\t%d", memUsage[0][0], memUsage[0][1], memUsage[0][2],
@@ -414,13 +281,14 @@ public class TestDriver {
     teardown();
     executor.close();
     connectionPool.close();
+    restartDrill();
 
     return totalExecutionFailure + totalVerificationFailure + totalTimeoutFailure;
   }
 
   public void setup() throws IOException, InterruptedException {
-    if (!new File(drillOutputDirName).exists()) {
-      new File(drillOutputDirName).mkdir();
+    if (!new File(drillOutputDir).exists()) {
+      new File(drillOutputDir).mkdir();
     }
 
     String templatePath = CWD + "/conf/plugin-templates/";
@@ -430,14 +298,14 @@ public class TestDriver {
       String filename = templateFile.getName();
       String pluginType = filename.substring(0, filename.indexOf('-'));
       Utils.updateDrillStoragePlugin(templateFile.getAbsolutePath(),
-          ipAddressPlugin, pluginType, fsMode);
+    		drillStoragePluginServer, pluginType, fsMode);
       Thread.sleep(200);
     }
-    String beforeRunQueryFilename = CWD + "/" + OPTIONS.beforeRunQueryFilename;
+    
+    String beforeRunQueryFilename = CWD + "/" + cmdParam.beforeRunQueryFilename;
     try {
       String[] setupQueries = Utils.getSqlStatements(beforeRunQueryFilename);
-	  connection = connectionPool.getOrCreateConnection(drillProperties.get("USERNAME"), 
-  				drillProperties.get("PASSWORD"));
+      connection = connectionPool.getOrCreateConnection(username ,password);
       for (String query : setupQueries) {
         LOG.info(Utils.getSqlResult(Utils.execSQL(query, connection)));
       }
@@ -460,17 +328,14 @@ public class TestDriver {
     	}    	
       }
 
-      connectionPool.releaseConnection(drillProperties.get("USERNAME"), 
-    		  drillProperties.get("PASSWORD"), connection);
+      connectionPool.releaseConnection(username, password, connection);
     } catch (IOException e) {
       LOG.warn("WARNING: " + beforeRunQueryFilename + " file does not exist.\n");
     } catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 		try {
 			connection.close();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -478,10 +343,9 @@ public class TestDriver {
   }
   
   private void teardown() {
-	String afterRunQueryFilename = CWD + "/" + OPTIONS.afterRunQueryFilename;
+	String afterRunQueryFilename = CWD + "/" + cmdParam.afterRunQueryFilename;
 	try {
-	  connection = connectionPool.getOrCreateConnection(drillProperties.get("USERNAME"),
-				drillProperties.get("PASSWORD"));
+	  connection = connectionPool.getOrCreateConnection(username, password);
 	  String[] teardownQueries = Utils.getSqlStatements(afterRunQueryFilename);
       for (String query : teardownQueries) {
         LOG.info(Utils.getSqlResult(Utils.execSQL(query, connection)));
@@ -489,17 +353,14 @@ public class TestDriver {
     } catch (IOException e) {
       LOG.warn("WARNING: " + afterRunQueryFilename + " file does not exist.\n");
     } catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 		try {
 			connection.close();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	} 
-	connectionPool.releaseConnection(drillProperties.get("USERNAME"), 
-			drillProperties.get("PASSWORD"), connection);
+	connectionPool.releaseConnection(username,password, connection);
   }
 
   private void prepareData(List<DrillTestCase> tests) throws Exception {
@@ -513,8 +374,8 @@ public class TestDriver {
 
     boolean restartDrillbits = false;
 
-    CancelingExecutor copyExecutor = new CancelingExecutor(OPTIONS.threads, Integer.MAX_VALUE);
-    CancelingExecutor genExecutor = new CancelingExecutor(OPTIONS.threads, Integer.MAX_VALUE);
+    CancelingExecutor copyExecutor = new CancelingExecutor(cmdParam.threads, Integer.MAX_VALUE);
+    CancelingExecutor genExecutor = new CancelingExecutor(cmdParam.threads, Integer.MAX_VALUE);
     List<Cancelable> copyTasks = Lists.newArrayList();
     List<Cancelable> genTasks = Lists.newArrayList();
     for (final TestCaseModeler.DataSource datasource : dataSources) {
@@ -529,7 +390,7 @@ public class TestDriver {
           @Override
           public void run() {
             try {
-              Path src = new Path(CWD + "/" + Utils.getDrillTestProperties().get("DRILL_TEST_DATA_DIR") + "/" + datasource.src);
+              Path src = new Path(CWD + "/" + drillTestData + "/" + datasource.src);
               Path dest = new Path(drillTestData, datasource.dest);
               dfsCopy(src, dest, fsMode);
             } catch (IOException e) {
@@ -566,34 +427,23 @@ public class TestDriver {
     genExecutor.executeAll(genTasks);
     genExecutor.close();
     LOG.info(">> TOOK " + stopwatch + " TO GENERATE DATA.");
+
     if (restartDrillbits) {
       LOG.info("Restarting drillbits");
-      int exitCode = 0;
-      String command = null;
-      try {
-        command = "/bin/bash " + restartDrillScript;
-        LOG.info("Running command: " + command);
-        exitCode = Runtime.getRuntime().exec(command).waitFor();
-      } catch (Exception e) {
-        LOG.error("Error: Failed to execute the command " + command + ".");
-      }
-      if (exitCode != 0) {
-        throw new RuntimeException("Error executing the command " + command
-            + " has return code " + exitCode);
-      }
+      restartDrill();
     }
   }
 
-  private static void dfsCopy(Path src, Path dest, String fsMode)
+  private void dfsCopy(Path src, Path dest, String fsMode)
           throws IOException {
 
     FileSystem fs;
     FileSystem localFs = FileSystem.getLocal(conf);
 
-    if (fsMode.equals(LOCALFS)) {
-      fs = FileSystem.getLocal(conf);
+    if (fsMode.equals("distributedFS")) {
+        fs = FileSystem.get(conf);
     } else {
-      fs = FileSystem.get(conf);
+        fs = FileSystem.getLocal(conf);
     }
 
     try {
@@ -621,8 +471,8 @@ public class TestDriver {
     }
   }
 
-  public static void runGenerateScript(DataSource datasource) {
-	String command = CWD + "/" + Utils.getDrillTestProperties().get("DRILL_TEST_DATA_DIR") + "/" + datasource.src;
+  private void runGenerateScript(DataSource datasource) {
+	String command = CWD + "/" + drillTestDataDir + "/" + datasource.src;
 	LOG.info("Running command " + command);
 	CmdConsOut cmdConsOut = null;
 	try {
@@ -638,7 +488,7 @@ public class TestDriver {
 	}
   }
   
-  private static DrillTest getDrillTest(DrillTestCase modeler, ConnectionPool connectionPool, int cloneId) {
+  private DrillTest getDrillTest(DrillTestCase modeler, ConnectionPool connectionPool, int cloneId) {
     switch(modeler.submitType) {
     case "jdbc":
       return new DrillTestJdbc(modeler, connectionPool, cloneId);
@@ -663,8 +513,7 @@ public class TestDriver {
     BufferedWriter writer = new BufferedWriter(new FileWriter(new File(memUsageFilename), true));
     ResultSet resultSet = null;
     try {
-      connection = connectionPool.getOrCreateConnection(drillProperties.get("USERNAME"), 
-    		drillProperties.get("PASSWORD"));
+      connection = connectionPool.getOrCreateConnection(username, password);
       resultSet = Utils.execSQL(query, connection);
 
       List columnLabels = new ArrayList<String>();
@@ -715,8 +564,7 @@ public class TestDriver {
           memUsage[1][i] = (Long) values.get(i)/1024/1024;
         }
       }
-      connectionPool.releaseConnection(drillProperties.get("USERNAME"), 
-    		  drillProperties.get("PASSWORD"), connection);
+      connectionPool.releaseConnection(username, password, connection);
     } catch (IllegalArgumentException | IllegalAccessException e1) {
 	  e1.printStackTrace();
     } catch (IOException e1) {
@@ -733,5 +581,128 @@ public class TestDriver {
         writer.close();
       }
     }
+  }
+  
+  private static void loadConf() {
+	Map<String, String> drillProperties = Utils.drillProperties;
+			
+	drillHome = drillProperties.containsKey("DRILL_HOME") ?
+			drillProperties.get("DRILL_HOME") : DRILL_HOME;
+			
+	fsMode = drillProperties.containsKey("FS_MODE") ? 
+			drillProperties.get("FS_MODE") : FS_MODE;
+	    
+	drillTestDataDir = drillProperties.containsKey("DRILL_TEST_DATA_DIR") ?
+			drillProperties.get("DRILL_TEST_DATA_DIR") : DRILL_TESTDATA_DIR;
+			
+	if (fsMode.equals("distributedFS")) {
+	  drillTestData = drillProperties.containsKey("DRILL_TESTDATA") ? 
+			drillProperties.get("DRILL_TESTDATA") : DRILL_TESTDATA;
+	} else {
+	  drillTestData = System.getProperty("user.home") + drillTestData;
+	}
+	    
+	drillOutputDir = drillProperties.containsKey("DRILL_OUTPUT_DIR") ? 
+			drillProperties.get("DRILL_OUTPUT_DIR") : DRILL_OUTPUT_DIR;
+	    		
+	drillStoragePluginServer = drillProperties.containsKey("DRILL_STORAGE_PLUGIN_SERVER") ?
+			drillProperties.get("DRILL_STORAGE_PLUGIN_SERVER") : DRILL_STORAGE_PLUGIN_SERVER;
+	    		
+	jdbcDriver = drillProperties.containsKey("JDBC_DRIVER") ?
+			drillProperties.get("JDBC_DRIVER") : JDBC_DRIVER;
+			
+	jdbcDriverCP = drillProperties.containsKey("JDBC_DRIVER_CP") ?
+			drillProperties.get("JDBC_DRIVER_CP") : JDBC_DRIVER_CP;
+			
+	connectionString = drillProperties.containsKey("CONNECTION_STRING") ?
+			drillProperties.get("CONNECTION_STRING") : CONNECTION_STRING;
+			
+	drillReportsDir = drillProperties.containsKey("DRILL_REPORTS_DIR") ?
+			drillProperties.get("DRILL_REPORTS_DIR") : DRILL_REPORTS_DIR;
+	    
+	drillReportsDFSDir = drillProperties.containsKey("DRILL_REPORTS_DFS_DIR") ?
+			drillProperties.get("DRILL_REPORTS_DFS_DIR") : DRILL_REPORTS_DFS_DIR;
+
+	username = drillProperties.containsKey("USERNAME") ?
+			drillProperties.get("USERNAME") : USERNAME;
+	    		
+	password = drillProperties.containsKey("PASSWORD") ?
+			drillProperties.get("PASSWORD") : PASSWORD;
+			
+	restartDrillScript = drillProperties.containsKey("RESTART_DRILL_SCRIPT") ?
+			drillProperties.get("RESTART_DRILL_SCRIPT") : RESTART_DRILL_SCRIPT;
+  }
+
+  private void generateReports(List<DrillTest> tests, int iteration) {
+    try{
+      File drillReportDir = new File(drillReportsDir);
+      FileSystem localFS = FileSystem.getLocal(conf);
+      FileSystem DFS = FileSystem.get(conf);
+
+      if (!drillReportDir.exists()) {
+        if (!drillReportDir.mkdir()) {
+          LOG.debug("Cannot create directory " + drillReportsDir
+                  + ".  Using current working directory for drill output");
+          drillReportsDir = CWD;
+        }
+      }
+
+      File reportFile = new File(drillReportsDir + "/apache-drill-" + version + "_" + commitId + "_" +
+              "report_" + new Date().toString().replace(' ', '_').replace(':','_') + ".json");
+
+      BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(reportFile));
+      Document document;
+      for (DrillTest test : tests) {
+        document = Json.newDocument();
+        document.set("_id", test.getTestId()+ "_" + new File(test.getInputFile()).getName() + "_" 
+        		+ test.getCloneId() + "_" + iteration);
+        document.set("queryFilepath", test.getInputFile().substring(test.getInputFile().indexOf("resources/")+10));
+        String query = test.getQuery();
+        if(query != null){
+          query.replaceAll("\n", "");
+        }
+        document.set("query", query);
+        document.set("status", test.getTestStatus().toString());
+        if(test.getTestStatus().equals(TestStatus.EXECUTION_FAILURE) 
+        		|| test.getTestStatus().equals(TestStatus.VERIFICATION_FAILURE)) {
+          document.set("errorMessage", test.getException().toString().replaceAll("\n",""));
+        }else{
+          document.set("errorMessage", "N/A");
+        }
+        document.set("queryExecutionTime", test.getDuration().toString());
+        document.set("drillVersion", version);
+        document.set("commitId", commitId);
+        bufferedWriter.write(document.toString());
+        bufferedWriter.newLine();
+      }
+
+      bufferedWriter.flush();
+      bufferedWriter.close();
+
+      // Upload report to DFS if the DRILL_REPORTS_DFS_DIR variable is set
+      if (Utils.drillProperties.containsKey("DRILL_REPORTS_DFS_DIR")){
+        FileUtil.copy(localFS, new Path(reportFile.getAbsolutePath()), DFS, 
+        		new Path (drillReportsDFSDir + "/" + reportFile.getName()), true, false, DFS.getConf());
+      }
+    }
+    catch(Exception e){
+      e.printStackTrace();
+    }
+  }
+  
+  private int restartDrill() {
+    int exitCode = 0;
+    String command = CWD + "/" + restartDrillScript;
+    File commandFile = new File(command);
+    if (commandFile.exists() && commandFile.canExecute()) {
+      LOG.info("Running command: " + command);
+      exitCode = Utils.execCmd(command).exitCode;
+      if (exitCode != 0) {
+        LOG.error("Error executing the command " + command + " has return code " + exitCode);
+      }
+    } else {
+      LOG.error("Restart Drillbit script " + command + " does not exist or can't be executed!");
+    }
+    return exitCode;
   }
 }

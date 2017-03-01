@@ -231,6 +231,7 @@ public class TestVerifier {
         sb.append("\nNumber of columns in actual data: " + size);
         sb.append("\nFirst row of expected data:\n" + line);
         sb.append("\nTypes in actual data: " + Utils.getTypesInStrings(types));
+        reader.close();
         throw new VerificationException(sb.toString());
       }
       List<Object> typedFields = Lists.newArrayList();
@@ -417,10 +418,8 @@ public class TestVerifier {
         String string1 = (String) o1;
         String string2 = (String) o2;
         if (orderByColumns != null) {
-          String columnName;
           String fieldName;
-          String nextFieldName = "";
-          columnName = (String) orderByColumns.keySet().toArray()[start];
+          String columnName = (String) orderByColumns.keySet().toArray()[start];
           if (columnName.indexOf('.') >= 0) {
             // there is a field in the JSON string
             fieldName = columnName.substring(columnName.indexOf('.') + 1);

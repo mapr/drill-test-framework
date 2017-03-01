@@ -86,8 +86,8 @@ public class TestCaseModeler {
     public String outputFormat;
     @JsonProperty("expected-file")
     public String expectedFile;
-    public String username = TestDriver.drillProperties.get("USERNAME");
-    public String password = TestDriver.drillProperties.get("PASSWORD");
+    public String username = Utils.drillProperties.get("USERNAME");
+    public String password = Utils.drillProperties.get("PASSWORD");
     @JsonProperty("verification-type")
     public List<String> verificationTypes;
 

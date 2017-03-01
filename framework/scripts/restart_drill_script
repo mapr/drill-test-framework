@@ -1,0 +1,9 @@
+#!/bin/bash
+#############################################
+# Sample script to restart drillbits
+# Rely on clush configured on the cluster
+############################################
+
+source ./conf/drillTestConfig.properties
+set -x
+clush -a ${DRILL_HOME}/bin/drillbit.sh restart

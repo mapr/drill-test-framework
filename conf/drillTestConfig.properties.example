@@ -1,46 +1,55 @@
 ########################################
+# Drill automation configuration file
+# Uncomment to provide local value
+########################################
+
+########################################
 # Drillbits
 ########################################
-DRILLBITS=IPADDR1,IPADDR2,IPADDR3,IPADDR4, ...
-NUMBER_OF_CLUSTER_NODES=4
+#DRILLBITS=IPADDR1,IPADDR2,IPADDR3,IPADDR4, ...
+
+########################################
+# Number of Drillbits
+########################################
+#NUMBER_OF_CLUSTER_NODES=4
 
 ########################################
 # Drill home
 ########################################
-DRILL_HOME=/opt/drill
+#DRILL_HOME=/opt/drill
 
 ########################################
 # Drill test data dir
 ########################################
-DRILL_TEST_DATA_DIR=framework/resources
+#DRILL_TEST_DATA_DIR=framework/resources
 
 ########################################
 # Drill actual resultset dir
 ########################################
-DRILL_OUTPUT_DIR=drill-output
+#DRILL_OUTPUT_DIR=drill-output
 
 ########################################
 # Drill report dir
 ########################################
-DRILL_REPORTS_DIR=drill-reports
-DRILL_REPORTS_DFS_DIR=/drill/reports
+#DRILL_REPORTS_DIR=drill-reports
+#DRILL_REPORTS_DFS_DIR=/drill/reports
 
 ########################################
 # Location of hadoop system drill is 
 # running in
 ########################################
-HADOOP_INSTALL_LOC=/opt/mapr
+#HADOOP_INSTALL_LOC=/opt/mapr
 
 ########################################
 # Path to the distributed system where
 # data is to be populated
 ########################################
-DRILL_TESTDATA=/drill/testdata
+#DRILL_TESTDATA=/drill/testdata
 
 ########################################
 # Zookeeper list
 ########################################
-ZOOKEEPERS=IPADDR1:5181/drill/drillbits1
+#ZOOKEEPERS=IPADDR1:5181/drill/drillbits1
 
 ########################################
 # DRILL JDBC driver
@@ -49,52 +58,51 @@ ZOOKEEPERS=IPADDR1:5181/drill/drillbits1
 #JDBC_DRIVER=com.mapr.drill.jdbc41.Driver
 
 # Apache DRILL JDBC driver
-JDBC_DRIVER=org.apache.drill.jdbc.Driver
+#JDBC_DRIVER=org.apache.drill.jdbc.Driver
 
 ########################################
 # JDBC DRIVER CLASSPATH
 ########################################
 #JDBC_DRIVER_CP=/root/DrillJDBC41/*
-JDBC_DRIVER_CP=${DRILL_HOME}/jars/jdbc-driver/*
+#JDBC_DRIVER_CP=${DRILL_HOME}/jars/jdbc-driver/*
 
 ########################################
 # DRILL JDBC CONNECTION STRING
 ########################################
-CONNECTION_STRING=jdbc:drill:zk\=x.x.x.x:5181/zk_root/cluster_id
+#CONNECTION_STRING=jdbc:drill:zk\=x.x.x.x:5181/zk_root/cluster_id
 
 ########################################
 # Drill storage plugin server
 ########################################
-DRILL_STORAGE_PLUGIN_SERVER=IPADDR1
+#DRILL_STORAGE_PLUGIN_SERVER=IPADDR1
 
 ########################################
 # Test timeout (seconds)
 ########################################
-TIME_OUT_SECONDS=1200
+#TIME_OUT_SECONDS=1200
 
 ########################################
-# Restart drill command
+# Restart drill script
 ########################################
-RESTART_DRILL_SCRIPT=resources/bin/drill-restart.sh
+#RESTART_DRILL_SCRIPT=framework/scripts/restart_drill_script
 
 ########################################
 ### Tests run as the following user
 ##########################################
-USERNAME=user1
-PASSWORD=pass1
+#USERNAME=user1
+#PASSWORD=pass1
 
-export ZOOKEEPER_HOST=IPADDR1
-export CLUSTER_NAME=Drill-ATS
-export ZK_ROOT=drill-ats-build
+#export ZOOKEEPER_HOST=IPADDR1
+#export CLUSTER_NAME=Drill-ATS
+#export ZK_ROOT=drill-ats-build
 
-export DRILL_USER=root
-export CLUSH_GROUP=all
+#export DRILL_USER=root
+#export CLUSH_GROUP=all
 export DRILL_STORAGE_PLUGIN_SERVER
 export DRILL_HOME=/opt/drill
 
 export M2_HOME=/usr/local/apache-maven/apache-maven-3.1.1
 export M2=$M2_HOME/bin
-
 export PATH=.:$M2:$PATH
 
 export DRILL_VERSION=1.6.0-SNAPSHOT

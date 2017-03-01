@@ -27,27 +27,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
-public class ConnectionPool implements AutoCloseable {
+public class ConnectionPool implements DrillDefaults, AutoCloseable {
   private static final Logger LOG = Logger.getLogger(ConnectionPool.class);
-  private String URL_STRING = "jdbc:drill:drillbit=localhost";
-  private String JDBC_DRIVER = "org.apache.drill.jdbc.Driver";
+  //private String URL_STRING = "jdbc:drill:drillbit=localhost";
+  //private String JDBC_DRIVER = "org.apache.drill.jdbc.Driver";
   //private static final String URL_STRING = Utils.getDrillTestProperties().get("CONNECTION_STRING");
   //private static final String URL_STRING = String.format("jdbc:drill:drillbit=%s",
   //  Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER"));
 
   private final Map<String, Queue<Connection>> connections;
 
-  public ConnectionPool() {
-	if (Utils.getDrillTestProperties().containsKey("CONNECTION_STRING")) {
-	  URL_STRING = Utils.getDrillTestProperties().get("CONNECTION_STRING");
-	}
-	if (Utils.getDrillTestProperties().containsKey("JDBC_DRIVER")) {
-	  JDBC_DRIVER = Utils.getDrillTestProperties().get("JDBC_DRIVER");
-	}
+  public ConnectionPool(String jdbcDriver) {
     try {
-		Class.forName(JDBC_DRIVER);
+		Class.forName(jdbcDriver);
 	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 		System.exit(-1);
 	}
@@ -70,14 +63,14 @@ public class ConnectionPool implements AutoCloseable {
     if (connections.containsKey(key)) {
       final Connection connection = connections.get(key).poll();
       if (connection == null) {
-        return DriverManager.getConnection(URL_STRING, username, password);
+        return DriverManager.getConnection(TestDriver.connectionString, username, password);
       } else {
         return connection;
       }
     } else {
       final Queue<Connection> connectionQueue = Queues.newLinkedBlockingQueue();
       connections.put(key, connectionQueue);
-      return DriverManager.getConnection(URL_STRING, username, password);
+      return DriverManager.getConnection(TestDriver.connectionString, username, password);
     }
   }
 
