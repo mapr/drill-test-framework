@@ -390,7 +390,7 @@ public class TestDriver implements DrillDefaults {
           @Override
           public void run() {
             try {
-              Path src = new Path(CWD + "/" + drillTestData + "/" + datasource.src);
+              Path src = new Path(CWD + "/" + drillTestDataDir + "/" + datasource.src);
               Path dest = new Path(drillTestData, datasource.dest);
               dfsCopy(src, dest, fsMode);
             } catch (IOException e) {
