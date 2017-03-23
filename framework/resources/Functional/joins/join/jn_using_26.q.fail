@@ -1,0 +1,1 @@
+SELECT * FROM using_f1 RIGHT OUTER JOIN using_f2 USING(col_id);

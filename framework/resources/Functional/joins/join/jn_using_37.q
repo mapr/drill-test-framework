@@ -1,0 +1,1 @@
+SELECT count(*) FROM using_f1 l INNER JOIN using_f2 r USING(col_dt, col_state, col_prime, col_varstr, col_id, col_name);

@@ -1,0 +1,1 @@
+SELECT l.col_dt, l.col_state, l.col_prime, l.col_varstr, l.col_id, l.col_name FROM using_f1 l LEFT OUTER JOIN using_f2 r USING(col_id);

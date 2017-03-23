@@ -1,0 +1,1 @@
+SELECT * FROM using_f1 JOIN using_f2 USING(col_name, col_varstr);

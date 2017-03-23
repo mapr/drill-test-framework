@@ -1,0 +1,1 @@
+SELECT * FROM using_f1 LEFT OUTER JOIN using_f2 USING(col_state);
