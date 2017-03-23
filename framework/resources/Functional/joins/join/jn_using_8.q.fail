@@ -1,0 +1,1 @@
+SELECT t1.col_dt t1_dt, t2.col_dt t2_dt, t1.col_state t1_state, t2.col_state t2_state FROM using_f1 t1 JOIN using_f2 t2 USING(col_dt);
