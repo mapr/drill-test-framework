@@ -307,6 +307,19 @@
                   <outputDirectory>${project.basedir}/resources/Datasources/json/studio</outputDirectory>
                 </configuration>
               </execution>
+              <execution>
+                <id>md1119_parquet</id>
+                <phase>prepare-package</phase>
+                <goals>
+                  <goal>wget</goal>
+                </goals>
+                <configuration>
+                  <url>http://apache-drill.s3.amazonaws.com/files/md1119_parquet.tgz</url>
+                  <outputFileName>md1119_parquet.tgz</outputFileName>
+                  <unpack>true</unpack>
+                  <outputDirectory>${project.basedir}/resources/Datasources/hive_storage/</outputDirectory>
+                </configuration>
+              </execution> 
             </executions>
           </plugin>
         </plugins>
