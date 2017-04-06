@@ -1,3 +1,3 @@
 .*
 Filter.*OR\(=.*1993.*=.*1994.*AND.*\(.*>.*29700.*<.*15000.*=.*1995\)\).*
-Scan.*path.*=.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitempart/0_0_3.parquet.*path.*=.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitempart/0_0_5.parquet.*path.*=.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitempart/0_0_4.parquet.*selectionRoot.*=.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitempart.*numFiles=3.*columns=\[`\*`\].*
+Scan.*selectionRoot.*=.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitempart.*numFiles=3.*columns=\[`\*`\].*

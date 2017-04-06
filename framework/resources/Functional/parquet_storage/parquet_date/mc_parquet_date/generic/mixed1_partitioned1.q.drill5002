@@ -1,3 +1,1 @@
-refresh table metadata dfs.`/drill/testdata/mc_parquet_date/mixed1_partitioned`;
 select  l_shipdate, `month`(l_shipdate) from dfs.`/drill/testdata/mc_parquet_date/mixed1_partitioned`;
-select 1 from sys.version;

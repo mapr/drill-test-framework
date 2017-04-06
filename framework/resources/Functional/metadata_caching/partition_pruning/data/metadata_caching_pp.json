@@ -21,6 +21,11 @@
           "mode": "cp",
           "src": "Datasources/metadata_caching/data_pp/",
           "dest": "metadata_caching_pp/"
-        } 
+        } ,
+        {
+            "mode": "gen",
+            "src": "Datasources/metadata_caching/refresh_metadata_multilevel.sh",
+            "dest": ""
+        }
     ]
 }
