@@ -1,2 +1,2 @@
 .*
-Scan.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring/0_0_4.parquet.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring/0_0_77.parquet.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring/0_0_31.parquet]].*selectionRoot.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring.*numFiles=3.*columns=\[`\*`\].*
+Scan.*selectionRoot.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring.*numFiles=3.*columns=\[`\*`\].*

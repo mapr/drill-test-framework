@@ -1,4 +1,3 @@
-refresh table metadata l_3level;
 explain plan for 
   select l_orderkey, dir0 from `l_3level/1/one/2015-7-12` t1
   union all 
