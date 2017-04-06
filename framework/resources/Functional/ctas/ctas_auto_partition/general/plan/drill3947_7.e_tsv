@@ -1,2 +1,2 @@
 .*00-02.*Project.*
-00-03.*Scan.*path=/drill/testdata/drill-3947/0_0_4540.parquet.*path=/drill/testdata/drill-3947/0_0_4539.parquet.*selectionRoot.*/drill/testdata/drill-3947.*numFiles=2.*columns.*`\*`.*
+00-03.*Scan.*selectionRoot.*/drill/testdata/drill-3947.*numFiles=2.*columns.*`\*`.*

@@ -1,4 +1,3 @@
-refresh table metadata l_3level;
 select l_quantity from l_3level 
 where 
     dir0=1 and (
