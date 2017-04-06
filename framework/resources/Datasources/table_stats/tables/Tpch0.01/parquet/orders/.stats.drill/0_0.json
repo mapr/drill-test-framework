@@ -1,0 +1,70 @@
+{
+  "statistics_version" : "v1",
+  "directories" : [ {
+    "computed" : "2017-02-23T22:17:27.395-08:00",
+    "columns" : [ {
+      "column" : "o_orderkey",
+      "schema" : 1.0,
+      "statcount" : 15000.0,
+      "nonnullstatcount" : 15000.0,
+      "ndv" : 14991,
+      "avgwidth" : 4.0
+    }, {
+      "column" : "o_custkey",
+      "schema" : 1.0,
+      "statcount" : 15000.0,
+      "nonnullstatcount" : 15000.0,
+      "ndv" : 999,
+      "avgwidth" : 4.0
+    }, {
+      "column" : "o_orderstatus",
+      "schema" : 1.0,
+      "statcount" : 15000.0,
+      "nonnullstatcount" : 15000.0,
+      "ndv" : 3,
+      "avgwidth" : 1.0
+    }, {
+      "column" : "o_totalprice",
+      "schema" : 1.0,
+      "statcount" : 15000.0,
+      "nonnullstatcount" : 15000.0,
+      "ndv" : 14996,
+      "avgwidth" : 8.0
+    }, {
+      "column" : "o_orderdate",
+      "schema" : 1.0,
+      "statcount" : 15000.0,
+      "nonnullstatcount" : 15000.0,
+      "ndv" : 2401,
+      "avgwidth" : 4.0
+    }, {
+      "column" : "o_orderpriority",
+      "schema" : 1.0,
+      "statcount" : 15000.0,
+      "nonnullstatcount" : 15000.0,
+      "ndv" : 5,
+      "avgwidth" : 8.412533333333334
+    }, {
+      "column" : "o_clerk",
+      "schema" : 1.0,
+      "statcount" : 15000.0,
+      "nonnullstatcount" : 15000.0,
+      "ndv" : 1000,
+      "avgwidth" : 15.0
+    }, {
+      "column" : "o_shippriority",
+      "schema" : 1.0,
+      "statcount" : 15000.0,
+      "nonnullstatcount" : 15000.0,
+      "ndv" : 1,
+      "avgwidth" : 4.0
+    }, {
+      "column" : "o_comment",
+      "schema" : 1.0,
+      "statcount" : 15000.0,
+      "nonnullstatcount" : 15000.0,
+      "ndv" : 14996,
+      "avgwidth" : 48.49093333333333
+    } ]
+  } ]
+}

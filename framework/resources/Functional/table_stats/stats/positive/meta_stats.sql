@@ -1,0 +1,1 @@
+explain plan including all attributes for select l_orderkey,l_partkey,l_shipdate,l_shipmode from `table_stats/lineitem_parquet_partitioned_hive_date` where dir0 = 'dt=2014-10-22' and l_shipmode='AIR';

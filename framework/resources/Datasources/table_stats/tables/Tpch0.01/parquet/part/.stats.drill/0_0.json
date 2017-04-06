@@ -1,0 +1,70 @@
+{
+  "statistics_version" : "v1",
+  "directories" : [ {
+    "computed" : "2017-02-23T22:17:33.209-08:00",
+    "columns" : [ {
+      "column" : "p_partkey",
+      "schema" : 1.0,
+      "statcount" : 2000.0,
+      "nonnullstatcount" : 2000.0,
+      "ndv" : 2000,
+      "avgwidth" : 4.0
+    }, {
+      "column" : "p_name",
+      "schema" : 1.0,
+      "statcount" : 2000.0,
+      "nonnullstatcount" : 2000.0,
+      "ndv" : 2001,
+      "avgwidth" : 33.127
+    }, {
+      "column" : "p_mfgr",
+      "schema" : 1.0,
+      "statcount" : 2000.0,
+      "nonnullstatcount" : 2000.0,
+      "ndv" : 5,
+      "avgwidth" : 14.0
+    }, {
+      "column" : "p_brand",
+      "schema" : 1.0,
+      "statcount" : 2000.0,
+      "nonnullstatcount" : 2000.0,
+      "ndv" : 25,
+      "avgwidth" : 8.0
+    }, {
+      "column" : "p_type",
+      "schema" : 1.0,
+      "statcount" : 2000.0,
+      "nonnullstatcount" : 2000.0,
+      "ndv" : 150,
+      "avgwidth" : 20.551
+    }, {
+      "column" : "p_size",
+      "schema" : 1.0,
+      "statcount" : 2000.0,
+      "nonnullstatcount" : 2000.0,
+      "ndv" : 50,
+      "avgwidth" : 4.0
+    }, {
+      "column" : "p_container",
+      "schema" : 1.0,
+      "statcount" : 2000.0,
+      "nonnullstatcount" : 2000.0,
+      "ndv" : 40,
+      "avgwidth" : 7.6105
+    }, {
+      "column" : "p_retailprice",
+      "schema" : 1.0,
+      "statcount" : 2000.0,
+      "nonnullstatcount" : 2000.0,
+      "ndv" : 1100,
+      "avgwidth" : 8.0
+    }, {
+      "column" : "p_comment",
+      "schema" : 1.0,
+      "statcount" : 2000.0,
+      "nonnullstatcount" : 2000.0,
+      "ndv" : 1960,
+      "avgwidth" : 13.5865
+    } ]
+  } ]
+}
