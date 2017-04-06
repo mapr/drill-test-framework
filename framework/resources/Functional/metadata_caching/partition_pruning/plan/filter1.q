@@ -1,4 +1,3 @@
-refresh table metadata l_3level;
 explain plan for select
   sum(l_extendedprice * l_discount) as revenue
 from
