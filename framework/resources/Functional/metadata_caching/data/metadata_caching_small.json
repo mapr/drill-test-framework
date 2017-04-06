@@ -36,6 +36,16 @@
            "mode": "gen",
            "src": "Datasources/metadata_caching/delete_toplevel_cache.sh",
            "dest": ""
+        },
+        {
+           "mode": "gen",
+           "src": "Datasources/metadata_caching/delete_toplevel_cache.sh",
+           "dest": ""
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/metadata_caching/refresh_metadata_multilevel.sh",
+            "dest": ""
         }
     ]
 }

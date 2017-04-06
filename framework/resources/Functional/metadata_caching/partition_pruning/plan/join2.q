@@ -1,6 +1,3 @@
-refresh table metadata l_3level;
-refresh table metadata c_1level;
-refresh table metadata o_2level;
 explain plan for select
   l.l_orderkey,
   sum(l.l_extendedprice * (1 - l.l_discount)) as revenue,
@@ -26,6 +23,3 @@ order by
   revenue desc,
   o.o_orderdate
 limit 10;
-select * from sys.version;
-select * from sys.version;
-select * from sys.version;

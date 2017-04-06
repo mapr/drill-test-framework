@@ -18,5 +18,10 @@
         }
     ],
     "datasources": [
+      {
+        "mode": "gen",
+        "src": "Datasources/metadata_caching/advanced_gen.sh",
+        "dest": ""
+      }
    ]
 }

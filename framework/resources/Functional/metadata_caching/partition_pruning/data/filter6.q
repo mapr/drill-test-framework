@@ -1,4 +1,3 @@
-refresh table metadata l_3level;
 select l_orderkey, dir0 from l_3level 
 where 
   (
