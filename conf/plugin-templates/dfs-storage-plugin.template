@@ -556,6 +556,14 @@
       "abc" : {
         "type" : "json",
         "extensions" : [ "abc" ]
+      },
+      "tcsv": {
+      "type": "text",
+      "extensions": [
+        "tcsv"
+      ],
+      "extractHeader": true,
+      "delimiter": ","
       }
     }
   }
