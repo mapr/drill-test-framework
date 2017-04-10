@@ -1,7 +1,7 @@
 {
-    "testId": "int96_hive",
+    "testId": "int96_data",
     "type": "group",
-    "description": "int96 tests: parquet files are coming from hive",
+    "description": "int96 data tests",
     "categories": [ "smoke" ],
     "matrices": [
         {
@@ -19,6 +19,11 @@
             "mode": "cp",
             "src": "Datasources/subqueries",
             "dest": "subqueries"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/subqueries/create_tables.sh",
+            "dest": ""
         }
     ]
 }

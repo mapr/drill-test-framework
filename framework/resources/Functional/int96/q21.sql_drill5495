@@ -1,0 +1,1 @@
+select date_trunc('year', convert_from(create_timestamp1,'TIMESTAMP_IMPALA')), date_trunc('month', convert_from(create_timestamp1,'TIMESTAMP_IMPALA')),date_trunc('day', convert_from(create_timestamp1,'TIMESTAMP_IMPALA')) from hive1_parquet where voter_id=5;
