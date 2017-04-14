@@ -5,6 +5,7 @@
     "categories": [
         "smoke"
     ],
+    "dependencies" : ["hive"],
     "matrices": [
         {
             "query-file": ".*.sql",

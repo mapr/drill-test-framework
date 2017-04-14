@@ -1,5 +1,5 @@
 {
-    "testId": "tpcds_sf1_hive1dot2_native",
+    "testId": "tpcds_sf1_hive1dot2_native_withdate",
     "type": "group",
     "description": "Test TPCDS SF 1 original queries on text (with views on top) via jdbc",
     "categories": [
