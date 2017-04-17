@@ -1,0 +1,1 @@
+select date_sub(sql_to_timestamp('2017-04-05', 'YYYY-MM-DD'),interval '1-3' year to month), date_sub(sql_to_timestamp('2017-04-05', 'YYYY-MM-DD'), interval '1 10:20:30' DAY to second),date_sub(sql_to_timestamp('2017-04-05 13:24:35', 'YYYY-MM-DD HH24:MI:SS'), interval '1 10:20:30' DAY to second)  from (values(1));

@@ -1,0 +1,1 @@
+select date_trunc('year', sql_to_date('Wed March-29-17','DY Month-DD-YY')), date_trunc('month', sql_to_date('Wed March-29-17','DY Month-DD-YY')), date_trunc('quarter', sql_to_date('Wed March-29-17','DY Month-DD-YY')),date_trunc('decade', sql_to_date('Wed March-29-17','DY Month-DD-YY')) from (values(1));

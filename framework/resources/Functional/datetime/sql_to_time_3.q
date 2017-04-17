@@ -1,0 +1,1 @@
+select extract(hour from sql_to_time('21:13:25:15','HH24:MI:SS:MS')),extract(MINUTE from sql_to_time('21:13:25:15','HH24:MI:SS:MS')),extract(second from sql_to_time('21:13:25:15','HH24:MI:SS:MS')) from (values(1));

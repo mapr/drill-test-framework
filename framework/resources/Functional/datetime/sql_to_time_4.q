@@ -1,0 +1,1 @@
+select date_part('hour',sql_to_time('21:13:25:15','HH24:MI:SS:MS')),date_part('MINUTE',sql_to_time('21:13:25:15','HH24:MI:SS:MS')),date_part('second',sql_to_time('21:13:25:15','HH24:MI:SS:MS')) from (values(1));
