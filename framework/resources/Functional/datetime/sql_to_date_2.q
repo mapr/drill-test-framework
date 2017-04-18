@@ -1,0 +1,1 @@
+select sql_to_date('Thursday March 30, 2017','day Month DD, YYYY'), sql_to_date('Thursday March 30, 2017','Day Month DD, YYY'), sql_to_date('Thursday March 30, 2017','DAY Month dd, YY') from (values(1));
