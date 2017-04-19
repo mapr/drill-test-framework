@@ -58,6 +58,7 @@
                   <outputFileName>tpcds_hivegenerated_parquet.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources</outputDirectory>
+                  <md5>b585a419fb5ceda6daa91a8bc19c2365</md5>
                 </configuration>
               </execution>
              <execution>
