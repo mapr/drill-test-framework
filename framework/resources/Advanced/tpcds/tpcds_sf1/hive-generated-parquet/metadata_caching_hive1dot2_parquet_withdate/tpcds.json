@@ -5,7 +5,6 @@
     "categories": [
         "smoke"
     ],
-    "dependencies" : ["hive"],
     "matrices": [
         {
             "query-file": ".*.sql",
@@ -20,7 +19,7 @@
     "datasources": [
       {
         "mode": "cp",
-        "src": "Datasources/tpcds1_hive1dot2_withdate",
+        "src": "Datasources/tpcds_hivegenerated_parquet/tpcds1_hive1dot2_parquet_withdate",
         "dest": "tpcds1_hive1dot2_parquet_withdate"
       },
       { 

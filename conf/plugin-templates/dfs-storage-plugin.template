@@ -520,6 +520,11 @@
       "writable": true, 
       "defaultInputFormat": "parquet" 
     },
+    "tpcds1_hive2dot1_withdate": {
+      "location": "/drill/testdata/tpcds1_hive2dot1_withdate",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
     "drill": {
       "location": "/drill",
       "writable": true,
