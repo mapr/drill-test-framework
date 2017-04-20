@@ -1,0 +1,32 @@
+{
+    "testId": "yelp_nested_maprdb_json",
+    "type": "group",
+    "description": "Test Queries on Yelp dataset loaded into MapR-DB JSON Tables",
+    "categories": [
+        "functional_maprdb"
+    ],
+    "dependencies" : ["maprdb"],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "mfs.yelp_maprdb_json",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+	{
+            "mode": "cp",
+            "src": "Datasources/yelp/maprdb/json",
+            "dest": "yelp/maprdb/json/importFiles"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/yelp/maprdb/json/importTables.sh",
+            "dest": ""
+        }
+    ]
+}
