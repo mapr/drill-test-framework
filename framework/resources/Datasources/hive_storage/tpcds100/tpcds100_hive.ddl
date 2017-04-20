@@ -624,7 +624,8 @@ create external table tpcds100_parquet.customer
     c_email_address string,
     c_last_review_date string
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/customer';
 
 drop table if exists tpcds100_parquet.customer_address;
 create external table tpcds100_parquet.customer_address 
@@ -643,7 +644,8 @@ create external table tpcds100_parquet.customer_address
     ca_gmt_offset int,
     ca_location_type string
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/customer_address';
 
 drop table if exists tpcds100_parquet.customer_demographics;
 create external table tpcds100_parquet.customer_demographics 
@@ -658,7 +660,8 @@ create external table tpcds100_parquet.customer_demographics
     cd_dep_employed_count int,
     cd_dep_college_count int
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/customer_demographics';
 
 drop table if exists tpcds100_parquet.household_demographics;
 create external table tpcds100_parquet.household_demographics 
@@ -669,7 +672,8 @@ create external table tpcds100_parquet.household_demographics
     hd_dep_count int,
     hd_vehicle_count int
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/household_demographics';
 
 drop table if exists tpcds100_parquet.item;
 create external table tpcds100_parquet.item 
@@ -697,7 +701,8 @@ create external table tpcds100_parquet.item
     i_manager_id int,
     i_product_name string
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/item';
 
 drop table if exists tpcds100_parquet.promotion;
 create external table tpcds100_parquet.promotion 
@@ -722,7 +727,8 @@ create external table tpcds100_parquet.promotion
     p_purpose string,
     p_discount_active string
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/promotion';
 
 drop table if exists tpcds100_parquet.time_dim;
 create external table tpcds100_parquet.time_dim (
@@ -737,7 +743,8 @@ create external table tpcds100_parquet.time_dim (
     t_sub_shift string, 
     t_meal_time string
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/time_dim';
 
 drop table if exists tpcds100_parquet.date_dim;
 create external table tpcds100_parquet.date_dim (
@@ -770,7 +777,8 @@ create external table tpcds100_parquet.date_dim (
     d_current_quarter string, 
     d_current_year string
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/date_dim';
 
 drop table if exists tpcds100_parquet.store;
 create external table tpcds100_parquet.store ( 
@@ -804,7 +812,8 @@ create external table tpcds100_parquet.store (
     s_gmt_offset double, 
     s_tax_precentage double
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/store';
 
 drop table if exists tpcds100_parquet.store_sales;
 create external table tpcds100_parquet.store_sales ( 
@@ -832,7 +841,8 @@ create external table tpcds100_parquet.store_sales (
     ss_net_paid_inc_tax double, 
     ss_net_profit double
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/store_sales';
 
 drop table if exists tpcds100_parquet.warehouse;
 create external table tpcds100_parquet.warehouse ( 
@@ -851,7 +861,8 @@ create external table tpcds100_parquet.warehouse (
     w_country string,
     w_gmt_offset double       
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/warehouse';
 
 drop table if exists tpcds100_parquet.ship_mode;
 create external table tpcds100_parquet.ship_mode (
@@ -862,7 +873,8 @@ create external table tpcds100_parquet.ship_mode (
     sm_carrier string,
     sm_contract string     
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/ship_mode';
 
 drop table if exists tpcds100_parquet.reason;
 create external table tpcds100_parquet.reason (
@@ -870,7 +882,8 @@ create external table tpcds100_parquet.reason (
     r_reason_id string,
     r_reason_desc string  
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/reason';
 
 drop table if exists tpcds100_parquet.income_band;
 create external table tpcds100_parquet.income_band ( 
@@ -878,7 +891,8 @@ create external table tpcds100_parquet.income_band (
     ib_lower_bound int,
     ib_upper_bound int         
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/income_band';
 
 drop table if exists tpcds100_parquet.call_center;
 create external table tpcds100_parquet.call_center ( 
@@ -914,7 +928,8 @@ create external table tpcds100_parquet.call_center (
     cc_gmt_offset double,
     cc_tax_percentage double 
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/call_center';
 
 drop table if exists tpcds100_parquet.web_site;
 create external table tpcds100_parquet.web_site (  
@@ -945,7 +960,8 @@ create external table tpcds100_parquet.web_site (
     web_gmt_offset double,
     web_tax_percentage double
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/web_site';
 
 drop table if exists tpcds100_parquet.store_returns;
 create external table tpcds100_parquet.store_returns ( 
@@ -970,7 +986,8 @@ create external table tpcds100_parquet.store_returns (
     sr_store_credit double,
     sr_net_loss double    
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/store_returns';
 
 drop table if exists tpcds100_parquet.web_page;
 create external table tpcds100_parquet.web_page ( 
@@ -989,7 +1006,8 @@ create external table tpcds100_parquet.web_page (
     wp_image_count int,
     wp_max_ad_count int         
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/web_page';
 
 drop table if exists tpcds100_parquet.catalog_page;
 create external table tpcds100_parquet.catalog_page (
@@ -1003,7 +1021,8 @@ create external table tpcds100_parquet.catalog_page (
     cp_description string,
     cp_type string        
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/catalog_page';
 
 drop table if exists tpcds100_parquet.inventory;
 create external table tpcds100_parquet.inventory ( 
@@ -1012,7 +1031,8 @@ create external table tpcds100_parquet.inventory (
     inv_warehouse_sk int,
     inv_quantity_on_hand int            
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/inventory';
 
 drop table if exists tpcds100_parquet.catalog_returns;
 create external table tpcds100_parquet.catalog_returns ( 
@@ -1044,7 +1064,8 @@ create external table tpcds100_parquet.catalog_returns (
     cr_store_credit double,
     cr_net_loss double       
 )
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/catalog_returns';
 
 drop table if exists tpcds100_parquet.web_returns;
 create external table tpcds100_parquet.web_returns ( 
@@ -1073,7 +1094,8 @@ create external table tpcds100_parquet.web_returns (
      wr_account_credit double,
      wr_net_loss double 
 )       
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/web_returns';
 
 drop table if exists tpcds100_parquet.web_sales;
 create external table tpcds100_parquet.web_sales (
@@ -1112,7 +1134,8 @@ create external table tpcds100_parquet.web_sales (
     ws_net_paid_inc_ship_tax double,
     ws_net_profit double       
 )       
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/web_sales';
 
 drop table if exists tpcds100_parquet.catalog_sales;
 create external table tpcds100_parquet.catalog_sales ( 
@@ -1151,4 +1174,5 @@ create external table tpcds100_parquet.catalog_sales (
     cs_net_paid_inc_ship_tax double,
     cs_net_profit double        
 )       
-STORED AS PARQUET;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds100_parquet_hivegen/catalog_sales';
