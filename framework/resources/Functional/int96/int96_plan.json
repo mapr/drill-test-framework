@@ -1,16 +1,16 @@
 {
-    "testId": "int96_impala",
+    "testId": "int96_plan",
     "type": "group",
-    "description": "int96 tests: parquet files are coming from impala",
+    "description": "int96 plan tests",
     "categories": [ "smoke" ],
     "matrices": [
         {
-            "query-file": ".*.sql",
+            "query-file": ".*.q",
             "schema": "dfs.subqueries",
             "output-format": "tsv",
-            "expected-file": ".*.res",
+            "expected-file": ".*.e",
             "verification-type": [
-                "in-memory"
+                "regex"
             ]
         }
     ],
@@ -22,4 +22,3 @@
         }
     ]
 }
-
