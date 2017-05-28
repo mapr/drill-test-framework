@@ -1,0 +1,41 @@
+
+Not sure why spilling happenned in the above 2 cases. The default memory is at 2GB and the default max width per node is 17. So each fragment should at-least be given ~117MB. Based on the profile the max memory used is just 40MB
+
+
+-- spill cycle 3 and 1 partition. Max memory 103 MB and took ~15 mins
+alter session set `planner.memory.max_query_memory_per_node` = 234127360;
+alter session set `planner.width.max_per_node` = 1;
+select max(columns[0]) from dfs.`/drill/testdata/resource-manager/250wide.tbl` group by substr(columns[0], cast(RAND()*250 as int));
+
+
+-- no spilling
+alter session set `planner.width.max_per_node` = 1;
+alter session set `planner.memory.max_query_memory_per_node` = 250127360;
+select max(d.cnt) from (select count(*) cnt, min(length(columns[0])) from dfs.`/drill/testdata/resource-manager/wide-strings-1k.tbl` group by columns[0]) d
+
+
+
+
+-- cancelled after 46 mins
+alter session set `planner.width.max_per_node` = 1;
+alter session set `planner.memory.max_query_memory_per_node` = 627127360;
+select count(*) from (select max(nulls_col), max(length(nulls_col)), max(`filename`) from dfs.`/drill/testdata/hash-agg/data2` group by no_nulls_col) d;
+
+
+-- MD-1978
+alter session set `planner.memory.max_query_memory_per_node` = 3027127360;
+alter session set `planner.width.max_per_node` = 17;
+select count(*) from (select max(`filename`) from dfs.`/drill/testdata/hash-agg/data2` group by no_nulls_col, nulls_col) d;
+
+
+-- MD-1988
+alter session set `planner.width.max_per_node` = 1;
+alter session set `planner.memory.max_query_memory_per_node` = 327127360;
+select count(*) from (select max(`filename`) from dfs.`/drill/testdata/hash-agg/data2` group by no_nulls_col, nulls_col) d;
+
+
+
+
+Why slower in the case of more memory for hash-agg. Leave everything default for the below query and it falls back to the old hash-agg
+
+select count(*) from (select nulls_col from dfs.`/drill/testdata/hash-agg/data1` group by nulls_col, no_nulls_col) d

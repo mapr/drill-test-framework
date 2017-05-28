@@ -345,6 +345,11 @@
       "writable": true,
       "defaultInputFormat": "parquet"
     },
+    "tpcds_sf1000_parquet_views": {
+      "location": "/drill/testdata/tpcds/parquet/sf1000_views",
+      "writable": true,
+      "defaultInputFormat": "parquet"
+    },
     "kvgenflatten-nulls": {
       "location": "/drill/testdata/kvgenflatten-nulls",
       "writable": true,

@@ -1,0 +1,7 @@
+alter session set `planner.width.max_per_node` = 1;
+alter session set `planner.width.max_per_query` = 1;
+alter session set `planner.memory.max_query_memory_per_node` = 247483648;
+select * from (select * from (select nulls_col, max(no_nulls_col) max_no_nulls from dfs.`/drill/testdata/hash-agg/data1` group by nulls_col)) d where d.nulls_col is not null and length(d.max_no_nulls) > 240;
+alter session set `planner.memory.max_query_memory_per_node` = 2147483648;
+alter session set `planner.width.max_per_node` = 17;
+alter session set `planner.width.max_per_query` = 1000;

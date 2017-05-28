@@ -1,0 +1,18 @@
+-- 2 out of 2 partitions spilled in all 7 minor fragments in one of the hash-agg. Each minor fragment received ~28MB and the spill cycle is 4
+
+ALTER SESSION SET `exec.sort.disable_managed` = false;
+alter session set `planner.memory.max_query_memory_per_node` = 7607483648;
+select * from (
+  select columns[0] col1 from dfs.`/drill/testdata/hash-agg/seq/seqaa.tbl` 
+  union all 
+  select distinct columns[0] col1 from dfs.`/drill/testdata/hash-agg/seq/seqaa.tbl`
+  order by col1 desc
+) d1 
+inner join (
+  select distinct columns[0] col2 from dfs.`/drill/testdata/hash-agg/uuid.tbl`
+  union all 
+  select max(dir0) col2 from dfs.`/drill/testdata/resource-manager/small_large_parquet` group by col1
+) d2 
+on d1.col1 = d2.col2;
+ALTER SESSION SET `exec.sort.disable_managed` = false;
+alter session set `planner.memory.max_query_memory_per_node` = 2147483648;

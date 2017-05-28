@@ -1,0 +1,50 @@
+WITH ss 
+     AS (SELECT ss_net_profit col1, 
+                Sum(ss_ext_sales_price) total_sales 
+         FROM   store_sales, 
+                date_dim, 
+                customer_address, 
+                item 
+         WHERE 
+                ss_item_sk = i_item_sk 
+                AND ss_sold_date_sk = d_date_sk 
+                AND ss_addr_sk = ca_address_sk  
+         GROUP  BY ss_net_profit), 
+     cs 
+     AS (SELECT cs_net_paid_inc_tax col1, 
+                Sum(cs_ext_sales_price) total_sales 
+         FROM   catalog_sales, 
+                date_dim, 
+                customer_address, 
+                item 
+         WHERE  
+                cs_item_sk = i_item_sk 
+                AND cs_sold_date_sk = d_date_sk 
+                AND cs_bill_addr_sk = ca_address_sk 
+         GROUP  BY cs_net_paid_inc_tax), 
+     ws 
+     AS (SELECT ws_net_paid_inc_ship_tax col1, 
+                Sum(ws_ext_sales_price) total_sales 
+         FROM   web_sales, 
+                date_dim, 
+                customer_address, 
+                item 
+         WHERE  
+                ws_item_sk = i_item_sk 
+                AND ws_sold_date_sk = d_date_sk 
+                AND ws_bill_addr_sk = ca_address_sk 
+         GROUP  BY ws_net_paid_inc_ship_tax) 
+SELECT col1, 
+               Sum(total_sales) total_sales 
+FROM   (SELECT * 
+        FROM   ss 
+        UNION ALL 
+        SELECT * 
+        FROM   cs 
+        UNION ALL 
+        SELECT * 
+        FROM   ws) tmp1 
+GROUP  BY col1 
+ORDER  BY total_sales
+LIMIT 100;
+
