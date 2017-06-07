@@ -19,6 +19,8 @@ package org.apache.drill.test.framework;
 
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
+
+import org.apache.drill.jdbc.DrillResultSet;
 import org.apache.drill.test.framework.TestCaseModeler.TestMatrix;
 import org.apache.drill.test.framework.TestVerifier.TestStatus;
 import org.apache.drill.test.framework.TestVerifier.VerificationException;
@@ -46,6 +48,7 @@ public class DrillTestJdbc implements DrillTest {
   private String query;
   private String outputFilename;
   private ResultSet resultSet;
+  private String queryId;
   private volatile TestStatus testStatus = TestStatus.PENDING;
   private Exception exception;
   private TestVerifier testVerifier;
@@ -138,7 +141,7 @@ public class DrillTestJdbc implements DrillTest {
     	Utils.deleteFile(outputFilename);
       }
       duration = stopwatch;
-      LOG.info(testStatus + " (" + stopwatch + ") " + modeler.queryFilename + " (connection: " + connection.hashCode() + ")");
+      LOG.info(testStatus + " (" + stopwatch + ") " + modeler.queryFilename + " (connection: " + connection.hashCode() + ") [QueryID: "+ queryId +"]");
     }
   }
 
@@ -175,6 +178,7 @@ public class DrillTestJdbc implements DrillTest {
     try {
       statement = connection.createStatement();
       resultSet = statement.executeQuery(query);      
+      queryId = ((DrillResultSet) resultSet).getQueryId();
       if (cancelQuery) {
     	c = new CancelQuery(statement);
     	c.start();
