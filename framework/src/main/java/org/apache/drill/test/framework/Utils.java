@@ -17,6 +17,7 @@
  */
 package org.apache.drill.test.framework;
 
+import org.apache.commons.io.FilenameUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -170,12 +171,21 @@ public class Utils implements DrillDefaults {
         
         String queryFileExtension = modeler.matrices.get(0).inputFile;
         String expectedFileExtension = modeler.matrices.get(0).expectedFile;
+        String failExtension = modeler.matrices.get(0).failExtension;
         String tempQueryExt = queryFileExtension;
         if(TestDriver.cmdParam.negativeCasesInclusion == true){
             LOG.info(LINE_BREAK);
             LOG.info("fail added");
             LOG.info(LINE_BREAK);
-            queryFileExtension += "|"+tempQueryExt+".fail"+"|"+tempQueryExt+".failing";
+            String fileExt = FilenameUtils.getExtension(queryFileExtension);
+	    if(failExtension!=null){
+		failExtension = FilenameUtils.getExtension(failExtension);
+	    	queryFileExtension = ".*.("+fileExt+"|"+failExtension+")";
+	    }
+	    else{ 
+	    	queryFileExtension = ".*.("+fileExt+"|fail|failing)";
+            }
+            //queryFileExtension += ".fail";
             LOG.info("Query Ext - "+queryFileExtension);
             LOG.info(LINE_BREAK);
         }
@@ -190,10 +200,18 @@ public class Utils implements DrillDefaults {
         if (skipSuite) {continue;}
           List<File> testQueryFiles = searchFiles(testDefFile.getParentFile(),
                   queryFileExtension);
+	LOG.info(LINE_BREAK);
+        for (File testQueryFile : testQueryFiles) {
+            LOG.info("test quer file :"+testQueryFile.getPath());
+        }
+        LOG.info(LINE_BREAK);
           for (File testQueryFile : testQueryFiles) {
 //            String expectedFileName = getExpectedFile(testQueryFile.getAbsolutePath(),
 //            		queryFileExtension, expectedFileExtension);
-            String expectedFileName = getExpectedFile(testQueryFile.getAbsolutePath(),
+            LOG.info(LINE_BREAK);
+            LOG.info("tempQueryExt : "+tempQueryExt);
+            LOG.info(LINE_BREAK);
+	    String expectedFileName = getExpectedFile(testQueryFile.getAbsolutePath(),
                       tempQueryExt, expectedFileExtension);
             drillTestCases.add(new DrillTestCase(modeler, testQueryFile.getAbsolutePath(), expectedFileName));
           }
@@ -207,11 +225,13 @@ public class Utils implements DrillDefaults {
   
   private static List<File> searchFiles(File root, String regex) {
 	    List<File> list = new ArrayList<File>();
+	    LOG.info("regex "+regex);
 	    Pattern pattern = Pattern.compile(regex + "$");
 	    Matcher matcher = null;
 	    if (root.isFile()) {
 	      matcher = pattern.matcher(root.getName());
 	      if (matcher.find()) {
+		LOG.info("root "+root.getName());
 	        list.add(root);
 	        return list;
 	      }
@@ -231,11 +251,35 @@ public class Utils implements DrillDefaults {
 	    ObjectMapper objectMapper = new ObjectMapper();
 	    return objectMapper.readValue(new String(jsonData), TestCaseModeler.class);
 	  }
+
+  private static String getBaseName(String queryFile){
+  
+	    //String basename = "";
+  	    while(queryFile.contains(".")){
+	    	queryFile = FilenameUtils.removeExtension(queryFile);
+            }
+	    return queryFile;
+
+  }
+
   
   private static String getExpectedFile(String queryFile, String queryFileExt,
 	      String expectedFileExt) {
-	    int idx = queryFile.indexOf(queryFileExt.substring(2));
-	    return queryFile.substring(0, idx).concat(expectedFileExt.substring(2));
+	    
+	    LOG.info("query file :"+queryFile);
+	    String[] queryFileArr = queryFile.split(".");
+            LOG.info("length f arr :"+queryFileArr.length);
+	    //LOG.info("1st part :"+queryFileArr[0]);
+	    String basename = getBaseName(queryFile);//FilenameUtils.removeExtension(queryFile);
+	    LOG.info("basename :"+basename);
+	    return basename.concat(expectedFileExt.substring(2));
+	    //int idx = queryFile.indexOf(queryFileExt.substring(2));
+	    //LOG.info(LINE_BREAK);
+	    //LOG.info("check idx,qFileE,qFileE.subst(2),quyFil,expectedFileExt:"+idx+" "+queryFileExt+" "+queryFileExt.substring(2)+" "+queryFile+" "+expectedFileExt);
+	    
+	    //LOG.info(LINE_BREAK);
+		
+	    //return queryFile.substring(0, idx).concat(expectedFileExt.substring(2));
 	  }
   
   /**
