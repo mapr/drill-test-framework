@@ -17,6 +17,7 @@
  */
 package org.apache.drill.test.framework;
 
+import org.apache.commons.io.FilenameUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -167,9 +168,26 @@ public class Utils implements DrillDefaults {
           }
         }
         if (!foundTests) {continue;}
-        
-        String queryFileExtension = modeler.matrices.get(0).inputFile;
+       
+	String queryFileExtension = modeler.matrices.get(0).inputFile;
         String expectedFileExtension = modeler.matrices.get(0).expectedFile;
+
+        expectedFileExtension = FilenameUtils.getExtension(expectedFileExtension);
+ 
+        String failExtension = modeler.matrices.get(0).failExtension;
+        String tempQueryExt = queryFileExtension;
+        //To include fail extension in the regex to pick query files tagged as failure as well 
+	if(TestDriver.cmdParam.includeFailed == true){
+            String fileExt = FilenameUtils.getExtension(queryFileExtension);
+	    String baseExt = FilenameUtils.removeExtension(queryFileExtension);
+	    if(failExtension!=null){
+		failExtension = FilenameUtils.getExtension(failExtension);
+	    	queryFileExtension = baseExt+".("+fileExt+"|"+failExtension+")";
+	    }
+	    else{ 
+	    	queryFileExtension = baseExt+".("+fileExt+"|fail|failing)";
+            }
+        }
         boolean skipSuite = false;
         if (modeler.dependencies != null) {
          for (String dependency : modeler.dependencies) {
@@ -182,8 +200,8 @@ public class Utils implements DrillDefaults {
           List<File> testQueryFiles = searchFiles(testDefFile.getParentFile(),
                   queryFileExtension);
           for (File testQueryFile : testQueryFiles) {
-            String expectedFileName = getExpectedFile(testQueryFile.getAbsolutePath(), 
-            		queryFileExtension, expectedFileExtension);
+	    String expectedFileName = getExpectedFile(testQueryFile.getAbsolutePath(),
+                      tempQueryExt, expectedFileExtension);
             drillTestCases.add(new DrillTestCase(modeler, testQueryFile.getAbsolutePath(), expectedFileName));
           }
       }
@@ -220,11 +238,39 @@ public class Utils implements DrillDefaults {
 	    ObjectMapper objectMapper = new ObjectMapper();
 	    return objectMapper.readValue(new String(jsonData), TestCaseModeler.class);
 	  }
+
+  /**
+   * @return returns the base name of a file with or without multiple extensions
+   *         
+   */  
+  private static String getBaseName(String queryFile){
+  
+	    String extn = "";
+	    int t = 0;
+  	    while(queryFile.contains(".")){
+ 		t++;
+		extn = FilenameUtils.getExtension(queryFile);
+		if(!extn.contains("/")){
+	    		queryFile = FilenameUtils.removeExtension(queryFile);
+		}
+		else{
+			break;
+		}
+		if(t>4){
+			break;
+		}
+            }
+	    return queryFile;
+
+  }
+
   
   private static String getExpectedFile(String queryFile, String queryFileExt,
 	      String expectedFileExt) {
-	    int idx = queryFile.indexOf(queryFileExt.substring(2));
-	    return queryFile.substring(0, idx).concat(expectedFileExt.substring(2));
+	    
+	    String[] queryFileArr = queryFile.split(".");
+	    String basename = getBaseName(queryFile);//FilenameUtils.removeExtension(queryFile);
+	    return basename.concat("."+expectedFileExt);
 	  }
   
   /**

@@ -52,6 +52,9 @@ import com.beust.jcommander.Parameter;
     @Parameter(names = {"-r", "--report"}, description = "Generate json report", required=false)
     public boolean generateReports = false;
 
+    @Parameter(names = {"-if", "--includeFailed"}, description = "Include tests tagged as failures", required=false)
+    public boolean includeFailed  = false;
+
     public List<String> excludeDependenciesAsList() {
       if (excludeDependencies == null) {
         return new ArrayList<String>();

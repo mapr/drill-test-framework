@@ -86,6 +86,8 @@ public class TestCaseModeler {
     public String outputFormat;
     @JsonProperty("expected-file")
     public String expectedFile;
+    @JsonProperty("fail-extension")
+    public String failExtension;//Define the fail extensions like .fail / .failing in the test definition file 
     public String username = Utils.drillProperties.get("USERNAME");
     public String password = Utils.drillProperties.get("PASSWORD");
     @JsonProperty("verification-type")

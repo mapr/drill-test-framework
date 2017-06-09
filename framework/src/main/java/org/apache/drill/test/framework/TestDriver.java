@@ -154,7 +154,9 @@ public class TestDriver implements DrillDefaults {
       }
     }
 
+
     int totalPassingTest = 0;
+    int totalFailingTestsThatPassed = 0;
     int totalExecutionFailure = 0;
     int totalVerificationFailure = 0;
     int totalCanceledTest = 0;
@@ -188,10 +190,22 @@ public class TestDriver implements DrillDefaults {
       List<DrillTest> executionFailures = Lists.newArrayList();
       List<DrillTest> timeoutFailures = Lists.newArrayList();
       List<DrillTest> canceledTests = Lists.newArrayList();
+      List<DrillTest> failedCases = Lists.newArrayList();
 
       for (DrillTest test : tests) {
         TestStatus testStatus = test.getTestStatus();
-        switch (testStatus) {
+	//Add the tests marked as fail to the failedCases list
+	if(cmdParam.includeFailed==true){
+		int index = tests.indexOf(test);
+		DrillTestCase testCase = drillTestCases.get(index);
+		if(testCase.matrices.get(0).failExtension!=null && test.getInputFile().contains(testCase.matrices.get(0).failExtension)){
+			failedCases.add(test);
+		}
+		else if(test.getInputFile().contains(".fail")){
+			failedCases.add(test);
+		}
+	}
+	switch (testStatus) {
         case PASS:
           passingTests.add(test);
           break;
@@ -216,7 +230,9 @@ public class TestDriver implements DrillDefaults {
       LOG.info(LINE_BREAK + LINE_BREAK);
       LOG.info("Results:");
       LOG.info(LINE_BREAK);
-      LOG.info("Execution Failures:");
+      if(executionFailures.size()>0){
+      	LOG.info("Execution Failures:");
+      }
       if(cmdParam.generateReports) {
         LOG.info("Generating reports");
         generateReports(tests, i);
@@ -226,13 +242,17 @@ public class TestDriver implements DrillDefaults {
         LOG.info("Query: \n" + test.getQuery());
         LOG.info("Failed with exception", test.getException());
       }
-      LOG.info("Verification Failures:");
+      if(verificationFailures.size()>0){
+      	LOG.info("Verification Failures:");
+      }
       for (DrillTest test : verificationFailures) {
         LOG.info(test.getInputFile());
         LOG.info("Query: \n" + test.getQuery());
         LOG.info(test.getException().getMessage());
       }
-      LOG.info("Timeout Failures:");
+      if(timeoutFailures.size()>0){
+      	LOG.info("Timeout Failures:");
+      }
       for (DrillTest test : timeoutFailures) {
         LOG.info(test.getInputFile());
         LOG.info("Query: \n" + test.getQuery());
@@ -240,19 +260,39 @@ public class TestDriver implements DrillDefaults {
       LOG.info(LINE_BREAK);
       LOG.info("Summary");
       LOG.info(LINE_BREAK);
-      LOG.info("Execution Failures:");
+      if(executionFailures.size()>0){
+      	LOG.info("Execution Failures:");
+      }
       for (DrillTest test : executionFailures) {
         LOG.info(test.getInputFile());
       }
-      LOG.info("Verification Failures:");
+      if(verificationFailures.size()>0){
+      	LOG.info("Verification Failures:");
+      }
       for (DrillTest test : verificationFailures) {
         LOG.info(test.getInputFile());
       }
-      LOG.info("Timeout Failures:");
+      if(timeoutFailures.size()>0){
+      	LOG.info("Timeout Failures:");
+      }
       for (DrillTest test : timeoutFailures) {
         LOG.info(test.getInputFile());
       }
       LOG.info(LINE_BREAK);
+
+      if(TestDriver.cmdParam.includeFailed== true){//Show the failed tagged cases that passed
+      	LOG.info(LINE_BREAK);
+	int temp = 0;
+      	for(DrillTest test : passingTests){
+			if(failedCases.contains(test)){
+				if(temp==0){
+      					LOG.info("Passing Tests of failed cases:");
+				}
+				temp++;
+				LOG.info(test.getInputFile());
+			}
+      	}
+      }
       LOG.info(String.format("\nPassing tests: %d\nExecution Failures: %d\nVerificationFailures: %d" +
       	"\nTimeouts: %d\nCanceled: %d", passingTests.size(), executionFailures.size(), 
       	verificationFailures.size(), timeoutFailures.size(), canceledTests.size()));
@@ -264,17 +304,24 @@ public class TestDriver implements DrillDefaults {
     			memUsage[1][0], memUsage[1][1], memUsage[1][2]));
       }
 
+      //Final count of tests that passed which were tagged as fail
       totalPassingTest += passingTests.size();
+      for(DrillTest test : passingTests){
+	String inputFile = test.getInputFile();
+      	if(inputFile.contains(".fail")){
+		totalFailingTestsThatPassed += 1;
+	}
+      }
       totalExecutionFailure += executionFailures.size();
       totalVerificationFailure += verificationFailures.size();
       totalTimeoutFailure += timeoutFailures.size();
       totalCanceledTest += canceledTests.size(); 
     }
 
-    if (i > 2) {
+    if (cmdParam.iterations >= 2) {
       LOG.info(LINE_BREAK);
       LOG.info(String.format("\nCompleted %d iterations.\n  Passing tests: %d\n  Execution Failures: %d\n  VerificationFailures: %d" +
-    	  "\n  Timeouts: %d\n  Canceled: %d", i-1, totalPassingTest, totalExecutionFailure, 
+    	  "\n  Timeouts: %d\n  Canceled: %d", i-1, totalPassingTest,totalExecutionFailure, 
     	  totalVerificationFailure, totalTimeoutFailure, totalCanceledTest));
       LOG.info("\n> TEARING DOWN..");
     }
