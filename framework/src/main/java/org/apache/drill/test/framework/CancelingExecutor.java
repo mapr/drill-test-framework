@@ -60,7 +60,7 @@ public class CancelingExecutor implements AutoCloseable {
     }
   }
 
-  private void execute(final Cancelable task) {
+  public void execute(final Cancelable task) {
     executor.submit(new Runnable() {
       @Override
       public void run() {
