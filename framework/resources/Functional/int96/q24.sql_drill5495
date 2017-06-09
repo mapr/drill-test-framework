@@ -1,0 +1,3 @@
+create or replace view hive1_parquet_v1 as select voter_id, name, age, registration, contributions, voterzone, create_timestamp1,create_timestamp2,create_date from hive1_parquet;
+select voter_id, date_part('year',convert_from(create_timestamp1, 'TIMESTAMP_IMPALA')) col1 from hive1_parquet_v1 order by voter_id,col1 limit 10;
+drop view hive1_parquet_v1;
