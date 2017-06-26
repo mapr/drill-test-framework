@@ -177,7 +177,7 @@ public class Utils implements DrillDefaults {
         String failExtension = modeler.matrices.get(0).failExtension;
         String tempQueryExt = queryFileExtension;
         //To include fail extension in the regex to pick query files tagged as failure as well 
-	if(TestDriver.cmdParam.includeFailed == true){
+	if(TestDriver.cmdParam.runFailed == true){
             String fileExt = FilenameUtils.getExtension(queryFileExtension);
 	    String baseExt = FilenameUtils.removeExtension(queryFileExtension);
 	    if(failExtension!=null){

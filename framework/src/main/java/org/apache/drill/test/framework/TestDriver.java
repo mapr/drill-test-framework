@@ -270,7 +270,7 @@ public class TestDriver implements DrillDefaults {
       }
       LOG.info(LINE_BREAK);
 
-      if(TestDriver.cmdParam.includeFailed== true){//Show the failed tagged cases that passed
+      if(TestDriver.cmdParam.runFailed== true){//Show the failed tagged cases that passed
       	LOG.info(LINE_BREAK);
 	int temp = 0;
       	for(DrillTest test : passingTests){
