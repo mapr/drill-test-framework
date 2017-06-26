@@ -182,12 +182,13 @@ public class Utils implements DrillDefaults {
 	    String baseExt = FilenameUtils.removeExtension(queryFileExtension);
 	    if(failExtension!=null){
 		failExtension = FilenameUtils.getExtension(failExtension);
-	    	queryFileExtension = baseExt+".("+fileExt+"|"+failExtension+")";
+	    	queryFileExtension = "."+failExtension;
 	    }
 	    else{ 
-	    	queryFileExtension = baseExt+".("+fileExt+"|fail|failing)";
+	    	queryFileExtension = ".(|fail|failing)";
             }
         }
+	
         boolean skipSuite = false;
         if (modeler.dependencies != null) {
          for (String dependency : modeler.dependencies) {
@@ -256,7 +257,7 @@ public class Utils implements DrillDefaults {
 		else{
 			break;
 		}
-		if(t>4){
+		if(t>4){ //To avoid a infinite loop 
 			break;
 		}
             }
