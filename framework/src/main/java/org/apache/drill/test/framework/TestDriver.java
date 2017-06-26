@@ -195,16 +195,6 @@ public class TestDriver implements DrillDefaults {
       for (DrillTest test : tests) {
         TestStatus testStatus = test.getTestStatus();
 	//Add the tests marked as fail to the failedCases list
-	if(cmdParam.includeFailed==true){
-		int index = tests.indexOf(test);
-		DrillTestCase testCase = drillTestCases.get(index);
-		if(testCase.matrices.get(0).failExtension!=null && test.getInputFile().contains(testCase.matrices.get(0).failExtension)){
-			failedCases.add(test);
-		}
-		else if(test.getInputFile().contains(".fail")){
-			failedCases.add(test);
-		}
-	}
 	switch (testStatus) {
         case PASS:
           passingTests.add(test);

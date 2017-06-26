@@ -182,13 +182,14 @@ public class Utils implements DrillDefaults {
 	    String baseExt = FilenameUtils.removeExtension(queryFileExtension);
 	    if(failExtension!=null){
 		failExtension = FilenameUtils.getExtension(failExtension);
-	    	queryFileExtension = "."+failExtension;
+	    	queryFileExtension = ".*."+failExtension;
 	    }
 	    else{ 
-	    	queryFileExtension = ".(|fail|failing)";
-            }
+	    	queryFileExtension =    ".*.(fail|failing)";
+            	//queryFileExtension = baseExt+".("+fileExt+"|fail|failing)";
+	    }
         }
-	
+	LOG.info("queryExten :"+queryFileExtension);	
         boolean skipSuite = false;
         if (modeler.dependencies != null) {
          for (String dependency : modeler.dependencies) {
@@ -201,6 +202,7 @@ public class Utils implements DrillDefaults {
           List<File> testQueryFiles = searchFiles(testDefFile.getParentFile(),
                   queryFileExtension);
           for (File testQueryFile : testQueryFiles) {
+	    LOG.info("file ----- "+testQueryFile.getAbsolutePath());
 	    String expectedFileName = getExpectedFile(testQueryFile.getAbsolutePath(),
                       tempQueryExt, expectedFileExtension);
             drillTestCases.add(new DrillTestCase(modeler, testQueryFile.getAbsolutePath(), expectedFileName));
