@@ -1,12 +1,11 @@
 .*Screen.*
   .*Project.*
     .*Project.*
-      .*Project.*
-        .*SelectionVectorRemover.*
-          .*Filter.*
-            .*HashAgg.*
+      .*SelectionVectorRemover.*
+        .*Filter.*
+          .*HashAgg.*
+            .*Project.*
               .*Project.*
-                .*Project.*
-                  .*HashJoin.*
-                    .*Scan.*
-                    .*Scan.*
+                .*HashJoin.*
+                  .*Scan.*
+                  .*Scan.*
