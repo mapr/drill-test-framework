@@ -1,13 +1,12 @@
 .*Screen.*
   .*Project.*
     .*Project.*
-      .*Project.*
-        .*StreamAgg.*
-          .*Sort.*
+      .*StreamAgg.*
+        .*Sort.*
+          .*Project.*
             .*Project.*
-              .*Project.*
-                .*HashJoin.*
-                  .*Scan.*
-                  .*SelectionVectorRemover.*
-                    .*Filter.*
-                      .*Scan.*
+              .*HashJoin.*
+                .*Scan.*
+                .*SelectionVectorRemover.*
+                  .*Filter.*
+                    .*Scan.*
