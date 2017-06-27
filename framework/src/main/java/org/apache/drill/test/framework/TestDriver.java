@@ -270,19 +270,6 @@ public class TestDriver implements DrillDefaults {
       }
       LOG.info(LINE_BREAK);
 
-      if(TestDriver.cmdParam.runFailed== true){//Show the failed tagged cases that passed
-      	LOG.info(LINE_BREAK);
-	int temp = 0;
-      	for(DrillTest test : passingTests){
-			if(failedCases.contains(test)){
-				if(temp==0){
-      					LOG.info("Passing Tests of failed cases:");
-				}
-				temp++;
-				LOG.info(test.getInputFile());
-			}
-      	}
-      }
       LOG.info(String.format("\nPassing tests: %d\nExecution Failures: %d\nVerificationFailures: %d" +
       	"\nTimeouts: %d\nCanceled: %d", passingTests.size(), executionFailures.size(), 
       	verificationFailures.size(), timeoutFailures.size(), canceledTests.size()));
