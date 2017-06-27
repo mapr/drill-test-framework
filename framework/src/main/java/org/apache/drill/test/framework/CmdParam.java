@@ -52,7 +52,6 @@ import com.beust.jcommander.Parameter;
     @Parameter(names = {"-r", "--report"}, description = "Generate json report", required=false)
     public boolean generateReports = false;
 
-
     public List<String> excludeDependenciesAsList() {
       if (excludeDependencies == null) {
         return new ArrayList<String>();
