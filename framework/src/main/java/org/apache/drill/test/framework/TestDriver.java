@@ -264,26 +264,52 @@ public class TestDriver implements DrillDefaults {
       }
       LOG.info(LINE_BREAK);
       LOG.info("Summary");
-      LOG.info(LINE_BREAK);
-      if(executionFailures.size()>0){
-      	LOG.info("Execution Failures:");
+      if(cmdParam.runFailed == true){
+      	if(passingTests.size()>0){
+        	LOG.info(LINE_BREAK);
+      		LOG.info("Passing Tests:");
+      	}
+      	for (DrillTest test : passingTests) {
+        	LOG.info(test.getInputFile());
+      	}
       }
-      for (DrillTest test : executionFailures) {
-        LOG.info(test.getInputFile());
+      if(executionFailures.size()>0){
+        LOG.info(LINE_BREAK);
+      	LOG.info("Execution Failures:");
+      
+      	for (DrillTest test : executionFailures) {
+		if(test.getExpectedFile()!=""){
+        		LOG.info(test.getInputFile());
+		}
+      	}
+	if(cmdParam.runFailed == true){
+      		LOG.info("Execution Failures with name errors:");
+      	}
+	for (DrillTest test : executionFailures) {
+        	if(test.getExpectedFile()==""){
+			LOG.info(test.getInputFile());
+		}
+      	}
+	
       }
       if(verificationFailures.size()>0){
+        LOG.info(LINE_BREAK);
       	LOG.info("Verification Failures:");
       }
       for (DrillTest test : verificationFailures) {
         LOG.info(test.getInputFile());
       }
       if(timeoutFailures.size()>0){
+        LOG.info(LINE_BREAK);
       	LOG.info("Timeout Failures:");
       }
       for (DrillTest test : timeoutFailures) {
         LOG.info(test.getInputFile());
       }
-      LOG.info("Random Failures:");
+      if(randomFailures.size()>0){
+      	LOG.info(LINE_BREAK);
+      	LOG.info("Random Failures:");
+      }
       for (DrillTest test : randomFailures) {
        LOG.info(test.getInputFile());
       }
@@ -321,59 +347,66 @@ public class TestDriver implements DrillDefaults {
 
       
       if (cmdParam.iterations > 1) {
-      LOG.info(LINE_BREAK);
-      LOG.info(String.format("\nCompleted %d iterations.\n  Passing tests: %d \n  Random failures: %d \n  Execution Failures: %d\n  VerificationFailures: %d" +
+      	LOG.info(LINE_BREAK);
+      	LOG.info(String.format("\nCompleted %d iterations.\n  Passing tests: %d \n  Random failures: %d \n  Execution Failures: %d\n  VerificationFailures: %d" +
     	  "\n  Timeouts: %d\n  Canceled: %d", i-1, totalPassingTests, totalRandomFailures,totalExecutionFailures, 
     	  totalVerificationFailures, totalTimeoutFailures, totalCancelledFailures));
-    //}
-      if(finalRandomFailures.size()>0){
-      	//LOG.info(LINE_BREAK);
-      	//LOG.info("The above random failures are not bugs as they passed when they were run a 2nd time");
-      	LOG.info(LINE_BREAK);
-      	for(DrillTest test : finalRandomFailures){
-      	 	LOG.info(test.getInputFile());
+      	if(finalRandomFailures.size()>0){
+      		LOG.info(LINE_BREAK);
+      		LOG.info("Random Failures:");
+      		LOG.info(LINE_BREAK);
+      		for(DrillTest test : finalRandomFailures){
+      	 		LOG.info(test.getInputFile());
+      		}
       	}
-      }
-      if(finalExecutionFailures.size()>0){
-      	LOG.info(LINE_BREAK);
-      	LOG.info("Execution Failures");
-      	LOG.info(LINE_BREAK);
-      	for(DrillTest test : finalExecutionFailures){
-      		 LOG.info(test.getInputFile());
+      	if(finalExecutionFailures.size()>0){
+        	LOG.info(LINE_BREAK);
+      		LOG.info("Execution Failures:");
+        	LOG.info(LINE_BREAK);      
+      		for (DrillTest test : finalExecutionFailures) {
+      			if(test.getExpectedFile()!=""){
+                         	LOG.info(test.getInputFile());
+                 	}
+		}
+		if(cmdParam.runFailed == true){
+			LOG.info("Execution Failures with name errors:");
+      		}
+		for (DrillTest test : finalExecutionFailures) {
+      			if(test.getExpectedFile()==""){
+                         	LOG.info(test.getInputFile());
+                 	}
+		}
       	}
-      }
-      if(finalVerificationFailures.size()>0){
-      	LOG.info(LINE_BREAK);
-      	LOG.info("Verification Failures");
-      	LOG.info(LINE_BREAK);
-      	for(DrillTest test : finalVerificationFailures){
-      	 	LOG.info(test.getInputFile());
+      	if(finalVerificationFailures.size()>0){
+      		LOG.info(LINE_BREAK);
+      		LOG.info("Verification Failures");
+      		LOG.info(LINE_BREAK);
+      		for(DrillTest test : finalVerificationFailures){
+      	 		LOG.info(test.getInputFile());
+      		}
       	}
-      }
-      if(finalCancelledFailures.size()>0){
-      	LOG.info(LINE_BREAK);
-      	LOG.info("Cancelled Failures");
-      	LOG.info(LINE_BREAK);
-      	for(DrillTest test : finalCancelledFailures){
-      	 	LOG.info(test.getInputFile());
+      	if(finalCancelledFailures.size()>0){
+      		LOG.info(LINE_BREAK);
+      		LOG.info("Cancelled Failures");
+      		LOG.info(LINE_BREAK);
+      		for(DrillTest test : finalCancelledFailures){
+      	 		LOG.info(test.getInputFile());
+      		}
       	}
-      }
-      if(finalTimeoutFailures.size()>0){
-      	LOG.info(LINE_BREAK);
-      	LOG.info("Timeout Failures");
-      	LOG.info(LINE_BREAK);
-      	for(DrillTest test : finalTimeoutFailures){
-      	 	LOG.info(test.getInputFile());
+      	if(finalTimeoutFailures.size()>0){
+      		LOG.info(LINE_BREAK);
+      		LOG.info("Timeout Failures");
+      		LOG.info(LINE_BREAK);
+      		for(DrillTest test : finalTimeoutFailures){
+      	 		LOG.info(test.getInputFile());
+      		}
       	}
-      }
-
     }
     LOG.info("\n> TEARING DOWN..");
     teardown();
     executor.close();
     connectionPool.close();
     restartDrill();
-
     return totalExecutionFailures + totalVerificationFailures + totalTimeoutFailures;
   }
 

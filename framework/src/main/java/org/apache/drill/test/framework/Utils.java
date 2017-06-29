@@ -170,11 +170,7 @@ public class Utils implements DrillDefaults {
         if (!foundTests) {continue;}
 
         String queryFileExtension = modeler.matrices.get(0).inputFile;
-
         String expectedFileExtension = modeler.matrices.get(0).expectedFile;
-
-        expectedFileExtension = FilenameUtils.getExtension(expectedFileExtension);
- 
         String failExtension = modeler.matrices.get(0).failExtension;
         String tempQueryExt = queryFileExtension;
         //To include fail extension in the regex to pick query files tagged as failure as well 
@@ -187,7 +183,6 @@ public class Utils implements DrillDefaults {
 	    }
 	    else{ 
 	    	queryFileExtension =    ".*.(fail|failing)";
-            	//queryFileExtension = baseExt+".("+fileExt+"|fail|failing)";
 	    }
         }
         boolean skipSuite = false;
@@ -243,38 +238,14 @@ public class Utils implements DrillDefaults {
 	    return objectMapper.readValue(new String(jsonData), TestCaseModeler.class);
 	  }
 
-  /**
-   * @return returns the base name of a file with or without multiple extensions
-   *         
-   */  
-  private static String getBaseName(String queryFile){
-  
-	    String extn = "";
-	    int t = 0;
-  	    while(queryFile.contains(".")){
- 		t++;
-		extn = FilenameUtils.getExtension(queryFile);
-		if(!extn.contains("/")){
-	    		queryFile = FilenameUtils.removeExtension(queryFile);
-		}
-		else{
-			break;
-		}
-		if(t>4){ //To avoid a infinite loop 
-			break;
-		}
-            }
-	    return queryFile;
-
-  }
-
-  
   private static String getExpectedFile(String queryFile, String queryFileExt,
 	      String expectedFileExt) {
-	    
-	    String[] queryFileArr = queryFile.split(".");
-	    String basename = getBaseName(queryFile);//FilenameUtils.removeExtension(queryFile);
-	    return basename.concat("."+expectedFileExt);
+
+	    int idx = queryFile.indexOf(queryFileExt.substring(2));
+	    if(idx<0){
+		return "";
+	    }
+	    return queryFile.substring(0, idx).concat(expectedFileExt.substring(2));
 	  }
   
   /**
