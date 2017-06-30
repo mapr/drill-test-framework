@@ -145,6 +145,7 @@ public class TestDriver implements DrillDefaults {
     stopwatch.reset().start();
     LOG.info("> SETTING UP..");
     setup();
+
     List<DrillTestCase> drillTestCases = Utils.getDrillTestCases();
     List<DrillTest> tests = Lists.newArrayList();
     for (DrillTestCase testCase : drillTestCases) {
@@ -152,6 +153,7 @@ public class TestDriver implements DrillDefaults {
         tests.add(getDrillTest(testCase, connectionPool, clone));
       }
     }
+
 
     HashSet  <DrillTest> totalFailedTestsSet = new HashSet<DrillTest>();
     HashSet  <DrillTest> finalExecutionFailures = new HashSet<DrillTest>();
@@ -189,11 +191,13 @@ public class TestDriver implements DrillDefaults {
       if (cmdParam.trackMemory) {
     	  queryMemoryUsage();
       }
+
       List<DrillTest> passingTests = Lists.newArrayList();
       List<DrillTest> verificationFailures = Lists.newArrayList();
       List<DrillTest> executionFailures = Lists.newArrayList();
       List<DrillTest> timeoutFailures = Lists.newArrayList();
       List<DrillTest> canceledTests = Lists.newArrayList();
+
 
       List<DrillTest> failedCases = Lists.newArrayList();
 
@@ -211,6 +215,7 @@ public class TestDriver implements DrillDefaults {
 	}
 
 	switch (testStatus) {
+
         case PASS:
           passingTests.add(test);
           break;
@@ -306,6 +311,7 @@ public class TestDriver implements DrillDefaults {
       for (DrillTest test : timeoutFailures) {
         LOG.info(test.getInputFile());
       }
+
       if(randomFailures.size()>0){
       	LOG.info(LINE_BREAK);
       	LOG.info("Random Failures:");
@@ -316,8 +322,8 @@ public class TestDriver implements DrillDefaults {
       LOG.info(LINE_BREAK);
 
       LOG.info(String.format("\nPassing tests: %d\nExecution Failures: %d\nVerificationFailures: %d" +
-      	"\nTimeouts: %d\nCanceled: %d\nRandom Failures: %d", passingTests.size(), executionFailures.size(), 
-      	verificationFailures.size(), timeoutFailures.size(), canceledTests.size(),randomFailures.size()));
+      	"\nTimeouts: %d\nCanceled: %d", passingTests.size(), executionFailures.size(), 
+      	verificationFailures.size(), timeoutFailures.size(), canceledTests.size()));
       
       if (cmdParam.trackMemory) {
     	LOG.info(LINE_BREAK);
@@ -340,8 +346,6 @@ public class TestDriver implements DrillDefaults {
        	
 
     }
-   
-     
 
 
 
@@ -402,12 +406,12 @@ public class TestDriver implements DrillDefaults {
       		}
       	}
     }
-    LOG.info("\n> TEARING DOWN..");
     teardown();
     executor.close();
     connectionPool.close();
     restartDrill();
     return totalExecutionFailures + totalVerificationFailures + totalTimeoutFailures;
+
   }
 
   public void setup() throws IOException, InterruptedException {
@@ -451,6 +455,7 @@ public class TestDriver implements DrillDefaults {
     	  LOG.fatal("Injection parameter not recognized!");
     	}    	
       }
+
       connectionPool.releaseConnection(username, password, connection);
     } catch (IOException e) {
       LOG.warn("WARNING: " + beforeRunQueryFilename + " file does not exist.\n");
@@ -754,7 +759,6 @@ public class TestDriver implements DrillDefaults {
 			
 	restartDrillScript = drillProperties.containsKey("RESTART_DRILL_SCRIPT") ?
 			drillProperties.get("RESTART_DRILL_SCRIPT") : RESTART_DRILL_SCRIPT;
-
   }
 
   private void generateReports(List<DrillTest> tests, int iteration) {
