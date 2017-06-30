@@ -147,10 +147,6 @@ public class TestVerifier {
    */
   public TestStatus verifyResultSet(String expectedOutput, String actualOutput, boolean verifyOrderBy) 
 		  			throws IOException, VerificationException, IllegalAccessException {
-    if (testStatus == TestStatus.EXECUTION_FAILURE 
-    	|| testStatus == TestStatus.CANCELED) {
-      return testStatus;
-    }
     
     Map<ColumnList, Integer> expectedMap = loadFromFileToMap(expectedOutput);
     if (expectedMap == null) {
@@ -676,10 +672,6 @@ public class TestVerifier {
 
   public TestStatus verifyTextPlan(String expectedOutput,
       String actualOutput) throws IOException, VerificationException {
-    if (testStatus == TestStatus.EXECUTION_FAILURE
-    	|| testStatus == TestStatus.CANCELED) {
-      return testStatus;
-    }
     StringBuilder sb = new StringBuilder();
     String expected = new String(Files.readAllBytes(Paths.get(expectedOutput)));
     

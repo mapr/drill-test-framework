@@ -167,7 +167,6 @@ public class Utils implements DrillDefaults {
           }
         }
         if (!foundTests) {continue;}
-        
         String queryFileExtension = modeler.matrices.get(0).inputFile;
         String expectedFileExtension = modeler.matrices.get(0).expectedFile;
         boolean skipSuite = false;
@@ -182,7 +181,7 @@ public class Utils implements DrillDefaults {
           List<File> testQueryFiles = searchFiles(testDefFile.getParentFile(),
                   queryFileExtension);
           for (File testQueryFile : testQueryFiles) {
-            String expectedFileName = getExpectedFile(testQueryFile.getAbsolutePath(), 
+            String expectedFileName = getExpectedFile(testQueryFile.getAbsolutePath(),
             		queryFileExtension, expectedFileExtension);
             drillTestCases.add(new DrillTestCase(modeler, testQueryFile.getAbsolutePath(), expectedFileName));
           }
