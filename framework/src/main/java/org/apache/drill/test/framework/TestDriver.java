@@ -198,7 +198,6 @@ public class TestDriver implements DrillDefaults {
       List<DrillTest> failedCases = Lists.newArrayList();
 
 
-      List<DrillTest> randomFailures = Lists.newArrayList();
 
       for (DrillTest test : tests) {
         TestStatus testStatus = test.getTestStatus();
