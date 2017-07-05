@@ -271,7 +271,6 @@ public class TestDriver implements DrillDefaults {
       }
       LOG.info(LINE_BREAK);
       LOG.info("Summary");
-<<<<<<< HEAD
       if(cmdParam.runFailed == true){
       	if(passingTests.size()>0){
         	LOG.info(LINE_BREAK);
