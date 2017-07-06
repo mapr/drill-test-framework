@@ -146,6 +146,9 @@ public class DrillTestScript implements DrillTest {
   }
 
   @Override
+  public String getExpectedFile(){return modeler.expectedFilename;}
+
+  @Override
   public String getQuery() {
     return query;
   }

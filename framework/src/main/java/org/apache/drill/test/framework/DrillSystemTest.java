@@ -51,6 +51,9 @@ public class DrillSystemTest implements DrillTest {
   }
 
   @Override
+  public String getExpectedFile(){return matrix.expectedFile;}
+
+  @Override
   public String getQuery() {
     return query;
   }

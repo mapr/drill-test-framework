@@ -53,6 +53,11 @@ import com.beust.jcommander.Parameter;
     public boolean generateReports = false;
 
 
+
+    @Parameter(names = {"-rf", "--runFailed"}, description = "Run tests tagged as failures", required=false)
+    public boolean runFailed  = false;
+
+
     public List<String> excludeDependenciesAsList() {
       if (excludeDependencies == null) {
         return new ArrayList<String>();
