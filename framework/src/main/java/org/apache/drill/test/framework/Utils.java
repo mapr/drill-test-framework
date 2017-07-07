@@ -171,12 +171,11 @@ public class Utils implements DrillDefaults {
         String queryFileExtension = modeler.matrices.get(0).inputFile;
         String expectedFileExtension = modeler.matrices.get(0).expectedFile;
         String failExtension = modeler.matrices.get(0).failExtension;
-        String tempQueryExt = queryFileExtension;
+        String originalQueryFileExtension = queryFileExtension;
         //To include fail extension in the regex to pick query files tagged as failure as well 
 	if(TestDriver.cmdParam.runFailed == true){
-            String fileExt = FilenameUtils.getExtension(queryFileExtension);
-	    String baseExt = FilenameUtils.removeExtension(queryFileExtension);
 	    if(failExtension!=null){
+		//To get the last part if there are multiple dots in the name (multiple extensions) instead of using substring
 		failExtension = FilenameUtils.getExtension(failExtension);
 	    	queryFileExtension = ".*."+failExtension;
 	    }
@@ -196,8 +195,9 @@ public class Utils implements DrillDefaults {
           List<File> testQueryFiles = searchFiles(testDefFile.getParentFile(),
                   queryFileExtension);
           for (File testQueryFile : testQueryFiles) {
+	    //Expected File to find based on the original query Extension
 	    String expectedFileName = getExpectedFile(testQueryFile.getAbsolutePath(),
-                      tempQueryExt, expectedFileExtension);
+                      originalQueryFileExtension, expectedFileExtension);
             drillTestCases.add(new DrillTestCase(modeler, testQueryFile.getAbsolutePath(), expectedFileName));
           }
       }

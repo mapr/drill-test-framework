@@ -211,24 +211,24 @@ public class TestDriver implements DrillDefaults {
 		}
 	}
 	switch (testStatus) {
-        case PASS:
-          passingTests.add(test);
-          break;
-        case VERIFICATION_FAILURE:
-          verificationFailures.add(test);
-          break;
-        case EXECUTION_FAILURE:
-          executionFailures.add(test);
-          break;
-        case TIMEOUT:
-          timeoutFailures.add(test);
-          break;
-        case CANCELED:
-          canceledTests.add(test);
-          break;
-        default:
-          executionFailures.add(test);
-        }
+        	case PASS:
+          		passingTests.add(test);
+          	break;
+        	case VERIFICATION_FAILURE:
+          		verificationFailures.add(test);
+          	break;
+        	case EXECUTION_FAILURE:
+          		executionFailures.add(test);
+          	break;
+        	case TIMEOUT:
+          		timeoutFailures.add(test);
+          	break;
+        	case CANCELED:
+          		canceledTests.add(test);
+          	break;
+        	default:
+          		executionFailures.add(test);
+        	}
       }
       LOG.info(LINE_BREAK + LINE_BREAK);
       LOG.info("Tests completed for iteration " + i + " in " + stopwatch);
