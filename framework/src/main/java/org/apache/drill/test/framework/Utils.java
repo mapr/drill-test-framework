@@ -17,6 +17,7 @@
  */
 package org.apache.drill.test.framework;
 
+import org.apache.commons.io.FilenameUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -169,20 +170,37 @@ public class Utils implements DrillDefaults {
         if (!foundTests) {continue;}
         String queryFileExtension = modeler.matrices.get(0).inputFile;
         String expectedFileExtension = modeler.matrices.get(0).expectedFile;
+        String failExtension = modeler.matrices.get(0).failExtension;
+	String originalQueryFileExtension = queryFileExtension;
+        //To include fail extension in the regex to pick query files tagged as failure as well 
+	if(TestDriver.cmdParam.runFailed == true){
+	  if(failExtension!=null){
+	    //To get the last part if there are multiple dots in the name (multiple extensions) instead of using substring
+	    if(FilenameUtils.getExtension(failExtension)!=null && FilenameUtils.getExtension(failExtension)!="")
+	    {
+	      failExtension = FilenameUtils.getExtension(failExtension);	
+	    }
+	    queryFileExtension = ".*."+failExtension;
+	  }
+	  else{ 
+	    queryFileExtension =    ".*.(fail|failing)";
+	  }
+        }
         boolean skipSuite = false;
         if (modeler.dependencies != null) {
-         for (String dependency : modeler.dependencies) {
-           if (TestDriver.cmdParam.excludeDependenciesAsList().contains(dependency)) {
-             skipSuite = true;
-           }
-         }
+          for (String dependency : modeler.dependencies) {
+            if (TestDriver.cmdParam.excludeDependenciesAsList().contains(dependency)) {
+              skipSuite = true;
+            }
+          }
         }
         if (skipSuite) {continue;}
           List<File> testQueryFiles = searchFiles(testDefFile.getParentFile(),
                   queryFileExtension);
           for (File testQueryFile : testQueryFiles) {
-            String expectedFileName = getExpectedFile(testQueryFile.getAbsolutePath(),
-            		queryFileExtension, expectedFileExtension);
+	    //Expected File to find based on the original query Extension
+	    String expectedFileName = getExpectedFile(testQueryFile.getAbsolutePath(),
+                      originalQueryFileExtension, expectedFileExtension);
             drillTestCases.add(new DrillTestCase(modeler, testQueryFile.getAbsolutePath(), expectedFileName));
           }
       }
@@ -200,7 +218,7 @@ public class Utils implements DrillDefaults {
 	    if (root.isFile()) {
 	      matcher = pattern.matcher(root.getName());
 	      if (matcher.find()) {
-	        list.add(root);
+		list.add(root);
 	        return list;
 	      }
 	    } else {
@@ -219,10 +237,13 @@ public class Utils implements DrillDefaults {
 	    ObjectMapper objectMapper = new ObjectMapper();
 	    return objectMapper.readValue(new String(jsonData), TestCaseModeler.class);
 	  }
-  
+
   private static String getExpectedFile(String queryFile, String queryFileExt,
 	      String expectedFileExt) {
 	    int idx = queryFile.indexOf(queryFileExt.substring(2));
+	    if(idx<0){//Check if queryFileExt not found as a substring in queryFile and if idx is negative if negative return empty string and the queryFile will not be added to tests scheduled to run 
+	      return "";
+	    }
 	    return queryFile.substring(0, idx).concat(expectedFileExt.substring(2));
 	  }
   

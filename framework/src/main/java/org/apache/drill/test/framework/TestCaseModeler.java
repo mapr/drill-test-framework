@@ -86,6 +86,8 @@ public class TestCaseModeler {
     public String outputFormat;
     @JsonProperty("expected-file")
     public String expectedFile;
+    @JsonProperty("fail-extension")
+    public String failExtension;//Failed tests are expected to be tagged with .fail extension. This can be overridden in the test definition file. However, it's not recommended.
     public String username = Utils.drillProperties.get("USERNAME");
     public String password = Utils.drillProperties.get("PASSWORD");
     @JsonProperty("verification-type")
