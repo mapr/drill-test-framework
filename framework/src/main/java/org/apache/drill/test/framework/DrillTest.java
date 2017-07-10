@@ -24,6 +24,7 @@ public interface DrillTest extends Cancelable {
   public TestStatus getTestStatus();
   public Exception getException();
   public String getInputFile();
+  public String getExpectedFile();
   public String getQuery();
   public String getTestId();
   public int getCloneId();

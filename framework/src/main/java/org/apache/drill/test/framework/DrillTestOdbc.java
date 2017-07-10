@@ -151,6 +151,11 @@ public class DrillTestOdbc implements DrillTest{
   }
 
   @Override
+  public String getExpectedFile(){
+    return modeler.expectedFilename;
+  }
+
+  @Override
   public String getQuery() {
 	if (query == null) {
 	  String[] queries = null;
