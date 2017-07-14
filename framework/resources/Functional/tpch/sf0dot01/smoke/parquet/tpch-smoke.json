@@ -1,9 +1,9 @@
 {
     "testId": "tpch",
     "type": "group",
-    "description": "Test tpch (smoke) queries via jdbc",
+    "description": "Test tpch (Functional) queries via jdbc",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "matrices": [
         {

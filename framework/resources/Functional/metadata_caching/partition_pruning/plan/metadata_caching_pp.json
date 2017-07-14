@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Metadata Caching Tests with smaller data sets",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "matrices": [
         {

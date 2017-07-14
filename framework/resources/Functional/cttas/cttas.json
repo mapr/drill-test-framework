@@ -2,7 +2,7 @@
     "testId": "cttas",
     "type": "group",
     "description": "CREATE TEMPORARY TABLE tests",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

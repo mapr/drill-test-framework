@@ -2,7 +2,7 @@
     "testId": "aggregation_group_by_limit0_plan",
     "type": "group",
     "description": "case in group by",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

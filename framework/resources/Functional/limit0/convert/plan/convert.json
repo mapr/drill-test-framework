@@ -4,7 +4,7 @@
     "description": "Test explicit cast queries via jdbc",
     "submit-type": "jdbc",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "matrices": [
         {

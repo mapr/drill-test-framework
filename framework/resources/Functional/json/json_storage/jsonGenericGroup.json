@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test generic json queries",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "matrices": [
         {

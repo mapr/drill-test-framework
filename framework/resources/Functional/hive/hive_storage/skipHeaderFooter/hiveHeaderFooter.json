@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test hive skip header and footer",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "dependencies" : ["hive"],
     "matrices": [

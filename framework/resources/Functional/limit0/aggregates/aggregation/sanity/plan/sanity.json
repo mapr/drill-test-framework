@@ -2,7 +2,7 @@
     "testId": "aggregation_sanity_limit0_plan",
     "type": "group",
     "description": "Sanity tests for aggregation",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

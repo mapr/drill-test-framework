@@ -2,7 +2,7 @@
     "testId": "subqueries_exists_not_exists",
     "type": "group",
     "description": "Exists not exists subqueries",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

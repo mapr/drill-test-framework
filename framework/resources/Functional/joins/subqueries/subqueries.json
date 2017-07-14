@@ -2,7 +2,7 @@
     "testId": "joins_subqueries",
     "type": "group",
     "description": "Joins with subqueries",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

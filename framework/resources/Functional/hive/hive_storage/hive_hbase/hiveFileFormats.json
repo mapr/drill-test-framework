@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test hive tables backed by hbase",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "dependencies" : ["hive","hbase"],
     "matrices": [

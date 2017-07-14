@@ -4,7 +4,7 @@
     "description": "Functional tests to verify LEAD Window Function",
     "submit-type": "jdbc",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "matrices": [
         {

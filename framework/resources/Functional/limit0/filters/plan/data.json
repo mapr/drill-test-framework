@@ -2,7 +2,7 @@
     "testId": "filter_pushdown_limit0_plan",
     "type": "group",
     "description": "Filter pushdown tests: these tests verify query correctness",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

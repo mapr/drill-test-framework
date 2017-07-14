@@ -4,7 +4,7 @@
     "description": "Functional tests to verify multiple windows with and without frame clause",
     "submit-type": "jdbc",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "matrices": [
         {

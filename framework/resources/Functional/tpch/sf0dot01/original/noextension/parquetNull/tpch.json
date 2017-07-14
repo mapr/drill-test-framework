@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test no extension - parquet null tpch queries via jdbc",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "matrices": [
         {
