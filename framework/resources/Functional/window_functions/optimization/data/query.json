@@ -2,7 +2,7 @@
     "testId": "window_functions_optimization_data",
     "type": "group",
     "description": "Window function tests: make sure tests return correct resuts, matching plans are in plans directory",
-    "categories": [ "smoke" ],
+    "categories": [ "functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

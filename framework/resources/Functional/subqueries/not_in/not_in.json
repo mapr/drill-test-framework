@@ -2,7 +2,7 @@
     "testId": "subqueries_not_in",
     "type": "group",
     "description": "NOT IN subqueries",
-    "categories": [ "smoke" ],
+    "categories": [ "functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

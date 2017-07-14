@@ -2,7 +2,7 @@
     "testId": "window_functions_multiple_partitions",
     "type": "group",
     "description": "Window function tests: multiple partitions",
-    "categories": [ "smoke" ],
+    "categories": [ "functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

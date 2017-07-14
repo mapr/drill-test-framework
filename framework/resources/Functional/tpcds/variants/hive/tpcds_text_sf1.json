@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test TPCDS SF 1 original queries on text (with views on top) via jdbc",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "dependencies" : ["hive"],
     "matrices": [

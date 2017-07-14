@@ -1,9 +1,9 @@
 {
-    "testId": "p1tests-regression_text_limit0_data",
+    "testId": "p1tests-functional_text_limit0_data",
     "type": "limit 0",
     "description": "Test p1tests function queries via jdbc",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "matrices": [
         {

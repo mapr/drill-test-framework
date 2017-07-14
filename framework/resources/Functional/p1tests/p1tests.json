@@ -1,9 +1,9 @@
 {
-    "testId": "p1tests-regression",
+    "testId": "p1tests-functional",
     "type": "group",
     "description": "Test p1tests function queries via jdbc",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "matrices": [
         {

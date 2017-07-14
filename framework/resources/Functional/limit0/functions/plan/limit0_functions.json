@@ -2,7 +2,7 @@
     "testId": "limit0_functions_plan",
     "type": "group",
     "description": "Tests calcite functions and Drill UDFs with views on top of parquet with required and optional fields",
-    "categories": [ "smoke" ],
+    "categories": [ "functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

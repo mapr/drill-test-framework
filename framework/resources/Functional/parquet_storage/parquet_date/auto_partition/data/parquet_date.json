@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test drill's parquet date compatibility",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "matrices": [
         {

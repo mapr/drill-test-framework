@@ -2,7 +2,7 @@
     "testId": "aggregation_bugs_limit0_data",
     "type": "limit 0",
     "description": "Bug verification tests for aggregation feature",
-    "categories": [ "smoke" ],
+    "categories": [ "functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

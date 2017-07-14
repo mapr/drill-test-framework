@@ -1,9 +1,9 @@
 {
-    "testId": "table_function-regression",
+    "testId": "table_function-functional",
     "type": "group",
     "description": "Test table function queries via jdbc",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "matrices": [
         {

@@ -2,7 +2,7 @@
     "testId": "aggregation_group_by_expression_limit0_data",
     "type": "limit 0",
     "description": "Group by expression tests",
-    "categories": [ "smoke" ],
+    "categories": [ "functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

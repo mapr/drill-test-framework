@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Miscellaneous tests",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "dependencies" : ["hive", "hbase"],
     "matrices": [

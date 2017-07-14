@@ -2,7 +2,7 @@
     "testId": "joins_inner",
     "type": "group",
     "description": "Inner join tests",
-    "categories": [ "smoke" ],
+    "categories": [ "functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

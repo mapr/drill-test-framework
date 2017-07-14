@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test parquet complex reader",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "matrices": [
         {

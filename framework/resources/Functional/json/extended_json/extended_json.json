@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test extended json functionality",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "matrices": [
         {
