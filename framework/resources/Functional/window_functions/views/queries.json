@@ -4,7 +4,7 @@
     "description": "Functional tests to verify Window Functions defined over Views",
     "submit-type": "jdbc",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "matrices": [
         {

@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test partition directory queries",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "matrices": [
         {

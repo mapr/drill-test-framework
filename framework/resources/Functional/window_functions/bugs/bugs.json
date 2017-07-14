@@ -2,7 +2,7 @@
     "testId": "window_functions_bugs",
     "type": "group",
     "description": "Window function tests: fixed bugs",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

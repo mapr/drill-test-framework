@@ -2,7 +2,7 @@
     "testId": "window_functions_empty_over_clause",
     "type": "group",
     "description": "Window function tests: empty over clause",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

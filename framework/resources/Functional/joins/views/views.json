@@ -2,7 +2,7 @@
     "testId": "joins_views",
     "type": "group",
     "description": "Joins with views",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

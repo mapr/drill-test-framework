@@ -2,7 +2,7 @@
     "testId": "joins_explicit_cast",
     "type": "group",
     "description": "Explicit cast tests in joins",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

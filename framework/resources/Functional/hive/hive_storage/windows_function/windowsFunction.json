@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test windows functions against hive tables",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "dependencies" : ["hbase"],
     "matrices": [

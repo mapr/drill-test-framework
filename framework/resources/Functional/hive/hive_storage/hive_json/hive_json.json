@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test hive json serde",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "dependencies" : ["hive"],
     "matrices": [

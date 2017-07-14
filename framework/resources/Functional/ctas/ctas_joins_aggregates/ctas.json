@@ -2,7 +2,7 @@
     "testId": "ctas_joins",
     "type": "group",
     "description": "ctas with joins",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

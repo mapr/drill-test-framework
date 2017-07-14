@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test tpch queries via jdbc",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "matrices": [
         {

@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test p1tests function queries via jdbc",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "matrices": [
         {

@@ -2,7 +2,7 @@
     "testId": "subqueries_scalar_aggregate",
     "type": "group",
     "description": "scalar aggregate subqueries",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

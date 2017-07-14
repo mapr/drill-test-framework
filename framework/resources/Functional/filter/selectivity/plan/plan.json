@@ -2,7 +2,7 @@
     "testId": "filter_selectivity_plan",
     "type": "group",
     "description": "Filter selectivity tests",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

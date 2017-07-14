@@ -2,7 +2,7 @@
     "testId": "aggregation_multicolumn",
     "type": "group",
     "description": "Group by on more than 6 columns",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

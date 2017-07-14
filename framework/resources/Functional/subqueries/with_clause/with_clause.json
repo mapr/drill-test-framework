@@ -2,7 +2,7 @@
     "testId": "subqueries_with_clause",
     "type": "group",
     "description": "WITH clause tests",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

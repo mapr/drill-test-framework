@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test hive file formats and queries",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "dependencies" : ["hive","hbase"],
     "matrices": [

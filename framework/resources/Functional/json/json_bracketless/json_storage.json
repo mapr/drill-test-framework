@@ -4,7 +4,7 @@
     "description": "Test Nested/Repeated queries via jdbc",
     "submit-type": "jdbc",
     "categories": [
-        "smoke"
+        "Functional"
     ],
     "matrices": [
         {

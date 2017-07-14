@@ -2,7 +2,7 @@
     "testId": "joins_left_outer",
     "type": "group",
     "description": "Left outer join tests",
-    "categories": [ "smoke" ],
+    "categories": [ "Functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",
