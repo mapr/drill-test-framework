@@ -2,7 +2,7 @@
     "testId": "window_functions_empty_over_clause_limit0_data",
     "type": "limit 0",
     "description": "Window function tests: empty over clause",
-    "categories": [ "smoke" ],
+    "categories": [ "functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

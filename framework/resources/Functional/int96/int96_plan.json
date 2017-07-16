@@ -2,7 +2,7 @@
     "testId": "int96_plan",
     "type": "group",
     "description": "int96 plan tests",
-    "categories": [ "smoke" ],
+    "categories": [ "functional" ],
     "matrices": [
         {
             "query-file": ".*.q",

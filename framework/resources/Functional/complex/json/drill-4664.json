@@ -4,7 +4,7 @@
     "description": "Test extended json support via jdbc",
     "submit-type": "jdbc",
     "categories": [
-        "regression"
+        "functional"
     ],
     "matrices": [
         {

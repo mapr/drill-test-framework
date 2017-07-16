@@ -4,7 +4,7 @@
     "description": "Test drill queries involving data from different sources",
     "submit-type": "jdbc",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "dependencies" : ["hive", "hbase"],
     "matrices": [

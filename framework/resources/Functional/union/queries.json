@@ -4,7 +4,7 @@
     "description": "Functional tests to verify correctness of UNION operator",
     "submit-type": "jdbc",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "matrices": [
         {

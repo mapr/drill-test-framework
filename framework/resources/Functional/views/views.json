@@ -4,7 +4,7 @@
     "description": "Test views in drill using parquet as the format ",
     "submit-type": "jdbc",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "dependencies" : ["hive"],
     "matrices": [

@@ -2,7 +2,7 @@
     "testId": "limit0_implicit_cast_with_views_plan",
     "type": "group",
     "description": "Implicit cast tests in joins with views",
-    "categories": [ "smoke" ],
+    "categories": [ "functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

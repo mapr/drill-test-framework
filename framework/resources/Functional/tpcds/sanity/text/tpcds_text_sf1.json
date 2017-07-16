@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test TPCDS SF 1 data sanity queries on text (with views on top) via jdbc",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "matrices": [
         {

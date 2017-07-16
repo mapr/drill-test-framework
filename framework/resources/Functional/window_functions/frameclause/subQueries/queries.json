@@ -4,7 +4,7 @@
     "description": "Functional tests to verify multiple windows in subqueries",
     "submit-type": "jdbc",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "matrices": [
         {

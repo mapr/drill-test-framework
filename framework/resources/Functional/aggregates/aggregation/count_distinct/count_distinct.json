@@ -2,7 +2,7 @@
     "testId": "aggregation_count_distinct",
     "type": "group",
     "description": "count distinct tests",
-    "categories": [ "smoke" ],
+    "categories": [ "functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

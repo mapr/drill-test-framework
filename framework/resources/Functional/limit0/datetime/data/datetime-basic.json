@@ -4,7 +4,7 @@
     "description": "Test datetime queries via jdbc",
     "submit-type": "jdbc",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "matrices": [
         {

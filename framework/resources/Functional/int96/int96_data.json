@@ -2,7 +2,7 @@
     "testId": "int96_data",
     "type": "group",
     "description": "int96 data tests",
-    "categories": [ "smoke" ],
+    "categories": [ "functional" ],
     "matrices": [
         {
             "query-file": ".*.sql",

@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test text read queries",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "matrices": [
         {

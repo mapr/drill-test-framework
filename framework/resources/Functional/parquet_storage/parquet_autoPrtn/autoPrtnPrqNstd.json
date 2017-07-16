@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Query auto partitioned parquet data that is stored in nested direcotries, where directory name is greater than 8 characters",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "matrices": [
         {

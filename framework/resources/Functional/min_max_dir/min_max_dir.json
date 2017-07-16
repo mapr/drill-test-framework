@@ -1,9 +1,9 @@
 {
-    "testId": "min_max_dir-regression",
+    "testId": "min_max_dir-functional",
     "type": "group",
     "description": "Test mindir and maxdir function queries via jdbc",
     "categories": [
-        "smoke"
+        "functional"
     ],
     "matrices": [
         {
