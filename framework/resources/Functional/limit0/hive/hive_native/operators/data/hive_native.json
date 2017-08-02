@@ -35,13 +35,18 @@
             "dest": "hive_storage/hive_native/hivegen_fewtypes_null/hivegen_fewtypes_null.parquet"
         },
         {
+            "mode": "cp",
+            "src": "Datasources/hive_storage/hive_native/allhivetypes.parquet",
+            "dest": "/drill/testdata/hive_storage/hive_native/drill_supported_hivetypes/allhivetypes.parquet"
+        },
+        {
             "mode": "gen",
             "src": "Datasources/cross-sources/cross-sources.sh",
             "dest": ""
         },
         {
             "mode": "gen",
-            "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/hive_native/hive_native.ddl",
+            "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/hive_native/hive_native.ddl",
             "dest": ""
         }
     ]
