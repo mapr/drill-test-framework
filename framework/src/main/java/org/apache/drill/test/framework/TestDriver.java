@@ -149,7 +149,7 @@ public class TestDriver implements DrillDefaults {
     List<DrillTest> tests = Lists.newArrayList();
     for (DrillTestCase testCase : drillTestCases) {
       for (int clone = 0; clone < cmdParam.clones; clone++) {
-        tests.add(getDrillTest(testCase, connectionPool, clone));
+        tests.add(getDrillTest(testCase, connectionPool, clone, drillTestCases.size()));
       }
     }
     HashSet  <DrillTest> totalFailedTestsSet = new HashSet<DrillTest>();
@@ -602,10 +602,10 @@ public class TestDriver implements DrillDefaults {
 	}
   }
   
-  private DrillTest getDrillTest(DrillTestCase modeler, ConnectionPool connectionPool, int cloneId) {
+  private DrillTest getDrillTest(DrillTestCase modeler, ConnectionPool connectionPool, int cloneId, int totalCases) {
     switch(modeler.submitType) {
     case "jdbc":
-      return new DrillTestJdbc(modeler, connectionPool, cloneId);
+      return new DrillTestJdbc(modeler, connectionPool, cloneId, totalCases);
     case "odbc":
       return new DrillTestOdbc(modeler, cloneId);
     case "script":
