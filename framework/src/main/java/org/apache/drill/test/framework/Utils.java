@@ -45,6 +45,7 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Arrays;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -117,6 +118,47 @@ public class Utils implements DrillDefaults {
     drillProperties = ImmutableMap.copyOf(properties);
   }
 
+
+ /**
+ * Check if the value passed to the -s parameter (test definition sources) can be 
+ * expanded as a regex expression and use that to construct the list of test definitions
+ *
+ * @return list of test definition sources to execute
+ */
+  public static String[] getTestDefSources() {
+
+    String[] testDirExpressions = null;
+    try {
+     testDirExpressions = TestDriver.cmdParam.sources.split(",");
+    } catch (Exception e) {
+      testDirExpressions = new String[] { "" }; //Look at the default location for test definition files
+    }
+    
+    for (String relTestDirExpression : testDirExpressions) {
+      String absoluteTestDirExpression = getAbsolutePath(relTestDirExpression, TestDriver.drillTestDataDir);
+      File absoluteTestDirExpressionFile = new File(absoluteTestDirExpression);
+      List<File> testDefinitionList = new ArrayList<>();
+      if (!absoluteTestDirExpressionFile.exists()) {
+        //try regex then exit if failure
+        File drillTestDataDir = new File(CWD + "/" + TestDriver.drillTestDataDir);
+        testDefinitionList.addAll(getTestDefinitionList(drillTestDataDir,absoluteTestDirExpression));
+        if(testDefinitionList.isEmpty()){
+          LOG.info("No regex Found for "+relTestDirExpression);
+	  return testDirExpressions;
+        }
+        else{
+          List<String> defSrcList = new ArrayList<>(Arrays.asList(testDirExpressions));
+          defSrcList.remove(relTestDirExpression);
+          for(File testDefinition : testDefinitionList){
+            defSrcList.add(testDefinition.getAbsolutePath());
+          }
+          testDirExpressions = new String[defSrcList.size()];
+	  testDirExpressions = defSrcList.toArray(testDirExpressions);                
+        }
+      }
+    }
+    return testDirExpressions;
+  }
   /**
    * Constructs an iteration of test case definitions from various test data
    * sources, obtained from the mvn command line option. See README.md for more
@@ -127,12 +169,8 @@ public class Utils implements DrillDefaults {
    * @throws Exception
    */
   public static List<DrillTestCase> getDrillTestCases() throws IOException {
-    String[] testDefSources = null;
-    try {
-      testDefSources = TestDriver.cmdParam.sources.split(",");
-    } catch (Exception e) {
-      testDefSources = new String[] { "" }; //Look at the default location for test definition files
-    }
+    
+    String[] testDefSources = getTestDefSources();
     String[] testGroups = null;
     try {
       testGroups = TestDriver.cmdParam.groups.split(",");
@@ -144,8 +182,8 @@ public class Utils implements DrillDefaults {
       testDefSource = getAbsolutePath(testDefSource, TestDriver.drillTestDataDir);
       File testDefSourceFile = new File(testDefSource);
       if (!testDefSourceFile.exists()) {
-    	  LOG.error("Directory " + testDefSourceFile.getAbsolutePath() + " does not exist!");
-    	  System.exit(-1);
+	  	LOG.error("Directory " + testDefSourceFile.getAbsolutePath() + " does not exist!");
+    	  	System.exit(-1);
       }
       List<File> testDefFiles = searchFiles(testDefSourceFile, ".*.json");
       for (File testDefFile : testDefFiles) {
@@ -230,6 +268,27 @@ public class Utils implements DrillDefaults {
 	    }
 	    return list;
 	  }
+
+  private static List<File> getTestDefinitionList(File root, String regex) {
+          List<File> list = new ArrayList<File>();
+          Pattern pattern = Pattern.compile(regex + "$");
+          Matcher matcher = null;
+          if (!root.isFile()) {
+            matcher = pattern.matcher(root.getAbsolutePath());
+            if (matcher.find()) {
+              list.add(root);
+              return list;
+            }
+	    else{
+              for (File file : root.listFiles()) {
+                if (!file.getName().equals("datasources")) {
+                  list.addAll(getTestDefinitionList(file, regex));
+              	}
+              }
+	    }
+	  }
+          return list;
+         }
   
   private static TestCaseModeler getTestCaseModeler(String testDefFile)
 	      throws IOException {
