@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import org.apache.drill.test.framework.TestCaseModeler.TestMatrix;
 import org.apache.drill.test.framework.TestVerifier.TestStatus;
 import org.apache.drill.test.framework.TestVerifier.VerificationException;
+import org.apache.drill.test.framework.DrillDefaults;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
@@ -61,12 +62,14 @@ public class DrillTestJdbc implements DrillTest {
   private Statement statement = null;
   private AtomicBoolean doneProcessingResultSet = new AtomicBoolean(false);
   private int id;
-
-  public DrillTestJdbc(DrillTestCase modeler, ConnectionPool connectionPool, int id) {
+  private int totalCases;
+  private static volatile int noOfCasesCompleted;
+  public DrillTestJdbc(DrillTestCase modeler, ConnectionPool connectionPool, int id,int totalCases) {
 	this.id = id;
     this.modeler = modeler;
     this.connectionPool = connectionPool;
     this.matrix = modeler.matrices.get(0);
+    this.totalCases = totalCases;
   }
   
  
@@ -140,6 +143,11 @@ public class DrillTestJdbc implements DrillTest {
     	Utils.deleteFile(outputFilename);
       }
       duration = stopwatch;
+      if(++noOfCasesCompleted%100==0 && noOfCasesCompleted <= totalCases){
+	LOG.info("----------------------------------------------------------------------------------------------------------------");
+        LOG.info("Execution completed for "+(noOfCasesCompleted)+" out of "+(totalCases)+" tests");
+	LOG.info("----------------------------------------------------------------------------------------------------------------\n");
+      }
       LOG.info(testStatus + " (" + stopwatch + ") " + modeler.queryFilename + " (connection: " + connection.hashCode() + ")");
     }
   }
