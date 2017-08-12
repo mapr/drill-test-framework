@@ -63,7 +63,9 @@ public class DrillTestJdbc implements DrillTest {
   private AtomicBoolean doneProcessingResultSet = new AtomicBoolean(false);
   private int id;
   private int totalCases;
-  private static int noOfCasesCompleted;
+
+  private static volatile int noOfCasesCompleted;
+
   public DrillTestJdbc(DrillTestCase modeler, ConnectionPool connectionPool, int id,int totalCases) {
 	this.id = id;
     this.modeler = modeler;
@@ -143,8 +145,10 @@ public class DrillTestJdbc implements DrillTest {
     	Utils.deleteFile(outputFilename);
       }
       duration = stopwatch;
-      if(++noOfCasesCompleted%100==0){
-	LOG.info("----------------------------------------------------------------------------------------------------------------\n");
+
+      if(++noOfCasesCompleted%100==0 && noOfCasesCompleted <= totalCases){
+	LOG.info("----------------------------------------------------------------------------------------------------------------");
+
         LOG.info("Execution completed for "+(noOfCasesCompleted)+" out of "+(totalCases)+" tests");
 	LOG.info("----------------------------------------------------------------------------------------------------------------\n");
       }
