@@ -25,8 +25,13 @@
 	},
         {
            "mode": "gen",
-           "src": "Datasources/partition_pruning/hive/dynamic_date_partition_gen.sh",
+           "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/partition_pruning/hive/hive_date_parquet.ddl",
            "dest": ""
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/partition_pruning/hive/hive.ddl",
+            "dest": ""
         }
     ]
 }
