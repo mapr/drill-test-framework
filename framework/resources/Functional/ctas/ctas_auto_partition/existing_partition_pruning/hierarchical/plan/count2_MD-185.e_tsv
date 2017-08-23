@@ -1,2 +1,2 @@
 .*
-Scan.*org.apache.drill.exec.store.pojo.PojoRecordReader.*
+.*Scan.*DynamicPojoRecordReader.*
