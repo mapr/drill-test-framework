@@ -47,7 +47,17 @@ Refer to [Github documentation](https://help.github.com/articles/cloning-a-repos
  6. Refer to [README](framework/resources/Advanced/README.md) for downloading datasets required for the Advanced tests. 
 
 #### Add testcases
-A testcase consists a query file and a baseline file containing the expected result. The query file contains a list of SQL statements. Only one query statement that starts with "@" is verified against the baseline. If no query starts with "@", the middle line will be the one its query result verified.
+A testcase consists a query file and a baseline file containing the expected result. The query file contains a list of SQL statements. Only one query statement that proceeded with a "--@test" line (can't contain ";") is verified against the baseline. If no query meets that requirement, the middle query is verified. Here is an example:
+
+-- Some setup queries
+setup query one;
+...
+--@test The following query will be verified.
+select * from table;
+-- Some teardown queries
+teardown query one;
+...
+
 
 #### Structure of test definiton files. 
 A test definition file is a JSON file that defines one or a set of tests within a directory. The framework scans for files with .json extension in the specified location(s) and executes all test(s) defined. 

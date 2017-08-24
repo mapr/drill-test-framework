@@ -79,7 +79,7 @@ public class DrillTestJdbc implements DrillTest {
     final Stopwatch stopwatch = Stopwatch.createStarted();
     this.thread = Thread.currentThread();
     setTestStatus(TestStatus.RUNNING);
-    int mainQueryIndex = 0;
+    int mainQueryIndex = -1;
     String[] queries = null;
     try {
       connection = connectionPool.getOrCreateConnection(modeler);
@@ -95,13 +95,12 @@ public class DrillTestJdbc implements DrillTest {
       }
 
       queries = Utils.getSqlStatements(modeler.queryFilename);
-      for (int i = 0; i < queries.length && mainQueryIndex == 0; i++) {
-    	if (queries[i].startsWith("@")) {
+      for (int i = 0; i < queries.length && mainQueryIndex == -1; i++) {
+    	if (queries[i].startsWith("--@test")) {
     	  mainQueryIndex = i;
-    	  queries[i] = queries[i].substring(1);
     	}
       }
-      if (mainQueryIndex == 0) {
+      if (mainQueryIndex == -1) {
         mainQueryIndex = queries.length / 2; // Currently, the main query must be in the middle of the list of queries
       }
       
