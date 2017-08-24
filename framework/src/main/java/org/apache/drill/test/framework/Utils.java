@@ -118,7 +118,6 @@ public class Utils implements DrillDefaults {
     drillProperties = ImmutableMap.copyOf(properties);
   }
 
-
  /**
  * Check if the value passed to the -s parameter (test definition sources) can be 
  * expanded as a regex expression and use that to construct the list of test definitions
@@ -159,6 +158,7 @@ public class Utils implements DrillDefaults {
     }
     return testDirExpressions;
   }
+
   /**
    * Constructs an iteration of test case definitions from various test data
    * sources, obtained from the mvn command line option. See README.md for more
