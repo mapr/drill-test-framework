@@ -24,9 +24,14 @@
 		"dest": "partition_pruning/hive"
 	},
         {
-           "mode": "gen",
-           "src": "Datasources/partition_pruning/hive/dynamic_int_partition_gen.sh",
-           "dest": ""
+            "mode": "gen",
+            "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/partition_pruning/hive/hive.ddl",
+            "dest": ""
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/partition_pruning/hive/hive_int_parquet.ddl",
+            "dest": ""
         }
         
     ]
