@@ -197,7 +197,7 @@ public class TestDriver implements DrillDefaults {
       
       for (DrillTest test : tests) {
         TestStatus testStatus = test.getTestStatus();
-        if(testStatus!=TestStatus.PASS && testStatus!=TestStatus.CANCELED){
+        if(testStatus!=TestStatus.PASS && testStatus!=TestStatus.CANCELED && cmdParam.skipRandom!=true){
 	   List<DrillTest> tempTests = Lists.newArrayList();
            tempTests.add(test); 
            executor.executeAll(tempTests);

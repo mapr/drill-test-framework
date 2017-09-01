@@ -55,6 +55,9 @@ import com.beust.jcommander.Parameter;
     @Parameter(names = {"-rf", "--runFailed"}, description = "Run tests tagged as failures", required=false)
     public boolean runFailed  = false;
 
+    @Parameter(names = {"-sR", "--skipRandom"}, description = "Skip check for random failures", required=false)
+    public boolean skipRandom  = false;
+
     public List<String> excludeDependenciesAsList() {
       if (excludeDependencies == null) {
         return new ArrayList<String>();
