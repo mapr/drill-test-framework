@@ -6,3 +6,4 @@ alter system set `new_view_default_permissions` = '777';
 alter system set `planner.enable_limit0_optimization` = true;
 alter system set `exec.errors.verbose` = true;
 alter system set `planner.memory.max_query_memory_per_node` = 10737418240;
+alter system set `drill.exec.hashagg.fallback.enabled` = true;
