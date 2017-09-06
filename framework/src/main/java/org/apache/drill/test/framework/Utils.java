@@ -657,4 +657,18 @@ public class Utils implements DrillDefaults {
         return rootNode.at(ptrExpr);
   }
 
+  /* Get query ID.  This matches the profile ID */
+  public static String getQueryID(ResultSet resultSet) throws SQLException {
+    org.apache.drill.jdbc.DrillResultSet drs = (org.apache.drill.jdbc.DrillResultSet)resultSet;
+    String queryId = null;
+    if (drs != null) {
+      try {
+        queryId = drs.getQueryId();
+      } catch (SQLException e) {
+        LOG.info ("getQueryId threw SQLException: " + e.getMessage());
+      }
+    }
+    return queryId;
+  }
+
 }

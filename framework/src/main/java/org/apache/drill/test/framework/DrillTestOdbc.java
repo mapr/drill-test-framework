@@ -83,14 +83,14 @@ public class DrillTestOdbc implements DrillTest{
     	try {
           setTestStatus(testVerifier.verifyResultSet(modeler.expectedFilename, outputFilename));
     	} catch (VerificationException e) {
-    	  fail(TestStatus.VERIFICATION_FAILURE, e);
+    	  fail(TestStatus.DATA_VERIFICATION_FAILURE, e);
     	};
         break;
       case 1:
         setTestStatus(TestStatus.EXECUTION_FAILURE);
         break;
       case 2:
-        setTestStatus(TestStatus.VERIFICATION_FAILURE);
+        setTestStatus(TestStatus.DATA_VERIFICATION_FAILURE);
         break;
       case 3:
         setTestStatus(TestStatus.ORDER_MISMATCH);
@@ -130,7 +130,7 @@ public class DrillTestOdbc implements DrillTest{
   }
   
   public synchronized void setTestStatus(TestStatus status) {
-	if (testStatus == TestStatus.CANCELED || testStatus == TestStatus.VERIFICATION_FAILURE) 
+	if (testStatus == TestStatus.CANCELED || testStatus == TestStatus.DATA_VERIFICATION_FAILURE) 
 	  return;
 	testStatus = status;
   }

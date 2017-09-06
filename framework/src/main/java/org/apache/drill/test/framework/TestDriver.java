@@ -62,6 +62,10 @@ public class TestDriver implements DrillDefaults {
  
   private static Configuration conf = new Configuration();
   public static final CmdParam cmdParam = new CmdParam();
+  public static DriverType driverType;
+  public enum DriverType {
+    APACHE, SIMBA_JDBC
+  };
 
   static {loadConf();};
   
@@ -154,14 +158,16 @@ public class TestDriver implements DrillDefaults {
     }
     HashSet  <DrillTest> totalFailedTestsSet = new HashSet<DrillTest>();
     HashSet  <DrillTest> finalExecutionFailures = new HashSet<DrillTest>();
-    HashSet  <DrillTest> finalVerificationFailures = new HashSet<DrillTest>();
+    HashSet  <DrillTest> finalDataVerificationFailures = new HashSet<DrillTest>();
+    HashSet  <DrillTest> finalPlanVerificationFailures = new HashSet<DrillTest>();
     HashSet  <DrillTest> finalCancelledFailures = new HashSet<DrillTest>();
     HashSet  <DrillTest> finalRandomFailures = new HashSet<DrillTest>();
     HashSet  <DrillTest> finalTimeoutFailures = new HashSet<DrillTest>();
     int totalRandomFailures = 0;
     int totalPassingTests = 0;
     int totalExecutionFailures = 0;
-    int totalVerificationFailures = 0;
+    int totalDataVerificationFailures = 0;
+    int totalPlanVerificationFailures = 0;
     int totalTimeoutFailures = 0;
     int totalCancelledFailures = 0;
     int i = 0;
@@ -188,7 +194,8 @@ public class TestDriver implements DrillDefaults {
     	  queryMemoryUsage();
       }
       List<DrillTest> passingTests = Lists.newArrayList();
-      List<DrillTest> verificationFailures = Lists.newArrayList();
+      List<DrillTest> dataVerificationFailures = Lists.newArrayList();
+      List<DrillTest> planVerificationFailures = Lists.newArrayList();
       List<DrillTest> executionFailures = Lists.newArrayList();
       List<DrillTest> timeoutFailures = Lists.newArrayList();
       List<DrillTest> canceledTests = Lists.newArrayList();
@@ -210,8 +217,11 @@ public class TestDriver implements DrillDefaults {
          case PASS:
            passingTests.add(test);
            break;
-         case VERIFICATION_FAILURE:
-           verificationFailures.add(test);
+         case DATA_VERIFICATION_FAILURE:
+           dataVerificationFailures.add(test);
+           break;
+         case PLAN_VERIFICATION_FAILURE:
+           planVerificationFailures.add(test);
            break;
          case EXECUTION_FAILURE:
            executionFailures.add(test);
@@ -243,10 +253,18 @@ public class TestDriver implements DrillDefaults {
         LOG.info("Query: \n" + test.getQuery());
         LOG.info("Failed with exception", test.getException());
       }
-      if(verificationFailures.size()>0){
-      	LOG.info("Verification Failures:");
+      if(dataVerificationFailures.size()>0){
+      	LOG.info("Data Verification Failures:");
       }
-      for (DrillTest test : verificationFailures) {
+      for (DrillTest test : dataVerificationFailures) {
+        LOG.info(test.getInputFile());
+        LOG.info("Query: \n" + test.getQuery());
+        LOG.info(test.getException().getMessage());
+      }
+      if(planVerificationFailures.size()>0){
+      	LOG.info("Plan Verification Failures:");
+      }
+      for (DrillTest test : planVerificationFailures) {
         LOG.info(test.getInputFile());
         LOG.info("Query: \n" + test.getQuery());
         LOG.info(test.getException().getMessage());
@@ -292,11 +310,18 @@ public class TestDriver implements DrillDefaults {
 	  }
       	}
       }
-      if(verificationFailures.size()>0){
+      if(dataVerificationFailures.size()>0){
         LOG.info(LINE_BREAK);
-      	LOG.info("Verification Failures:");
+      	LOG.info("Data Verification Failures:");
       }
-      for (DrillTest test : verificationFailures) {
+      for (DrillTest test : dataVerificationFailures) {
+        LOG.info(test.getInputFile());
+      }
+      if(planVerificationFailures.size()>0){
+        LOG.info(LINE_BREAK);
+      	LOG.info("Plan Verification Failures:");
+      }
+      for (DrillTest test : planVerificationFailures) {
         LOG.info(test.getInputFile());
       }
       if(timeoutFailures.size()>0){
@@ -317,9 +342,11 @@ public class TestDriver implements DrillDefaults {
       }
       LOG.info(LINE_BREAK);
 
-      LOG.info(String.format("\nPassing tests: %d\nExecution Failures: %d\nVerificationFailures: %d" +
+      LOG.info(String.format("\nPassing tests: %d\nExecution Failures: %d\nData Verification Failures: %d" +
+        "\nPlan Verification Failures: %d" +
       	"\nTimeouts: %d\nCanceled: %d\nRandom Failures: %d", passingTests.size(), executionFailures.size(), 
-      	verificationFailures.size(), timeoutFailures.size(), canceledTests.size(),randomFailures.size()));
+      	dataVerificationFailures.size(), planVerificationFailures.size(),
+        timeoutFailures.size(), canceledTests.size(),randomFailures.size()));
       
       if (cmdParam.trackMemory) {
         LOG.info(LINE_BREAK);
@@ -330,22 +357,25 @@ public class TestDriver implements DrillDefaults {
 
       totalPassingTests += passingTests.size();
       totalExecutionFailures += executionFailures.size();
-      totalVerificationFailures += verificationFailures.size();
+      totalDataVerificationFailures += dataVerificationFailures.size();
+      totalPlanVerificationFailures += planVerificationFailures.size();
       totalTimeoutFailures += timeoutFailures.size();
       totalRandomFailures += randomFailures.size();
       totalCancelledFailures += canceledTests.size();
       finalRandomFailures.addAll(randomFailures);
       finalExecutionFailures.addAll(executionFailures);
-      finalVerificationFailures.addAll(verificationFailures);
+      finalDataVerificationFailures.addAll(dataVerificationFailures);
+      finalPlanVerificationFailures.addAll(planVerificationFailures);
       finalTimeoutFailures.addAll(timeoutFailures);
        	
     }
       
     if (cmdParam.iterations > 1) {
       LOG.info(LINE_BREAK);
-      LOG.info(String.format("\nCompleted %d iterations.\n  Passing tests: %d \n  Random failures: %d \n  Execution Failures: %d\n  Verification Failures: %d" +
+      LOG.info(String.format("\nCompleted %d iterations.\n  Passing tests: %d \n  Random failures: %d \n" +
+          "  Execution Failures: %d\n  Data Verification Failures: %d\n  Plan Verification Failures: %d" +
     	  "\n  Timeouts: %d\n  Canceled: %d", i-1, totalPassingTests, totalRandomFailures,totalExecutionFailures, 
-    	  totalVerificationFailures, totalTimeoutFailures, totalCancelledFailures));
+    	  totalDataVerificationFailures, totalPlanVerificationFailures, totalTimeoutFailures, totalCancelledFailures));
         if(finalRandomFailures.size()>0){
       	  LOG.info(LINE_BREAK);
       	  LOG.info("Random Failures:");
@@ -370,10 +400,17 @@ public class TestDriver implements DrillDefaults {
             }
 	  }
       	}
-      	if(finalVerificationFailures.size()>0){
+      	if(finalDataVerificationFailures.size()>0){
       	  LOG.info(LINE_BREAK);
-      	  LOG.info("Verification Failures");
-      	    for(DrillTest test : finalVerificationFailures){
+      	  LOG.info("Data Verification Failures");
+      	    for(DrillTest test : finalDataVerificationFailures){
+      	      LOG.info(test.getInputFile());
+      	    }
+      	}
+      	if(finalPlanVerificationFailures.size()>0){
+      	  LOG.info(LINE_BREAK);
+      	  LOG.info("Plan Verification Failures");
+      	    for(DrillTest test : finalPlanVerificationFailures){
       	      LOG.info(test.getInputFile());
       	    }
       	}
@@ -397,7 +434,7 @@ public class TestDriver implements DrillDefaults {
     executor.close();
     connectionPool.close();
     restartDrill();
-    return totalExecutionFailures + totalVerificationFailures + totalTimeoutFailures;
+    return totalExecutionFailures + totalDataVerificationFailures + totalPlanVerificationFailures + totalTimeoutFailures;
   }
 
   public void setup() throws IOException, InterruptedException {
@@ -777,7 +814,8 @@ public class TestDriver implements DrillDefaults {
         document.set("query", query);
         document.set("status", test.getTestStatus().toString());
         if(test.getTestStatus().equals(TestStatus.EXECUTION_FAILURE) 
-        		|| test.getTestStatus().equals(TestStatus.VERIFICATION_FAILURE)) {
+        		|| test.getTestStatus().equals(TestStatus.DATA_VERIFICATION_FAILURE)
+        		|| test.getTestStatus().equals(TestStatus.PLAN_VERIFICATION_FAILURE)) {
           document.set("errorMessage", test.getException().toString().replaceAll("\n",""));
         }else{
           document.set("errorMessage", "N/A");
