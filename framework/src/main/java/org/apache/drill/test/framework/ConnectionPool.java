@@ -46,6 +46,11 @@ public class ConnectionPool implements DrillDefaults, AutoCloseable {
 	}
     //Driver.load();
     connections = new HashMap<>();
+    if (jdbcDriver.equals("org.apache.drill.jdbc.Driver")) {
+      TestDriver.driverType = TestDriver.DriverType.APACHE;
+    } else if (jdbcDriver.equals("com.mapr.drill.jdbc41.Driver")) {
+      TestDriver.driverType = TestDriver.DriverType.SIMBA_JDBC;
+    }
   }
 
   public Connection getOrCreateConnection(TestCaseModeler test) throws SQLException {

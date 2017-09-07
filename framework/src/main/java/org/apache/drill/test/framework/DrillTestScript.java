@@ -88,7 +88,7 @@ public class DrillTestScript implements DrillTest {
         setTestStatus(TestStatus.EXECUTION_FAILURE);
         break;
       case 2:
-        setTestStatus(TestStatus.VERIFICATION_FAILURE);
+        setTestStatus(TestStatus.DATA_VERIFICATION_FAILURE);
         break;
       case 3:
         setTestStatus(TestStatus.ORDER_MISMATCH);
@@ -125,7 +125,7 @@ public class DrillTestScript implements DrillTest {
   }
   
   public synchronized void setTestStatus(TestStatus status) {
-	if (testStatus == TestStatus.CANCELED || testStatus == TestStatus.VERIFICATION_FAILURE) 
+	if (testStatus == TestStatus.CANCELED || testStatus == TestStatus.DATA_VERIFICATION_FAILURE) 
 	  return;
 	testStatus = status;
   }

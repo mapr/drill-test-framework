@@ -61,8 +61,8 @@ public class TestVerifier {
   private boolean checkType = true;
 
   public enum TestStatus {
-    PENDING, RUNNING, PASS, EXECUTION_FAILURE, VERIFICATION_FAILURE, ORDER_MISMATCH, TIMEOUT,
-    CANCELED
+    PENDING, RUNNING, PASS, EXECUTION_FAILURE, VERIFICATION_FAILURE,
+    DATA_VERIFICATION_FAILURE, PLAN_VERIFICATION_FAILURE, ORDER_MISMATCH, TIMEOUT, CANCELED
   };
 
   public TestVerifier(List<Integer> types, String query, List<String> columnLabels, List<String> verificationType) {
@@ -157,9 +157,9 @@ public class TestVerifier {
     Map<ColumnList, Integer> actualMap = loadFromFileToMap(actualOutput);
     int actualCount = mapSize;
     
-    testStatus = expectedMap.equals(actualMap) ? TestStatus.PASS : TestStatus.VERIFICATION_FAILURE;
+    testStatus = expectedMap.equals(actualMap) ? TestStatus.PASS : TestStatus.DATA_VERIFICATION_FAILURE;
     
-    if (testStatus == TestStatus.VERIFICATION_FAILURE) {
+    if (testStatus == TestStatus.DATA_VERIFICATION_FAILURE) {
       List<ColumnList> unexpectedList = new ArrayList<ColumnList>();
       int unexpectedCount = 0;
       Iterator<Map.Entry<ColumnList, Integer>> iterator = actualMap.entrySet().iterator();
@@ -671,7 +671,7 @@ public class TestVerifier {
   }
 
   public TestStatus verifyTextPlan(String expectedOutput,
-      String actualOutput) throws IOException, VerificationException {
+      String actualOutput) throws IOException, PlanVerificationException {
     StringBuilder sb = new StringBuilder();
     String expected = new String(Files.readAllBytes(Paths.get(expectedOutput)));
     
@@ -697,7 +697,7 @@ public class TestVerifier {
     sb.append("\nExpected and actual text plans are different.");
     sb.append("\nExpected:\n" + expected);
     sb.append("\nActual:\n" + actual);
-    throw new VerificationException(sb.toString());
+    throw new PlanVerificationException(sb.toString());
   }
 
   private static boolean matchesAll(String actual, String expected) {
@@ -909,6 +909,12 @@ public class TestVerifier {
   public static class VerificationException extends Exception {
 
     public VerificationException(String message) {
+      super(message);
+    }
+  }
+  public static class PlanVerificationException extends Exception {
+
+    public PlanVerificationException(String message) {
       super(message);
     }
   }

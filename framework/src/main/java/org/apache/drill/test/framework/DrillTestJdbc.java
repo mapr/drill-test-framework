@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import org.apache.drill.test.framework.TestCaseModeler.TestMatrix;
 import org.apache.drill.test.framework.TestVerifier.TestStatus;
 import org.apache.drill.test.framework.TestVerifier.VerificationException;
+import org.apache.drill.test.framework.TestVerifier.PlanVerificationException;
 import org.apache.drill.test.framework.DrillDefaults;
 import org.apache.log4j.Logger;
 
@@ -63,6 +64,7 @@ public class DrillTestJdbc implements DrillTest {
   private AtomicBoolean doneProcessingResultSet = new AtomicBoolean(false);
   private int id;
   private int totalCases;
+  private String queryID;
 
   private static volatile int noOfCasesCompleted;
 
@@ -128,7 +130,9 @@ public class DrillTestJdbc implements DrillTest {
     	  executeLimitZeroQuery(limitZeroQuery);
       }
     } catch (VerificationException e) {
-      fail(TestStatus.VERIFICATION_FAILURE, e);
+      fail(TestStatus.DATA_VERIFICATION_FAILURE, e);
+    } catch (PlanVerificationException e) {
+      fail(TestStatus.PLAN_VERIFICATION_FAILURE, e);
     } catch (Exception e) {
       fail(TestStatus.EXECUTION_FAILURE, e);
 	} finally {
@@ -159,7 +163,11 @@ public class DrillTestJdbc implements DrillTest {
         LOG.info("Execution completed for "+(noOfCasesCompleted)+" out of "+(totalCases)+" tests");
 	LOG.info("----------------------------------------------------------------------------------------------------------------\n");
       }
-      LOG.info(testStatus + " (" + stopwatch + ") " + modeler.queryFilename + " (connection: " + connection.hashCode() + ")");
+      if (TestDriver.driverType == TestDriver.DriverType.APACHE) {
+        LOG.info(testStatus + " (" + stopwatch + ") " + modeler.queryFilename + " (connection: " + connection.hashCode() + ")" + " (queryID: " + queryID + ")");
+      } else {
+        LOG.info(testStatus + " (" + stopwatch + ") " + modeler.queryFilename + " (connection: " + connection.hashCode() + ")");
+      }
     }
   }
 
@@ -268,6 +276,10 @@ public class DrillTestJdbc implements DrillTest {
 	} finally {
 	  doneProcessingResultSet.set(true);
       if (resultSet != null) {
+        if (TestDriver.driverType == TestDriver.DriverType.APACHE) {
+          // get queryID before resultSet is closed
+          queryID = Utils.getQueryID(resultSet);
+        }
         resultSet.close();
       }
       if (writer != null) {
@@ -313,7 +325,7 @@ public class DrillTestJdbc implements DrillTest {
           || !isNullabilityCompatible(columnNullabilities, this.columnNullabilities)
           || !columnSizes.equals(this.columnSizes))  {
         LOG.info(msg);
-        setTestStatus(TestStatus.VERIFICATION_FAILURE);
+        setTestStatus(TestStatus.DATA_VERIFICATION_FAILURE);
         exception = exception == null? new VerificationException(msg)
         	: new VerificationException(exception + "\n" + msg);
       }
