@@ -160,6 +160,15 @@ public class Utils implements DrillDefaults {
   }
 
   /**
+   * Returns the drillProperties
+   *
+   * @return a map of drill configuration properties
+   */
+  public static Map<String, String> getDrillProperties() {
+    return drillProperties;
+  }
+
+  /**
    * Constructs an iteration of test case definitions from various test data
    * sources, obtained from the mvn command line option. See README.md for more
    * details.

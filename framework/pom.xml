@@ -127,6 +127,19 @@
                 </configuration>
               </execution>
               <execution>
+                <id>schema_change_empty_batch</id>
+                <phase>prepare-package</phase>
+                <goals>
+                  <goal>wget</goal>
+                </goals>
+                <configuration>
+                  <url>https://s3.amazonaws.com/apache-drill/files/schema_change_empty_batch.tgz</url>
+                  <outputFileName>schema_change_empty_batch.tgz</outputFileName>
+                  <unpack>true</unpack>
+                  <outputDirectory>${project.basedir}/resources/Datasources/schema_change_empty_batch/</outputDirectory>
+                </configuration>
+              </execution>
+              <execution>
                 <id>func-passing-widestrings-large</id>
                 <phase>prepare-package</phase>
                 <goals>

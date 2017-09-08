@@ -1,0 +1,28 @@
+{
+  "testId": "schema_change_empty_batch_maprdb_json",
+  "type": "group",
+  "description": "Test drill queries involving empty batches for maprdb json tables",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "dependencies" : ["maprdb"],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "mfs.drillTestDirSchemaChangeEmptyBatch",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources" : [
+    {
+      "mode": "gen",
+      "src": "Datasources/schema_change_empty_batch/maprdb/json/setup.sh",
+      "dest": ""
+    }
+  ]
+}

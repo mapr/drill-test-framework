@@ -1,0 +1,1 @@
+select p.p_partkey, ps.ps_suppkey from (select p_partkey, p_name, p_mfgr from `json/part` where p_size = 98 UNION select p_partkey, p_name, p_mfgr from `json/part` where p_size = 99) as p, `json/partsupp` as ps where p.p_partkey = ps.ps_partkey;
