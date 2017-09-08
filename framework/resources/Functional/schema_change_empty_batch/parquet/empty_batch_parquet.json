@@ -1,0 +1,20 @@
+{
+  "testId": "schema_change_empty_batch_parquet",
+  "type": "group",
+  "description": "Test drill queries involving empty batches for parquet files",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "cp",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ]
+}

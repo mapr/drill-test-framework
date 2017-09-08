@@ -1,0 +1,1 @@
+select * from `maprdb/binary/part` t order by t.data.p_partkey limit 5;

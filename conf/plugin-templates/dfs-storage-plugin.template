@@ -45,6 +45,11 @@
         "writable" : true,
         "defaultInputFormat" : "parquet"
       },
+      "drillTestDirSchemaChangeEmptyBatch" : {
+        "location" : "/drill/testdata/schema_change_empty_batch/",
+        "writable" : true,
+        "defaultInputFormat" : null
+      },
       "Join" : {
         "location" : "/drill/testdata/join",
         "writable" : true,
