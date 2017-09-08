@@ -1,3 +1,4 @@
-    Screen
-      Project(row_key=[$0], fivecf=[$1], fourcf=[$2], onecf=[$3], threecf=[$4], twocf=[$5])
-        Scan(groupscan=[HBaseGroupScan [HBaseScanSpec=HBaseScanSpec [tableName=student, startRow=101\x00, stopRow=121, filter=FilterList AND (3/3): [RowFilter (GREATER, 101), RowFilter (LESS, 121), RowFilter (EQUAL, ^\x5CQ1\x5CE.*$)]], columns=[`*`]]])
+Screen
+Project(row_key=[$0], fivecf=[$1], fourcf=[$2], onecf=[$3], threecf=[$4], twocf=[$5])
+Scan(groupscan=[HBaseGroupScan [HBaseScanSpec=HBaseScanSpec [tableName=student, startRow=101\x00, stopRow=121, filter=FilterList AND (3/3): [RowFilter (GREATER, 101), RowFilter (LESS, 121), RowFilter (EQUAL, ^\x5CQ1\x5CE.*$)]], columns=[
+]]])
