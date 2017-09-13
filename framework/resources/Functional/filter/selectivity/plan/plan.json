@@ -6,7 +6,7 @@
     "matrices": [
         {
             "query-file": ".*.sql",
-            "schema": "dfs.drillTestDirTpch01Parquet",
+            "schema": "dfs_test.drillTestDirTpch01Parquet",
             "output-format": "tsv",
             "expected-file": ".*.res",
             "verification-type": [

@@ -8,7 +8,7 @@
     "matrices": [
         {
             "query-file": ".*.q",
-            "schema": "dfs.tpchSinglePartition",
+            "schema": "dfs_test.tpchSinglePartition",
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
             "verification-type": [

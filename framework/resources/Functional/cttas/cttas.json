@@ -6,7 +6,7 @@
     "matrices": [
         {
             "query-file": ".*.sql",
-            "schema": "dfs.Join",
+            "schema": "dfs_test.Join",
             "output-format": "tsv",
             "expected-file": ".*.e",
             "verification-type": [

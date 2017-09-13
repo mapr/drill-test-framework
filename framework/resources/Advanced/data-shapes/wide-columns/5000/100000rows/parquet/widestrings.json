@@ -9,7 +9,7 @@
     "matrices": [
         {
             "query-file": ".*.q",
-            "schema": "dfs.wideStringsParquet5000Width100000rows",
+            "schema": "dfs_test.wideStringsParquet5000Width100000rows",
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
             "verification-type": [

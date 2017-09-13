@@ -8,7 +8,7 @@ select
   avg(l_discount) as avg_disc,
   count(*) as count_order
 from
-  dfs.`/drill/testdata/metadata_caching/lineitem_addautopartitioned_files`
+  dfs_test.`/drill/testdata/metadata_caching/lineitem_addautopartitioned_files`
 group by
   l_returnflag,
   l_linestatus

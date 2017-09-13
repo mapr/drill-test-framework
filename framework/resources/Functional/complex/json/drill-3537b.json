@@ -9,7 +9,7 @@
     "matrices": [
         {
             "query-file": "drill-3537b.sql",
-            "schema": "dfs.drillTestDir",
+            "schema": "dfs_test.drillTestDir",
             "output-format": "tsv",
             "expected-file": "drill-3537b.res",
             "verification-type": [

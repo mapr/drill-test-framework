@@ -1,5 +1,5 @@
-create or replace view `dfs.subqueries`.t1_v as select cast(a1 as int) a1,cast(b1 as char(5)) b1, cast(c1 as date) as c1 from `dfs.subqueries`.t1;
+create or replace view `dfs_test.subqueries`.t1_v as select cast(a1 as int) a1,cast(b1 as char(5)) b1, cast(c1 as date) as c1 from `dfs_test.subqueries`.t1;
 
-create or replace view `dfs.subqueries`.t2_v as select cast(a2 as int) a2, cast(b2 as character varying(5)) b2,cast(c2 as date) c2 from `dfs.subqueries`.t2;
+create or replace view `dfs_test.subqueries`.t2_v as select cast(a2 as int) a2, cast(b2 as character varying(5)) b2,cast(c2 as date) c2 from `dfs_test.subqueries`.t2;
 
-create or replace view `dfs.subqueries`.t3_v as select cast(a3 as integer) a3,cast(b3 as varchar(5)) b3,cast(c3 as date) c3 from `dfs.subqueries`.t3;
+create or replace view `dfs_test.subqueries`.t3_v as select cast(a3 as integer) a3,cast(b3 as varchar(5)) b3,cast(c3 as date) c3 from `dfs_test.subqueries`.t3;

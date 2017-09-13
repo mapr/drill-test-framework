@@ -14,4 +14,4 @@ CREATE TABLE `complex.json` AS
          ooof, 
          ooos, 
          oooa 
-  FROM   dfs.`/drill/testdata/complex/json/complex.json`; 
+  FROM   dfs_test.`/drill/testdata/complex/json/complex.json`; 

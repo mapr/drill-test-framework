@@ -1,1 +1,1 @@
-select * from dfs.`/drill/testdata/parquet_storage/drill4764/uint_16`;
+select * from dfs_test.`/drill/testdata/parquet_storage/drill4764/uint_16`;

@@ -8,7 +8,7 @@
     "matrices": [
         {
             "query-file": ".*.q",
-            "schema": "dfs.drillTestDirTpch01Json",
+            "schema": "dfs_test.drillTestDirTpch01Json",
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
             "verification-type": [

@@ -1,1 +1,1 @@
-drop table if exists dfs.droptable.`droptableif31/t.dat`;
+drop table if exists dfs_test.droptable.`droptableif31/t.dat`;

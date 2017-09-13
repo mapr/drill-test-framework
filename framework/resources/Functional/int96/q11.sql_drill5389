@@ -1,1 +1,1 @@
-select convert_from(create_timestamp2, 'TIMESTAMP_IMPALA') - convert_from(create_timestamp1, 'TIMESTAMP_IMPALA') from dfs.`/user/hive/warehouse/hive1_parquet` where voter_id=3;
+select convert_from(create_timestamp2, 'TIMESTAMP_IMPALA') - convert_from(create_timestamp1, 'TIMESTAMP_IMPALA') from dfs_test.`/user/hive/warehouse/hive1_parquet` where voter_id=3;

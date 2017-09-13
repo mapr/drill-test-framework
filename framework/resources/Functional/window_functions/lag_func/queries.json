@@ -9,7 +9,7 @@
     "matrices": [
         {
             "query-file": ".*.q",
-            "schema": "dfs.window_functions",
+            "schema": "dfs_test.window_functions",
             "output-format": "tsv",
             "expected-file": ".*.e",
             "verification-type": [

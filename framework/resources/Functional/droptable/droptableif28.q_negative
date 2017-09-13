@@ -1,1 +1,1 @@
-drop table if exists dfs.droptable.notfound;
+drop table if exists dfs_test.droptable.notfound;

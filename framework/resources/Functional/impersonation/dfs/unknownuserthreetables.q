@@ -1,1 +1,1 @@
-select count(*) from dfs.`/drill/testdata/impersonation/threetables`;
+select count(*) from dfs_test.`/drill/testdata/impersonation/threetables`;

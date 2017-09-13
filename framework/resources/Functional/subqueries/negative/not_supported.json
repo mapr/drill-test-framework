@@ -7,7 +7,7 @@
     "matrices": [
         {
             "query-file": ".*.sql",
-            "schema": "dfs.subqueries",
+            "schema": "dfs_test.subqueries",
             "output-format": "tsv",
             "expected-file": ".*.res",
             "verification-type": [ "regex" ]

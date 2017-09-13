@@ -1,3 +1,3 @@
-use dfs;
+use dfs_test;
 drop table droptable.droptable25;
-use dfs.droptable;
+use dfs_test.droptable;

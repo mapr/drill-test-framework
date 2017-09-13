@@ -9,7 +9,7 @@
     "matrices": [
         {
             "query-file": ".*.q",
-            "schema": "dfs.droptable",
+            "schema": "dfs_test.droptable",
             "output-format": "tsv",
             "expected-file": ".*.e",
             "verification-type": [

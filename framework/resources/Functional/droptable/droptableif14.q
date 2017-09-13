@@ -1,1 +1,1 @@
-drop table dfs.droptable.`droptableif14/t.dat`;
+drop table dfs_test.droptable.`droptableif14/t.dat`;

@@ -18,7 +18,7 @@ TBLPROPERTIES ("serialization.null.format"="null");
 
 
 
-create table dfs.`cross-sources`.fewtypes as
+create table dfs_test.`cross-sources`.fewtypes as
 select
     makerequired(cast(int_col as int)) int_col,
     makerequired(cast(bigint_col as bigint)) bigint_col,

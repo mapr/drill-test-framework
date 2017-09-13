@@ -8,7 +8,7 @@
     "matrices": [
         {
             "query-file": ".*.sql",
-            "schema": "dfs.hive_storage",
+            "schema": "dfs_test.hive_storage",
             "output-format": "tsv",
             "expected-file": ".*.e",
             "verification-type": [

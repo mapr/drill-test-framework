@@ -8,7 +8,7 @@
     "matrices": [
         {
             "query-file": ".*.q",
-            "schema": "dfs.TpcHMulti",
+            "schema": "dfs_test.TpcHMulti",
             "output-format": "tsv",
             "expected-file": ".*.e",
             "verification-type": [

@@ -11,7 +11,7 @@ else
         filenameWithoutExtension="${filename%.*}"
 
         ctas="_100000rows_ctas"
-        tablename="dfs.ctas_flatten.\`$filenameWithoutExtension$ctas\`"
+        tablename="dfs_test.ctas_flatten.\`$filenameWithoutExtension$ctas\`"
         outfile="copied/$filename"
         echo "alter session set \`drill.exec.storage.file.partition.column.label\` = 'partition_string1';" > $outfile
         echo "$line" >> $outfile

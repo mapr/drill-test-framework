@@ -7,7 +7,7 @@
     "matrices": [
         {
             "query-file": ".*.sql",
-            "schema": "dfs.flatten_operators",
+            "schema": "dfs_test.flatten_operators",
             "output-format": "tsv",
             "expected-file": ".*.res",
             "verification-type": [

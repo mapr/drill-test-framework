@@ -1,7 +1,7 @@
 select
     o.int_col, o.bigint_col, o.date_col, o.time_col, o.timestamp_col, o.interval_col, o.varchar_col, cast(o.float_col as float), o.double_col, o.bool_col,
     p.int_col, p.bigint_col, p.date_col, p.time_col, p.timestamp_col, p.interval_col, p.varchar_col, cast(p.float_col as float), p.double_col, p.bool_col
-from dfs.`cross-sources`.`fewtypes_null.json` p
+from dfs_test.`cross-sources`.`fewtypes_null.json` p
 inner join (
 select
     cast(case when columns[0] = 'null' then NULL else columns[0] end as int) int_col,
@@ -14,7 +14,7 @@ select
     cast(case when columns[7] = 'null' then NULL else columns[7] end as float) float_col,
     cast(case when columns[8] = 'null' then NULL else columns[8] end as double) double_col,
     cast(case when columns[9] = 'null' then NULL else columns[9] end as boolean) bool_col
-from dfs.`cross-sources`.`fewtypes_null.tbl`) o
+from dfs_test.`cross-sources`.`fewtypes_null.tbl`) o
     on p.int_col=o.int_col
     and p.bigint_col = o.bigint_col
     and cast(p.date_col as date) = cast(o.date_col as date)

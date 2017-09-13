@@ -11,7 +11,7 @@ select
   avg(l_discount) as avg_disc,
   count(*) as count_order 
 from
-  dfs.`/drill/testdata/no-extension/parquet/lineitem`
+  dfs_test.`/drill/testdata/no-extension/parquet/lineitem`
 where
   l_shipdate <= date '1998-12-01' - interval '120' day (3)
 group by

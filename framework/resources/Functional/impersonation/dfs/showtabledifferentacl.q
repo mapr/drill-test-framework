@@ -1,3 +1,3 @@
-use dfs.drillTestDirImpersonationThreecsvtables;
+use dfs_test.drillTestDirImpersonationThreecsvtables;
 show tables;
-use dfs.drillTestDirImpersonationThreecsvtables;
+use dfs_test.drillTestDirImpersonationThreecsvtables;

@@ -1,4 +1,4 @@
-use dfs.drillTestDirImpersonation;
+use dfs_test.drillTestDirImpersonation;
 alter session set `store.format` = 'csv';
 create table secondarydata(c1, c2, c3, c4) as select c_row, c_int, c_float4, c_date from data;
 create or replace view secondaryv4(c1, c2, c3, c4) as select columns[0], columns[1], columns[2], columns[3] from secondarydata;
@@ -12,4 +12,4 @@ drop view secondaryv3;
 drop view secondaryv4;
 drop table secondarydata;
 alter session set `store.format` = 'parquet';
-use dfs.drillTestDirImpersonation;
+use dfs_test.drillTestDirImpersonation;
