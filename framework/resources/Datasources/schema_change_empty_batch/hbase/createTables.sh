@@ -52,3 +52,12 @@ echo "put 'browser_action2', '7','v:e0', 'abc7'" |hbase shell
 echo "put 'browser_action2', '8','v:e0', 'abc8'" |hbase shell
 echo "put 'browser_action2', '9','v:e0', 'abc9'" |hbase shell
 echo "put 'browser_action2', '10','v:e0', 'abc10'" |hbase shell
+
+echo "create 'customer1', 'orders', {SPLITS => ['3', '6']}" |hbase shell
+echo "put 'customer1', '1', 'orders:id', '100'" |hbase shell
+echo "put 'customer1', '5', 'orders:id', '200'" |hbase shell
+echo "put 'customer1', '7', 'orders:id', '300'" |hbase shell
+
+echo "create 'customer2', 'orders', {SPLITS => ['3', '6']}" |hbase shell
+echo "put 'customer2', '1', 'orders:id', '100'" |hbase shell
+echo "put 'customer2', '5', 'orders:id', '200'" |hbase shell
