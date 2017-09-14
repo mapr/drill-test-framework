@@ -15,6 +15,7 @@ public class CreateTable {
         String table1 = "part";
         String table2 = "partsupp";
         String table3 = "empty";
+        String table4 = "partsupp1";
 
         TableDescriptor tableDesc = MapRDB.newTableDescriptor(tablePath+table1);
         String[] splitPoints1 = {"1", "1000", "10000", "99999"};
@@ -40,6 +41,15 @@ public class CreateTable {
         try (Admin admin = MapRDB.newAdmin()) {
             if (!admin.tableExists(tablePath+table3)) {
                 admin.createTable(tableDesc, splitPoints3).close();
+            }
+        }
+
+        tableDesc = MapRDB.newTableDescriptor(tablePath+table4);
+        String[] splitPoints4 = {"2", "4", "6", "8"};
+
+        try (Admin admin = MapRDB.newAdmin()) {
+            if (!admin.tableExists(tablePath+table4)) {
+                admin.createTable(tableDesc, splitPoints4).close();
             }
         }
     }
