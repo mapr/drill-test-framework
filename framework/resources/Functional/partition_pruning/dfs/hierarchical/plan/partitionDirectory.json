@@ -12,7 +12,7 @@
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
             "verification-type": [
-                "regex"
+                "regex-no-order"
             ]
         }
     ],

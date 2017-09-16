@@ -1,3 +1,3 @@
 .*
   Project.*
-    Scan.*selectionRoot=.*/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intstring.*numFiles=1.*columns=\[`columns`\[0\], `columns`\[1\], `columns`\[4\], `columns`\[10\], `columns`\[13\]\].*files=.*/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intstring/1993/feb/lineitemab.tbl.*
+    Scan.*selectionRoot=.*partition_pruning/hive/text/lineitem_hierarchical_intstring.*numFiles=1.*columns=\[`columns`\[0\], `columns`\[1\], `columns`\[4\], `columns`\[10\], `columns`\[13\]\].*files=.*partition_pruning/hive/text/lineitem_hierarchical_intstring/1993/feb/lineitemab.tbl

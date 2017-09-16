@@ -1,4 +1,4 @@
 .*
   StreamAgg.*
     Project.*
-      Scan.*selectionRoot=.*/drill/testdata/partition_pruning/dfs/lineitempart.*numFiles=1.*columns=\[\].*files=.*/drill/testdata/partition_pruning/dfs/lineitempart/1991/lineitemaa.tbl.*
+      Scan.*selectionRoot=.*partition_pruning/dfs/lineitempart.*numFiles=1.*columns=\[\].*files=.*partition_pruning/dfs/lineitempart/1991/lineitemaa.tbl.*

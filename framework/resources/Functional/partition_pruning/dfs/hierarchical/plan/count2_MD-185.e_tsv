@@ -1,4 +1,4 @@
 .*
   StreamAgg.*
     Project.*
-      Scan.*selectionRoot=.*/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intstring.*numFiles=12.*columns=\[\].*files=.*
+      Scan.*selectionRoot=.*partition_pruning/hive/text/lineitem_hierarchical_intstring.*numFiles=12.*columns=\[\].*files=.*
