@@ -25,7 +25,7 @@
 	},
         {
            "mode": "gen",
-           "src": "bin/execHive.sh framework/resources/Datasources/partition_pruning/hive/hier_intint_parquet.ddl",
+           "src": "Datasources/hive/execHive.sh framework/resources/Datasources/partition_pruning/hive/hier_intint_parquet.ddl",
            "dest": ""
         }
     ]

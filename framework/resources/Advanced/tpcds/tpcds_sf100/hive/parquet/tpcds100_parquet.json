@@ -20,7 +20,7 @@
     "datasources": [
 	{
             "mode": "gen",
-            "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/tpcds100/tpcds100_hive.ddl",
+            "src": "Datasources/hive/execHive.sh framework/resources/Datasources/hive_storage/tpcds100/tpcds100_hive.ddl",
             "dest": ""
         }
     ]
