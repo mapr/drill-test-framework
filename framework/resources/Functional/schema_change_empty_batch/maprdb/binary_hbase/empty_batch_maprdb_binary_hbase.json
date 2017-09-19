@@ -1,0 +1,28 @@
+{
+  "testId": "schema_change_empty_batch_maprdb_binary_hbase",
+  "type": "group",
+  "description": "Test drill queries involving empty batches for maprdb binary tables",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "dependencies" : ["hbase","maprdb"],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "hbase",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources" : [
+    {
+      "mode": "gen",
+      "src": "Datasources/schema_change_empty_batch/maprdb/binary/setup.sh",
+      "dest": ""
+    }
+  ]
+}
