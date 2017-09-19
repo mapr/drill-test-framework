@@ -1,5 +1,5 @@
 {
-  "testId": "schema_change_empty_batch_maprdb_binary",
+  "testId": "schema_change_empty_batch_maprdb_binary_maprdb",
   "type": "group",
   "description": "Test drill queries involving empty batches for maprdb binary tables",
   "submit-type": "jdbc",
