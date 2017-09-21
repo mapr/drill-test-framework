@@ -1,0 +1,1 @@
+select date_add(cast('2015-01-24 07:27:05.0' as timestamp), interval '3' HOUR), date_add(cast('2015-01-24 07:27:05.0' as timestamp), interval '50' MINUTE), date_add(cast('2015-01-24 07:27:05.0' as timestamp), interval '50' second) from (values(1));
