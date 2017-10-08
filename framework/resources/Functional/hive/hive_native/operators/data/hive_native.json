@@ -6,7 +6,7 @@
     "categories": [
         "smoke"
     ],
-    "dependencies" : ["hive"],
+    "dependencies" : ["hive", "hbase"],
     "matrices": [
         {
             "query-file": ".*.q",
