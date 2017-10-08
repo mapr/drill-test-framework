@@ -6,7 +6,7 @@
     "categories": [
         "functional"
     ],
-    "dependencies" : ["hive"],
+    "dependencies" : ["hive", "hbase"],
     "matrices": [
         {
             "query-file": ".*.q",
