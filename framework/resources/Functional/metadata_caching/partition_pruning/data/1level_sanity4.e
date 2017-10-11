@@ -1,2 +1,2 @@
--994.79	hSaNqI1P2IyEFHY0r0PsPkMqt	bold packages. regular, final asymptotes use quickly fluffily even waters. blithely express requests wake into th	294	BUILDING	Customer#000000294	18	28-187-946-4260	1991
--994.79	hSaNqI1P2IyEFHY0r0PsPkMqt	bold packages. regular, final asymptotes use quickly fluffily even waters. blithely express requests wake into th	294	BUILDING	Customer#000000294	18	28-187-946-4260	1992
+1991	294	Customer#000000294	hSaNqI1P2IyEFHY0r0PsPkMqt	18	28-187-946-4260	-994.79	BUILDING	bold packages. regular, final asymptotes use quickly fluffily even waters. blithely express requests wake into th
+1992	294	Customer#000000294	hSaNqI1P2IyEFHY0r0PsPkMqt	18	28-187-946-4260	-994.79	BUILDING	bold packages. regular, final asymptotes use quickly fluffily even waters. blithely express requests wake into th
