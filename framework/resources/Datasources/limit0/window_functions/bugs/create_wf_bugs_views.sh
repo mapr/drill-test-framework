@@ -4,6 +4,11 @@ source conf/drillTestConfig.properties
 set -x
 set -e
 
-${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.dfs.subqueries;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/limit0/window_functions/bugs/create_wf_bugs_views.sql
+if [ -z "$PASSWORD" ]
+then
+  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.dfs.subqueries;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/limit0/window_functions/bugs/create_wf_bugs_views.sql
+else
+  ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.dfs.subqueries;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/limit0/window_functions/bugs/create_wf_bugs_views.sql
+fi
 
 set +x
