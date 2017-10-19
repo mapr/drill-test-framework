@@ -1,7 +1,12 @@
 #!/bin/sh
 source conf/drillTestConfig.properties
 
-${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/metadata_caching/advanced_gen.ddl
+if [ -z "$PASSWORD" ]
+then
+  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/metadata_caching/advanced_gen.ddl
+else
+  ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/metadata_caching/advanced_gen.ddl
+fi
 
 # it seems that sqlline does not exit, if one of the queries failed.
 if [ "$?" -eq 0 ]
