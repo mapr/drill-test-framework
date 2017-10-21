@@ -3,9 +3,9 @@ source conf/drillTestConfig.properties
 
 if [ -z "$PASSWORD" ]
 then
-  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.Join;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/join/crt_tbls_partition_by_l.ddl
-  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.Join;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/join/crt_tbls_partition_by_r.ddl
-  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.Join;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/join/crt_tbl_prtnby_nulls.ddl
+  ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=dfs.Join;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}" --run=${DRILL_TEST_DATA_DIR}/Datasources/join/crt_tbls_partition_by_l.ddl
+  ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=dfs.Join;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}" --run=${DRILL_TEST_DATA_DIR}/Datasources/join/crt_tbls_partition_by_r.ddl
+  ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=dfs.Join;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}" --run=${DRILL_TEST_DATA_DIR}/Datasources/join/crt_tbl_prtnby_nulls.ddl
 else
   ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.Join;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/join/crt_tbls_partition_by_l.ddl
   ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.Join;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/join/crt_tbls_partition_by_r.ddl

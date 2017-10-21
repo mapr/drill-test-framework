@@ -24,7 +24,7 @@ hadoop fs -copyFromLocal ${DRILL_TEST_DATA_DIR}/Datasources/parquet_date/auto_pa
 
 if [ -z "$PASSWORD" ]
 then
-  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.ctas_parquet;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/parquet_date/metadata_cache.ddl
+  ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=dfs.ctas_parquet;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}" --run=${DRILL_TEST_DATA_DIR}/Datasources/parquet_date/metadata_cache.ddl
 else
   ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.ctas_parquet;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/parquet_date/metadata_cache.ddl
 fi
