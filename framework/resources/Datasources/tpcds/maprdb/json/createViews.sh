@@ -6,7 +6,7 @@ hadoop fs -test -d /drill/testdata/tpcds_sf1/maprdb/json/views ;if [ `echo $?` -
 
 if [ -z "$PASSWORD" ]
 then
-  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=mfs.tpcds_sf1_maprdb_json_views;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/tpcds/maprdb/json/createViews.sql
+  ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=mfs.tpcds_sf1_maprdb_json_views;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}" --run=${DRILL_TEST_DATA_DIR}/Datasources/tpcds/maprdb/json/createViews.sql
 else
   ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=mfs.tpcds_sf1_maprdb_json_views;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/tpcds/maprdb/json/createViews.sql
 fi
