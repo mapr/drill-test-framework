@@ -434,7 +434,7 @@ public class TestDriver implements DrillDefaults {
     executor.close();
     connectionPool.close();
     restartDrill();
-    return totalExecutionFailures + totalDataVerificationFailures + totalPlanVerificationFailures + totalTimeoutFailures;
+    return totalExecutionFailures + totalDataVerificationFailures + totalPlanVerificationFailures + totalTimeoutFailures + totalRandomFailures;
   }
 
   public void setup() throws IOException, InterruptedException {
