@@ -141,17 +141,18 @@ public class TestDriver implements DrillDefaults {
 		System.exit(-1);
 	}
     
-    //Record JDBC driver name and version
+    //Record JDBC driver name, version and other metadata info
     DatabaseMetaData dm = connection.getMetaData();
-    LOG.info(LINE_BREAK + "Product name = " + dm.getDatabaseProductName() + "\n"
+    LOG.info(LINE_BREAK + new DBMetaData(dm).toString() + LINE_BREAK);
+/*    LOG.info(LINE_BREAK + "Product name = " + dm.getDatabaseProductName() + "\n"
     		 + "Product version = " + dm.getDatabaseProductVersion() + "\n"
     		 + "Product major version = " + dm.getDatabaseMajorVersion() + "\n"
     		 + "Product minor version = " + dm.getDatabaseMinorVersion() + "\n"
     		 + "Driver name = " + dm.getDriverName() + "\n"
     		 + "Driver version = " + dm.getDriverVersion() + "\n"
     		 + "Driver major version = " + dm.getDriverMajorVersion() + "\n"
-    		 + "Driver minor version = " + dm.getDriverMinorVersion() + "\n" + LINE_BREAK);
-    
+    		 + "Driver minor version = " + dm.getDriverMinorVersion() + "\n" + LINE_BREAK); */
+
     //Check number of drillbits equals number of cluster nodes    
     int numberOfDrillbits = Utils.getNumberOfDrillbits(connection);
     connectionPool.releaseConnection(username,password, connection);
