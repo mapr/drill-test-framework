@@ -32,6 +32,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -615,7 +616,8 @@ public class Utils implements DrillDefaults {
 	String query = "select count(*) from sys.drillbits";
 	int numberOfDrillbits = 0;
 	try {
-	  ResultSet resultSet = execSQL(query, connection);
+	  PreparedStatement ps = connection.prepareStatement(query);
+	  ResultSet resultSet = ps.executeQuery();
 	  resultSet.next();
 	  numberOfDrillbits = resultSet.getInt(1);
 	} catch (SQLException e) {
