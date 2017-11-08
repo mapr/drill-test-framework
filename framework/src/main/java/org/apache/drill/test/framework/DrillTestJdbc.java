@@ -186,6 +186,12 @@ public class DrillTestJdbc implements DrillTest {
         LOG.debug(query + " " + connection.hashCode());
       }
       statement = connection.createStatement();
+    } catch (SQLException e) {
+      try {connection.close();} catch (SQLException ee) {}
+      connection = connectionPool.getOrCreateConnection(modeler);
+      statement = connection.createStatement();
+    }
+    try {
       resultSet = statement.executeQuery(query);
     } finally {
       if (resultSet != null) {
