@@ -1,7 +1,7 @@
 {
     "testId": "tpcds_sf1_original_parquet",
     "type": "group",
-    "description": "Test TPCDS SF 1 queries via jdbc",
+    "description": "Test Original TPC-DS queries (SF1)",
     "categories": [
         "smoke"
     ],
