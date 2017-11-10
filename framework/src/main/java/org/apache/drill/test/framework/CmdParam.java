@@ -58,6 +58,9 @@ import com.beust.jcommander.Parameter;
     @Parameter(names = {"-sR", "--skipRandom"}, description = "Skip check for random failures", required=false)
     public boolean skipRandom  = false;
 
+    @Parameter(names = {"-rR", "--repeatRun"}, description = "Log the sequence of tests and run that sequence again", required=false)
+    public boolean repeatRun  = false;
+
     public List<String> excludeDependenciesAsList() {
       if (excludeDependencies == null) {
         return new ArrayList<String>();

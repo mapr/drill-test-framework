@@ -36,8 +36,10 @@ import org.apache.log4j.Logger;
 import org.ojai.Document;
 import org.ojai.json.Json;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -188,6 +190,56 @@ public class TestDriver implements DrillDefaults {
 
       LOG.info("> RUNNING TESTS (ITERATION " + i + ")..");
       Collections.shuffle(tests, new Random());
+      List<DrillTest> new_tests = Lists.newArrayList();
+      String queryLogFilename = drillOutputDir + "/queryLog.log";
+      List<String> skippedTests = Lists.newArrayList();
+      File queryFile = new File(queryLogFilename);
+      if (cmdParam.repeatRun == true) {
+        // check if file has list of tests
+        if (queryFile.length() > 0) {
+          // generate a new list of tests in the requested order
+          try {
+            BufferedReader reader = new BufferedReader(new FileReader(queryFile));
+            boolean found = false;
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+              for (DrillTest test : tests) {
+                // check that requested test is in the list of tests
+                if (found = test.getInputFile().equals(line)) {
+                  new_tests.add(test);
+                  break;
+                }
+              }
+              if (!found) {
+	        skippedTests.add(line);
+              }
+              found = false;
+            }
+            reader.close();
+            tests = new_tests;
+          } catch (Exception e) {
+            LOG.error("\nCould not open queryFile " + queryLogFilename + " containing tests to run");
+            LOG.error(e.getMessage());
+            System.exit(-1);
+          }
+        } else {
+          // file with list of tests does not exist.  create new file and
+          // record the tests and the order in which they are run
+          try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(queryFile));
+            if (writer != null) {
+              for (DrillTest test : tests) {
+                writer.write (test.getInputFile() + "\n");
+              }
+              writer.close();
+            }
+          } catch (Exception e) {
+            LOG.error("\nCould not create queryFile " + queryLogFilename + " to record which tests are run");
+            LOG.error(e.getMessage());
+            System.exit(-1);
+          }
+        }
+      }
       executor.executeAll(tests);
 
       if (cmdParam.trackMemory) {
@@ -276,14 +328,25 @@ public class TestDriver implements DrillDefaults {
         LOG.info(test.getInputFile());
         LOG.info("Query: \n" + test.getQuery());
       }
-      LOG.info("Random Failures:");
+      if(randomFailures.size()>0){
+        LOG.info("Random Failures:");
+      }
       for (DrillTest test : randomFailures) {
         LOG.info(test.getInputFile());
         LOG.info("Query: \n" + test.getQuery());
         LOG.info("Failed with exception", test.getException());
       }
+      if(skippedTests.size() > 0) {
+        LOG.info("Skipped Tests: These tests cannot be run from " + queryLogFilename + " because they were not in source or group, or it is a duplicate test");
+        for (String line : skippedTests) {
+          LOG.info(line);
+        }
+      }
       LOG.info(LINE_BREAK);
       LOG.info("Summary");
+      if ((cmdParam.repeatRun == true) && (queryFile.length() > 0)) {
+        LOG.info("Executed queries from " + queryFile);
+      }
       if(cmdParam.runFailed == true){
         if(passingTests.size()>0){
           LOG.info(LINE_BREAK);
@@ -348,6 +411,10 @@ public class TestDriver implements DrillDefaults {
       	dataVerificationFailures.size(), planVerificationFailures.size(),
         timeoutFailures.size(), canceledTests.size(),randomFailures.size()));
       
+      if(skippedTests.size() > 0) {
+        LOG.info("Skipped tests: " + skippedTests.size());
+      }
+
       if (cmdParam.trackMemory) {
         LOG.info(LINE_BREAK);
     	LOG.info(String.format("\nMemory Consumption:\n\t\theap(M)\t\tdirect(M)\tjvm_direct(M)\n" +
