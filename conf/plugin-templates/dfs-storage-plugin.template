@@ -235,18 +235,8 @@
         "writable": true,
         "defaultInputFormat": "csv"
       },
-    "wideStringsJson5000Width1000rows": {
-      "location": "/drill/testdata/data-shapes/wide-columns/5000/1000rows/json",
-      "writable": true,
-      "defaultInputFormat": "parquet"
-    },
     "wideStringsParquet5000Width1000rows": {
       "location": "/drill/testdata/data-shapes/wide-columns/5000/1000rows/parquet",
-      "writable": true,
-      "defaultInputFormat": "parquet"
-    },
-    "wideStringsJson5000Width100000rows": {
-      "location": "/drill/testdata/data-shapes/wide-columns/5000/100000rows/json",
       "writable": true,
       "defaultInputFormat": "parquet"
     },
