@@ -1,0 +1,3 @@
+set `planner.slice_target`=1;
+select * from `json/part_small` order by p_partkey;
+reset `planner.slice_target`;
