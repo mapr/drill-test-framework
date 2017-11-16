@@ -379,7 +379,13 @@ public class Utils implements DrillDefaults {
         queryFileName)));
     String line = null;
     while ((line = reader.readLine()) != null) {
-      builder.append(line + "\n");
+      line = line.trim();
+      //skip comment line
+      if (line.startsWith("--") && !line.startsWith("--@test")) {
+    	//do nothing
+      } else {
+        builder.append(line + "\n");
+      }
     }
     reader.close();
     String[] statements = builder.toString().trim().split(";");
