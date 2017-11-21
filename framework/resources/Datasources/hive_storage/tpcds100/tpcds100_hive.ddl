@@ -680,12 +680,12 @@ LOCATION '/drill/testdata/tpcds_sf100/parquet/household_demographics'
 TBLPROPERTIES ("parquet.compression"="GZIP");
 
 drop table if exists tpcds100_parquet.item;
-create table tpcds100_parquet.item
+create external table tpcds100_parquet.item
 (
     i_item_sk int,
     i_item_id string,
-    i_rec_start_date string,
-    i_rec_end_date string,
+    i_rec_start_date date,
+    i_rec_end_date date,
     i_item_desc string,
     i_current_price double,
     i_wholesale_cost double,
@@ -705,8 +705,8 @@ create table tpcds100_parquet.item
     i_manager_id int,
     i_product_name string
 )
-STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.item select * from tpcds100_text.item;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds_sf100/parquet/item';
 
 drop table if exists tpcds100_parquet.promotion;
 create external table tpcds100_parquet.promotion 
@@ -823,7 +823,7 @@ LOCATION '/drill/testdata/tpcds_sf100/parquet/store'
 TBLPROPERTIES ("parquet.dictionary.page.size"="32768", "parquet.block.size"="32768", "parquet.page.size"="32768");
 
 drop table if exists tpcds100_parquet.store_sales;
-create table tpcds100_parquet.store_sales (
+create external table tpcds100_parquet.store_sales (
     ss_sold_date_sk int, 
     ss_sold_time_sk int, 
     ss_item_sk int, 
@@ -841,15 +841,15 @@ create table tpcds100_parquet.store_sales (
     ss_ext_discount_amt double, 
     ss_ext_sales_price double, 
     ss_ext_wholesale_cost double, 
-    ss_ext_list_price double, 
+    ss_ext_list_price double,
     ss_ext_tax double, 
     ss_coupon_amt double, 
     ss_net_paid double, 
     ss_net_paid_inc_tax double, 
     ss_net_profit double
 )
-STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.store_sales select * from tpcds100_text.store_sales;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds_sf100/parquet/store_sales';
 
 drop table if exists tpcds100_parquet.warehouse;
 create external table tpcds100_parquet.warehouse (
@@ -902,7 +902,7 @@ STORED AS PARQUET
 LOCATION '/drill/testdata/tpcds_sf100/parquet/income_band';
 
 drop table if exists tpcds100_parquet.call_center;
-create table tpcds100_parquet.call_center (
+create external table tpcds100_parquet.call_center (
     cc_call_center_sk int,
     cc_call_center_id string,
     cc_rec_start_date string,
@@ -935,11 +935,11 @@ create table tpcds100_parquet.call_center (
     cc_gmt_offset double,
     cc_tax_percentage double 
 )
-STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.call_center select * from tpcds100_text.call_center;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds_sf100/parquet/call_center';
 
 drop table if exists tpcds100_parquet.web_site;
-create table tpcds100_parquet.web_site (
+create external table tpcds100_parquet.web_site (
     web_site_sk int,
     web_site_id string,
     web_rec_start_date string,
@@ -967,11 +967,11 @@ create table tpcds100_parquet.web_site (
     web_gmt_offset double,
     web_tax_percentage double
 )
-STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.web_site select * from tpcds100_text.web_site;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds_sf100/parquet/web_site';
 
 drop table if exists tpcds100_parquet.store_returns;
-create table tpcds100_parquet.store_returns (
+create external table tpcds100_parquet.store_returns (
     sr_returned_date_sk int,
     sr_return_time_sk int,
     sr_item_sk int,
@@ -993,11 +993,11 @@ create table tpcds100_parquet.store_returns (
     sr_store_credit double,
     sr_net_loss double    
 )
-STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.store_returns select * from tpcds100_text.store_returns;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds_sf100/parquet/store_returns';
 
 drop table if exists tpcds100_parquet.web_page;
-create table tpcds100_parquet.web_page (
+create external table tpcds100_parquet.web_page (
     wp_web_page_sk int,
     wp_web_page_id string,
     wp_rec_start_date string,
@@ -1013,8 +1013,8 @@ create table tpcds100_parquet.web_page (
     wp_image_count int,
     wp_max_ad_count int         
 )
-STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.web_page select * from tpcds100_text.web_page;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds_sf100/parquet/web_page';
 
 drop table if exists tpcds100_parquet.catalog_page;
 create external table tpcds100_parquet.catalog_page (
@@ -1044,7 +1044,7 @@ LOCATION '/drill/testdata/tpcds_sf100/parquet/inventory'
 TBLPROPERTIES ("parquet.block.size"="10485760");
 
 drop table if exists tpcds100_parquet.catalog_returns;
-create table tpcds100_parquet.catalog_returns (
+create external table tpcds100_parquet.catalog_returns (
     cr_returned_date_sk int,
     cr_returned_time_sk int,
     cr_item_sk int,
@@ -1073,8 +1073,8 @@ create table tpcds100_parquet.catalog_returns (
     cr_store_credit double,
     cr_net_loss double       
 )
-STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.catalog_returns select * from tpcds100_text.catalog_returns;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds_sf100/parquet/catalog_returns';
 
 drop table if exists tpcds100_parquet.web_returns;
 create table tpcds100_parquet.web_returns (
@@ -1103,11 +1103,11 @@ create table tpcds100_parquet.web_returns (
      wr_account_credit double,
      wr_net_loss double 
 )       
-STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.web_returns select * from tpcds100_text.web_returns;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds_sf100/parquet/web_returns';
 
 drop table if exists tpcds100_parquet.web_sales;
-create table tpcds100_parquet.web_sales (
+create external table tpcds100_parquet.web_sales (
     ws_sold_date_sk int,
     ws_sold_time_sk int,
     ws_ship_date_sk int,
@@ -1143,11 +1143,11 @@ create table tpcds100_parquet.web_sales (
     ws_net_paid_inc_ship_tax double,
     ws_net_profit double       
 )       
-STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.web_sales select * from tpcds100_text.web_sales;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds_sf100/parquet/web_sales';
 
 drop table if exists tpcds100_parquet.catalog_sales;
-create table tpcds100_parquet.catalog_sales (
+create external table tpcds100_parquet.catalog_sales (
     cs_sold_date_sk int,
     cs_sold_time_sk int,
     cs_ship_date_sk int,
@@ -1183,5 +1183,5 @@ create table tpcds100_parquet.catalog_sales (
     cs_net_paid_inc_ship_tax double,
     cs_net_profit double        
 )       
-STORED AS PARQUET;
-insert overwrite table tpcds100_parquet.catalog_sales select * from tpcds100_text.catalog_sales;
+STORED AS PARQUET
+LOCATION '/drill/testdata/tpcds_sf100/parquet/catalog_sales';
