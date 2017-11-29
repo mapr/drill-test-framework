@@ -83,7 +83,7 @@ CREATE TABLE lineitem_parquet_partitioned_hive (
 )
 PARTITIONED BY (year INT)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
-STORED AS PARQUET LOCATION "/drill/testdata/partition_pruning/hive/parquet/dynamic_partition_lineitempart";
+STORED AS PARQUET LOCATION "/drill/testdata/partition_pruning/hive/parquet/dynamic_partition_lineitempart_int";
 
 INSERT OVERWRITE TABLE dynamic_partitions.lineitem_parquet_partitioned_hive PARTITION (year)
 SELECT 

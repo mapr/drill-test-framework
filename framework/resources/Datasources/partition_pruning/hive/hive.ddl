@@ -347,7 +347,7 @@ CREATE TABLE IF NOT EXISTS lineitem_text_partitioned_hive (
 )
 PARTITIONED BY (year INT)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
-STORED AS TEXTFILE LOCATION "/drill/testdata/partition_pruning/hive/text/dynamic_partition_lineitempart";
+STORED AS TEXTFILE LOCATION "/drill/testdata/partition_pruning/hive/text/dynamic_partition_lineitempart_int";
 
 INSERT OVERWRITE TABLE dynamic_partitions.lineitem_text_partitioned_hive PARTITION (year)
 SELECT
