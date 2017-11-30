@@ -79,74 +79,6 @@ ALTER TABLE lineitem_text_partitioned_hive ADD PARTITION (year=1995) location '/
 ALTER TABLE lineitem_text_partitioned_hive ADD PARTITION (year=1996) location '/drill/testdata/partition_pruning/hive/text/lineitempart/1996';
 ALTER TABLE lineitem_text_partitioned_hive ADD PARTITION (year=1997) location '/drill/testdata/partition_pruning/hive/text/lineitempart/1997';
 
-
------------------
-DROP TABLE IF EXISTS lineitem_text_partitioned_hive_string;
-CREATE EXTERNAL TABLE IF NOT EXISTS lineitem_text_partitioned_hive_string (
-    l_orderkey INT,
-    l_partkey INT,
-    l_suppkey INT,
-    l_linenumber INT,
-    l_quantity DOUBLE,
-    l_extendedprice DOUBLE,
-    l_discount DOUBLE,
-    l_tax DOUBLE,
-    l_returnflag STRING,
-    l_linestatus STRING,
-    l_shipdate DATE,
-    l_commitdate DATE,
-    l_receiptdate DATE,
-    l_shipinstruct STRING,
-    l_shipmode STRING,
-    l_comment STRING
-)
-PARTITIONED BY (year STRING)
-ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
-STORED AS TEXTFILE LOCATION "/drill/testdata/partition_pruning/hive/text/lineitempart";
-
-ALTER TABLE lineitem_text_partitioned_hive_string ADD PARTITION (year='1991') location '/drill/testdata/partition_pruning/hive/text/lineitempart/1991';
-ALTER TABLE lineitem_text_partitioned_hive_string ADD PARTITION (year='1992') location '/drill/testdata/partition_pruning/hive/text/lineitempart/1992';
-ALTER TABLE lineitem_text_partitioned_hive_string ADD PARTITION (year='1993') location '/drill/testdata/partition_pruning/hive/text/lineitempart/1993';
-ALTER TABLE lineitem_text_partitioned_hive_string ADD PARTITION (year='1994') location '/drill/testdata/partition_pruning/hive/text/lineitempart/1994';
-ALTER TABLE lineitem_text_partitioned_hive_string ADD PARTITION (year='1995') location '/drill/testdata/partition_pruning/hive/text/lineitempart/1995';
-ALTER TABLE lineitem_text_partitioned_hive_string ADD PARTITION (year='1996') location '/drill/testdata/partition_pruning/hive/text/lineitempart/1996';
-ALTER TABLE lineitem_text_partitioned_hive_string ADD PARTITION (year='1997') location '/drill/testdata/partition_pruning/hive/text/lineitempart/1997';
-
-
-DROP TABLE IF EXISTS lineitem_text_partitioned_hive_date;
-CREATE EXTERNAL TABLE IF NOT EXISTS lineitem_text_partitioned_hive_date (
-    l_orderkey INT,
-    l_partkey INT,
-    l_suppkey INT,
-    l_linenumber INT,
-    l_quantity DOUBLE,
-    l_extendedprice DOUBLE,
-    l_discount DOUBLE,
-    l_tax DOUBLE,
-    l_returnflag STRING,
-    l_linestatus STRING,
-    l_shipdate DATE,
-    l_commitdate DATE,
-    l_receiptdate DATE,
-    l_shipinstruct STRING,
-    l_shipmode STRING,
-    l_comment STRING
-)
-PARTITIONED BY (dt DATE)
-ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
-STORED AS TEXTFILE LOCATION "/drill/testdata/partition_pruning/hive/text/lineitem_datepart";
-
-ALTER TABLE lineitem_text_partitioned_hive_date ADD PARTITION (dt='2014-10-20') location '/drill/testdata/partition_pruning/hive/text/lineitem_datepart/2014-10-20';
-ALTER TABLE lineitem_text_partitioned_hive_date ADD PARTITION (dt='2014-10-21') location '/drill/testdata/partition_pruning/hive/text/lineitem_datepart/2014-10-21';
-ALTER TABLE lineitem_text_partitioned_hive_date ADD PARTITION (dt='2014-10-22') location '/drill/testdata/partition_pruning/hive/text/lineitem_datepart/2014-10-22';
-ALTER TABLE lineitem_text_partitioned_hive_date ADD PARTITION (dt='2014-10-23') location '/drill/testdata/partition_pruning/hive/text/lineitem_datepart/2014-10-23';
-ALTER TABLE lineitem_text_partitioned_hive_date ADD PARTITION (dt='2014-10-24') location '/drill/testdata/partition_pruning/hive/text/lineitem_datepart/2014-10-24';
-ALTER TABLE lineitem_text_partitioned_hive_date ADD PARTITION (dt='2014-10-25') location '/drill/testdata/partition_pruning/hive/text/lineitem_datepart/2014-10-25';
-ALTER TABLE lineitem_text_partitioned_hive_date ADD PARTITION (dt='2014-10-26') location '/drill/testdata/partition_pruning/hive/text/lineitem_datepart/2014-10-26';
-
-
-
-
 DROP TABLE IF EXISTS lineitem_text_partitioned_hive_hier_intstring;
 CREATE EXTERNAL TABLE IF NOT EXISTS lineitem_text_partitioned_hive_hier_intstring (
     l_orderkey INT,
@@ -393,6 +325,50 @@ ALTER TABLE lineitem_text_partitioned_hive_hier_intint ADD PARTITION (year=1997,
 SET hive.exec.dynamic.partition.mode=true;
 CREATE DATABASE IF NOT EXISTS dynamic_partitions;
 USE dynamic_partitions;
+
+DROP TABLE IF EXISTS lineitem_text_partitioned_hive;
+CREATE TABLE IF NOT EXISTS lineitem_text_partitioned_hive (
+    l_orderkey INT,
+    l_partkey INT,
+    l_suppkey INT,
+    l_linenumber INT,
+    l_quantity DOUBLE,
+    l_extendedprice DOUBLE,
+    l_discount DOUBLE,
+    l_tax DOUBLE,
+    l_returnflag STRING,
+    l_linestatus STRING,
+    l_shipdate DATE,
+    l_commitdate DATE,
+    l_receiptdate DATE,
+    l_shipinstruct STRING,
+    l_shipmode STRING,
+    l_comment STRING
+)
+PARTITIONED BY (year INT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
+STORED AS TEXTFILE LOCATION "/drill/testdata/partition_pruning/hive/text/dynamic_partition_lineitempart_int";
+
+INSERT OVERWRITE TABLE dynamic_partitions.lineitem_text_partitioned_hive PARTITION (year)
+SELECT
+    l_orderkey,
+    l_partkey ,
+    l_suppkey,
+    l_linenumber,
+    l_quantity,
+    l_extendedprice,
+    l_discount,
+    l_tax ,
+    l_returnflag ,
+    l_linestatus,
+    l_shipdate ,
+    l_commitdate ,
+    l_receiptdate ,
+    l_shipinstruct,
+    l_shipmode,
+    l_comment,
+    year
+FROM DEFAULT.lineitem_text_partitioned_hive;
 
 DROP TABLE IF EXISTS lineitem_text_partitioned_hive_hier_intstring;
 CREATE TABLE IF NOT EXISTS lineitem_text_partitioned_hive_hier_intstring (

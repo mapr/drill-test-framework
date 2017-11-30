@@ -18,15 +18,10 @@
         }
     ],
     "datasources": [
-	{
-		"mode": "cp",
-		"src": "Datasources/partition_pruning/hive",
-		"dest": "partition_pruning/hive"
-	},
         {
-           "mode": "gen",
-           "src": "Datasources/hive/execHive.sh framework/resources/Datasources/partition_pruning/hive/hive_date_parquet.ddl",
-           "dest": ""
+            "mode": "cp",
+            "src": "Datasources/partition_pruning/hive",
+            "dest": "partition_pruning/hive"
         },
         {
             "mode": "gen",
