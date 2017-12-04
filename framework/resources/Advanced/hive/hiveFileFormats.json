@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Long running hive queries",
     "categories": [
-        "smoke"
+        "advanced"
     ],
     "dependencies" : ["hive"],
     "matrices": [

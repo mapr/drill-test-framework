@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test TPC-H Original Queries on MapR-DB JSON Tables",
     "categories": [
-        "functional_maprdb"
+        "advanced"
     ],
     "dependencies" : ["maprdb"],
     "matrices": [

@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test TPCDS SF 1 queries via jdbc",
     "categories": [
-        "smoke"
+        "advanced"
     ],
     "matrices": [
         {
