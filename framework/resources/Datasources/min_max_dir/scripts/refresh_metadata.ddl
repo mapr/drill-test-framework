@@ -1,0 +1,1 @@
+refresh table metadata min_max_dir_metadatacache;
