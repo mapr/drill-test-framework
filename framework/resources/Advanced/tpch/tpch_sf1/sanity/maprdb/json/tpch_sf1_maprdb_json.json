@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test Sanity Queries on TPC-H SF1 MapR-DB JSON Dataset",
     "categories": [
-        "functional_maprdb"
+        "advanced"
     ],
     "dependencies" : ["maprdb"],
     "matrices": [
