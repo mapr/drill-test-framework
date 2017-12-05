@@ -55,8 +55,8 @@ FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE 
 LOCATION '/drill/testdata/hive_storage/hive_maps.txt';
 
-DROP TABLE IF EXISTS lineitem_text_hive;
-CREATE EXTERNAL TABLE lineitem_text_hive (
+DROP TABLE IF EXISTS lineitem_text_hive_temp;
+CREATE EXTERNAL TABLE lineitem_text_hive_temp (
     l_orderkey INT,
     l_partkey INT,
     l_suppkey INT,
@@ -79,13 +79,13 @@ STORED AS TEXTFILE LOCATION "/drill/testdata/partition_pruning/hive/text/lineite
 
 CREATE TABLE if not exists h1_testpart2(id INT) PARTITIONED BY(id2 int);
 set hive.exec.dynamic.partition.mode=nonstrict;
-INSERT OVERWRITE TABLE h1_testpart2 PARTITION(id2) SELECT 1 as id1 , 20150101 as id2 from lineitem_text_hive limit 1;
-INSERT OVERWRITE TABLE h1_testpart2 PARTITION(id2) SELECT 1 as id1 , null as id2 from lineitem_text_hive limit 1;
+INSERT OVERWRITE TABLE h1_testpart2 PARTITION(id2) SELECT 1 as id1 , 20150101 as id2 from lineitem_text_hive_temp limit 1;
+INSERT OVERWRITE TABLE h1_testpart2 PARTITION(id2) SELECT 1 as id1 , null as id2 from lineitem_text_hive_temp limit 1;
 
 create table if not exists hier_null_partitions(col3 INT) PARTITIONED BY(col1 int, col2 int);
-insert overwrite table hier_null_partitions partition(col1, col2) select 1 as col3, 2 as col2, 3 as col1 from lineitem_text_hive limit 1;
-insert overwrite table hier_null_partitions partition(col1, col2) select 1 as col3, 2 as col2, null as col1 from lineitem_text_hive limit 1;
-insert overwrite table hier_null_partitions partition(col1, col2) select 1 as col3, null as col2, null as col1 from lineitem_text_hive limit 1;
+insert overwrite table hier_null_partitions partition(col1, col2) select 1 as col3, 2 as col2, 3 as col1 from lineitem_text_hive_temp limit 1;
+insert overwrite table hier_null_partitions partition(col1, col2) select 1 as col3, 2 as col2, null as col1 from lineitem_text_hive_temp limit 1;
+insert overwrite table hier_null_partitions partition(col1, col2) select 1 as col3, null as col2, null as col1 from lineitem_text_hive_temp limit 1;
 
 drop table if exists voter_text;
 create table voter_text (
