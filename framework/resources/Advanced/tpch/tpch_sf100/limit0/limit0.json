@@ -3,7 +3,7 @@
     "type": "group",
     "description": "TPCH queries wrapped in LIMIT 0",
     "categories": [
-        "smoke"
+        "advanced"
     ],
     "matrices": [
         {
