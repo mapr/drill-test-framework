@@ -34,7 +34,6 @@ ALTER TABLE lineitem_text_partitioned_hive_date ADD PARTITION (dt='2014-10-25') 
 ALTER TABLE lineitem_text_partitioned_hive_date ADD PARTITION (dt='2014-10-26') location '/drill/testdata/partition_pruning/hive/text/lineitem_datepart/2014-10-26';
 
 
-
 DROP TABLE IF EXISTS lineitem_parquet_partitioned_hive_date;
 CREATE TABLE IF NOT EXISTS lineitem_parquet_partitioned_hive_date (
     l_orderkey INT,
@@ -58,7 +57,6 @@ PARTITIONED BY (dt DATE) STORED AS PARQUET;
 
 FROM lineitem_text_partitioned_hive_date
 insert overwrite table lineitem_parquet_partitioned_hive_date partition(dt) select *;
-
 
 -- Hive dynamic partitions
 
@@ -91,7 +89,7 @@ ROW FORMAT DELIMITED FIELDS TERMINATED BY "|"
 STORED AS TEXTFILE LOCATION "/drill/testdata/partition_pruning/hive/text/dynamic_partition_lineitem_datepart";
 
 INSERT OVERWRITE TABLE dynamic_partitions.lineitem_text_partitioned_hive_date PARTITION (dt)
-SELECT 
+SELECT
     l_orderkey,
     l_partkey ,
     l_suppkey,
@@ -110,5 +108,3 @@ SELECT
     l_comment,
     dt
 FROM DEFAULT.lineitem_text_partitioned_hive_date;
-
-SET hive.exec.dynamic.partition.mode=strict;
