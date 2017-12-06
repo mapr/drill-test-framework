@@ -24,8 +24,18 @@
       },
       {
          "mode": "cp",
+         "src": "Datasources/min_max_dir/data",
+         "dest": "min_max_dir_metadatacache"
+      },
+      {
+         "mode": "cp",
          "src": "Datasources/min_max_dir/drill-3474",
          "dest": "drill-3474"
+      },
+      {
+        "mode": "gen",
+        "src": "Datasources/min_max_dir/scripts/refresh_metadata.sh",
+        "dest": ""
       }
     ]
 }
