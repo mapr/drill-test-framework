@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test Smoke Queries on TPC-H SF1 JSON Dataset",
     "categories": [
-        "functional"
+        "advanced"
     ],
     "matrices": [
         {

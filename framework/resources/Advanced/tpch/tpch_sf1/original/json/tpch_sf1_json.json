@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test TPC-H Original Queries on JSON",
     "categories": [
-        "functional"
+        "advanced"
     ],
     "matrices": [
         {

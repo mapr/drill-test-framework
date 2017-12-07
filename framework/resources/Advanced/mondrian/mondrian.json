@@ -4,7 +4,7 @@
     "description": "Test mondrian queries via jdbc",
     "submit-type": "jdbc",
     "categories": [
-        "regression"
+        "advanced"
     ],
     "matrices": [
         {

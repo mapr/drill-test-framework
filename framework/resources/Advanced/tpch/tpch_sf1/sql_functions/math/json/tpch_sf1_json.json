@@ -3,7 +3,7 @@
     "type": "group",
     "description": "Test Queries with SQL Math Functions on TPC-H SF1 JSON Dataset",
     "categories": [
-        "functional"
+        "advanced"
     ],
     "matrices": [
         {
