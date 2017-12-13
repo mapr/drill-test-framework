@@ -45,17 +45,17 @@
         },
         {
             "mode": "gen",
-            "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/hive_storage.ddl",
+            "src": "Datasources/hive/execHive.sh framework/resources/Datasources/hive_storage/hive_storage.ddl",
             "dest": ""
         },
         {
             "mode": "gen",
-            "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/sample.ddl",
+            "src": "Datasources/hive/execHive.sh framework/resources/Datasources/hive_storage/sample.ddl",
             "dest": ""
         },
         {
             "mode": "gen",
-            "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/tpch0.01/tpch.ddl",
+            "src": "Datasources/hive/execHive.sh framework/resources/Datasources/hive_storage/tpch0.01/tpch.ddl",
             "dest": ""
         },
         {
@@ -65,7 +65,7 @@
         },
         {
             "mode": "gen",
-            "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/tpcds01_text.ddl",
+            "src": "Datasources/hive/execHive.sh framework/resources/Datasources/hive_storage/tpcds01_text.ddl",
             "dest": ""
         }
       ]

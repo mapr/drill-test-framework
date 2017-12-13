@@ -60,7 +60,7 @@
         },
         {
            "mode": "gen",
-           "src": "bin/execHive.sh framework/resources/Datasources/hive_storage/tpch0.01/tpch.ddl",
+           "src": "Datasources/hive/execHive.sh framework/resources/Datasources/hive_storage/tpch0.01/tpch.ddl",
            "dest": ""
         }
     ]

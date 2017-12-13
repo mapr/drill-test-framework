@@ -30,7 +30,7 @@
     },
     {
        "mode": "gen",
-       "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/hivegenerated_parquet.ddl",
+       "src": "Datasources/hive/execHive.sh framework/resources/Datasources/hive_storage/hivegenerated_parquet.ddl",
        "dest": ""
     }
    ]

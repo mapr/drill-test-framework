@@ -5,7 +5,7 @@
     "categories": [
         "smoke"
     ],
-    "dependencies" : ["hive"],
+    "dependencies" : ["hive", "hbase"],
     "matrices": [
         {
             "query-file": ".*.q",
@@ -90,7 +90,7 @@
     },
         {
             "mode": "gen",
-            "src": "Datasources/hive_storage/execHive.sh framework/resources/Datasources/hive_storage/hive_storage.ddl",
+            "src": "Datasources/hive/execHive.sh framework/resources/Datasources/hive_storage/hive_storage.ddl",
             "dest": ""
         },
         {
