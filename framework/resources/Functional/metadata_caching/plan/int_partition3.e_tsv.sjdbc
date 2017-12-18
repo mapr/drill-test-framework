@@ -1,0 +1,2 @@
+.*00-03.*Project.*
+00-04.*Scan.*/drill/testdata/metadata_caching/fewtypes_intpartition/0_0_20.parquet.*/drill/testdata/metadata_caching/fewtypes_intpartition/0_0_21.parquet.*selectionRoot=/drill/testdata/metadata_caching/fewtypes_intpartition.*numFiles=2.*usedMetadataFile=true.*
