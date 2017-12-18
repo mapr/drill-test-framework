@@ -1,0 +1,25 @@
+{
+    "testId": "drill5375_non-equi_left_join",
+    "type": "group",
+    "description": "non-equi left join tests for drill-5375",
+    "categories": [ "functional" ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.joins",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/joins",
+            "dest": "joins"
+        }
+    ]
+}
+
