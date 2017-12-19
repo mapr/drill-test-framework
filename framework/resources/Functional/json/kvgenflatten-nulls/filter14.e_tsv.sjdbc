@@ -1,0 +1,2 @@
+web	{  "event_name" : "e2_name",  "event_time" : 2000000,  "type" : "cmpgn4",  "evnt_id" : "e2",  "campaign_id" : "c1"}
+web	{  "event_name" : "e9_name",  "event_time" : 9000000,  "type" : "cmpgn4",  "evnt_id" : "e9"}

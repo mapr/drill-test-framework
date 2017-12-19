@@ -1,0 +1,2 @@
+null	{  "mapid" : "m0",  "mapvalue" : {    "col1" : 1,    "col2" : [ 0, 1, 2, 3, 4, 5 ]  },  "rptd" : [ {    "a" : "foo1"  }, { } ]}
+null	{  "mapid" : "m1",  "mapvalue" : {    "col2" : [ ]  },  "rptd" : [ {    "a" : "bar"  }, {    "c" : -1  }, {    "d" : 4.5  } ]}
