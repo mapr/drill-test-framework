@@ -1,0 +1,4 @@
+{  "boolean_1" : true,  "boolean_2" : false,  "boolean_3" : true}	[ {  "key" : "int_1",  "value" : 1}, {  "key" : "int_2",  "value" : 2}, {  "key" : "int_3",  "value" : 3} ]
+{  "boolean_1" : true}	[ {  "key" : "int_1",  "value" : 1}, {  "key" : "int_2",  "value" : 2} ]
+{  "boolean_1" : true,  "boolean_2" : false}	[ {  "key" : "int_1",  "value" : 1}, {  "key" : "int_3",  "value" : 3} ]
+{  "boolean_1" : true,  "boolean_2" : false}	[ {  "key" : "int_2",  "value" : 2}, {  "key" : "int_3",  "value" : 3} ]

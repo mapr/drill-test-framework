@@ -1,0 +1,4 @@
+1	[ {  "key" : "varchar_1",  "value" : "abc"}, {  "key" : "varchar_2",  "value" : "def"}, {  "key" : "key",  "value" : "value"} ]
+2	[ {  "key" : "varchar_2",  "value" : ""} ]
+3	[ {  "key" : "varchar_2",  "value" : "how"} ]
+2	[ ]
