@@ -39,6 +39,7 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,6 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Arrays;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -228,10 +228,16 @@ public class Utils implements DrillDefaults {
 	    {
 	      failExtension = FilenameUtils.getExtension(failExtension);	
 	    }
-	    queryFileExtension = ".*."+failExtension;
+            // add queryFileExtension.substring to include ".q" or ".sql"
+            // this prevents expected results files with the "fail" extension from being picked up
+            // so queryFileExtension now looks like this: "*.q.fail"
+            queryFileExtension = ".*"+queryFileExtension.substring(2)+"."+failExtension;
 	  }
 	  else{ 
-	    queryFileExtension =    ".*.(fail|failing)";
+            // add queryFileExtension.substring to include ".q" or ".sql"
+            // this prevents expected results files with the "fail" extension from being picked up
+            // so queryFileExtension now looks like this: "*.q.fail"
+            queryFileExtension =    ".*" + queryFileExtension.substring(2) + ".(fail|failing)";
 	  }
         }
         boolean skipSuite = false;
@@ -243,14 +249,17 @@ public class Utils implements DrillDefaults {
           }
         }
         if (skipSuite) {continue;}
-          List<File> testQueryFiles = searchFiles(testDefFile.getParentFile(),
-                  queryFileExtension);
-          for (File testQueryFile : testQueryFiles) {
-	    //Expected File to find based on the original query Extension
-	    String expectedFileName = getExpectedFile(testQueryFile.getAbsolutePath(),
-                      originalQueryFileExtension, expectedFileExtension);
+
+        List<File> testQueryFiles = searchFiles(testDefFile.getParentFile(),
+                queryFileExtension);
+        for (File testQueryFile : testQueryFiles) {
+          //Expected File to find based on the original query Extension
+          String expectedFileName = getExpectedFile(testQueryFile.getAbsolutePath(),
+                    originalQueryFileExtension, expectedFileExtension);
+          if (expectedFileName != null) {
             drillTestCases.add(new DrillTestCase(modeler, testQueryFile.getAbsolutePath(), expectedFileName));
           }
+        }
       }
     }
     if (drillTestCases.size() == 0) {
@@ -313,7 +322,33 @@ public class Utils implements DrillDefaults {
 	    if(idx<0){//Check if queryFileExt not found as a substring in queryFile and if idx is negative if negative return empty string and the queryFile will not be added to tests scheduled to run 
 	      return "";
 	    }
-	    return queryFile.substring(0, idx).concat(expectedFileExt.substring(2));
+            String Filename = null;
+            String FilenameJDBC = null;
+            String driverExt = TestDriver.cmdParam.driverExt;
+            if (driverExt == null) {
+              // no driver has been specified.  use Apache.
+              return queryFile.substring(0, idx).concat(expectedFileExt.substring(2));
+            } else {
+              // if expected results file with driver extension exists, then use it
+              //     i.e. query.e_tsv.sjdbc
+              // else if expected result file with driver extension and .fail exists, and skip this test
+              //     i.e. query.e_tsv.sjdbc.fail
+              // else use Apache.
+              Filename = queryFile.substring(0, idx).concat(expectedFileExt.substring(2));
+              FilenameJDBC = Filename.concat(".").concat(driverExt);
+              File driverFile = new File(FilenameJDBC);
+              if (driverFile.exists()) {
+                return FilenameJDBC;
+              } else {
+                FilenameJDBC = FilenameJDBC.concat(".fail");
+                driverFile = new File(FilenameJDBC);
+                if (driverFile.exists()) {
+                  return null;
+                } else {
+                  return Filename;
+                }
+              }
+            }
 	  }
   
   /**
@@ -686,6 +721,30 @@ public class Utils implements DrillDefaults {
       }
     }
     return queryId;
+  }
+
+  /* Remove new lines in a varchar except within quotes */
+  public static String removeNewLines(String input) {
+    List<String> newStrings = Lists.newArrayList();
+    boolean inQuotes = false;
+    int start = 0;
+    int stringLength = input.length();
+    for (int index = 0; index < stringLength; index++) {
+      if (input.charAt(index) == '\"') {
+        inQuotes = !(inQuotes);
+      }
+      if (index == stringLength-1) {
+        newStrings.add(input.substring(start,stringLength));
+      } else if ((input.charAt(index) == '\n') && !(inQuotes)) {
+        newStrings.add(input.substring(start,index));
+        start = index + 1;
+      }
+    }
+    StringBuilder builder = new StringBuilder();
+    for (String s : newStrings) {
+      builder.append(s);
+    }
+    return builder.toString();
   }
 
 }

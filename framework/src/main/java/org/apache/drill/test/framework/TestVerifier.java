@@ -250,6 +250,7 @@ public class TestVerifier {
             typedFields.add(new BigInteger(fields[i]));
             break;
           case Types.FLOAT:
+          case Types.REAL:
             typedFields.add(new Float(fields[i]));
             break;
           case Types.DOUBLE:

@@ -30,10 +30,19 @@ import java.util.List;
 public class ColumnList {
   private final List<Object> values;
   private final List<Integer> types;
+  private final boolean Simba;
+  public static final String SIMBA_JDBC = "sjdbc";
 
   public ColumnList(List<Integer> types, List<Object> values) {
     this.values = values;
     this.types = types;
+    if (TestDriver.cmdParam.driverExt != null &&
+        TestDriver.cmdParam.driverExt.equals(ColumnList.SIMBA_JDBC)) {
+      this.Simba = true;
+    }
+    else {
+      this.Simba = false;
+    }
   }
 
   public List<Object> getValues() {
@@ -72,6 +81,7 @@ public class ColumnList {
       case Types.FLOAT:
       case Types.DOUBLE:
       case Types.DECIMAL:
+      case Types.REAL:
         break;
       default:
         hash += values.get(i).hashCode();
@@ -88,7 +98,35 @@ public class ColumnList {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < values.size() - 1; i++) {
+      int type = (Integer) (types.get(i));
+      if (Simba && (type == Types.VARCHAR)) {
+        String s1 = String.valueOf(values.get(i));
+        // if the field has a JSON string or list, then remove newlines so that
+        // each record fits on a single line in the actual output file.
+        // sometimes Drill returns records in different orders, and by
+        // ensuring each reoord is on a single line, they can be matched in any
+        // order
+        if ((s1.length() > 0) &&
+           ((s1.charAt(0) == '{') || (s1.charAt(0) == '[')) ) {
+          s1 = Utils.removeNewLines(s1);
+          values.set(i, s1);
+        }
+      }
       sb.append(values.get(i) + "\t");
+    }
+    int type = (Integer) (types.get(values.size()-1));
+    if (Simba && (type == Types.VARCHAR)) {
+      String s1 = String.valueOf(values.get(values.size()-1));
+      // if the field has a JSON string or list, then remove newlines so that
+      // each record fits on a single line in the actual output file.
+      // sometimes Drill returns records in different orders, and by
+      // ensuring each reoord is on a single line, they can be matched in any
+      // order
+      if ((s1.length() > 0) &&
+         ((s1.charAt(0) == '{') || (s1.charAt(0) == '[')) ) {
+        s1 = Utils.removeNewLines(s1);
+        values.set(values.size()-1, s1);
+      }
     }
     sb.append(values.get(values.size() - 1));
     return sb.toString();
@@ -113,6 +151,7 @@ public class ColumnList {
       try {
         switch (type) {
         case Types.FLOAT:
+        case Types.REAL:
           float f1 = (Float) list1.get(i);
           float f2 = (Float) list2.get(i);
           if ((f1 + f2) / 2 != 0) {
