@@ -310,6 +310,7 @@ public class TestDriver implements DrillDefaults {
       }
       for (DrillTest test : dataVerificationFailures) {
         LOG.info(test.getInputFile());
+        LOG.info(test.getExpectedFile());
         LOG.info("Query: \n" + test.getQuery());
         LOG.info(test.getException().getMessage());
       }
@@ -318,6 +319,7 @@ public class TestDriver implements DrillDefaults {
       }
       for (DrillTest test : planVerificationFailures) {
         LOG.info(test.getInputFile());
+        LOG.info(test.getExpectedFile());
         LOG.info("Query: \n" + test.getQuery());
         LOG.info(test.getException().getMessage());
       }
@@ -333,6 +335,7 @@ public class TestDriver implements DrillDefaults {
       }
       for (DrillTest test : randomFailures) {
         LOG.info(test.getInputFile());
+        LOG.info(test.getExpectedFile());
         LOG.info("Query: \n" + test.getQuery());
         LOG.info("Failed with exception", test.getException());
       }
