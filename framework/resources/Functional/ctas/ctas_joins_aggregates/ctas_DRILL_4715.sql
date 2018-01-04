@@ -249,6 +249,6 @@ CAST (columns[0] as  VARCHAR(100) ) as IJPCD
 ,CAST (columns[247] as  CHAR(4))  as MEISAIJYURYOKAKIKOMIKBN8 
 ,CAST (columns[248] as  VARCHAR(12)) as SEKYUHSTCENTCD 
 ,CAST (columns[249] as  CHAR(4))  as DAIBINAIZEIKBN 
-FROM `../custmimic.csv`;
+FROM dfs.ctas.`custmimic.csv`;
 SELECT * FROM SelectwManyColsInProject;
 DROP TABLE SelectwManyColsInProject;
