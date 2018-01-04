@@ -1,0 +1,31 @@
+{
+  "testId": "table_function-functional-plan",
+  "type": "group",
+  "description": "Test table function queries via jdbc",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.q",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e",
+      "verification-type": [
+        "regex"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/table_function",
+      "dest": "table_function/"
+    },
+    {
+      "mode": "gen",
+      "src": "Datasources/table_function/DRILL-5166_generate_data.sh",
+      "dest": ""
+    }
+  ]
+}

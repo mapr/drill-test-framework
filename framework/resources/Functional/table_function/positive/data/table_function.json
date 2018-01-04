@@ -1,5 +1,5 @@
 {
-    "testId": "table_function-functional",
+    "testId": "table_function-functional-data",
     "type": "group",
     "description": "Test table function queries via jdbc",
     "categories": [
@@ -21,6 +21,11 @@
          "mode": "cp",
          "src": "Datasources/table_function",
          "dest": "table_function/"
+      },
+      {
+        "mode": "gen",
+        "src": "Datasources/table_function/DRILL-5166_generate_data.sh",
+        "dest": ""
       }
     ]
 }

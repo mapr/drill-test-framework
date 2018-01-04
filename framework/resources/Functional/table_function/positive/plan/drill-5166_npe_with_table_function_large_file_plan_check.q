@@ -1,0 +1,1 @@
+explain plan for select * from table(`table_function/DRILL-5166_NPE_with_table_function_large_file.csv`(type => 'text', fieldDelimiter => ',')) limit 1
