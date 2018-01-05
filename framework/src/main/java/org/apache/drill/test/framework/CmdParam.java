@@ -9,6 +9,7 @@ import com.beust.jcommander.Parameter;
   public class CmdParam  {
     @Parameter(names = {"-b"}, description = "file extension for different baseline expected results", required=false)
     public String driverExt = null;
+    public String SIMBA_ODBC = "sodbc";
     
     @Parameter(names = {"-c"}, description = "percent of tests canceled", required=false)
     public int cancelPercent = 0;

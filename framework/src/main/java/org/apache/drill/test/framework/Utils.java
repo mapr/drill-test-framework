@@ -313,7 +313,16 @@ public class Utils implements DrillDefaults {
 	      throws IOException {
 	    byte[] jsonData = Files.readAllBytes(Paths.get(testDefFile));
 	    ObjectMapper objectMapper = new ObjectMapper();
-	    return objectMapper.readValue(new String(jsonData), TestCaseModeler.class);
+            // check if submitType should be over-ridden to odbc
+            TestCaseModeler testCaseModeler = objectMapper.readValue(new String(jsonData), TestCaseModeler.class);
+            if (TestDriver.cmdParam.driverExt != null &&
+                TestDriver.cmdParam.driverExt.equals(TestDriver.cmdParam.SIMBA_ODBC)) {
+              testCaseModeler.submitType = "odbc";
+              if (testCaseModeler.script == null) {
+                testCaseModeler.script = "Functional/odbcTest.py";
+              }
+            }
+	    return testCaseModeler;
 	  }
 
   private static String getExpectedFile(String queryFile, String queryFileExt,
