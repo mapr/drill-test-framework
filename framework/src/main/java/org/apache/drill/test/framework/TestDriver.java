@@ -713,7 +713,7 @@ public class TestDriver implements DrillDefaults {
     case "jdbc":
       return new DrillTestJdbc(modeler, connectionPool, cloneId, totalCases);
     case "odbc":
-      return new DrillTestOdbc(modeler, cloneId);
+      return new DrillTestOdbc(modeler, cloneId, totalCases);
     case "script":
       return new DrillTestScript(modeler, cloneId);
     case "system":
