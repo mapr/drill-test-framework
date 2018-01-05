@@ -1,1 +1,1 @@
-drop table dfs.droptable.droptable11;
+drop table dfs_test.droptable.droptable11;

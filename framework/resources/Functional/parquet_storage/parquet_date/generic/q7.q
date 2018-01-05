@@ -1,1 +1,1 @@
-select * from dfs.`/drill/testdata/parquet_date/dates_nodrillversion/drillgen1`;
+select * from dfs_test.`/drill/testdata/parquet_date/dates_nodrillversion/drillgen1`;

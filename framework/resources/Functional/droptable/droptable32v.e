@@ -1,1 +1,1 @@
-true	View [droptable32v] deleted successfully from schema [dfs.droptable].
+true	View [droptable32v] deleted successfully from schema [dfs_test.droptable].

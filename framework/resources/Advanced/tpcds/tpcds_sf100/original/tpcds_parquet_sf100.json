@@ -8,7 +8,7 @@
     "matrices": [
         {
             "query-file": ".*.sql",
-            "schema": "dfs.tpcds_sf100_parquet_views",
+            "schema": "dfs_test.tpcds_sf100_parquet_views",
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
             "verification-type": [

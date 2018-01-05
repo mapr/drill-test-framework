@@ -1,1 +1,1 @@
-DRILL	dfs.drillTestDirViews	Drill2461View	EXPR$0	1	null	YES	INTERVAL	null	null	null	null	null	6	HOUR	2
+DRILL	dfs_test.drillTestDirViews	Drill2461View	EXPR$0	1	null	YES	INTERVAL	null	null	null	null	null	6	HOUR	2

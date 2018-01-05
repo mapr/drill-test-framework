@@ -1,1 +1,1 @@
-select flatten(columns) from dfs.`/drill/testdata/views/dfs/text/rankings`;
+select flatten(columns) from dfs_test.`/drill/testdata/views/dfs/text/rankings`;

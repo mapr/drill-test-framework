@@ -1,4 +1,4 @@
-use dfs.drillTestDirImpersonation;
+use dfs_test.drillTestDirImpersonation;
 show tables;
-use dfs.drillTestDirImpersonation;
+use dfs_test.drillTestDirImpersonation;
 

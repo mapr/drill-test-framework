@@ -1,5 +1,5 @@
 {
-  "name" : "dfs",
+  "name" : "dfs_test",
   "config" : {
     "type" : "file",
     "enabled" : true,

@@ -1,1 +1,1 @@
-refresh table metadata dfs.kjsd.nowayIExist;
+refresh table metadata dfs_test.kjsd.nowayIExist;

@@ -1,1 +1,1 @@
-refresh table metadata dfs.`/drill/testdata/droptable/droptable1`;
+refresh table metadata dfs_test.`/drill/testdata/droptable/droptable1`;

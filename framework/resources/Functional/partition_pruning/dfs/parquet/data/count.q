@@ -1,1 +1,1 @@
-select count(*) from dfs.`/drill/testdata/partition_pruning/dfs/orders` where dir0=1993;
+select count(*) from dfs_test.`/drill/testdata/partition_pruning/dfs/orders` where dir0=1993;

@@ -140,7 +140,7 @@ select
         sum(c_bigint)            ,
         count(c_date)
 from
-        dfs.`ctas`.`j4`
+        dfs_test.`ctas`.`j4`
 group by
         c_boolean,
         c_timestamp

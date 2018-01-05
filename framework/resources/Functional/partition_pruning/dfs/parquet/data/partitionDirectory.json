@@ -8,7 +8,7 @@
     "matrices": [
         {
             "query-file": ".*.q",
-            "schema": "dfs",
+            "schema": "dfs_test",
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
             "verification-type": [

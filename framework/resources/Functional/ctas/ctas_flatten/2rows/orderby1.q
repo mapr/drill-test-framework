@@ -1,3 +1,3 @@
-create table dfs.ctas_flatten.`orderby1_ctas` as select * from (select d.uid uid, flatten(d.events) evnts from `data.json` d order by d.uid) s order by s.evnts.event_time;
-select * from dfs.ctas_flatten.`orderby1_ctas`;
-drop table dfs.ctas_flatten.`orderby1_ctas`;
+create table dfs_test.ctas_flatten.`orderby1_ctas` as select * from (select d.uid uid, flatten(d.events) evnts from `data.json` d order by d.uid) s order by s.evnts.event_time;
+select * from dfs_test.ctas_flatten.`orderby1_ctas`;
+drop table dfs_test.ctas_flatten.`orderby1_ctas`;

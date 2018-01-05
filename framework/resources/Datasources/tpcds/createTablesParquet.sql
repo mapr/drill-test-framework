@@ -1,4 +1,4 @@
-use dfs.tpcds_sf1_parquet;
+use dfs_test.tpcds_sf1_parquet;
 
 create table customer as select 
  case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as c_customer_sk, 
@@ -19,7 +19,7 @@ create table customer as select
  case when (columns[15]='') then cast(null as varchar(200)) else cast(columns[15] as varchar(200)) end as c_login, 
  case when (columns[16]='') then cast(null as varchar(200)) else cast(columns[16] as varchar(200)) end as c_email_address, 
  case when (columns[17]='') then cast(null as varchar(200)) else cast(columns[17] as varchar(200)) end as c_last_review_date 
-from dfs.`/drill/testdata/tpcds_sf1/text/customer`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/customer`;
 
 create table customer_address as select  
 case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end  as ca_address_sk, 
@@ -35,7 +35,7 @@ case when (columns[9]='') then cast(null as varchar(200)) else cast(columns[9] a
 case when (columns[10]='') then cast(null as varchar(200)) else cast(columns[10] as varchar(200)) end as ca_country, 
 case when (columns[11]='') then cast(null as integer) else cast(columns[11] as integer) end  as ca_gmt_offset, 
 case when (columns[12]='') then cast(null as varchar(200)) else cast(columns[12] as varchar(200)) end as ca_location_type 
-from dfs.`/drill/testdata/tpcds_sf1/text/customer_address`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/customer_address`;
 
 create table customer_demographics as select 
 case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as cd_demo_sk, 
@@ -47,7 +47,7 @@ case when (columns[5]='') then cast(null as varchar(200)) else cast(columns[5] a
 case when (columns[6]='') then cast(null as integer) else cast(columns[6] as integer) end as cd_dep_count, 
 case when (columns[7]='') then cast(null as integer) else cast(columns[7] as integer) end as cd_dep_employed_count, 
 case when (columns[8]='') then cast(null as integer) else cast(columns[8] as integer) end as cd_dep_college_count 
-from dfs.`/drill/testdata/tpcds_sf1/text/customer_demographics`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/customer_demographics`;
 
 create table household_demographics as select 
 case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as hd_demo_sk,
@@ -55,7 +55,7 @@ case when (columns[1]='') then cast(null as integer) else cast(columns[1] as int
 case when (columns[2]='') then cast(null as varchar(200)) else cast(columns[2] as varchar(200)) end as hd_buy_potential, 
 case when (columns[3]='') then cast(null as integer) else cast(columns[3] as integer) end  as hd_dep_count, 
 case when (columns[4]='') then cast(null as integer) else cast(columns[4] as integer) end  as hd_vehicle_count 
-from dfs.`/drill/testdata/tpcds_sf1/text/household_demographics`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/household_demographics`;
 
 create table item as select 
 case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as i_item_sk, 
@@ -80,7 +80,7 @@ case when (columns[18]='') then cast(null as varchar(200)) else cast(columns[18]
 case when (columns[19]='') then cast(null as varchar(200)) else cast(columns[19] as varchar(200))  end as i_container, 
 case when (columns[20]='') then cast(null as integer) else cast(columns[20] as integer) end as i_manager_id, 
 case when (columns[21]='') then cast(null as varchar(200)) else cast(columns[21] as varchar(200))  end as i_product_name 
-from dfs.`/drill/testdata/tpcds_sf1/text/item`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/item`;
 
 create table promotion as select 
 case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as p_promo_sk, 
@@ -102,7 +102,7 @@ case when (columns[15]='') then cast(null as varchar(200)) else cast(columns[15]
 case when (columns[16]='') then cast(null as varchar(200)) else cast(columns[16] as varchar(200)) end as p_channel_details, 
 case when (columns[17]='') then cast(null as varchar(200)) else cast(columns[17] as varchar(200)) end as p_purpose, 
 case when (columns[18]='') then cast(null as varchar(200)) else cast(columns[18] as varchar(200)) end as p_discount_active 
-from dfs.`/drill/testdata/tpcds_sf1/text/promotion`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/promotion`;
 
 create table time_dim as select 
 case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as t_time_sk, 
@@ -115,7 +115,7 @@ case when (columns[6]='') then cast(null as varchar(200)) else cast(columns[6] a
 case when (columns[7]='') then cast(null as varchar(200)) else cast(columns[7] as varchar(200)) end as t_shift, 
 case when (columns[8]='') then cast(null as varchar(200)) else cast(columns[8] as varchar(200)) end as t_sub_shift , 
 case when (columns[9]='') then cast(null as varchar(200)) else cast(columns[9] as varchar(200)) end as t_meal_time 
-from dfs.`/drill/testdata/tpcds_sf1/text/time_dim`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/time_dim`;
 
 create table date_dim as select 
 case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as d_date_sk, 
@@ -146,7 +146,7 @@ case when (columns[24]='') then cast(null as varchar(200)) else cast(columns[24]
 case when (columns[25]='') then cast(null as varchar(200)) else cast(columns[25] as varchar(200)) end as d_current_month, 
 case when (columns[26]='') then cast(null as varchar(200)) else cast(columns[26] as varchar(200)) end as d_current_quarter, 
 case when (columns[27]='') then cast(null as varchar(200)) else cast(columns[27] as varchar(200)) end as d_current_year 
-from dfs.`/drill/testdata/tpcds_sf1/text/date_dim`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/date_dim`;
 
 create table store as select 
 case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as s_store_sk, 
@@ -178,7 +178,7 @@ case when (columns[25]='') then cast(null as varchar(200)) else cast(columns[25]
 case when (columns[26]='') then cast(null as varchar(200)) else cast(columns[26] as varchar(200)) end as s_country, 
 case when (columns[27]='') then cast(null as double) else cast(columns[27] as double) end as s_gmt_offset, 
 case when (columns[28]='') then cast(null as double) else cast(columns[28] as double) end as s_tax_precentage 
-from dfs.`/drill/testdata/tpcds_sf1/text/store`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/store`;
 
 create table store_sales as select 
 case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as ss_sold_date_sk, 
@@ -204,7 +204,7 @@ case when (columns[19]='') then cast(null as double) else cast(columns[19] as do
 case when (columns[20]='') then cast(null as double) else cast(columns[20] as double) end as ss_net_paid, 
 case when (columns[21]='') then cast(null as double) else cast(columns[21] as double) end as ss_net_paid_inc_tax, 
 case when (columns[22]='') then cast(null as double) else cast(columns[22] as double) end as ss_net_profit 
-from dfs.`/drill/testdata/tpcds_sf1/text/store_sales`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/store_sales`;
 
 create table warehouse as select 
   case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as w_warehouse_sk,
@@ -221,7 +221,7 @@ create table warehouse as select
   case when (columns[11]='') then cast(null as varchar(200)) else cast(columns[11] as varchar(200)) end as w_zip,
   case when (columns[12]='') then cast(null as varchar(200)) else cast(columns[12] as varchar(200)) end as w_country,
   case when (columns[13]='') then cast(null as double) else cast(columns[13] as double) end as w_gmt_offset        
-from dfs.`/drill/testdata/tpcds_sf1/text/warehouse`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/warehouse`;
 
 create table ship_mode as select 
   case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as sm_ship_mode_sk,
@@ -230,19 +230,19 @@ create table ship_mode as select
   case when (columns[3]='') then cast(null as varchar(200)) else cast(columns[3] as varchar(200)) end as sm_code,
   case when (columns[4]='') then cast(null as varchar(200)) else cast(columns[4] as varchar(200)) end as sm_carrier,
   case when (columns[5]='') then cast(null as varchar(200)) else cast(columns[5] as varchar(200)) end as sm_contract      
-from dfs.`/drill/testdata/tpcds_sf1/text/ship_mode`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/ship_mode`;
 
 create table reason as select 
   case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as r_reason_sk,
   case when (columns[1]='') then cast(null as varchar(200)) else cast(columns[1] as varchar(200)) end as r_reason_id,
   case when (columns[2]='') then cast(null as varchar(200)) else cast(columns[2] as varchar(200)) end as r_reason_desc  
-from dfs.`/drill/testdata/tpcds_sf1/text/reason`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/reason`;
 
 create table income_band as select 
   case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as ib_income_band_sk,
   case when (columns[1]='') then cast(null as integer) else cast(columns[1] as integer) end as ib_lower_bound,
   case when (columns[2]='') then cast(null as integer) else cast(columns[2] as integer) end as ib_upper_bound          
-from dfs.`/drill/testdata/tpcds_sf1/text/income_band`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/income_band`;
 
 create table call_center as select 
   case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as cc_call_center_sk,
@@ -276,7 +276,7 @@ create table call_center as select
   case when (columns[28]='') then cast(null as varchar(200)) else cast(columns[28] as varchar(200)) end as cc_country,
   case when (columns[29]='') then cast(null as double) else cast(columns[29] as double) end as cc_gmt_offset,
   case when (columns[30]='') then cast(null as double) else cast(columns[30] as double) end as cc_tax_percentage  
-from dfs.`/drill/testdata/tpcds_sf1/text/call_center`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/call_center`;
 
 create table web_site as select 
   case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as web_site_sk,
@@ -305,7 +305,7 @@ create table web_site as select
   case when (columns[23]='') then cast(null as varchar(200)) else cast(columns[23] as varchar(200)) end as web_country,
   case when (columns[24]='') then cast(null as double) else cast(columns[24] as double) end as web_gmt_offset,
   case when (columns[25]='') then cast(null as double) else cast(columns[25] as double) end as web_tax_percentage 
-from dfs.`/drill/testdata/tpcds_sf1/text/web_site`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/web_site`;
 
 create table store_returns as select 
   case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as sr_returned_date_sk,
@@ -328,7 +328,7 @@ create table store_returns as select
   case when (columns[17]='') then cast(null as double) else cast(columns[17] as double) end as sr_reversed_charge,
   case when (columns[18]='') then cast(null as double) else cast(columns[18] as double) end as sr_store_credit,
   case when (columns[19]='') then cast(null as double) else cast(columns[19] as double) end as sr_net_loss    
-from dfs.`/drill/testdata/tpcds_sf1/text/store_returns`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/store_returns`;
 
 create table web_page as select 
   case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as wp_web_page_sk,
@@ -345,7 +345,7 @@ create table web_page as select
   case when (columns[11]='') then cast(null as integer) else cast(columns[11] as integer) end as wp_link_count,
   case when (columns[12]='') then cast(null as integer) else cast(columns[12] as integer) end as wp_image_count,
   case when (columns[13]='') then cast(null as integer) else cast(columns[13] as integer) end as wp_max_ad_count          
-from dfs.`/drill/testdata/tpcds_sf1/text/web_page`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/web_page`;
 
 create table catalog_page as select 
   case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as cp_catalog_page_sk,
@@ -357,14 +357,14 @@ create table catalog_page as select
   case when (columns[6]='') then cast(null as integer) else cast(columns[6] as integer) end as cp_catalog_page_number,
   case when (columns[7]='') then cast(null as varchar(200)) else cast(columns[7] as varchar(200)) end as cp_description,
   case when (columns[8]='') then cast(null as varchar(200)) else cast(columns[8] as varchar(200)) end as cp_type         
-from dfs.`/drill/testdata/tpcds_sf1/text/catalog_page`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/catalog_page`;
 
 create table inventory as select 
   case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as inv_date_sk,
   case when (columns[1]='') then cast(null as integer) else cast(columns[1] as integer) end as inv_item_sk,
   case when (columns[2]='') then cast(null as integer) else cast(columns[2] as integer) end as inv_warehouse_sk,
   case when (columns[3]='') then cast(null as integer) else cast(columns[3] as integer) end as inv_quantity_on_hand            
-from dfs.`/drill/testdata/tpcds_sf1/text/inventory`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/inventory`;
 
 create table catalog_returns as select 
   case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as cr_returned_date_sk,
@@ -394,7 +394,7 @@ create table catalog_returns as select
   case when (columns[24]='') then cast(null as double) else cast(columns[24] as double) end as cr_reversed_charge,
   case when (columns[25]='') then cast(null as double) else cast(columns[25] as double) end as cr_store_credit,
   case when (columns[26]='') then cast(null as double) else cast(columns[26] as double) end as cr_net_loss        
-from dfs.`/drill/testdata/tpcds_sf1/text/catalog_returns`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/catalog_returns`;
 
 create table web_returns as select 
   case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as wr_returned_date_sk,
@@ -421,7 +421,7 @@ create table web_returns as select
   case when (columns[21]='') then cast(null as double) else cast(columns[21] as double) end as wr_reversed_charge,
   case when (columns[22]='') then cast(null as double) else cast(columns[22] as double) end as wr_account_credit,
   case when (columns[23]='') then cast(null as double) else cast(columns[23] as double) end as wr_net_loss         
-from dfs.`/drill/testdata/tpcds_sf1/text/web_returns`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/web_returns`;
 
 create table web_sales as select 
   case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as ws_sold_date_sk,
@@ -458,7 +458,7 @@ create table web_sales as select
   case when (columns[31]='') then cast(null as double) else cast(columns[31] as double) end as ws_net_paid_inc_ship,
   case when (columns[32]='') then cast(null as double) else cast(columns[32] as double) end as ws_net_paid_inc_ship_tax,
   case when (columns[33]='') then cast(null as double) else cast(columns[33] as double) end as ws_net_profit        
-from dfs.`/drill/testdata/tpcds_sf1/text/web_sales`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/web_sales`;
 
 create table catalog_sales as select 
   case when (columns[0]='') then cast(null as integer) else cast(columns[0] as integer) end as cs_sold_date_sk,
@@ -495,4 +495,4 @@ create table catalog_sales as select
   case when (columns[31]='') then cast(null as double) else cast(columns[31] as double) end as cs_net_paid_inc_ship,
   case when (columns[32]='') then cast(null as double) else cast(columns[32] as double) end as cs_net_paid_inc_ship_tax,
   case when (columns[33]='') then cast(null as double) else cast(columns[33] as double) end as cs_net_profit         
-from dfs.`/drill/testdata/tpcds_sf1/text/catalog_sales`;
+from dfs_test.`/drill/testdata/tpcds_sf1/text/catalog_sales`;

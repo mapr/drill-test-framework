@@ -1,1 +1,1 @@
-select l_shipdate from dfs.`/drill/testdata/mc_parquet_date/mixed1_partitioned/1992`;
+select l_shipdate from dfs_test.`/drill/testdata/mc_parquet_date/mixed1_partitioned/1992`;

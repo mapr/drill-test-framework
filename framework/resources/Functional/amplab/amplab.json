@@ -9,7 +9,7 @@
     "matrices": [
         {
             "query-file": ".*.q",
-            "schema": "dfs.drillTestDirAmplab",
+            "schema": "dfs_test.drillTestDirAmplab",
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
             "verification-type": [

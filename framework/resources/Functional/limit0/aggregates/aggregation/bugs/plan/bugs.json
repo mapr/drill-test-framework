@@ -6,7 +6,7 @@
     "matrices": [
         {
             "query-file": ".*.sql",
-            "schema": "dfs.aggregation",
+            "schema": "dfs_test.aggregation",
             "output-format": "tsv",
             "expected-file": ".*.res",
             "verification-type": [

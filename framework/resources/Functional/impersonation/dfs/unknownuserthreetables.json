@@ -10,7 +10,7 @@
     "matrices": [
         {
             "query-file": "unknownuserthreetables.q",
-            "schema": "dfs.drillTestDirImpersonation",
+            "schema": "dfs_test.drillTestDirImpersonation",
             "output-format": "tsv",
             "expected-file": "unknownuserthreetables.e",
             "username": "unknown",

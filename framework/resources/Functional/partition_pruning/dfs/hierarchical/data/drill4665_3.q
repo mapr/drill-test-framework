@@ -1,1 +1,1 @@
-select columns[0], columns[1], columns[4], columns[10], columns[13] from dfs.`/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intstring` where dir0=1993 and cast(columns[0] as int) like 29600 and columns[0] like '%' and dir1='nov';
+select columns[0], columns[1], columns[4], columns[10], columns[13] from dfs_test.`/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intstring` where dir0=1993 and cast(columns[0] as int) like 29600 and columns[0] like '%' and dir1='nov';

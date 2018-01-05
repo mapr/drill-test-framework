@@ -1,1 +1,1 @@
-select d.id, flatten(d.evnts) from dfs.`/drill/testdata/json_kvgenflatten/empty-array.json` d;
+select d.id, flatten(d.evnts) from dfs_test.`/drill/testdata/json_kvgenflatten/empty-array.json` d;

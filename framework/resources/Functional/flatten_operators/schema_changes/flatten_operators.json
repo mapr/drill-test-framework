@@ -8,7 +8,7 @@
     "matrices": [
         {
             "query-file": ".*.q",
-            "schema": "dfs.flatten_operators_schema_changes",
+            "schema": "dfs_test.flatten_operators_schema_changes",
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
             "verification-type": [

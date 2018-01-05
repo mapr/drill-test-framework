@@ -1,1 +1,1 @@
-drop table if exists dfs.droptable.droptableif6;
+drop table if exists dfs_test.droptable.droptableif6;
