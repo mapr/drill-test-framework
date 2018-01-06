@@ -8,7 +8,7 @@
     "matrices": [
         {
             "query-file": ".*.q",
-            "schema": "dfs.metadata_caching_pp",
+            "schema": "dfs_test.metadata_caching_pp",
             "output-format": "tsv",
             "expected-file": ".*.e",
             "verification-type": [

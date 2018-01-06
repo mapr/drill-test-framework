@@ -2,7 +2,7 @@
 # THIS SCRIPT IS NOT USED ANYWHERE IN OUR FUNCTIONAL TESTS
 # THIS IS JUST CHECKED IN SO THAT WE HAVE A REFERENCE AS TO HOW WE GENERATED THE DATA
 #
-create table dfs.drillTestDir.drillgen_fewtypes_null_hive as 
+create table dfs_test.drillTestDir.drillgen_fewtypes_null_hive as 
 select 
   int_col, 
   bigint_col, 

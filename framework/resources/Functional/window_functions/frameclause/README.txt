@@ -15,7 +15,7 @@ group is a directory and holds related test files.
 
 CTAS used to create `t_alltype.parquet` file is,
 
-0: jdbc:drill:schema=dfs.tmp> create table t_alltype as select
+0: jdbc:drill:schema=dfs_test.tmp> create table t_alltype as select
 > case when columns[0] = '' then cast(null as integer) else cast(columns[0] as integer) end as c1,
 > case when columns[1] = '' then cast(null as integer) else cast(columns[1] as integer) end as c2,
 > case when columns[2] = '' then cast(null as bigint) else cast(columns[2] as bigint) end as c3,
@@ -25,7 +25,7 @@ CTAS used to create `t_alltype.parquet` file is,
 > case when columns[6] = '' then cast(null as date) else cast(columns[6] as date) end as c7,
 > case when columns[7] = '' then cast(null as boolean) else cast(columns[7] as boolean) end as c8,
 > case when columns[8] = '' then cast(null as double) else cast(columns[8] as double) end as c9
- > from dfs.tmp.`t_alltype.csv`;
+ > from dfs_test.tmp.`t_alltype.csv`;
 +-----------+----------------------------+
 | Fragment  | Number of records written  |
 +-----------+----------------------------+

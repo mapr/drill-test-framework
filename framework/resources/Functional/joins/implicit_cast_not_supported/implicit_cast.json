@@ -7,7 +7,7 @@
     "matrices": [
         {
             "query-file": ".*.sql",
-            "schema": "dfs.joins",
+            "schema": "dfs_test.joins",
             "output-format": "tsv",
             "expected-file": ".*.res",
             "verification-type": [

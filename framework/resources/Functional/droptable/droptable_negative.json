@@ -10,7 +10,7 @@
     "matrices": [
         {
             "query-file": ".*.q_negative",
-            "schema": "dfs.droptable",
+            "schema": "dfs_test.droptable",
             "output-format": "tsv",
             "expected-file": ".*.e_negative",
             "verification-type": [

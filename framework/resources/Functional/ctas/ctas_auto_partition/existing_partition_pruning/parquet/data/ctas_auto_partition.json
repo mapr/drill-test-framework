@@ -8,7 +8,7 @@
     "matrices": [
         {
             "query-file": ".*.q",
-            "schema": "dfs.ctasAutoPartition",
+            "schema": "dfs_test.ctasAutoPartition",
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
             "verification-type": [

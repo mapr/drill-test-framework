@@ -1,4 +1,4 @@
-use dfs.tpcds_sf1_parquet_views;
+use dfs_test.tpcds_sf1_parquet_views;
 
 WITH v1 
      AS (SELECT i_category, 
@@ -19,10 +19,10 @@ WITH v1
                     partition BY i_category, i_brand, s_store_name, 
                   s_company_name 
                     ORDER BY d_year, d_moy) rn 
-         FROM   dfs.`/drill/testdata/tpcds_sf1/parquet/views/item.view.drill`, 
-                dfs.`/drill/testdata/tpcds_sf1/parquet/views/store_sales.view.drill`, 
-                dfs.`/drill/testdata/tpcds_sf1/parquet/views/date_dim.view.drill`, 
-                dfs.`/drill/testdata/tpcds_sf1/parquet/views/store.view.drill` 
+         FROM   dfs_test.`/drill/testdata/tpcds_sf1/parquet/views/item.view.drill`, 
+                dfs_test.`/drill/testdata/tpcds_sf1/parquet/views/store_sales.view.drill`, 
+                dfs_test.`/drill/testdata/tpcds_sf1/parquet/views/date_dim.view.drill`, 
+                dfs_test.`/drill/testdata/tpcds_sf1/parquet/views/store.view.drill` 
          WHERE  ss_item_sk = i_item_sk 
                 AND ss_sold_date_sk = d_date_sk 
                 AND ss_store_sk = s_store_sk 

@@ -8,7 +8,7 @@ echo $mul
 size=`expr $var / $mul`
 echo $size
 #sed "s/$var/$size/g" "gendata.ddl" > gendata.ddl_temp && mv gendata.ddl_temp gendata.ddl
-${DRILL_HOME}/bin/sqlline -n user1 -p mapr -u "jdbc:drill:schema=dfs.tpch100_$1files;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/metadata_caching/gendata.ddl
+${DRILL_HOME}/bin/sqlline -n user1 -p mapr -u "jdbc:drill:schema=dfs_test.tpch100_$1files;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/metadata_caching/gendata.ddl
 #sed "s/$size/$var/g" "gendata.ddl" > gendata.ddl_temp && mv gendata.ddl_temp gendata.ddl
 
 # TODO: it seems that sqlline does not exit, if one of the queries failed.

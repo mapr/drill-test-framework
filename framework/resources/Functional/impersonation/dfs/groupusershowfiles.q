@@ -1,3 +1,3 @@
-use dfs.drillTestDirImpersonationThreeparquettables;
+use dfs_test.drillTestDirImpersonationThreeparquettables;
 show files;
-use dfs.drillTestDirImpersonationThreeparquettables;
+use dfs_test.drillTestDirImpersonationThreeparquettables;

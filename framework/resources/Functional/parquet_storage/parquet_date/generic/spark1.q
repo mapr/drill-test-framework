@@ -1,1 +1,1 @@
-select a,b,c from dfs.`/drill/testdata/parquet_date/spark_generated/d1`;
+select a,b,c from dfs_test.`/drill/testdata/parquet_date/spark_generated/d1`;

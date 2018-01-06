@@ -1,1 +1,1 @@
-SELECT * FROM dfs.drillMinMaxDirCache.`.` WHERE dir0 = IMINDIR('dfs.drillMinMaxDirCache') order by dir1;
+SELECT * FROM dfs_test.drillMinMaxDirCache.`.` WHERE dir0 = IMINDIR('dfs_test.drillMinMaxDirCache') order by dir1;

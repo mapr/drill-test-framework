@@ -1,3 +1,3 @@
-use dfs;
+use dfs_test;
 drop table if exists droptable.droptableif25;
-use dfs.droptable;
+use dfs_test.droptable;

@@ -1,1 +1,1 @@
-SELECT * FROM dfs.drillMinMaxDirCache.`.` WHERE dir0 = IMAXDIR('dfs.drillMinMaxDirCache');
+SELECT * FROM dfs_test.drillMinMaxDirCache.`.` WHERE dir0 = IMAXDIR('dfs_test.drillMinMaxDirCache');

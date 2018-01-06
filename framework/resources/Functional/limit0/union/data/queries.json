@@ -9,7 +9,7 @@
     "matrices": [
         {
             "query-file": ".*.q",
-            "schema": "dfs.union",
+            "schema": "dfs_test.union",
             "output-format": "tsv",
             "expected-file": ".*.e",
             "verification-type": [

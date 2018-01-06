@@ -9,7 +9,7 @@
   "matrices": [
     {
       "query-file": ".*.sql",
-      "schema": "dfs.drillTestDirSchemaChangeEmptyBatch",
+      "schema": "dfs_test.drillTestDirSchemaChangeEmptyBatch",
       "output-format": "tsv",
       "expected-file": ".*.e_tsv",
       "verification-type": [

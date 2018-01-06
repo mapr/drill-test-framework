@@ -8,7 +8,7 @@
     "matrices": [
         {
             "query-file": ".*.sql",
-            "schema": "dfs.tpcds1_hive2dot1_withdate",
+            "schema": "dfs_test.tpcds1_hive2dot1_withdate",
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
             "verification-type": [

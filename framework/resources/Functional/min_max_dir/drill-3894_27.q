@@ -1,1 +1,1 @@
-SELECT distinct(registration), count(*) as `count` FROM dfs.drillMinMaxDir.`.` WHERE dir0 = MAXDIR('dfs.drillMinMaxDir') group by registration;
+SELECT distinct(registration), count(*) as `count` FROM dfs_test.drillMinMaxDir.`.` WHERE dir0 = MAXDIR('dfs_test.drillMinMaxDir') group by registration;
