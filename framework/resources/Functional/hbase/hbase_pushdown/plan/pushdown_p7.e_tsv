@@ -1,4 +1,4 @@
 Screen
 Project(row_key=[$0], fivecf=[$1], fourcf=[$2], onecf=[$3], threecf=[$4], twocf=[$5])
-Scan(groupscan=[HBaseGroupScan [HBaseScanSpec=HBaseScanSpec [tableName=student, startRow=201, stopRow=101\x00, filter=FilterList AND (2/2): [RowFilter (EQUAL, 101), RowFilter (EQUAL, 201)]], columns=[
+Scan(groupscan=[HBaseGroupScan [HBaseScanSpec=HBaseScanSpec [tableName=student, startRow=null, stopRow=null, filter=null], columns=[`*`
 ]]])

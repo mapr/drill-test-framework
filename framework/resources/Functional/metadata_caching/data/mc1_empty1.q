@@ -1,1 +1,1 @@
-select count(*) from empty;
+select count(*) from `empty`;

@@ -1,1 +1,1 @@
-select * from empty;
+select * from `empty`;
