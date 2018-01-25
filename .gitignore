@@ -29,4 +29,17 @@ framework/resources/Datasources/tpcds/sf1/
 framework/resources/Functional/Failing/
 framework/resources/Functional/data-shapes/wide-columns/5000/1000rows/parquet/large/
 framework/resources/Functional/flatten_operators/100000rows/large/
-#
+framework/resources/Datasources/table_function/DRILL-5166*
+framework/resources/Datasources/hive_storage/skipHeaderFooter/DRILL_5941*
+framework/resources/Datasources/tpcds1_hive1dot2_withdate/
+framework/resources/Datasources/tpcds_hivegenerated_parquet/
+framework/resources/Datasources/tpch/sf1/
+framework/resources/Datasources/hive_storage/md1119_parquet/
+framework/resources/Datasources/schema_change_empty_batch/data/
+
+
+# Logs
+drill.log*
+
+# External
+framework/resources/External/
