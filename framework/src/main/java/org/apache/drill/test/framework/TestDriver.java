@@ -288,8 +288,8 @@ public class TestDriver implements DrillDefaults {
         LOG.info(LINE_BREAK);
         executor.executeAll(tempTests);
 
-        for (DrillTest test : tests) {
-          if (tempTests.get(0).getTestStatus() == TestStatus.PASS) {
+        for (DrillTest test : tempTests) {
+          if (test.getTestStatus() == TestStatus.PASS) {
             randomFailures.add(test);
           }
         }
