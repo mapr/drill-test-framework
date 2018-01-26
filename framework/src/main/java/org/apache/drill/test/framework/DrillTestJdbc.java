@@ -165,7 +165,7 @@ public class DrillTestJdbc implements DrillTest {
 
       if((++countTestsCompleted %100==0 && countTestsCompleted <= totalCases) || (countTestsCompleted == totalCases)){
         LOG.info(LINE_BREAK);
-        LOG.info("Execution completed for " + countTestsCompleted + " (out of " + totalCases + ") tests");
+        LOG.info("EXECUTION COMPLETED FOR " + countTestsCompleted + " (of " + totalCases + ") TESTS");
         LOG.info(LINE_BREAK);
       }
     }
