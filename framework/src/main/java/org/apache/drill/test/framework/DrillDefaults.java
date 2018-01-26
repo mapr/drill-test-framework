@@ -33,7 +33,7 @@ public interface DrillDefaults {
 	/**
 	 * Default line break for logging.
 	 */
-	static final String LINE_BREAK = "----------------------------------------------------------------------------------------------------------------\n";
+	static final String LINE_BREAK = "------------------------------------------------------------------------";
 
 	/**
 	 * Default location storing drill query output files. By default, only failed query
