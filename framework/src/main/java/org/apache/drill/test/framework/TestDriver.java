@@ -452,7 +452,7 @@ public class TestDriver implements DrillDefaults {
       LOG.info("> Plan Verification Failures : " + planVerificationFailures.size());
       LOG.info("> Timeout Failures           : " + timeoutFailures.size());
 
-      if(canceledTests.size() > 0)
+      if(randomFailures.size() > 0)
         LOG.info("\n> Random Failures            : " + randomFailures.size());
 
       if(canceledTests.size() > 0)
