@@ -42,6 +42,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DrillTestJdbc implements DrillTest {
   private static final Logger LOG = Logger.getLogger(DrillTestJdbc.class);
+  private static final String LINE_BREAK = "------------------------------------------------------------------------";
 
   private ConnectionPool connectionPool;
   private Connection connection;
@@ -66,8 +67,7 @@ public class DrillTestJdbc implements DrillTest {
   private int id;
   private int totalCases;
   private String queryID;
-
-  private static volatile int noOfCasesCompleted;
+  private static volatile int countTestsCompleted;
 
   public DrillTestJdbc(DrillTestCase modeler, ConnectionPool connectionPool, int id,int totalCases) {
 	this.id = id;
@@ -76,8 +76,7 @@ public class DrillTestJdbc implements DrillTest {
     this.matrix = modeler.matrices.get(0);
     this.totalCases = totalCases;
   }
-  
- 
+
   public void run() {
     final Stopwatch stopwatch = Stopwatch.createStarted();
     this.thread = Thread.currentThread();
@@ -91,7 +90,7 @@ public class DrillTestJdbc implements DrillTest {
       throw new RuntimeException(e);
     }
     try {
-      LOG.debug("Running test " + modeler.queryFilename + " (connection: " + connection.hashCode() + ")");
+      LOG.debug("Running test " + modeler.queryFilename + " (Connection HashCode: " + connection.hashCode() + ")");
 
       if (!modeler.type.equalsIgnoreCase("impersonation")) {
         executeSetupQuery(String.format("use `%s`", matrix.schema));
@@ -136,7 +135,7 @@ public class DrillTestJdbc implements DrillTest {
       fail(TestStatus.PLAN_VERIFICATION_FAILURE, e);
     } catch (Exception e) {
       fail(TestStatus.EXECUTION_FAILURE, e);
-	} finally {
+	  } finally {
       try {
         for (int i = mainQueryIndex + 1; i < queries.length; i++) {
           Thread.sleep(1000);
@@ -147,27 +146,27 @@ public class DrillTestJdbc implements DrillTest {
       } catch (Exception e) {
         LOG.error("Failed while running cleanup query. Not returning connection to pool.", e);
         try {
-			connection.close();
-		} catch (SQLException e1) {
-			LOG.warn(e.getMessage());
-			e1.printStackTrace();
-		}
+			    connection.close();
+		    } catch (SQLException e1) {
+			    LOG.warn(e.getMessage());
+			    e1.printStackTrace();
+		    }
       }
       if (testStatus == TestStatus.PASS && !TestDriver.cmdParam.outputQueryResult) {
-    	Utils.deleteFile(outputFilename);
+    	  Utils.deleteFile(outputFilename);
       }
       duration = stopwatch;
 
-      if(++noOfCasesCompleted%100==0 && noOfCasesCompleted <= totalCases){
-	LOG.info("----------------------------------------------------------------------------------------------------------------");
-
-        LOG.info("Execution completed for "+(noOfCasesCompleted)+" out of "+(totalCases)+" tests");
-	LOG.info("----------------------------------------------------------------------------------------------------------------\n");
-      }
       if (TestDriver.driverType == TestDriver.DriverType.APACHE) {
-        LOG.info(testStatus + " (" + stopwatch + ") " + modeler.queryFilename + " (connection: " + connection.hashCode() + ")" + " (queryID: " + queryID + ")");
+        LOG.info("[" + testStatus + "] (" + stopwatch + ") " + modeler.queryFilename + " (ConnectionID: " + connection.hashCode()+ " | QueryID: " + queryID + ")");
       } else {
-        LOG.info(testStatus + " (" + stopwatch + ") " + modeler.queryFilename + " (connection: " + connection.hashCode() + ")");
+        LOG.info("[" + testStatus + "] (" + stopwatch + ") " + modeler.queryFilename + " (ConnectionID: " + connection.hashCode() + ")");
+      }
+
+      if((++countTestsCompleted %100==0 && countTestsCompleted <= totalCases) || (countTestsCompleted == totalCases)){
+        LOG.info(LINE_BREAK);
+        LOG.info("Execution completed for " + countTestsCompleted + " (out of " + totalCases + ") tests");
+        LOG.info(LINE_BREAK);
       }
     }
   }
