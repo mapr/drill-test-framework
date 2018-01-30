@@ -161,12 +161,17 @@ public class ColumnList {
           }
           break;
         case Types.DOUBLE:
-          double d1 = (Double) list1.get(i);
-          double d2 = (Double) list2.get(i);
-          if ((d1 + d2) / 2 != 0) {
-            if (!(Math.abs((d1 - d2) / ((d1 + d2) / 2)) < 1.0E-12)) return false;
-          } else if (d1 != 0) {
-            return false;
+          Double d1 = (Double) list1.get(i);
+          Double d2 = (Double) list2.get(i);
+          // first we check strictly if two Doubles are equal,
+          // especially for the cases when doubles are NaN / POSITIVE_INFINITY / NEGATIVE_INFINITY
+          // otherwise proceed with "loosened" logic
+          if (!d1.equals(d2)) {
+            if ((d1 + d2) / 2 != 0) {
+              if (!(Math.abs((d1 - d2) / ((d1 + d2) / 2)) < 1.0E-12)) return false;
+            } else if (d1 != 0) {
+              return false;
+            }
           }
           break;
         case Types.DECIMAL:
