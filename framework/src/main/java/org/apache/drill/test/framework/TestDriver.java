@@ -103,11 +103,11 @@ public class TestDriver implements DrillDefaults {
       errorCode = -1;
     } finally {
       LOG.info("\n" + LINE_BREAK);
-      LOG.info("Run Status");
+      LOG.info("RUN STATUS");
       LOG.info(LINE_BREAK);
       LOG.info("Exit Code      : " + errorCode);
       LOG.info("Exit Status    : " + ((errorCode==0) ? "SUCCESS" : "FAILURE"));
-      LOG.info("\nRun Started  : " + startDate);
+      LOG.info("\nRun Started    : " + startDate);
       LOG.info("Run Completed  : " + new Date());
       LOG.info("Total Duration : " + stopwatch);
       LOG.info(LINE_BREAK);
@@ -132,7 +132,7 @@ public class TestDriver implements DrillDefaults {
 
     final Stopwatch stopwatch = Stopwatch.createStarted();
     LOG.info(LINE_BREAK);
-    LOG.info("Pre-check");
+    LOG.info("PRE-CHECK");
     LOG.info(LINE_BREAK);
     try {
 		connection = connectionPool.getOrCreateConnection(username,password);
@@ -168,7 +168,7 @@ public class TestDriver implements DrillDefaults {
     
     stopwatch.reset().start();
     LOG.info("\n"+LINE_BREAK);
-    LOG.info("Setup");
+    LOG.info("SETUP");
     LOG.info(LINE_BREAK);
     setup();
     LOG.info("\n> Setup duration: " + stopwatch);
@@ -205,12 +205,12 @@ public class TestDriver implements DrillDefaults {
     for (i = 1; i < cmdParam.iterations+1; i++) {
       stopwatch.reset().start();
       LOG.info("\n"+LINE_BREAK);
-      LOG.info("Test Preparation");
+      LOG.info("PREPARATION");
       LOG.info(LINE_BREAK);
       if (cmdParam.generate) {
         prepareData(drillTestCases);
       }
-      LOG.info("> Test preparation duration: " + stopwatch);
+      LOG.info("> Preparation duration: " + stopwatch);
 
       stopwatch.reset().start();
 
@@ -267,7 +267,7 @@ public class TestDriver implements DrillDefaults {
       }
 
       LOG.info("\n"+LINE_BREAK);
-      LOG.info("Running Tests - Iteration " + i + " (out of "+ cmdParam.iterations + ")");
+      LOG.info("RUNNING TESTS - ITERATION " + i + " (of "+ cmdParam.iterations + ")");
       LOG.info(LINE_BREAK);
       executor.executeAll(tests);
 
@@ -275,15 +275,14 @@ public class TestDriver implements DrillDefaults {
     	  queryMemoryUsage();
       }
 
-      LOG.info(LINE_BREAK);
-      LOG.info("Isolating random failures - execution attempt 2 (out of 2)");
-      LOG.info(LINE_BREAK);
-
       for (DrillTest test : tests) {
         TestStatus testStatus = test.getTestStatus();
         if(testStatus!=TestStatus.PASS && testStatus!=TestStatus.CANCELED && cmdParam.skipRandom!=true){
 	      List<DrillTest> tempTests = Lists.newArrayList();
           tempTests.add(test);
+          LOG.info(LINE_BREAK);
+          LOG.info("ISOLATING RANDOM FAILURES - Execution attempt 2 (of 2)");
+          LOG.info(LINE_BREAK);
           executor.executeAll(tempTests);
           testStatus = tempTests.get(0).getTestStatus();
           if(testStatus==TestStatus.PASS){
@@ -316,7 +315,7 @@ public class TestDriver implements DrillDefaults {
 
       if(executionFailures.size()>0 || dataVerificationFailures.size()>0 || planVerificationFailures.size()>0 || timeoutFailures.size()>0) {
         LOG.info("\n"+LINE_BREAK);
-        LOG.info("Iteration Failures");
+        LOG.info("ITERATION FAILURES");
         LOG.info(LINE_BREAK);
       }
 
@@ -369,9 +368,11 @@ public class TestDriver implements DrillDefaults {
         }
       }
 
-      LOG.info("\n"+LINE_BREAK);
-      LOG.info("Iteration Results");
-      LOG.info(LINE_BREAK);
+      if(executionFailures.size()>0 || dataVerificationFailures.size()>0 || planVerificationFailures.size()>0 || timeoutFailures.size()>0 || randomFailures.size()>0) {
+        LOG.info("\n"+LINE_BREAK);
+        LOG.info("ITERATION RESULTS");
+        LOG.info(LINE_BREAK);
+      }
 
       if(executionFailures.size()>0){
       	LOG.info("Execution Failures:\n");
@@ -442,7 +443,7 @@ public class TestDriver implements DrillDefaults {
       }
 
       LOG.info("\n"+LINE_BREAK);
-      LOG.info("Iteration Summary");
+      LOG.info("ITERATION SUMMARY");
       LOG.info(LINE_BREAK);
       LOG.info("Total Tests                  : " + countTotalTests);
       LOG.info("Passing Tests                : " + passingTests.size());
@@ -474,9 +475,9 @@ public class TestDriver implements DrillDefaults {
 
       if(cmdParam.generateReports) {
         LOG.info(LINE_BREAK);
-        LOG.info("Generating reports");
-        generateReports(tests, i);
+        LOG.info("GENERATING REPORT");
         LOG.info(LINE_BREAK);
+        generateReports(tests, i);
       }
 
       totalPassingTests += passingTests.size();
@@ -553,7 +554,7 @@ public class TestDriver implements DrillDefaults {
       	}
     }
     LOG.info("\n"+LINE_BREAK);
-    LOG.info("Tear Down");
+    LOG.info("TEARDOWN");
     LOG.info(LINE_BREAK);
     teardown();
 
@@ -981,8 +982,8 @@ public class TestDriver implements DrillDefaults {
     int exitCode = 0;
     String command = CWD + "/" + restartDrillScript;
     File commandFile = new File(command);
+    LOG.info("\n> Restarting drillbits");
     if (commandFile.exists() && commandFile.canExecute()) {
-      LOG.info("\n> Restarting drillbits");
       LOG.info("\n>> Path: " + command);
       exitCode = Utils.execCmd(command).exitCode;
       if (exitCode != 0) {
