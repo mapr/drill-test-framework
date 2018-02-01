@@ -1,0 +1,2 @@
+--keep partition 3.  Count is 9.
+select count(*) from orders_parts where (((int_id > -3000 and bigint_id < -2500) or (bigint_id > -2400 and int_id < -2000)) or (float_id > -5 and double_id < 1000) or (double_id > 3060 and float_id < 6000) or (int_id > 9025 and int_id < 11976)) and ((int_id > 2000 and int_id < 3061) or (int_id > 3200 and int_id < 3300)) and ((int_id > -2100 and int_id < -1500) or (int_id > 3250 and int_id < 3400)) and ((int_id > 10000 and int_id < 11000) or (int_id > 3270 and int_id < 3500)) and (int_id > 3280 and int_id < 3290);

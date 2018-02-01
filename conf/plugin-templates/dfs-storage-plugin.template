@@ -529,6 +529,11 @@
       "location": "/drill",
       "writable": true,
       "defaultInputFormat": "json"
+    },
+    "parquet_filter_pushdown": {
+      "location": "/drill/testdata/filter",
+      "writable": true,
+      "defaultInputFormat": "parquet"
     }
     },
     "formats" : {

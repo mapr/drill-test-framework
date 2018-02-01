@@ -1,0 +1,35 @@
+{
+    "testId": "parquet_filter_pushdown_data",
+    "type": "group",
+    "description": "Parquet filter pushdown tests: these tests verify query correctness",
+    "categories": [ "smoke" ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.parquet_filter_pushdown",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/filter/parquet",
+            "dest": "filter"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/filter/filterview.sh",
+            "dest": ""
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/filter/refresh_metadata.sh",
+            "dest": ""
+        }
+    ]
+}
+
