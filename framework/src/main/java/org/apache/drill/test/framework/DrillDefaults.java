@@ -17,8 +17,6 @@
  */
 package org.apache.drill.test.framework;
 
-import java.util.Map;
-
 public interface DrillDefaults {
 	/**
 	 * Default drill home directory.
@@ -51,7 +49,7 @@ public interface DrillDefaults {
 	 * Default configuration file name.
 	 */
 	static final String DRILL_TEST_CONFIG = "drillTestConfig.properties";
-	
+
 	/**
 	 * Default JDBC driver.
 	 */
@@ -96,7 +94,7 @@ public interface DrillDefaults {
 	 * Default password.
 	 */
 	static final String PASSWORD = "password";
-	
+
 	/**
 	 * Default drill restart script name.
 	 */

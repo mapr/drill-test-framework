@@ -18,14 +18,13 @@
 package org.apache.drill.test.framework;
 
 import com.google.common.collect.Queues;
-//import org.apache.drill.jdbc.Driver;
-//import com.mapr.drill.jdbc41.Driver;
 import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Queue;
 
 public class ConnectionPool implements DrillDefaults, AutoCloseable {
@@ -37,14 +36,16 @@ public class ConnectionPool implements DrillDefaults, AutoCloseable {
   //  Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER"));
 
   private final Map<String, Queue<Connection>> connections;
+  private Properties connectionProperties;
 
-  public ConnectionPool(String jdbcDriver) {
+  public ConnectionPool(String jdbcDriver, Properties connectionProperties) {
+    this.connectionProperties = connectionProperties;
     try {
-		Class.forName(jdbcDriver);
-	} catch (ClassNotFoundException e) {
-		e.printStackTrace();
-		System.exit(-1);
-	}
+      Class.forName(jdbcDriver);
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+      System.exit(-1);
+    }
     //Driver.load();
     connections = new HashMap<>();
     if (jdbcDriver.equals("org.apache.drill.jdbc.Driver")) {
@@ -68,16 +69,14 @@ public class ConnectionPool implements DrillDefaults, AutoCloseable {
     final String key = username + password;
     if (connections.containsKey(key)) {
       final Connection connection = connections.get(key).poll();
-      if (connection == null) {
-        return DriverManager.getConnection(TestDriver.connectionString, username, password);
-      } else {
+      if (connection != null) {
         return connection;
       }
     } else {
       final Queue<Connection> connectionQueue = Queues.newLinkedBlockingQueue();
       connections.put(key, connectionQueue);
-      return DriverManager.getConnection(TestDriver.connectionString, username, password);
     }
+    return DriverManager.getConnection(TestDriver.connectionString, connectionProperties);
   }
 
   public synchronized void releaseConnection(String username, String password, Connection connection) {

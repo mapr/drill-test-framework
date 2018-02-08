@@ -17,20 +17,18 @@
  */
 package org.apache.drill.test.framework;
 
+import junit.framework.Assert;
 import org.apache.commons.io.FilenameUtils;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
+
+import java.io.*;
 import java.lang.reflect.Field;
-import java.net.Inet4Address;
+import java.net.*;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.GeneralSecurityException;
+import java.security.KeyStore;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,14 +53,19 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import org.apache.drill.test.framework.TestCaseModeler.DataSource;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
+
+import javax.net.ssl.*;
 
 /**
  * Collection of utilities supporting the drill test framework.
@@ -71,9 +74,21 @@ import org.apache.log4j.Logger;
  */
 public class Utils implements DrillDefaults {
   private static final Logger LOG = Logger.getLogger(Utils.class);
-  static final Map<Integer, String> sqlTypes;
-  static final Map<Integer, String> sqlNullabilities;
+  private static final Map<Integer, String> sqlTypes;
+  private static final Map<Integer, String> sqlNullabilities;
   static final Map<String, String> drillProperties;
+  private static HttpClient client;
+  private static final String drillStoragePluginServer;
+  private static String protocol = "http://";
+
+  // Accept self-signed certificate
+  public static class MyHostNameVerifier implements HostnameVerifier {
+
+    @Override
+    public boolean verify(String s, SSLSession sslSession) {
+      return true;
+    }
+  }
   
   static {
     // setup sql types
@@ -117,6 +132,70 @@ public class Utils implements DrillDefaults {
       properties.put(key.trim(), bundle.getString(key).trim());
     }
     drillProperties = ImmutableMap.copyOf(properties);
+    drillStoragePluginServer = drillProperties.containsKey("DRILL_STORAGE_PLUGIN_SERVER") ?
+      drillProperties.get("DRILL_STORAGE_PLUGIN_SERVER") : DRILL_STORAGE_PLUGIN_SERVER;
+    client = getHTTPClientInstance();
+    if (drillProperties.containsKey("AUTH_MECHANISM") && drillProperties.get("AUTH_MECHANISM").equals("PLAIN")) {
+      authenticateHTTPClient();
+    }
+  }
+
+  /**
+   * Create a HttpClients instance.
+   * @return Returns a default HttpClient instance or a custom instance if SSL is enabled
+   */
+  public static HttpClient getHTTPClientInstance() {
+    HttpClient client;
+    if (drillProperties.containsKey("SSL_ENABLED") && Boolean.parseBoolean(drillProperties.get("SSL_ENABLED"))) {
+      protocol = "https://";
+      Assert.assertTrue("Truststore location not provided", drillProperties.containsKey("SSL_TRUSTSTORE"));
+      Assert.assertTrue("Truststore password not provided", drillProperties.containsKey("SSL_TRUSTSTORE_PASSWORD"));
+
+      final String trustStorePath = drillProperties.get("SSL_TRUSTSTORE");
+      final String trustStorePassword = drillProperties.get("SSL_TRUSTSTORE_PASSWORD");
+
+      final SSLConnectionSocketFactory socketFactory;
+
+      try {
+        final KeyStore keyStore = KeyStore.getInstance("JKS");
+        try (final InputStream is = new FileInputStream(trustStorePath)) {
+          keyStore.load(is, trustStorePassword.toCharArray());
+        }
+
+        final TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+        tmf.init(keyStore);
+
+        final SSLContext sc = SSLContext.getInstance("TLS");
+        sc.init(null, tmf.getTrustManagers(), new java.security.SecureRandom());
+        socketFactory = new SSLConnectionSocketFactory(sc, new MyHostNameVerifier());
+      } catch (GeneralSecurityException | IOException ex) {
+        LOG.info("Problem validating ssl truststore");
+        throw new RuntimeException(ex);
+      }
+      client = HttpClients.custom().setSSLSocketFactory(socketFactory).build();
+    } else {
+      client = HttpClients.createDefault();
+    }
+    return client;
+  }
+
+  /**
+   * Rest server authentication when plain authentication is enabled
+   */
+  public static void authenticateHTTPClient() {
+    HttpPost post = new HttpPost(protocol + drillStoragePluginServer + ":8047/j_security_check");
+    post.setHeader("Content-Type", "application/x-www-form-urlencoded");
+    List<NameValuePair> postParameters = new ArrayList<>();
+    postParameters.add(new BasicNameValuePair("j_username", "mapr"));
+    postParameters.add(new BasicNameValuePair("j_password", "mapr"));
+
+    try {
+      post.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
+      CloseableHttpResponse response = (CloseableHttpResponse) client.execute(post);
+      response.close();
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
  /**
@@ -533,40 +612,17 @@ public class Utils implements DrillDefaults {
     }
     return nullabilitiesInStrings;
   }
-  
-  /**
-   * Saves content of existing drill storage plugins.
-   * 
-   * @param ipAddress
-   *          IP address of node to update storage plugin for
-   * @param pluginType
-   *          type of plugin; e.g.: "dfs", "cp"
-   * @return content of the specified plugin
-   * @throws Exception
-   */
-  public static String getExistingDrillStoragePlugin(String ipAddress,
-      String pluginType) throws IOException {
-    StringBuilder builder = new StringBuilder();
-    builder.append("http://" + ipAddress + ":8047/storage/" + pluginType);
-    HttpUriRequest request = new HttpGet(builder.toString() + ".json");
-    DefaultHttpClient client = new DefaultHttpClient();
-    HttpResponse response = client.execute(request);
-    return getHttpResponseAsString(response);
-  }
 
   /**
    * Updates storage plugin for drill
    * 
    * @param filename
    *          name of file containing drill storage plugin
-   * @param ipAddress
-   *          IP address of node to update storage plugin for
    * @param pluginType
    *          type of plugin; e.g.: "dfs", "cp"
    * @return true if operation is successful
    */
-  public static boolean updateDrillStoragePlugin(String filename,
-      String ipAddress, String pluginType, String fsMode) throws IOException {
+  public static boolean updateDrillStoragePlugin(String filename, String pluginType, String fsMode) throws IOException, URISyntaxException {
     String content = getFileContent(filename);
     content = content.replace("localhost", Inet4Address.getLocalHost()
         .getHostAddress());
@@ -574,31 +630,27 @@ public class Utils implements DrillDefaults {
       content = content.replace("maprfs:", "file:");
       content = content.replaceAll("location\"\\s*:\\s*\"", "location\":\"" + System.getProperty("user.home"));
     }
-    return postDrillStoragePlugin(content, ipAddress, pluginType);
+    return postDrillStoragePlugin(content, pluginType);
   }
 
   /**
-   * Posts/updates drill storage plugin content
-   * 
-   * @param content
-   *          string containing drill storage plugin
-   * @param ipAddress
-   *          IP address of node to update storage plugin for
-   * @param pluginType
-   *          type of plugin; e.g.: "dfs", "cp"
+   * Update drill storage plugin content
+   *
+   * @param content    string containing drill storage plugin
+   * @param pluginType type of plugin; e.g.: "dfs", "cp"
    * @return true if operation is successful
    * @throws Exception
    */
-  public static boolean postDrillStoragePlugin(String content,
-      String ipAddress, String pluginType) throws IOException {
-      StringBuilder builder = new StringBuilder();
-      builder.append("http://" + ipAddress + ":8047/storage/" + pluginType);
-      HttpPost post = new HttpPost(builder.toString() + ".json");
-      post.setHeader("Content-Type", "application/json");
-      post.setEntity(new StringEntity(content));
-      DefaultHttpClient client = new DefaultHttpClient();
-      HttpResponse response = client.execute(post);
-      return isResponseSuccessful(response);
+  public static boolean postDrillStoragePlugin(String content, String pluginType) throws IOException {
+    StringBuilder builder = new StringBuilder();
+    builder.append(protocol + drillStoragePluginServer + ":8047/storage/" + pluginType + ".json");
+
+    HttpPost post = new HttpPost(builder.toString());
+    post.setHeader("Content-Type", "application/json");
+    post.setEntity(new ByteArrayEntity(content.getBytes("UTF-8")));
+    CloseableHttpResponse response = (CloseableHttpResponse) client.execute(post);
+
+    return isResponseSuccessful(response);
   }
 
   private static String getFileContent(String filename) throws IOException {
@@ -609,7 +661,7 @@ public class Utils implements DrillDefaults {
 
   private static String getHttpResponseAsString(HttpResponse response) throws IOException {
     Reader reader = new BufferedReader(new InputStreamReader(response
-        .getEntity().getContent(), "UTF-8"));
+      .getEntity().getContent(), "UTF-8"));
     StringBuilder builder = new StringBuilder();
     char[] buffer = new char[1024];
     int l = 0;
@@ -622,7 +674,7 @@ public class Utils implements DrillDefaults {
 
   private static boolean isResponseSuccessful(HttpResponse response) throws IOException {
     return getHttpResponseAsString(response).toLowerCase().contains(
-        "\"result\" : \"success\"");
+      "\"result\" : \"success\"");
   }
 
   public static String generateOutputFileName(String inputFileName,

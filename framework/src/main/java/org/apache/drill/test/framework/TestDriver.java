@@ -18,7 +18,6 @@
 package org.apache.drill.test.framework;
 
 import com.beust.jcommander.JCommander;
-import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
@@ -42,6 +41,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -53,16 +53,19 @@ public class TestDriver implements DrillDefaults {
   private static final Logger LOG = Logger.getLogger(TestDriver.class);
   private Connection connection = null;
   public static String commitId, version, drillHome, fsMode;
-  public static String drillTestData, drillTestDataDir, drillOutputDir, drillStoragePluginServer;
+  public static String drillTestData, drillTestDataDir, drillOutputDir;
   public static String jdbcDriver, jdbcDriverCP, connectionString;
-  public static String drillReportsDir, drillReportsDFSDir, username, password, restartDrillScript;
+  private static String drillReportsDir, drillReportsDFSDir, username, password, restartDrillScript;
+  private static String authMechanism = null;
+  private static boolean isTLSEnabled;
   private String[] injectionKeys = {"DRILL_VERSION"};
   public static Map<String,String> injections = Maps.newHashMap();
   private long [][] memUsage = new long[2][3];
   private String memUsageFilename = null;
   private ConnectionPool connectionPool;
   private int countTotalTests;
- 
+  private Properties connectionProperties;
+
   private static Configuration conf = new Configuration();
   public static final CmdParam cmdParam = new CmdParam();
   public static DriverType driverType;
@@ -73,7 +76,8 @@ public class TestDriver implements DrillDefaults {
   static {loadConf();};
   
   public TestDriver() {
-	  connectionPool = new ConnectionPool(jdbcDriver);
+    connectionProperties = getConnectionProperties();
+	  connectionPool = new ConnectionPool(jdbcDriver, connectionProperties);
   }
   
   public static void main(String[] args) throws Exception {
@@ -115,7 +119,26 @@ public class TestDriver implements DrillDefaults {
     System.exit(errorCode);
   }
 
+  public static Properties getConnectionProperties() {
+    Properties connectionProperties = new Properties();
 
+    connectionProperties.put("user", username);
+    connectionProperties.put("password", password);
+    if (authMechanism.equals("PLAIN")) {
+      connectionProperties.put("auth", "PLAIN");
+      if (isTLSEnabled) {
+        connectionProperties.put("enableTLS", true);
+        connectionProperties.put("trustStorePath", "/opt/mapr/conf/ssl_truststore");
+        connectionProperties.put("trustStorePassword", "mapr123");
+      }
+    } else if (authMechanism.equals("MAPRSASL")) {
+      connectionProperties.put("auth", "MAPRSASL");
+    } else if (authMechanism.equals("KERBEROS")) {
+      connectionProperties.put("auth", "KERBEROS");
+    }
+
+    return connectionProperties;
+  }
 
   public int runTests() throws Exception {
 
@@ -135,11 +158,11 @@ public class TestDriver implements DrillDefaults {
     LOG.info("PRE-CHECK");
     LOG.info(LINE_BREAK);
     try {
-		connection = connectionPool.getOrCreateConnection(username,password);
-	} catch (SQLException e) {
-		e.printStackTrace();
-		System.exit(-1);
-	}
+      connection = connectionPool.getOrCreateConnection(username,password);
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.exit(-1);
+    }
     
     //Record JDBC driver name, version and other metadata info
     DatabaseMetaData dm = connection.getMetaData();
@@ -181,7 +204,7 @@ public class TestDriver implements DrillDefaults {
       }
     }
     countTotalTests = drillTestCases.size();
-    HashSet  <DrillTest> totalFailedTestsSet = new HashSet<DrillTest>();
+
     HashSet  <DrillTest> finalExecutionFailures = new HashSet<DrillTest>();
     HashSet  <DrillTest> finalDataVerificationFailures = new HashSet<DrillTest>();
     HashSet  <DrillTest> finalPlanVerificationFailures = new HashSet<DrillTest>();
@@ -195,8 +218,7 @@ public class TestDriver implements DrillDefaults {
     int totalPlanVerificationFailures = 0;
     int totalTimeoutFailures = 0;
     int totalCancelledFailures = 0;
-    int i = 0;
-
+    int i;
 
     if (cmdParam.trackMemory) {
   	  queryMemoryUsage();
@@ -564,7 +586,7 @@ public class TestDriver implements DrillDefaults {
     return totalExecutionFailures + totalDataVerificationFailures + totalPlanVerificationFailures + totalTimeoutFailures + totalRandomFailures;
   }
 
-  public void setup() throws IOException, InterruptedException {
+  public void setup() throws IOException, InterruptedException, URISyntaxException {
     if (!new File(drillOutputDir).exists()) {
       new File(drillOutputDir).mkdir();
     }
@@ -577,8 +599,7 @@ public class TestDriver implements DrillDefaults {
       String filename = templateFile.getName();
       LOG.info(">> File: " + filename);
       String pluginType = filename.substring(0, filename.indexOf('-'));
-      Utils.updateDrillStoragePlugin(templateFile.getAbsolutePath(),
-    		drillStoragePluginServer, pluginType, fsMode);
+      Utils.updateDrillStoragePlugin(templateFile.getAbsolutePath(), pluginType, fsMode);
       Thread.sleep(200);
     }
 
@@ -869,55 +890,59 @@ public class TestDriver implements DrillDefaults {
       }
     }
   }
-  
-  private static void loadConf() {
-	Map<String, String> drillProperties = Utils.drillProperties;
-			
-	drillHome = drillProperties.containsKey("DRILL_HOME") ?
-			drillProperties.get("DRILL_HOME") : DRILL_HOME;
-			
-	fsMode = drillProperties.containsKey("FS_MODE") ? 
-			drillProperties.get("FS_MODE") : FS_MODE;
-	    
-	drillTestDataDir = drillProperties.containsKey("DRILL_TEST_DATA_DIR") ?
-			drillProperties.get("DRILL_TEST_DATA_DIR") : DRILL_TESTDATA_DIR;
-			
-	if (fsMode.equals("distributedFS")) {
-	  drillTestData = drillProperties.containsKey("DRILL_TESTDATA") ? 
-			drillProperties.get("DRILL_TESTDATA") : DRILL_TESTDATA;
-	} else {
-	  drillTestData = System.getProperty("user.home") + drillTestData;
-	}
-	    
-	drillOutputDir = drillProperties.containsKey("DRILL_OUTPUT_DIR") ? 
-			drillProperties.get("DRILL_OUTPUT_DIR") : DRILL_OUTPUT_DIR;
-	    		
-	drillStoragePluginServer = drillProperties.containsKey("DRILL_STORAGE_PLUGIN_SERVER") ?
-			drillProperties.get("DRILL_STORAGE_PLUGIN_SERVER") : DRILL_STORAGE_PLUGIN_SERVER;
-	    		
-	jdbcDriver = drillProperties.containsKey("JDBC_DRIVER") ?
-			drillProperties.get("JDBC_DRIVER") : JDBC_DRIVER;
-			
-	jdbcDriverCP = drillProperties.containsKey("JDBC_DRIVER_CP") ?
-			drillProperties.get("JDBC_DRIVER_CP") : JDBC_DRIVER_CP;
-			
-	connectionString = drillProperties.containsKey("CONNECTION_STRING") ?
-			drillProperties.get("CONNECTION_STRING") : CONNECTION_STRING;
-			
-	drillReportsDir = drillProperties.containsKey("DRILL_REPORTS_DIR") ?
-			drillProperties.get("DRILL_REPORTS_DIR") : DRILL_REPORTS_DIR;
-	    
-	drillReportsDFSDir = drillProperties.containsKey("DRILL_REPORTS_DFS_DIR") ?
-			drillProperties.get("DRILL_REPORTS_DFS_DIR") : DRILL_REPORTS_DFS_DIR;
 
-	username = drillProperties.containsKey("USERNAME") ?
-			drillProperties.get("USERNAME") : USERNAME;
-	    		
-	password = drillProperties.containsKey("PASSWORD") ?
-			drillProperties.get("PASSWORD") : PASSWORD;
-			
-	restartDrillScript = drillProperties.containsKey("RESTART_DRILL_SCRIPT") ?
-			drillProperties.get("RESTART_DRILL_SCRIPT") : RESTART_DRILL_SCRIPT;
+  private static void loadConf() {
+    Map<String, String> drillProperties = Utils.drillProperties;
+
+    drillHome = drillProperties.containsKey("DRILL_HOME") ?
+        drillProperties.get("DRILL_HOME") : DRILL_HOME;
+
+    fsMode = drillProperties.containsKey("FS_MODE") ?
+        drillProperties.get("FS_MODE") : FS_MODE;
+
+    drillTestDataDir = drillProperties.containsKey("DRILL_TEST_DATA_DIR") ?
+        drillProperties.get("DRILL_TEST_DATA_DIR") : DRILL_TESTDATA_DIR;
+
+    if (fsMode.equals("distributedFS")) {
+      drillTestData = drillProperties.containsKey("DRILL_TESTDATA") ?
+        drillProperties.get("DRILL_TESTDATA") : DRILL_TESTDATA;
+    } else {
+      drillTestData = System.getProperty("user.home") + drillTestData;
+    }
+
+    drillOutputDir = drillProperties.containsKey("DRILL_OUTPUT_DIR") ?
+        drillProperties.get("DRILL_OUTPUT_DIR") : DRILL_OUTPUT_DIR;
+
+    jdbcDriver = drillProperties.containsKey("JDBC_DRIVER") ?
+        drillProperties.get("JDBC_DRIVER") : JDBC_DRIVER;
+
+    jdbcDriverCP = drillProperties.containsKey("JDBC_DRIVER_CP") ?
+        drillProperties.get("JDBC_DRIVER_CP") : JDBC_DRIVER_CP;
+
+    connectionString = drillProperties.containsKey("CONNECTION_STRING") ?
+        drillProperties.get("CONNECTION_STRING") : CONNECTION_STRING;
+
+    drillReportsDir = drillProperties.containsKey("DRILL_REPORTS_DIR") ?
+        drillProperties.get("DRILL_REPORTS_DIR") : DRILL_REPORTS_DIR;
+
+    drillReportsDFSDir = drillProperties.containsKey("DRILL_REPORTS_DFS_DIR") ?
+        drillProperties.get("DRILL_REPORTS_DFS_DIR") : DRILL_REPORTS_DFS_DIR;
+
+    username = drillProperties.containsKey("USERNAME") ?
+        drillProperties.get("USERNAME") : USERNAME;
+
+    password = drillProperties.containsKey("PASSWORD") ?
+        drillProperties.get("PASSWORD") : PASSWORD;
+
+    restartDrillScript = drillProperties.containsKey("RESTART_DRILL_SCRIPT") ?
+        drillProperties.get("RESTART_DRILL_SCRIPT") : RESTART_DRILL_SCRIPT;
+
+    authMechanism = drillProperties.containsKey("AUTH_MECHANISM") ?
+        drillProperties.get("AUTH_MECHANISM") : null;
+
+    isTLSEnabled = drillProperties.containsKey("SSL_ENABLED") ?
+      Boolean.parseBoolean(drillProperties.get("SSL_ENABLED")) : false;
+
   }
 
   private void generateReports(List<DrillTest> tests, int iteration) {

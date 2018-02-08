@@ -23,7 +23,6 @@ import org.apache.drill.test.framework.TestCaseModeler.TestMatrix;
 import org.apache.drill.test.framework.TestVerifier.TestStatus;
 import org.apache.drill.test.framework.TestVerifier.VerificationException;
 import org.apache.drill.test.framework.TestVerifier.PlanVerificationException;
-import org.apache.drill.test.framework.DrillDefaults;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
