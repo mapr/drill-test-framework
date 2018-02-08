@@ -19,6 +19,7 @@ package org.apache.drill.test.framework;
 
 import com.google.common.collect.Queues;
 //import org.apache.drill.jdbc.Driver;
+//import com.mapr.drill.jdbc41.Driver;
 import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;

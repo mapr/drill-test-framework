@@ -65,7 +65,9 @@ public class TestVerifier {
     DATA_VERIFICATION_FAILURE, PLAN_VERIFICATION_FAILURE, ORDER_MISMATCH, TIMEOUT, CANCELED
   };
 
-  public TestVerifier(List<Integer> types, String query, List<String> columnLabels, List<String> verificationType) {
+  public TestVerifier(List<Integer> types, String query,
+                      List<String> columnLabels,
+                      List<String> verificationType) {
     this.types = types;
     this.query = query;
     this.columnLabels = columnLabels;
@@ -250,6 +252,7 @@ public class TestVerifier {
             typedFields.add(new BigInteger(fields[i]));
             break;
           case Types.FLOAT:
+          case Types.REAL:
             typedFields.add(new Float(fields[i]));
             break;
           case Types.DOUBLE:

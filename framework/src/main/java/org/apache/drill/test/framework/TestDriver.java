@@ -36,8 +36,10 @@ import org.apache.log4j.Logger;
 import org.ojai.Document;
 import org.ojai.json.Json;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -59,6 +61,7 @@ public class TestDriver implements DrillDefaults {
   private long [][] memUsage = new long[2][3];
   private String memUsageFilename = null;
   private ConnectionPool connectionPool;
+  private int countTotalTests;
  
   private static Configuration conf = new Configuration();
   public static final CmdParam cmdParam = new CmdParam();
@@ -90,20 +93,24 @@ public class TestDriver implements DrillDefaults {
     }
 
     final Stopwatch stopwatch = Stopwatch.createStarted();
-    int errorCode;
+    int errorCode=0;
+    Date startDate =null;
     try {
-      LOG.info(LINE_BREAK + LINE_BREAK);
-      LOG.info("STARTING AT " + new Date());
-      LOG.info(LINE_BREAK);
+      startDate = new Date();
       errorCode = new TestDriver().runTests();
     } catch (Exception e) {
       LOG.error("Exiting due to uncaught exception", e);
       errorCode = -1;
     } finally {
+      LOG.info("\n" + LINE_BREAK);
+      LOG.info("RUN STATUS");
       LOG.info(LINE_BREAK);
-      LOG.info("FINISHED AT " + new Date());
-      LOG.info("TOTAL DURATION: " + stopwatch);
-      LOG.info(LINE_BREAK + LINE_BREAK);
+      LOG.info("Exit Code      : " + errorCode);
+      LOG.info("Exit Status    : " + ((errorCode==0) ? "SUCCESS" : "FAILURE"));
+      LOG.info("\nRun Started    : " + startDate);
+      LOG.info("Run Completed  : " + new Date());
+      LOG.info("Total Duration : " + stopwatch);
+      LOG.info(LINE_BREAK);
     }
     System.exit(errorCode);
   }
@@ -111,10 +118,22 @@ public class TestDriver implements DrillDefaults {
 
 
   public int runTests() throws Exception {
+
+    List<DrillTest> passingTests = Lists.newArrayList();
+    List<DrillTest> dataVerificationFailures = Lists.newArrayList();
+    List<DrillTest> planVerificationFailures = Lists.newArrayList();
+    List<DrillTest> executionFailures = Lists.newArrayList();
+    List<DrillTest> timeoutFailures = Lists.newArrayList();
+    List<DrillTest> canceledTests = Lists.newArrayList();
+    List<DrillTest> randomFailures = Lists.newArrayList();
+    List<DrillTest> failedCases = Lists.newArrayList();
+
 	CancelingExecutor executor = new CancelingExecutor(cmdParam.threads, cmdParam.timeout);
 
     final Stopwatch stopwatch = Stopwatch.createStarted();
-    LOG.info("> Pre-check..");
+    LOG.info(LINE_BREAK);
+    LOG.info("PRE-CHECK");
+    LOG.info(LINE_BREAK);
     try {
 		connection = connectionPool.getOrCreateConnection(username,password);
 	} catch (SQLException e) {
@@ -138,17 +157,21 @@ public class TestDriver implements DrillDefaults {
     connectionPool.releaseConnection(username,password, connection);
     int numberOfClusterNodes = Utils.getNumberOfClusterNodes();
     if (numberOfClusterNodes != 0 && numberOfClusterNodes != numberOfDrillbits) {
-    	LOG.error("\nPrecheck failed!\n\tNumber of cluster nodes = "
-    			+ numberOfClusterNodes + ";\n\tnumber of drillbits = " + numberOfDrillbits);
+    	LOG.error("\n> Pre-check failed\n\t>> Number of cluster nodes configured = "
+    			+ numberOfClusterNodes + ";\n\t>> Number of drillbits = " + numberOfDrillbits);
     	System.exit(-1);
     }
-    LOG.info("Number of cluster nodes configured = " + numberOfClusterNodes);
-    LOG.info("Number of drillbits running = " + numberOfDrillbits);
-    LOG.info("> TOOK " + stopwatch + " TO do pre-check.");
+    LOG.info("> Number of cluster nodes configured = " + numberOfClusterNodes);
+    LOG.info("> Number of drillbits running = " + numberOfDrillbits);
+    LOG.info("\n> Pre-check duration " + stopwatch);
     
     stopwatch.reset().start();
-    LOG.info("> SETTING UP..");
+    LOG.info("\n"+LINE_BREAK);
+    LOG.info("SETUP");
+    LOG.info(LINE_BREAK);
     setup();
+    LOG.info("\n> Setup duration: " + stopwatch);
+
     List<DrillTestCase> drillTestCases = Utils.getDrillTestCases();
     List<DrillTest> tests = Lists.newArrayList();
     for (DrillTestCase testCase : drillTestCases) {
@@ -156,6 +179,7 @@ public class TestDriver implements DrillDefaults {
         tests.add(getDrillTest(testCase, connectionPool, clone, drillTestCases.size()));
       }
     }
+    countTotalTests = drillTestCases.size();
     HashSet  <DrillTest> totalFailedTestsSet = new HashSet<DrillTest>();
     HashSet  <DrillTest> finalExecutionFailures = new HashSet<DrillTest>();
     HashSet  <DrillTest> finalDataVerificationFailures = new HashSet<DrillTest>();
@@ -171,7 +195,7 @@ public class TestDriver implements DrillDefaults {
     int totalTimeoutFailures = 0;
     int totalCancelledFailures = 0;
     int i = 0;
-    LOG.info("> TOOK " + stopwatch + " TO SETUP.");
+
 
     if (cmdParam.trackMemory) {
   	  queryMemoryUsage();
@@ -179,38 +203,89 @@ public class TestDriver implements DrillDefaults {
 
     for (i = 1; i < cmdParam.iterations+1; i++) {
       stopwatch.reset().start();
-      LOG.info("> PREPARING DATA..");
+      LOG.info("\n"+LINE_BREAK);
+      LOG.info("PREPARATION");
+      LOG.info(LINE_BREAK);
       if (cmdParam.generate) {
         prepareData(drillTestCases);
       }
-      LOG.info("> TOOK " + stopwatch + " TO PREPARE DATA.");
+      LOG.info("> Preparation duration: " + stopwatch);
+
       stopwatch.reset().start();
 
-      LOG.info("> RUNNING TESTS (ITERATION " + i + ")..");
       Collections.shuffle(tests, new Random());
+      List<DrillTest> new_tests = Lists.newArrayList();
+      String queryLogFilename = drillOutputDir + "/queryLog.log";
+      List<String> skippedTests = Lists.newArrayList();
+      File queryFile = new File(queryLogFilename);
+      if (cmdParam.repeatRun == true) {
+        // check if file has list of tests
+        if (queryFile.length() > 0) {
+          // generate a new list of tests in the requested order
+          try {
+            BufferedReader reader = new BufferedReader(new FileReader(queryFile));
+            boolean found = false;
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+              for (DrillTest test : tests) {
+                // check that requested test is in the list of tests
+                if (found = test.getInputFile().equals(line)) {
+                  new_tests.add(test);
+                  break;
+                }
+              }
+              if (!found) {
+	        skippedTests.add(line);
+              }
+              found = false;
+            }
+            reader.close();
+            tests = new_tests;
+          } catch (Exception e) {
+            LOG.error("\nCould not open queryFile " + queryLogFilename + " containing tests to run");
+            LOG.error(e.getMessage());
+            System.exit(-1);
+          }
+        } else {
+          // file with list of tests does not exist.  create new file and
+          // record the tests and the order in which they are run
+          try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(queryFile));
+            if (writer != null) {
+              for (DrillTest test : tests) {
+                writer.write (test.getInputFile() + "\n");
+              }
+              writer.close();
+            }
+          } catch (Exception e) {
+            LOG.error("\nCould not create queryFile " + queryLogFilename + " to record which tests are run");
+            LOG.error(e.getMessage());
+            System.exit(-1);
+          }
+        }
+      }
+
+      LOG.info("\n"+LINE_BREAK);
+      LOG.info("RUNNING TESTS - ITERATION " + i + " (of "+ cmdParam.iterations + ")");
+      LOG.info(LINE_BREAK);
       executor.executeAll(tests);
 
       if (cmdParam.trackMemory) {
     	  queryMemoryUsage();
       }
-      List<DrillTest> passingTests = Lists.newArrayList();
-      List<DrillTest> dataVerificationFailures = Lists.newArrayList();
-      List<DrillTest> planVerificationFailures = Lists.newArrayList();
-      List<DrillTest> executionFailures = Lists.newArrayList();
-      List<DrillTest> timeoutFailures = Lists.newArrayList();
-      List<DrillTest> canceledTests = Lists.newArrayList();
-      List<DrillTest> randomFailures = Lists.newArrayList();
-      List<DrillTest> failedCases = Lists.newArrayList();
-      
+
       for (DrillTest test : tests) {
         TestStatus testStatus = test.getTestStatus();
         if(testStatus!=TestStatus.PASS && testStatus!=TestStatus.CANCELED && cmdParam.skipRandom!=true){
-	   List<DrillTest> tempTests = Lists.newArrayList();
-           tempTests.add(test); 
-           executor.executeAll(tempTests);
-           testStatus = tempTests.get(0).getTestStatus();
-           if(testStatus==TestStatus.PASS){
-	     randomFailures.add(test);
+	      List<DrillTest> tempTests = Lists.newArrayList();
+          tempTests.add(test);
+          LOG.info(LINE_BREAK);
+          LOG.info("ISOLATING RANDOM FAILURES - Execution attempt 2 (of 2)");
+          LOG.info(LINE_BREAK);
+          executor.executeAll(tempTests);
+          testStatus = tempTests.get(0).getTestStatus();
+          if(testStatus==TestStatus.PASS){
+	      randomFailures.add(test);
 	   }
 	}
 	switch (testStatus) {
@@ -236,123 +311,172 @@ public class TestDriver implements DrillDefaults {
            executionFailures.add(test);
         }
       }
-      LOG.info(LINE_BREAK + LINE_BREAK);
-      LOG.info("Tests completed for iteration " + i + " in " + stopwatch);
-      LOG.info(LINE_BREAK + LINE_BREAK);
-      LOG.info("Results:");
-      LOG.info(LINE_BREAK);
+
+      if(executionFailures.size()>0 || dataVerificationFailures.size()>0 || planVerificationFailures.size()>0 || timeoutFailures.size()>0) {
+        LOG.info("\n"+LINE_BREAK);
+        LOG.info("ITERATION FAILURES");
+        LOG.info(LINE_BREAK);
+      }
+
       if(executionFailures.size()>0){
-        LOG.info("Execution Failures:");
+        LOG.info("\nExecution Failures:\n");
+        for (DrillTest test : executionFailures) {
+          LOG.info("Query: " + test.getInputFile() + "\n" + test.getQuery());
+          LOG.info("Exception:\n", test.getException());
+        }
       }
-      if(cmdParam.generateReports) {
-        LOG.info("Generating reports");
-        generateReports(tests, i);
+
+      if(dataVerificationFailures.size()>0) {
+        LOG.info("\nData Verification Failures:\n");
+        for (DrillTest test : dataVerificationFailures) {
+          LOG.info("Query: " + test.getInputFile()+ "\n" + test.getQuery());
+          LOG.info("Baseline: "+ test.getExpectedFile() + "\n");
+          LOG.info(test.getException().getMessage());
+        }
       }
-      for (DrillTest test : executionFailures) {
-        LOG.info(test.getInputFile());
-        LOG.info("Query: \n" + test.getQuery());
-        LOG.info("Failed with exception", test.getException());
+
+      if(planVerificationFailures.size()>0) {
+        LOG.info("\nPlan Verification Failures:\n");
+        for (DrillTest test : planVerificationFailures) {
+          LOG.info("Query: " + test.getInputFile()+ "\n" + test.getQuery());
+          LOG.info("Baseline: "+ test.getExpectedFile() + "\n");
+          LOG.info(test.getException().getMessage());
+        }
       }
+
+      if(timeoutFailures.size()>0) {
+        LOG.info("\nTimeout Failures:\n");
+        for (DrillTest test : timeoutFailures) {
+          LOG.info("Query: " + test.getInputFile() + "\n" + test.getQuery());
+          LOG.info("Timed out");
+        }
+      }
+
+      if(randomFailures.size()>0){
+        LOG.info("\nRandom Failures:\n");
+        for (DrillTest test : randomFailures) {
+          LOG.info("Query: " + test.getInputFile() + "\n" + test.getQuery());
+          LOG.info("Exception:\n", test.getException());
+        }
+      }
+
+      if(skippedTests.size() > 0) {
+        LOG.info("\nSkipped Tests:\n> These tests cannot be run from " + queryLogFilename + "\n");
+        for (String line : skippedTests) {
+          LOG.info(line);
+        }
+      }
+
+      if(executionFailures.size()>0 || dataVerificationFailures.size()>0 || planVerificationFailures.size()>0 || timeoutFailures.size()>0 || randomFailures.size()>0) {
+        LOG.info("\n"+LINE_BREAK);
+        LOG.info("ITERATION RESULTS");
+        LOG.info(LINE_BREAK);
+      }
+
+      if(executionFailures.size()>0){
+      	LOG.info("Execution Failures:\n");
+        for (DrillTest test : executionFailures) {
+	      if(test.getExpectedFile()!=""){
+            LOG.info(test.getInputFile());
+	      }
+        LOG.info("\n");
+      	}
+      }
+
       if(dataVerificationFailures.size()>0){
-      	LOG.info("Data Verification Failures:");
+      	LOG.info("Data Verification Failures:\n");
+        for (DrillTest test : dataVerificationFailures) {
+          LOG.info(test.getInputFile());
+        }
+        LOG.info("\n");
       }
-      for (DrillTest test : dataVerificationFailures) {
-        LOG.info(test.getInputFile());
-        LOG.info("Query: \n" + test.getQuery());
-        LOG.info(test.getException().getMessage());
-      }
+
       if(planVerificationFailures.size()>0){
-      	LOG.info("Plan Verification Failures:");
+      	LOG.info("Plan Verification Failures:\n");
+        for (DrillTest test : planVerificationFailures) {
+          LOG.info(test.getInputFile());
+        }
+        LOG.info("\n");
       }
-      for (DrillTest test : planVerificationFailures) {
-        LOG.info(test.getInputFile());
-        LOG.info("Query: \n" + test.getQuery());
-        LOG.info(test.getException().getMessage());
-      }
+
       if(timeoutFailures.size()>0){
-      	LOG.info("Timeout Failures:");
+      	LOG.info("Timeouts:\n");
+        for (DrillTest test : timeoutFailures) {
+          LOG.info(test.getInputFile());
+        }
+        LOG.info("\n");
       }
-      for (DrillTest test : timeoutFailures) {
+
+      if(randomFailures.size()>0){
+      	LOG.info("Random Failures:\n");
+        for (DrillTest test : randomFailures) {
         LOG.info(test.getInputFile());
-        LOG.info("Query: \n" + test.getQuery());
+        }
+        LOG.info("\n");
       }
-      LOG.info("Random Failures:");
-      for (DrillTest test : randomFailures) {
-        LOG.info(test.getInputFile());
-        LOG.info("Query: \n" + test.getQuery());
-        LOG.info("Failed with exception", test.getException());
+
+      // Special handling for repeated runs
+      if ((cmdParam.repeatRun == true) && (queryFile.length() > 0)) {
+        LOG.info("Executed queries from " + queryFile);
       }
-      LOG.info(LINE_BREAK);
-      LOG.info("Summary");
+
+      // Special handling for running tests tagged as failed
       if(cmdParam.runFailed == true){
         if(passingTests.size()>0){
-          LOG.info(LINE_BREAK);
-      	  LOG.info("Passing Tests:");
-      	}
-      	for (DrillTest test : passingTests) {
-          LOG.info(test.getInputFile());
-      	}
-      }
-      if(executionFailures.size()>0){
-        LOG.info(LINE_BREAK);
-      	LOG.info("Execution Failures:");
-        for (DrillTest test : executionFailures) {
-	  if(test.getExpectedFile()!=""){
+          LOG.info("Passing Tests:\n");
+          for (DrillTest test : passingTests) {
             LOG.info(test.getInputFile());
-	  }
-      	}
-	if(cmdParam.runFailed == true){
-      	  LOG.info("Execution Failures with name errors:");
-      	}
-	for (DrillTest test : executionFailures) {
-          if(test.getExpectedFile()==""){
-	    LOG.info(test.getInputFile());
-	  }
-      	}
-      }
-      if(dataVerificationFailures.size()>0){
-        LOG.info(LINE_BREAK);
-      	LOG.info("Data Verification Failures:");
-      }
-      for (DrillTest test : dataVerificationFailures) {
-        LOG.info(test.getInputFile());
-      }
-      if(planVerificationFailures.size()>0){
-        LOG.info(LINE_BREAK);
-      	LOG.info("Plan Verification Failures:");
-      }
-      for (DrillTest test : planVerificationFailures) {
-        LOG.info(test.getInputFile());
-      }
-      if(timeoutFailures.size()>0){
-      	LOG.info(LINE_BREAK);
-      	LOG.info("Timeout Failures:");
-      	LOG.info(LINE_BREAK);
-      }
-      for (DrillTest test : timeoutFailures) {
-        LOG.info(test.getInputFile());
-      }
-      if(randomFailures.size()>0){
-      	LOG.info(LINE_BREAK);
-      	LOG.info("Random Failures:");
-      	LOG.info(LINE_BREAK);
-      }
-      for (DrillTest test : randomFailures) {
-        LOG.info(test.getInputFile());
-      }
-      LOG.info(LINE_BREAK);
+          }
+          LOG.info("\n");
+        }
 
-      LOG.info(String.format("\nPassing tests: %d\nExecution Failures: %d\nData Verification Failures: %d" +
-        "\nPlan Verification Failures: %d" +
-      	"\nTimeouts: %d\nCanceled: %d\nRandom Failures: %d", passingTests.size(), executionFailures.size(), 
-      	dataVerificationFailures.size(), planVerificationFailures.size(),
-        timeoutFailures.size(), canceledTests.size(),randomFailures.size()));
-      
+        if(executionFailures.size()>0) {
+          LOG.info("Execution Failures (invalid tests):\n");
+          for (DrillTest test : executionFailures) {
+            if (test.getExpectedFile() == "") {
+              LOG.info(test.getInputFile());
+            }
+          }
+          LOG.info("\n");
+        }
+      }
+
+      LOG.info("\n"+LINE_BREAK);
+      LOG.info("ITERATION SUMMARY");
+      LOG.info(LINE_BREAK);
+      LOG.info("Total Tests                  : " + countTotalTests);
+      LOG.info("Passing Tests                : " + passingTests.size());
+      LOG.info("Failing Tests                : " + (executionFailures.size() + dataVerificationFailures.size() + planVerificationFailures.size() + timeoutFailures.size())+"\n");
+      LOG.info("> Execution Failures         : " + executionFailures.size());
+      LOG.info("> Data Verification Failures : " + dataVerificationFailures.size());
+      LOG.info("> Plan Verification Failures : " + planVerificationFailures.size());
+      LOG.info("> Timeout Failures           : " + timeoutFailures.size());
+
+      if(randomFailures.size() > 0)
+        LOG.info("\n> Random Failures            : " + randomFailures.size());
+
+      if(canceledTests.size() > 0)
+        LOG.info("\n> Canceled Tests             : " + canceledTests.size());
+
+      if(skippedTests.size() > 0) {
+        LOG.info("\n> Skipped tests              : " + skippedTests.size());
+      }
+
+      LOG.info("\nIteration " + i + " (of " + cmdParam.iterations + ") duration: " + stopwatch);
+
       if (cmdParam.trackMemory) {
         LOG.info(LINE_BREAK);
     	LOG.info(String.format("\nMemory Consumption:\n\t\theap(M)\t\tdirect(M)\tjvm_direct(M)\n" +
     			"  before:\t%d\t\t%d\t\t%d\n  after:\t%d\t\t%d\t\t%d", memUsage[0][0], memUsage[0][1], memUsage[0][2],
     			memUsage[1][0], memUsage[1][1], memUsage[1][2]));
+        LOG.info(LINE_BREAK);
+      }
+
+      if(cmdParam.generateReports) {
+        LOG.info(LINE_BREAK);
+        LOG.info("GENERATING REPORT");
+        LOG.info(LINE_BREAK);
+        generateReports(tests, i);
       }
 
       totalPassingTests += passingTests.size();
@@ -367,7 +491,6 @@ public class TestDriver implements DrillDefaults {
       finalDataVerificationFailures.addAll(dataVerificationFailures);
       finalPlanVerificationFailures.addAll(planVerificationFailures);
       finalTimeoutFailures.addAll(timeoutFailures);
-       	
     }
       
     if (cmdParam.iterations > 1) {
@@ -429,8 +552,11 @@ public class TestDriver implements DrillDefaults {
       	  }
       	}
     }
-    LOG.info("\n> TEARING DOWN..");
+    LOG.info("\n"+LINE_BREAK);
+    LOG.info("TEARDOWN");
+    LOG.info(LINE_BREAK);
     teardown();
+
     executor.close();
     connectionPool.close();
     restartDrill();
@@ -442,25 +568,32 @@ public class TestDriver implements DrillDefaults {
       new File(drillOutputDir).mkdir();
     }
 
+    LOG.info("> Uploading storage plugins\n");
     String templatePath = CWD + "/conf/plugin-templates/";
-    LOG.info(templatePath);
+    LOG.info(">> Path: " + templatePath + "\n");
     File[] templateFiles = new File(templatePath).listFiles();
     for (File templateFile : templateFiles) {
       String filename = templateFile.getName();
+      LOG.info(">> File: " + filename);
       String pluginType = filename.substring(0, filename.indexOf('-'));
       Utils.updateDrillStoragePlugin(templateFile.getAbsolutePath(),
     		drillStoragePluginServer, pluginType, fsMode);
       Thread.sleep(200);
     }
-    
+
     String beforeRunQueryFilename = CWD + "/" + cmdParam.beforeRunQueryFilename;
+    LOG.info("\n> Executing queries\n");
+    LOG.info(">> Path: " + beforeRunQueryFilename + "\n");
     try {
       String[] setupQueries = Utils.getSqlStatements(beforeRunQueryFilename);
       connection = connectionPool.getOrCreateConnection(username ,password);
       for (String query : setupQueries) {
+        LOG.info(">> Query: " + query + ";");
         LOG.info(Utils.getSqlResult(Utils.execSQL(query, connection)));
       }
-      
+      LOG.info(LINE_BREAK);
+
+      // Initializing variables for reporting
       String getCommitId = "SELECT version, commit_id from sys.version";
       ResultSet resultSet = Utils.execSQL(getCommitId, connection);
       while(resultSet.next()) {
@@ -468,7 +601,7 @@ public class TestDriver implements DrillDefaults {
         version = resultSet.getString("version");
       }
       
-      //setup injection map
+      // Setup injection map
       for (int i = 0; i < injectionKeys.length; i++) {
     	switch (injectionKeys[i]) {
     	case "DRILL_VERSION":
@@ -480,7 +613,7 @@ public class TestDriver implements DrillDefaults {
       }
       connectionPool.releaseConnection(username, password, connection);
     } catch (IOException e) {
-      LOG.warn("WARNING: " + beforeRunQueryFilename + " file does not exist.\n");
+      LOG.warn("[WARNING] " + beforeRunQueryFilename + " file does not exist.\n");
     } catch (SQLException e) {
 		e.printStackTrace();
 		try {
@@ -494,14 +627,18 @@ public class TestDriver implements DrillDefaults {
   
   private void teardown() {
 	String afterRunQueryFilename = CWD + "/" + cmdParam.afterRunQueryFilename;
+  LOG.info("> Executing queries\n");
+  LOG.info(">> Path: " + afterRunQueryFilename + "\n");
 	try {
 	  connection = connectionPool.getOrCreateConnection(username, password);
 	  String[] teardownQueries = Utils.getSqlStatements(afterRunQueryFilename);
       for (String query : teardownQueries) {
+        LOG.info(">> Query: " + query + ";");
         LOG.info(Utils.getSqlResult(Utils.execSQL(query, connection)));
       }
+      LOG.info(LINE_BREAK);
     } catch (IOException e) {
-      LOG.warn("WARNING: " + afterRunQueryFilename + " file does not exist.\n");
+      LOG.warn("[WARNING] " + afterRunQueryFilename + " file does not exist.\n");
     } catch (SQLException e) {
 		e.printStackTrace();
 		try {
@@ -568,18 +705,17 @@ public class TestDriver implements DrillDefaults {
     }
 
     final Stopwatch stopwatch = Stopwatch.createStarted();
-    LOG.info(">> COPYING DATA..");
+    LOG.info("> Copying Data");
     copyExecutor.executeAll(copyTasks);
     copyExecutor.close();
-    LOG.info(">> TOOK " + stopwatch + " TO COPY DATA.");
+    LOG.info(">> Copy duration: " + stopwatch + "\n");
     stopwatch.reset().start();
-    LOG.info(">> GENERATING DATA..");
+    LOG.info("> Generating Data");
     genExecutor.executeAll(genTasks);
     genExecutor.close();
-    LOG.info(">> TOOK " + stopwatch + " TO GENERATE DATA.");
+    LOG.info(">> Generation duration: " + stopwatch + "\n");
 
     if (restartDrillbits) {
-      LOG.info("Restarting drillbits");
       restartDrill();
     }
   }
@@ -643,7 +779,7 @@ public class TestDriver implements DrillDefaults {
     case "jdbc":
       return new DrillTestJdbc(modeler, connectionPool, cloneId, totalCases);
     case "odbc":
-      return new DrillTestOdbc(modeler, cloneId);
+      return new DrillTestOdbc(modeler, cloneId, totalCases);
     case "script":
       return new DrillTestScript(modeler, cloneId);
     case "system":
@@ -845,14 +981,15 @@ public class TestDriver implements DrillDefaults {
     int exitCode = 0;
     String command = CWD + "/" + restartDrillScript;
     File commandFile = new File(command);
+    LOG.info("\n> Restarting drillbits");
     if (commandFile.exists() && commandFile.canExecute()) {
-      LOG.info("Running command: " + command);
+      LOG.info("\n>> Path: " + command);
       exitCode = Utils.execCmd(command).exitCode;
       if (exitCode != 0) {
-        LOG.error("Error executing the command " + command + " has return code " + exitCode);
+        LOG.error("\n>> Error restarting drillbits");
       }
     } else {
-      LOG.error("Restart Drillbit script " + command + " does not exist or can't be executed!");
+      LOG.error("\n>> Script (" + command + ") does not exist or cannot be executed");
     }
     return exitCode;
   }
