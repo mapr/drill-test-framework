@@ -1,0 +1,14 @@
+{"name":"obj1_all", "attr1":1, "attr2":2, "attr3":3, "attr4":NaN}
+{"name":"obj1_all", "attr1":1, "attr2":2, "attr3":4, "attr4":Infinity}
+{"name":"obj1_all", "attr1":1, "attr2":2, "attr3":4, "attr4":-Infinity}
+{"name":"obj1_all", "attr1":1, "attr2":2, "attr3":4, "attr4":100500.0}
+{"name":"obj2_inf_nan", "attr1":1, "attr2":2, "attr3":5, "attr4":-Infinity}
+{"name":"obj2_inf_nan", "attr1":1, "attr2":2, "attr3":3, "attr4":NaN}
+{"name":"obj2_inf_nan", "attr1":1, "attr2":2, "attr3":4, "attr4":Infinity}
+{"name":"obj3_infOnly", "attr1":1, "attr2":2, "attr3":5, "attr4":-Infinity}
+{"name":"obj3_infOnly", "attr1":1, "attr2":2, "attr3":4, "attr4":Infinity}
+{"name":"obj3_infOnly", "attr1":1, "attr2":2, "attr3":5, "attr4":-Infinity}
+{"name":"obj3_infOnly", "attr1":1, "attr2":2, "attr3":4, "attr4":Infinity}
+{"name":"obj4_infOnly", "attr1":1, "attr2":2, "attr3":5, "attr4":-Infinity}
+{"name":"obj4_infOnly", "attr1":1, "attr2":2, "attr3":4, "attr4":Infinity}
+{"name":"obj4_infOnly", "attr1":1, "attr2":2, "attr3":4, "attr4":100500.0}

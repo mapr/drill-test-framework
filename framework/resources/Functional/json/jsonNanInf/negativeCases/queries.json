@@ -1,0 +1,26 @@
+{
+    "testId": "jsonNaNInf_negative_cases",
+    "type": "group",
+    "negative": true,
+    "description": "Functional tests to verify NaN/Infinity/-Infinity Json types",
+    "submit-type": "jdbc",
+    "categories": [ "negative" ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/jsonNanInf",
+            "dest": "jsonNanInf"
+        }
+    ]
+}
