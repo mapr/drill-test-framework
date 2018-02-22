@@ -2,9 +2,6 @@ hive_describe	\{
   \"type\" : \"hive\",
   \"enabled\" : true,
   \"configProps\" : \{
-    \"hive.metastore.uris\" : \"thrift://.*:9083\",
-    \"hive.metastore.sasl.enabled\" : \"false\",
-    \"hbase.zookeeper.quorum\" : \".*\",
-    \"hbase.zookeeper.property.clientPort\" : \"5181\"
+    .*
   \}
 \}
