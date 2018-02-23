@@ -27,62 +27,95 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Queue;
 
-public class ConnectionPool implements DrillDefaults, AutoCloseable {
+public class ConnectionPool implements AutoCloseable {
   private static final Logger LOG = Logger.getLogger(ConnectionPool.class);
-  //private String URL_STRING = "jdbc:drill:drillbit=localhost";
-  //private String JDBC_DRIVER = "org.apache.drill.jdbc.Driver";
-  //private static final String URL_STRING = Utils.getDrillTestProperties().get("CONNECTION_STRING");
-  //private static final String URL_STRING = String.format("jdbc:drill:drillbit=%s",
-  //  Utils.getDrillTestProperties().get("DRILL_STORAGE_PLUGIN_SERVER"));
 
   private final Map<String, Queue<Connection>> connections;
   private Properties connectionProperties;
 
-  public ConnectionPool(String jdbcDriver, Properties connectionProperties) {
+  public ConnectionPool(Properties connectionProperties) {
     this.connectionProperties = connectionProperties;
     try {
-      Class.forName(jdbcDriver);
+      Class.forName(DrillTestDefaults.JDBC_DRIVER.getClassName());
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
       System.exit(-1);
     }
     //Driver.load();
     connections = new HashMap<>();
-    if (jdbcDriver.equals("org.apache.drill.jdbc.Driver")) {
-      TestDriver.driverType = TestDriver.DriverType.APACHE;
-    } else if (jdbcDriver.equals("com.mapr.drill.jdbc41.Driver")) {
-      TestDriver.driverType = TestDriver.DriverType.SIMBA_JDBC;
-    }
   }
 
+  /**
+   * Get / create connection for user in TestSuite
+   * @param test TestCaseModeler of the test suite
+   * @return Connection for user specified in the TestSuite
+   * @throws SQLException
+   */
   public Connection getOrCreateConnection(TestCaseModeler test) throws SQLException {
     final String username = test.matrices.get(0).username;
     final String password = test.matrices.get(0).password;
     return getOrCreateConnection(username, password);
   }
 
-  public void releaseConnection(TestCaseModeler test, Connection connection) {
-    releaseConnection(test.matrices.get(0).username, test.matrices.get(0).password, connection);
+  /**
+   * Get / create connection for user in DrillTestConfig
+   * @return Connection for user specified in DrillTestConfig
+   * @throws SQLException
+   */
+  public Connection getOrCreateConnection() throws SQLException {
+    return getOrCreateConnection(DrillTestDefaults.USERNAME, DrillTestDefaults.PASSWORD);
   }
 
-  public synchronized Connection getOrCreateConnection(String username, String password) throws SQLException {
-    final String key = username + password;
-    if (connections.containsKey(key)) {
-      final Connection connection = connections.get(key).poll();
+  /**
+   * Get / create connection for user
+   * @param username connection user info
+   * @param password password user info
+   * @return Connection for specified user
+   * @throws SQLException
+   */
+  private synchronized Connection getOrCreateConnection(String username, String password) throws SQLException {
+    String connectionKey = username + "|" + password;
+    if (connections.containsKey(connectionKey)) {
+      final Connection connection = connections.get(connectionKey).poll();
       if (connection != null) {
         return connection;
       }
     } else {
       final Queue<Connection> connectionQueue = Queues.newLinkedBlockingQueue();
-      connections.put(key, connectionQueue);
+      connections.put(connectionKey, connectionQueue);
     }
-    return DriverManager.getConnection(TestDriver.connectionString, connectionProperties);
+    connectionProperties.put("user", username);
+    connectionProperties.put("password", password);
+    return DriverManager.getConnection(DrillTestDefaults.CONNECTION_STRING, connectionProperties);
   }
 
-  public synchronized void releaseConnection(String username, String password, Connection connection) {
-    final String key = username + password;
-    if (connections.containsKey(key)) {
-      connections.get(key).add(connection);
+  /**
+   * Add connection to connection pool
+   * @param test TestCaseModeler of the test suite
+   * @param connection Connection for user specified in the TestSuite
+   */
+  public void releaseConnection(TestCaseModeler test, Connection connection) {
+    releaseConnection(test.matrices.get(0).username, test.matrices.get(0).password, connection);
+  }
+
+  /**
+   * Add connection to connection pool
+   * @param connection Connection for user specified in DrillTestConfig
+   */
+  public void releaseConnection(Connection connection) {
+    releaseConnection(DrillTestDefaults.USERNAME, DrillTestDefaults.PASSWORD, connection);
+  }
+
+  /**
+   * Add connection to connection pool
+   * @param username connection user info
+   * @param password password user info
+   * @param connection Connection for specified user
+   */
+  private synchronized void releaseConnection(String username, String password, Connection connection) {
+    String connectionKey = username + "|" + password;
+    if (connections.containsKey(connectionKey)) {
+      connections.get(connectionKey).add(connection);
     } else {
       LOG.warn("Unknown connection released to pool. Closing connection now.");
       try {

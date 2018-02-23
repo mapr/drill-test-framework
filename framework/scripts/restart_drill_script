@@ -6,4 +6,4 @@
 
 source ./conf/drillTestConfig.properties
 set -x
-clush -a ${DRILL_HOME}/bin/drillbit.sh restart
+clush -a su ${USERNAME} ${DRILL_HOME}/bin/drillbit.sh restart
