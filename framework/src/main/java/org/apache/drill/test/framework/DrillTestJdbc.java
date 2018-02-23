@@ -23,7 +23,6 @@ import org.apache.drill.test.framework.TestCaseModeler.TestMatrix;
 import org.apache.drill.test.framework.TestVerifier.TestStatus;
 import org.apache.drill.test.framework.TestVerifier.VerificationException;
 import org.apache.drill.test.framework.TestVerifier.PlanVerificationException;
-import org.apache.drill.test.framework.DrillDefaults;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
@@ -156,7 +155,7 @@ public class DrillTestJdbc implements DrillTest {
       }
       duration = stopwatch;
 
-      if (TestDriver.driverType == TestDriver.DriverType.APACHE) {
+      if (DrillTestDefaults.JDBC_DRIVER.equals(DrillTestDefaults.Driver.APACHE)) {
         LOG.info("[" + testStatus + "] (" + stopwatch + ") " + modeler.queryFilename + " (ConnectionID: " + connection.hashCode()+ " | QueryID: " + queryID + ")");
       } else {
         LOG.info("[" + testStatus + "] (" + stopwatch + ") " + modeler.queryFilename + " (ConnectionID: " + connection.hashCode() + ")");
@@ -275,7 +274,7 @@ public class DrillTestJdbc implements DrillTest {
 	} finally {
 	  doneProcessingResultSet.set(true);
       if (resultSet != null) {
-        if (TestDriver.driverType == TestDriver.DriverType.APACHE) {
+        if (DrillTestDefaults.JDBC_DRIVER.equals(DrillTestDefaults.Driver.APACHE)) {
           // get queryID before resultSet is closed
           queryID = Utils.getQueryID(resultSet);
         }

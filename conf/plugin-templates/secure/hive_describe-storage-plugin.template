@@ -1,0 +1,13 @@
+{
+  "name" : "hive_describe",
+  "config" : {
+    "type" : "hive",
+    "enabled" : true,
+    "configProps" : {
+      "hive.metastore.uris" : "thrift://localhost:9083",
+      "hive.metastore.sasl.enabled" : "true",
+      "hbase.zookeeper.quorum": "localhost",
+      "hbase.zookeeper.property.clientPort": "5181"
+    }
+  }
+}

@@ -18,5 +18,5 @@
 package org.apache.drill.test.framework;
 
 public interface Cancelable extends Runnable {
-  public void cancel();
+  void cancel();
 }

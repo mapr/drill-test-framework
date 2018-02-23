@@ -77,6 +77,11 @@
 #DRILL_STORAGE_PLUGIN_SERVER=IPADDR1
 
 ########################################
+# Drill storage plugin server port
+########################################
+#DRILL_STORAGE_PLUGIN_SERVER_PORT=8047
+
+########################################
 # Test timeout (seconds)
 ########################################
 #TIME_OUT_SECONDS=1200
@@ -85,6 +90,42 @@
 # Restart drill script
 ########################################
 #RESTART_DRILL_SCRIPT=framework/scripts/restart_drill_script
+
+########################################
+# Authentication Mechanisms
+########################################
+#AUTH_MECHANISM=MAPRSASL
+#AUTH_MECHANISM=PLAIN
+
+########################################
+# Is HTTPS enabled
+########################################
+#HTTPS_ENABLED=true
+
+########################################
+# Is SSL enabled
+########################################
+#SSL_ENABLED=true
+
+########################################
+# Truststore
+########################################
+#TRUSTSTORE_PATH=/opt/mapr/conf/ssl_truststore
+
+########################################
+# Truststore Password
+########################################
+#TRUSTSTORE_PASSWORD=mapr123
+
+########################################
+# Kerberos Principal
+########################################
+#KERBEROS_PRINCIPAL=username/fully.qualified.domain.name@YOUR-REALM.COM
+
+########################################
+# Is secure cluster?
+########################################
+#IS_SECURE_CLUSTER=true
 
 ########################################
 ### Tests run as the following user
