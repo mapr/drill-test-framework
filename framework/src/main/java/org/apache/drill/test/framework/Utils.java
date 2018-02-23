@@ -17,20 +17,18 @@
  */
 package org.apache.drill.test.framework;
 
+import junit.framework.Assert;
 import org.apache.commons.io.FilenameUtils;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
+
+import java.io.*;
 import java.lang.reflect.Field;
-import java.net.Inet4Address;
+import java.net.*;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.GeneralSecurityException;
+import java.security.KeyStore;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,8 +41,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -55,25 +51,42 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import org.apache.drill.test.framework.TestCaseModeler.DataSource;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.entity.StringEntity;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
+
+import javax.net.ssl.*;
 
 /**
  * Collection of utilities supporting the drill test framework.
- * 
- * 
+ *
  */
-public class Utils implements DrillDefaults {
+public class Utils {
   private static final Logger LOG = Logger.getLogger(Utils.class);
-  static final Map<Integer, String> sqlTypes;
-  static final Map<Integer, String> sqlNullabilities;
-  static final Map<String, String> drillProperties;
+  private static final Map<Integer, String> sqlTypes;
+  private static final Map<Integer, String> sqlNullabilities;
+  private static HttpClient client;
+  private static String protocol = "http://";
+
+  // Accept self-signed certificate
+  public static class MyHostNameVerifier implements HostnameVerifier {
+
+    @Override
+    public boolean verify(String s, SSLSession sslSession) {
+      return true;
+    }
+  }
   
   static {
     // setup sql types
@@ -99,24 +112,67 @@ public class Utils implements DrillDefaults {
       }
     }
     sqlNullabilities = ImmutableMap.copyOf(nullabilityMap);
-    
-    // read configuration file
-    final Map<String, String> properties = Maps.newHashMap();
-    final File overrideFile = new File(CWD + "/conf/" + DRILL_TEST_CONFIG);
-    final ResourceBundle bundle;
-    if (overrideFile.exists() && !overrideFile.isDirectory()) {
+
+    client = getHTTPClientInstance();
+    if (DrillTestDefaults.AUTHENTICATION_MECHANISM.equals("PLAIN")) {
+      authenticateHTTPClient();
+    }
+  }
+
+  /**
+   * Create a HttpClients instance.
+   * @return Returns a default HttpClient instance or a custom instance if SSL is enabled
+   */
+  public static HttpClient getHTTPClientInstance() {
+    HttpClient client;
+    if (DrillTestDefaults.HTTPS_ENABLED) {
+      protocol = "https://";
+
+      Assert.assertFalse("Truststore location not provided", DrillTestDefaults.TRUSTSTORE_PATH.isEmpty());
+      Assert.assertFalse("Truststore password not provided", DrillTestDefaults.TRUSTSTORE_PASSWORD.isEmpty());
+
+      final SSLConnectionSocketFactory socketFactory;
+
       try {
-        bundle = new PropertyResourceBundle(new FileInputStream(overrideFile));
-      } catch (IOException e) {
-        throw new RuntimeException("Error reading configuration file " + overrideFile.getPath(), e);
+        final KeyStore keyStore = KeyStore.getInstance("JKS");
+        try (final InputStream is = new FileInputStream(DrillTestDefaults.TRUSTSTORE_PATH)) {
+          keyStore.load(is, DrillTestDefaults.TRUSTSTORE_PASSWORD.toCharArray());
+        }
+
+        final TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+        tmf.init(keyStore);
+
+        final SSLContext sc = SSLContext.getInstance("TLS");
+        sc.init(null, tmf.getTrustManagers(), new java.security.SecureRandom());
+        socketFactory = new SSLConnectionSocketFactory(sc, new MyHostNameVerifier());
+      } catch (GeneralSecurityException | IOException ex) {
+        LOG.info("Problem validating ssl truststore");
+        throw new RuntimeException(ex);
       }
+      client = HttpClients.custom().setSSLSocketFactory(socketFactory).build();
     } else {
-      bundle = ResourceBundle.getBundle(DRILL_TEST_CONFIG);
+      client = HttpClients.createDefault();
     }
-    for (final String key : bundle.keySet()) {
-      properties.put(key.trim(), bundle.getString(key).trim());
+    return client;
+  }
+
+  /**
+   * Rest server authentication when plain authentication is enabled
+   */
+  public static void authenticateHTTPClient() {
+    HttpPost post = new HttpPost(protocol + DrillTestDefaults.DRILL_STORAGE_PLUGIN_SERVER + ":" + DrillTestDefaults.DRILL_STORAGE_PLUGIN_SERVER_PORT + "/j_security_check");
+    post.setHeader("Content-Type", "application/x-www-form-urlencoded");
+    List<NameValuePair> postParameters = new ArrayList<>();
+    postParameters.add(new BasicNameValuePair("j_username", DrillTestDefaults.USERNAME));
+    postParameters.add(new BasicNameValuePair("j_password", DrillTestDefaults.PASSWORD));
+
+    try {
+      post.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
+      CloseableHttpResponse response = (CloseableHttpResponse) client.execute(post);
+      response.close();
+    } catch (IOException ex) {
+      throw new RuntimeException(ex);
     }
-    drillProperties = ImmutableMap.copyOf(properties);
   }
 
  /**
@@ -127,7 +183,7 @@ public class Utils implements DrillDefaults {
  */
   public static String[] getTestDefSources() {
 
-    String[] testDirExpressions = null;
+    String[] testDirExpressions;
     try {
      testDirExpressions = TestDriver.cmdParam.sources.split(",");
     } catch (Exception e) {
@@ -135,12 +191,12 @@ public class Utils implements DrillDefaults {
     }
     
     for (String relTestDirExpression : testDirExpressions) {
-      String absoluteTestDirExpression = getAbsolutePath(relTestDirExpression, TestDriver.drillTestDataDir);
+      String absoluteTestDirExpression = getAbsolutePath(relTestDirExpression, DrillTestDefaults.DRILL_TESTDATA_DIR);
       File absoluteTestDirExpressionFile = new File(absoluteTestDirExpression);
       List<File> testDefinitionList = new ArrayList<>();
       if (!absoluteTestDirExpressionFile.exists()) {
         //try regex then exit if failure
-        File drillTestDataDir = new File(CWD + "/" + TestDriver.drillTestDataDir);
+        File drillTestDataDir = new File(DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR);
         testDefinitionList.addAll(getTestDefinitionList(drillTestDataDir,absoluteTestDirExpression));
         if(testDefinitionList.isEmpty()){
           LOG.info("No regex Found for "+relTestDirExpression);
@@ -158,15 +214,6 @@ public class Utils implements DrillDefaults {
       }
     }
     return testDirExpressions;
-  }
-
-  /**
-   * Returns the drillProperties
-   *
-   * @return a map of drill configuration properties
-   */
-  public static Map<String, String> getDrillProperties() {
-    return drillProperties;
   }
 
   /**
@@ -189,7 +236,7 @@ public class Utils implements DrillDefaults {
     }
     List<DrillTestCase> drillTestCases = new ArrayList<>();
     for (String testDefSource : testDefSources) {
-      testDefSource = getAbsolutePath(testDefSource, TestDriver.drillTestDataDir);
+      testDefSource = getAbsolutePath(testDefSource, DrillTestDefaults.DRILL_TESTDATA_DIR);
       File testDefSourceFile = new File(testDefSource);
       if (!testDefSourceFile.exists()) {
 	  	LOG.error("Directory " + testDefSourceFile.getAbsolutePath() + " does not exist!");
@@ -405,7 +452,7 @@ public class Utils implements DrillDefaults {
     if (filename.startsWith("/")) {
       return filename;
     }
-    return CWD + "/" + dataDir + "/" + filename;
+    return DrillTestDefaults.CWD + "/" + dataDir + "/" + filename;
   }
 
   /**
@@ -533,10 +580,10 @@ public class Utils implements DrillDefaults {
     }
     return nullabilitiesInStrings;
   }
-  
+
   /**
    * Saves content of existing drill storage plugins.
-   * 
+   *
    * @param ipAddress
    *          IP address of node to update storage plugin for
    * @param pluginType
@@ -545,7 +592,7 @@ public class Utils implements DrillDefaults {
    * @throws Exception
    */
   public static String getExistingDrillStoragePlugin(String ipAddress,
-      String pluginType) throws IOException {
+                                                     String pluginType) throws IOException {
     StringBuilder builder = new StringBuilder();
     builder.append("http://" + ipAddress + ":8047/storage/" + pluginType);
     HttpUriRequest request = new HttpGet(builder.toString() + ".json");
@@ -555,50 +602,66 @@ public class Utils implements DrillDefaults {
   }
 
   /**
+   * Update storage plugins in directory
+   * @param templatePath directory having drill storage plugin templates
+   * @throws InterruptedException
+   */
+  public static void updateDrillStoragePlugins(String templatePath) throws InterruptedException {
+    LOG.info(">> Path: " + templatePath + "\n");
+    File[] templateFiles = new File(templatePath).listFiles();
+    for (File templateFile : templateFiles) {
+      String filename = templateFile.getName();
+      LOG.info(">> Updating File: " + filename);
+      String pluginType = filename.substring(0, filename.indexOf('-'));
+      boolean isSuccess = Utils.updateDrillStoragePlugin(templateFile.getAbsolutePath(), pluginType, DrillTestDefaults.FS_MODE);
+      LOG.info(">> Update file " + filename + (isSuccess ? " succeeded" : " failed"));
+      Thread.sleep(200);
+    }
+  }
+
+  /**
    * Updates storage plugin for drill
    * 
    * @param filename
    *          name of file containing drill storage plugin
-   * @param ipAddress
-   *          IP address of node to update storage plugin for
    * @param pluginType
    *          type of plugin; e.g.: "dfs", "cp"
    * @return true if operation is successful
    */
-  public static boolean updateDrillStoragePlugin(String filename,
-      String ipAddress, String pluginType, String fsMode) throws IOException {
-    String content = getFileContent(filename);
-    content = content.replace("localhost", Inet4Address.getLocalHost()
+  private static boolean updateDrillStoragePlugin(String filename, String pluginType, String fsMode) {
+    try {
+      String content = getFileContent(filename);
+      content = content.replace("localhost", Inet4Address.getLocalHost()
         .getHostAddress());
-    if (!fsMode.equals("distributedFS")) {
-      content = content.replace("maprfs:", "file:");
-      content = content.replaceAll("location\"\\s*:\\s*\"", "location\":\"" + System.getProperty("user.home"));
+      if (!fsMode.equals("distributedFS")) {
+        content = content.replace("maprfs:", "file:");
+        content = content.replaceAll("location\"\\s*:\\s*\"", "location\":\"" + System.getProperty("user.home"));
+      }
+      return postDrillStoragePlugin(content, pluginType);
+    } catch (IOException ex) {
+      ex.printStackTrace();
     }
-    return postDrillStoragePlugin(content, ipAddress, pluginType);
+    return false;
   }
 
   /**
-   * Posts/updates drill storage plugin content
-   * 
-   * @param content
-   *          string containing drill storage plugin
-   * @param ipAddress
-   *          IP address of node to update storage plugin for
-   * @param pluginType
-   *          type of plugin; e.g.: "dfs", "cp"
+   * Update drill storage plugin content
+   *
+   * @param content    string containing drill storage plugin
+   * @param pluginType type of plugin; e.g.: "dfs", "cp"
    * @return true if operation is successful
    * @throws Exception
    */
-  public static boolean postDrillStoragePlugin(String content,
-      String ipAddress, String pluginType) throws IOException {
-      StringBuilder builder = new StringBuilder();
-      builder.append("http://" + ipAddress + ":8047/storage/" + pluginType);
-      HttpPost post = new HttpPost(builder.toString() + ".json");
-      post.setHeader("Content-Type", "application/json");
-      post.setEntity(new StringEntity(content));
-      DefaultHttpClient client = new DefaultHttpClient();
-      HttpResponse response = client.execute(post);
-      return isResponseSuccessful(response);
+  private static boolean postDrillStoragePlugin(String content, String pluginType) throws IOException {
+    StringBuilder builder = new StringBuilder();
+    builder.append(protocol + DrillTestDefaults.DRILL_STORAGE_PLUGIN_SERVER + ":" + DrillTestDefaults.DRILL_STORAGE_PLUGIN_SERVER_PORT + "/storage/" + pluginType + ".json");
+
+    HttpPost post = new HttpPost(builder.toString());
+    post.setHeader("Content-Type", "application/json");
+    post.setEntity(new ByteArrayEntity(content.getBytes("UTF-8")));
+    CloseableHttpResponse response = (CloseableHttpResponse) client.execute(post);
+
+    return isResponseSuccessful(response);
   }
 
   private static String getFileContent(String filename) throws IOException {
@@ -609,7 +672,7 @@ public class Utils implements DrillDefaults {
 
   private static String getHttpResponseAsString(HttpResponse response) throws IOException {
     Reader reader = new BufferedReader(new InputStreamReader(response
-        .getEntity().getContent(), "UTF-8"));
+      .getEntity().getContent(), "UTF-8"));
     StringBuilder builder = new StringBuilder();
     char[] buffer = new char[1024];
     int l = 0;
@@ -622,23 +685,23 @@ public class Utils implements DrillDefaults {
 
   private static boolean isResponseSuccessful(HttpResponse response) throws IOException {
     return getHttpResponseAsString(response).toLowerCase().contains(
-        "\"result\" : \"success\"");
+      "\"result\" : \"success\"");
   }
 
   public static String generateOutputFileName(String inputFileName,
                                         String testId, boolean isPlan) throws IOException {
-    File drillOutputDir = new File(TestDriver.drillOutputDir);
+    File drillOutputDir = new File(DrillTestDefaults.DRILL_OUTPUT_DIR);
     if (!drillOutputDir.exists()) {
       if (!drillOutputDir.mkdir()) {
-        LOG.debug("Cannot create directory " + TestDriver.drillOutputDir
+        LOG.debug("Cannot create directory " + DrillTestDefaults.DRILL_OUTPUT_DIR
             + ".  Using /tmp for drill output");
-        TestDriver.drillOutputDir = "/tmp";
+        DrillTestDefaults.DRILL_OUTPUT_DIR = "/tmp";
       }
     }
     int index = inputFileName.lastIndexOf('/');
     String queryName = inputFileName.substring(index + 1);
     queryName = queryName.split("\\.")[0];
-    String outputFileName = TestDriver.drillOutputDir + "/" + testId + "_" + queryName;
+    String outputFileName = DrillTestDefaults.DRILL_OUTPUT_DIR + "/" + testId + "_" + queryName;
     if (isPlan) {
       outputFileName += ".plan";
     } else {
@@ -655,11 +718,6 @@ public class Utils implements DrillDefaults {
 	} catch (IOException e) {
 		e.printStackTrace();
 	}
-  }
-  
-  public static int getNumberOfClusterNodes() {
-	return drillProperties.containsKey("NUMBER_OF_CLUSTER_NODES") ?
-	  Integer.parseInt(drillProperties.get("NUMBER_OF_CLUSTER_NODES")) : 0;
   }
   
   public static int getNumberOfDrillbits(Connection connection) {
