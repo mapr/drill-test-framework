@@ -25,4 +25,4 @@
 .*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring/0_0_45.parquet.*
 .*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring/0_0_26.parquet.*
 .*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring/0_0_40.parquet.*
-.*selectionRoot.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring.*numFiles=24.*columns=\[`\*`\].*
+.*selectionRoot.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring.*numFiles=24.*columns=\[`\*\*`\].*

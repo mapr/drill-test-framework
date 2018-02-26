@@ -1,2 +1,2 @@
 .*00-02.*Project.*
-00-03.*Scan.*selectionRoot.*/drill/testdata/drill-3947.*numFiles=2.*columns.*`\*`.*
+00-03.*Scan.*selectionRoot.*/drill/testdata/drill-3947.*numFiles=2.*columns.*`\*\*`.*
