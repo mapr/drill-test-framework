@@ -70,7 +70,7 @@ public class DrillTestScript implements DrillTest {
     }
   	CmdConsOut cmdConsOut = null;
     String command = System.getProperty("user.dir") + "/" 
-    		+ TestDriver.drillTestDataDir + "/" 
+    		+ DrillTestDefaults.DRILL_TESTDATA_DIR + "/"
     		+ modeler.script + " "
     	    + modeler.queryFilename + " "
     	    + outputFilename;

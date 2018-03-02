@@ -4,12 +4,12 @@ import com.mapr.db.exceptions.DBException;
 import com.mapr.db.MapRDB;
 import com.mapr.fs.tables.TableProperties;
 import java.util.*;
-import org.apache.drill.test.framework.Utils;
+import org.apache.drill.test.framework.DrillTestDefaults;
 
 public class CreateTable {
     public static void main(String args[]) throws DBException {
 
-        Map<String, String> drillProperties = Utils.getDrillProperties();
+        Map<String, String> drillProperties = DrillTestDefaults.getDrillProperties();
 
         String tablePath = drillProperties.get("DRILL_TESTDATA")+"/schema_change_empty_batch/maprdb/json/";
         String table1 = "part";
