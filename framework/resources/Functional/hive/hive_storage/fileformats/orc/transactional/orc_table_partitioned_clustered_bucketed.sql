@@ -1,0 +1,1 @@
+select * from hive_orc_transactional.orc_table_partitioned_clustered_bucketed;
