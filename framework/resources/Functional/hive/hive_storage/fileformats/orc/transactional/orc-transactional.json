@@ -1,0 +1,32 @@
+{
+  "testId": "orc_transactional",
+  "type": "group",
+  "description": "Test hive orc transactional",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional",
+    "hive"
+  ],
+  "dependencies": [
+    "hive",
+    "mysql"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "hive",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources" : [
+    {
+      "mode": "gen",
+      "src": "Datasources/hive/execHive.sh framework/resources/Datasources/hive_storage/orc/transactional.ddl",
+      "dest": ""
+    }
+  ]
+}
