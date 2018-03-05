@@ -1,7 +1,7 @@
 .*Screen.*
   .*Project.*
-    .*SelectionVectorRemover.*
-     .*Limit.*
-        .*Project.*
+    .*Project.*
+      .*SelectionVectorRemover.*
+        .*Limit.*
           .*HashAgg.*
-           .*Scan.*
+            .*Scan.*
