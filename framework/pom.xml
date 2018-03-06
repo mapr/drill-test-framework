@@ -377,6 +377,8 @@
       <groupId>org.apache.drill.exec</groupId>
       <artifactId>drill-jdbc-all</artifactId>
       <version>${drill.version}</version>
+      <systemPath>${env.DRILL_HOME}/jars/jdbc-driver/drill-jdbc-all-${drill.version}.jar</systemPath>
+-     <scope>system</scope>
     </dependency>
     <dependency>
       <groupId>com.beust</groupId>
