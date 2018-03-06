@@ -100,23 +100,6 @@
                 </configuration>
               </execution>
               <execution>
-                <id>func-failing-widestrings-large</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>
-                    https://s3.amazonaws.com/apache-drill/files/func-failing-widestrings-large.tgz
-                  </url>
-                  <outputFileName>func-failing-widestrings-large.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>
-                    ${project.basedir}/resources/Functional/Failing/data-shapes/wide-columns/5000/1000rows/parquet/
-                  </outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
                 <id>schema_change_empty_batch</id>
                 <phase>prepare-package</phase>
                 <goals>
