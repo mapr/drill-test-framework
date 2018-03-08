@@ -1,39 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-   <modelVersion>4.0.0</modelVersion>
-   <groupId>org.apache.drill.test</groupId>
-   <artifactId>framework</artifactId>
-   <packaging>jar</packaging>
-   <version>1.0.0-SNAPSHOT</version>
-   
-   <repositories>
-      <repository>
-         <id>pentaho</id>
-         <name>Pentaho</name>
-         <url>http://repo.pentaho.org/artifactory/repo</url>
-         <layout>default</layout>
-         <releases>
-            <enabled>true</enabled>
-            <updatePolicy>daily</updatePolicy>
-            <checksumPolicy>warn</checksumPolicy>
-         </releases>
-         <snapshots>
-            <enabled>true</enabled>
-         </snapshots>
-      </repository>
-   </repositories>
-   <properties>
-      <testng.version>6.4</testng.version>
-      <log4j.version>1.2.17</log4j.version>
-      <json.version>20090211</json.version>
-      <jsontools.version>1.7</jsontools.version>
-      <surefireoutputDir>${basedir}/../surefire-reports</surefireoutputDir>
-      <google.common.version>16.0.1</google.common.version>
-      <drill.version>${env.DRILL_VERSION}</drill.version>
-      <hadoop.version>2.7.1</hadoop.version>
-      <runtimeDepenencies>${env.DRILL_HOME}/conf</runtimeDepenencies>
-      <apache-httpcomponents.version>4.5.5</apache-httpcomponents.version>
-   </properties>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.apache.drill.test</groupId>
+  <artifactId>framework</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+  <properties>
+    <log4j.version>1.2.17</log4j.version>
+    <drill.version>${env.DRILL_VERSION}</drill.version>
+    <hadoop.version>2.7.1</hadoop.version>
+    <runtimeDepenencies>${env.DRILL_HOME}/conf</runtimeDepenencies>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>xerces</groupId>
+      <artifactId>xercesImpl</artifactId>
+      <version>2.8.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ojai</groupId>
+      <artifactId>ojai</artifactId>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.zookeeper</groupId>
+      <artifactId>zookeeper</artifactId>
+      <version>3.4.6</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>apache-log4j-extras</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20090211</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sdicons.jsontools</groupId>
+      <artifactId>jsontools-core</artifactId>
+      <version>1.7</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>16.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-client</artifactId>
+      <version>${hadoop.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.codehaus.jackson</groupId>
+          <artifactId>jackson-mapper-asl</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.sun.jersey</groupId>
+          <artifactId>jersey-json</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.drill.exec</groupId>
+      <artifactId>drill-jdbc-all</artifactId>
+      <version>${drill.version}</version>
+      <systemPath>${env.DRILL_HOME}/jars/jdbc-driver/drill-jdbc-all-${drill.version}.jar</systemPath>
+      <scope>system</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.beust</groupId>
+      <artifactId>jcommander</artifactId>
+      <version>1.30</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.jaxrs</groupId>
+      <artifactId>jackson-jaxrs-json-provider</artifactId>
+      <version>2.4.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.4.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.4.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.4.3</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <shadedArtifactAttached>true</shadedArtifactAttached>
+          <transformers>
+            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+              <mainClass>org.apache.drill.test.framework.TestDriver</mainClass>
+            </transformer>
+          </transformers>
+        </configuration>
+        <executions>
+          <execution>
+            <id>shade</id>
+            <!--phase>package</phase-->
+            <!-- default -->
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.5</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>2.4</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+      </plugin>
+    </plugins>
+  </build>
   <profiles>
     <profile>
       <id>download</id>
@@ -61,7 +196,7 @@
                   <md5>b585a419fb5ceda6daa91a8bc19c2365</md5>
                 </configuration>
               </execution>
-             <execution>
+              <execution>
                 <id>install-tpcds1-hive1dot2-withdate</id>
                 <phase>prepare-package</phase>
                 <goals>
@@ -73,7 +208,7 @@
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources</outputDirectory>
                 </configuration>
-              </execution> 
+              </execution>
               <execution>
                 <id>install-complexga100k-tgz-json</id>
                 <phase>prepare-package</phase>
@@ -114,19 +249,6 @@
                 </configuration>
               </execution>
               <execution>
-                <id>func-failing-widestrings-large</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>https://s3.amazonaws.com/apache-drill/files/func-failing-widestrings-large.tgz</url>
-                  <outputFileName>func-failing-widestrings-large.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Functional/Failing/data-shapes/wide-columns/5000/1000rows/parquet/</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
                 <id>schema_change_empty_batch</id>
                 <phase>prepare-package</phase>
                 <goals>
@@ -149,7 +271,9 @@
                   <url>https://s3.amazonaws.com/apache-drill/files/func-passing-widestrings-large.tgz</url>
                   <outputFileName>func-passing-widestrings-large.tgz</outputFileName>
                   <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Functional/data-shapes/wide-columns/5000/1000rows/parquet/</outputDirectory>
+                  <outputDirectory>
+                    ${project.basedir}/resources/Functional/data-shapes/wide-columns/5000/1000rows/parquet/
+                  </outputDirectory>
                 </configuration>
               </execution>
               <execution>
@@ -175,10 +299,11 @@
                   <url>https://s3.amazonaws.com/apache-drill/files/func-passing-flatten-operators-large.tgz</url>
                   <outputFileName>func-passing-flatten-operators-large.tgz</outputFileName>
                   <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Functional/flatten_operators/100000rows/</outputDirectory>
+                  <outputDirectory>${project.basedir}/resources/Functional/flatten_operators/100000rows/
+                  </outputDirectory>
                 </configuration>
               </execution>
-	      <execution>
+              <execution>
                 <id>tpch_sf1_parquet</id>
                 <phase>prepare-package</phase>
                 <goals>
@@ -191,7 +316,7 @@
                   <outputDirectory>${project.basedir}/resources/Datasources/tpch/sf1/parquet</outputDirectory>
                 </configuration>
               </execution>
-	      <execution>
+              <execution>
                 <id>tpch_sf1_json</id>
                 <phase>prepare-package</phase>
                 <goals>
@@ -204,7 +329,7 @@
                   <outputDirectory>${project.basedir}/resources/Datasources/tpch/sf1/json</outputDirectory>
                 </configuration>
               </execution>
-	      <execution>
+              <execution>
                 <id>tpch_sf1_text</id>
                 <phase>prepare-package</phase>
                 <goals>
@@ -217,7 +342,7 @@
                   <outputDirectory>${project.basedir}/resources/Datasources/tpch/sf1/text</outputDirectory>
                 </configuration>
               </execution>
-	      <execution>
+              <execution>
                 <id>tpch_sf1_maprdb_json</id>
                 <phase>prepare-package</phase>
                 <goals>
@@ -269,7 +394,7 @@
                   <outputDirectory>${project.basedir}/resources/Datasources/tpcds/sf1/text</outputDirectory>
                 </configuration>
               </execution>
-	      <execution>
+              <execution>
                 <id>tpcds_sf1_maprdb_json</id>
                 <phase>prepare-package</phase>
                 <goals>
@@ -280,45 +405,6 @@
                   <outputFileName>tpcds_sf1_maprdb_json.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/tpcds/sf1/maprdb/json</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>json_fed</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>https://s3.amazonaws.com/apache-drill/files/fed.tgz</url>
-                  <outputFileName>json_fed.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/json/fed</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>json_factbook</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>https://s3.amazonaws.com/apache-drill/files/factbook.tgz</url>
-                  <outputFileName>json_factbook.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/json/factbook</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>json_studio</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>https://s3.amazonaws.com/apache-drill/files/studio.tgz</url>
-                  <outputFileName>json_studio.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/json/studio</outputDirectory>
                 </configuration>
               </execution>
               <execution>
@@ -333,171 +419,11 @@
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/hive_storage/</outputDirectory>
                 </configuration>
-              </execution> 
+              </execution>
             </executions>
           </plugin>
         </plugins>
       </build>
     </profile>
   </profiles>
-   <dependencies>
-      <dependency>
-         <groupId>xerces</groupId>
-         <artifactId>xercesImpl</artifactId>
-         <version>2.8.0</version>
-      </dependency>
-      <dependency>
-         <groupId>org.ojai</groupId>
-         <artifactId>ojai</artifactId>
-         <version>1.1</version>
-      </dependency>
-      <dependency>
-         <groupId>org.apache.zookeeper</groupId>
-         <artifactId>zookeeper</artifactId>
-         <version>3.4.6</version>
-      </dependency>
-      <dependency>
-         <groupId>log4j</groupId>
-         <artifactId>log4j</artifactId>
-         <version>${log4j.version}</version>
-      </dependency>
-      <dependency>
-         <groupId>log4j</groupId>
-         <artifactId>apache-log4j-extras</artifactId>
-         <version>${log4j.version}</version>
-      </dependency>
-      <dependency>
-         <groupId>org.json</groupId>
-         <artifactId>json</artifactId>
-         <version>${json.version}</version>
-      </dependency>
-      <dependency>
-         <groupId>com.sdicons.jsontools</groupId>
-         <artifactId>jsontools-core</artifactId>
-         <version>${jsontools.version}</version>
-      </dependency>
-      <dependency>
-         <groupId>com.google.guava</groupId>
-         <artifactId>guava</artifactId>
-         <version>${google.common.version}</version>
-      </dependency>
-      <dependency>
-         <groupId>org.apache.hadoop</groupId>
-         <artifactId>hadoop-client</artifactId>
-         <version>${hadoop.version}</version>
-         <exclusions>
-            <exclusion>
-               <groupId>org.slf4j</groupId>
-               <artifactId>slf4j-api</artifactId>
-            </exclusion>
-            <exclusion>
-               <groupId>org.slf4j</groupId>
-               <artifactId>slf4j-log4j12</artifactId>
-            </exclusion>
-            <exclusion>
-               <groupId>org.codehaus.jackson</groupId>
-               <artifactId>jackson-mapper-asl</artifactId>
-            </exclusion>
-            <exclusion>
-               <groupId>com.sun.jersey</groupId>
-               <artifactId>jersey-json</artifactId>
-            </exclusion>
-         </exclusions>
-      </dependency>
-      <dependency>
-         <groupId>org.apache.httpcomponents</groupId>
-         <artifactId>httpclient</artifactId>
-         <version>${apache-httpcomponents.version}</version>
-      </dependency>
-      <dependency>
-         <groupId>org.apache.drill.exec</groupId>
-         <artifactId>drill-jdbc-all</artifactId>
-         <version>${drill.version}</version>
-         <systemPath>${env.DRILL_HOME}/jars/jdbc-driver/drill-jdbc-all-${drill.version}.jar</systemPath>
-         <scope>system</scope>
-      </dependency>
-      <dependency>
-         <artifactId>jcommander</artifactId>
-         <version>1.30</version>
-         <groupId>com.beust</groupId>
-      </dependency>
-      <dependency>
-         <groupId>com.fasterxml.jackson.jaxrs</groupId>
-         <artifactId>jackson-jaxrs-json-provider</artifactId>
-         <version>2.4.3</version>
-      </dependency>
-      <dependency>
-         <groupId>com.fasterxml.jackson.core</groupId>
-         <artifactId>jackson-core</artifactId>
-         <version>2.4.3</version>
-      </dependency>
-      <dependency>
-         <groupId>com.fasterxml.jackson.core</groupId>
-         <artifactId>jackson-databind</artifactId>
-         <version>2.4.3</version>
-      </dependency>
-      <dependency>
-         <groupId>com.fasterxml.jackson.core</groupId>
-         <artifactId>jackson-annotations</artifactId>
-         <version>2.4.3</version>
-      </dependency>
-   </dependencies>
-   <build>
-      <plugins>
-	<plugin>
-  	  <groupId>org.apache.maven.plugins</groupId>
-  	  <artifactId>maven-shade-plugin</artifactId>
-  	  <configuration>
-    	    <shadedArtifactAttached>true</shadedArtifactAttached>
-    	    <transformers>
-      	      <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                <mainClass>org.apache.drill.test.framework.TestDriver</mainClass>
-              </transformer>
-    	    </transformers>
-  	  </configuration>
-  	  <executions>
-    	    <execution>
-      		<id>shade</id>
-      <!--phase>package</phase--> <!-- default -->
-      		<goals>
-        	  <goal>shade</goal>
-      		</goals>
-    	    </execution>
-  	  </executions>
-	</plugin>
-      </plugins>
-      <pluginManagement>
-         <plugins>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-resources-plugin</artifactId>
-               <version>2.6</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-clean-plugin</artifactId>
-               <version>2.5</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-compiler-plugin</artifactId>
-               <version>3.1</version>
-               <configuration>
-                  <source>1.7</source>
-                  <target>1.7</target>
-               </configuration>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-install-plugin</artifactId>
-               <version>2.4</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-jar-plugin</artifactId>
-               <version>2.4</version>
-            </plugin>
-         </plugins>
-      </pluginManagement>
-   </build>
 </project>
