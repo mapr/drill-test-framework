@@ -19,6 +19,7 @@ package org.apache.drill.test.framework;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import org.junit.Assert;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,7 +55,7 @@ public class DrillTestDefaults {
   public static String DRILL_REPORTS_DFS_DIR = "/drill/reports";
 
   // Default JDBC driver.
-  public static Driver JDBC_DRIVER = Driver.APACHE;
+  public static String JDBC_DRIVER = "org.apache.drill.jdbc.Driver";
 
   // Default connection string.
   public static String CONNECTION_STRING = "jdbc:drill:drillbit=localhost";
@@ -105,21 +106,6 @@ public class DrillTestDefaults {
   static final String LINE_BREAK = "------------------------------------------------------------------------";
 
   private static final Map<String, String> drillProperties;
-
-  public enum Driver {
-    APACHE ("org.apache.drill.jdbc.Driver"),
-    SIMBA ("com.mapr.drill.jdbc41.Driver");
-
-    private final String className;
-
-    Driver(String className) {
-      this.className = className;
-    }
-
-    public String getClassName() {
-      return className;
-    }
-  }
 
   static {
     drillProperties = getConfigProperties();
@@ -184,7 +170,7 @@ public class DrillTestDefaults {
       drillProperties.get("DRILL_REPORTS_DFS_DIR") : DRILL_REPORTS_DFS_DIR;
 
     JDBC_DRIVER = drillProperties.containsKey("JDBC_DRIVER") ?
-      Driver.valueOf(drillProperties.get("JDBC_DRIVER")) : JDBC_DRIVER;
+      drillProperties.get("JDBC_DRIVER") : JDBC_DRIVER;
 
     CONNECTION_STRING = drillProperties.containsKey("CONNECTION_STRING") ?
       drillProperties.get("CONNECTION_STRING") : CONNECTION_STRING;
@@ -205,16 +191,18 @@ public class DrillTestDefaults {
       drillProperties.get("RESTART_DRILL_SCRIPT") : RESTART_DRILL_SCRIPT;
 
     AUTHENTICATION_MECHANISM = drillProperties.containsKey("AUTH_MECHANISM") ?
-      drillProperties.get("AUTH_MECHANISM") : "";
+      drillProperties.get("AUTH_MECHANISM").toUpperCase() : "";
 
     SSL_ENABLED = drillProperties.containsKey("SSL_ENABLED") &&
       Boolean.parseBoolean(drillProperties.get("SSL_ENABLED"));
 
-    TRUSTSTORE_PATH = drillProperties.containsKey("TRUSTSTORE_PATH") ?
-      drillProperties.get("TRUSTSTORE_PATH") : "";
+    if (SSL_ENABLED) {
+      TRUSTSTORE_PATH = drillProperties.containsKey("TRUSTSTORE_PATH") ? drillProperties.get("TRUSTSTORE_PATH") : "";
+      TRUSTSTORE_PASSWORD = drillProperties.containsKey("TRUSTSTORE_PASSWORD") ? drillProperties.get("TRUSTSTORE_PASSWORD") : "";
 
-    TRUSTSTORE_PASSWORD = drillProperties.containsKey("TRUSTSTORE_PASSWORD") ?
-      drillProperties.get("TRUSTSTORE_PASSWORD") : "";
+      Assert.assertFalse("Truststore location not provided", DrillTestDefaults.TRUSTSTORE_PATH.isEmpty());
+      Assert.assertFalse("Truststore password not provided", DrillTestDefaults.TRUSTSTORE_PASSWORD.isEmpty());
+    }
 
     HTTPS_ENABLED = drillProperties.containsKey("HTTPS_ENABLED") &&
       Boolean.parseBoolean(drillProperties.get("HTTPS_ENABLED"));
@@ -222,8 +210,12 @@ public class DrillTestDefaults {
     NUMBER_OF_CLUSTER_NODES = drillProperties.containsKey("NUMBER_OF_CLUSTER_NODES") ?
       Integer.parseInt(drillProperties.get("NUMBER_OF_CLUSTER_NODES")) : 0;
 
-    KERBEROS_PRINCIPAL = drillProperties.containsKey("KERBEROS_PRINCIPAL") ?
-      drillProperties.get("KERBEROS_PRINCIPAL") : KERBEROS_PRINCIPAL;
+    if (AUTHENTICATION_MECHANISM == "KERBEROS") {
+      KERBEROS_PRINCIPAL = drillProperties.containsKey("KERBEROS_PRINCIPAL") ?
+        drillProperties.get("KERBEROS_PRINCIPAL") : KERBEROS_PRINCIPAL;
+
+      Assert.assertFalse("Kerberos principal not provided", DrillTestDefaults.KERBEROS_PRINCIPAL.isEmpty());
+    }
 
     IS_SECURE_CLUSTER = drillProperties.containsKey("IS_SECURE_CLUSTER") &&
       Boolean.parseBoolean(drillProperties.get("IS_SECURE_CLUSTER"));
