@@ -1,0 +1,7 @@
+source conf/drillTestConfig.properties
+if $SSL_ENABLED
+then
+  java -cp .:${JDBC_DRIVER_CP}:framework/target/* org.junit.runner.JUnitCore org.apache.drill.test.framework.TestSSLProperties
+else
+  echo "NONE"
+fi
