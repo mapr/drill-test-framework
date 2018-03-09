@@ -18,6 +18,7 @@
 package org.apache.drill.test.framework;
 
 import com.google.common.collect.Queues;
+import com.google.common.annotations.VisibleForTesting;
 import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,7 +37,7 @@ public class ConnectionPool implements AutoCloseable {
   public ConnectionPool(Properties connectionProperties) {
     this.connectionProperties = connectionProperties;
     try {
-      Class.forName(DrillTestDefaults.JDBC_DRIVER.getClassName());
+      Class.forName(DrillTestDefaults.JDBC_DRIVER);
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
       System.exit(-1);
@@ -86,6 +87,11 @@ public class ConnectionPool implements AutoCloseable {
     }
     connectionProperties.put("user", username);
     connectionProperties.put("password", password);
+    return DriverManager.getConnection(DrillTestDefaults.CONNECTION_STRING, connectionProperties);
+  }
+
+  @VisibleForTesting
+  public Connection createConnection(Properties connectionProperties) throws SQLException {
     return DriverManager.getConnection(DrillTestDefaults.CONNECTION_STRING, connectionProperties);
   }
 

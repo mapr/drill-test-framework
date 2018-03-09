@@ -17,7 +17,6 @@
  */
 package org.apache.drill.test.framework;
 
-import junit.framework.Assert;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.*;
@@ -127,9 +126,6 @@ public class Utils {
     HttpClient client;
     if (DrillTestDefaults.HTTPS_ENABLED) {
       protocol = "https://";
-
-      Assert.assertFalse("Truststore location not provided", DrillTestDefaults.TRUSTSTORE_PATH.isEmpty());
-      Assert.assertFalse("Truststore password not provided", DrillTestDefaults.TRUSTSTORE_PASSWORD.isEmpty());
 
       final SSLConnectionSocketFactory socketFactory;
 
@@ -733,6 +729,21 @@ public class Utils {
 		e.printStackTrace();
 	}
 	return numberOfDrillbits;
+  }
+
+  public static boolean sanityTest(Connection connection) {
+    String query = "SELECT count(*) FROM cp.`employee.json`";
+    int rowCount = 0;
+    try {
+      PreparedStatement ps = connection.prepareStatement(query);
+      ResultSet resultSet = ps.executeQuery();
+      resultSet.next();
+      rowCount = resultSet.getInt(1);
+    } catch (SQLException e) {
+      LOG.error(e.getMessage());
+      e.printStackTrace();
+    }
+    return rowCount==1155;
   }
   
 
