@@ -1,27 +1,22 @@
 {
-  "testId": "filter_pushdown_data",
+  "testId": "filter_pushdown_plan_no_order",
   "type": "group",
-  "description": "Filter pushdown tests: these tests verify query correctness",
+  "description": "Filter pushdown tests: these tests verify query plans for the queries that are in ../data directory",
   "categories": [
     "functional"
   ],
   "matrices": [
     {
       "query-file": ".*.sql",
-      "schema": "dfs.subqueries",
+      "schema": "dfs",
       "output-format": "tsv",
       "expected-file": ".*.res",
       "verification-type": [
-        "in-memory"
+        "regex-no-order"
       ]
     }
   ],
   "datasources": [
-    {
-      "mode": "cp",
-      "src": "Datasources/subqueries",
-      "dest": "subqueries"
-    },
     {
       "mode": "cp",
       "src": "Datasources/parquet_storage/DRILL-6118/DRILL_6118_data_source.csv",
@@ -43,4 +38,3 @@
     }
   ]
 }
-

@@ -1,0 +1,10 @@
+1	true	false
+2	true	false
+3	true	false
+4	true	false
+5	true	false
+1	false	false
+2	false	false
+3	false	false
+4	false	false
+5	false	false
