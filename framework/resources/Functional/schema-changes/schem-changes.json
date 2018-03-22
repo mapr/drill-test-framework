@@ -1,26 +1,27 @@
 {
-    "testId": "schema-changes",
-    "type": "group",
-    "description": "Test p1tests function queries via jdbc",
+    "testId": "schema-changes", 
+    "type": "group", 
+    "description": "Test p1tests function queries via jdbc", 
     "categories": [
-        "functional"
-    ],
+        "functional", 
+        "json"
+    ], 
     "matrices": [
         {
-            "query-file": ".*.q",
-            "schema": "dfs.drillTestDirP1",
-            "output-format": "tsv",
-            "expected-file": ".*.e_tsv",
+            "query-file": ".*.q", 
+            "schema": "dfs.drillTestDirP1", 
+            "output-format": "tsv", 
+            "expected-file": ".*.e_tsv", 
             "verification-type": [
                 "in-memory"
             ]
         }
-    ],
+    ], 
     "datasources": [
-      {
-         "mode": "cp",
-         "src": "Datasources/schema-changes",
-         "dest": "schema-changes"
-      } 
+        {
+            "mode": "cp", 
+            "src": "Datasources/schema-changes", 
+            "dest": "schema-changes"
+        }
     ]
 }

@@ -1,26 +1,27 @@
 {
-    "testId": "FlattenNulls",
-    "type": "group",
-    "description": "Test flatten with operators",
+    "testId": "FlattenNulls", 
+    "type": "group", 
+    "description": "Test flatten with operators", 
     "categories": [
-        "functional"
-    ],
+        "functional", 
+        "json"
+    ], 
     "matrices": [
         {
-            "query-file": ".*.q",
-            "schema": "dfs.kvgenflatten-nulls",
-            "output-format": "tsv",
-            "expected-file": ".*.e_tsv",
+            "query-file": ".*.q", 
+            "schema": "dfs.kvgenflatten-nulls", 
+            "output-format": "tsv", 
+            "expected-file": ".*.e_tsv", 
             "verification-type": [
                 "in-memory"
             ]
         }
-    ],
+    ], 
     "datasources": [
-	{
-          "mode": "cp",
-          "src": "Datasources/kvgenflatten-nulls",
-          "dest": "kvgenflatten-nulls"
-    	}
+        {
+            "mode": "cp", 
+            "src": "Datasources/kvgenflatten-nulls", 
+            "dest": "kvgenflatten-nulls"
+        }
     ]
 }

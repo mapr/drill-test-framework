@@ -1,26 +1,27 @@
 {
-    "testId": "ExtendedJson",
-    "type": "group",
-    "description": "Test extended json functionality",
+    "testId": "ExtendedJson", 
+    "type": "group", 
+    "description": "Test extended json functionality", 
     "categories": [
-        "functional"
-    ],
+        "functional", 
+        "json"
+    ], 
     "matrices": [
         {
-            "query-file": ".*.q",
-            "schema": "dfs.extended_json",
-            "output-format": "tsv",
-            "expected-file": ".*.e_tsv",
+            "query-file": ".*.q", 
+            "schema": "dfs.extended_json", 
+            "output-format": "tsv", 
+            "expected-file": ".*.e_tsv", 
             "verification-type": [
                 "in-memory"
             ]
         }
-    ],
+    ], 
     "datasources": [
-	{
-          "mode": "cp",
-          "src": "Datasources/extended_json",
-          "dest": "extended_json"
-    	}
+        {
+            "mode": "cp", 
+            "src": "Datasources/extended_json", 
+            "dest": "extended_json"
+        }
     ]
 }

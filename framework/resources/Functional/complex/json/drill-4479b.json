@@ -1,27 +1,28 @@
 {
-    "testId": "drill-4479b",
-    "type": "group",
-    "description": "Test extended json support via jdbc",
-    "submit-type": "jdbc",
+    "testId": "drill-4479b", 
+    "type": "group", 
+    "description": "Test extended json support via jdbc", 
+    "submit-type": "jdbc", 
     "categories": [
-        "functional"
-    ],
+        "functional", 
+        "json"
+    ], 
     "matrices": [
         {
-            "query-file": "drill-4479b.sql",
-            "schema": "dfs.drillTestDir",
-            "output-format": "tsv",
-            "expected-file": "drill-4479b.res",
+            "query-file": "drill-4479b.sql", 
+            "schema": "dfs.drillTestDir", 
+            "output-format": "tsv", 
+            "expected-file": "drill-4479b.res", 
             "verification-type": [
                 "in-memory"
             ]
         }
-    ],
+    ], 
     "datasources": [
-    {
-          "mode": "cp",
-          "src": "Datasources/complex/json/mostlynulls.json",
-          "dest": "complex/drill-4479/mostlynulls.json"
+        {
+            "mode": "cp", 
+            "src": "Datasources/complex/json/mostlynulls.json", 
+            "dest": "complex/drill-4479/mostlynulls.json"
         }
     ]
 }
