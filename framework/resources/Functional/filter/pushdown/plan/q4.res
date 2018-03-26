@@ -1,7 +1,9 @@
 .*Screen.*
-  .*Project.*
-    .*Project.*
-      .*SelectionVectorRemover.*
-        .*Limit.*
-          .*HashAgg.*
-            .*Scan.*
+.*Project.*
+.*Project.*
+.*SelectionVectorRemover.*
+.*Limit.*
+.*StreamAgg.*
+.*Sort.*
+.*Limit.*
+.*Scan.*
