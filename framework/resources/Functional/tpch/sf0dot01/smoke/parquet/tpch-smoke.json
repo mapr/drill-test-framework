@@ -1,25 +1,26 @@
 {
-    "testId": "tpch",
-    "type": "group",
-    "description": "Test tpch (functional) queries via jdbc",
+    "testId": "tpch", 
+    "type": "group", 
+    "description": "Test tpch (functional) queries via jdbc", 
     "categories": [
-        "functional"
-    ],
+        "functional", 
+        "parquet"
+    ], 
     "matrices": [
         {
-            "query-file": ".*.q",
-            "schema": "dfs.TpcHMulti",
-            "output-format": "tsv",
-            "expected-file": ".*.e",
+            "query-file": ".*.q", 
+            "schema": "dfs.TpcHMulti", 
+            "output-format": "tsv", 
+            "expected-file": ".*.e", 
             "verification-type": [
                 "in-memory"
             ]
         }
-    ],
+    ], 
     "datasources": [
         {
-            "mode": "cp",
-            "src": "Datasources/tpch-multi",
+            "mode": "cp", 
+            "src": "Datasources/tpch-multi", 
             "dest": "tpch-multi"
         }
     ]

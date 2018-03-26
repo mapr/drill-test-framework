@@ -1,26 +1,27 @@
 {
-    "testId": "MoreFiles",
-    "type": "group",
-    "description": "Test flatten with operators",
+    "testId": "MoreFiles", 
+    "type": "group", 
+    "description": "Test flatten with operators", 
     "categories": [
-        "functional"
-    ],
+        "functional", 
+        "json"
+    ], 
     "matrices": [
         {
-            "query-file": ".*.q",
-            "schema": "dfs.morefiles",
-            "output-format": "tsv",
-            "expected-file": ".*.e_tsv",
+            "query-file": ".*.q", 
+            "schema": "dfs.morefiles", 
+            "output-format": "tsv", 
+            "expected-file": ".*.e_tsv", 
             "verification-type": [
                 "in-memory"
             ]
         }
-    ],
+    ], 
     "datasources": [
-	{
-          "mode": "cp",
-          "src": "Datasources/morefiles",
-          "dest": "morefiles"
-    	}
+        {
+            "mode": "cp", 
+            "src": "Datasources/morefiles", 
+            "dest": "morefiles"
+        }
     ]
 }
