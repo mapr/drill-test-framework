@@ -3,7 +3,8 @@
     "type": "group",
     "description": "Test rules for query identifiers: case sensitivity",
     "categories": [
-        "functional"
+        "functional",
+        "json"
     ],
     "matrices": [
         {

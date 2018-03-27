@@ -4,7 +4,8 @@
     "description": "Test queries via jdbc",
     "submit-type": "jdbc",
     "categories": [
-        "functional"
+        "functional",
+        "json"
     ],
     "matrices": [
         {
@@ -18,15 +19,15 @@
         }
     ],
     "datasources": [
-	{
+       {
           "mode": "cp",
           "src": "Datasources/complex/json/empty.json",
           "dest": "complex/drill-3537b/b.json"
-    	},
-	{
-	  "mode": "cp",
-	  "src": "Datasources/complex/json/drill-3537.json",
-	  "dest": "complex/drill-3537b/a.json"
-	}
+       }, 
+       {
+          "mode": "cp",
+          "src": "Datasources/complex/json/drill-3537.json",
+          "dest": "complex/drill-3537b/a.json"
+       }
     ]
 }

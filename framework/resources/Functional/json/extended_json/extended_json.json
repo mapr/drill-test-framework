@@ -3,7 +3,8 @@
     "type": "group",
     "description": "Test extended json functionality",
     "categories": [
-        "functional"
+        "functional",
+        "json"
     ],
     "matrices": [
         {
@@ -17,10 +18,10 @@
         }
     ],
     "datasources": [
-	{
+       {
           "mode": "cp",
           "src": "Datasources/extended_json",
           "dest": "extended_json"
-    	}
+       }
     ]
 }

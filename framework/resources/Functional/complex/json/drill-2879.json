@@ -4,7 +4,8 @@
     "description": "Test extended json support via jdbc",
     "submit-type": "jdbc",
     "categories": [
-        "functional"
+        "functional",
+        "json"
     ],
     "matrices": [
         {
@@ -18,10 +19,10 @@
         }
     ],
     "datasources": [
-	{
+        {
           "mode": "cp",
           "src": "Datasources/complex/json/extended.json",
           "dest": "complex/drill-2879/extended.json"
-    	}
+        }
     ]
 }

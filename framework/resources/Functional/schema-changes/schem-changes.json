@@ -3,7 +3,8 @@
     "type": "group",
     "description": "Test p1tests function queries via jdbc",
     "categories": [
-        "functional"
+        "functional",
+        "json"
     ],
     "matrices": [
         {
@@ -17,10 +18,10 @@
         }
     ],
     "datasources": [
-      {
-         "mode": "cp",
-         "src": "Datasources/schema-changes",
-         "dest": "schema-changes"
-      } 
+       {
+          "mode": "cp",
+          "src": "Datasources/schema-changes",
+          "dest": "schema-changes"
+       }
     ]
 }

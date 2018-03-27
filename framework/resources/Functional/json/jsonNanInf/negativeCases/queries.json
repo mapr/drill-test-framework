@@ -4,7 +4,9 @@
     "negative": true,
     "description": "Functional tests to verify NaN/Infinity/-Infinity Json types",
     "submit-type": "jdbc",
-    "categories": [ "negative" ],
+    "categories": [ "negative",
+		    "json"
+    ],
     "matrices": [
         {
             "query-file": ".*.q",

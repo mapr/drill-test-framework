@@ -3,7 +3,8 @@
     "type": "group",
     "description": "Test generic json queries",
     "categories": [
-        "functional"
+        "functional",
+	"json"
     ],
     "matrices": [
         {
