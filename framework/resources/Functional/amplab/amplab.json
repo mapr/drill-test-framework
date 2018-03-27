@@ -4,8 +4,9 @@
     "description": "Test amplab queries via jdbc",
     "submit-type": "jdbc",
     "categories": [
-        "functional"
-    ],
+        "functional",
+        "parquet"
+    ], 
     "matrices": [
         {
             "query-file": ".*.q",

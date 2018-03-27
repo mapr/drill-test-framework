@@ -3,7 +3,8 @@
     "type": "group",
     "description": "Test parquet read queries",
     "categories": [
-        "functional"
+        "functional",
+	"parquet"
     ],
     "matrices": [
         {

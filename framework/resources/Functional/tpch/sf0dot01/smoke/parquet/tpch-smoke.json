@@ -3,8 +3,9 @@
     "type": "group",
     "description": "Test tpch (functional) queries via jdbc",
     "categories": [
-        "functional"
-    ],
+        "functional",
+        "parquet"
+    ], 
     "matrices": [
         {
             "query-file": ".*.q",

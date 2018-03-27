@@ -3,7 +3,8 @@
     "type": "group",
     "description": "Query parquet data that is stored in nested direcotries",
     "categories": [
-        "functional"
+        "functional",
+        "parquet"
     ],
     "matrices": [
         {

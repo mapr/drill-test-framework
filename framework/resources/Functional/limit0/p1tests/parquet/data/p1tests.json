@@ -3,7 +3,8 @@
     "type": "limit 0",
     "description": "Test p1tests function queries via jdbc",
     "categories": [
-        "functional"
+        "functional",
+	"parquet"
     ],
     "matrices": [
         {
