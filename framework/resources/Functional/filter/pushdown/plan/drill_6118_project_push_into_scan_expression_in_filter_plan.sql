@@ -1,0 +1,1 @@
+explain plan for select distinct c1 from (select * from dfs.drillTestDir.`DRILL_6118_parquet_partitioned_by_folders`) where c1*2<5;

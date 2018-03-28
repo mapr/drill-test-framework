@@ -1,25 +1,41 @@
 {
-    "testId": "filter_pushdown_data",
-    "type": "group",
-    "description": "Filter pushdown tests: these tests verify query correctness",
-    "categories": [ "functional" ],
-    "matrices": [
-        {
-            "query-file": ".*.sql",
-            "schema": "dfs.subqueries",
-            "output-format": "tsv",
-            "expected-file": ".*.res",
-            "verification-type": [
-                "in-memory"
-            ]
-        }
-    ],
-    "datasources": [
-        {
-            "mode": "cp",
-            "src": "Datasources/subqueries",
-            "dest": "subqueries"
-        }
-    ]
+  "testId": "filter_pushdown_data",
+  "type": "group",
+  "description": "Filter pushdown tests: these tests verify query correctness",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.subqueries",
+      "output-format": "tsv",
+      "expected-file": ".*.res",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/subqueries",
+      "dest": "subqueries"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/DRILL-6118/DRILL_6118_data_source.csv",
+      "dest": "parquet_storage/DRILL_6118/DRILL_6118_data_source.csv"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/DRILL-6118/DRILL_6118_complex.parquet",
+      "dest": "parquet_storage/DRILL_6118/DRILL_6118_complex.parquet"
+    },
+    {
+      "mode": "gen",
+      "src": "Datasources/parquet_storage/DRILL-6118/DRILL_6118_execute_ddl.sh"
+    }
+  ]
 }
 

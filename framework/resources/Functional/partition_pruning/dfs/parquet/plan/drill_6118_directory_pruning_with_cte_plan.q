@@ -1,0 +1,2 @@
+explain plan for with DRILL_6118_parquet_partitioned_by_folders_cte as (select * from dfs.drillTestDir.`DRILL_6118_parquet_partitioned_by_folders`)
+select * from DRILL_6118_parquet_partitioned_by_folders_cte where dir0='d2';
