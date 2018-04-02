@@ -10,7 +10,7 @@ if [ -n $USERNAME ]
 then
     user=$USERNAME
 else
-    user=ps -aef | grep Drillbit | grep org.apache.drill | cut -d' ' -f1 | head -1
+    user=`ps -aef | grep Drillbit | grep org.apache.drill | cut -d' ' -f1 | head -1`
 fi
 
 hadoop fs -mkdir -p /drill/testdata/tpcds_sf$sf/maprdb/json
