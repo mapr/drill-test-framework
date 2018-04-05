@@ -1,0 +1,25 @@
+{
+    "testId": "nested_loop_join",
+    "type": "group",
+    "description": "Full outer join tests",
+    "categories": [ "functional" ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.joins",
+            "output-format": "tsv",
+            "expected-file": ".*.res",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/joins",
+            "dest": "joins"
+        }
+    ]
+}
+
