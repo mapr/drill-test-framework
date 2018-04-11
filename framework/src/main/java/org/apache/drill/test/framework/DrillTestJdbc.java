@@ -252,30 +252,9 @@ public class DrillTestJdbc implements DrillTest {
       LOG.debug(Utils.getTypesInStrings(columnTypes));
 
       while (resultSet.next()) {
-        List<Object> values = Lists.newArrayList();
-        for (int i = 1; i <= columnCount; i++) {
-          try {
-            if (resultSet.getObject(i) == null) {
-              values.add(null);
-              continue;
-            }
-            if (resultSet.getMetaData().getColumnType(i) == Types.NVARCHAR) {
-              values.add(new String(resultSet.getBytes(i), "UTF-16"));
-            } else {
-              values.add(new String(resultSet.getBytes(i), "UTF-8"));
-            }
-          } catch (Exception e) {
-            if (resultSet.getMetaData().getColumnType(i) == Types.DATE) {
-              values.add(resultSet.getDate(i));
-            } else {
-              values.add(resultSet.getObject(i));
-            }
-          }
-        }
+        List<Object> values = Utils.getRowValues(resultSet);
         ColumnList columnList = new ColumnList(columnTypes, values);
-        if (writer != null) {
-          writer.write(columnList + "\n");
-        }
+        writer.write(columnList + "\n");
       }
 
     } catch (IllegalArgumentException | IllegalAccessException | IOException e1) {
