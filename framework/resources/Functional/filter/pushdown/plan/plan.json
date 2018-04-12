@@ -35,6 +35,11 @@
     {
       "mode": "gen",
       "src": "Datasources/parquet_storage/DRILL-6118/DRILL_6118_execute_ddl.sh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/DRILL_6174/DRILL_6174_test_data",
+      "dest": "parquet_storage/DRILL_6174/DRILL_6174_test_data"
     }
   ]
 }
