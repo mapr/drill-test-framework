@@ -143,7 +143,8 @@ public class TestDriver {
     List<DrillTest> timeoutFailures = Lists.newArrayList();
     List<DrillTest> canceledTests = Lists.newArrayList();
     List<DrillTest> randomFailures = Lists.newArrayList();
-
+    List<DrillTest> failingTests = Lists.newArrayList();
+    
 	CancelingExecutor executor = new CancelingExecutor(cmdParam.threads, cmdParam.timeout);
 
     final Stopwatch stopwatch = Stopwatch.createStarted();
@@ -289,20 +290,10 @@ public class TestDriver {
       if (cmdParam.trackMemory) {
     	  queryMemoryUsage();
       }
-
       for (DrillTest test : tests) {
         TestStatus testStatus = test.getTestStatus();
         if(testStatus!=TestStatus.PASS && testStatus!=TestStatus.CANCELED && cmdParam.skipRandom!=true){
-	      List<DrillTest> tempTests = Lists.newArrayList();
-          tempTests.add(test);
-          LOG.info(DrillTestDefaults.LINE_BREAK);
-          LOG.info("ISOLATING RANDOM FAILURES - Execution attempt 2 (of 2)");
-          LOG.info(DrillTestDefaults.LINE_BREAK);
-          executor.executeAll(tempTests);
-          testStatus = tempTests.get(0).getTestStatus();
-          if(testStatus==TestStatus.PASS){
-	      randomFailures.add(test);
-	   }
+ 	    failingTests.add(test);
 	}
 	switch (testStatus) {
          case PASS:
@@ -325,6 +316,41 @@ public class TestDriver {
            break;
          default:
            executionFailures.add(test);
+        }
+      }
+
+      /* Run all failed tests a second time.
+       * Tests which succeed are categorized as random failures.
+       * To prevent long runtimes, cmdParam.threads is chosen as an arbitrary max limit.
+       * If total failed tests are higher than the max defined above, we do not isolate random failures.
+       */ 
+      if(failingTests.size() <= cmdParam.threads){
+        LOG.info(DrillTestDefaults.LINE_BREAK);
+        LOG.info("ISOLATING RANDOM FAILURES - Execution attempt 2 (of 2)");
+        LOG.info(DrillTestDefaults.LINE_BREAK);
+        executor.executeAll(failingTests);
+	for(DrillTest test : failingTests){
+	  TestStatus testStatus = test.getTestStatus();         
+          if(testStatus==TestStatus.PASS){
+            randomFailures.add(test);
+          }
+	}
+      }
+      
+      if(randomFailures.size()>0){
+        for (DrillTest test : randomFailures) {
+	  if(executionFailures.contains(test)){
+	    executionFailures.remove(test);
+	  }
+	  else if(dataVerificationFailures.contains(test)){
+	    dataVerificationFailures.remove(test);
+	  }
+	  else if(planVerificationFailures.contains(test)){
+	    planVerificationFailures.remove(test);
+	  }
+	  else if(timeoutFailures.contains(test)){
+	    timeoutFailures.remove(test);
+	  }
         }
       }
 
