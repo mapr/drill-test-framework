@@ -111,6 +111,16 @@ public class TestDriver implements DrillDefaults {
 
 
   public int runTests() throws Exception {
+
+    List<DrillTest> passingTests = Lists.newArrayList();
+    List<DrillTest> dataVerificationFailures = Lists.newArrayList();
+    List<DrillTest> planVerificationFailures = Lists.newArrayList();
+    List<DrillTest> executionFailures = Lists.newArrayList();
+    List<DrillTest> timeoutFailures = Lists.newArrayList();
+    List<DrillTest> canceledTests = Lists.newArrayList();
+    List<DrillTest> randomFailures = Lists.newArrayList();
+    List<DrillTest> failingTests = Lists.newArrayList();
+    
 	CancelingExecutor executor = new CancelingExecutor(cmdParam.threads, cmdParam.timeout);
 
     final Stopwatch stopwatch = Stopwatch.createStarted();
@@ -193,25 +203,10 @@ public class TestDriver implements DrillDefaults {
       if (cmdParam.trackMemory) {
     	  queryMemoryUsage();
       }
-      List<DrillTest> passingTests = Lists.newArrayList();
-      List<DrillTest> dataVerificationFailures = Lists.newArrayList();
-      List<DrillTest> planVerificationFailures = Lists.newArrayList();
-      List<DrillTest> executionFailures = Lists.newArrayList();
-      List<DrillTest> timeoutFailures = Lists.newArrayList();
-      List<DrillTest> canceledTests = Lists.newArrayList();
-      List<DrillTest> randomFailures = Lists.newArrayList();
-      List<DrillTest> failedCases = Lists.newArrayList();
-      
       for (DrillTest test : tests) {
         TestStatus testStatus = test.getTestStatus();
         if(testStatus!=TestStatus.PASS && testStatus!=TestStatus.CANCELED && cmdParam.skipRandom!=true){
-	   List<DrillTest> tempTests = Lists.newArrayList();
-           tempTests.add(test); 
-           executor.executeAll(tempTests);
-           testStatus = tempTests.get(0).getTestStatus();
-           if(testStatus==TestStatus.PASS){
-	     randomFailures.add(test);
-	   }
+ 	    failingTests.add(test);
 	}
 	switch (testStatus) {
          case PASS:
@@ -236,11 +231,48 @@ public class TestDriver implements DrillDefaults {
            executionFailures.add(test);
         }
       }
-      LOG.info(LINE_BREAK + LINE_BREAK);
-      LOG.info("Tests completed for iteration " + i + " in " + stopwatch);
-      LOG.info(LINE_BREAK + LINE_BREAK);
-      LOG.info("Results:");
-      LOG.info(LINE_BREAK);
+
+      /* Run all failed tests a second time.
+       * Tests which succeed are categorized as random failures.
+       * To prevent long runtimes, cmdParam.threads is chosen as an arbitrary max limit.
+       * If total failed tests are higher than the max defined above, we do not isolate random failures.
+       */ 
+      if(failingTests.size() <= cmdParam.threads){
+        LOG.info(LINE_BREAK);
+        LOG.info("ISOLATING RANDOM FAILURES - Execution attempt 2 (of 2)");
+        LOG.info(LINE_BREAK);
+        executor.executeAll(failingTests);
+	for(DrillTest test : failingTests){
+	  TestStatus testStatus = test.getTestStatus();         
+          if(testStatus==TestStatus.PASS){
+            randomFailures.add(test);
+          }
+	}
+      }
+      
+      if(randomFailures.size()>0){
+        for (DrillTest test : randomFailures) {
+	  if(executionFailures.contains(test)){
+	    executionFailures.remove(test);
+	  }
+	  else if(dataVerificationFailures.contains(test)){
+	    dataVerificationFailures.remove(test);
+	  }
+	  else if(planVerificationFailures.contains(test)){
+	    planVerificationFailures.remove(test);
+	  }
+	  else if(timeoutFailures.contains(test)){
+	    timeoutFailures.remove(test);
+	  }
+        }
+      }
+
+      if(executionFailures.size()>0 || dataVerificationFailures.size()>0 || planVerificationFailures.size()>0 || timeoutFailures.size()>0) {
+        LOG.info("\n"+LINE_BREAK);
+        LOG.info("ITERATION FAILURES");
+        LOG.info(LINE_BREAK);
+      }
+
       if(executionFailures.size()>0){
         LOG.info("Execution Failures:");
       }
