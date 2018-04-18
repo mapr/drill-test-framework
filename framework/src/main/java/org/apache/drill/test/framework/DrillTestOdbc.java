@@ -56,7 +56,6 @@ public class DrillTestOdbc implements DrillTest{
   private Thread thread;
   private int id;
   private int totalCases;
-
   private static volatile int noOfCasesCompleted;
   
   public DrillTestOdbc(DrillTestCase modeler, int id, int totalCases) {
@@ -153,12 +152,10 @@ public class DrillTestOdbc implements DrillTest{
 
       LOG.info(testStatus + " (" + stopwatch + ") " + modeler.script + " " +
                modeler.queryFilename);
-      if(++noOfCasesCompleted%100==0 && noOfCasesCompleted <= totalCases){
-        LOG.info("----------------------------------------------------------------------------------------------------------------");
-
-        LOG.info("Execution completed for "+(noOfCasesCompleted)+" out of "+
-                 (totalCases)+" tests");
-        LOG.info("----------------------------------------------------------------------------------------------------------------\n");
+      if(++noOfCasesCompleted%100==0 && noOfCasesCompleted <= (totalCases*TestDriver.cmdParam.iterations*TestDriver.cmdParam.clones)){
+        LOG.info("----------------------------------------------------------------------------------------------------------------\nExecution completed for "+(noOfCasesCompleted)+" out of "+
+                 (totalCases*TestDriver.cmdParam.iterations*TestDriver.cmdParam.clones)+" tests\n----------------------------------------------------------------------------------------------------------------");
+        
       }
     }
   }
