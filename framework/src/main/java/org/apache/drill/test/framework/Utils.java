@@ -22,6 +22,7 @@ import org.apache.commons.io.FilenameUtils;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -503,30 +504,11 @@ public class Utils {
 
 	  LOG.debug("Result set data types:");
 	  LOG.debug(Utils.getTypesInStrings(types));
-	  stringBuffer.append(new ColumnList(types, columnLabels).toString() + "\n");
+	  stringBuffer.append(new ColumnList(types, columnLabels).toString()).append("\n");
 
 	  while (resultSet.next()) {
-		List<Object> values = Lists.newArrayList();
-	    for (int i = 1; i <= columnCount; i++) {
-	      try {
-	        if (resultSet.getObject(i) == null) {
-	          values.add(null);
-	          continue;
-	        }
-	        if (resultSet.getMetaData().getColumnType(i) == Types.NVARCHAR) {
-	          values.add(new String(resultSet.getBytes(i), "UTF-16"));
-	        } else {
-	          values.add(new String(resultSet.getBytes(i), "UTF-8"));
-	        }
-	      } catch (Exception e) {
-	        if (resultSet.getMetaData().getColumnType(i) == Types.DATE) {
-	          values.add(resultSet.getDate(i));
-	        } else {
-	          values.add(resultSet.getObject(i));
-	        }
-	      }
-	    }
-		stringBuffer.append(new ColumnList(types, values).toString() + "\n");
+	    List<Object> values = getRowValues(resultSet);
+	    stringBuffer.append(new ColumnList(types, values).toString()).append("\n");
 	  }
 	} catch (IllegalArgumentException | IllegalAccessException e1) {
 		// TODO Auto-generated catch block
@@ -538,7 +520,39 @@ public class Utils {
     }
 	return stringBuffer.toString();
   }
-  
+
+  /**
+   * Collects values of one row from current position of specified result set.
+   *
+   * @param resultSet the source of values
+   * @return list with values of one row from current position of specified resultSet
+   * @throws SQLException if result set is not available.
+   */
+  public static List<Object> getRowValues(ResultSet resultSet) throws SQLException {
+    int columnCount = resultSet.getMetaData().getColumnCount();
+    List<Object> values = new ArrayList<>();
+    for (int i = 1; i <= columnCount; i++) {
+      try {
+        switch (resultSet.getMetaData().getColumnType(i)) {
+          case Types.BINARY:
+          case Types.VARBINARY:
+            byte[] bytes = resultSet.getBytes(i);
+            if (bytes != null) {
+              values.add(new String(bytes, StandardCharsets.UTF_8.name()));
+            } else {
+              values.add(null);
+            }
+            break;
+          default:
+            values.add(resultSet.getObject(i));
+        }
+      } catch (SQLException | UnsupportedEncodingException e) {
+        LOG.error(e.getMessage(), e);
+      }
+    }
+    return values;
+  }
+
   /**
    * Turns a list of types in numerical values into one in strings with semantic
    * content.
