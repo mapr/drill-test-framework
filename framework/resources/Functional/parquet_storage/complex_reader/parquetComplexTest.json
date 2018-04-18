@@ -3,7 +3,8 @@
     "type": "group",
     "description": "Test parquet complex reader",
     "categories": [
-        "functional"
+        "functional",
+	"parquet"
     ],
     "matrices": [
         {

@@ -17,10 +17,10 @@
         }
     ],
     "datasources": [
-	{
+        {
           "mode": "cp",
           "src": "Datasources/morefiles",
           "dest": "morefiles"
-    	}
+        }
     ]
 }
