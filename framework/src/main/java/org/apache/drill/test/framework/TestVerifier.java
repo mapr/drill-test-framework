@@ -168,17 +168,14 @@ public class TestVerifier {
       while (iterator.hasNext()) {
         Map.Entry<ColumnList, Integer> entry = iterator.next();
         ColumnList cl = entry.getKey();
-        int count = entry.getValue();
-        while (count > 0 && check(expectedMap, cl)) {
-          count--;
-        }
+        int count = getUnexpectedCount(expectedMap, entry);
         if (count > 0) {
-          unexpectedList.add(cl);
+          unexpectedList.add(entry.getKey());
           unexpectedCount += count;
         }
       }
       throw new VerificationException(printSummary(unexpectedList, unexpectedCount, 
-    		expectedMap, expectedCount, actualCount, verifyOrderBy));
+    		expectedMap, expectedCount, actualMap, actualCount, verifyOrderBy));
     }
 
     if (checkType) {
@@ -194,7 +191,21 @@ public class TestVerifier {
 		  throws IOException, VerificationException, IllegalAccessException {
     return loadFromFileToMap(filename, false);
   }
-
+  
+  /**
+   * Detects the number of unexpected entries in the actual map
+   *
+   * @param count
+   * 	    value of a particular entry in actual map 
+   * @return unexpected count for that entry
+   */
+  private int getUnexpectedCount(Map<ColumnList, Integer> map, Map.Entry<ColumnList, Integer> entry){
+   if (map.containsKey(entry.getKey())) {
+     return entry.getValue() - map.get(entry.getKey());   
+   }    
+   return entry.getValue(); 
+  }
+	 
   /**
    * Loads content of a result set file into a Map object.
    * 
@@ -284,27 +295,16 @@ public class TestVerifier {
     reader.close();
     return map;
   }
-
-  private boolean check(Map<ColumnList, Integer> map, ColumnList entry) {
-    if (map.containsKey(entry)) {
-      map.put(entry, map.get(entry) - 1);
-      if (map.get(entry) == 0) {
-        map.remove(entry);
-      }
-      return true;
-    }
-    return false;
-  }
-
+  
   private String printSummary(List<ColumnList> unexpectedList,
       int unexpectedCount, Map<ColumnList, Integer> expectedMap,
-      int expectedCount, int actualCount, boolean verifyOrderBy) {
+      int expectedCount, Map<ColumnList, Integer> actualMap, int actualCount, boolean verifyOrderBy) {
     StringBuilder sb = new StringBuilder();
     if (testStatus == TestStatus.EXECUTION_FAILURE
         || testStatus == TestStatus.TIMEOUT) {
       return null;
     }
-    int missingCount = getMissingCount(expectedMap);
+    int missingCount = getMissingCount(expectedMap,actualMap);
     if (testStatus == TestStatus.PASS) {
       return null;
     }
@@ -330,7 +330,7 @@ public class TestVerifier {
       sb.append("\n\nThese rows are missing (first " + MAX_MISMATCH_SIZE + "):");
       count = 0;
       for (Map.Entry<ColumnList, Integer> entry : expectedMap.entrySet()) {
-        sb.append("\n" + entry.getKey() + " (" + entry.getValue() + " time(s))");
+        sb.append("\n" + entry.getKey() + " (" + entry.getValue() + " occurence(s))");
         count++;
         if (count == MAX_MISMATCH_SIZE) {
           break;
@@ -340,13 +340,27 @@ public class TestVerifier {
     return sb.toString();
   }
 
-  private static int getMissingCount(Map<ColumnList, Integer> map) {
+  private static int getMissingCount(Map<ColumnList, Integer> expectedMap, Map<ColumnList, Integer> actualMap) {
     int missingCount = 0;
-    Iterator<Integer> iterator = map.values().iterator();
+    Iterator<Map.Entry<ColumnList, Integer>> iterator = expectedMap.entrySet().iterator();
+    
     while (iterator.hasNext()) {
-      missingCount += iterator.next();
+      Map.Entry<ColumnList, Integer> entry = iterator.next();
+      if(actualMap.containsKey(entry.getKey())){
+        int actualCount = actualMap.get(entry.getKey());
+	if(entry.getValue() > actualCount){
+	  missingCount += (entry.getValue() - actualCount);
+	  entry.setValue((entry.getValue() - actualCount));
+	}
+	else{
+	  iterator.remove();
+	}
+      }
+      else{
+        missingCount += entry.getValue();
+      }
     }
-    return missingCount;
+    return missingCount;  
   }
 
   private static int compareTo(ColumnList list1, ColumnList list2,
