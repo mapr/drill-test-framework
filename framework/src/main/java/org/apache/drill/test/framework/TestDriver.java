@@ -856,35 +856,9 @@ public class TestDriver {
       LOG.debug(Utils.getTypesInStrings(types));
 
       while (resultSet.next()) {
-        List<Object> values = Lists.newArrayList();
-        for (int i = 1; i <= columnCount; i++) {
-          try {
-            if (resultSet.getObject(i) == null) {
-              values.add(null);
-              continue;
-            }
-            if (resultSet.getMetaData().getColumnType(i) == Types.NVARCHAR) {
-              values.add(new String(resultSet.getBytes(i), "UTF-16"));
-            } else {
-              values.add(new String(resultSet.getBytes(i), "UTF-8"));
-            }
-          } catch (Exception e) {
-            try {
-			  if (resultSet.getMetaData().getColumnType(i) == Types.DATE) {
-				values.add(resultSet.getDate(i));
-              } else {
-				values.add(resultSet.getObject(i));
-              }
-			} catch (SQLException e1) {
-			  LOG.error(e.getMessage());
-			  e1.printStackTrace();
-			}
-          }
-        }
+        List<Object> values = Utils.getRowValues(resultSet);
         ColumnList columnList = new ColumnList(types, values);
-        if (writer != null) {
-          writer.write(columnList + "\n");
-        }
+        writer.write(columnList + "\n");
         for (int i = 0; i < 3; i++) {
           memUsage[0][i] = memUsage[1][i];
           memUsage[1][i] = (Long) values.get(i)/1024/1024;
