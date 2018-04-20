@@ -312,7 +312,7 @@ public class TestVerifier {
     sb.append("\n         Number of matching rows: "
         + (expectedCount - missingCount));
     sb.append("\n          Number of rows missing: " + missingCount);
-    sb.append("\n       Number of rows unexpected: " + unexpectedList.size());
+    sb.append("\n       Number of rows unexpected: " + unexpectedCount);
     int count = 0;
     if (!unexpectedList.isEmpty()) {
       sb.append("\n\nThese rows are not expected (first " + MAX_MISMATCH_SIZE
