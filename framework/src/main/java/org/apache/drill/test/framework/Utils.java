@@ -304,6 +304,24 @@ public class Utils {
             drillTestCases.add(new DrillTestCase(modeler, testQueryFile.getAbsolutePath(), expectedFileName));
           }
         }
+        // Check for query files that are not marked failed, but have expected
+        // files that are marked fail.  This can occur if a query file passes
+        // with the Apache JDBC driver but not the Simba JDBC driver.
+        if ((TestDriver.cmdParam.runFailed == true) &&
+            (TestDriver.cmdParam.driverExt != null)) {
+          testQueryFiles = searchFiles(testDefFile.getParentFile(),
+                  originalQueryFileExtension);
+          for (File testQueryFile : testQueryFiles) {
+            //Expected File to find based on the original query Extension
+            String expectedFileName = getExpectedFileIfFail(testQueryFile.getAbsolutePath(),
+                      originalQueryFileExtension, expectedFileExtension,
+                      TestDriver.cmdParam.driverExt);
+            if (expectedFileName != null) {
+              drillTestCases.add(new DrillTestCase(modeler, testQueryFile.getAbsolutePath(),
+                                 expectedFileName));
+            }
+          }
+        }
       }
     }
     if (drillTestCases.size() == 0) {
@@ -404,6 +422,30 @@ public class Utils {
             }
 	  }
   
+  private static String getExpectedFileIfFail(String queryFile, String queryFileExt,
+              String expectedFileExt, String driverExt) {
+            int idx = queryFile.indexOf(queryFileExt.substring(2));
+            if(idx<0){//Check if queryFileExt not found as a substring in queryFile and if idx is negative if negative return empty string and the queryFile will not be added to tests scheduled to run
+              return "";
+            }
+            String Filename = null;
+            String FilenameJDBC = null;
+            // if expected result file with driver extension and .fail exists,
+            // the driver did not return the correct results.
+            // check if it can pass now
+            //   i.e. query.e_tsv.sjdbc.fail exists, check if driver now returns
+            //   rows matching query.e_tsv
+            Filename = queryFile.substring(0, idx).concat(expectedFileExt.substring(2));
+            FilenameJDBC = Filename.concat(".").concat(driverExt).concat(".fail");
+            File driverFile = new File(FilenameJDBC);
+            if (driverFile.exists()) {
+              // use original expected results file
+              return queryFile.substring(0, idx).concat(expectedFileExt.substring(2));
+            } else {
+              return null;
+            }
+          }
+
   /**
    * Computes difference between two dates
    * 
