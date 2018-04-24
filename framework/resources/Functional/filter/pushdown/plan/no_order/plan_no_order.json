@@ -7,10 +7,10 @@
   ],
   "matrices": [
     {
-      "query-file": ".*.sql",
+      "query-file": ".*.sql_no",
       "schema": "dfs",
       "output-format": "tsv",
-      "expected-file": ".*.res",
+      "expected-file": ".*.res_no",
       "verification-type": [
         "regex-no-order"
       ]
@@ -35,6 +35,11 @@
       "mode": "cp",
       "src": "Datasources/parquet_storage/DRILL_6174/DRILL_6174_test_data",
       "dest": "parquet_storage/DRILL_6174/DRILL_6174_test_data"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/DRILL_6259/DRILL_6259_test_data",
+      "dest": "parquet_storage/DRILL_6259/DRILL_6259_test_data"
     }
   ]
 }
