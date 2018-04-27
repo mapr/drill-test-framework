@@ -1,1 +1,1 @@
-.*HiveDrillNativeParquetScan.*numPartitions=1.*
+.*HiveDrillNativeParquetScan.*numFiles=1.*
