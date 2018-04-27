@@ -1,1 +1,1 @@
-.*HiveDrillNativeParquetScan.*numPartitions=84.*
+.*numFiles.*=.*84.*.*DynamicPojoRecordReader.*
