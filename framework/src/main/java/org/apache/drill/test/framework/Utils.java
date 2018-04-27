@@ -72,7 +72,7 @@ import javax.net.ssl.*;
  *
  */
 public class Utils {
-  private static final Logger LOG = Logger.getLogger(Utils.class);
+  private static final Logger LOG = Logger.getLogger("DrillTestLogger");
   private static final Map<Integer, String> sqlTypes;
   private static final Map<Integer, String> sqlNullabilities;
   private static HttpClient client;
@@ -603,14 +603,16 @@ public class Utils {
    * @throws InterruptedException
    */
   public static void updateDrillStoragePlugins(String templatePath) throws InterruptedException {
-    LOG.info(">> Path: " + templatePath + "\n");
+    LOG.info("\n>> Path: " + templatePath + "\n");
     File[] templateFiles = new File(templatePath).listFiles();
     for (File templateFile : templateFiles) {
       String filename = templateFile.getName();
       LOG.info(">> Updating File: " + filename);
       String pluginType = filename.substring(0, filename.indexOf('-'));
       boolean isSuccess = Utils.updateDrillStoragePlugin(templateFile.getAbsolutePath(), pluginType, DrillTestDefaults.FS_MODE);
-      LOG.info(">> Update file " + filename + (isSuccess ? " succeeded" : " failed"));
+      if(!isSuccess){
+        LOG.info(">> Update file " + filename + " failed");
+      }
       Thread.sleep(200);
     }
   }

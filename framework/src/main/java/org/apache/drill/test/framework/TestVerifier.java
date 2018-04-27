@@ -49,9 +49,8 @@ import org.apache.log4j.Logger;
  * 
  */
 public class TestVerifier {
-  private static final Logger LOG = Logger.getLogger(TestVerifier.class);
+  private static final Logger LOG = Logger.getLogger("DrillTestLogger"); 
   private static final int MAX_MISMATCH_SIZE = 10;
-  private static final int ALLOWED_ACTUAL_PLAN_VERIFICATION_LENGTH = 1060;
   public TestStatus testStatus = TestStatus.PENDING;
   private int mapSize = 0;
   private List<ColumnList> resultSet = null;
@@ -698,8 +697,6 @@ public class TestVerifier {
     if (verified) {
       return TestStatus.PASS;
     }
-    actual = actual.substring(0,ALLOWED_ACTUAL_PLAN_VERIFICATION_LENGTH);
-    actual = actual + "\n...";
     sb.append("\nExpected and actual text plans are different.");
     sb.append("\nExpected:\n" + expected);
     sb.append("\nActual:\n" + actual);

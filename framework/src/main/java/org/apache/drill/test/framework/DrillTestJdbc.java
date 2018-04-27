@@ -39,10 +39,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-
-
 public class DrillTestJdbc implements DrillTest {
-  private static final Logger LOG = Logger.getLogger(DrillTestJdbc.class);
+  private static final Logger LOG = Logger.getLogger("DrillTestLogger");
   private static final String LINE_BREAK = "------------------------------------------------------------------------";
 
   private ConnectionPool connectionPool;
@@ -165,7 +163,7 @@ public class DrillTestJdbc implements DrillTest {
         LOG.info("[" + testStatus + "] (" + stopwatch + ") " + modeler.queryFilename + " (ConnectionID: " + connection.hashCode() + ")");
       }
 
-      if((++countTestsCompleted %100==0 && countTestsCompleted <= (totalCases*TestDriver.cmdParam.iterations*TestDriver.cmdParam.clones))){
+      if((++countTestsCompleted %100==0 && countTestsCompleted <= (totalCases*TestDriver.cmdParam.iterations*TestDriver.cmdParam.clones))||(countTestsCompleted>=totalCases && countTestsCompleted%totalCases==0)){
         LOG.info(LINE_BREAK+"\nExecution completed for " + countTestsCompleted + " (out of " + (totalCases*TestDriver.cmdParam.iterations*TestDriver.cmdParam.clones) + ") tests\n"+LINE_BREAK);
       }
     }

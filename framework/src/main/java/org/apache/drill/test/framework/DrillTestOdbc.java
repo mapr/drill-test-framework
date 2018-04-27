@@ -42,8 +42,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DrillTestOdbc implements DrillTest{
-  private static final Logger LOG = Logger.getLogger(DrillTestOdbc.class);
-
+  private static final Logger LOG = Logger.getLogger("DrillTestLogger");
   private String query = null;
   private String outputFilename;
   private volatile TestStatus testStatus = TestStatus.PENDING;
@@ -152,7 +151,7 @@ public class DrillTestOdbc implements DrillTest{
 
       LOG.info(testStatus + " (" + stopwatch + ") " + modeler.script + " " +
                modeler.queryFilename);
-      if(++noOfCasesCompleted%100==0 && noOfCasesCompleted <= (totalCases*TestDriver.cmdParam.iterations*TestDriver.cmdParam.clones)){
+      if((++noOfCasesCompleted%100==0 && noOfCasesCompleted <= (totalCases*TestDriver.cmdParam.iterations*TestDriver.cmdParam.clones))||(noOfCasesCompleted>=totalCases && noOfCasesCompleted%totalCases==0)){
         LOG.info("----------------------------------------------------------------------------------------------------------------\nExecution completed for "+(noOfCasesCompleted)+" out of "+
                  (totalCases*TestDriver.cmdParam.iterations*TestDriver.cmdParam.clones)+" tests\n----------------------------------------------------------------------------------------------------------------");
         
