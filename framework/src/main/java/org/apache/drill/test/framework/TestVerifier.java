@@ -49,7 +49,7 @@ import org.apache.log4j.Logger;
  * 
  */
 public class TestVerifier {
-  private static final Logger LOG = Logger.getLogger(TestVerifier.class);
+  private static final Logger LOG = Logger.getLogger("DrillTestLogger"); 
   private static final int MAX_MISMATCH_SIZE = 10;
   public TestStatus testStatus = TestStatus.PENDING;
   private int mapSize = 0;

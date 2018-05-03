@@ -29,8 +29,7 @@ import java.util.Properties;
 import java.util.Queue;
 
 public class ConnectionPool implements AutoCloseable {
-  private static final Logger LOG = Logger.getLogger(ConnectionPool.class);
-
+  private static final Logger LOG = Logger.getLogger("DrillTestLogger");
   private final Map<String, Queue<Connection>> connections;
   private Properties connectionProperties;
 

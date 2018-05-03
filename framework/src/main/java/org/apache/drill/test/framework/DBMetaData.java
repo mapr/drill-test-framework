@@ -27,8 +27,8 @@ import org.apache.log4j.Logger;
 */
 
 public class DBMetaData {
-	private static final Logger LOG = Logger.getLogger(DBMetaData.class);
-	private DatabaseMetaData md = null;
+	private static final Logger LOG = Logger.getLogger("DrillTestLogger");
+        private DatabaseMetaData md = null;
 	public DBMetaData(DatabaseMetaData md) {
 		this.md = md;
 	}
