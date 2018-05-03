@@ -40,7 +40,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DrillTestJdbc implements DrillTest {
-  private static final Logger LOG = Logger.getLogger(DrillTestJdbc.class);
+  private static final Logger LOG = Logger.getLogger("DrillTestLogger");
   private static final String LINE_BREAK = "------------------------------------------------------------------------";
 
   private ConnectionPool connectionPool;
@@ -63,6 +63,7 @@ public class DrillTestJdbc implements DrillTest {
   private Random rand = new Random();
   private Statement statement = null;
   private AtomicBoolean doneProcessingResultSet = new AtomicBoolean(false);
+  public static final CmdParam cmdParam = new CmdParam();
   private int id;
   private int totalCases;
   private String queryID;
@@ -162,10 +163,8 @@ public class DrillTestJdbc implements DrillTest {
         LOG.info("[" + testStatus + "] (" + stopwatch + ") " + modeler.queryFilename + " (ConnectionID: " + connection.hashCode() + ")");
       }
 
-      if((++countTestsCompleted %100==0 && countTestsCompleted <= totalCases) || (countTestsCompleted == totalCases)){
-        LOG.info(LINE_BREAK);
-        LOG.info("Execution completed for " + countTestsCompleted + " (out of " + totalCases + ") tests");
-        LOG.info(LINE_BREAK);
+      if((++countTestsCompleted %100==0 && countTestsCompleted <= (totalCases*TestDriver.cmdParam.iterations*TestDriver.cmdParam.clones))||(countTestsCompleted>=totalCases && countTestsCompleted%totalCases==0)){
+        LOG.info(LINE_BREAK+"\nExecution completed for " + countTestsCompleted + " (out of " + (totalCases*TestDriver.cmdParam.iterations*TestDriver.cmdParam.clones) + ") tests\n"+LINE_BREAK);
       }
     }
   }
