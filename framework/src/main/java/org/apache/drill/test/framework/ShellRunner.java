@@ -26,8 +26,8 @@ import java.util.concurrent.Future;
 public enum ShellRunner implements Closeable {
 	INSTANCE;
 
-	private static final Logger LOG = LoggerFactory.getLogger(ShellRunner.class);
-	private ExecutorService executors = Executors.newCachedThreadPool();
+	private static final Logger LOG = LoggerFactory.getLogger("DrillTestLogger");
+        private ExecutorService executors = Executors.newCachedThreadPool();
 
 	public  CmdConsOut execCmd(String cmd)  {
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(cmd), "cmd is invalid");

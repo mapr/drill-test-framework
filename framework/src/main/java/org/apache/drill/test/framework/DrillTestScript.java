@@ -39,8 +39,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DrillTestScript implements DrillTest {
-  private static final Logger LOG = Logger.getLogger(DrillTestScript.class);
-
+  private static final Logger LOG = Logger.getLogger("DrillTestLogger");
   private String query;
   private String outputFilename;
   private volatile TestStatus testStatus = TestStatus.PENDING;
