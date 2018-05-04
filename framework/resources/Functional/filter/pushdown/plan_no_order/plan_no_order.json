@@ -7,10 +7,10 @@
   ],
   "matrices": [
     {
-      "query-file": ".*.sql_no",
+      "query-file": ".*.sql",
       "schema": "dfs",
       "output-format": "tsv",
-      "expected-file": ".*.res_no",
+      "expected-file": ".*.e_tsv",
       "verification-type": [
         "regex-no-order"
       ]
