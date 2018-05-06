@@ -1,0 +1,5 @@
+Scan
+path=.*parquet_storage/DRILL_6259/DRILL_6259_test_data/d1/DRILL_6259_test_data.parquet
+path=.*parquet_storage/DRILL_6259/DRILL_6259_test_data/d2/DRILL_6259_test_data.parquet
+numFiles=2
+numRowGroups=2
