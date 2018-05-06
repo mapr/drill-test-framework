@@ -1,1 +1,1 @@
-select hex(floor(24710.35)) from `lineitem_nodate.parquet` limit 1;
+select hex(floor(cast(24710.35 as double))) from `lineitem_nodate.parquet` limit 1;

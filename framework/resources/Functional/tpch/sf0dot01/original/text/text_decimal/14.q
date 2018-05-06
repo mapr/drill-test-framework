@@ -7,11 +7,11 @@ create or replace view customer_decimal_14 as select cast(columns[0] as int) c_c
 create or replace view orders_decimal_14 as select cast(columns[0] as int) o_orderkey, cast(columns[1] as int) o_custkey, columns[2] o_orderstatus, cast(columns[3] as decimal(15,2)) o_totalprice, cast(columns[4] as date)o_orderdate, columns[5] o_orderpriority, columns[6] o_clerk, cast(columns[7] as int) o_shippriority, columns[8] o_comment from `orders.tbl`;
 create or replace view lineitem_decimal_14 as select cast(columns[0] as int) l_orderkey, cast(columns[1] as int) l_partkey, cast(columns[2] as int) l_suppkey, cast(columns[3] as int) l_linenumber, cast(columns[4] as decimal(15,2)) l_quantity, cast(columns[5] as decimal(15,2)) l_extendedprice, cast(columns[6] as decimal(15,2)) l_discount, cast(columns[7] as decimal(15,2)) l_tax, columns[8] l_returnflag, columns[9] l_linestatus, cast(columns[10] as date) l_shipdate, cast(columns[11] as date) l_commitdate, cast(columns[12] as date) l_receiptdate, columns[13] l_shipinstruct, columns[14] l_shipmode, columns[15] l_comment from `lineitem.tbl`;
 select
-  100.00 * sum(case
+  cast(100.00 * sum(case
     when p.p_type like 'PROMO%'
       then l.l_extendedprice * (1 - l.l_discount)
     else 0
-  end) / sum(l.l_extendedprice * (1 - l.l_discount)) as promo_revenue
+  end) as double) / sum(l.l_extendedprice * (1 - l.l_discount)) as promo_revenue
 from
   lineitem_decimal_14 l,
   part_decimal_14 p
