@@ -16,7 +16,7 @@ from
   (
     select
       extract(year from o.o_orderdate) as o_year,
-      l.l_extendedprice * (1 - l.l_discount) as volume,
+      cast((l.l_extendedprice * (1 - l.l_discount)) as double) as volume,
       n2.n_name as nation
     from
       part_decimal_08 p,
