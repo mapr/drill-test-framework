@@ -1,5 +1,5 @@
 {
-  "testId": "partitionDirectoryParquetPlan",
+  "testId": "partitionDirectoryParquetPlanNoOrder",
   "type": "group",
   "description": "Test partition directory queries",
   "categories": [
@@ -7,10 +7,10 @@
   ],
   "matrices": [
     {
-      "query-file": ".*.q",
+      "query-file": ".*.sql.explain",
       "schema": "dfs",
       "output-format": "tsv",
-      "expected-file": ".*.e_tsv",
+      "expected-file": ".*.plan",
       "verification-type": [
         "regex-no-order"
       ]

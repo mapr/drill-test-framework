@@ -7,7 +7,7 @@
   ],
   "matrices": [
     {
-      "query-file": ".*.q",
+      "query-file": ".*.sql",
       "schema": "dfs",
       "output-format": "tsv",
       "expected-file": ".*.e_tsv",
@@ -36,6 +36,11 @@
       "mode": "cp",
       "src": "Datasources/parquet_storage/DRILL-6118/DRILL_6118_data_source.csv",
       "dest": "parquet_storage/DRILL_6118/DRILL_6118_data_source.csv"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/DRILL_3855/DRILL_3855_test_data",
+      "dest": "parquet_storage/DRILL_3855/DRILL_3855_test_data"
     },
     {
       "mode": "gen",

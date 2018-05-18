@@ -1,0 +1,26 @@
+{
+  "testId": "partitionDirectoryParquetPlan",
+  "type": "group",
+  "description": "Test partition directory queries",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql.explain",
+      "schema": "dfs",
+      "output-format": "tsv",
+      "expected-file": ".*.plan",
+      "verification-type": [
+        "regex"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/DRILL_3855/DRILL_3855_test_data",
+      "dest": "parquet_storage/DRILL_3855/DRILL_3855_test_data"
+    }
+  ]
+}
