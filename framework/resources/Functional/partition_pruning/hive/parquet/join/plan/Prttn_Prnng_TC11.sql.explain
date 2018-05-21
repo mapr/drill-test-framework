@@ -1,0 +1,1 @@
+explain plan for SELECT * FROM hive.`h_tab1` t1 JOIN hive.`h_tab2` t2 ON t1.y=t2.y WHERE (t2.y=1987 or t2.y=1990);

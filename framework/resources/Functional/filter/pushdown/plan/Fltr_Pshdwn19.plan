@@ -1,0 +1,1 @@
+.*Scan\W*groupscan=\W*ParquetGroupScan\W*entries=\W*ReadEntryWithPath\W*path=/drill/testdata/ctas/parquet/DRILL_6173/tab1/0_0_(16|15).parquet\W*ReadEntryWithPath\W*path=/drill/testdata/ctas/parquet/DRILL_6173/tab1/0_0_(16|15).parquet\W*selectionRoot=maprfs:/drill/testdata/ctas/parquet/DRILL_6173/tab1\W*numFiles=2.*
