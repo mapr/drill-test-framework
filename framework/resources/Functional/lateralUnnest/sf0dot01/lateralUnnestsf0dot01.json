@@ -10,7 +10,7 @@
             "query-file": ".*.q",
             "schema": "dfs.drillTestDirLateralsf001",
             "output-format": "tsv",
-            "expected-file": ".*.e_tsv",
+            "expected-file": ".*.e",
             "verification-type": [
                 "in-memory"
             ]
