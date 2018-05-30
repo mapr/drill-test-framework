@@ -7,10 +7,10 @@
   ],
   "matrices": [
     {
-      "query-file": ".*.sql",
+      "query-file": ".*.sql.explain",
       "schema": "dfs.subqueries",
       "output-format": "tsv",
-      "expected-file": ".*.e_tsv",
+      "expected-file": ".*.plan",
       "verification-type": [
         "regex"
       ]
@@ -33,8 +33,18 @@
       "dest": "parquet_storage/DRILL_6118/DRILL_6118_complex.parquet"
     },
     {
+      "mode": "cp",
+      "src": "Datasources/ctas/PRTTN.csv",
+      "dest": "/drill/testdata/ctas/parquet/PRTTN.csv"
+    },
+    {
       "mode": "gen",
       "src": "Datasources/parquet_storage/DRILL-6118/DRILL_6118_execute_ddl.sh"
+    },
+    {
+      "mode": "gen",
+      "src": "Datasources/ctas/create_test_data.sh create_pushDownData.ddl ctas_parquet /drill/testdata/ctas/parquet/",
+      "dest": ""
     },
     {
       "mode": "cp",
