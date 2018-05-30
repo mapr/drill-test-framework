@@ -1,0 +1,34 @@
+{
+    "testId": "jsonNaNInf_positive_cases",
+    "type": "group",
+    "description": "Functional tests to verify NaN/Infinity/-Infinity Json types",
+    "submit-type": "jdbc",
+    "categories": [
+        "functional",
+        "hive"
+    ],
+    "dependencies" : ["hive"],
+    "matrices": [
+        {
+            "query-file": ".*.sql.explain",
+            "schema": "dfs.ctas_parquet",
+            "output-format": "tsv",
+            "expected-file": ".*.plan",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources":[
+        {
+            "mode": "cp",
+            "src": "Datasources/ctas/PRTTN.csv",
+            "dest": "/drill/testdata/ctas/parquet/PRTTN.csv"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/ctas/create_test_data.sh  create_pruning.ddl ctas_parquet /drill/testdata/ctas/parquet /Datasources/ctas/hive_ext.ddl",
+            "dest": ""
+         }
+    ]
+}
