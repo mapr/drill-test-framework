@@ -20,6 +20,16 @@
         "writable" : true,
         "defaultInputFormat" : "parquet"
       },
+      "drillTestDirLateralsf001Json" : {
+        "location" : "/drill/testdata/lateralUnnest/sf0dot01/json/",
+        "writable" : true,
+        "defaultInputFormat" : "json"
+      },
+      "drillTestDirLateralsf1Json" : {
+        "location" : "/drill/testdata/lateralUnnest/sf1/json/",
+        "writable" : true,
+        "defaultInputFormat" : "json"
+      },
       "drillTestDirAmplab" : {
         "location" : "/drill/testdata/amplab",
         "writable" : true,

@@ -1,1 +1,1 @@
-select f.c_custkey, f.c_name, f.o.o_orderkey as o_orderkey, f.o.O_ORDERPRIORITY as O_ORDERPRIORITY from (select c_custkey, c_name, flatten(c_orders) as o  from customer) f WHERE f.c_mktsegment like '%AUTOMOBILE%' OR f.c_acctbal between 10 and 1000 ;
+select f.c_custkey, f.c_name, f.o.o_orderkey as o_orderkey, f.o.O_ORDERPRIORITY as O_ORDERPRIORITY from (select c_custkey, c_name,c_mktsegment,c_acctbal, flatten(c_orders) as o  from customer) f WHERE f.c_mktsegment like '%AUTOMOBILE%' OR f.c_acctbal between 10 and 1000 ;

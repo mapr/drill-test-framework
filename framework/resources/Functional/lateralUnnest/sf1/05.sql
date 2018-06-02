@@ -1,1 +1,1 @@
-select f.c_custkey, f.c_name, f.o.o_orderkey as o_orderkey, f.o.o_totalprice as as o_totalprice from (select c_custkey, c_name,c_acctbal, flatten(c_orders) as o from customer) f WHERE f.o.O_TOTALPRICE in (10,20,30,40,100,89230.03,270087.44) and WHERE f.c_acctbal between 10 and 100;
+select f.c_custkey, f.c_name, f.o.o_orderkey as o_orderkey, f.o.o_totalprice as o_totalprice from (select c_custkey, c_name,c_acctbal, flatten(c_orders) as o from customer) f WHERE f.o.O_TOTALPRICE in (10,20,30,40,100,89230.03,270087.44) and f.c_acctbal between 10 and 100;
