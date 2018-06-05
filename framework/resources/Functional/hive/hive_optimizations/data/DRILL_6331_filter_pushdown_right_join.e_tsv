@@ -1,0 +1,5 @@
+null	null	null	null	null	null	null	3	null	true	null	2.458	2016-01-01 22:57:53.0	Partition_one
+null	null	null	null	null	null	null	4	-27	true	null	3.459	2016-01-02 22:58:52.0	Partition_one
+null	null	null	null	null	null	null	5	-26	true	2018-01-03	4.46	2016-01-03 22:59:51.0	Partition_one
+null	null	null	null	null	null	null	9	3	null	2016-03-01	3.159	2016-01-07 23:03:47.0	Partition_two
+null	null	null	null	null	null	null	10	4	false	2016-03-02	4.06	null	Partition_two

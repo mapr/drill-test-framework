@@ -1,0 +1,10 @@
+Scan
+HiveDrillNativeParquetScan
+path=/user/hive/warehouse/drill_6331_managed_table/part_col=Partition_two/000000_0
+numFiles=1
+numRowGroups=1
+Scan
+HiveDrillNativeParquetScan
+path=/drill/testdata/hive_storage/DRILL_6331/DRILL_6331_external_table/part_col=Partition_two/000000_0
+numFiles=1
+numRowGroups=1
