@@ -1,0 +1,8 @@
+Scan
+HiveDrillNativeParquetScan
+path=/user/hive/warehouse/drill_6331_managed_table/part_col=Partition_one/000000_0
+path=/user/hive/warehouse/drill_6331_managed_table/part_col=Partition_three/000000_0
+path=/user/hive/warehouse/drill_6331_managed_table/part_col=Partition_two/000000_0
+numFiles=3
+numRowGroups=3
+columns=\[`int_col`, `ts_col`\]

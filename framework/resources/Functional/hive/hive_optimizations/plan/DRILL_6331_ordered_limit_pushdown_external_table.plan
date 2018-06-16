@@ -1,0 +1,7 @@
+Scan
+HiveDrillNativeParquetScan
+path=.*/hive_storage/DRILL_6331/DRILL_6331_external_table/part_col=Partition_one/000000_0
+path=.*/hive_storage/DRILL_6331/DRILL_6331_external_table_outer_partition/part_col=Partition_three/000000_0
+path=.*/hive_storage/DRILL_6331/DRILL_6331_external_table/part_col=Partition_two/000000_0
+numFiles=3
+numRowGroups=3
