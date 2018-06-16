@@ -1,0 +1,11 @@
+Scan
+HiveDrillNativeParquetScan
+path=.*/hive_storage/DRILL_6331/DRILL_6331_external_table/part_col=Partition_one/000000_0
+path=.*/hive_storage/DRILL_6331/DRILL_6331_external_table/part_col=Partition_two/000000_0
+numFiles=2
+numRowGroups=2
+Scan
+HiveScan
+tableName:drill_6331_managed_empty_table
+numPartitions=0
+partitions= null

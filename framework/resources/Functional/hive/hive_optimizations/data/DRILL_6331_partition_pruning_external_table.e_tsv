@@ -1,0 +1,10 @@
+1	-30	null	2017-12-30	0.456	null	Partition_one
+2	-29	true	2017-12-31	1.457	2015-12-31 22:56:54.0	Partition_one
+3	null	true	null	2.458	2016-01-01 22:57:53.0	Partition_one
+4	-27	true	null	3.459	2016-01-02 22:58:52.0	Partition_one
+5	-26	true	2018-01-03	4.46	2016-01-03 22:59:51.0	Partition_one
+11	999	true	2017-02-27	1.357	2016-01-09 23:05:45.0	Partition_three
+12	1000	false	2017-02-28	0.258	2016-01-10 23:06:44.0	Partition_three
+13	null	false	2017-03-01	-0.841	2016-01-11 23:07:43.0	Partition_three
+14	1002	true	2017-03-02	-1.94	2016-01-12 23:08:42.0	Partition_three
+15	1003	true	2017-03-03	-3.039	2016-01-13 23:09:41.0	Partition_three
