@@ -1,6 +1,5 @@
 cp_describe	\{
   \"type\" : \"file\",
-  \"enabled\" : true,
   \"connection\" : \"classpath:///\",
   \"config\" : null,
   \"formats\" : \{
@@ -31,4 +30,5 @@ cp_describe	\{
       \"delimiter\" : \",\"
     \}
   \}
+  \"enabled\" : true
 \}
