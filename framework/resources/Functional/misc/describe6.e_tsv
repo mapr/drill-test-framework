@@ -1,6 +1,5 @@
 dfs_describe.drillTestDirDSV	\{
   \"type\" : \"file\",
-  \"enabled\" : true,
   \"connection\" : \"maprfs:///\",
   \"config\" : null,
   \"formats\" : \{
@@ -48,7 +47,9 @@ dfs_describe.drillTestDirDSV	\{
       \"extensions\" : \[ \"json\" \]
     \}
   \},
+  \"enabled\" : true,
   \"location\" : \"/drill/testdata/describe/dsv\",
   \"writable\" : true,
-  \"defaultInputFormat\" : \"dsv\"
+  \"defaultInputFormat\" : \"dsv\",
+  \"allowAccessOutsideWorkspace\" : false
 \}

@@ -1,6 +1,5 @@
 dfs_describe.drillTestDirNull	\{
   \"type\" : \"file\",
-  \"enabled\" : true,
   \"connection\" : \"maprfs:///\",
   \"config\" : null,
   \"formats\" : \{
@@ -48,7 +47,9 @@ dfs_describe.drillTestDirNull	\{
       \"extensions\" : \[ \"json\" \]
     \}
   \},
+  \"enabled\" : true,
   \"location\" : \"/drill/testdata/describe/null\",
   \"writable\" : true,
-  \"defaultInputFormat\" : null
+  \"defaultInputFormat\" : null,
+  \"allowAccessOutsideWorkspace\" : false
 \}
