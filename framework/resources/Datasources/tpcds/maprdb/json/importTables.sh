@@ -67,30 +67,30 @@ then
   mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/web_sales
   mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/catalog_sales
 else
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/customer
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/customer_address
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/customer_demographics
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/household_demographics
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/item
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/promotion
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/time_dim
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/date_dim
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/store
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/store_sales
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/warehouse
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/ship_mode
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/reason
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/income_band
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/call_center
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/web_site
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/store_returns
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/web_page
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/catalog_page
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/inventory
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/catalog_returns
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/web_returns
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/web_sales
-  su $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/catalog_sales
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/customer
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/customer_address
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/customer_demographics
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/household_demographics
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/item
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/promotion
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/time_dim
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/date_dim
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/store
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/store_sales
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/warehouse
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/ship_mode
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/reason
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/income_band
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/call_center
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/web_site
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/store_returns
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/web_page
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/catalog_page
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/inventory
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/catalog_returns
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/web_returns
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/web_sales
+  sudo -u $user mapr dbshell create /drill/testdata/tpcds_sf$sf/maprdb/json/catalog_sales
 fi
 
 if [ "$user" == "root" ]
