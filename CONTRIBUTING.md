@@ -22,6 +22,7 @@
 ## Add testcases
 A testcase consists a query file and a baseline file containing the expected result. The query file contains a list of SQL statements. Only one query statement that proceeded with a "--@test" line (can't contain ";") is verified against the baseline. If no query meets that requirement, the middle query is verified. Here is an example:
 
+```
 -- Some setup queries
 setup query one;
 ...
@@ -30,6 +31,7 @@ select * from table;
 -- Some teardown queries
 teardown query one;
 ...
+```
 
 
 ## Structure of test definiton files. 
