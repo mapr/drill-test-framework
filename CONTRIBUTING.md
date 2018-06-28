@@ -34,7 +34,7 @@ teardown query one;
 ```
 
 
-## Structure of test definiton files. 
+## Structure of test definition files. 
 A test definition file is a JSON file that defines one or a set of tests within a directory. The framework scans for files with .json extension in the specified location(s) and executes all test(s) defined. 
 
  <pre><code>
