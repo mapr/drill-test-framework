@@ -268,21 +268,3 @@ This query cannot be validated because the order-by has an expression,
 
 This query cannot be validated because the "gbyi" column is not projected so
 the Test Framework cannot determine what the order should be.
-
-
-## Authors
-
-[Zhiyong](https://github.com/zhiyongliu)  
-[Chun](https://github.com/cchang738)  
-[Krystal](https://github.com/krystaln)  
-[Ramana](https://github.com/inramana)  
-[Abhishek](https://github.com/agirish)  
-[Vicky](https://github.com/vmarkman)  
-[Suresh](https://github.com/sollala)  
-[Khurram](https://github.com/kfaraaz)  
-[Rahul](https://github.com/rchallapalli)  
-[Steven](https://github.com/StevenMPhillips)  
-[Jacques](https://github.com/jacques-n)  
-[Jason](https://github.com/jaltekruse)  
-[Sudheesh](https://github.com/sudheeshkatkam)   
-[Robert](https://github.com/rhou1)   
