@@ -1,3 +1,3 @@
-.*UnionAll\(all=\[true\]\).*
-.*Scan\(groupscan=\[ParquetGroupScan \[entries=\[ReadEntryWithPath \[path=/drill/testdata/ctas_auto_partition/tpch_single_partition1/drill4449.*numFiles=5.*numRowGroups=5, usedMetadataFile=true, cacheFileRoot=/drill/testdata/ctas_auto_partition/tpch_single_partition1/drill4449, columns=\[`l_discount`.*
-.*Scan\(groupscan=\[ParquetGroupScan \[entries=\[ReadEntryWithPath \[path=/drill/testdata/ctas_auto_partition/tpch_single_partition1/drill4449/.*numFiles=8, numRowGroups=8, usedMetadataFile=true, cacheFileRoot=/drill/testdata/ctas_auto_partition/tpch_single_partition1/drill4449, columns=\[`l_discount`.*
+.*UnionAll.*all.*true.*
+.*Scan.*ParquetGroupScan.*path.*ctas_auto_partition/tpch_single_partition1/drill4449.*numFiles=5.*numRowGroups=5.*usedMetadataFile=true.*cacheFileRoot.*ctas_auto_partition/tpch_single_partition1/drill4449.*columns.*l_discount.*
+.*Scan.*ParquetGroupScan.*path.*ctas_auto_partition/tpch_single_partition1/drill4449.*numFiles=8.*numRowGroups=8.*usedMetadataFile=true.*cacheFileRoot.*ctas_auto_partition/tpch_single_partition1/drill4449.*columns.*l_discount.*
