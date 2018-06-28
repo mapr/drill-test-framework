@@ -35,7 +35,7 @@ Example:
   -d data generation (required on first run and upon pulling in new changes. Optional otherwise)
      Here, it turns on data copy and data generation
   -n concurrency (optional)
-     Here, '2' queries can execute concurrently
+     Here, '20' queries can execute concurrently
   -x exclude dependencies (optional)
      Here, any 'hbase' test suites within the specified directory are excluded
   -h help (optional)

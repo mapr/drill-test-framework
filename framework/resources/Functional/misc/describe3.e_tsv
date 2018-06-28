@@ -1,6 +1,5 @@
 dfs_describe.drillTestDir	\{
   \"type\" : \"file\",
-  \"enabled\" : true,
   \"connection\" : \"maprfs:///\",
   \"config\" : null,
   \"formats\" : \{
@@ -48,7 +47,9 @@ dfs_describe.drillTestDir	\{
       \"extensions\" : \[ \"json\" \]
     \}
   \},
-  "location" : "/drill/testdata/",
-  "writable" : true,
-  "defaultInputFormat" : "parquet"
+  \"enabled\" : true,
+  \"location\" : \"/drill/testdata/\",
+  \"writable\" : true,
+  \"defaultInputFormat\" : \"parquet\",
+  \"allowAccessOutsideWorkspace\" : false
 \}

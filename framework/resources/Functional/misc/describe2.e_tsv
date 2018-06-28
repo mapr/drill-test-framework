@@ -1,6 +1,5 @@
 dfs_describe.default	\{
   \"type\" : \"file\",
-  \"enabled\" : true,
   \"connection\" : \"maprfs:///\",
   \"config\" : null,
   \"formats\" : \{
@@ -48,7 +47,9 @@ dfs_describe.default	\{
       \"extensions\" : \[ \"json\" \]
     \}
   \},
+  \"enabled\" : true,
   \"location\" : \"/\",
   \"writable\" : false,
-  \"defaultInputFormat\" : null
+  \"defaultInputFormat\" : null,
+  \"allowAccessOutsideWorkspace\" : false
 \}

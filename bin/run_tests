@@ -9,4 +9,4 @@ cd ${bin}/../
 # java -cp conf/:${JDBC_DRIVER_CP}:framework/target/framework-1.0.0-SNAPSHOT-shaded.jar:${HADOOP_INSTALL_LOC}/lib/* org.apache.drill.test.framework.TestDriver $*
 
 # use the following line when testing apache drill JDBC driver
-java -cp conf/:${DRILL_HOME}/jars/jdbc-driver/drill-jdbc-all-${DRILL_VERSION}.jar:framework/target/framework-1.0.0-SNAPSHOT-shaded.jar:${HADOOP_INSTALL_LOC}/lib/* org.apache.drill.test.framework.TestDriver $*
+java -Xss40m -cp conf/:${DRILL_HOME}/jars/jdbc-driver/drill-jdbc-all-${DRILL_VERSION}.jar:framework/target/framework-1.0.0-SNAPSHOT-shaded.jar:${HADOOP_INSTALL_LOC}/lib/* org.apache.drill.test.framework.TestDriver $*
