@@ -1,7 +1,7 @@
 hive_describe.hive_describe	\{
   \"type\" : \"hive\",
-  \"enabled\" : true,
   \"configProps\" : \{
     .*
   \}
+  \"enabled\" : true
 \}
