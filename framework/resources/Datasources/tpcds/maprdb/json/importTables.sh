@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+set -xe
 
 source conf/drillTestConfig.properties
 
@@ -120,28 +120,28 @@ then
   mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/web_sales -dst /drill/testdata/tpcds_sf$sf/maprdb/json/web_sales -bulkload false > /dev/null 2>&1
   mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/catalog_sales -dst /drill/testdata/tpcds_sf$sf/maprdb/json/catalog_sales -bulkload false > /dev/null 2>&1
 else
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/customer -dst /drill/testdata/tpcds_sf$sf/maprdb/json/customer -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/customer_address -dst /drill/testdata/tpcds_sf$sf/maprdb/json/customer_address -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/customer_demographics -dst /drill/testdata/tpcds_sf$sf/maprdb/json/customer_demographics -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/household_demographics -dst /drill/testdata/tpcds_sf$sf/maprdb/json/household_demographics -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/item -dst /drill/testdata/tpcds_sf$sf/maprdb/json/item -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/promotion -dst /drill/testdata/tpcds_sf$sf/maprdb/json/promotion -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/time_dim -dst /drill/testdata/tpcds_sf$sf/maprdb/json/time_dim -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/date_dim -dst /drill/testdata/tpcds_sf$sf/maprdb/json/date_dim -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/store -dst /drill/testdata/tpcds_sf$sf/maprdb/json/store -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/store_sales -dst /drill/testdata/tpcds_sf$sf/maprdb/json/store_sales -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/warehouse -dst /drill/testdata/tpcds_sf$sf/maprdb/json/warehouse -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/ship_mode -dst /drill/testdata/tpcds_sf$sf/maprdb/json/ship_mode -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/reason -dst /drill/testdata/tpcds_sf$sf/maprdb/json/reason -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/income_band -dst /drill/testdata/tpcds_sf$sf/maprdb/json/income_band -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/call_center -dst /drill/testdata/tpcds_sf$sf/maprdb/json/call_center -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/web_site -dst /drill/testdata/tpcds_sf$sf/maprdb/json/web_site -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/store_returns -dst /drill/testdata/tpcds_sf$sf/maprdb/json/store_returns -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/web_page -dst /drill/testdata/tpcds_sf$sf/maprdb/json/web_page -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/catalog_page -dst /drill/testdata/tpcds_sf$sf/maprdb/json/catalog_page -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/inventory -dst /drill/testdata/tpcds_sf$sf/maprdb/json/inventory -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/catalog_returns -dst /drill/testdata/tpcds_sf$sf/maprdb/json/catalog_returns -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/web_returns -dst /drill/testdata/tpcds_sf$sf/maprdb/json/web_returns -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/web_sales -dst /drill/testdata/tpcds_sf$sf/maprdb/json/web_sales -bulkload false > /dev/null 2>&1
-  su $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/catalog_sales -dst /drill/testdata/tpcds_sf$sf/maprdb/json/catalog_sales -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/customer -dst /drill/testdata/tpcds_sf$sf/maprdb/json/customer -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/customer_address -dst /drill/testdata/tpcds_sf$sf/maprdb/json/customer_address -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/customer_demographics -dst /drill/testdata/tpcds_sf$sf/maprdb/json/customer_demographics -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/household_demographics -dst /drill/testdata/tpcds_sf$sf/maprdb/json/household_demographics -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/item -dst /drill/testdata/tpcds_sf$sf/maprdb/json/item -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/promotion -dst /drill/testdata/tpcds_sf$sf/maprdb/json/promotion -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/time_dim -dst /drill/testdata/tpcds_sf$sf/maprdb/json/time_dim -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/date_dim -dst /drill/testdata/tpcds_sf$sf/maprdb/json/date_dim -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/store -dst /drill/testdata/tpcds_sf$sf/maprdb/json/store -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/store_sales -dst /drill/testdata/tpcds_sf$sf/maprdb/json/store_sales -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/warehouse -dst /drill/testdata/tpcds_sf$sf/maprdb/json/warehouse -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/ship_mode -dst /drill/testdata/tpcds_sf$sf/maprdb/json/ship_mode -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/reason -dst /drill/testdata/tpcds_sf$sf/maprdb/json/reason -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/income_band -dst /drill/testdata/tpcds_sf$sf/maprdb/json/income_band -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/call_center -dst /drill/testdata/tpcds_sf$sf/maprdb/json/call_center -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/web_site -dst /drill/testdata/tpcds_sf$sf/maprdb/json/web_site -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/store_returns -dst /drill/testdata/tpcds_sf$sf/maprdb/json/store_returns -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/web_page -dst /drill/testdata/tpcds_sf$sf/maprdb/json/web_page -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/catalog_page -dst /drill/testdata/tpcds_sf$sf/maprdb/json/catalog_page -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/inventory -dst /drill/testdata/tpcds_sf$sf/maprdb/json/inventory -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/catalog_returns -dst /drill/testdata/tpcds_sf$sf/maprdb/json/catalog_returns -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/web_returns -dst /drill/testdata/tpcds_sf$sf/maprdb/json/web_returns -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/web_sales -dst /drill/testdata/tpcds_sf$sf/maprdb/json/web_sales -bulkload false > /dev/null 2>&1
+  sudo -u $user mapr importtable -src /drill/testdata/tpcds_sf$sf/maprdb/json/importFiles/catalog_sales -dst /drill/testdata/tpcds_sf$sf/maprdb/json/catalog_sales -bulkload false > /dev/null 2>&1
 fi
