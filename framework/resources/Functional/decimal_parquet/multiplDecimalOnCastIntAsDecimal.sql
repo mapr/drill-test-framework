@@ -1,0 +1,3 @@
+SELECT
+  typeOf(decimal_28_4 * CAST(-1 AS DECIMAL(28,4))) c1
+FROM dfs.drillTestDir.`CTAS_CSV_PARQUET_DECIMAL28`;

@@ -1,0 +1,38 @@
+{
+  "testId": "decimal_avro",
+  "type": "group",
+  "description": "Avro storage tests: testing decimals in bytes or fixed formats. Different types in avro",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/ctas/avro/decimal_9_bytes.avro",
+      "dest": "decimal/DRILL_6094/decimal_9_bytes.avro"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/ctas/avro/decimal_9_fixed.avro",
+      "dest": "decimal/DRILL_6094/decimal_9_fixed.avro"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/ctas/avro/Types.avro",
+      "dest": "decimal/DRILL_6094/Types.avro"
+    }
+  ]
+}
+

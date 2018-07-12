@@ -1,0 +1,53 @@
+{
+  "testId": "decimal_parquet",
+  "type": "group",
+  "description": "Decimal datatype in parquet files: tests verifying decimal data type enhancements",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/ctas/decimal/decimal9.csv",
+      "dest": "decimal/DRILL_6094/decimal9.csv"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/ctas/decimal/decimal18.csv",
+      "dest": "decimal/DRILL_6094/decimal18.csv"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/ctas/decimal/decimal28.csv",
+      "dest": "decimal/DRILL_6094/decimal28.csv"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/ctas/decimal/decimal38.csv",
+      "dest": "decimal/DRILL_6094/decimal38.csv"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/ctas/decimal/decimal.parquet",
+      "dest": "decimal/DRILL_6094/decimal.parquet"
+    },
+    {
+       "mode": "gen",
+       "src": "Datasources/ctas/decimal/create_decimals_test_data.sh",
+       "dest": ""
+    }
+  ]
+}
+
