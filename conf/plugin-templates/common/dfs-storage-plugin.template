@@ -555,6 +555,9 @@
       "parquet" : {
         "type" : "parquet"
       },
+      "avro" : {
+        "type" : "avro"
+      },
       "json" : {
         "type" : "json"
       },
