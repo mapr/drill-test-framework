@@ -26,7 +26,6 @@ Extract this compresses file and copy over files to "/drill/testdata/tpch100_dir
 
 ### Data-shapes widestring
 
-For the [data-shapes widestring 100000rows parquet tests](data-shapes/wide-columns/5000/100000rows/parquet), download dataset from [Amazon S3](http://drill-public.s3.amazonaws
-.com/data-shapes/wide-columns/5000/100000rows/parquet/widestrings.tar.gz)
+For the [data-shapes widestring 100000rows parquet tests](data-shapes/wide-columns/5000/100000rows/parquet), download dataset from [Amazon S3](http://drill-public.s3.amazonaws.com/data-shapes/wide-columns/5000/100000rows/parquet/widestrings.tar.gz)
 
 Extract this compressed file and copy over files to MapR-FS / HDFS into `/drill/testdata/data-shapes/wide-columns/5000/100000rows/parquet`
