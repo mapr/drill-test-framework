@@ -10,7 +10,7 @@ Extract this compressed file and copy over files to MapR-FS / HDFS into `/drill/
 
 ### TPC-DS SF 100
 
-For the [TPC-DS SF100 tests](tpcds/tpcds_sf100), download dataset from [Amazon S3](http://drill-public.s3.amazonaws.com/tpcds/sf100/parquet/tpcds_sf100_parquet.tgz) 
+For the [TPC-DS SF100 tests](tpcds/tpcds_sf100), download dataset from [Amazon S3](https://s3.us-west-1.amazonaws.com/drill-public/tpcds/sf100/parquet/tpcds_sf100_parquet.tar.gz) 
 
 Extract this compressed file and copy over files to MapR-FS / HDFS into `/drill/testdata/tpcds_sf100/parquet`
 
