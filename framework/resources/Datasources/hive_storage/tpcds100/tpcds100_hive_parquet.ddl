@@ -384,7 +384,7 @@ create external table tpcds100_parquet.store_returns (
     sr_net_loss double
 )
 STORED AS PARQUET
-LOCATION '/drill/testdata/tpcds_sf100/parquet/web_returns';
+LOCATION '/drill/testdata/tpcds_sf100/parquet/store_returns';
 
 drop table if exists tpcds100_parquet.web_page;
 create external table tpcds100_parquet.web_page (
