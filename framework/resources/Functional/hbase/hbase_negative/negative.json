@@ -4,6 +4,7 @@
     "negative": true,
     "description": "Negative test cases for hbase",
     "categories": [ "negative" ],
+    "dependencies" : ["hbase"],
     "matrices": [
         {
             "query-file": ".*.sql",
