@@ -1,0 +1,5 @@
+.*UnionAll
+.*UnionAll
+.*Scan.*path=.*/parquet_storage/DRILL_3855/DRILL_3855_test_data/0_0_3.parquet.*numFiles=1.*numRowGroups=1
+.*Scan.*path=.*/parquet_storage/DRILL_3855/DRILL_3855_test_data/0_0_3.parquet.*numFiles=1.*numRowGroups=1
+.*Scan.*path=.*/parquet_storage/DRILL_3855/DRILL_3855_test_data/0_0_3.parquet.*numFiles=1.*numRowGroups=1
