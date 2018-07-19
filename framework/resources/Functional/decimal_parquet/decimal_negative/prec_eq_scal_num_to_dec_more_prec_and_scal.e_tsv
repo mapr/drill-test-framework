@@ -1,0 +1,1 @@
+.*VALIDATION ERROR: Value 123.456 overflows specified precision 2 with scale 2\..*

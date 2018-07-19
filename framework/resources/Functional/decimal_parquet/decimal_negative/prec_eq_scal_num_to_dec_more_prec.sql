@@ -1,0 +1,1 @@
+SELECT cast(1234.56 as DECIMAL(2, 2));
