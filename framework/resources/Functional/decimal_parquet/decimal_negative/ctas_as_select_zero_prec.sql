@@ -1,0 +1,1 @@
+create table dfs.drillTestDir.`zero_pr` as select cast(1111.05 as decimal(0,5));

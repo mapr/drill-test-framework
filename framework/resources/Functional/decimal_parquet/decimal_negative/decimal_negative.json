@@ -1,0 +1,20 @@
+{
+  "testId": "Decimal_negative_casting",
+  "type": "group",
+  "negative": true,
+  "description": "Decimal datatype casting errors validation",
+  "categories": [
+    "negative"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "regex"
+      ]
+    }
+  ]
+}
