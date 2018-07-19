@@ -3,7 +3,5 @@
     .*Project.*
       .*SelectionVectorRemover.*
         .*Limit.*
-          .*StreamAgg.*
-            .*Sort.*
-             .*Limit.*
-              .*Scan.*
+          .*HashAgg.*
+            .*Scan.*
