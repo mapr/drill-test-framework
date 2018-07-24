@@ -1,0 +1,1 @@
+select f.c_custkey, f.c_name,f.c_acctbal, f.o.o_orderkey as o_orderkey, f.o.o_totalprice as o_totalprice from (select c_custkey, c_name,c_acctbal, flatten(c_orders) as o from customer) f WHERE f.o.O_TOTALPRICE in (89230.03,270087.44,246408.53,82657.72,153941.38,65277.06,180309.76) and f.c_acctbal between 0 and 6000 order by f.c_custkey limit 50;

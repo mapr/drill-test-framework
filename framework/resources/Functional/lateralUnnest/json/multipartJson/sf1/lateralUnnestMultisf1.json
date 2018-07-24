@@ -1,0 +1,19 @@
+{
+    "testId": "lateral-unnest-multi-json-tpch-sf1",
+    "type": "group",
+    "description": "Test lateral unnest multi json tpch sf1 queries via jdbc",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.drillTestDirLateralmultisf1Json",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "testId": "lateral-unnest-schema-change-multi-json-tpch-sf1",
+    "type": "group",
+    "description": "Test lateral unnest schema change multi json tpch sf1 queries via jdbc",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.maprdb_document",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ]
+}

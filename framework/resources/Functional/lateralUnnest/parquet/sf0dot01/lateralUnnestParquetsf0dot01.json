@@ -1,0 +1,19 @@
+{
+    "testId": "lateral-unnest-parquet-tpch-sf0dot01",
+    "type": "group",
+    "description": "Test lateral unnest parquet tpch sf0dot01 queries via jdbc",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDirLateralsf001Parquet",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ]
+}

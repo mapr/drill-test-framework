@@ -1,0 +1,1 @@
+select customer.c_custkey, customer.c_name, orders.o_orderkey, avg(orders.o_totalprice) average_order from customer, lateral (select t.o.o_orderkey o_orderkey, t.o.o_totalprice o_totalprice from unnest(customer.c_orders) t(o) limit 2000) orders group by customer.c_custkey, customer.c_name, orders.o_orderkey order by average_order limit 50;

@@ -1,0 +1,1 @@
+select customer.c_custkey, customer.c_name, orders.o_orderkey, orders.o_totalprice from customer inner join lateral (select t.o.o_orderkey o_orderkey, t.o.o_totalprice o_totalprice from unnest(customer.c_orders) t(o) where t.o.o_totalprice > 1000 limit 2000) orders on true order by customer.c_custkey, orders.o_totalprice limit 50;

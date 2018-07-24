@@ -1,0 +1,1 @@
+select f.c_custkey, f.c_name, f.o.o_orderkey as o_orderkey,f.o.o_totalprice as o_totalprice,f.c_acctbal, f.c_mktsegment from (select c_custkey, c_name,c_mktsegment,c_acctbal, flatten(c_orders) as o  from customer) f WHERE f.c_mktsegment like '%AUTOMOBILE%' OR f.c_acctbal between 0 and 9000 order by f.c_custkey limit 50;

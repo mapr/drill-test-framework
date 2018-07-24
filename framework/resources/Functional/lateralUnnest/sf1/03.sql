@@ -1,1 +1,0 @@
-select f.c_custkey, f.c_name, f.o.o_orderkey, f.o.o_totalprice from (select c_custkey, c_name,c_acctbal, flatten(c_orders) as o from customer) f WHERE f.c_acctbal between 10 and 100 order by f.c_custkey;

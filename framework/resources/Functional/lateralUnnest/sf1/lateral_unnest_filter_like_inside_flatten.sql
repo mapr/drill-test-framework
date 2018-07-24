@@ -1,0 +1,1 @@
+select f.c_custkey, f.c_name, f.o.o_orderkey as o_orderkey,f.o.o_totalprice as o_amount, f.o.O_ORDERPRIORITY as O_ORDERPRIORITY from (select c_custkey, c_name, flatten(c_orders) as o from customer) f WHERE f.o.O_ORDERPRIORITY like '%URGENT%' order by f.c_custkey limit 50;

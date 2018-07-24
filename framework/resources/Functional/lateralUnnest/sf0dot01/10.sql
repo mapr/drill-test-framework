@@ -1,1 +1,0 @@
-select f.c_custkey, f.c_name, f.o.o_orderkey as o_orderkey, f.o.o_totalprice as o_totalprice from (select c_custkey, c_name, flatten(c_orders) as o from customer) f WHERE  f.o.o_totalprice  in (10,20,30,40,100,89230.03,270087.44) AND f.O.O_ORDERPRIORITY like '%URGENT%' ;

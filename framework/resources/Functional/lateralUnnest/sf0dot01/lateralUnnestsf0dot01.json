@@ -6,7 +6,8 @@
         "functional"
     ],
     "matrices": [
-        {
+        
+	{
             "query-file": ".*.sql",
             "schema": "dfs.drillTestDirLateralsf001Json",
             "output-format": "tsv",
