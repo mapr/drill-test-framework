@@ -1,1 +1,0 @@
-select f.c_name,f.c_address,f.o.o_orderkey as o_orderkey,  cast(f.o.o_totalprice as int) o_totalprice, cast(f.c_acctbal as int) from (select c_custkey, c_name,c_acctbal,c_address,flatten(c_orders) as o from customer) f;

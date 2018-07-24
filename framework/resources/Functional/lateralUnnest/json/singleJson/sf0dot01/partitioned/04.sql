@@ -1,1 +1,0 @@
-select f.c_custkey, f.c_name, f.o.o_orderkey as o_orderkey, f.o.o_totalprice as o_totalprice from (select c_custkey, c_name, flatten(c_orders) as o from customer) f WHERE f.o.O_TOTALPRICE in (89230.03,270087.44,246408.53,82657.72,153941.38,65277.06,180309.76);
