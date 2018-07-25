@@ -30,6 +30,12 @@
         "writable" : true,
         "defaultInputFormat" : "json"
       },
+      "drillTestDirLateralTpchSf1PartitionedSchemaChangeJson": {
+        "location": "/drill/testdata/lateralUnnest/sf1/json/multipart/PartitionedSchemaChange/",
+        "writable": true,
+        "defaultInputFormat": "json",
+        "allowAccessOutsideWorkspace": false
+      },
       "drillTestDirAmplab" : {
         "location" : "/drill/testdata/amplab",
         "writable" : true,
