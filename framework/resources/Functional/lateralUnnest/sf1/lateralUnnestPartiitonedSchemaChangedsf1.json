@@ -1,0 +1,20 @@
+{
+    "testId": "lateral-unnest-json-tpch-partitioned-schemachnaged-sf1",
+    "type": "group",
+    "description": "Test lateral unnest json tpch sf1 queries on partiitoned schema changed complex data via jdbc",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        
+	{
+            "query-file": ".*.sql",
+            "schema": "dfs.drillTestDirLateralTpchSf1PartitionedSchemaChangeJson",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ]
+}
