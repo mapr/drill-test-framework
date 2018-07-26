@@ -8,7 +8,7 @@
     "matrices": [
         
 	{
-            "query-file": ".*.sql",
+            "query-file": ".*.q",
             "schema": "dfs.drillTestDirLateralsf1Json",
             "output-format": "tsv",
             "expected-file": ".*.e",
