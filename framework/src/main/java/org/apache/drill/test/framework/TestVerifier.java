@@ -20,7 +20,6 @@ package org.apache.drill.test.framework;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,7 +29,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Types;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -51,6 +49,7 @@ import org.apache.log4j.Logger;
 public class TestVerifier {
   private static final Logger LOG = Logger.getLogger("DrillTestLogger"); 
   private static final int MAX_MISMATCH_SIZE = 10;
+  private static final double MAX_DIFF_VALUE = 1.0E-7;
   public TestStatus testStatus = TestStatus.PENDING;
   private int mapSize = 0;
   private List<ColumnList> resultSet = null;
@@ -253,28 +252,28 @@ public class TestVerifier {
           typedFields.add(null);
           continue;
         }
-        int type = (Integer) (types.get(i));
+        int type = types.get(i);
         try {
           switch (type) {
-          case Types.INTEGER:
-          case Types.BIGINT:
-          case Types.SMALLINT:
-          case Types.TINYINT:
-            typedFields.add(new BigInteger(fields[i]));
-            break;
-          case Types.FLOAT:
-          case Types.REAL:
-            typedFields.add(new Float(fields[i]));
-            break;
-          case Types.DOUBLE:
-            typedFields.add(new Double(fields[i]));
-            break;
-          case Types.DECIMAL:
-            typedFields.add(new BigDecimal(fields[i]));
-            break;
-          default:
-            typedFields.add(fields[i]);
-            break;
+            case Types.INTEGER:
+            case Types.BIGINT:
+            case Types.SMALLINT:
+            case Types.TINYINT:
+              typedFields.add(new BigInteger(fields[i]));
+              break;
+            case Types.FLOAT:
+            case Types.REAL:
+              typedFields.add(new Float(fields[i]));
+              break;
+            case Types.DOUBLE:
+              typedFields.add(new Double(fields[i]));
+              break;
+            case Types.DECIMAL:
+              typedFields.add(new BigDecimal(fields[i]));
+              break;
+            default:
+              typedFields.add(fields[i]);
+              break;
           }
         } catch (Exception e) {
           typedFields.add(fields[i]);
@@ -399,7 +398,7 @@ public class TestVerifier {
       return 0;
     }
     int idx = columnIndexAndOrder.get(start).index;
-    int result = -1;
+    int result;
     Object o1 = list1.getValues().get(idx);
     Object o2 = list2.getValues().get(idx);
     if (ColumnList.bothNull(o1, o2)) {
@@ -408,9 +407,9 @@ public class TestVerifier {
       return 0; // TODO handle NULLS FIRST and NULLS LAST cases
     }
     if (o1 instanceof Number) {
-      Number number1 = (Number) o1;
-      Number number2 = (Number) o2;
-      double diff = number1.doubleValue() - number2.doubleValue();
+      double d1 = ((Number) o1).doubleValue();
+      double d2 = ((Number) o2).doubleValue();
+      double diff = d1 - d2;
       if (diff == 0) {
         return compareTo(list1, list2, columnIndexAndOrder, start + 1, orderByColumns);
       } else {
@@ -447,9 +446,9 @@ public class TestVerifier {
               return 1;
             }
             if (idNode1.isNumber()) {
-              Number number1 = (Number) idNode1.asInt();
-              Number number2 = (Number) idNode2.asInt();
-              double diff = number1.doubleValue() - number2.doubleValue();
+              double d1 = idNode1.doubleValue();
+              double d2 = idNode2.doubleValue();
+              double diff = d1 - d2;
               if (diff == 0) {
                 return compareTo(list1, list2, columnIndexAndOrder, start + 1, orderByColumns);
               } else {
@@ -872,7 +871,6 @@ public class TestVerifier {
       column = column.trim();
       String[] columnOrder = column.split("\\s+");
       String columnName = columnOrder[0].trim();
-      String fieldName;
       if (columnName.indexOf('.') >= 0) {
         // table name precedes column name.  remove it
         columnName = columnName.substring(columnName.indexOf('.') + 1);
