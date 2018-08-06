@@ -1,4 +1,4 @@
 .*
   Filter.*OR.*AND.*=.*1993.*>.*29600.*AND.*=.*1994.*>.*29700.*
     .*
-      Scan.*selectionRoot=.*partition_pruning/hive/text/lineitem_hierarchical_intstring.*numFiles=24.*columns=\[`\*\*`\].*files=.*
+      Scan.*selectionRoot=.*partition_pruning/hive/text/lineitem_hierarchical_intstring.*numFiles=24.*columns=\[`\*\*`, `dir0`, `columns`\], files=.*

@@ -1,2 +1,2 @@
 .*
-Scan.*selectionRoot.*=.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitempart.*numFiles=2.*numRowGroups=2.*columns=\[`\*\*`\].*
+Scan.*selectionRoot.*=.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitempart.*numFiles=2.*numRowGroups=2.*columns=\[`\*\*`, `dir0`, `columns`\].*
