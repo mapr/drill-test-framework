@@ -30,19 +30,18 @@ import java.util.List;
 public class ColumnList {
   private final List<Object> values;
   private final List<Integer> types;
-  private final boolean simba;
+  private final boolean Simba;
   public static final String SIMBA_JDBC = "sjdbc";
-  private static final double MAX_DIFF_VALUE = 1.0E-6;
 
   public ColumnList(List<Integer> types, List<Object> values) {
     this.values = values;
     this.types = types;
     if (TestDriver.cmdParam.driverExt != null &&
         TestDriver.cmdParam.driverExt.equals(ColumnList.SIMBA_JDBC)) {
-      this.simba = true;
+      this.Simba = true;
     }
     else {
-      this.simba = false;
+      this.Simba = false;
     }
   }
 
@@ -55,15 +54,9 @@ public class ColumnList {
    * "loosened" logic to handle float, double and decimal types. The algorithm
    * used for the comparison follows:
    * 
-   * Floats: f1 and f2 are equal
-   * if f1 == f2
-   * if f1 > f2 && if |(f1-f2)/f1| < 0.000001
-   * if f1 < f2 && if |(f1-f2)/f2| < 0.000001
+   * Floats: f1 equals f2 iff |((f1-f2)/(average(f1,f2)))| < 0.000001
    * 
-   * Doubles: d1 and d2 are equal
-   * if d1 == d2
-   * if d1 > d2 && if |(d1-d2)/d1| < 0.000001
-   * if d1 < d2 && if |(d1-d2)/d2| < 0.000001
+   * Doubles: d1 equals d2 iff |((d1-d2)/(average(d1,d2)))| < 0.000000000001
    * 
    * Decimals: dec1 equals dec2 iff value(dec1) == value(dec2) and scale(dec1)
    * == scale(dec2)
@@ -83,7 +76,7 @@ public class ColumnList {
       if (values.get(i) == null) {
         continue;
       }
-      int type = types.get(i);
+      int type = (Integer) (types.get(i));
       switch (type) {
       case Types.FLOAT:
       case Types.DOUBLE:
@@ -105,8 +98,8 @@ public class ColumnList {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < values.size() - 1; i++) {
-      int type = types.get(i);
-      if (simba && (type == Types.VARCHAR)) {
+      int type = (Integer) (types.get(i));
+      if (Simba && (type == Types.VARCHAR)) {
         String s1 = String.valueOf(values.get(i));
         // if the field has a JSON string or list, then remove newlines so that
         // each record fits on a single line in the actual output file.
@@ -121,8 +114,8 @@ public class ColumnList {
       }
       sb.append(values.get(i) + "\t");
     }
-    int type = types.get(values.size()-1);
-    if (simba && (type == Types.VARCHAR)) {
+    int type = (Integer) (types.get(values.size()-1));
+    if (Simba && (type == Types.VARCHAR)) {
       String s1 = String.valueOf(values.get(values.size()-1));
       // if the field has a JSON string or list, then remove newlines so that
       // each record fits on a single line in the actual output file.
@@ -154,23 +147,17 @@ public class ColumnList {
       if (oneNull(list1.get(i), list2.get(i))) {
         return false;
       }
-      int type = types.get(i);
+      int type = (Integer) (types.get(i));
       try {
         switch (type) {
         case Types.FLOAT:
         case Types.REAL:
           float f1 = (Float) list1.get(i);
           float f2 = (Float) list2.get(i);
-          if (f1 != f2) {
-            double relativeError;
-            if (f1 > f2) {
-              relativeError = Math.abs((f1-f2)/f1);
-            } else {
-              relativeError = Math.abs((f1-f2)/f2);
-            }
-            if (relativeError > MAX_DIFF_VALUE) {
-              return false;
-            }
+          if ((f1 + f2) / 2 != 0) {
+            if (!(Math.abs((f1 - f2) / ((f1 + f2) / 2)) < 1.0E-6)) return false;
+          } else if (f1 != 0) {
+            return false;
           }
           break;
         case Types.DOUBLE:
@@ -180,13 +167,9 @@ public class ColumnList {
           // especially for the cases when doubles are NaN / POSITIVE_INFINITY / NEGATIVE_INFINITY
           // otherwise proceed with "loosened" logic
           if (!d1.equals(d2)) {
-            double relativeError;
-            if (d1 > d2) {
-              relativeError = Math.abs((d1-d2)/d1);
-            } else {
-              relativeError = Math.abs((d1-d2)/d2);
-            }
-            if (relativeError > MAX_DIFF_VALUE) {
+            if ((d1 + d2) / 2 != 0) {
+              if (!(Math.abs((d1 - d2) / ((d1 + d2) / 2)) < 1.0E-12)) return false;
+            } else if (d1 != 0) {
               return false;
             }
           }
