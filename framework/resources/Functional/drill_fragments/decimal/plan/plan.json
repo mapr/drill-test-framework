@@ -1,0 +1,28 @@
+{
+  "testId": "decimal_fragments_plan",
+  "type": "group",
+  "description": "Testing Drill queries plan with major and minor fragments",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql.explain",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.plan",
+      "verification-type": [
+        "regex"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+       "mode": "gen",
+       "src": "Datasources/ctas/decimal/fragments/decimal_fragments.sh",
+       "dest": ""
+    }
+  ]
+}
+
