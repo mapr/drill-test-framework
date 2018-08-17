@@ -1,0 +1,35 @@
+{
+  "testId": "hiveMapRDBJson",
+  "type": "group",
+  "description": "Testing native MapR DB plugin support for Hive-MapR DB json table",
+  "categories": [
+    "functional"
+  ],
+  "dependencies": [
+    "hive",
+    "maprdb"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "hive",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/hive_storage/hive_maprdb_json/test_data.json",
+      "dest": "hive_storage/maprdb/json/test_data.json"
+    },
+    {
+      "mode": "gen",
+      "src": "Datasources/hive_storage/hive_maprdb_json/import_tables.sh",
+      "dest": ""
+    }
+  ]
+}

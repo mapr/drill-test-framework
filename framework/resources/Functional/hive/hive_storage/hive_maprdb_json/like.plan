@@ -1,0 +1,3 @@
+Scan.*JsonTableGroupScan
+tableName=.*/hive_storage/maprdb/json/json_MapR_DB_table
+condition=\(column_1 MATCHES \"\^\\\\Qvalue\\\\E.\\\\Q1\\\\E.\\\\Q17\\\\E\$\"\)
