@@ -1,3 +1,5 @@
+-- set hive option until HIVE-19069 is fixed
+set `store.hive.parquet.optimize_scan_with_native_reader` = true;
 -- start query 45 in stream 0 using template query45.tpl 
 SELECT ca_zip, 
                ca_state, 
@@ -26,3 +28,4 @@ GROUP  BY ca_zip,
 ORDER  BY ca_zip, 
           ca_state
 LIMIT 100; 
+reset `store.hive.parquet.optimize_scan_with_native_reader`;

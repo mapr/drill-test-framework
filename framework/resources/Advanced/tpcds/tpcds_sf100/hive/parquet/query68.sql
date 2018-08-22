@@ -1,3 +1,5 @@
+-- set hive option until HIVE-19069 is fixed
+set `store.hive.parquet.optimize_scan_with_native_reader` = true;
 -- start query 68 in stream 0 using template query68.tpl 
 SELECT c_last_name, 
                c_first_name, 
@@ -39,3 +41,4 @@ WHERE  ss_customer_sk = c_customer_sk
 ORDER  BY c_last_name, 
           ss_ticket_number
 LIMIT 100; 
+reset `store.hive.parquet.optimize_scan_with_native_reader`;

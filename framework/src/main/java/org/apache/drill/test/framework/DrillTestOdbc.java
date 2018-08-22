@@ -145,7 +145,7 @@ public class DrillTestOdbc implements DrillTest{
       fail(TestStatus.EXECUTION_FAILURE, e);
     } finally {
       if (testStatus == TestStatus.PASS && !TestDriver.cmdParam.outputQueryResult) {
-    	Utils.deleteFile(outputFilename);
+    	// Utils.deleteFile(outputFilename);
       }
       duration = stopwatch;
 

@@ -1,3 +1,5 @@
+-- set hive option until HIVE-19069 is fixed
+set `store.hive.parquet.optimize_scan_with_native_reader` = true;
 -- start query 60 in stream 0 using template query60.tpl 
 WITH ss 
      AS (SELECT i_item_id, 
@@ -64,3 +66,4 @@ GROUP  BY i_item_id
 ORDER  BY i_item_id, 
           total_sales
 LIMIT 100; 
+reset `store.hive.parquet.optimize_scan_with_native_reader`;

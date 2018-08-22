@@ -1,3 +1,5 @@
+-- set hive option until HIVE-19069 is fixed
+set `store.hive.parquet.optimize_scan_with_native_reader` = true;
 -- start query 79 in stream 0 using template query79.tpl 
 SELECT c_last_name, 
                c_first_name, 
@@ -33,3 +35,4 @@ ORDER  BY c_last_name,
           Substr(s_city, 1, 30), 
           profit
 LIMIT 100; 
+reset `store.hive.parquet.optimize_scan_with_native_reader`;

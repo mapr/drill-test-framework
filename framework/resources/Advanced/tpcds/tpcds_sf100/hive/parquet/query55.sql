@@ -1,3 +1,5 @@
+-- set hive option until HIVE-19069 is fixed
+set `store.hive.parquet.optimize_scan_with_native_reader` = true;
 -- start query 55 in stream 0 using template query55.tpl 
 SELECT i_brand_id              brand_id, 
                i_brand                 brand, 
@@ -15,3 +17,4 @@ GROUP  BY i_brand,
 ORDER  BY ext_price DESC, 
           i_brand_id
 LIMIT 100; 
+reset `store.hive.parquet.optimize_scan_with_native_reader`;
