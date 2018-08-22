@@ -1,4 +1,4 @@
-dfs_describe.drillTestDirNull	\{
+dfs_describe.drilltestdirnull	\{
   \"type\" : \"file\",
   \"connection\" : \"maprfs:///\",
   \"config\" : null,
@@ -10,7 +10,7 @@ dfs_describe.drillTestDirNull	\{
       \"escape\" : \"`\",
       \"comment\" : \"\^\",
       \"skipFirstLine\" : true,
-      \"delimiter\" : \"|\"
+      \"delimiter\" : \"\|\"
     \},
     \"dsv\" : \{
       \"type\" : \"text\",
@@ -19,7 +19,7 @@ dfs_describe.drillTestDirNull	\{
       \"escape\" : \"!\",
       \"comment\" : \"@\",
       \"extractHeader\" : true,
-      \"delimiter\" : \"|\"
+      \"delimiter\" : \"\|\"
     \},
     \"csv\" : \{
       \"type\" : \"text\",

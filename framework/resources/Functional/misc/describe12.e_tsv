@@ -1,4 +1,4 @@
-hive_describe	\{
+hive_describe.default	\{
   \"type\" : \"hive\",
   \"configProps\" : \{
     .*
