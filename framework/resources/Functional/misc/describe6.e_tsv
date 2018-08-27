@@ -1,4 +1,4 @@
-dfs_describe.drillTestDirDSV	\{
+dfs_describe.drilltestdirdsv	\{
   \"type\" : \"file\",
   \"connection\" : \"maprfs:///\",
   \"config\" : null,
@@ -10,7 +10,7 @@ dfs_describe.drillTestDirDSV	\{
       \"escape\" : \"`\",
       \"comment\" : \"\^\",
       \"skipFirstLine\" : true,
-      \"delimiter\" : \"|\"
+      \"delimiter\" : \"\|\"
     \},
     \"dsv\" : \{
       \"type\" : \"text\",
@@ -19,7 +19,7 @@ dfs_describe.drillTestDirDSV	\{
       \"escape\" : \"!\",
       \"comment\" : \"@\",
       \"extractHeader\" : true,
-      \"delimiter\" : \"|\"
+      \"delimiter\" : \"\|\"
     \},
     \"csv\" : \{
       \"type\" : \"text\",

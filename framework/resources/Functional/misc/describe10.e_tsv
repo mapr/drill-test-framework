@@ -1,4 +1,4 @@
-cp_describe	\{
+cp_describe.default	\{
   \"type\" : \"file\",
   \"connection\" : \"classpath:///\",
   \"config\" : null,

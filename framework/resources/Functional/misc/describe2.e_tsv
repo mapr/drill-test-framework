@@ -10,7 +10,7 @@ dfs_describe.default	\{
       \"escape\" : \"`\",
       \"comment\" : \"\^\",
       \"skipFirstLine\" : true,
-      \"delimiter\" : \"|\"
+      \"delimiter\" : \"\|\"
     \},
     \"dsv\" : \{
       \"type\" : \"text\",
@@ -19,7 +19,7 @@ dfs_describe.default	\{
       \"escape\" : \"!\",
       \"comment\" : \"@\",
       \"extractHeader\" : true,
-      \"delimiter\" : \"|\"
+      \"delimiter\" : \"\|\"
     \},
     \"csv\" : \{
       \"type\" : \"text\",
