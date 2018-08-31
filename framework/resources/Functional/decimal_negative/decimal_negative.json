@@ -16,5 +16,37 @@
         "regex"
       ]
     }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/decimal/",
+      "dest": "numerical_decimal"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/implicit_cast/",
+      "dest": "numerical_implicit_cast"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/ctas/decimal/decimal28.csv",
+      "dest": "decimal/DRILL_6094/decimal28.csv"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/ctas/decimal/decimal38.csv",
+      "dest": "decimal/DRILL_6094/decimal38.csv"
+    },
+    {
+      "mode": "gen",
+      "src": "Datasources/ctas/decimal/create_decimals_test_data_negative.sh",
+      "dest": ""
+    },
+    {
+      "mode": "gen",
+      "src": "Datasources/ctas/decimal/fragments/decimal_fragments_negative.sh",
+      "dest": ""
+    }
   ]
 }

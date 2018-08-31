@@ -1,0 +1,5 @@
+SELECT
+  var_pop(DECIMAL_18_0),
+  var_pop(DECIMAL_2_0),
+  var_pop(DECIMAL_15_0)
+FROM dfs.drillTestDir.`decimal/fragments/negative/T_DECIMAL_BIG_ZERO_SCALE_NEGATIVE`;
