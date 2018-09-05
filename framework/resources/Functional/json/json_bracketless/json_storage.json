@@ -4,11 +4,12 @@
     "description": "Test Nested/Repeated queries via jdbc",
     "submit-type": "jdbc",
     "categories": [
-        "functional"
+        "functional",
+	"json"
     ],
     "matrices": [
         {
-            "query-file": ".*.q",            
+            "query-file": ".*.q",           
             "schema": "dfs.drillTestDirJson",
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",

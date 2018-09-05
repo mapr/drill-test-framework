@@ -3,7 +3,8 @@
     "type": "group",
     "description": "Test flatten with operators",
     "categories": [
-        "functional"
+        "functional",
+	"json"
     ],
     "matrices": [
         {

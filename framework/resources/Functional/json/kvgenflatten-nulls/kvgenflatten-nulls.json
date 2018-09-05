@@ -3,7 +3,8 @@
     "type": "group",
     "description": "Test flatten with operators",
     "categories": [
-        "functional"
+        "functional",
+        "json"
     ],
     "matrices": [
         {
@@ -17,10 +18,10 @@
         }
     ],
     "datasources": [
-	{
+       {
           "mode": "cp",
           "src": "Datasources/kvgenflatten-nulls",
           "dest": "kvgenflatten-nulls"
-    	}
+       }
     ]
 }

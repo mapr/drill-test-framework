@@ -5,7 +5,8 @@
     "submit-type": "jdbc",
     "negative": true,
     "categories": [
-        "impersonation"
+        "impersonation",
+        "json"
     ],
     "matrices": [
         {
@@ -21,20 +22,20 @@
         }
     ],
     "datasources": [
-	{
+       {
           "mode": "cp",
           "src": "Datasources/impersonation/dfs/complexga100k.json",
           "dest": "impersonation/threetables/complex1.json"
-    	},
-	{
-	  "mode": "cp",
-	  "src": "Datasources/impersonation/dfs/complexga100k.json",
-	  "dest": "impersonation/threetables/complex2.json"
-	},
-        {
+       },
+       {
+          "mode": "cp",
+          "src": "Datasources/impersonation/dfs/complexga100k.json",
+          "dest": "impersonation/threetables/complex2.json"
+       },
+       {
           "mode": "cp",
           "src": "Datasources/impersonation/dfs/complexga100k.json",
           "dest": "impersonation/threetables/complex3.json"
-        }
+       }
     ]
 }
