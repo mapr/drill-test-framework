@@ -258,6 +258,14 @@ public class DrillTestJdbc implements DrillTest {
 
     } catch (IllegalArgumentException | IllegalAccessException | IOException e1) {
 		LOG.warn(e1);
+    } catch (SQLException e) {
+      if (writer != null) {
+        writer.write(e.getErrorCode() + "\t" + e.getMessage());
+        writer.close();
+      }
+      if (resultSet != null) {resultSet.close();}
+      if (modeler.negative) {return;}
+      throw e;
 	} finally {
 	  doneProcessingResultSet.set(true);
       if (resultSet != null) {
