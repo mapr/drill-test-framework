@@ -1,0 +1,3 @@
+Scan.*JsonTableGroupScan
+tableName=.*/hive_storage/maprdb/json/json_MapR_DB_table
+condition=\(column_4 = true\)
