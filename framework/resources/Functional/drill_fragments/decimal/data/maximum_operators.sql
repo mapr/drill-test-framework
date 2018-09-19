@@ -3,7 +3,7 @@ SET planner.slice_target=1;
 SET planner.enable_multiphase_agg=false;
 SELECT decimal_big.DECIMAL_15_5
 FROM dfs.drillTestDir.`decimal/fragments/T_DECIMAL_BIG` decimal_big
-JOIN dfs.drillTestDir.`decimal/fragments/T_DECIMAL_BIG_ZERO_PREC` decimal_big_zero_prec
+JOIN `dfs.drillTestDir`.`decimal/fragments/T_DECIMAL_BIG_ZERO_PREC` decimal_big_zero_prec
   ON decimal_big.ID = decimal_big_zero_prec.ID
   AND decimal_big.ID > 2
 JOIN dfs.drillTestDir.`decimal/fragments/T_DECIMAL_BIG_ZERO_SCALE` decimal_big_zero_scale
@@ -11,8 +11,8 @@ JOIN dfs.drillTestDir.`decimal/fragments/T_DECIMAL_BIG_ZERO_SCALE` decimal_big_z
 WHERE decimal_big.ID < 14
 UNION
 SELECT CAST(decimal_big_tsv.columns[4] as DECIMAL(15, 5)) DECIMAL_15_5
-FROM dfs.drillTestDir.`decimal/fragments/decimal_big.tsv` decimal_big_tsv
-JOIN dfs.drillTestDir.`decimal/fragments/decimal_big_zero_scale.tsv` decimal_big_zero_scale_tsv
+FROM `dfs.drillTestDir`.`decimal/fragments/decimal_big.tsv` decimal_big_tsv
+JOIN `dfs`.`drillTestDir`.`decimal/fragments/decimal_big_zero_scale.tsv` decimal_big_zero_scale_tsv
   ON CAST(decimal_big_tsv.columns[0] as INT) = CAST(decimal_big_zero_scale_tsv.columns[0] as INT)
   AND CAST(decimal_big_zero_scale_tsv.columns[0] as INT) > 2
 JOIN dfs.drillTestDir.`decimal/fragments/T_DECIMAL_BIG_ZERO_PREC` second_decimal_big_zero_prec
