@@ -18,9 +18,8 @@ DRILL_OUTPUT_DIR=drill-output
 
 # Hadoop Version (Please specify maven version for Hadoop Project (for groupId=org.apache.hadoop)
 HADOOP_VERSION=version
-
-# Path to where Hadoop binaries are installed
-HADOOP_INSTALL_LOC=/opt/hadoop/hadoop-0.20.2
+# For Apache Hadoop, version=2.7.0
+# For MapR Hadoop, version=2.7.0-mapr-1808
 
 # Path on the distributed system where test data is to be populated (currently cannot be modified - create the directory if it doesn't exist).
 DRILL_TESTDATA=/drill/testdata
