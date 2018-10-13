@@ -264,7 +264,8 @@ public class Utils {
         String expectedFileExtension = modeler.matrices.get(0).expectedFile;
         String failExtension = modeler.matrices.get(0).failExtension;
 	String originalQueryFileExtension = queryFileExtension;
-        //To include fail extension in the regex to pick query files tagged as failure as well 
+        LOG.info("modeler.matrices.get(0).createDataInFolder : "+modeler.matrices.get(0).createDataInFolder);
+	//To include fail extension in the regex to pick query files tagged as failure as well 
 	if(TestDriver.cmdParam.runFailed == true){
 	  if(failExtension!=null){
 	    //To get the last part if there are multiple dots in the name (multiple extensions) instead of using substring

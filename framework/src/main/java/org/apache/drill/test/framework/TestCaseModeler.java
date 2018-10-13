@@ -20,6 +20,7 @@ package org.apache.drill.test.framework;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.log4j.Logger;
 
 /**
  * Modeler for a drill test case from test definition json file.
@@ -79,6 +80,7 @@ public class TestCaseModeler {
   }
 
   public static class TestMatrix {
+    private static final Logger LOG = Logger.getLogger("DrillTestLogger");
     @JsonProperty("query-file")
     public String inputFile;
     public String schema;
@@ -89,6 +91,10 @@ public class TestCaseModeler {
     @JsonProperty("fail-extension")
     public String failExtension;//Failed tests are expected to be tagged with .fail extension. This can be overridden in the test definition file. However, it's not recommended.
     // TODO: The below code can be reused when we decide to have username & password at suite level
+    
+    @JsonProperty("create-data-in-folder")
+    public boolean createDataInFolder;
+
     public String username = DrillTestDefaults.USERNAME;
     public String password = DrillTestDefaults.PASSWORD;
     @JsonProperty("verification-type")

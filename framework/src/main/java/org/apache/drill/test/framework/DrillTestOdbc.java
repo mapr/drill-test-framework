@@ -72,7 +72,13 @@ public class DrillTestOdbc implements DrillTest{
 
     setTestStatus(TestStatus.RUNNING);
     try {
-      outputFilename = Utils.generateOutputFileName(modeler.queryFilename, modeler.testId, false) + "_" + id;
+      //TODO:flag n def file check
+      if(getCreateDataInFolder() && createDataInFolderFlag){
+        LOG.info("modeler.queryFilename : "+modeler.queryFilename);
+        //outputFilename = 
+      }
+      else
+      	outputFilename = Utils.generateOutputFileName(modeler.queryFilename, modeler.testId, false) + "_" + id;
     } catch (IOException e) {
       LOG.error(e.getMessage());
       throw new RuntimeException(e);
@@ -145,6 +151,7 @@ public class DrillTestOdbc implements DrillTest{
       fail(TestStatus.EXECUTION_FAILURE, e);
     } finally {
       if (testStatus == TestStatus.PASS && !TestDriver.cmdParam.outputQueryResult) {
+	//TODO:flag n def file check
     	Utils.deleteFile(outputFilename);
       }
       duration = stopwatch;
@@ -211,6 +218,14 @@ public class DrillTestOdbc implements DrillTest{
 	}
     return query;
   }
+
+
+  //TODO:get def file info create-data-in-folder
+  //
+  @Override
+  public boolean getCreateDataInFolder() {
+    return modeler.createDataInFolder;
+  } 
 
   @Override
   public String getTestId() {

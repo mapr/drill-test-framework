@@ -62,6 +62,7 @@ public class DrillTestScript implements DrillTest {
     this.thread = Thread.currentThread();
     setTestStatus(TestStatus.RUNNING);
     try {
+      //TODO:flag n def file check
       outputFilename = Utils.generateOutputFileName(modeler.queryFilename, modeler.testId, false) + "_" + id;
     } catch (IOException e) {
       LOG.error(e.getMessage());
@@ -147,6 +148,13 @@ public class DrillTestScript implements DrillTest {
   @Override
   public String getExpectedFile(){
     return modeler.expectedFilename;
+  }
+
+  //TODO:get def file info create-data-in-folder 
+
+  @Override
+  public boolean getCreateDataInFolder() {
+    return modeler.createDataInFolder;
   }
 
   @Override

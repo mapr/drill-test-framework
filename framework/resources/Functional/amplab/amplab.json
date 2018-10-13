@@ -12,7 +12,8 @@
             "schema": "dfs.drillTestDirAmplab",
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
-            "verification-type": [
+            "create-data-in-folder": true,
+	    "verification-type": [
                 "in-memory"
             ]
         }

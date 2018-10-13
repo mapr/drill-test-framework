@@ -153,7 +153,8 @@ public class DrillTestJdbc implements DrillTest {
 		    }
       }
       if (testStatus == TestStatus.PASS && !TestDriver.cmdParam.outputQueryResult) {
-    	  Utils.deleteFile(outputFilename);
+    	  //TODO:flag n def file check
+	  Utils.deleteFile(outputFilename);
       }
       duration = stopwatch;
 
@@ -200,7 +201,13 @@ public class DrillTestJdbc implements DrillTest {
   }
 
   private void executeQuery(String query) throws IOException, SQLException {
-    outputFilename = Utils.generateOutputFileName(modeler.queryFilename, modeler.testId, false) + "_" + id;
+    //TODO:flag n def file check
+    if(getCreateDataInFolder() && createDataInFolderFlag){
+      LOG.info("modeler.queryFilename : "+modeler.queryFilename);
+      //outputFilename = 
+    }
+    else
+      outputFilename = Utils.generateOutputFileName(modeler.queryFilename, modeler.testId, false) + "_" + id;
     BufferedWriter writer = new BufferedWriter(new FileWriter(new File(
             outputFilename)));
     final boolean cancelQuery = rand.nextInt(100) < TestDriver.cmdParam.cancelPercent;
@@ -414,6 +421,15 @@ public class DrillTestJdbc implements DrillTest {
   public String getQuery() {
     return query;
   }
+
+
+  //TODO:get def file info create-data-in-folder
+  //
+  @Override
+  public boolean getCreateDataInFolder() {
+    return modeler.createDataInFolder;
+  }
+
 
   @Override
   public String getTestId() {
