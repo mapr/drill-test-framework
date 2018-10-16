@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xe
+set -x
 
 source conf/drillTestConfig.properties
 
