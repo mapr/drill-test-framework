@@ -29,14 +29,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class DrillTestCase extends TestCaseModeler {
   public String queryFilename;
   public String expectedFilename;
+  public boolean createDataInFolder; 
 	
-  public DrillTestCase(TestCaseModeler modeler, String queryFilename, String expectedFilename) {
+  public DrillTestCase(TestCaseModeler modeler, String queryFilename, String expectedFilename, boolean createDataInFolder) {
 	super(modeler);
 	this.queryFilename = queryFilename;
 	this.expectedFilename = expectedFilename;
+	this.createDataInFolder = createDataInFolder;
   }
   
   public DrillTestCase(TestCaseModeler modeler) {
-	this(modeler, modeler.matrices.get(0).inputFile, modeler.matrices.get(0).expectedFile);
+	this(modeler, modeler.matrices.get(0).inputFile, modeler.matrices.get(0).expectedFile, modeler.matrices.get(0).createDataInFolder);
   }
 }

@@ -16,7 +16,10 @@ import com.beust.jcommander.Parameter;
     
     @Parameter(names = {"-d"}, description = "generate data", required=false)
     public boolean generate = false;
-    
+   
+    @Parameter(names = {"-o"}, description = "create baseline in same folder", required=false)
+    public boolean createDataInFolder = false;
+ 
     @Parameter(names = {"-e"}, description = "filename", required=false)
     public String afterRunQueryFilename = "after-run.sql";
     

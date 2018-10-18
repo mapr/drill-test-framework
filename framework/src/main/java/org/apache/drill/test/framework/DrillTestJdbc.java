@@ -154,7 +154,12 @@ public class DrillTestJdbc implements DrillTest {
       }
       if (testStatus == TestStatus.PASS && !TestDriver.cmdParam.outputQueryResult) {
     	  //TODO:flag n def file check
-	  Utils.deleteFile(outputFilename);
+	  //if(getCreateDataInFolder()==false || TestDriver.cmdParam.createDataInFolder==false){
+	  //  LOG.info("vals getC :"+getCreateDataInFolder()+" ,cmdPAram : "+TestDriver.cmdParam.createDataInFolder);
+	    LOG.info("outputFilename.equals(getExpectedFile()) : "+outputFilename.equals(getExpectedFile()));
+	    if(!outputFilename.equals(getExpectedFile()))
+	      Utils.deleteFile(outputFilename);
+	 // }
       }
       duration = stopwatch;
 
@@ -202,9 +207,14 @@ public class DrillTestJdbc implements DrillTest {
 
   private void executeQuery(String query) throws IOException, SQLException {
     //TODO:flag n def file check
-    if(getCreateDataInFolder() && createDataInFolderFlag){
-      LOG.info("modeler.queryFilename : "+modeler.queryFilename);
-      //outputFilename = 
+    if(getCreateDataInFolder() && TestDriver.cmdParam.createDataInFolder){
+      LOG.info("modeler.queryFilename : n getCreatedatafolder n cmdParam.createDataInFolder :"+modeler.queryFilename+" , "+getCreateDataInFolder()+" , "+TestDriver.cmdParam.createDataInFolder);
+      outputFilename = getExpectedFile();
+      
+      LOG.info("exp file : "+getExpectedFile());
+      if(new File(outputFilename).exists())
+      	outputFilename = Utils.generateOutputFileName(modeler.queryFilename, modeler.testId, false) + "_" + id;
+      
     }
     else
       outputFilename = Utils.generateOutputFileName(modeler.queryFilename, modeler.testId, false) + "_" + id;
@@ -423,8 +433,6 @@ public class DrillTestJdbc implements DrillTest {
   }
 
 
-  //TODO:get def file info create-data-in-folder
-  //
   @Override
   public boolean getCreateDataInFolder() {
     return modeler.createDataInFolder;

@@ -26,6 +26,7 @@ public interface DrillTest extends Cancelable {
   public String getInputFile();
   public String getExpectedFile();
   public String getQuery();
+  public boolean getCreateDataInFolder();
   public String getTestId();
   public int getCloneId();
   public Stopwatch getDuration();

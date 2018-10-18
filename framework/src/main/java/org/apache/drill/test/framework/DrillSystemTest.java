@@ -56,6 +56,11 @@ public class DrillSystemTest implements DrillTest {
   }
 
   @Override
+  public boolean getCreateDataInFolder(){
+    return matrix.createDataInFolder;
+  }
+
+  @Override
   public String getQuery() {
     return query;
   }
