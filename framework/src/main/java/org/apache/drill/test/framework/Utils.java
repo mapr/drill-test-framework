@@ -265,7 +265,7 @@ public class Utils {
         String failExtension = modeler.matrices.get(0).failExtension;
 	String originalQueryFileExtension = queryFileExtension;
 	boolean createDataInFolder = modeler.matrices.get(0).createDataInFolder;
-        LOG.info("modeler.matrices.get(0).createDataInFolder : "+modeler.matrices.get(0).createDataInFolder);
+        //LOG.info("modeler.matrices.get(0).createDataInFolder : "+modeler.matrices.get(0).createDataInFolder);
 	//To include fail extension in the regex to pick query files tagged as failure as well 
 	if(TestDriver.cmdParam.runFailed == true){
 	  if(failExtension!=null){
