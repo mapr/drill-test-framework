@@ -72,15 +72,16 @@ public class DrillTestOdbc implements DrillTest{
 
     setTestStatus(TestStatus.RUNNING);
     try {
+      boolean fileExists = false;
       //TODO:flag n def file check
       if(getCreateDataInFolder() && TestDriver.cmdParam.createDataInFolder){
         //LOG.info("modeler.queryFilename : "+modeler.queryFilename);
         //outputFilename = 
         //LOG.info("modeler.queryFilename : n getCreatedatafolder n cmdParam.createDataInFolder :"+modeler.queryFilename+" , "+getCreateDataInFolder()+" , "+TestDriver.cmdParam.createDataInFolder);
         outputFilename = getExpectedFile();
-
+        fileExists = new File(outputFilename).exists();
         //LOG.info("exp file : "+getExpectedFile());
-        if(new File(outputFilename).exists())
+        if(fileExists)
           outputFilename = Utils.generateOutputFileName(modeler.queryFilename, modeler.testId, false) + "_" + id;
       }
       else
