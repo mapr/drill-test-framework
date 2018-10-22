@@ -7,6 +7,7 @@
   <version>1.0.0-SNAPSHOT</version>
   <properties>
     <log4j.version>1.2.17</log4j.version>
+    <jackson.version>2.8.11</jackson.version>
     <drill.version>${env.DRILL_VERSION}</drill.version>
     <hadoop.version>${env.HADOOP_VERSION}</hadoop.version>
     <runtimeDepenencies>${env.DRILL_HOME}/conf</runtimeDepenencies>
@@ -100,22 +101,22 @@
     <dependency>
       <groupId>com.fasterxml.jackson.jaxrs</groupId>
       <artifactId>jackson-jaxrs-json-provider</artifactId>
-      <version>2.4.3</version>
+      <version>${jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
-      <version>2.4.3</version>
+      <version>${jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.4.3</version>
+      <version>${jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
-      <version>2.4.3</version>
+      <version>${jackson.version}</version>
     </dependency>
   </dependencies>
   <repositories>
