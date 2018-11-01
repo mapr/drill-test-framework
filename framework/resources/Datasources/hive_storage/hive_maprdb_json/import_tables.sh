@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 source conf/drillTestConfig.properties
 
+if [ -n $USERNAME ]
+then
+    user=$USERNAME
+else
+    user=`ps -aef | grep Drillbit | grep org.apache.drill | cut -d' ' -f1 | head -1`
+fi
+
 hadoop_folder=${DRILL_TESTDATA}/hive_storage/maprdb/json
 test_data=test_data.json
 maprdb_table=json_MapR_DB_table
@@ -11,7 +18,13 @@ if [ $? -eq 0 ]
 then
     hadoop fs -rm -r $hadoop_folder/$maprdb_table
 fi
-mapr importJSON -idField "id" -src $hadoop_folder/$test_data -dst $hadoop_folder/$maprdb_table
+
+if [ "$user" == "root" ]
+then
+    mapr importJSON -idField "id" -src $hadoop_folder/$test_data -dst $hadoop_folder/$maprdb_table
+else
+    sudo -u $user mapr importJSON -idField "id" -src $hadoop_folder/$test_data -dst $hadoop_folder/$maprdb_table
+fi
 
 # Creating the Hive table:
 
