@@ -25,12 +25,9 @@ copy_to_dfs () {
     then
         hadoop fs -mkdir -p $destination
     fi
-
-    hadoop fs -test -f $destination/$file_name
-    if [ ! $? -eq 0 ]
-    then
-	    hadoop fs -put $file $destination/
-    fi
+    
+    # Replace the csv every time
+    hadoop fs -put -f $file $destination/
 }
 
 prepare_dataset () {
