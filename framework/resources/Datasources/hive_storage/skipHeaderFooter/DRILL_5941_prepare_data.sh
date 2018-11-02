@@ -25,12 +25,9 @@ copy_to_dfs () {
     then
         hadoop fs -mkdir -p $destination
     fi
-
-    hadoop fs -test -f $destination/$file_name
-    if [ ! $? -eq 0 ]
-    then
-	    hadoop fs -put $file $destination/
-    fi
+    
+    # Replace the csv every time
+    hadoop fs -put -f $file $destination/
 }
 
 prepare_dataset () {
@@ -40,11 +37,7 @@ prepare_dataset () {
     local tar_name=$3
     local destination=$4
 
-    # Reusing of existing file if exists
-    if [ ! -f $file ]
-    then
-        untar_data $location $tar_name $file_name
-    fi
+    untar_data $location $tar_name $file_name
 
     copy_to_dfs $location $file_name $destination
 }
