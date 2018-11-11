@@ -1,0 +1,15 @@
+.*01-03\s+HashJoin.*
+01-05\s+Project.*
+01-07\s+HashToRandomExchange.*
+02-01\s+UnorderedMuxExchange
+04-01\s+Project.*
+04-02\s+SelectionVectorRemover
+04-03\s+RuntimeFilter
+04-04\s+Scan\(table=\[\[dfs, drilltestdirtpch100parquet, lineitem\]\].*columns=\[`l_orderkey`\]\]\]\)
+01-04\s+Project.*
+01-06\s+HashToRandomExchange.*
+03-01\s+UnorderedMuxExchange
+05-01\s+Project.*
+05-02\s+SelectionVectorRemover
+05-03\s+Filter.*
+05-04\s+Scan\(table=\[\[dfs, drilltestdirtpch100parquet, orders\]\].*columns=\[`o_orderkey`, `o_totalprice`\]\]\]\)

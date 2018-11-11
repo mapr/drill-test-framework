@@ -1,0 +1,11 @@
+.*03-03\s+HashJoin.*
+03-05\s+HashToRandomExchange.*
+04-01\s+RuntimeFilter
+04-02\s+Scan\(table=\[\[dfs, drilltestdirtpch100parquet, lineitem\]\].*columns=\[`l_shipdate`, `l_quantity`\]\]\]\)
+03-04\s+HashAgg.*
+03-06\s+HashToRandomExchange.*
+05-01\s+HashAgg.*
+05-02\s+Project.*
+05-03\s+SelectionVectorRemover
+05-04\s+Filter.*
+05-05\s+Scan\(table=\[\[dfs, drilltestdirtpch100parquet, orders\]\].*columns=\[`o_orderpriority`, `o_orderdate`\]\]\]\)

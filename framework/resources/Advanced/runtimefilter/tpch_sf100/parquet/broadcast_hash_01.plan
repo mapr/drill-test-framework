@@ -1,0 +1,15 @@
+03-05\s+HashJoin.*
+03-07\s+HashToRandomExchange.*
+04-01\s+Filter.*
+04-02\s+RuntimeFilter
+04-03\s+Scan.*lineitem.*columns=\[`l_orderkey`, `l_shipdate`, `l_extendedprice`, `l_discount`\]\]\]\)
+03-06\s+HashToRandomExchange.*
+05-01\s+HashJoin.*
+05-03\s+SelectionVectorRemover
+05-04\s+Filter.*
+05-05\s+RuntimeFilter
+05-06\s+Scan.*orders.*columns=\[`o_custkey`, `o_orderkey`, `o_orderdate`, `o_shippriority`\]\]\]\)
+05-02\s+BroadcastExchange
+06-01\s+SelectionVectorRemover
+06-02\s+Filter.*
+06-03\s+Scan.*customer.*columns=\[`c_mktsegment`, `c_custkey`\]\]\]\)

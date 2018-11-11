@@ -1,0 +1,6 @@
+.*01-03\s+HashJoin.*
+01-05\s+SelectionVectorRemover
+01-06\s+RuntimeFilter
+01-07\s+Scan\(table=\[\[dfs, drilltestdirtpch100parquet, lineitem\]\].*columns=\[`l_suppkey`\]\]\]\)
+01-04\s+BroadcastExchange
+.*02-03\s+Scan\(table=\[\[dfs, drilltestdirtpch100parquet, supplier\]\].*columns=\[`s_suppkey`, `s_acctbal`\]\]\]\)

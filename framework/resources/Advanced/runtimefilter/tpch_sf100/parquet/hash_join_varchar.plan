@@ -1,0 +1,10 @@
+.*01-03\s+HashJoin.*
+01-05\s+SelectionVectorRemover
+01-06\s+RuntimeFilter
+01-07\s+Scan.*lineitem.*columns=\[`l_shipmode`, `l_extendedprice`\]\]\]\)
+01-04\s+BroadcastExchange.*
+05-01\s+Project\(least_used_ship_mode=\[CAST\(\$0\)\:VARCHAR\(65535\).*
+05-02\s+HashAgg.*
+05-03\s+HashToRandomExchange.*
+06-01\s+HashAgg.*
+06-02\s+Scan.*lineitem.*columns=\[`l_shipmode`\]\]\]\)

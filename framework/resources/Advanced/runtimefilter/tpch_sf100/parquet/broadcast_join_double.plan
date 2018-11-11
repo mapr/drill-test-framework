@@ -1,0 +1,9 @@
+.*01-03\s+HashJoin.*
+01-05\s+SelectionVectorRemover
+01-06\s+RuntimeFilter
+01-07\s+Scan.*orders.*columns=\[`o_totalprice`\]\]\]\)
+01-04\s+BroadcastExchange
+02-01\s+StreamAgg.*
+02-02\s+UnionExchange
+03-01\s+StreamAgg.*
+03-02\s+Scan.*lineitem.*columns=\[`l_extendedprice`\]\]\]\)
