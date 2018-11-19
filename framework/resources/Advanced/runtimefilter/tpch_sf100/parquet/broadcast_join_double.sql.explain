@@ -1,0 +1,21 @@
+set `exec.hashjoin.enable.runtime_filter` = true;
+set `exec.hashjoin.runtime_filter.max.waiting.time` = 10000;
+set `planner.enable_broadcast_join` = true;
+set `planner.broadcast_threshold` = 2147483647;
+
+explain plan for
+select
+  count(*) as row_count
+from
+  orders o
+where
+  o.o_totalprice = (
+    select
+      max(l.l_extendedprice)
+    from
+      lineitem l);
+
+reset `exec.hashjoin.enable.runtime_filter`;
+reset `exec.hashjoin.runtime_filter.max.waiting.time`;
+reset `planner.enable_broadcast_join`;
+reset `planner.broadcast_threshold`;

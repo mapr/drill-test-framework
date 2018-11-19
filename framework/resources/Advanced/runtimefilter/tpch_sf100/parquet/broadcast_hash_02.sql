@@ -1,5 +1,7 @@
-alter session set `exec.hashjoin.enable.runtime_filter` = true;
-alter session set `exec.hashjoin.runtime_filter.max.waiting.time` = 10000;
+set `exec.hashjoin.enable.runtime_filter` = true;
+set `exec.hashjoin.runtime_filter.max.waiting.time` = 10000;
+set `planner.enable_broadcast_join` = true;
+set `planner.broadcast_threshold` = 10000000;
 
 select
   supp_nation,
@@ -41,5 +43,8 @@ order by
   cust_nation,
   l_year;
 
-alter session reset `exec.hashjoin.enable.runtime_filter`;
-alter session reset `exec.hashjoin.runtime_filter.max.waiting.time`;
+reset `exec.hashjoin.enable.runtime_filter`;
+reset `exec.hashjoin.runtime_filter.max.waiting.time`;
+reset `planner.enable_broadcast_join`;
+reset `planner.broadcast_threshold`;
+

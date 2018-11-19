@@ -7,7 +7,7 @@
   ],
   "matrices": [
     {
-      "query-file": ".*.q.explain",
+      "query-file": ".*.sql.explain",
       "schema": "dfs.drillTestDirTpch100Parquet",
       "output-format": "tsv",
       "expected-file": ".*.plan",
