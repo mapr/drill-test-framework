@@ -1,3 +1,5 @@
+-- set hive option until HIVE-19069 is fixed
+set `store.hive.parquet.optimize_scan_with_native_reader` = true;
 -- start query 59 in stream 0 using template query59.tpl 
 WITH wss 
      AS (SELECT d_week_seq, 
@@ -83,3 +85,4 @@ ORDER  BY s_store_name1,
           s_store_id1, 
           d_week_seq1
 LIMIT 100; 
+reset `store.hive.parquet.optimize_scan_with_native_reader`;

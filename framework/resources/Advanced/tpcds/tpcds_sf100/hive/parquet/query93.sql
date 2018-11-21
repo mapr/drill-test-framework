@@ -1,3 +1,5 @@
+-- set hive option until HIVE-19069 is fixed
+set `store.hive.parquet.optimize_scan_with_native_reader` = true;
 -- start query 93 in stream 0 using template query93.tpl 
 SELECT ss_customer_sk, 
                Sum(act_sales) sumsales 
@@ -20,3 +22,4 @@ GROUP  BY ss_customer_sk
 ORDER  BY sumsales, 
           ss_customer_sk
 LIMIT 100; 
+reset `store.hive.parquet.optimize_scan_with_native_reader`;

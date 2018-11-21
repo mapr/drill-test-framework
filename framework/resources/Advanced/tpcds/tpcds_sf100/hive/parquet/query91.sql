@@ -1,3 +1,5 @@
+-- set hive option until HIVE-19069 is fixed
+set `store.hive.parquet.optimize_scan_with_native_reader` = true;
 -- start query 91 in stream 0 using template query91.tpl 
 SELECT cc_call_center_id Call_Center, 
        cc_name           Call_Center_Name, 
@@ -30,3 +32,4 @@ GROUP  BY cc_call_center_id,
           cd_marital_status, 
           cd_education_status 
 ORDER  BY Sum(cr_net_loss) DESC; 
+reset `store.hive.parquet.optimize_scan_with_native_reader`;

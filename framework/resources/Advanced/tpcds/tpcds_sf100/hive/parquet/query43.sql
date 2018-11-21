@@ -1,3 +1,5 @@
+-- set hive option until HIVE-19069 is fixed
+set `store.hive.parquet.optimize_scan_with_native_reader` = true;
 -- start query 43 in stream 0 using template query43.tpl 
 SELECT s_store_name, 
                s_store_id, 
@@ -48,3 +50,4 @@ ORDER  BY s_store_name,
           fri_sales, 
           sat_sales
 LIMIT 100; 
+reset `store.hive.parquet.optimize_scan_with_native_reader`;

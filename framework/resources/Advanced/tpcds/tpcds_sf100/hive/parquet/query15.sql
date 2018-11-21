@@ -1,3 +1,5 @@
+-- set hive option until HIVE-19069 is fixed
+set `store.hive.parquet.optimize_scan_with_native_reader` = true;
 -- start query 15 in stream 0 using template query15.tpl 
 SELECT ca_zip, 
                Sum(cs_sales_price) 
@@ -18,3 +20,4 @@ WHERE  cs_bill_customer_sk = c_customer_sk
 GROUP  BY ca_zip 
 ORDER  BY ca_zip
 LIMIT 100; 
+reset `store.hive.parquet.optimize_scan_with_native_reader`;

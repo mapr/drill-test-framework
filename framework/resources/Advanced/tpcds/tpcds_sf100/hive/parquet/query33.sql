@@ -1,3 +1,5 @@
+-- set hive option until HIVE-19069 is fixed
+set `store.hive.parquet.optimize_scan_with_native_reader` = true;
 -- start query 33 in stream 0 using template query33.tpl 
 WITH ss 
      AS (SELECT i_manufact_id, 
@@ -63,3 +65,4 @@ FROM   (SELECT *
 GROUP  BY i_manufact_id 
 ORDER  BY total_sales
 LIMIT 100; 
+reset `store.hive.parquet.optimize_scan_with_native_reader`;
