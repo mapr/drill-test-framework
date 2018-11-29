@@ -1,0 +1,27 @@
+{
+  "testId": "filter_pushdown_union",
+  "type": "group",
+  "description": "Filter pushdown tests with union: these tests verify query correctness",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/DRILL_3855/DRILL_3855_test_data",
+      "dest": "parquet_storage/DRILL_3855/DRILL_3855_test_data"
+    }
+  ]
+}
+

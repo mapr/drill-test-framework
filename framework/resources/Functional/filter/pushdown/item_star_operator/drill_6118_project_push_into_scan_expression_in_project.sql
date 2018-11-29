@@ -1,0 +1,1 @@
+select distinct c1+2 from (select * from `DRILL_6118_parquet_partitioned_by_folders`) where c1>3;

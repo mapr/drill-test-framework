@@ -1,0 +1,31 @@
+{
+  "testId": "filter_pushdown_item_star_operator",
+  "type": "group",
+  "description": "Filter pushdown tests with item star operator: these tests verify query correctness",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/DRILL-6118/DRILL_6118_data_source.csv",
+      "dest": "parquet_storage/DRILL_6118/DRILL_6118_data_source.csv"
+    },
+    {
+      "mode": "gen",
+      "src": "Datasources/parquet_storage/DRILL-6118/DRILL_6118_execute_ddl.sh"
+    }
+  ]
+}
+

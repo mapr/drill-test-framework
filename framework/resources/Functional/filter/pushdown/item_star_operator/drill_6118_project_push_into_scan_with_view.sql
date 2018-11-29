@@ -1,0 +1,1 @@
+select c3 from `DRILL_6118_parquet_without_partitioning_view` where c1<3;

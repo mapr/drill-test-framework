@@ -1,1 +1,0 @@
-select c3 from dfs.drillTestDir.`DRILL_6118_parquet_without_partitioning_view` where c1<3;

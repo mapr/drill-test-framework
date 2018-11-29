@@ -1,1 +1,0 @@
-select c3 from (select * from (select * from dfs.drillTestDir.`DRILL_6118_parquet_without_partitioning`)) where c1 = 3;

@@ -1,0 +1,27 @@
+{
+  "testId": "filter_pushdown_complex_fields",
+  "type": "group",
+  "description": "Filter pushdown tests for complex fields: these tests verify query correctness",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/DRILL_6259/DRILL_6259_test_data",
+      "dest": "parquet_storage/DRILL_6259/DRILL_6259_test_data"
+    }
+  ]
+}
+
