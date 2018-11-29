@@ -1,0 +1,62 @@
+{
+    "testId": "crossJoinTpchSf001Parquet",
+    "type": "group",
+    "description": "Test cross join queries for tpch sf001 parquet data via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.drillTestDirTpch01Parquet",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+	    "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/parquet/customer.parquet",
+            "dest": "Tpch0.01/parquet/customer/customer.parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/parquet/lineitem.parquet",
+            "dest": "Tpch0.01/parquet/lineitem/lineitem.parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/parquet/nation.parquet",
+            "dest": "Tpch0.01/parquet/nation/nation.parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/parquet/region.parquet",
+            "dest": "Tpch0.01/parquet/region/region.parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/parquet/part.parquet",
+            "dest": "Tpch0.01/parquet/part/part.parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/parquet/partsupp.parquet",
+            "dest": "Tpch0.01/parquet/partsupp/partsupp.parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/parquet/supplier.parquet",
+            "dest": "Tpch0.01/parquet/supplier/supplier.parquet"
+        },
+        {
+            "mode": "cp",
+            "src": "Datasources/Tpch0.01/parquet/orders.parquet",
+            "dest": "Tpch0.01/parquet/orders/orders.parquet"
+        }
+    ]
+}

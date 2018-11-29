@@ -1,0 +1,5 @@
+set `planner.enable_multiphase_agg` =  false;
+set `planner.enable_nljoin_for_scalar_only` = false;
+select c.c_custkey,o1.o_orderkey from customer c cross join (select * from orders o inner join lineitem l on cast(o.o_orderkey as int) = cast(l.l_orderkey as int) limit 10 ) as o1 order by c.c_custkey,o1.o_orderkey limit 10;
+reset `planner.enable_nljoin_for_scalar_only`;
+reset `planner.enable_multiphase_agg`;
