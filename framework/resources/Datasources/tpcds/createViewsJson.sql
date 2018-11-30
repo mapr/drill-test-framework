@@ -496,4 +496,3 @@ cast( cs_net_paid_inc_ship as double)  as cs_net_paid_inc_ship,
 cast( cs_net_paid_inc_ship_tax as double)  as cs_net_paid_inc_ship_tax,
 cast( cs_net_profit as double)  as cs_net_profit
 from dfs.`/drill/testdata/tpcds_sf1/json/catalog_sales`;
-
