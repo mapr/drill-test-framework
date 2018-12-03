@@ -495,5 +495,4 @@ create or replace view catalog_sales as select
   case when (columns[31]='') then cast(null as double) else cast(columns[31] as double) end as cs_net_paid_inc_ship,
   case when (columns[32]='') then cast(null as double) else cast(columns[32] as double) end as cs_net_paid_inc_ship_tax,
   case when (columns[33]='') then cast(null as double) else cast(columns[33] as double) end as cs_net_profit         
-from dfs.`/drill/testdata/tpcds_sf1/text/catalog_sales`;
-
+from dfs.`/drill/testdata/tpcds_sf1/text/catalog_sales`
