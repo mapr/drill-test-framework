@@ -351,11 +351,6 @@ select ws2.str_null, max(ws1.tinyint_var) from widestrings ws1 INNER JOIN widest
 select ws2.str_empty, max(ws1.tinyint_var) from widestrings ws1 INNER JOIN widestrings ws2 on ws1.str_empty=ws2.str_var_null_empty group by ws2.str_empty order by lower(ws2.str_empty) limit 100;
 select ws2.str_empty_null, max(ws1.tinyint_var) from widestrings ws1 INNER JOIN widestrings ws2 on ws1.str_empty_null=ws2.str_var_null_empty group by ws2.str_empty_null order by lower(ws2.str_empty_null) limit 100;
 select ws2.str_fixed_null_empty, max(ws1.tinyint_var) from widestrings ws1 INNER JOIN widestrings ws2 on ws1.str_fixed_null_empty=ws2.str_var_null_empty group by ws2.str_fixed_null_empty order by lower(ws2.str_fixed_null_empty) limit 100;
-
-
-
-
 --- TODO UNION ALL & EXTERNAL SORT
 --- Modify Merge Join queries to alter session
 --- add explain plan queries
-
