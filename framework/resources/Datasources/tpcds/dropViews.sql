@@ -45,4 +45,3 @@ drop view web_returns ;
 drop view web_sales ; 
   
 drop view catalog_sales ; 
- 
