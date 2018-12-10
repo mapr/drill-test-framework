@@ -587,13 +587,16 @@ public class TestDriver {
       connection = connectionPool.getOrCreateConnection();
       for (String query : setupQueries) {
         LOG.info(">> Query: " + query + ";");
-        LOG.info(Utils.getSqlResult(Utils.execSQL(query, connection)));
+        ResultSet resultSet = Utils.execSQL(query, connection);
+        if (resultSet != null) {
+          LOG.info(Utils.getSqlResult(resultSet));
+        }
       }
 
       // Initializing variables for reporting
       String getCommitId = "SELECT version, commit_id from sys.version";
       ResultSet resultSet = Utils.execSQL(getCommitId, connection);
-      while(resultSet.next()) {
+      while (resultSet.next()) {
         commitId = resultSet.getString("commit_id");
         version = resultSet.getString("version");
       }
@@ -631,7 +634,10 @@ public class TestDriver {
 	  String[] teardownQueries = Utils.getSqlStatements(afterRunQueryFilename);
       for (String query : teardownQueries) {
         LOG.info(">> Query: " + query + ";");
-        LOG.info(Utils.getSqlResult(Utils.execSQL(query, connection)));
+        ResultSet resultSet = Utils.execSQL(query, connection);
+        if(resultSet != null) {
+          LOG.info(Utils.getSqlResult(resultSet));
+        }
       }
       LOG.info(DrillTestDefaults.LINE_BREAK);
     } catch (IOException e) {
@@ -800,7 +806,7 @@ public class TestDriver {
       resultSet = Utils.execSQL(query, connection);
 
       List columnLabels = new ArrayList<String>();
-      int columnCount = resultSet.getMetaData().getColumnCount();
+      int columnCount = resultSet != null ? resultSet.getMetaData().getColumnCount() : 0;
       for (int i = 1; i <= columnCount; i++) {
         columnLabels.add(resultSet.getMetaData().getColumnLabel(i));
       }
@@ -812,13 +818,15 @@ public class TestDriver {
       LOG.debug("Result set data types:");
       LOG.debug(Utils.getTypesInStrings(types));
 
-      while (resultSet.next()) {
-        List<Object> values = Utils.getRowValues(resultSet);
-        ColumnList columnList = new ColumnList(types, values);
-        writer.write(columnList + "\n");
-        for (int i = 0; i < 3; i++) {
-          memUsage[0][i] = memUsage[1][i];
-          memUsage[1][i] = (Long) values.get(i)/1024/1024;
+      if (resultSet != null) {
+        while (resultSet.next()) {
+          List<Object> values = Utils.getRowValues(resultSet);
+          ColumnList columnList = new ColumnList(types, values);
+          writer.write(columnList + "\n");
+          for (int i = 0; i < 3; i++) {
+            memUsage[0][i] = memUsage[1][i];
+            memUsage[1][i] = (Long) values.get(i) / 1024 / 1024;
+          }
         }
       }
       connectionPool.releaseConnection(connection);

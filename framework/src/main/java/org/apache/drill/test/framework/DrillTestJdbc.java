@@ -189,7 +189,7 @@ public class DrillTestJdbc implements DrillTest {
       statement = connection.createStatement();
     }
     try {
-      resultSet = statement.executeQuery(query);
+      resultSet = statement.execute(query) ? statement.getResultSet() : null;
     } finally {
       if (resultSet != null) {
         // TODO(DRILL-2560) : Once resolved, we can use statement#executeUpdate instead of exhausting the result set
@@ -207,7 +207,7 @@ public class DrillTestJdbc implements DrillTest {
     CancelQuery c = null;
     try {
       statement = connection.createStatement();
-      resultSet = statement.executeQuery(query);      
+      resultSet = statement.execute(query) ? statement.getResultSet() : null;
       if (cancelQuery) {
     	c = new CancelQuery(statement);
     	c.start();
@@ -238,7 +238,7 @@ public class DrillTestJdbc implements DrillTest {
       columnNullabilities = Lists.newArrayList();
       columnSizes = Lists.newArrayList();
       columnPrecisions = Lists.newArrayList();
-      int columnCount = resultSet.getMetaData().getColumnCount();
+      int columnCount = resultSet != null ? resultSet.getMetaData().getColumnCount() : 0;
       for (int i = 1; i <= columnCount; i++) {
         columnLabels.add(resultSet.getMetaData().getColumnLabel(i));
         columnTypes.add(resultSet.getMetaData().getColumnType(i));
@@ -250,12 +250,13 @@ public class DrillTestJdbc implements DrillTest {
       LOG.debug("Result set data types:");
       LOG.debug(Utils.getTypesInStrings(columnTypes));
 
-      while (resultSet.next()) {
-        List<Object> values = Utils.getRowValues(resultSet);
-        ColumnList columnList = new ColumnList(columnTypes, values);
-        writer.write(columnList + "\n");
+      if (resultSet != null) {
+        while (resultSet.next()) {
+          List<Object> values = Utils.getRowValues(resultSet);
+          ColumnList columnList = new ColumnList(columnTypes, values);
+          writer.write(columnList + "\n");
+        }
       }
-
     } catch (IllegalArgumentException | IllegalAccessException | IOException e1) {
 		LOG.warn(e1);
 	} finally {
@@ -280,7 +281,7 @@ public class DrillTestJdbc implements DrillTest {
 	
 	BufferedWriter writer = new BufferedWriter(new FileWriter(new File(outputFilename),true));	
     statement = connection.createStatement();
-    ResultSet resultSet = statement.executeQuery(query);
+    ResultSet resultSet = statement.execute(query) ? statement.getResultSet() : null;
     List columnLabels = new ArrayList<String>();
     List<Integer> columnTypes = Lists.newArrayList();
     List<Integer> columnNullabilities = Lists.newArrayList();
@@ -288,7 +289,7 @@ public class DrillTestJdbc implements DrillTest {
     List<Integer> columnPrecisions = Lists.newArrayList();
     
     try {
-      int columnCount = resultSet.getMetaData().getColumnCount();
+      int columnCount = resultSet != null ? resultSet.getMetaData().getColumnCount() : 0;
       for (int i = 1; i <= columnCount; i++) {
         columnLabels.add(resultSet.getMetaData().getColumnLabel(i));
         columnTypes.add(resultSet.getMetaData().getColumnType(i));
@@ -296,29 +297,29 @@ public class DrillTestJdbc implements DrillTest {
         columnSizes.add(resultSet.getMetaData().getColumnDisplaySize(i));
         columnPrecisions.add(resultSet.getMetaData().getPrecision(i));
       }
-      
-      String msg = "\nlimit 0: " + query + "\n" 
-    		  + "limit 0: " + columnLabels + "\n" 
-    		  + "regular: " + this.columnLabels + "\n"
-    		  + "\nlimit 0: " + Utils.getTypesInStrings(columnTypes) + "\n"
-    		  + "regular: " + Utils.getTypesInStrings(this.columnTypes) + "\n"
-    		  + "\nlimit 0: " + Utils.getNullabilitiesInStrings(columnNullabilities) + "\n"
-    		  + "regular: " + Utils.getNullabilitiesInStrings(this.columnNullabilities) + "\n"
-    		  + "\nlimit 0: " + columnSizes + "\n"
-    		  + "regular: " + this.columnSizes + "\n"
-    		  + "\nlimit 0: " + columnPrecisions + "\n"
-    		  + "regular: " + this.columnPrecisions + "\n";
+
+      String msg = "\nlimit 0: " + query + "\n"
+              + "limit 0: " + columnLabels + "\n"
+              + "regular: " + this.columnLabels + "\n"
+              + "\nlimit 0: " + Utils.getTypesInStrings(columnTypes) + "\n"
+              + "regular: " + Utils.getTypesInStrings(this.columnTypes) + "\n"
+              + "\nlimit 0: " + Utils.getNullabilitiesInStrings(columnNullabilities) + "\n"
+              + "regular: " + Utils.getNullabilitiesInStrings(this.columnNullabilities) + "\n"
+              + "\nlimit 0: " + columnSizes + "\n"
+              + "regular: " + this.columnSizes + "\n"
+              + "\nlimit 0: " + columnPrecisions + "\n"
+              + "regular: " + this.columnPrecisions + "\n";
       writer.append(msg);
-      
-      if (!columnLabels.equals(this.columnLabels) 
-    	  || !columnTypes.equals(this.columnTypes)
+
+      if (!columnLabels.equals(this.columnLabels)
+          || !columnTypes.equals(this.columnTypes)
           || !isNullabilityCompatible(columnNullabilities, this.columnNullabilities)
-          || !columnSizes.equals(this.columnSizes) 
+          || !columnSizes.equals(this.columnSizes)
           || !columnPrecisions.equals(this.columnPrecisions))  {
         LOG.info(msg);
         setTestStatus(TestStatus.DATA_VERIFICATION_FAILURE);
         exception = exception == null? new VerificationException(msg)
-        	: new VerificationException(exception + "\n" + msg);
+            : new VerificationException(exception + "\n" + msg);
       }
     } catch (IllegalArgumentException | IllegalAccessException e1) {
       LOG.warn(e1);
