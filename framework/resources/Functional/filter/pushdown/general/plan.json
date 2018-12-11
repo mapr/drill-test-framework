@@ -1,0 +1,37 @@
+{
+  "testId": "filter_pushdown_general_plan",
+  "type": "group",
+  "description": "Filter pushdown tests: these tests verify query plans for the queries that are in ../data directory",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql.explain",
+      "schema": "dfs.subqueries",
+      "output-format": "tsv",
+      "expected-file": ".*.plan",
+      "verification-type": [
+        "regex"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/subqueries",
+      "dest": "subqueries"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/ctas/Transitive_closure.csv",
+      "dest": "/drill/testdata/transitive_closure/filterPushdown/Transitive_closure.csv"
+    },
+    {
+      "mode": "gen",
+      "src": "Datasources/ctas/Transitive_closure_gen.sh Transitive_closure_pushDown.ddl drillTestDir /drill/testdata/transitive_closure/filterPushdown/",
+      "dest": ""
+    }
+  ]
+}
+

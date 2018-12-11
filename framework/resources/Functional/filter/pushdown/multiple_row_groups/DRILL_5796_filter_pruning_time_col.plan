@@ -1,0 +1,2 @@
+(?s)\A((?!Filter).)*\Z
+Scan.*numFiles=1.*numRowGroups=2

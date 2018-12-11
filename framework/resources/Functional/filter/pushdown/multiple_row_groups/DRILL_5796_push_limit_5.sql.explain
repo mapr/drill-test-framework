@@ -1,0 +1,1 @@
+explain plan for select * from `parquet_storage/DRILL_5796/DRILL_5796_test_data.parquet` limit 5;

@@ -1,0 +1,1 @@
+Scan.*numFiles=1.*numRowGroups=1.*columns=\[`nested_group`\.`int_col`\[0\]\]

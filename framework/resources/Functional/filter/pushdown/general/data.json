@@ -1,0 +1,27 @@
+{
+  "testId": "filter_pushdown_general",
+  "type": "group",
+  "description": "Filter pushdown tests: these tests verify query correctness",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.subqueries",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/subqueries",
+      "dest": "subqueries"
+    }
+  ]
+}
+
