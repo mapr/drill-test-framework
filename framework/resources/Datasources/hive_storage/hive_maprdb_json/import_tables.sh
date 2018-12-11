@@ -12,18 +12,13 @@ hadoop_folder=${DRILL_TESTDATA}/hive_storage/maprdb/json
 test_data=test_data.json
 maprdb_table=json_MapR_DB_table
 
-# Creating the MapR-DB table:
-hadoop fs -test -f $hadoop_folder/$maprdb_table
-if [ $? -eq 0 ]
+if [ ${user} == "root" ]
 then
-    hadoop fs -rm -r $hadoop_folder/$maprdb_table
-fi
-
-if [ "$user" == "root" ]
-then
+    mapr dbshell drop $hadoop_folder/$maprdb_table
     mapr importJSON -idField "id" -src $hadoop_folder/$test_data -dst $hadoop_folder/$maprdb_table
 else
-    sudo -u $user mapr importJSON -idField "id" -src $hadoop_folder/$test_data -dst $hadoop_folder/$maprdb_table
+    sudo -u ${user} mapr dbshell drop $hadoop_folder/$maprdb_table
+    sudo -u ${user} mapr importJSON -idField "id" -src $hadoop_folder/$test_data -dst $hadoop_folder/$maprdb_table
 fi
 
 # Creating the Hive table:
