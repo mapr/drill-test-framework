@@ -770,14 +770,15 @@ public class Utils {
   public static ResultSet execSQL(String sql, Connection connection) throws SQLException {
 	try {
 	  Statement statement = connection.createStatement();
-	  return statement.executeQuery(sql);
+      return statement.execute(sql) ? statement.getResultSet() : null;
 	} catch (SQLException e) {
 	  LOG.error(e.getMessage());
 	  e.printStackTrace();
       try {
 		connection.close();
 	  } catch (SQLException e1) {
-		LOG.error(e.getMessage());e1.printStackTrace();
+		LOG.error(e.getMessage());
+		e1.printStackTrace();
 	  }
       throw e;
 	}
