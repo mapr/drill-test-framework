@@ -1,0 +1,21 @@
+{
+  "testId": "no_result_set",
+  "type": "group",
+  "description": "Test Drill option to not return a result set",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+  ]
+}
