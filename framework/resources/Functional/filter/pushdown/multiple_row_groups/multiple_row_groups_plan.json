@@ -20,7 +20,7 @@
     {
       "mode": "cp",
       "src": "Datasources/parquet_storage/DRILL_5796/DRILL_5796_test_data.parquet",
-      "dest": "parquet_storage/DRILL_5796/DRILL_5796_test_data.parquet"
+      "dest": "filter/pushdown/DRILL_5796_test_data.parquet"
     }
   ]
 }

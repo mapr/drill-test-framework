@@ -1,0 +1,2 @@
+Filter.*\(condition=\[<\(/\(\$1, 2\), 2\)\]\)
+Scan.*numFiles=1.*numRowGroups=1.*columns=\[`\*\*`, `int_col`\]
