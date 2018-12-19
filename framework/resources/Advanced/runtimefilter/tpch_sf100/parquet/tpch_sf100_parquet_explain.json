@@ -1,0 +1,21 @@
+{
+  "testId": "runtime_filter_tpch_sf100_parquet_plan",
+  "type": "group",
+  "description": "Plan Validation for Runtime Filter on TPC-H parquet data",
+  "categories": [
+    "advanced"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql.explain",
+      "schema": "dfs.drillTestDirTpch100Parquet",
+      "output-format": "tsv",
+      "expected-file": ".*.plan",
+      "verification-type": [
+        "regex"
+      ]
+    }
+  ],
+  "datasources": [
+  ]
+}

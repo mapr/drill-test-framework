@@ -1,0 +1,19 @@
+.*03-04\s+HashJoin.*
+03-06\s+HashJoin.*
+03-08\s+SelectionVectorRemover
+03-09\s+RuntimeFilter
+03-10\s+SelectionVectorRemover
+03-11\s+RuntimeFilter
+03-12\s+Scan.*partsupp.*columns=\[`ps_suppkey`, `ps_partkey`\]\]\]\)
+03-07\s+BroadcastExchange
+04-01\s+HashJoin.*
+04-03\s+SelectionVectorRemover
+04-05\s+Filter.*
+04-07\s+Scan.*supplier.*columns=\[`s_nationkey`, `s_suppkey`\]\]\]\)
+04-02\s+SelectionVectorRemover
+04-04\s+Filter.*
+04-06\s+Scan.*nation.*columns=\[`n_nationkey`\]\]\]\)
+03-05\s+BroadcastExchange
+05-01\s+SelectionVectorRemover
+05-02\s+Filter.*
+05-03\s+Scan.*part.*columns=\[`p_partkey`, `p_type`, `p_mfgr`\]\]\]\)

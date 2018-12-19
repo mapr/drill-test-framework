@@ -1,0 +1,21 @@
+{
+    "testId": "runtime_filter_tpch_sf100_parquet",
+    "type": "group",
+    "description": "Test Runtime Filter on TPC-H parquet data",
+    "categories": [
+        "advanced"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.sql",
+            "schema": "dfs.drillTestDirTpch100Parquet",
+            "output-format": "tsv",
+            "expected-file": ".*.e_tsv",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+    ]
+}
