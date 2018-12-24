@@ -1,3 +1,3 @@
-set `exec.return_result_set_for_ddl` = false;
+set `exec.query.return_result_set_for_ddl` = false;
 reset `store.format`;
-reset `exec.return_result_set_for_ddl`;
+reset `exec.query.return_result_set_for_ddl`;
