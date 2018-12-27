@@ -1,1 +1,1 @@
-select * from `parquet_storage/DRILL_6259/DRILL_6259_test_data` t where t.top_level_array[2] is not null;
+select * from `filter/pushdown/DRILL_6259_test_data` t where t.top_level_array[2] is not null;

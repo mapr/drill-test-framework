@@ -1,0 +1,26 @@
+{
+  "testId": "filter_pushdown_filter_pruning_plan",
+  "type": "group",
+  "description": "Filter pushdown tests: these tests verify the query plan for the filter pruning",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "regex-no-order"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/DRILL_3855/DRILL_3855_test_data",
+      "dest": "filter/pushdown/DRILL_3855_test_data"
+    }
+  ]
+}

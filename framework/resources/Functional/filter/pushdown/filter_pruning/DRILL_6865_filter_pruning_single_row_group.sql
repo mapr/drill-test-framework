@@ -1,0 +1,1 @@
+select * from `filter/pushdown/DRILL_3855_test_data/0_0_1.parquet` where float_col < 5;

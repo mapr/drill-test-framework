@@ -1,1 +1,1 @@
-select distinct c1 from (select * from `DRILL_6118_parquet_partitioned_by_folders`) where c1*2<5;
+select distinct c1 from (select * from `filter/pushdown/DRILL_6118_parquet_partitioned_by_folders`) where c1*2<5;

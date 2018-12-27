@@ -1,0 +1,1 @@
+select * from `filter/pushdown/DRILL_3855_test_data` where int_col between 0 and 5 and int_col/2 < 2;

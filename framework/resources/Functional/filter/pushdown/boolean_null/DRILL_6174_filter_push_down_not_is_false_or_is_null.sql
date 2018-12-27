@@ -1,1 +1,1 @@
-select c1, c2, c3 from `parquet_storage/DRILL_6174/DRILL_6174_test_data` where not c2 = false or c3 is null;
+select c1, c2, c3 from `filter/pushdown/DRILL_6174_test_data` where not c2 = false or c3 is null;

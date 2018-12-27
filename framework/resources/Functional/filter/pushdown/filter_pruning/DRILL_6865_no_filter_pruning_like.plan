@@ -1,0 +1,2 @@
+Filter.*\(condition=\[LIKE\(\$1, '3'\)\]\)
+Scan.*numFiles=1.*numRowGroups=1.*columns=\[`\*\*`, `int_col`\]

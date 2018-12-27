@@ -1,0 +1,1 @@
+explain plan for select * from `filter/pushdown/0_0_1.parquet` where float_col < 5;
