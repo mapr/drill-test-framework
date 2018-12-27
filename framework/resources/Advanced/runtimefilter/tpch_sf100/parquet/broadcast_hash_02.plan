@@ -17,9 +17,7 @@
 04-03\s+SelectionVectorRemover
 04-04\s+Filter.*
 04-05\s+RuntimeFilter
-04-06\s+SelectionVectorRemover
-04-07\s+RuntimeFilter
-04-08\s+Scan.*lineitem.*columns=\[`l_suppkey`, `l_orderkey`, `l_shipdate`, `l_extendedprice`, `l_discount`\]\]\]\)
+04-06\s+Scan.*lineitem.*columns=\[`l_suppkey`, `l_orderkey`, `l_shipdate`, `l_extendedprice`, `l_discount`\]\]\]\)
 04-02\s+BroadcastExchange
 06-01\s+HashJoin.*
 06-03\s+Scan.*supplier.*columns=\[`s_suppkey`, `s_nationkey`\]\]\]\)
