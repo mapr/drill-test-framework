@@ -2,9 +2,7 @@
 03-06\s+HashJoin.*
 03-08\s+SelectionVectorRemover
 03-09\s+RuntimeFilter
-03-10\s+SelectionVectorRemover
-03-11\s+RuntimeFilter
-03-12\s+Scan.*partsupp.*columns=\[`ps_suppkey`, `ps_partkey`\]\]\]\)
+03-10\s+Scan.*partsupp.*columns=\[`ps_suppkey`, `ps_partkey`\]\]\]\)
 03-07\s+BroadcastExchange
 04-01\s+HashJoin.*
 04-03\s+SelectionVectorRemover

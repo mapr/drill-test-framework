@@ -6,11 +6,9 @@
 04-02\s+SelectionVectorRemover
 04-03\s+RuntimeFilter
 04-04\s+Scan.*lineitem.*columns=\[`l_discount`\]\]\]\)
-01-04\s+HashAgg.*
-01-06\s+Project.*
-01-08\s+HashToRandomExchange.*
+01-04\s+Project.*
+01-06\s+HashToRandomExchange.*
 03-01\s+UnorderedMuxExchange
 05-01\s+Project.*
-05-02\s+HashAgg.*
-05-03\s+Project\(EXPR\$0=\[CAST\(\$0\)\:DOUBLE\]\)
-05-04\s+Scan.*lineitem.*columns=\[`l_discount`\]\]\]\)
+05-02\s+Project\(EXPR\$0=\[CAST\(\$0\)\:DOUBLE\]\)
+05-03\s+Scan.*lineitem.*columns=\[`l_discount`\]\]\]\)
