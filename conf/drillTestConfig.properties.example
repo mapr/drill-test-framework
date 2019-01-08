@@ -146,7 +146,7 @@ export M2_HOME=/usr/local/apache-maven/apache-maven-3.1.1
 export M2=$M2_HOME/bin
 export PATH=.:$M2:$PATH
 
-export DRILL_VERSION=1.6.0-SNAPSHOT
+export DRILL_VERSION=$(grep 'git.build.version' ${DRILL_HOME}/git.properties | tr '=' '\n' | tail -1)
 export HADOOP_VERSION=1.0.3-mapr-3.0.2
 export USERNAME
 export PASSWORD
