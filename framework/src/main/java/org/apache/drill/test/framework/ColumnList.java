@@ -32,7 +32,6 @@ public class ColumnList {
   private final List<Integer> types;
   private final boolean Simba;
   public static final String SIMBA_JDBC = "sjdbc";
-
   public ColumnList(List<Integer> types, List<Object> values) {
     this.values = values;
     this.types = types;
@@ -63,6 +62,11 @@ public class ColumnList {
    */
   @Override
   public boolean equals(Object object) {
+    return (compare(this, (ColumnList) object)>0);
+  }
+
+  
+  public int equallll(Object object) {
     return compare(this, (ColumnList) object);
   }
 
@@ -132,20 +136,20 @@ public class ColumnList {
     return sb.toString();
   }
 
-  private boolean compare(ColumnList o1, ColumnList o2) {
+  public int compare(ColumnList o1, ColumnList o2) {
     List<Object> list1 = o1.values;
     List<Object> list2 = o2.values;
-    if (list1.size() != list2.size()) return false;
+    if (list1.size() != list2.size()) return 0;
     for (int i = 0; i < list1.size(); i++) {
       if (types == null || types.size() == 0) {
-        if (!list1.get(i).equals(list2.get(i))) return false;
+        if (!list1.get(i).equals(list2.get(i))) return 0;
         continue;
       }
       if (bothNull(list1.get(i), list2.get(i))) {
         continue;
       }
       if (oneNull(list1.get(i), list2.get(i))) {
-        return false;
+        return 0;
       }
       int type = (Integer) (types.get(i));
       try {
@@ -155,9 +159,22 @@ public class ColumnList {
           float f1 = (Float) list1.get(i);
           float f2 = (Float) list2.get(i);
           if ((f1 + f2) / 2 != 0) {
-            if (!(Math.abs((f1 - f2) / ((f1 + f2) / 2)) < 1.0E-6)) return false;
+            if (!(Math.abs((f1 - f2) / ((f1 + f2) / 2)) < TestDriver.cmdParam.precisionFloat)){ 
+              if (!(Math.abs((f1 - f2) / ((f1 + f2) / 2)) < TestDriver.cmdParam.precisionFloat*10)){
+                if (!(Math.abs((f1 - f2) / ((f1 + f2) / 2)) < TestDriver.cmdParam.precisionFloat*100)){
+                  return 0;
+                }
+                else{
+                 return -1;//data precision error
+                }
+              }
+              else{
+                return -1;
+              }
+              //return false;
+            }
           } else if (f1 != 0) {
-            return false;
+            return 0;//data verification error
           }
           break;
         case Types.DOUBLE:
@@ -168,26 +185,39 @@ public class ColumnList {
           // otherwise proceed with "loosened" logic
           if (!d1.equals(d2)) {
             if ((d1 + d2) / 2 != 0) {
-              if (!(Math.abs((d1 - d2) / ((d1 + d2) / 2)) < 1.0E-12)) return false;
+              if (!(Math.abs((d1 - d2) / ((d1 + d2) / 2)) < TestDriver.cmdParam.precisionDouble)){ 
+                if (!(Math.abs((d1 - d2) / ((d1 + d2) / 2)) < TestDriver.cmdParam.precisionDouble*10)){
+                  if (!(Math.abs((d1 - d2) / ((d1 + d2) / 2)) < TestDriver.cmdParam.precisionDouble*100)){
+                    return 0;
+                  }
+                  else{
+                    return -1;
+                  }
+                }
+                else{
+                  return -1;
+                }
+                //return false;
+              }
             } else if (d1 != 0) {
-              return false;
+              return 0;
             }
           }
           break;
         case Types.DECIMAL:
           BigDecimal bd1 = (BigDecimal) list1.get(i);
           BigDecimal bd2 = (BigDecimal) list2.get(i);
-          if (!(bd1.compareTo(bd2) == 0)) return false;
+          if (!(bd1.compareTo(bd2) == 0)) return 0;
           break;
         default:
-          if (!(list1.get(i).equals(list2.get(i)))) return false;
+          if (!(list1.get(i).equals(list2.get(i)))) return 0;
           break;
         }
       } catch (Exception e) {
-        if (!(list1.get(i).equals(list2.get(i)))) return false;
+        if (!(list1.get(i).equals(list2.get(i)))) return 0;
       }
     }
-    return true;
+    return 1;
   }
 
   public static boolean bothNull(Object obj1, Object obj2) {

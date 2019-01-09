@@ -59,6 +59,12 @@ import com.beust.jcommander.Parameter;
     @Parameter(names = {"-t"}, description = "timeout", required=false)
     public int timeout = 120;
 
+    @Parameter(names = {"-pF"}, description = "precision value for float values", required=false)
+    public double precisionFloat = 1.0E-6;
+    
+    @Parameter(names = {"-pD"}, description = "precision value for double values", required=false)
+    public double precisionDouble = 1.0E-12;
+    
     @Parameter(names = {"-w"}, description = "enable write actual query result to file", required=false)
     public boolean outputQueryResult = false;
 
