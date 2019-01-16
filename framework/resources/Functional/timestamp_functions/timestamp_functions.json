@@ -1,0 +1,26 @@
+{
+  "testId": "timestampadd_timestampdiff_tests",
+  "type": "group",
+  "description": "Tests for TIMESTAMPADD and TIMESTAMPDIFF functions",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drilltestdirtpch01parquet",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/Tpch0.01/parquet/orders.parquet",
+      "dest": "Tpch0.01/parquet/orders/orders.parquet"
+    }
+  ]
+}
