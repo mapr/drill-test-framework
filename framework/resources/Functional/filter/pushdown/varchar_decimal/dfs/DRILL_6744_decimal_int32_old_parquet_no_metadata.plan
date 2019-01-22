@@ -1,0 +1,2 @@
+Filter\(condition=\[AND\(=\(\$0, 1\), <\(\$1, 100\)\)\]\)
+Scan.*numFiles=1.*numRowGroups=5.*usedMetadataFile=false.*columns=\[`p_size`, `p_partkey`, `p_name`\]

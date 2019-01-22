@@ -1,0 +1,2 @@
+Filter.*\(condition=\[OR\(=\(\$0, 'Customer#000000334'\), =\(\$0, 'Customer#000000335'\)\)\]\)
+Scan.*numFiles=1.*numRowGroups=1.*usedMetadataFile=false.*columns=\[`c_name`, `c_custkey`, `c_phone`\]

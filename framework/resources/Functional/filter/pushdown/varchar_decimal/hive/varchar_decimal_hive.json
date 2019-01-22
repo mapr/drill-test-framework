@@ -1,0 +1,50 @@
+{
+  "testId": "varchar_decimal_hive",
+  "type": "group",
+  "description": "Filter pushdown tests for varchar and decimals: these tests verify query correctness",
+  "categories": [
+    "functional",
+    "hive"
+  ],
+  "dependencies" : [
+    "hive"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "hive.filter_pushdown",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/filter/pushdown/varchar_decimal/no_metadata_file",
+      "dest": "filter/pushdown/varchar_decimal/no_metadata_file/"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/filter/pushdown/varchar_decimal/no_metadata_file",
+      "dest": "filter/pushdown/varchar_decimal/new_metadata_file/"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/filter/pushdown/varchar_decimal/no_metadata_file",
+      "dest": "filter/pushdown/varchar_decimal/old_metadata_file/"
+    },
+    {
+      "mode": "gen",
+      "src": "Datasources/parquet_storage/filter/pushdown/varchar_decimal/copy_metadata.sh",
+      "dest": ""
+    },
+    {
+      "mode": "gen",
+      "src": "Datasources/parquet_storage/filter/pushdown/varchar_decimal/create_hive_tables.sh",
+      "dest": ""
+    }
+  ]
+}

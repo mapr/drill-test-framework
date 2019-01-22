@@ -1,0 +1,2 @@
+Filter\(condition=\[<\(\$2, -980\)\]\)
+Scan.*HiveDrillNativeParquetScan.*numFiles=2.*numRowGroups=2.*columns=\[`c_nationkey`, `c_phone`, `c_acctbal`, `c_comment`\]

@@ -1,0 +1,6 @@
+set `store.hive.optimize_scan_with_native_readers` = true;
+explain plan for
+select c_custkey, c_name, c_phone, c_phone
+from `customer`
+where c_name in ('Customer#000000334', 'Customer#000000335');
+reset `store.hive.optimize_scan_with_native_readers`;

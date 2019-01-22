@@ -1,0 +1,50 @@
+{
+  "testId": "varchar_decimal_hive_plan",
+  "type": "group",
+  "description": "Filter pushdown tests for parquets with multiple row groups: these tests verify physical plan correctness",
+  "categories": [
+    "functional",
+    "hive"
+  ],
+  "dependencies" : [
+    "hive"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql.explain",
+      "schema": "hive.filter_pushdown",
+      "output-format": "tsv",
+      "expected-file": ".*.plan",
+      "verification-type": [
+        "regex"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/filter/pushdown/varchar_decimal/no_metadata_file",
+      "dest": "filter/pushdown/varchar_decimal/no_metadata_file/"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/filter/pushdown/varchar_decimal/no_metadata_file",
+      "dest": "filter/pushdown/varchar_decimal/new_metadata_file/"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/filter/pushdown/varchar_decimal/no_metadata_file",
+      "dest": "filter/pushdown/varchar_decimal/old_metadata_file/"
+    },
+    {
+      "mode": "gen",
+      "src": "Datasources/parquet_storage/filter/pushdown/varchar_decimal/copy_metadata.sh",
+      "dest": ""
+    },
+    {
+      "mode": "gen",
+      "src": "Datasources/parquet_storage/filter/pushdown/varchar_decimal/create_hive_tables.sh",
+      "dest": ""
+    }
+  ]
+}

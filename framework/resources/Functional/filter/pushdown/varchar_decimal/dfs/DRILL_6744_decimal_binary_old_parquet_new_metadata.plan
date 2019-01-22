@@ -1,0 +1,2 @@
+Filter\(condition=\[<=\(\$0, -900\)\]\)
+Scan.*numFiles=1.*numRowGroups=3.*usedMetadataFile=true.*columns=\[`s_acctbal`, `s_address`, `s_phone`\]
