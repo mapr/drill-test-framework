@@ -1,0 +1,32 @@
+{
+  "testId": "group_by_with_alias",
+  "type": "group",
+  "description": "Testing Group By and Having operators with aliases",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/ctas/DRILL-1248/group_by.tsv",
+      "dest": "DRILL-1248/group_by.tsv"
+    },
+    {
+       "mode": "gen",
+       "src": "Datasources/ctas/DRILL-1248/ctas.sh",
+       "dest": ""
+    }
+  ]
+}
