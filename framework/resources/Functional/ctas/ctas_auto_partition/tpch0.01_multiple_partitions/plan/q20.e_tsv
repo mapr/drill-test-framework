@@ -86,4 +86,4 @@
 .*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart_ordered3/0_0_32.parquet.*
 .*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart_ordered3/0_0_28.parquet.*
 .*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart_ordered3/0_0_3.parquet.*
-.*selectionRoot.*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart_ordered3.*numFiles=85.*columns=\[`l_moddate`.*`l_modline`\].*
+.*selectionRoot.*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart_ordered3.*numFiles=85.*columns=\[`l_modline`.*`l_moddate`\].*
