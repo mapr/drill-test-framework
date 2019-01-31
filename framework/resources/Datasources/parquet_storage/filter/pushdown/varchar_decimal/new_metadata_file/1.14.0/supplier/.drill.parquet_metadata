@@ -102,9 +102,7 @@
         "nulls" : 0
       }, {
         "name" : [ "s_acctbal" ],
-        "minValue" : "jrI=",
-        "maxValue" : "cCw=",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "s_comment" ],
         "minValue" : "IGZpbmFsIHBhdHRlcm5zLiBhY2NvdW50cyBoYWdnbGUgaWRseSBwYXM=",
@@ -149,9 +147,7 @@
         "nulls" : 0
       }, {
         "name" : [ "s_acctbal" ],
-        "minValue" : "kSA=",
-        "maxValue" : "eIg=",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "s_comment" ],
         "minValue" : "IGFjcm9zcyB0aGUgZnVyaW91c2x5IHJlZ3VsYXIgcGxhdGVsZXRzIHdha2UgZXZlbiBkZXBvc2l0cy4gcXVpY2tseSBleHByZXNzIHNoZQ==",
@@ -196,9 +192,7 @@
         "nulls" : 0
       }, {
         "name" : [ "s_acctbal" ],
-        "minValue" : "qCw=",
-        "maxValue" : "QPg=",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "s_comment" ],
         "minValue" : "IGV2ZW4gdGhlb2RvbGl0ZXMgd2FrZSBhZ2FpbnN0IHRoZSBibGl0aGVseSBmbHVmZnkgcGFja2FnZXM=",
@@ -208,5 +202,5 @@
     } ]
   } ],
   "directories" : [ ],
-  "drillVersion" : "1.14.0-SNAPSHOT"
+  "drillVersion" : "1.16.0"
 }

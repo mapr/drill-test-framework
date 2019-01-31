@@ -12,10 +12,10 @@ create external table filter_pushdown.customer(
   c_comment string
 )
 stored as parquet
-location 'dfs_location/customer';
+location 'dfs_location/1.16.0/customer';
 
-drop table if exists filter_pushdown.part_old;
-create external table filter_pushdown.part_old(
+drop table if exists filter_pushdown.part;
+create external table filter_pushdown.part(
   p_partkey int,
   p_name string,
   p_mfgr string,
@@ -27,10 +27,10 @@ create external table filter_pushdown.part_old(
   p_comment string
 )
 stored as parquet
-location 'dfs_location/part_old';
+location 'dfs_location/1.14.0/part';
 
-drop table if exists filter_pushdown.partsupp_old;
-create external table filter_pushdown.partsupp_old(
+drop table if exists filter_pushdown.partsupp;
+create external table filter_pushdown.partsupp(
   ps_partkey int,
   ps_suppkey int,
   ps_availqty int,
@@ -38,4 +38,4 @@ create external table filter_pushdown.partsupp_old(
   ps_comment string
 )
 stored as parquet
-location 'dfs_location/partsupp_old';
+location 'dfs_location/1.14.0/partsupp';

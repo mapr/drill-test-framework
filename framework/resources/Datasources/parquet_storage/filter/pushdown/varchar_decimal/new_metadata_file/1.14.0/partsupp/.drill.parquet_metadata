@@ -74,9 +74,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AICB",
-        "maxValue" : "AX/M",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFib3V0IHRoZSBwZXJtYW5lbnQsIGV2ZW4gdGhlb2RvbGl0ZXMuIGV2ZW4sIGlyb25pYyBpZGVhcyB3YWtlLiBxdWlja2x5IHNwZWNpYWwg",
@@ -111,9 +109,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AIEA",
-        "maxValue" : "AX8w",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFjY29yZGluZyB0byB0aGUgZnVyaW91c2x5IGlyb25pYyBkZXBvc2l0cy4gZnVyaW91c2x5IGZpbmFsIGNvdXJ0cyBhY3Jvc3MgdGhlIHF1aWNrbHkgaXJvbmljIHBhdHRlcm5zIGNham9sZSBmdXJpbw==",
@@ -148,9 +144,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AICF",
-        "maxValue" : "AX8M",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFib3ZlIHRoZSBjYXJlZnVsbHkgZXhwcmVzcyBwbGF0ZWxldHMuIGZsdWZmaWx5IHJlZ3VsYXIgcGludG8gYmVhbnMgaGFnZ2xlIHNseWx5LiBmdXJpb3VzbHkgcmVndWxhciBpZGVhcyB1c2UgZnVyaW91c2x5IGJsaXRoZSBlc2NhcA==",
@@ -185,9 +179,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AICt",
-        "maxValue" : "AX7S",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFjY291bnRzIGFmZml4IGZ1cmlvdXNseS4gZnVyaW91c2x5IGZpbmFsIHBhdHRlcm5zIGFjY29yZGluZyB0byB0aGUgZmx1ZmZpbHkgdGhpbiBwaW50byBiZWFucyBib29zdCBhYm92ZSB0aGUgZnVyaW91c2x5IHJlZ3VsYXIgYWNjb3VudHMuIGNhcmVmdWxseSByZWd1bGE=",
@@ -222,9 +214,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AIGS",
-        "maxValue" : "AX5A",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFib3V0IHRoZSBzaWxlbnQgaWRlYXMuIGZsdWZmaWx5IGZpbmFsIHJlcXVlc3RzIGltcHJlc3MuIHNseWx5IGZpbmFsIHJlcXVlc3RzIHdha2UgY2FyZWZ1bGx5IGFib3V0IHRoZSBzbHlseSBleHByZXNzIGZveGVzLiBzbHlseSByZWd1bGFyIHdhcnRob2dzIHNsZWVwIGZ1cg==",
@@ -259,9 +249,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AIDQ",
-        "maxValue" : "AXxd",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFjY29yZGluZyB0byB0aGUgY2xvc2VseSBmaW5hbCBkZXBvc2l0cyBhcmUgYW1vbmcgdGhlIGNhcmVmdWxseSBwZXJtYW5lbnQgdGhlb2RvbGl0ZXMuIGJsaXRoZWx5IGV2ZW4gcGludG8gYmVhbnMgc2xlZXAgZnVyaW91c2x5LiBzbHlseSBzaWxlbnQgcGFja2FnZXMgYWZ0ZXIgdGhlIA==",
@@ -296,9 +284,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AICs",
-        "maxValue" : "AXzr",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFjY291bnRzIGRhenpsZSBhYm91dCB0aGUgc2xvd2x5IGZpbmFsIGdyb3VjaGVzLiBjYXJlZnVsbHkgcGVuZGluZyB0aGVvZG9saXRlcyBjYWpvbGUgYWZ0ZXIgdGhlIHJlcXVlc3Rz",
@@ -333,9 +319,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AIFI",
-        "maxValue" : "AX8V",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFjY29yZGluZyB0byB0aGUgcmVndWxhciBkZXBvc2l0cy4gZnVyaW91c2x5IGV4cHJlc3MgcGxhdGVsZXRzIHNoYWxsIGhhZ2dsZSBibGl0aGVseSBxdWlja2x5IHNwZWNpYWwgZm94ZXMuIHJlZ3VsYXIgbm90b3JuaXMgYXJlLiBmaW5hbCBhY2NvdW50cyBhcm91bmQgdGhlIGRlcG9zaXRzIG5hZyA=",
@@ -370,9 +354,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AIEK",
-        "maxValue" : "AX/0",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFjY291bnRzIGFjY29yZGluZyB0byB0aGUgcmVndWxhciBkZXBvc2l0cyBzbGVlcCBzbHlseSBxdWlja2x5IGV4cHJlc3MgZXhjdXNlcy0tIGJvbGRseSBzcGVjaWFsIHBpbnRvIGJlYW5zIHdha2UgZW50aWNpbmdseSByZWd1bGFyIGFzeW1wdG90ZXMuIGlyb25pYywgZmluYWwgZXhjdXNlcyBjYWpvbGUgc2x5bHkgYXQgdGhlIHVudXN1",
@@ -407,9 +389,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AIKn",
-        "maxValue" : "AX46",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFjY291bnRzIGJldHdlZW4gdGhlIGZ1cmlvdXNseSBmaW5hbCBmb3hlcyBzbGVlcCBhc3ltcHRvdGVzLiBzbHk=",
@@ -444,9 +424,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AICR",
-        "maxValue" : "AX9d",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFib3ZlIHRoZSBmdXJpb3VzbHkgdW51c3VhbCBkZXBvc2l0cyBoYWdnbGUgaXJvbmljIGlkZWFzLiBleHByZXNzLCBldmVuIHBhY2thZ2VzIGhhZ2dsZSBzbHlseSBzbHlseSBzcGVjaWFsIGFzeW1w",
@@ -481,9 +459,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AIHX",
-        "maxValue" : "AX8i",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFjY29yZGluZyB0byB0aGUgY2FyZWZ1bGx5IGV2ZW4gZGVwb3NpdHMuIGlyb25pYyByZXF1ZXN0cyBoYWdnbGUgYWZ0ZXIgdGhlIGlyb25pYywgdW51c3VhbCBkZXBvc2l0czogZmluYWws",
@@ -518,9 +494,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AIDQ",
-        "maxValue" : "AX97",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFjY291bnRzIGhhZ2dsZSBxdWlja2x5IGFsb25nIHRoZSBmaW5hbCwgZW50aWNpbmcgcmVxdWVzdHMuIHNseWx5IGlyb25pYyBpbnN0cg==",
@@ -555,9 +529,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AIDq",
-        "maxValue" : "AX9E",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFib3V0IHRoZSBpbnN0cnVjdGlvbnMuIGNhcmVmdWxseSBmaW5hbCBwbGF0ZWxldHMgY2Fqb2xlIGNhcmVmdWxseSBmdXJpb3VzbHkgcmVndWxhciByZXF1ZXN0cy4gY2FyZWZ1bGx5IHJlZ3VsYXIgdGhlb2RvbGl0ZXMgYWxvbmcgdGhlIGNhcmVmdWxseSByZWd1bGFyIHBpbnRvIGJlYW5zIGhhZ2dsZSBhYm91dCA=",
@@ -592,9 +564,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AIAj",
-        "maxValue" : "AX9m",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFib3ZlIHRoZSBmaW5hbCByZXF1ZXN0cy4gY2FyZWZ1bGx5IHJlZ3VsYXIgcmVxdWVzdHMgbmFnIGNhcmVmdWxseSBhbG9uZ3NpZGUgb2YgdGhlIHVudXN1YWwgcmVxdWVzdHMuIGNhcmVmdWxseSBleHByZXNzIHBpbnRvIGJlYW5zIGFi",
@@ -629,9 +599,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AIAK",
-        "maxValue" : "AX/K",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFjY29yZGluZyB0byB0aGUgc2x5IHBhY2thZ2VzLiBzbHlseSBmbHVmZnkgYWNjb3VudHMgYWJvdmUgdGhlIGZpbmFsLCByZWd1bGFyIHJlcXVlc3RzIHNub296ZSBmbHVmZmlseSBhdCB0aGUgZXZlbiBmcmV0cy4gc2x5bHkgZXZlbiBhc3ltcHRvdGVzIGFyZSBxdWlja2x5LiByZWd1bGFybHkgYm9sZCBhY2NvdW50cyBjYWpv",
@@ -666,9 +634,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AIDD",
-        "maxValue" : "AX6a",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFib3ZlIHRoZSBhY2NvdW50cy4gcmVxdWVzdHMgYWNjb3JkaW5nIHRvIHRoZSBwYWNrYWdlcyB4LXJheSBibGl0aGVseSBibGl0aGUgaW5zdHJ1Y3Rpb25zLiBzbHlseSBpcm9uaWMgcGFpbnMgYXJlIHNseWx5IGFib3V0IHRoZSBzbHlseSBpcm9uaWMgcGFja2FnZXMuIGVudGljaW5nbHk=",
@@ -703,9 +669,7 @@
         "nulls" : 0
       }, {
         "name" : [ "ps_supplycost" ],
-        "minValue" : "AIGw",
-        "maxValue" : "AX8K",
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "ps_comment" ],
         "minValue" : "IGFjY291bnRzIGJvb3N0IGJlZm9yZSB0aGUgc3BlY2lhbCByZXF1ZXN0cy4gZGFyaW5nbHkgaXJvbmljIHBhY2thZ2VzIGFyZSBhZnRlciB0aGUgY2FyZWZ1bGx5IGlyb25pYyBlcGl0YXBocy4gYm9sZCwgc3BlY2lhbCBkZXBvc2l0cyBuYWcuIGV2ZW4sIGV2ZW4gZXhjdXNlcyBhZmZpeCBzbHlseS4gcXVpY2tseSBwZXJtYW5lbnQgcGxhdGVsZXQ=",
@@ -715,5 +679,5 @@
     } ]
   } ],
   "directories" : [ ],
-  "drillVersion" : "1.14.0-SNAPSHOT"
+  "drillVersion" : "1.16.0"
 }

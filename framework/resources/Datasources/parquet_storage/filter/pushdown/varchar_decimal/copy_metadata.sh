@@ -17,7 +17,8 @@ copy_to_dfs() {
     hadoop fs -appendToFile $metadata_file $destination
 }
 
-for file in $(find ${test_dir} -name .drill.parquet_metadata | grep -oE "[^/]*/[^/]*/[^/]*$")
+#   Finding all metadata files and extracting 3 last directories of the path, then copying to dfs.
+for file in $(find ${test_dir} -name .drill.parquet_metadata | grep -oE "[^/]+/[^/]+/[^/]+/[^/]+$")
 do
     copy_to_dfs $file
 done

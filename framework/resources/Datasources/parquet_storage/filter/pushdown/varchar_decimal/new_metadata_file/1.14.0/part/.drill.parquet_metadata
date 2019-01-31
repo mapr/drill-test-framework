@@ -120,9 +120,7 @@
         "nulls" : 0
       }, {
         "name" : [ "p_size" ],
-        "minValue" : 360,
-        "maxValue" : 480,
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "p_container" ],
         "minValue" : "SlVNQk8gQkFH",
@@ -130,9 +128,7 @@
         "nulls" : 0
       }, {
         "name" : [ "p_retailprice" ],
-        "minValue" : 90200,
-        "maxValue" : 189999,
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "p_comment" ],
         "minValue" : "IGFjY29yZGluZyB0byB0aGUgcGVuZA==",
@@ -177,9 +173,7 @@
         "nulls" : 0
       }, {
         "name" : [ "p_size" ],
-        "minValue" : 120,
-        "maxValue" : 240,
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "p_container" ],
         "minValue" : "SlVNQk8gQkFH",
@@ -187,9 +181,7 @@
         "nulls" : 0
       }, {
         "name" : [ "p_retailprice" ],
-        "minValue" : 90300,
-        "maxValue" : 189999,
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "p_comment" ],
         "minValue" : "IGFjY29yZGluZw==",
@@ -234,9 +226,7 @@
         "nulls" : 0
       }, {
         "name" : [ "p_size" ],
-        "minValue" : 480,
-        "maxValue" : 500,
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "p_container" ],
         "minValue" : "SlVNQk8gQkFH",
@@ -244,9 +234,7 @@
         "nulls" : 0
       }, {
         "name" : [ "p_retailprice" ],
-        "minValue" : 92402,
-        "maxValue" : 188798,
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "p_comment" ],
         "minValue" : "IGJvbGQgcA==",
@@ -291,9 +279,7 @@
         "nulls" : 0
       }, {
         "name" : [ "p_size" ],
-        "minValue" : 10,
-        "maxValue" : 120,
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "p_container" ],
         "minValue" : "SlVNQk8gQkFH",
@@ -301,9 +287,7 @@
         "nulls" : 0
       }, {
         "name" : [ "p_retailprice" ],
-        "minValue" : 90100,
-        "maxValue" : 189899,
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "p_comment" ],
         "minValue" : "IGFib3ZlIHRoZSBp",
@@ -348,9 +332,7 @@
         "nulls" : 0
       }, {
         "name" : [ "p_size" ],
-        "minValue" : 240,
-        "maxValue" : 360,
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "p_container" ],
         "minValue" : "SlVNQk8gQkFH",
@@ -358,9 +340,7 @@
         "nulls" : 0
       }, {
         "name" : [ "p_retailprice" ],
-        "minValue" : 90200,
-        "maxValue" : 190099,
-        "nulls" : 0
+        "nulls" : -1
       }, {
         "name" : [ "p_comment" ],
         "minValue" : "IGFib3V0IHRoZSBmdXJpbw==",
@@ -370,5 +350,5 @@
     } ]
   } ],
   "directories" : [ ],
-  "drillVersion" : "1.14.0-SNAPSHOT"
+  "drillVersion" : "1.16.0"
 }
