@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.sql.Types;
 import java.util.List;
 
+
 /**
  * Class modeling a row in a ResultSet. It also stores a values of types of each
  * cell shared by all rows in a given ResultSet.
@@ -161,12 +162,7 @@ public class ColumnList {
           if ((f1 + f2) / 2 != 0) {
             if (!(Math.abs((f1 - f2) / ((f1 + f2) / 2)) < TestDriver.cmdParam.precisionFloat)){ 
               if (!(Math.abs((f1 - f2) / ((f1 + f2) / 2)) < TestDriver.cmdParam.precisionFloat*10)){
-                if (!(Math.abs((f1 - f2) / ((f1 + f2) / 2)) < TestDriver.cmdParam.precisionFloat*100)){
-                  return 0;
-                }
-                else{
-                 return -1;//data precision error
-                }
+                return 0;
               }
               else{
                 return -1;

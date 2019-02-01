@@ -63,7 +63,7 @@ import com.beust.jcommander.Parameter;
     public double precisionFloat = 1.0E-6;
     
     @Parameter(names = {"-pD"}, description = "precision value for double values", required=false)
-    public double precisionDouble = 1.0E-12;
+    public double precisionDouble = 1.0E-7;
     
     @Parameter(names = {"-w"}, description = "enable write actual query result to file", required=false)
     public boolean outputQueryResult = false;
