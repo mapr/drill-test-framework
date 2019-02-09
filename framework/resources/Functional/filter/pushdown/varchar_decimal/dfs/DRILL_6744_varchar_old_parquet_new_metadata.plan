@@ -1,0 +1,2 @@
+Filter\(condition=\[=\(\$0, 'yellow white tan khaki saddle'\)\]\)
+Scan.*numFiles=1.*numRowGroups=1.*usedMetadataFile=true.*columns=\[`p_name`, `p_retailprice`, `p_comment`\]

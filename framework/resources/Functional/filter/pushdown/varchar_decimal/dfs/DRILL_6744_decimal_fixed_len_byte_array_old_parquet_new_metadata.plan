@@ -1,0 +1,2 @@
+Filter\(condition=\[>\(\$0, 999\.9\)\]\)
+Scan.*numFiles=1.*numRowGroups=18.*usedMetadataFile=true.*columns=\[`ps_supplycost`, `ps_availqty`, `ps_comment`\]

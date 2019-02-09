@@ -1,0 +1,62 @@
+{
+  "metadata_version" : "3.3",
+  "columnTypeInfo" : {
+    "`r_regionkey`" : {
+      "name" : [ "r_regionkey" ],
+      "primitiveType" : "INT32",
+      "originalType" : null,
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`r_comment`" : {
+      "name" : [ "r_comment" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`r_name`" : {
+      "name" : [ "r_name" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    }
+  },
+  "files" : [ {
+    "path" : "0_0_0.parquet",
+    "length" : 1191,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 665,
+      "rowCount" : 5,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "r_regionkey" ],
+        "minValue" : 0,
+        "maxValue" : 4,
+        "nulls" : 0
+      }, {
+        "name" : [ "r_name" ],
+        "minValue" : "QUZSSUNB",
+        "maxValue" : "TUlERExFIEVBU1Q=",
+        "nulls" : 0
+      }, {
+        "name" : [ "r_comment" ],
+        "minValue" : "Z2VzLiB0aGlubHkgZXZlbiBwaW50byBiZWFucyBjYQ==",
+        "maxValue" : "dWlja2x5IHNwZWNpYWwgYWNjb3VudHMgY2Fqb2xlIGNhcmVmdWxseSBibGl0aGVseSBjbG9zZSByZXF1ZXN0cy4gY2FyZWZ1bGx5IGZpbmFsIGFzeW1wdG90ZXMgaGFnZ2xlIGZ1cmlvdXNs",
+        "nulls" : 0
+      } ]
+    } ]
+  } ],
+  "directories" : [ ],
+  "drillVersion" : "1.16.0"
+}

@@ -1,0 +1,683 @@
+{
+  "metadata_version" : "3.3",
+  "columnTypeInfo" : {
+    "`ps_suppkey`" : {
+      "name" : [ "ps_suppkey" ],
+      "primitiveType" : "INT32",
+      "originalType" : null,
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`ps_availqty`" : {
+      "name" : [ "ps_availqty" ],
+      "primitiveType" : "INT32",
+      "originalType" : null,
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`ps_comment`" : {
+      "name" : [ "ps_comment" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`ps_partkey`" : {
+      "name" : [ "ps_partkey" ],
+      "primitiveType" : "INT32",
+      "originalType" : null,
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`ps_supplycost`" : {
+      "name" : [ "ps_supplycost" ],
+      "primitiveType" : "FIXED_LEN_BYTE_ARRAY",
+      "originalType" : "DECIMAL",
+      "precision" : 6,
+      "scale" : 2,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    }
+  },
+  "files" : [ {
+    "path" : "0_0_3.parquet",
+    "length" : 66832,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66000,
+      "rowCount" : 448,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 346,
+        "maxValue" : 458,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 12,
+        "maxValue" : 9998,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFib3V0IHRoZSBwZXJtYW5lbnQsIGV2ZW4gdGhlb2RvbGl0ZXMuIGV2ZW4sIGlyb25pYyBpZGVhcyB3YWtlLiBxdWlja2x5IHNwZWNpYWwg",
+        "maxValue" : "eW1wdG90ZXMhIGJsaXRoZWx5IGlkbGUgcmVxdWVzdHMgbmFnIHNseWx5LS0gaWRlYXMgZG8gd2FrZSBhZnRlciB0aGUgZG9nZ2VkbHkgZmluYWwgYnJhaWRzLiByZXF1ZXN0cyB1c2UgYmxpdGhlbHkgaXJvbmljIGRlcG9zaXRzLiBmbHVmZmlseSBleHByZXNzIGZveGVzIHNsZWVwIGlyb25pY2FsbHkgc3BlY2lhbCBhY2NvdW50cy4gc2x5bHkgcw==",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_17.parquet",
+    "length" : 30723,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 29900,
+      "rowCount" : 207,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 1949,
+        "maxValue" : 2000,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 11,
+        "maxValue" : 9992,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFjY29yZGluZyB0byB0aGUgZnVyaW91c2x5IGlyb25pYyBkZXBvc2l0cy4gZnVyaW91c2x5IGZpbmFsIGNvdXJ0cyBhY3Jvc3MgdGhlIHF1aWNrbHkgaXJvbmljIHBhdHRlcm5zIGNham9sZSBmdXJpbw==",
+        "maxValue" : "eWx5IGlyb25pYyBkZXBlbmRlbmNpZXMuIGJsaXRoZWx5IGZpbmFsIHRoZW9kb2xpdGVzIHNsZWVwLiBmdXJpb3VzbHkgaXJvbmljIGFjY291bnRzIHdha2UgY2FyZWZ1bGx5IGFjcm9zcyB0aGUgZXhwcmVzcywgcmVndWxhciByZXF1ZXN0cy4gY2FyZWZ1bGx5IHJlZ3Vs",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_9.parquet",
+    "length" : 66674,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 65920,
+      "rowCount" : 460,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 1030,
+        "maxValue" : 1145,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 48,
+        "maxValue" : 9995,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFib3ZlIHRoZSBjYXJlZnVsbHkgZXhwcmVzcyBwbGF0ZWxldHMuIGZsdWZmaWx5IHJlZ3VsYXIgcGludG8gYmVhbnMgaGFnZ2xlIHNseWx5LiBmdXJpb3VzbHkgcmVndWxhciBpZGVhcyB1c2UgZnVyaW91c2x5IGJsaXRoZSBlc2NhcA==",
+        "maxValue" : "eWx5IHVudXN1YWwgYWNjb3VudHMuIHJlZ3VsYXIsIGV2ZW4gZ3JvdWNoZXMgc2xlZXAgY2FyZWZ1bGx5IHF1aWNr",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_15.parquet",
+    "length" : 66998,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66107,
+      "rowCount" : 457,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 1722,
+        "maxValue" : 1836,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 26,
+        "maxValue" : 9998,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFjY291bnRzIGFmZml4IGZ1cmlvdXNseS4gZnVyaW91c2x5IGZpbmFsIHBhdHRlcm5zIGFjY29yZGluZyB0byB0aGUgZmx1ZmZpbHkgdGhpbiBwaW50byBiZWFucyBib29zdCBhYm92ZSB0aGUgZnVyaW91c2x5IHJlZ3VsYXIgYWNjb3VudHMuIGNhcmVmdWxseSByZWd1bGE=",
+        "maxValue" : "eW1wdG90ZXMuIGlyb25pYyByZXF1ZXN0cyBzbGVlcCBmdXJpb3VzbHkgYWJvdXQgdGhlIGNhcmVmdWxseSBzcGVjaWFsIGFzeW1wdG90ZXMuIGZpbmFsLCBwZW5kaW5nIHJlcXVlc3RzIGJvb3N0IHBlcm1hbmVudGx5IGJsaXRoZWx5IHJlZ3VsYXIgYXN5bXB0b3Rlcy4gZnVyaW91c2x5IHNwZWNpYWwgcGludG8gYmVh",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_1.parquet",
+    "length" : 66708,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 65943,
+      "rowCount" : 462,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 115,
+        "maxValue" : 230,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 11,
+        "maxValue" : 9985,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFib3V0IHRoZSBzaWxlbnQgaWRlYXMuIGZsdWZmaWx5IGZpbmFsIHJlcXVlc3RzIGltcHJlc3MuIHNseWx5IGZpbmFsIHJlcXVlc3RzIHdha2UgY2FyZWZ1bGx5IGFib3V0IHRoZSBzbHlseSBleHByZXNzIGZveGVzLiBzbHlseSByZWd1bGFyIHdhcnRob2dzIHNsZWVwIGZ1cg==",
+        "maxValue" : "eWx5IHJlZ3VsYXIgcmVxdWVzdHMgY2Fqb2xlIGNhcmVmdWxseS4gY2FyZWZ1bGx5IGZpbmE=",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_4.parquet",
+    "length" : 66837,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66012,
+      "rowCount" : 459,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 458,
+        "maxValue" : 573,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 13,
+        "maxValue" : 9987,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFjY29yZGluZyB0byB0aGUgY2xvc2VseSBmaW5hbCBkZXBvc2l0cyBhcmUgYW1vbmcgdGhlIGNhcmVmdWxseSBwZXJtYW5lbnQgdGhlb2RvbGl0ZXMuIGJsaXRoZWx5IGV2ZW4gcGludG8gYmVhbnMgc2xlZXAgZnVyaW91c2x5LiBzbHlseSBzaWxlbnQgcGFja2FnZXMgYWZ0ZXIgdGhlIA==",
+        "maxValue" : "emUgYWdhaW5zdCB0aGUgZGFyaW5nbHkgZXZlbiBwYWNrYWdlcy4gc2x5bHkgaWRsZSBhY2NvdW50cyBib29zdCBzbHlseSBhY2NvcmRpbmcgdG8gdGhlIGNhcmVmdWxseSBleHByZXNzIHA=",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_13.parquet",
+    "length" : 66855,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66053,
+      "rowCount" : 466,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 1488,
+        "maxValue" : 1605,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 45,
+        "maxValue" : 9991,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFjY291bnRzIGRhenpsZSBhYm91dCB0aGUgc2xvd2x5IGZpbmFsIGdyb3VjaGVzLiBjYXJlZnVsbHkgcGVuZGluZyB0aGVvZG9saXRlcyBjYWpvbGUgYWZ0ZXIgdGhlIHJlcXVlc3Rz",
+        "maxValue" : "eWx5IGlyb25pYyBpZGVhcyBhcmUgZnVyaW91c2x5IGlyb25pYyBmb3hlczogcGxhdGVsZXRzIGhhZ2dsZS4gcmVndWxhciwgcmVndWxhciByZXF1ZXN0cyBhZmZpeCBkb2dnZWRseSBwZW5kaW5nLCBwZW5kaW5nIHRoZW9kb2xpdGVzLiBzbHlseSByZQ==",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_10.parquet",
+    "length" : 66892,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66054,
+      "rowCount" : 454,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 1145,
+        "maxValue" : 1259,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 16,
+        "maxValue" : 9972,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFjY29yZGluZyB0byB0aGUgcmVndWxhciBkZXBvc2l0cy4gZnVyaW91c2x5IGV4cHJlc3MgcGxhdGVsZXRzIHNoYWxsIGhhZ2dsZSBibGl0aGVseSBxdWlja2x5IHNwZWNpYWwgZm94ZXMuIHJlZ3VsYXIgbm90b3JuaXMgYXJlLiBmaW5hbCBhY2NvdW50cyBhcm91bmQgdGhlIGRlcG9zaXRzIG5hZyA=",
+        "maxValue" : "eW1wdG90ZXMuIGZsdWZmaWx5IHNpbGVudCBob2NrZXkgcGxheWVycyB1c2UgZmluYWwsIGZpbmFsIGZveGVzLiBjYXJlZnVsbHkgZXhwcmVzcyBleGN1c2VzIHdha2UgZXhjdXNlcy4gc2x5bHkgYm8=",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_7.parquet",
+    "length" : 66862,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66014,
+      "rowCount" : 460,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 802,
+        "maxValue" : 916,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 31,
+        "maxValue" : 9983,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFjY291bnRzIGFjY29yZGluZyB0byB0aGUgcmVndWxhciBkZXBvc2l0cyBzbGVlcCBzbHlseSBxdWlja2x5IGV4cHJlc3MgZXhjdXNlcy0tIGJvbGRseSBzcGVjaWFsIHBpbnRvIGJlYW5zIHdha2UgZW50aWNpbmdseSByZWd1bGFyIGFzeW1wdG90ZXMuIGlyb25pYywgZmluYWwgZXhjdXNlcyBjYWpvbGUgc2x5bHkgYXQgdGhlIHVudXN1",
+        "maxValue" : "emUgYmxpdGhlbHkgYWJvdXQgdGhlIGNhcmVmdWxseSBldmVuIHBhY2thZ2VzLiBjYXJlZnVsbHkgZmluYWwgYWNjb3VudHMgYXJlLiBjYXJlZnVsbHkgZXhwcmVzcyBhY2NvdW4=",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_11.parquet",
+    "length" : 66698,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 65940,
+      "rowCount" : 450,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 1259,
+        "maxValue" : 1371,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 47,
+        "maxValue" : 9944,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFjY291bnRzIGJldHdlZW4gdGhlIGZ1cmlvdXNseSBmaW5hbCBmb3hlcyBzbGVlcCBhc3ltcHRvdGVzLiBzbHk=",
+        "maxValue" : "eXMgYmxpdGhlbHkgZXhwcmVzcyByZXF1ZXN0cy4gc2x5bHkgcmVndWxhciBwaW50byBiZWFucyBjYWpvbGUgYWNjb3JkaW5nIHRvIHRoZSBmdXJpb3VzbHkgZXhwcmVzcyBkZXBvc2l0cy4gYmxpdGhlbHkgYm9sZCByZXF1ZXN0cyB3YWtlIGZ1",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_0.parquet",
+    "length" : 66686,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 65953,
+      "rowCount" : 457,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 1,
+        "maxValue" : 115,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 43,
+        "maxValue" : 9988,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFib3ZlIHRoZSBmdXJpb3VzbHkgdW51c3VhbCBkZXBvc2l0cyBoYWdnbGUgaXJvbmljIGlkZWFzLiBleHByZXNzLCBldmVuIHBhY2thZ2VzIGhhZ2dsZSBzbHlseSBzbHlseSBzcGVjaWFsIGFzeW1w",
+        "maxValue" : "eWx5IGV4cHJlc3MgdGhlb2RvbGl0ZXMuIHNseWx5IGJvbGQgaWRlYXMgc2xlZXAgZnVyaW91c2x5IGFjY29yZGk=",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_5.parquet",
+    "length" : 66699,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 65987,
+      "rowCount" : 454,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 573,
+        "maxValue" : 686,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 27,
+        "maxValue" : 9998,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFjY29yZGluZyB0byB0aGUgY2FyZWZ1bGx5IGV2ZW4gZGVwb3NpdHMuIGlyb25pYyByZXF1ZXN0cyBoYWdnbGUgYWZ0ZXIgdGhlIGlyb25pYywgdW51c3VhbCBkZXBvc2l0czogZmluYWws",
+        "maxValue" : "enpsZSBibGl0aGVseSBhYm91dCB0aGUgZnVyaW91c2x5IGZpbmFsIGZveGVzLiBwZW4=",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_6.parquet",
+    "length" : 66545,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 65856,
+      "rowCount" : 461,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 686,
+        "maxValue" : 801,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 4,
+        "maxValue" : 9981,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFjY291bnRzIGhhZ2dsZSBxdWlja2x5IGFsb25nIHRoZSBmaW5hbCwgZW50aWNpbmcgcmVxdWVzdHMuIHNseWx5IGlyb25pYyBpbnN0cg==",
+        "maxValue" : "eXMgdW51c3VhbCBmb3hlcyB3YWtlIGZ1cmlvdXNseSBhYm92ZSB0aGUgZnVyaW91c2x5IGlyb24=",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_16.parquet",
+    "length" : 66985,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66098,
+      "rowCount" : 451,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 1836,
+        "maxValue" : 1949,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 10,
+        "maxValue" : 9897,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFib3V0IHRoZSBpbnN0cnVjdGlvbnMuIGNhcmVmdWxseSBmaW5hbCBwbGF0ZWxldHMgY2Fqb2xlIGNhcmVmdWxseSBmdXJpb3VzbHkgcmVndWxhciByZXF1ZXN0cy4gY2FyZWZ1bGx5IHJlZ3VsYXIgdGhlb2RvbGl0ZXMgYWxvbmcgdGhlIGNhcmVmdWxseSByZWd1bGFyIHBpbnRvIGJlYW5zIGhhZ2dsZSBhYm91dCA=",
+        "maxValue" : "eWx5IGZpbmFsIHRoZW9kb2xpdGVzIGludGVncmF0ZSBjYXJlZnVsbHkgYWJvdXQgdGhlIGluc3RydWN0aW9ucy4gaXJvbmljIGZveGVzIHJ1biBmaW5hbCByZXF1ZXN0cy4gY2FyZWZ1bGx5IHNpbGVudCBmb3hlcyBuYWcgaXJvbmljYWxseSBldmVuIGNvdXJ0cy4gc2k=",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_14.parquet",
+    "length" : 66922,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66076,
+      "rowCount" : 468,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 1605,
+        "maxValue" : 1722,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 14,
+        "maxValue" : 9977,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFib3ZlIHRoZSBmaW5hbCByZXF1ZXN0cy4gY2FyZWZ1bGx5IHJlZ3VsYXIgcmVxdWVzdHMgbmFnIGNhcmVmdWxseSBhbG9uZ3NpZGUgb2YgdGhlIHVudXN1YWwgcmVxdWVzdHMuIGNhcmVmdWxseSBleHByZXNzIHBpbnRvIGJlYW5zIGFi",
+        "maxValue" : "eWx5IHNpbGVudCB0aGVvZG9saXRlcy4gc2lsZW50bHkgZXZlbiByZXF1ZXN0cyB3YWtlIHF1aWNrbHkuIGZpbmFsIHJlcXVlc3RzIGVhdCBhY3Jvc3MgdGhlIGZ1cmlvdXNseSBldmVuIGFjY291bnRzLiBwZW5kaW5nIGFjY291bnRzIGFib3ZlIHRoZSByZWd1bGFyIHJlcXU=",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_8.parquet",
+    "length" : 66915,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66124,
+      "rowCount" : 455,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 917,
+        "maxValue" : 1030,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 7,
+        "maxValue" : 9982,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFjY29yZGluZyB0byB0aGUgc2x5IHBhY2thZ2VzLiBzbHlseSBmbHVmZnkgYWNjb3VudHMgYWJvdmUgdGhlIGZpbmFsLCByZWd1bGFyIHJlcXVlc3RzIHNub296ZSBmbHVmZmlseSBhdCB0aGUgZXZlbiBmcmV0cy4gc2x5bHkgZXZlbiBhc3ltcHRvdGVzIGFyZSBxdWlja2x5LiByZWd1bGFybHkgYm9sZCBhY2NvdW50cyBjYWpv",
+        "maxValue" : "eW1wdG90ZXMuIHBlbmRpbmcsIGJvbGQgcGludG8gYmVhbnMgaW1wcmVzcyBpcm9uaWM=",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_12.parquet",
+    "length" : 66872,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66014,
+      "rowCount" : 468,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 1371,
+        "maxValue" : 1488,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 3,
+        "maxValue" : 9978,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFib3ZlIHRoZSBhY2NvdW50cy4gcmVxdWVzdHMgYWNjb3JkaW5nIHRvIHRoZSBwYWNrYWdlcyB4LXJheSBibGl0aGVseSBibGl0aGUgaW5zdHJ1Y3Rpb25zLiBzbHlseSBpcm9uaWMgcGFpbnMgYXJlIHNseWx5IGFib3V0IHRoZSBzbHlseSBpcm9uaWMgcGFja2FnZXMuIGVudGljaW5nbHk=",
+        "maxValue" : "emUgaW5zdHJ1Y3Rpb25zLiBmdXJpb3VzbHkgcmVndWxhciBkZXBvc2l0cyBoYWdnbGUgYWdhaW5zdCB0aGUgdW51c3VhbCBpZGVhcy4gYm9sZCBwYWNrYWdlcyBzbGVlcC0tIGJvbGQgYWNjb3VudHMgd2FrZSBzbHlseSBmaW5hbCBwYWNrYWdl",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_2.parquet",
+    "length" : 66861,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66058,
+      "rowCount" : 463,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "ps_partkey" ],
+        "minValue" : 230,
+        "maxValue" : 346,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_availqty" ],
+        "minValue" : 14,
+        "maxValue" : 9986,
+        "nulls" : 0
+      }, {
+        "name" : [ "ps_supplycost" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "ps_comment" ],
+        "minValue" : "IGFjY291bnRzIGJvb3N0IGJlZm9yZSB0aGUgc3BlY2lhbCByZXF1ZXN0cy4gZGFyaW5nbHkgaXJvbmljIHBhY2thZ2VzIGFyZSBhZnRlciB0aGUgY2FyZWZ1bGx5IGlyb25pYyBlcGl0YXBocy4gYm9sZCwgc3BlY2lhbCBkZXBvc2l0cyBuYWcuIGV2ZW4sIGV2ZW4gZXhjdXNlcyBhZmZpeCBzbHlseS4gcXVpY2tseSBwZXJtYW5lbnQgcGxhdGVsZXQ=",
+        "maxValue" : "eWx5IHN0ZWFsdGhpbHkgcGVuZGluZyByZXF1ZXN0cy4gYmxpdGhlbHkgcmVndWxhciB0",
+        "nulls" : 0
+      } ]
+    } ]
+  } ],
+  "directories" : [ ],
+  "drillVersion" : "1.16.0"
+}

@@ -1,0 +1,5 @@
+Filter\(condition=\[AND\(<=\(\$1, 1\), >=\(\$2, 0\.08\), <=\(\$2, 0\.09\), =\(\$3, 0\)\)\]\)
+Scan.*numFiles=5.*numRowGroups=5.*usedMetadataFile=false.*columns=\[`l_partkey`, `l_quantity`, `l_discount`, `l_tax`, `l_suppkey`\]
+.*
+Filter\(condition=\[<\(\$1, 5\)\]\)
+Scan.*numFiles=1.*numRowGroups=5.*usedMetadataFile=false.*columns=\[`p_partkey`, `p_size`, `p_name`\]

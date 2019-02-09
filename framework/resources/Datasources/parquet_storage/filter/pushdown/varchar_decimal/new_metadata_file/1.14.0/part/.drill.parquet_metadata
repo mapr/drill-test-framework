@@ -1,0 +1,354 @@
+{
+  "metadata_version" : "3.3",
+  "columnTypeInfo" : {
+    "`p_partkey`" : {
+      "name" : [ "p_partkey" ],
+      "primitiveType" : "INT32",
+      "originalType" : null,
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`p_container`" : {
+      "name" : [ "p_container" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`p_name`" : {
+      "name" : [ "p_name" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`p_comment`" : {
+      "name" : [ "p_comment" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`p_brand`" : {
+      "name" : [ "p_brand" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`p_type`" : {
+      "name" : [ "p_type" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`p_retailprice`" : {
+      "name" : [ "p_retailprice" ],
+      "primitiveType" : "INT64",
+      "originalType" : "DECIMAL",
+      "precision" : 10,
+      "scale" : 2,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`p_mfgr`" : {
+      "name" : [ "p_mfgr" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`p_size`" : {
+      "name" : [ "p_size" ],
+      "primitiveType" : "INT32",
+      "originalType" : "DECIMAL",
+      "precision" : 3,
+      "scale" : 1,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    }
+  },
+  "files" : [ {
+    "path" : "0_0_3.parquet",
+    "length" : 67102,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66095,
+      "rowCount" : 478,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "p_partkey" ],
+        "minValue" : 7,
+        "maxValue" : 2000,
+        "nulls" : 0
+      }, {
+        "name" : [ "p_name" ],
+        "minValue" : "YWxtb25kIGNvcmFsIGRpbSBmcm9zdGVkIG1pZG5pZ2h0",
+        "maxValue" : "eWVsbG93IGRyYWIgZm9yZXN0IGxpbWUgaW5kaWFu",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_mfgr" ],
+        "minValue" : "TWFudWZhY3R1cmVyIzE=",
+        "maxValue" : "TWFudWZhY3R1cmVyIzU=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_brand" ],
+        "minValue" : "QnJhbmQjMTE=",
+        "maxValue" : "QnJhbmQjNTU=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_type" ],
+        "minValue" : "RUNPTk9NWSBBTk9ESVpFRCBCUkFTUw==",
+        "maxValue" : "U1RBTkRBUkQgUE9MSVNIRUQgVElO",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_size" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "p_container" ],
+        "minValue" : "SlVNQk8gQkFH",
+        "maxValue" : "V1JBUCBQS0c=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_retailprice" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "p_comment" ],
+        "minValue" : "IGFjY29yZGluZyB0byB0aGUgcGVuZA==",
+        "maxValue" : "eWx5IHJlZ3VsYQ==",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_1.parquet",
+    "length" : 67080,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66077,
+      "rowCount" : 481,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "p_partkey" ],
+        "minValue" : 3,
+        "maxValue" : 1997,
+        "nulls" : 0
+      }, {
+        "name" : [ "p_name" ],
+        "minValue" : "YWxtb25kIGF6dXJlIGZsb3JhbCBibHVzaCBzaWVubmE=",
+        "maxValue" : "eWVsbG93IHdoaXRlIHRhbiBraGFraSBzYWRkbGU=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_mfgr" ],
+        "minValue" : "TWFudWZhY3R1cmVyIzE=",
+        "maxValue" : "TWFudWZhY3R1cmVyIzU=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_brand" ],
+        "minValue" : "QnJhbmQjMTE=",
+        "maxValue" : "QnJhbmQjNTU=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_type" ],
+        "minValue" : "RUNPTk9NWSBBTk9ESVpFRCBCUkFTUw==",
+        "maxValue" : "U1RBTkRBUkQgUE9MSVNIRUQgVElO",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_size" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "p_container" ],
+        "minValue" : "SlVNQk8gQkFH",
+        "maxValue" : "V1JBUCBQS0c=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_retailprice" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "p_comment" ],
+        "minValue" : "IGFjY29yZGluZw==",
+        "maxValue" : "eWx5IHNseWx5IGV4cHJlc3MgdGg=",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_4.parquet",
+    "length" : 12812,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 11840,
+      "rowCount" : 83,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "p_partkey" ],
+        "minValue" : 57,
+        "maxValue" : 1986,
+        "nulls" : 0
+      }, {
+        "name" : [ "p_name" ],
+        "minValue" : "YW50aXF1ZSBjcmVhbSBjeWFuIHBvd2RlciBkcmFi",
+        "maxValue" : "d2hlYXQgY2hpZmZvbiBnaG9zdCBzbGF0ZSBncmVlbg==",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_mfgr" ],
+        "minValue" : "TWFudWZhY3R1cmVyIzE=",
+        "maxValue" : "TWFudWZhY3R1cmVyIzU=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_brand" ],
+        "minValue" : "QnJhbmQjMTE=",
+        "maxValue" : "QnJhbmQjNTU=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_type" ],
+        "minValue" : "RUNPTk9NWSBBTk9ESVpFRCBOSUNLRUw=",
+        "maxValue" : "U1RBTkRBUkQgUExBVEVEIFRJTg==",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_size" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "p_container" ],
+        "minValue" : "SlVNQk8gQkFH",
+        "maxValue" : "V1JBUCBQQUNL",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_retailprice" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "p_comment" ],
+        "minValue" : "IGJvbGQgcA==",
+        "maxValue" : "eWx5IGZpbmE=",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_0.parquet",
+    "length" : 67100,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66103,
+      "rowCount" : 480,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "p_partkey" ],
+        "minValue" : 1,
+        "maxValue" : 1993,
+        "nulls" : 0
+      }, {
+        "name" : [ "p_name" ],
+        "minValue" : "YWxtb25kIGRvZGdlciBkYXJrIHNhZGRsZSBuYXZ5",
+        "maxValue" : "eWVsbG93IGJsYW5jaGVkIGxhY2UgYmx1ZSBncmVlbg==",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_mfgr" ],
+        "minValue" : "TWFudWZhY3R1cmVyIzE=",
+        "maxValue" : "TWFudWZhY3R1cmVyIzU=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_brand" ],
+        "minValue" : "QnJhbmQjMTE=",
+        "maxValue" : "QnJhbmQjNTU=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_type" ],
+        "minValue" : "RUNPTk9NWSBBTk9ESVpFRCBCUkFTUw==",
+        "maxValue" : "U1RBTkRBUkQgUE9MSVNIRUQgVElO",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_size" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "p_container" ],
+        "minValue" : "SlVNQk8gQkFH",
+        "maxValue" : "V1JBUCBQS0c=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_retailprice" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "p_comment" ],
+        "minValue" : "IGFib3ZlIHRoZSBp",
+        "maxValue" : "enpsZSBhbW9uZyB0",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_2.parquet",
+    "length" : 67046,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66043,
+      "rowCount" : 478,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "p_partkey" ],
+        "minValue" : 12,
+        "maxValue" : 1999,
+        "nulls" : 0
+      }, {
+        "name" : [ "p_name" ],
+        "minValue" : "YWxtb25kIGF6dXJlIHllbGxvdyBhcXVhbWFyaW5lIHNwcmluZw==",
+        "maxValue" : "eWVsbG93IHdoZWF0IG1pZG5pZ2h0IHBhcGF5YSBibHVl",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_mfgr" ],
+        "minValue" : "TWFudWZhY3R1cmVyIzE=",
+        "maxValue" : "TWFudWZhY3R1cmVyIzU=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_brand" ],
+        "minValue" : "QnJhbmQjMTE=",
+        "maxValue" : "QnJhbmQjNTU=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_type" ],
+        "minValue" : "RUNPTk9NWSBBTk9ESVpFRCBCUkFTUw==",
+        "maxValue" : "U1RBTkRBUkQgUE9MSVNIRUQgVElO",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_size" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "p_container" ],
+        "minValue" : "SlVNQk8gQkFH",
+        "maxValue" : "V1JBUCBQS0c=",
+        "nulls" : 0
+      }, {
+        "name" : [ "p_retailprice" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "p_comment" ],
+        "minValue" : "IGFib3V0IHRoZSBmdXJpbw==",
+        "maxValue" : "eWx5IHM=",
+        "nulls" : 0
+      } ]
+    } ]
+  } ],
+  "directories" : [ ],
+  "drillVersion" : "1.16.0"
+}

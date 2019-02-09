@@ -1,0 +1,2 @@
+Filter.*\(condition=\[OR\(=\(\$1, 'Customer#000000334'\), =\(\$1, 'Customer#000000335'\)\)\]\)
+Scan.*HiveDrillNativeParquetScan.*numFiles=1.*numRowGroups=1.*columns=\[`c_custkey`, `c_name`, `c_phone`\]

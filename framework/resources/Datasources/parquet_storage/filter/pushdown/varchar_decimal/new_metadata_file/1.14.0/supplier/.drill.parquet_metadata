@@ -1,0 +1,206 @@
+{
+  "metadata_version" : "3.3",
+  "columnTypeInfo" : {
+    "`s_comment`" : {
+      "name" : [ "s_comment" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`s_phone`" : {
+      "name" : [ "s_phone" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`s_nationkey`" : {
+      "name" : [ "s_nationkey" ],
+      "primitiveType" : "INT32",
+      "originalType" : null,
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`s_name`" : {
+      "name" : [ "s_name" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`s_address`" : {
+      "name" : [ "s_address" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`s_acctbal`" : {
+      "name" : [ "s_acctbal" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "DECIMAL",
+      "precision" : 7,
+      "scale" : 2,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`s_suppkey`" : {
+      "name" : [ "s_suppkey" ],
+      "primitiveType" : "INT32",
+      "originalType" : null,
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    }
+  },
+  "files" : [ {
+    "path" : "0_0_1.parquet",
+    "length" : 16261,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 15404,
+      "rowCount" : 100,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "s_suppkey" ],
+        "minValue" : 34,
+        "maxValue" : 67,
+        "nulls" : 0
+      }, {
+        "name" : [ "s_name" ],
+        "minValue" : "U3VwcGxpZXIjMDAwMDAwMDM0",
+        "maxValue" : "U3VwcGxpZXIjMDAwMDAwMDY3",
+        "nulls" : 0
+      }, {
+        "name" : [ "s_address" ],
+        "minValue" : "MDFkRUFESVpvQ1VMWlhn",
+        "maxValue" : "enlJZVd6YmJwa1RWMzd2bTFubVNHQnhTZ2QyS3A=",
+        "nulls" : 0
+      }, {
+        "name" : [ "s_nationkey" ],
+        "minValue" : 0,
+        "maxValue" : 24,
+        "nulls" : 0
+      }, {
+        "name" : [ "s_phone" ],
+        "minValue" : "MTAtNDcwLTE0NC0xMzMw",
+        "maxValue" : "MzQtODc2LTkxMi02MDA3",
+        "nulls" : 0
+      }, {
+        "name" : [ "s_acctbal" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "s_comment" ],
+        "minValue" : "IGZpbmFsIHBhdHRlcm5zLiBhY2NvdW50cyBoYWdnbGUgaWRseSBwYXM=",
+        "maxValue" : "eHByZXNzIGluc3RydWN0aW9ucyBhZmZpeC4gZmx1ZmZpbHkgZXZlbiByZXF1ZXN0cyBib29z",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_0.parquet",
+    "length" : 16636,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 15678,
+      "rowCount" : 100,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "s_suppkey" ],
+        "minValue" : 1,
+        "maxValue" : 34,
+        "nulls" : 0
+      }, {
+        "name" : [ "s_name" ],
+        "minValue" : "U3VwcGxpZXIjMDAwMDAwMDAx",
+        "maxValue" : "U3VwcGxpZXIjMDAwMDAwMDM0",
+        "nulls" : 0
+      }, {
+        "name" : [ "s_address" ],
+        "minValue" : "IE4ga0Q0b245T00gSXB3MyxnZjBKQm9RRGQ3dGdyenJkZFo=",
+        "maxValue" : "eXZvRDNUdFpTeDFza1FOQ0s4YWdrNWJabFpMdWc=",
+        "nulls" : 0
+      }, {
+        "name" : [ "s_nationkey" ],
+        "minValue" : 0,
+        "maxValue" : 24,
+        "nulls" : 0
+      }, {
+        "name" : [ "s_phone" ],
+        "minValue" : "MTAtNTM4LTM4NC04NDYw",
+        "maxValue" : "MzQtODUyLTQ4OS04NTg1",
+        "nulls" : 0
+      }, {
+        "name" : [ "s_acctbal" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "s_comment" ],
+        "minValue" : "IGFjcm9zcyB0aGUgZnVyaW91c2x5IHJlZ3VsYXIgcGxhdGVsZXRzIHdha2UgZXZlbiBkZXBvc2l0cy4gcXVpY2tseSBleHByZXNzIHNoZQ==",
+        "maxValue" : "eSBpcm9uaWMgcGFja2FnZXMuIHNseWx5IGlyb25pYyBhY2NvdW50cyBhZmZpeCBmdXJpb3VzbHk7IGlyb25pY2FsbHkgdW51c3VhbCBleGN1c2VzIGFjcm9zcyB0aGUgZmx1",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_2.parquet",
+    "length" : 16301,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 15428,
+      "rowCount" : 100,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "s_suppkey" ],
+        "minValue" : 67,
+        "maxValue" : 100,
+        "nulls" : 0
+      }, {
+        "name" : [ "s_name" ],
+        "minValue" : "U3VwcGxpZXIjMDAwMDAwMDY3",
+        "maxValue" : "U3VwcGxpZXIjMDAwMDAwMTAw",
+        "nulls" : 0
+      }, {
+        "name" : [ "s_address" ],
+        "minValue" : "NFN4a1RIRzI4blpydFQwLE1uVkY5SA==",
+        "maxValue" : "eU9zaFk4d3d6TWdT",
+        "nulls" : 0
+      }, {
+        "name" : [ "s_nationkey" ],
+        "minValue" : 1,
+        "maxValue" : 24,
+        "nulls" : 0
+      }, {
+        "name" : [ "s_phone" ],
+        "minValue" : "MTEtNzQzLTkxOS03Mjcy",
+        "maxValue" : "MzQtODY5LTExOC03ODAz",
+        "nulls" : 0
+      }, {
+        "name" : [ "s_acctbal" ],
+        "nulls" : -1
+      }, {
+        "name" : [ "s_comment" ],
+        "minValue" : "IGV2ZW4gdGhlb2RvbGl0ZXMgd2FrZSBhZ2FpbnN0IHRoZSBibGl0aGVseSBmbHVmZnkgcGFja2FnZXM=",
+        "maxValue" : "eWx5IGZpbmFsIGFjY291bnRzIGNvdWxkIGFyZSBjYXJlZnVsbHkuIGZsdWZmaWx5IGlyb25pYyBpbnN0cnVjdA==",
+        "nulls" : 0
+      } ]
+    } ]
+  } ],
+  "directories" : [ ],
+  "drillVersion" : "1.16.0"
+}

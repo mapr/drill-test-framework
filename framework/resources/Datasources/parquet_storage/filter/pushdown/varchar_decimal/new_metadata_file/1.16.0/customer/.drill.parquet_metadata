@@ -1,0 +1,288 @@
+{
+  "metadata_version" : "3.3",
+  "columnTypeInfo" : {
+    "`c_custkey`" : {
+      "name" : [ "c_custkey" ],
+      "primitiveType" : "INT32",
+      "originalType" : null,
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`c_phone`" : {
+      "name" : [ "c_phone" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`c_acctbal`" : {
+      "name" : [ "c_acctbal" ],
+      "primitiveType" : "FIXED_LEN_BYTE_ARRAY",
+      "originalType" : "DECIMAL",
+      "precision" : 6,
+      "scale" : 2,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`c_mktsegment`" : {
+      "name" : [ "c_mktsegment" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`c_address`" : {
+      "name" : [ "c_address" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`c_nationkey`" : {
+      "name" : [ "c_nationkey" ],
+      "primitiveType" : "INT32",
+      "originalType" : null,
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`c_name`" : {
+      "name" : [ "c_name" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    },
+    "`c_comment`" : {
+      "name" : [ "c_comment" ],
+      "primitiveType" : "BINARY",
+      "originalType" : "UTF8",
+      "precision" : 0,
+      "scale" : 0,
+      "repetitionLevel" : 0,
+      "definitionLevel" : 0
+    }
+  },
+  "files" : [ {
+    "path" : "0_0_3.parquet",
+    "length" : 61001,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 59920,
+      "rowCount" : 347,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "c_custkey" ],
+        "minValue" : 1154,
+        "maxValue" : 1500,
+        "nulls" : 0
+      }, {
+        "name" : [ "c_name" ],
+        "minValue" : "Q3VzdG9tZXIjMDAwMDAxMTU0",
+        "maxValue" : "Q3VzdG9tZXIjMDAwMDAxNTAw",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_address" ],
+        "minValue" : "IDNRc1BnYlZMWg==",
+        "maxValue" : "elpzVFozbkkxckc1WA==",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_nationkey" ],
+        "minValue" : 0,
+        "maxValue" : 24,
+        "nulls" : 0
+      }, {
+        "name" : [ "c_phone" ],
+        "minValue" : "MTAtMjAzLTc3MS0yMjE5",
+        "maxValue" : "MzQtOTczLTczNS01Mzc0",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_acctbal" ],
+        "minValue" : "/oBI",
+        "maxValue" : "DvTs",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_mktsegment" ],
+        "minValue" : "QVVUT01PQklMRQ==",
+        "maxValue" : "TUFDSElORVJZ",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_comment" ],
+        "minValue" : "IGFjY291bnRzIGFmdGVyIHRoZSBmaW5hbCBkZXBvc2l0cyBzbGVlcCBmbHVmZmlseSBpcm9uaWMgYWNjb3Vu",
+        "maxValue" : "eW1wdG90ZXMgYWNjb3JkaW5nIHRvIHRoZSBpcm9uaWMgZGVwb3NpdHMgdXNlIGFyb3VuZCB0aGUgcmVn",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_1.parquet",
+    "length" : 67301,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66179,
+      "rowCount" : 386,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "c_custkey" ],
+        "minValue" : 388,
+        "maxValue" : 773,
+        "nulls" : 0
+      }, {
+        "name" : [ "c_name" ],
+        "minValue" : "Q3VzdG9tZXIjMDAwMDAwMzg4",
+        "maxValue" : "Q3VzdG9tZXIjMDAwMDAwNzcz",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_address" ],
+        "minValue" : "ICxjSVosMDZLZw==",
+        "maxValue" : "enlXdmksU0djLHRYVGxz",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_nationkey" ],
+        "minValue" : 0,
+        "maxValue" : 24,
+        "nulls" : 0
+      }, {
+        "name" : [ "c_phone" ],
+        "minValue" : "MTAtMzUxLTExOS03NTE0",
+        "maxValue" : "MzQtOTg1LTQyMi02MDA5",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_acctbal" ],
+        "minValue" : "/pPK",
+        "maxValue" : "DxAe",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_mktsegment" ],
+        "minValue" : "QVVUT01PQklMRQ==",
+        "maxValue" : "TUFDSElORVJZ",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_comment" ],
+        "minValue" : "IGFjY291bnRzIGNham9sZSBxdWlja2x5IGFib3ZlIHRoZSBibGl0aGVseSBmaW5hbCBwYWNrYWdlcy4gZXZlbiwgZXhwcmVzcyBwYWNrYWdl",
+        "maxValue" : "eW1wdG90ZXMuIGJsaXRoZWx5IGJvbGQgcmVxdWVzdHMgc2hhbGwgYXJlIGFib3V0IHRoZSBmdXJpb3VzbHkgZmluYWwgcGxhdGVsZXRzLg==",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_0.parquet",
+    "length" : 67190,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66146,
+      "rowCount" : 387,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "c_custkey" ],
+        "minValue" : 1,
+        "maxValue" : 387,
+        "nulls" : 0
+      }, {
+        "name" : [ "c_name" ],
+        "minValue" : "Q3VzdG9tZXIjMDAwMDAwMDAx",
+        "maxValue" : "Q3VzdG9tZXIjMDAwMDAwMzg3",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_address" ],
+        "minValue" : "IFVRNW1GM3Nkb1pUMg==",
+        "maxValue" : "emlTcnZ5eUJrZQ==",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_nationkey" ],
+        "minValue" : 0,
+        "maxValue" : 24,
+        "nulls" : 0
+      }, {
+        "name" : [ "c_phone" ],
+        "minValue" : "MTAtMjI5LTU0OC03MTE4",
+        "maxValue" : "MzQtOTkyLTUyOS0yMDIz",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_acctbal" ],
+        "minValue" : "/ntp",
+        "maxValue" : "Dz1z",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_mktsegment" ],
+        "minValue" : "QVVUT01PQklMRQ==",
+        "maxValue" : "TUFDSElORVJZ",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_comment" ],
+        "minValue" : "IGFib3V0IHRoZSBjYXJlZnVsbHkgaXJvbmljIHBpbnRvIGJlYW5zLiBhY2NvdW4=",
+        "maxValue" : "eWx5IGZsdWZmeSBmb3hlcyBib29zdCBmaW5hbCBpZGVhcy4gYg==",
+        "nulls" : 0
+      } ]
+    } ]
+  }, {
+    "path" : "0_0_2.parquet",
+    "length" : 67379,
+    "rowGroups" : [ {
+      "start" : 4,
+      "length" : 66216,
+      "rowCount" : 380,
+      "hostAffinity" : {
+        "localhost" : 1.0
+      },
+      "columns" : [ {
+        "name" : [ "c_custkey" ],
+        "minValue" : 774,
+        "maxValue" : 1153,
+        "nulls" : 0
+      }, {
+        "name" : [ "c_name" ],
+        "minValue" : "Q3VzdG9tZXIjMDAwMDAwNzc0",
+        "maxValue" : "Q3VzdG9tZXIjMDAwMDAxMTUz",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_address" ],
+        "minValue" : "IDNiOEsyWWhmYkdESk9wU0FVcnZxODJNbmtoSEJkd0w=",
+        "maxValue" : "enB2UTZMWUU4OUlubDQwWXosN05K",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_nationkey" ],
+        "minValue" : 0,
+        "maxValue" : 24,
+        "nulls" : 0
+      }, {
+        "name" : [ "c_phone" ],
+        "minValue" : "MTAtMTA5LTQzMC01NjM4",
+        "maxValue" : "MzQtOTMxLTkxMS02MTU2",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_acctbal" ],
+        "minValue" : "/oKn",
+        "maxValue" : "DzmC",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_mktsegment" ],
+        "minValue" : "QVVUT01PQklMRQ==",
+        "maxValue" : "TUFDSElORVJZ",
+        "nulls" : 0
+      }, {
+        "name" : [ "c_comment" ],
+        "minValue" : "IGFjY29yZGluZyB0byB0aGUgY2FyZWZ1bGx5IGJvbGQgZGVwZW5kZW5jaWVzIHVzZSBib2xkbHkgc2x5bHkgZXhwcmVzcyBkZXBvc2l0cy4gY2Fy",
+        "maxValue" : "eW1wdG90ZXMuIGlyb25pYywgdW51c3VhbCBub3Rvcm5pcyB3YWtlIGFmdGVyIHRoZSBpcm9uaWMsIHNwZWNpYWwgZGVwb3NpdHMuIGJsaXRoZWx5IGZpbmE=",
+        "nulls" : 0
+      } ]
+    } ]
+  } ],
+  "directories" : [ ],
+  "drillVersion" : "1.16.0"
+}
