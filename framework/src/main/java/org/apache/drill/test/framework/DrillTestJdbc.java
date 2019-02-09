@@ -153,7 +153,7 @@ public class DrillTestJdbc implements DrillTest {
 		    }
       }
       if (testStatus == TestStatus.PASS && !TestDriver.cmdParam.outputQueryResult) {
-    	  // Utils.deleteFile(outputFilename);
+    	  Utils.deleteFile(outputFilename);
       }
       duration = stopwatch;
 
