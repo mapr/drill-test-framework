@@ -14,6 +14,6 @@ analyze table `table_stats/ps_5level` compute statistics;
 analyze table `table_stats/spark_generated` compute statistics;
 analyze table `table_stats/voter_hive_parquet` compute statistics;
 analyze table `table_stats/hive_alltypes` compute statistics (c1,c2,c3,c4,c9,c10,c11,c12,n);
---analyze table `table_stats` compute statistics (non_exist_col,bigint_col,bigint_col,int_col,bigint_col);
+--analyze table `table_stats/data_with_0` compute statistics (non_exist_col,bigint_col,bigint_col,int_col,bigint_col);
 analyze table `table_stats/data_with_0` compute statistics (int_col,bigint_col);
 reset `store.parquet.reader.int96_as_timestamp`;
