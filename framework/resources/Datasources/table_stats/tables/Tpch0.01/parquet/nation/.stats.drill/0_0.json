@@ -1,0 +1,35 @@
+{
+  "statistics_version" : "v1",
+  "directories" : [ {
+    "computed" : "2017-02-23T22:17:20.855-08:00",
+    "columns" : [ {
+      "column" : "n_nationkey",
+      "schema" : 1.0,
+      "statcount" : 25.0,
+      "nonnullstatcount" : 25.0,
+      "ndv" : 25,
+      "avgwidth" : 4.0
+    }, {
+      "column" : "n_name",
+      "schema" : 1.0,
+      "statcount" : 25.0,
+      "nonnullstatcount" : 25.0,
+      "ndv" : 25,
+      "avgwidth" : 7.08
+    }, {
+      "column" : "n_regionkey",
+      "schema" : 1.0,
+      "statcount" : 25.0,
+      "nonnullstatcount" : 25.0,
+      "ndv" : 5,
+      "avgwidth" : 4.0
+    }, {
+      "column" : "n_comment",
+      "schema" : 1.0,
+      "statcount" : 25.0,
+      "nonnullstatcount" : 25.0,
+      "ndv" : 25,
+      "avgwidth" : 74.28
+    } ]
+  } ]
+}

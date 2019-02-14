@@ -1,0 +1,56 @@
+{
+  "statistics_version" : "v1",
+  "directories" : [ {
+    "computed" : "2017-02-23T22:17:53.227-08:00",
+    "columns" : [ {
+      "column" : "s_suppkey",
+      "schema" : 1.0,
+      "statcount" : 100.0,
+      "nonnullstatcount" : 100.0,
+      "ndv" : 100,
+      "avgwidth" : 4.0
+    }, {
+      "column" : "s_name",
+      "schema" : 1.0,
+      "statcount" : 100.0,
+      "nonnullstatcount" : 100.0,
+      "ndv" : 100,
+      "avgwidth" : 18.0
+    }, {
+      "column" : "s_address",
+      "schema" : 1.0,
+      "statcount" : 100.0,
+      "nonnullstatcount" : 100.0,
+      "ndv" : 100,
+      "avgwidth" : 25.37
+    }, {
+      "column" : "s_nationkey",
+      "schema" : 1.0,
+      "statcount" : 100.0,
+      "nonnullstatcount" : 100.0,
+      "ndv" : 25,
+      "avgwidth" : 4.0
+    }, {
+      "column" : "s_phone",
+      "schema" : 1.0,
+      "statcount" : 100.0,
+      "nonnullstatcount" : 100.0,
+      "ndv" : 100,
+      "avgwidth" : 15.0
+    }, {
+      "column" : "s_acctbal",
+      "schema" : 1.0,
+      "statcount" : 100.0,
+      "nonnullstatcount" : 100.0,
+      "ndv" : 100,
+      "avgwidth" : 8.0
+    }, {
+      "column" : "s_comment",
+      "schema" : 1.0,
+      "statcount" : 100.0,
+      "nonnullstatcount" : 100.0,
+      "ndv" : 100,
+      "avgwidth" : 61.15
+    } ]
+  } ]
+}
