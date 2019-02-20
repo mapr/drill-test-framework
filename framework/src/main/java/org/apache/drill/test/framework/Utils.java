@@ -178,40 +178,39 @@ public class Utils {
  *
  * @return list of test definition sources to execute
  */
-  public static String[] getTestDefSources() {
+ public static String[] getTestDefSources() throws IOException {
 
-    String[] testDirExpressions;
-    try {
+   String[] testDirExpressions;
+   try {
      testDirExpressions = TestDriver.cmdParam.sources.split(",");
-    } catch (Exception e) {
-      testDirExpressions = new String[] { "" }; //Look at the default location for test definition files
-    }
-    
-    for (String relTestDirExpression : testDirExpressions) {
-      String absoluteTestDirExpression = getAbsolutePath(relTestDirExpression, DrillTestDefaults.DRILL_TESTDATA_DIR);
-      File absoluteTestDirExpressionFile = new File(absoluteTestDirExpression);
-      List<File> testDefinitionList = new ArrayList<>();
-      if (!absoluteTestDirExpressionFile.exists()) {
-        //try regex then exit if failure
-        File drillTestDataDir = new File(DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR);
-        testDefinitionList.addAll(getTestDefinitionList(drillTestDataDir,absoluteTestDirExpression));
-        if(testDefinitionList.isEmpty()){
-          LOG.info("No regex Found for "+relTestDirExpression);
-	  return testDirExpressions;
-        }
-        else{
-          List<String> defSrcList = new ArrayList<>(Arrays.asList(testDirExpressions));
-          defSrcList.remove(relTestDirExpression);
-          for(File testDefinition : testDefinitionList){
-            defSrcList.add(testDefinition.getAbsolutePath());
-          }
-          testDirExpressions = new String[defSrcList.size()];
-	  testDirExpressions = defSrcList.toArray(testDirExpressions);                
-        }
-      }
-    }
-    return testDirExpressions;
-  }
+   } catch (Exception e) {
+     testDirExpressions = new String[]{""}; //Look at the default location for test definition files
+   }
+
+   for (String relTestDirExpression : testDirExpressions) {
+     String absoluteTestDirExpression = getAbsolutePath(relTestDirExpression, DrillTestDefaults.DRILL_TESTDATA_DIR);
+     File absoluteTestDirExpressionFile = new File(absoluteTestDirExpression);
+     List<File> testDefinitionList = new ArrayList<>();
+     if (!absoluteTestDirExpressionFile.exists()) {
+       //try regex then exit if failure
+       File drillTestDataDir = new File(DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR);
+       testDefinitionList.addAll(getTestDefinitionList(drillTestDataDir, absoluteTestDirExpression));
+       if (testDefinitionList.isEmpty()) {
+         LOG.info("No regex Found for " + relTestDirExpression);
+         return testDirExpressions;
+       } else {
+         List<String> defSrcList = new ArrayList<>(Arrays.asList(testDirExpressions));
+         defSrcList.remove(relTestDirExpression);
+         for (File testDefinition : testDefinitionList) {
+           defSrcList.add(testDefinition.getAbsolutePath());
+         }
+         testDirExpressions = new String[defSrcList.size()];
+         testDirExpressions = defSrcList.toArray(testDirExpressions);
+       }
+     }
+   }
+   return testDirExpressions;
+ }
 
   /**
    * Constructs an iteration of test case definitions from various test data
@@ -312,62 +311,73 @@ public class Utils {
     return drillTestCases;
   }
   
-  private static List<File> searchFiles(File root, String regex) {
-	    List<File> list = new ArrayList<File>();
-	    Pattern pattern = Pattern.compile(regex + "$");
-	    Matcher matcher = null;
-	    if (root.isFile()) {
-	      matcher = pattern.matcher(root.getName());
-	      if (matcher.find()) {
-		list.add(root);
-	        return list;
-	      }
-	    } else {
-	      for (File file : root.listFiles()) {
-	        if (!file.getName().equals("datasources")) {
-	          list.addAll(searchFiles(file, regex));
-	        }
-	      }
-	    }
-	    return list;
-	  }
+  private static List<File> searchFiles(File root, String regex) throws FileNotFoundException {
+    List<File> list = new ArrayList<File>();
+    Pattern pattern = Pattern.compile(regex + "$");
+    Matcher matcher = null;
+    if (root.isFile()) {
+      matcher = pattern.matcher(root.getName());
+      if (matcher.find()) {
+        list.add(root);
+        return list;
+      }
+    } else {
+      File[] files = root.listFiles();
+      if (files != null) { //Directory exists
+        for (File file : files) {
+          if (!file.getName().equals("datasources")) {
+            list.addAll(searchFiles(file, regex));
+          }
+        }
+      } else {
+        throw new FileNotFoundException("Pathname, \"" + root.getPath() + "\"" +
+                " does not exist or does not denote a directory");
+      }
+    }
+    return list;
+  }
 
-  private static List<File> getTestDefinitionList(File root, String regex) {
-          List<File> list = new ArrayList<File>();
-          Pattern pattern = Pattern.compile(regex + "$");
-          Matcher matcher = null;
-          if (!root.isFile()) {
-            matcher = pattern.matcher(root.getAbsolutePath());
-            if (matcher.find()) {
-              list.add(root);
-              return list;
+  private static List<File> getTestDefinitionList(File root, String regex) throws FileNotFoundException {
+    List<File> list = new ArrayList<File>();
+    Pattern pattern = Pattern.compile(regex + "$");
+    Matcher matcher = null;
+    if (!root.isFile()) {
+      matcher = pattern.matcher(root.getAbsolutePath());
+      if (matcher.find()) {
+        list.add(root);
+        return list;
+      } else {
+        File[] files = root.listFiles();
+        if (files != null) { //Directory exists
+          for (File file : files) {
+            if (!file.getName().equals("datasources")) {
+              list.addAll(getTestDefinitionList(file, regex));
             }
-	    else{
-              for (File file : root.listFiles()) {
-                if (!file.getName().equals("datasources")) {
-                  list.addAll(getTestDefinitionList(file, regex));
-              	}
-              }
-	    }
-	  }
-          return list;
-         }
+          }
+        } else {
+          throw new FileNotFoundException("Pathname, \"" + root.getPath() + "\"" +
+                  " does not exist or does not denote a directory");
+        }
+      }
+    }
+    return list;
+  }
   
   private static TestCaseModeler getTestCaseModeler(String testDefFile)
 	      throws IOException {
-	    byte[] jsonData = Files.readAllBytes(Paths.get(testDefFile));
-	    ObjectMapper objectMapper = new ObjectMapper();
-            // check if submitType should be over-ridden to odbc
-            TestCaseModeler testCaseModeler = objectMapper.readValue(new String(jsonData), TestCaseModeler.class);
-            if (TestDriver.cmdParam.driverExt != null &&
-                TestDriver.cmdParam.driverExt.equals(TestDriver.cmdParam.SIMBA_ODBC)) {
-              testCaseModeler.submitType = "odbc";
-              if (testCaseModeler.script == null) {
-                testCaseModeler.script = "Functional/odbcTest.py";
-              }
-            }
-	    return testCaseModeler;
-	  }
+    byte[] jsonData = Files.readAllBytes(Paths.get(testDefFile));
+    ObjectMapper objectMapper = new ObjectMapper();
+    // check if submitType should be over-ridden to odbc
+    TestCaseModeler testCaseModeler = objectMapper.readValue(new String(jsonData), TestCaseModeler.class);
+    if (TestDriver.cmdParam.driverExt != null &&
+            TestDriver.cmdParam.driverExt.equals(TestDriver.cmdParam.SIMBA_ODBC)) {
+      testCaseModeler.submitType = "odbc";
+      if (testCaseModeler.script == null) {
+        testCaseModeler.script = "Functional/odbcTest.py";
+      }
+    }
+    return testCaseModeler;
+  }
 
   private static String getExpectedFile(String queryFile, String queryFileExt,
 	      String expectedFileExt) {
