@@ -178,7 +178,7 @@ public class Utils {
  *
  * @return list of test definition sources to execute
  */
-  public static String[] getTestDefSources() {
+  public static String[] getTestDefSources() throws IOException {
 
     String[] testDirExpressions;
     try {
@@ -186,7 +186,7 @@ public class Utils {
     } catch (Exception e) {
       testDirExpressions = new String[] { "" }; //Look at the default location for test definition files
     }
-    
+
     for (String relTestDirExpression : testDirExpressions) {
       String absoluteTestDirExpression = getAbsolutePath(relTestDirExpression, DrillTestDefaults.DRILL_TESTDATA_DIR);
       File absoluteTestDirExpressionFile = new File(absoluteTestDirExpression);
@@ -206,7 +206,7 @@ public class Utils {
             defSrcList.add(testDefinition.getAbsolutePath());
           }
           testDirExpressions = new String[defSrcList.size()];
-	  testDirExpressions = defSrcList.toArray(testDirExpressions);                
+	  testDirExpressions = defSrcList.toArray(testDirExpressions);
         }
       }
     }
@@ -312,7 +312,7 @@ public class Utils {
     return drillTestCases;
   }
   
-  private static List<File> searchFiles(File root, String regex) {
+  private static List<File> searchFiles(File root, String regex) throws FileNotFoundException {
 	    List<File> list = new ArrayList<File>();
 	    Pattern pattern = Pattern.compile(regex + "$");
 	    Matcher matcher = null;
@@ -323,16 +323,22 @@ public class Utils {
 	        return list;
 	      }
 	    } else {
-	      for (File file : root.listFiles()) {
-	        if (!file.getName().equals("datasources")) {
-	          list.addAll(searchFiles(file, regex));
-	        }
-	      }
+	      File[] files = root.listFiles();
+	      if (files != null) { //Directory exists
+            for (File file : files) {
+              if (!file.getName().equals("datasources")) {
+                list.addAll(searchFiles(file, regex));
+              }
+            }
+          } else {
+            throw new FileNotFoundException("Pathname, \"" + root.getPath() + "\"" +
+                    " does not exist or does not denote a directory");
+          }
 	    }
 	    return list;
 	  }
 
-  private static List<File> getTestDefinitionList(File root, String regex) {
+  private static List<File> getTestDefinitionList(File root, String regex) throws FileNotFoundException {
           List<File> list = new ArrayList<File>();
           Pattern pattern = Pattern.compile(regex + "$");
           Matcher matcher = null;
@@ -341,12 +347,17 @@ public class Utils {
             if (matcher.find()) {
               list.add(root);
               return list;
-            }
-	    else{
-              for (File file : root.listFiles()) {
-                if (!file.getName().equals("datasources")) {
-                  list.addAll(getTestDefinitionList(file, regex));
-              	}
+            } else{
+              File[] files = root.listFiles();
+              if (files != null) { //Directory exists
+                for (File file : files) {
+                  if (!file.getName().equals("datasources")) {
+                    list.addAll(getTestDefinitionList(file, regex));
+                  }
+                }
+              } else {
+                throw new FileNotFoundException("Pathname, \"" + root.getPath() + "\"" +
+                        " does not exist or does not denote a directory");
               }
 	    }
 	  }
