@@ -1,4 +1,3 @@
--- Enable when DRILL-6914 is fixed
 set `exec.hashjoin.enable.runtime_filter` = true;
 set `exec.hashjoin.runtime_filter.max.waiting.time` = 10000;
 set `planner.enable_broadcast_join` = false;
