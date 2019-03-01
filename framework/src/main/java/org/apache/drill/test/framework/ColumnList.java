@@ -19,7 +19,7 @@ package org.apache.drill.test.framework;
 
 import java.math.BigDecimal;
 import java.sql.Types;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -32,10 +32,14 @@ public class ColumnList {
   private final List<Object> values;
   private final List<Integer> types;
   private final boolean Simba;
+  //array of every row when data precision errors  
+  private final List <Integer> flags;
+  private int precisionErrorFlag;
   public static final String SIMBA_JDBC = "sjdbc";
   public ColumnList(List<Integer> types, List<Object> values) {
     this.values = values;
     this.types = types;
+    flags = new ArrayList<>(Collections.nCopies(values.size(), 0));
     if (TestDriver.cmdParam.driverExt != null &&
         TestDriver.cmdParam.driverExt.equals(ColumnList.SIMBA_JDBC)) {
       this.Simba = true;
@@ -117,7 +121,10 @@ public class ColumnList {
           values.set(i, s1);
         }
       }
-      sb.append(values.get(i) + "\t");
+      if(precisionErrorFlag == 1 && flags.get(i) == 1)
+       sb.append("\""+values.get(i)+"\"" + "\t");
+      else
+       sb.append(values.get(i) + "\t");
     }
     int type = (Integer) (types.get(values.size()-1));
     if (Simba && (type == Types.VARCHAR)) {
@@ -133,8 +140,11 @@ public class ColumnList {
         values.set(values.size()-1, s1);
       }
     }
-    sb.append(values.get(values.size() - 1));
-    return sb.toString();
+    if(precisionErrorFlag == 1 && flags.get(values.size() - 1) == 1)
+     sb.append("\""+values.get(values.size() - 1)+"\"");
+    else
+     sb.append(values.get(values.size() - 1));
+     return sb.toString();
   }
 
   public int compare(ColumnList o1, ColumnList o2) {
@@ -165,6 +175,8 @@ public class ColumnList {
                 return 0;
               }
               else{
+                precisionErrorFlag = 1;
+                flags.set(i,1);
                 return -1;
               }
               //return false;
@@ -187,10 +199,14 @@ public class ColumnList {
                     return 0;
                   }
                   else{
+                    precisionErrorFlag = 1;
+                    flags.set(i,1);
                     return -1;
                   }
                 }
                 else{
+                  precisionErrorFlag = 1;
+                  flags.set(i,1);
                   return -1;
                 }
                 //return false;
