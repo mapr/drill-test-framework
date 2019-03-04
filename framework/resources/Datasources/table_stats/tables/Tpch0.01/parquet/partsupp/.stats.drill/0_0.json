@@ -1,0 +1,42 @@
+{
+  "statistics_version" : "v1",
+  "directories" : [ {
+    "computed" : "2017-02-23T22:17:39.004-08:00",
+    "columns" : [ {
+      "column" : "ps_partkey",
+      "schema" : 1.0,
+      "statcount" : 8000.0,
+      "nonnullstatcount" : 8000.0,
+      "ndv" : 2000,
+      "avgwidth" : 4.0
+    }, {
+      "column" : "ps_suppkey",
+      "schema" : 1.0,
+      "statcount" : 8000.0,
+      "nonnullstatcount" : 8000.0,
+      "ndv" : 100,
+      "avgwidth" : 4.0
+    }, {
+      "column" : "ps_availqty",
+      "schema" : 1.0,
+      "statcount" : 8000.0,
+      "nonnullstatcount" : 8000.0,
+      "ndv" : 5494,
+      "avgwidth" : 4.0
+    }, {
+      "column" : "ps_supplycost",
+      "schema" : 1.0,
+      "statcount" : 8000.0,
+      "nonnullstatcount" : 8000.0,
+      "ndv" : 7661,
+      "avgwidth" : 8.0
+    }, {
+      "column" : "ps_comment",
+      "schema" : 1.0,
+      "statcount" : 8000.0,
+      "nonnullstatcount" : 8000.0,
+      "ndv" : 7994,
+      "avgwidth" : 124.06625
+    } ]
+  } ]
+}

@@ -1,0 +1,1 @@
+[{"computed":.*,"columns":[{"column":"col1","schema":.*,"statcount":50100.0,"nonnullstatcount":50100.0,"ndv":50155,"avgwidth":4.0},{"column":"col2","schema":1.0,"statcount":50100.0,"nonnullstatcount":100.0,"ndv":101,"avgwidth":4.0}]}]

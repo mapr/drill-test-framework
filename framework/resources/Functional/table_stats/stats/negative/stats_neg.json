@@ -1,0 +1,32 @@
+{
+    "testId": "Table_Stats_Analyze_Negative",
+    "type": "group",
+    "negative": true,
+    "description": "Negative Table Stats Tests",
+    "categories": [
+        "negative"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+           "mode": "cp",
+           "src": "Datasources/table_stats/tables",
+           "dest": "table_stats"
+        },
+	{
+           "mode": "gen",
+           "src": "Datasources/table_stats/table_stats_neg.sh",
+           "dest": ""
+    	}
+    ]
+}
