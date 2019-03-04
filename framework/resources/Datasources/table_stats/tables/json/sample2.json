@@ -1,0 +1,8 @@
+{
+    "ArrayOfLiterals1": ["GML", "XML"],
+    "ArrayOfLiterals2": ["GML", "XML"],
+    "a": {
+        "ArrayOfLiterals3": ["GML", "XML"],
+        "ArrayOfLiterals4": ["GML", "XML"]
+    }
+}
