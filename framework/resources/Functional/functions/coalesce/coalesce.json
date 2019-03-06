@@ -1,0 +1,22 @@
+{
+  "testId": "coalesce",
+  "type": "group",
+  "description": "Tests for coalesce function",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "cp",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+
+  ]
+}
