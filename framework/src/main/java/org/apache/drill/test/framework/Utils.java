@@ -61,7 +61,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
@@ -615,11 +616,9 @@ public class Utils {
   public static String getExistingDrillStoragePlugin(String ipAddress,
                                                      String pluginType) throws IOException {
     StringBuilder builder = new StringBuilder();
-    builder.append("http://" + ipAddress + ":8047/storage/" + pluginType);
-    HttpUriRequest request = new HttpGet(builder.toString() + ".json");
-    DefaultHttpClient client = new DefaultHttpClient();
-    HttpResponse response = client.execute(request);
-    return getHttpResponseAsString(response);
+    builder.append("http://").append(ipAddress).append(":8047/storage/").append(pluginType).append(".json");
+
+    return sendHttpGETRequestGetResponseAsString(builder.toString());
   }
 
   /**
@@ -693,22 +692,74 @@ public class Utils {
     return new String(encoded, "UTF-8");
   }
 
-  private static String getHttpResponseAsString(HttpResponse response) throws IOException {
-    Reader reader = new BufferedReader(new InputStreamReader(response
-      .getEntity().getContent(), "UTF-8"));
-    StringBuilder builder = new StringBuilder();
-    char[] buffer = new char[1024];
-    int l = 0;
-    while (l >= 0) {
-      builder.append(buffer, 0, l);
-      l = reader.read(buffer);
+
+  /**
+   * Send Http GET request and return response as string.
+   *
+   * @param url
+   * @return Http GET response built as string.
+   * @throws IOException
+   */
+  public static String sendHttpGETRequestGetResponseAsString(final String url) throws IOException {
+    HttpUriRequest request = new HttpGet(url);
+    try (CloseableHttpClient client = HttpClientBuilder.create().build();
+         CloseableHttpResponse response = client.execute(request)) {
+      return getHttpResponseAsString(response);
     }
+  }
+
+  /**
+   * Convert HttpResponse to a string.
+   *
+   * @param response a HttpResponse object.
+   * @return HttpResponse as a string.
+   * @throws IOException
+   */
+  public static String getHttpResponseAsString(HttpResponse response) throws IOException {
+    BufferedReader reader = new BufferedReader(new InputStreamReader(response
+      .getEntity().getContent()));
+    StringBuilder builder = new StringBuilder();
+
+    reader.lines().forEach(builder::append);
+
     return builder.toString();
   }
 
-  private static boolean isResponseSuccessful(HttpResponse response) throws IOException {
+  /**
+   * Builds a Http GET request for getting query profile as JSON.
+   * @param ip
+   * @param queryId
+   * @return
+   */
+  public static String buildHttpGETProfileRequest(final String ip, final String queryId) {
+    StringBuilder sb = new StringBuilder("http://");
+    return sb.append(ip)
+            .append(":")
+            .append(DrillTestDefaults.DRILL_STORAGE_PLUGIN_SERVER_PORT)
+            .append("/profiles/")
+            .append(queryId)
+            .append(".json")
+            .toString();
+  }
+
+  public static boolean isResponseSuccessful(HttpResponse response) throws IOException {
     return getHttpResponseAsString(response).toLowerCase().contains(
       "\"result\" : \"success\"");
+  }
+
+  /**
+   * Returns a {@link DrillQueryProfile} instance after sending a Http GET request to
+   * a Drillbit, obtaining a response and deserializing the response into a {@link DrillQueryProfile}.
+   *
+   * @param queryId string query id (see {@link #getQueryID(ResultSet)} for more information.
+   * @return {@link DrillQueryProfile} object.
+   * @throws IOException
+   */
+  public static DrillQueryProfile getQueryProfile(final String queryId) throws IOException {
+    final String url = Utils.buildHttpGETProfileRequest(DrillTestDefaults.DRILL_STORAGE_PLUGIN_SERVER, queryId);
+    return new ObjectMapper()
+            .readerFor(DrillQueryProfile.class)
+            .readValue(Utils.sendHttpGETRequestGetResponseAsString(url));
   }
 
   public static String generateOutputFileName(String inputFileName,

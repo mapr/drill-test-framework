@@ -155,7 +155,12 @@ public class DrillTestDefaults {
    */
   private static Map<String, String> getConfigProperties() {
     final Map<String, String> properties = Maps.newHashMap();
-    final File overrideFile = new File(CWD + "/conf/" + DRILL_TEST_CONFIG);
+
+    //CWD can be {basePath}/drill-test-framework or {basePath}/drill-test-framework/framework
+    final File overrideFile = new File(CWD +
+            (!CWD.endsWith("drill-test-framework") ? "/.." : "") +
+            "/conf/"  + DRILL_TEST_CONFIG);
+
     final ResourceBundle bundle;
     if (overrideFile.exists() && !overrideFile.isDirectory()) {
       try {
