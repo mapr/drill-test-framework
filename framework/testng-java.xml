@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="Drill Java Test Suite">
+    <test name="Resource Management Tests">
+        <classes>
+            <class name="org.apache.drill.test.framework.resourcemanagement.RMSelectorTests" />
+        </classes>
+        <groups>
+            <run>
+                <include name="functional" />
+                <exclude name="broken" />
+            </run>
+        </groups>
+    </test>
+</suite>
