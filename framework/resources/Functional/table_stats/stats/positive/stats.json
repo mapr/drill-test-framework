@@ -10,9 +10,9 @@
             "query-file": ".*.sql",
             "schema": "dfs.drillTestDir",
             "output-format": "tsv",
-            "expected-file": ".*.e_tsv",
+            "expected-file": ".*.plan",
             "verification-type": [
-                "memory"
+                "regex"
             ]
         }
     ],
@@ -21,6 +21,11 @@
                 "mode": "cp",
                 "src": "Datasources/table_stats/tables",
                 "dest": "table_stats"
+        },
+        {
+            "mode": "gen",
+            "src": "Datasources/table_stats/table_stats.sh",
+            "dest": ""
         }
     ]
 }
