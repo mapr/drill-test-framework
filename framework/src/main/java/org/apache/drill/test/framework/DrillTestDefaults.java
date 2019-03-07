@@ -105,15 +105,15 @@ public class DrillTestDefaults {
   // Default line break for logging.
   static final String LINE_BREAK = "------------------------------------------------------------------------";
   
-  //More classifications for Execution Failures
+  // Adding classifications for Execution Failures
   public static enum DRILL_EXCEPTION{
        VALIDATION_ERROR_INVALID_SCHEMA, 
        VALIDATION_ERROR_OBJECT_NOT_FOUND, 
-       SQL_ERROR_INTERNAL, 
+       INTERNAL_ERROR, 
        SQL_EXCEPTION_CONNECTION_ERROR,
        ALREADY_CLOSED_SQL_EXCEPTION, 
        SQL_EXCEPTION_RESOURCE_ERROR,
-       ARRAY_INDEX_OUT_OFBOUNDS__EXCEPTION, 
+       ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION, 
        UNSUPPORTED_OPERATION_EXCEPTION, 
        SYSTEM_ERROR_ILLEGAL_EXCEPTION,
        SYSTEM_ERROR_ILLEGAL_ARGUMENT_EXCEPTION,

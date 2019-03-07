@@ -139,8 +139,9 @@ public class TestDriver {
    
     List<List<DrillTest>> executionFailureExceptions=Lists.newArrayList(); 
     for(int ii=0;ii<DrillTestDefaults.DRILL_EXCEPTION_REGEXES.length;ii++){
-       List<DrillTest> temp = Lists.newArrayList();
-       executionFailureExceptions.add(temp);
+       executionFailureExceptions.add(new ArrayList<DrillTest>());
+       //List<DrillTest> temp = (List<DrillTest>)Lists.newArrayList();
+       //executionFailureExceptions.add((temp);
     }
     HashMap<String,Integer> exceptionMessageSet = new HashMap<String,Integer>(); 
     CancelingExecutor executor = new CancelingExecutor(cmdParam.threads, cmdParam.timeout);
@@ -219,8 +220,7 @@ public class TestDriver {
       List<DrillTest> failingTests = Lists.newArrayList();
       executionFailureExceptions = Lists.newArrayList(); 
       for(int ii=0;ii<DrillTestDefaults.DRILL_EXCEPTION_REGEXES.length;ii++){
-       List<DrillTest> temp = Lists.newArrayList();
-       executionFailureExceptions.add(temp);
+       executionFailureExceptions.add(new ArrayList<DrillTest>());
       }
       //PREPARATION
       stopwatch.reset().start();
@@ -368,33 +368,28 @@ public class TestDriver {
 	  }
           boolean regexFound = false;
           for(String regexStr : DrillTestDefaults.DRILL_EXCEPTION_REGEXES){
-             if(matches(localMsg,regexStr)){
+             if(Utils.matches(localMsg,regexStr)){
 	       regexFound = true;
 	       int index = Arrays.asList(DrillTestDefaults.DRILL_EXCEPTION_REGEXES).indexOf(regexStr);
-               List<DrillTest> temp;
 	       if(executionFailureExceptions.size()==0){
-		temp = Lists.newArrayList();
-		temp.add(test);
-		executionFailureExceptions.add(temp);
-	       }
+	         executionFailureExceptions.add(new ArrayList<DrillTest>());
+               }
 	       else if(executionFailureExceptions.get(index)==null){
-	         temp = Lists.newArrayList();
-		 temp.add(test);
-		 executionFailureExceptions.set(index,temp);
+                 List listAtIndex = new ArrayList<DrillTest>();
+                 listAtIndex.add(test);
+                 executionFailureExceptions.set(index,listAtIndex);
                } 
 	       else{
-	         temp = executionFailureExceptions.get(index);
-               	 temp.add(test);
-	       	 executionFailureExceptions.set(index,temp);
+                 List listAtIndex = executionFailureExceptions.get(index);
+                 listAtIndex.add(test);
+	       	 executionFailureExceptions.set(index,listAtIndex);
                }
 	       break;
 	     }
 
           }
 	if(regexFound == false){
-	  List<DrillTest> temp = Lists.newArrayList();
-	  temp.add(test);
-          executionFailureExceptions.add(temp);
+          executionFailureExceptions.add(new ArrayList<DrillTest>());
 	}
         }
       }
@@ -460,9 +455,9 @@ public class TestDriver {
               }
               else{ 
                 if(ii==0)
-                  LOG.info("CATEGORY - "+"UNCATEGORIZED: "+(ii-DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values().length+1)+" count("+executionFailureExceptions.get(ii).size()+")");
+                  LOG.info("UNCATEGORIZED: "+(ii-DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values().length+1)+" count("+executionFailureExceptions.get(ii).size()+")");
                 else
-                  LOG.info("\nCATEGORY - "+"UNCATEGORIZED: "+(ii-DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values().length+1)+" count("+executionFailureExceptions.get(ii).size()+")");
+                  LOG.info("\nUNCATEGORIZED: "+(ii-DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values().length+1)+" count("+executionFailureExceptions.get(ii).size()+")");
               }
               for(DrillTest t:executionFailureExceptions.get(ii)){
                 LOG.info(t.getInputFile());
@@ -631,16 +626,6 @@ public class TestDriver {
     connectionPool.close();
     restartDrill();
     return totalExecutionFailures + totalDataVerificationFailures + totalPlanVerificationFailures + totalTimeoutFailures + totalRandomFailures;
-  }
-
-  private static boolean matches(String actual, String expected) {
-    actual = actual.trim();
-    expected = expected.trim();
-      Matcher matcher = Pattern.compile(expected).matcher(actual);
-      if (!matcher.find()) {
-        return false;
-      }
-    return true;
   }
 
   public void setup() throws IOException, InterruptedException, URISyntaxException {

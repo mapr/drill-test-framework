@@ -853,4 +853,13 @@ public class Utils {
     return builder.toString();
   }
 
+  public static boolean matches(String actual, String expected) {
+    actual = actual.trim();
+    expected = expected.trim();
+      Matcher matcher = Pattern.compile(expected).matcher(actual);
+      if (!matcher.find()) {
+        return false;
+      }
+    return true;
+  }
 }
