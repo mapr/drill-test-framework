@@ -3,7 +3,6 @@ package org.apache.drill.test.framework.resourcemanagement;
 import org.apache.drill.test.framework.*;
 import org.apache.drill.test.framework.common.DrillJavaTestBase;
 import org.apache.drill.test.framework.DrillQueryProfile;
-import org.apache.drill.test.framework.common.DrillTestConstants;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -53,5 +52,35 @@ public class RMSelectorTests extends DrillJavaTestBase {
             e.printStackTrace();
             Assert.fail("Test " + method.getName() + " failed due to " + e.getMessage());
         }
+    }
+
+    /**
+     * A unit test to validate that {@link Utils#getQueryProfile(String)}
+     * fails with the right error if a profile for a specified queryId does not exist.
+     *
+     * @param method
+     */
+    @Test(groups = UNIT_GROUP)
+    public void testQueryProfileDoesNotExist(Method method) {
+        LOG.info("Test " + method.getName() + " started.");
+        final String queryId = "invalidQueryId";
+
+        try {
+            Utils.getQueryProfile(queryId);
+            Assert.fail("Querying invalid query profile did not throw exception!");
+        } catch (IOException e) {
+            Assert.assertTrue(e.getMessage().contains("Could not get query profile"),
+                    "Expected error message \"Could not get query profile\" " +
+                            "but obtained - " + e.getMessage());
+        }
+    }
+
+    @Test(groups = UNIT_GROUP)
+    public void testRunTPCHQuery(Method method) {
+        LOG.info("Test " + method.getName() + " started.");
+
+        final Properties props = TestDriver.createConnectionProperties();
+        final ConnectionPool pool = new ConnectionPool(props);
+        final String sqlStatement = "select name, val, status from sys.options where name like \'%runtime%\'";
     }
 }
