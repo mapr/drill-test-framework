@@ -757,9 +757,15 @@ public class Utils {
    */
   public static DrillQueryProfile getQueryProfile(final String queryId) throws IOException {
     final String url = Utils.buildHttpGETProfileRequest(DrillTestDefaults.DRILL_STORAGE_PLUGIN_SERVER, queryId);
-    return new ObjectMapper()
-            .readerFor(DrillQueryProfile.class)
-            .readValue(Utils.sendHttpGETRequestGetResponseAsString(url));
+    final String response = Utils.sendHttpGETRequestGetResponseAsString(url);
+
+    if(response.contains("error")) {
+      throw new IOException("Could not get query profile for queryId: " + queryId + ", response: " + response);
+    } else {
+      return new ObjectMapper()
+              .readerFor(DrillQueryProfile.class)
+              .readValue(response);
+    }
   }
 
   public static String generateOutputFileName(String inputFileName,
