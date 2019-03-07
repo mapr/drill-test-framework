@@ -239,6 +239,12 @@ public class Utils {
 	  	LOG.error("Directory " + testDefSourceFile.getAbsolutePath() + " does not exist!");
     	  	System.exit(-1);
       }
+      if (testDefSourceFile.isFile()) {
+        // Single test execution
+        singleTestCase(testDefSourceFile, testGroups, drillTestCases);
+        continue;
+      }
+
       List<File> testDefFiles = searchFiles(testDefSourceFile, ".*.json");
       for (File testDefFile : testDefFiles) {
 //        try {
@@ -851,6 +857,62 @@ public class Utils {
       builder.append(s);
     }
     return builder.toString();
+  }
+
+  /* Get DrillTestCase for a single query file */
+  public static void singleTestCase(File singleTestFile,
+                                      String[] testGroups,
+                                      List<DrillTestCase> drillTestCases)
+      throws IOException {
+    List<File> jsonFiles = searchFiles(singleTestFile.getParentFile(), ".*.json");
+    if (jsonFiles.isEmpty()) {
+      String updir = "";
+      while (jsonFiles.isEmpty()) {
+        updir = updir + "/..";
+        File singleTestFileParent = new File(singleTestFile.getParent() + updir);
+        jsonFiles = searchFiles(singleTestFileParent, ".*.json");
+      }
+    }
+    for (File jsonFile : jsonFiles) {
+      TestCaseModeler modeler;
+      try {
+        modeler = getTestCaseModeler(jsonFile.getAbsolutePath());
+      } catch (JsonParseException e) {
+        LOG.warn("Caught exception parsing " + jsonFile + ". This test will not be executed.", e);
+        continue;
+      }
+
+      String queryFileExtension = modeler.matrices.get(0).inputFile;
+      Pattern pattern = Pattern.compile(queryFileExtension + "$");
+      Matcher matcher = pattern.matcher(singleTestFile.getName());
+      if (matcher.find()) {
+        List<String> categories = modeler.categories;
+        boolean foundTests = false;
+        for (String testGroup : testGroups) {
+          if (categories != null && !categories.contains(testGroup)) {
+            continue;
+          } else {
+            foundTests = true;
+            break;
+          }
+        }
+        if (!foundTests) {continue;}
+        String expectedFileExtension = modeler.matrices.get(0).expectedFile;
+        boolean skipSuite = false;
+        if (modeler.dependencies != null) {
+          for (String dependency : modeler.dependencies) {
+            if (TestDriver.cmdParam.excludeDependenciesAsList().contains(dependency)) {
+              skipSuite = true;
+            }
+          }
+        }
+        if (skipSuite) {continue;}
+        String expectedFileName = getExpectedFile(singleTestFile.getAbsolutePath(),
+                  queryFileExtension, expectedFileExtension);
+        drillTestCases.add(new DrillTestCase(modeler, singleTestFile.getAbsolutePath(), expectedFileName));
+        break;
+      }
+    }
   }
 
 }
