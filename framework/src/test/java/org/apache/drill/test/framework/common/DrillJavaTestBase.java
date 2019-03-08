@@ -1,7 +1,14 @@
 package org.apache.drill.test.framework.common;
 
 import org.apache.log4j.Logger;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 
 public class DrillJavaTestBase {
     private static final Logger LOG = Logger.getLogger(DrillJavaTestBase.class);
