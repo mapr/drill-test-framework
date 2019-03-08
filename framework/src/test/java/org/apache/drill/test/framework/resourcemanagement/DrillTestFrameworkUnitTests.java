@@ -24,7 +24,7 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
 
     @BeforeTest(alwaysRun = true)
     public void runBeforeTest() {
-        LOG.info("Running before test");
+        LOG.debug("Running before test");
     }
 
 
