@@ -104,7 +104,39 @@ public class DrillTestDefaults {
 
   // Default line break for logging.
   static final String LINE_BREAK = "------------------------------------------------------------------------";
+  
+  // Adding classifications for Execution Failures
+  public static enum DRILL_EXCEPTION{
+       VALIDATION_ERROR_INVALID_SCHEMA, 
+       VALIDATION_ERROR_OBJECT_NOT_FOUND, 
+       INTERNAL_ERROR, 
+       SQL_EXCEPTION_CONNECTION_ERROR,
+       ALREADY_CLOSED_SQL_EXCEPTION, 
+       SQL_EXCEPTION_RESOURCE_ERROR,
+       ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION, 
+       UNSUPPORTED_OPERATION_EXCEPTION, 
+       SYSTEM_ERROR_ILLEGAL_EXCEPTION,
+       SYSTEM_ERROR_ILLEGAL_ARGUMENT_EXCEPTION,
+       SYSTEM_ERROR_CHANNEL_CLOSED_EXCEPTION,
+       NULL_POINTER_EXCEPTION, 
+       UNCATEGORIZED_ERROR;
+  }
 
+  public static final String DRILL_EXCEPTION_REGEXES[] = { "Schema \\[.*\\] is not valid with respect to either root schema or current default schema.*",
+							   "Object .* not found.*",
+							   "INTERNAL_ERROR ERROR.*",
+							   ".*SQLException.*CONNECTION ERROR.*",
+							   ".*ResultSet.*closed.*",
+							   "Not enough memory.*",
+							   "ArrayIndexOutOfBoundsException.*",
+							   "UnsupportedOperationException.*",
+							   ".*SYSTEM ERROR.*IllegalStateException.*",
+							   ".*SYSTEM ERROR.*IllegalArgumentException.*",
+							   ".*SYSTEM ERROR.*ChannelClosedException.*",
+							   ".*NullPointerException.*",
+							   "Uncategorized"
+							};
+   
   private static final Map<String, String> drillProperties;
 
   static {

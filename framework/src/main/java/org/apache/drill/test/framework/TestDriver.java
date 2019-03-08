@@ -48,6 +48,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.sql.DatabaseMetaData;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TestDriver {
   private static final Logger LOG = Logger.getLogger("DrillTestLogger");
@@ -131,10 +133,17 @@ public class TestDriver {
 
     return connectionProperties;
   }
+  
 
   public int runTests() throws Exception {
-
-    
+   
+    List<List<DrillTest>> executionFailureExceptions=Lists.newArrayList(); 
+    for(int ii=0;ii<DrillTestDefaults.DRILL_EXCEPTION_REGEXES.length;ii++){
+       executionFailureExceptions.add(new ArrayList<DrillTest>());
+       //List<DrillTest> temp = (List<DrillTest>)Lists.newArrayList();
+       //executionFailureExceptions.add((temp);
+    }
+    HashMap<String,Integer> exceptionMessageSet = new HashMap<String,Integer>(); 
     CancelingExecutor executor = new CancelingExecutor(cmdParam.threads, cmdParam.timeout);
 
     final Stopwatch stopwatch = Stopwatch.createStarted();
@@ -209,7 +218,10 @@ public class TestDriver {
       List<DrillTest> canceledTests = Lists.newArrayList();
       List<DrillTest> randomFailures = Lists.newArrayList();
       List<DrillTest> failingTests = Lists.newArrayList();
-      
+      executionFailureExceptions = Lists.newArrayList(); 
+      for(int ii=0;ii<DrillTestDefaults.DRILL_EXCEPTION_REGEXES.length;ii++){
+       executionFailureExceptions.add(new ArrayList<DrillTest>());
+      }
       //PREPARATION
       stopwatch.reset().start();
       if (cmdParam.generate) {
@@ -346,6 +358,39 @@ public class TestDriver {
         for (DrillTest test : executionFailures) {
           LOG.info("Query: " + test.getInputFile() + "\n" + test.getQuery());
           LOG.info("\nException:\n", test.getException());
+	  String [] localMsgArray = test.getException().getLocalizedMessage().split(":");
+	  String localMsg = test.getException().getLocalizedMessage();
+	  if(localMsgArray.length > 0){
+            if(exceptionMessageSet.containsKey(localMsgArray[0]))
+	      exceptionMessageSet.put(localMsgArray[0],exceptionMessageSet.get(localMsgArray[0])+1);
+	    else
+	      exceptionMessageSet.put(localMsgArray[0],1);
+	  }
+          boolean regexFound = false;
+          for(String regexStr : DrillTestDefaults.DRILL_EXCEPTION_REGEXES){
+             if(Utils.matches(localMsg,regexStr)){
+	       regexFound = true;
+	       int index = Arrays.asList(DrillTestDefaults.DRILL_EXCEPTION_REGEXES).indexOf(regexStr);
+	       if(executionFailureExceptions.size()==0){
+	         executionFailureExceptions.add(new ArrayList<DrillTest>());
+               }
+	       else if(executionFailureExceptions.get(index)==null){
+                 List listAtIndex = new ArrayList<DrillTest>();
+                 listAtIndex.add(test);
+                 executionFailureExceptions.set(index,listAtIndex);
+               } 
+	       else{
+                 List listAtIndex = executionFailureExceptions.get(index);
+                 listAtIndex.add(test);
+	       	 executionFailureExceptions.set(index,listAtIndex);
+               }
+	       break;
+	     }
+
+          }
+	if(regexFound == false){
+          executionFailureExceptions.add(new ArrayList<DrillTest>());
+	}
         }
       }
 
@@ -396,11 +441,30 @@ public class TestDriver {
 
       if(executionFailures.size()>0){
       	LOG.info("Execution Failures:\n");
-        for (DrillTest test : executionFailures) {
-	  if(test.getExpectedFile()!=""){
-            LOG.info(test.getInputFile());
-	  }
-      	}
+	if(executionFailureExceptions != null){
+          for (int ii=0;ii<executionFailureExceptions.size();ii++){
+            if(executionFailureExceptions==null || executionFailureExceptions.get(ii)==null){
+            }    
+            else if(executionFailureExceptions.get(ii)!=null && executionFailureExceptions.get(ii).size()!=0){
+              if(ii<DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values().length){
+                if(ii==0)
+                  LOG.info("CATEGORY - "+DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values()[ii]+" count("+executionFailureExceptions.get(ii).size()+")");
+                else
+                  LOG.info("\nCATEGORY - "+DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values()[ii]+" count("+executionFailureExceptions.get(ii).size()+")");
+                  
+              }
+              else{ 
+                if(ii==0)
+                  LOG.info("UNCATEGORIZED: "+(ii-DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values().length+1)+" count("+executionFailureExceptions.get(ii).size()+")");
+                else
+                  LOG.info("\nUNCATEGORIZED: "+(ii-DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values().length+1)+" count("+executionFailureExceptions.get(ii).size()+")");
+              }
+              for(DrillTest t:executionFailureExceptions.get(ii)){
+                LOG.info(t.getInputFile());
+              }    
+            }    
+          }    
+        }
       }
 
       if(dataVerificationFailures.size()>0){
@@ -553,6 +617,7 @@ public class TestDriver {
       	  }
       	}
     }
+    
     LOG.info(DrillTestDefaults.LINE_BREAK+"\n");
     LOG.info(DrillTestDefaults.LINE_BREAK+"\nTEARDOWN\n"+DrillTestDefaults.LINE_BREAK);
     teardown();
