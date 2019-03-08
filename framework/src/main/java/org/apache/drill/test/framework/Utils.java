@@ -41,6 +41,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,7 +68,10 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
 
-import javax.net.ssl.*;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManagerFactory;
 
 /**
  * Collection of utilities supporting the drill test framework.
@@ -79,6 +83,32 @@ public class Utils {
   private static final Map<Integer, String> sqlNullabilities;
   private static HttpClient client;
   private static String protocol = "http://";
+
+  /**
+   * Creates connection properties from DrillTestConfig
+   * @return connection properties
+   */
+  public static Properties createConnectionProperties() {
+    Properties connectionProperties = new Properties();
+
+    if (DrillTestDefaults.AUTHENTICATION_MECHANISM.equals("PLAIN")) {
+      connectionProperties.put("auth", "PLAIN");
+    } else if (DrillTestDefaults.AUTHENTICATION_MECHANISM.equals("MAPRSASL")) {
+      connectionProperties.put("auth", "MAPRSASL");
+    } else if (DrillTestDefaults.AUTHENTICATION_MECHANISM.equals("KERBEROS")) {
+      connectionProperties.put("auth", "KERBEROS");
+      connectionProperties.put("principal", DrillTestDefaults.KERBEROS_PRINCIPAL);
+    }
+
+    if (DrillTestDefaults.SSL_ENABLED) {
+      connectionProperties.put("enableTLS", "true");
+      connectionProperties.put("disableHostVerification", "true");
+      connectionProperties.put("trustStorePath", DrillTestDefaults.TRUSTSTORE_PATH);
+      connectionProperties.put("trustStorePassword", DrillTestDefaults.TRUSTSTORE_PASSWORD);
+    }
+
+    return connectionProperties;
+  }
 
   // Accept self-signed certificate
   public static class MyHostNameVerifier implements HostnameVerifier {

@@ -46,7 +46,6 @@ import java.util.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.sql.DatabaseMetaData;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -67,8 +66,8 @@ public class TestDriver {
   public static final CmdParam cmdParam = new CmdParam();
   
   public TestDriver() {
-    connectionProperties = createConnectionProperties();
-	  connectionPool = new ConnectionPool(connectionProperties);
+    connectionProperties = Utils.createConnectionProperties();
+    connectionPool = new ConnectionPool(connectionProperties);
   }
   
   public static void main(String[] args) throws Exception {
@@ -107,33 +106,6 @@ public class TestDriver {
     }
     System.exit(errorCode);
   }
-
-  /**
-   * Creates connection properties from DrillTestConfig
-   * @return connection properties
-   */
-  public static Properties createConnectionProperties() {
-    Properties connectionProperties = new Properties();
-
-    if (DrillTestDefaults.AUTHENTICATION_MECHANISM.equals("PLAIN")) {
-      connectionProperties.put("auth", "PLAIN");
-    } else if (DrillTestDefaults.AUTHENTICATION_MECHANISM.equals("MAPRSASL")) {
-      connectionProperties.put("auth", "MAPRSASL");
-    } else if (DrillTestDefaults.AUTHENTICATION_MECHANISM.equals("KERBEROS")) {
-      connectionProperties.put("auth", "KERBEROS");
-      connectionProperties.put("principal", DrillTestDefaults.KERBEROS_PRINCIPAL);
-    }
-
-    if (DrillTestDefaults.SSL_ENABLED) {
-      connectionProperties.put("enableTLS", "true");
-      connectionProperties.put("disableHostVerification", "true");
-      connectionProperties.put("trustStorePath", DrillTestDefaults.TRUSTSTORE_PATH);
-      connectionProperties.put("trustStorePassword", DrillTestDefaults.TRUSTSTORE_PASSWORD);
-    }
-
-    return connectionProperties;
-  }
-  
 
   public int runTests() throws Exception {
    

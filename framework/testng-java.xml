@@ -2,7 +2,7 @@
 <suite name="Drill Java Test Suite">
     <test name="Resource Management Tests">
         <classes>
-            <class name="org.apache.drill.test.framework.resourcemanagement.RMSelectorTests" />
+            <class name="org.apache.drill.test.framework.resourcemanagement.DrillTestFrameworkUnitTests" />
         </classes>
         <groups>
             <run>

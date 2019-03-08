@@ -1,8 +1,9 @@
 package org.apache.drill.test.framework.resourcemanagement;
 
-import org.apache.drill.test.framework.*;
-import org.apache.drill.test.framework.common.DrillJavaTestBase;
+import org.apache.drill.test.framework.ConnectionPool;
 import org.apache.drill.test.framework.DrillQueryProfile;
+import org.apache.drill.test.framework.Utils;
+import org.apache.drill.test.framework.common.DrillJavaTestBase;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -17,8 +18,9 @@ import java.util.Properties;
 
 import static org.apache.drill.test.framework.common.DrillTestConstants.UNIT_GROUP;
 
-public class RMSelectorTests extends DrillJavaTestBase {
-    private static final Logger LOG = Logger.getLogger(RMSelectorTests.class);
+@Test(groups = UNIT_GROUP)
+public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
+    private static final Logger LOG = Logger.getLogger(DrillTestFrameworkUnitTests.class);
 
     @BeforeTest(alwaysRun = true)
     public void runBeforeTest() {
@@ -37,7 +39,7 @@ public class RMSelectorTests extends DrillJavaTestBase {
     public void testGetQueryProfile(Method method) {
         LOG.info("Test " + method.getName() + " started.");
 
-        final Properties props = TestDriver.createConnectionProperties();
+        final Properties props = Utils.createConnectionProperties();
         final ConnectionPool pool = new ConnectionPool(props);
         final String sqlStatement = "select name, val, status from sys.options where name like \'%runtime%\'";
 
@@ -73,14 +75,5 @@ public class RMSelectorTests extends DrillJavaTestBase {
                     "Expected error message \"Could not get query profile\" " +
                             "but obtained - " + e.getMessage());
         }
-    }
-
-    @Test(groups = UNIT_GROUP)
-    public void testRunTPCHQuery(Method method) {
-        LOG.info("Test " + method.getName() + " started.");
-
-        final Properties props = TestDriver.createConnectionProperties();
-        final ConnectionPool pool = new ConnectionPool(props);
-        final String sqlStatement = "select name, val, status from sys.options where name like \'%runtime%\'";
     }
 }
