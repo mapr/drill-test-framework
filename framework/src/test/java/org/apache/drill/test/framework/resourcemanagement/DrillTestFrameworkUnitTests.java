@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
-import static org.apache.drill.test.framework.common.DrillTestNGDefaults.UNIT_GROUP;
+import static org.apache.drill.test.framework.common.DrillTestConstants.UNIT_GROUP;
 
 @Test(groups = UNIT_GROUP)
 public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
@@ -24,9 +24,10 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
 
     @BeforeTest(alwaysRun = true)
     public void runBeforeTest() {
-        LOG.debug("Running before test");
+        LOG.info("Running before test");
     }
-    
+
+
     /**
      * A unit test to validate that {@link Utils#getQueryProfile(String)}
      * can be used to obtain query profile. This test also validates that
