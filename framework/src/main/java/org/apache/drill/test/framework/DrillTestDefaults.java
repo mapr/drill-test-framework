@@ -119,7 +119,7 @@ public class DrillTestDefaults {
        SYSTEM_ERROR_ILLEGAL_ARGUMENT_EXCEPTION,
        SYSTEM_ERROR_CHANNEL_CLOSED_EXCEPTION,
        NULL_POINTER_EXCEPTION, 
-       UNCATEGORIZED_ERROR;
+       UNCATEGORIZED;
   }
 
   public static final String DRILL_EXCEPTION_REGEXES[] = { "Schema \\[.*\\] is not valid with respect to either root schema or current default schema.*",

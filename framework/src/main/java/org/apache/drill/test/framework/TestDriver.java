@@ -372,7 +372,9 @@ public class TestDriver {
 	       regexFound = true;
 	       int index = Arrays.asList(DrillTestDefaults.DRILL_EXCEPTION_REGEXES).indexOf(regexStr);
 	       if(executionFailureExceptions.size()==0){
-	         executionFailureExceptions.add(new ArrayList<DrillTest>());
+                 List newList = new ArrayList<DrillTest>();
+                 newList.add(test);
+                 executionFailureExceptions.add(newList);
                }
 	       else if(executionFailureExceptions.get(index)==null){
                  List listAtIndex = new ArrayList<DrillTest>();
@@ -389,8 +391,10 @@ public class TestDriver {
 
           }
 	if(regexFound == false){
-          executionFailureExceptions.add(new ArrayList<DrillTest>());
-	}
+          List newList = executionFailureExceptions.get(DrillTestDefaults.DRILL_EXCEPTION_REGEXES.length-1);
+          newList.add(test);
+          executionFailureExceptions.set(DrillTestDefaults.DRILL_EXCEPTION_REGEXES.length-1,newList);
+        }
         }
       }
 
@@ -448,16 +452,17 @@ public class TestDriver {
             else if(executionFailureExceptions.get(ii)!=null && executionFailureExceptions.get(ii).size()!=0){
               if(ii<DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values().length){
                 if(ii==0)
-                  LOG.info("CATEGORY - "+DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values()[ii]+" count("+executionFailureExceptions.get(ii).size()+")");
+                  LOG.info("CATEGORY - "+DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values()[ii]+" ("+executionFailureExceptions.get(ii).size()+")");
+                else if(ii<executionFailureExceptions.size()-1)
+                  LOG.info("\nCATEGORY - "+DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values()[ii]+" ("+executionFailureExceptions.get(ii).size()+")");
                 else
-                  LOG.info("\nCATEGORY - "+DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values()[ii]+" count("+executionFailureExceptions.get(ii).size()+")");
-                  
+                  LOG.info("\n"+DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values()[ii]+" ("+executionFailureExceptions.get(ii).size()+")");  
               }
               else{ 
                 if(ii==0)
-                  LOG.info("UNCATEGORIZED: "+(ii-DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values().length+1)+" count("+executionFailureExceptions.get(ii).size()+")");
+                  LOG.info("UNCATEGORIZED "+(ii-DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values().length+1)+"("+executionFailureExceptions.get(ii).size()+")");
                 else
-                  LOG.info("\nUNCATEGORIZED: "+(ii-DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values().length+1)+" count("+executionFailureExceptions.get(ii).size()+")");
+                  LOG.info("\nUNCATEGORIZED "+(ii-DrillTestDefaults.DRILL_EXCEPTION.VALIDATION_ERROR_INVALID_SCHEMA.values().length+1)+"("+executionFailureExceptions.get(ii).size()+")");
               }
               for(DrillTest t:executionFailureExceptions.get(ii)){
                 LOG.info(t.getInputFile());
