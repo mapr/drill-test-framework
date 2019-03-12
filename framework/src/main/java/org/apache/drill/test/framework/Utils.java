@@ -642,6 +642,33 @@ public class Utils {
     }
   }
 
+  public static void startMinio() {
+    LOG.info("> Starting Apache Minio server\n");
+    String cmd = DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/Datasources/s3/minio/run_mn.sh";
+    try {
+      Runtime.getRuntime().exec(cmd);
+    } catch (Throwable e) {
+      LOG.warn("Fail to run command " + cmd, e);
+    }
+  }
+
+  public static void stopMinio() {
+    LOG.info("> Stopping Apache Minio server\n");
+    String cmd = DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/Datasources/s3/minio/stop_mn.sh";
+    try {
+      Runtime.getRuntime().exec(cmd);
+    } catch (Throwable e) {
+      LOG.warn("Fail to run command " + cmd, e);
+    }
+    LOG.info("> Disabling S3 storage plugin\n");
+    String templatePath = DrillTestDefaults.CWD + "/conf/plugin-templates/common/s3-storage-plugin.template";
+
+    boolean isSuccess = Utils.disableStoragePlugin(templatePath, "s3");
+    if(!isSuccess){
+      LOG.info(">> Fail to disable S3 storage plugin");
+    }
+  }
+
   /**
    * Updates storage plugin for drill
    * 
@@ -660,6 +687,26 @@ public class Utils {
         content = content.replace("maprfs:", "file:");
         content = content.replaceAll("location\"\\s*:\\s*\"", "location\":\"" + System.getProperty("user.home"));
       }
+      return postDrillStoragePlugin(content, pluginType);
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
+    return false;
+  }
+
+  /**
+   * Turns off a storage plugin for drill
+   *
+   * @param filename
+   *          name of file containing drill storage plugin
+   * @param pluginType
+   *          type of plugin; e.g.: "dfs", "cp"
+   * @return true if operation is successful
+   */
+  private static boolean disableStoragePlugin(String filename, String pluginType) {
+    try {
+      String content = getFileContent(filename)
+          .replace("\"enabled\": true", "\"enabled\": false");
       return postDrillStoragePlugin(content, pluginType);
     } catch (IOException ex) {
       ex.printStackTrace();

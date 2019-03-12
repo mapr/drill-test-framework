@@ -716,6 +716,11 @@ public class TestDriver {
 		}
 	} 
 	connectionPool.releaseConnection(connection);
+
+    // Stop Apache Minio server if it was started for the S3 storage
+    if(cmdParam.excludeDependencies == null || !cmdParam.excludeDependencies.contains("s3")) {
+      Utils.stopMinio();
+    }
   }
 
   private void prepareData(List<DrillTestCase> tests) throws Exception {
@@ -773,6 +778,12 @@ public class TestDriver {
     }
 
     final Stopwatch stopwatch = Stopwatch.createStarted();
+
+    // Run Apache Minio server if needed for the S3 storage
+    if(cmdParam.excludeDependencies == null || !cmdParam.excludeDependencies.contains("s3")) {
+      Utils.startMinio();
+    }
+    
     LOG.info("> Copying Data");
     copyExecutor.executeAll(copyTasks);
     copyExecutor.close();
