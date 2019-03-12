@@ -175,6 +175,8 @@ public class ColumnList {
                 return 0;
               }
               else{
+                if(Math.abs(f1-f2)>0.01)
+	          return 0;
                 precisionErrorFlag = 1;
                 flags.set(i,1);
                 return -1;
@@ -199,6 +201,8 @@ public class ColumnList {
                     return 0;
                   }
                   else{
+                    if(Math.abs(d1-d2)>0.01)
+                      return 0;
                     precisionErrorFlag = 1;
                     flags.set(i,1);
                     return -1;
