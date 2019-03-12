@@ -1,0 +1,4 @@
+.*Screen.*rowcount = 8000.0
+.*HashJoin.*rowcount = 8000.0
+.*Scan.*rowcount = 8000.0
+.*Scan.*rowcount = 2000.0

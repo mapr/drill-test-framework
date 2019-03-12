@@ -1,0 +1,1 @@
+select directories from `table_stats/nested_scalar_cols/.stats.drill`;

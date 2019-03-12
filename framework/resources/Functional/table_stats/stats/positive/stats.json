@@ -1,5 +1,5 @@
 {
-    "testId": "Table_Stats_Query",
+    "testId": "Stats_positive_tests",
     "type": "group",
     "description": "Test queries using stats",
     "categories": [
