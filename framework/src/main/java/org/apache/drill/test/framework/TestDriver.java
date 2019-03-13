@@ -555,7 +555,7 @@ public class TestDriver {
       LOG.info("Failing Tests                : " + (executionFailures.size() + dataVerificationFailures.size() + dataPrecisionFailures.size() + planVerificationFailures.size() + timeoutFailures.size())+"\n");
       LOG.info("> Execution Failures         : " + executionFailures.size());
       LOG.info("> Data Verification Failures : " + dataVerificationFailures.size());
-      LOG.info("> Data Precision Failures : " + dataPrecisionFailures.size());
+      LOG.info("> Data Precision Failures    : " + dataPrecisionFailures.size());
       LOG.info("> Plan Verification Failures : " + planVerificationFailures.size());
       LOG.info("> Timeout Failures           : " + timeoutFailures.size());
 
