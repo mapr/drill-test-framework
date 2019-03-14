@@ -1,9 +1,5 @@
 package org.apache.drill.test.framework;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
-import com.typesafe.config.ConfigRenderOptions;
 import org.apache.drill.test.framework.common.DrillJavaTestBase;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
@@ -38,8 +34,6 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
      */
     @Test(groups = UNIT_GROUP)
     public void testGetQueryProfile(Method method) {
-        LOG.info("Test " + method.getName() + " started.");
-
         final Properties props = Utils.createConnectionProperties();
         final ConnectionPool pool = new ConnectionPool(props);
         final String sqlStatement = "select name, val, status from sys.options where name like \'%runtime%\'";
@@ -60,12 +54,9 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
     /**
      * A unit test to validate that {@link Utils#getQueryProfile(String)}
      * fails with the right error if a profile for a specified queryId does not exist.
-     *
-     * @param method
      */
     @Test(groups = UNIT_GROUP)
-    public void testQueryProfileDoesNotExist(Method method) {
-        LOG.info("Test " + method.getName() + " started.");
+    public void testQueryProfileDoesNotExist() {
         final String queryId = "invalidQueryId";
 
         try {
@@ -79,33 +70,34 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
     }
 
 
+    /**
+     * Test reading a sample RM config file in to a Java Bean.
+     */
     @Test(groups = UNIT_GROUP)
-    public void testReadSampleRMConfigFile(Method method) {
-        LOG.info("Test " + method.getName() + " started.");
-        final String resourceName = "sample-drill-rm-override.conf";
+    public void testReadSampleRMConfigFile() {
+        final String sampleRMConfigPath = "sample-drill-rm-override.conf";
 
         try {
+            DrillRMConfig drillRMConfig = DrillRMConfig.load(sampleRMConfigPath);
+            Assert.assertEquals(drillRMConfig.poolName, "root",
+                    "Root resource pool name did not match");
 
-            Config config = ConfigFactory.load(resourceName).getConfig("drill.exec.rm");
-            final String rmConfigString = config.root().render(ConfigRenderOptions.concise());
-            LOG.info(rmConfigString);
-            DrillRMConfig drillRMConfig = new ObjectMapper()
-                    .readerFor(DrillRMConfig.class)
-                    .readValue(rmConfigString);
-
-            LOG.info("PoolName: " +  drillRMConfig.poolName);
-            LOG.info("Childpool size: " + drillRMConfig.childPools.size());
-            LOG.info("Childpool name: ");
-            drillRMConfig.childPools.forEach(p -> LOG.info(p.poolName));
-
-            config = ConfigFactory.parseString(rmConfigString);
-            LOG.info(config.getString("queue_selection_policy"));
-
-            LOG.info(drillRMConfig.renderAsConf());
-
+            Assert.assertEquals(drillRMConfig.childPools.size(), 2,
+                    "Number of child pools in the config did not match!");
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());
         }
     }
+
+    /**
+     * Negative test to validate the behavior when the config file does not exist.
+     */
+    @Test(groups = UNIT_GROUP, expectedExceptions = com.typesafe.config.ConfigException.class)
+    public void testLoadConfigWhenFileDoesNotExist() throws IOException {
+        final String invalidPath = "invalid-config-file.conf";
+
+        DrillRMConfig.load(invalidPath);
+    }
+
 }

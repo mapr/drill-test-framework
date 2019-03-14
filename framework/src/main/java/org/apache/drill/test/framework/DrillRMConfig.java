@@ -6,11 +6,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
+import com.typesafe.config.ConfigRenderOptions;
 
+import java.io.IOException;
 import java.util.List;
 
+import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_EXEC_RM_CONFIG_KEY;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonTypeName("drill.exec.rm")
+@JsonTypeName(DRILL_EXEC_RM_CONFIG_KEY)
 @JsonInclude(Include.NON_DEFAULT)
 /**
  * Represents a Drill RM Resource Pool configuration.
@@ -259,5 +266,17 @@ public class DrillRMConfig implements DrillConfigRenderer {
         sb.append("}");
 
         return sb.toString();
+    }
+
+    public static DrillRMConfig load(final String path) throws IOException {
+        final String rmConfigString = ConfigFactory
+                .load(path)
+                .getConfig(DRILL_EXEC_RM_CONFIG_KEY)
+                .root()
+                .render(ConfigRenderOptions.concise());
+
+        return new ObjectMapper()
+                .readerFor(DrillRMConfig.class)
+                .readValue(rmConfigString);
     }
 }
