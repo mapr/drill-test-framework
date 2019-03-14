@@ -1,8 +1,9 @@
-package org.apache.drill.test.framework.resourcemanagement;
+package org.apache.drill.test.framework;
 
-import org.apache.drill.test.framework.ConnectionPool;
-import org.apache.drill.test.framework.DrillQueryProfile;
-import org.apache.drill.test.framework.Utils;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
+import com.typesafe.config.ConfigRenderOptions;
 import org.apache.drill.test.framework.common.DrillJavaTestBase;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
@@ -74,6 +75,37 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
             Assert.assertTrue(e.getMessage().contains("Could not get query profile"),
                     "Expected error message \"Could not get query profile\" " +
                             "but obtained - " + e.getMessage());
+        }
+    }
+
+
+    @Test(groups = UNIT_GROUP)
+    public void testReadSampleRMConfigFile(Method method) {
+        LOG.info("Test " + method.getName() + " started.");
+        final String resourceName = "sample-drill-rm-override.conf";
+
+        try {
+
+            Config config = ConfigFactory.load(resourceName).getConfig("drill.exec.rm");
+            final String rmConfigString = config.root().render(ConfigRenderOptions.concise());
+            LOG.info(rmConfigString);
+            DrillRMConfig drillRMConfig = new ObjectMapper()
+                    .readerFor(DrillRMConfig.class)
+                    .readValue(rmConfigString);
+
+            LOG.info("PoolName: " +  drillRMConfig.poolName);
+            LOG.info("Childpool size: " + drillRMConfig.childPools.size());
+            LOG.info("Childpool name: ");
+            drillRMConfig.childPools.forEach(p -> LOG.info(p.poolName));
+
+            config = ConfigFactory.parseString(rmConfigString);
+            LOG.info(config.getString("queue_selection_policy"));
+
+            LOG.info(drillRMConfig.renderAsConf());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail(e.getMessage());
         }
     }
 }
