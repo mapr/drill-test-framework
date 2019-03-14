@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import com.typesafe.config.ConfigRenderOptions;
 
@@ -24,26 +23,26 @@ import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_EXEC_RM_CO
  */
 public class DrillRMConfig implements DrillConfigRenderer {
     //Resource Pool Configurations
-    private static final String RESOURCE_POOL_NAME_KEY = "pool_name";
-    private static final String MEMORY_KEY = "memory";
-    private static final String QUEUE_SELECTION_POLICY_KEY = "queue_selection_policy";
-    private static final String SELECTOR_KEY = "selector";
-    private static final String QUEUE_KEY = "queue";
-    private static final String CHILD_POOLS_KEY = "child_pools";
+    public static final String RESOURCE_POOL_NAME_KEY = "pool_name";
+    public static final String MEMORY_KEY = "memory";
+    public static final String QUEUE_SELECTION_POLICY_KEY = "queue_selection_policy";
+    public static final String SELECTOR_KEY = "selector";
+    public static final String QUEUE_KEY = "queue";
+    public static final String CHILD_POOLS_KEY = "child_pools";
 
     //Selector Configurations
-    private static final String SELECTOR_TAG_KEY = "tag";
-    private static final String SELECTOR_ACL_KEY = "acl";
+    public static final String SELECTOR_TAG_KEY = "tag";
+    public static final String SELECTOR_ACL_KEY = "acl";
 
     //ACL Configurations
-    private static final String ACL_USERS_KEY = "users";
-    private static final String ACL_GROUPS_KEY = "groups";
+    public static final String ACL_USERS_KEY = "users";
+    public static final String ACL_GROUPS_KEY = "groups";
 
     //Queue Configurations
-    private static final String QUEUE_MAX_QUERY_MEMORY_PER_NODE_KEY = "max_query_memory_per_node";
-    private static final String QUEUE_MAX_WAITING_KEY = "max_waiting";
-    private static final String QUEUE_MAX_ADMISSIBLE_KEY = "max_admissible";
-    private static final String QUEUE_WAIT_FOR_PREFERRED_NODES_KEY = "wait_for_preferred_nodes";
+    public static final String QUEUE_MAX_QUERY_MEMORY_PER_NODE_KEY = "max_query_memory_per_node";
+    public static final String QUEUE_MAX_WAITING_KEY = "max_waiting";
+    public static final String QUEUE_MAX_ADMISSIBLE_KEY = "max_admissible";
+    public static final String QUEUE_WAIT_FOR_PREFERRED_NODES_KEY = "wait_for_preferred_nodes";
 
     @JsonProperty(RESOURCE_POOL_NAME_KEY)
     public String poolName;

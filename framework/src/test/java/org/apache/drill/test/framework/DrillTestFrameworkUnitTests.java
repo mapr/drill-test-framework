@@ -1,5 +1,7 @@
 package org.apache.drill.test.framework;
 
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 import org.apache.drill.test.framework.common.DrillJavaTestBase;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
@@ -100,4 +102,31 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
         DrillRMConfig.load(invalidPath);
     }
 
+    /**
+     * Test reading a sample RM config file in to a Java Bean.
+     */
+    @Test(groups = UNIT_GROUP)
+    public void testConfigFileRenderer() {
+        final String sampleRMConfigPath = "sample-drill-rm-override.conf";
+
+        try {
+            DrillRMConfig drillRMConfig = DrillRMConfig.load(sampleRMConfigPath);
+            Assert.assertEquals(drillRMConfig.poolName, "root",
+                    "Root resource pool name did not match");
+
+            Assert.assertEquals(drillRMConfig.childPools.size(), 2,
+                    "Number of child pools in the config did not match!");
+
+            Config config = ConfigFactory.parseString(drillRMConfig.render());
+            Assert.assertEquals(config.getString(DrillRMConfig.RESOURCE_POOL_NAME_KEY),
+                    drillRMConfig.poolName,
+                    "Pool names did not match!");
+            Assert.assertEquals(config.getString(DrillRMConfig.QUEUE_SELECTION_POLICY_KEY),
+                    drillRMConfig.queueSelectionPolicy,
+                    "Queue selection policy did not match!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail(e.getMessage());
+        }
+    }
 }
