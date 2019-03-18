@@ -16,4 +16,8 @@ analyze table `table_stats/voter_hive_parquet` compute statistics;
 analyze table `table_stats/hive_alltypes` compute statistics (c1,c2,c3,c4,c9,c10,c11,c12,n);
 --analyze table `table_stats/data_with_0` compute statistics (non_exist_col,bigint_col,bigint_col,int_col,bigint_col);
 analyze table `table_stats/data_with_0` compute statistics (int_col,bigint_col);
+analyze table `table_stats/nested_scalar_cols` compute statistics(glossary.title,glossary.GlossDiv.title,glossary.GlossDiv.GlossList.GlossEntry.Acronym,glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso[0]);
+analyze table `table_stats/Tpch0.01/parquet/customer` compute statistics;
+analyze table `table_stats/Tpch0.01/parquet/part` compute statistics;
+analyze table `table_stats/Tpch0.01/parquet/partsupp` compute statistics;
 reset `store.parquet.reader.int96_as_timestamp`;

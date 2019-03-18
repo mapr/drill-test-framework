@@ -1,0 +1,3 @@
+.*Screen.*rowcount = 1500.0
+.*HashAgg.*rowcount = 1500.0
+.*Scan.*rowcount = 1500.0
