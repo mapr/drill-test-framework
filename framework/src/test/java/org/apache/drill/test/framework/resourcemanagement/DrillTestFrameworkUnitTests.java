@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
-import static org.apache.drill.test.framework.common.DrillTestConstants.UNIT_GROUP;
+import static org.apache.drill.test.framework.common.DrillTestNGDefaults.UNIT_GROUP;
 
 @Test(groups = UNIT_GROUP)
 public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
