@@ -88,7 +88,7 @@ public class DrillTestOdbc implements DrillTest{
 
       cmdConsOut = Utils.execCmd(command);
       if (cmdConsOut.exitCode > 0) {
-        throw new RuntimeException("ERROR: exitCode " + cmdConsOut.exitCode + "\n" + cmdConsOut.consoleOut);
+        throw new RuntimeException("ERROR: " + cmdConsOut.consoleErr);
       }
 
       queries = Utils.getSqlStatements(modeler.queryFilename);

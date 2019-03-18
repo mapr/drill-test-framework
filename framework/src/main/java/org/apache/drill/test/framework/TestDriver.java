@@ -836,7 +836,7 @@ public class TestDriver {
 	CmdConsOut cmdConsOut;
 	try {
 	  cmdConsOut = Utils.execCmd(command);
-	  LOG.debug(cmdConsOut.consoleOut);
+	  LOG.debug(cmdConsOut);
 	} catch (Exception e) {
 	  LOG.error("Error: Failed to execute the command " + command + ".");
 	  throw new RuntimeException(e);

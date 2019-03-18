@@ -77,7 +77,7 @@ public class DrillTestScript implements DrillTest {
     try {
 
   	  cmdConsOut = Utils.execCmd(command);
-  	  LOG.info(cmdConsOut.consoleOut);
+  	  LOG.info(cmdConsOut);
 
       switch (cmdConsOut.exitCode) {
       case 0:
