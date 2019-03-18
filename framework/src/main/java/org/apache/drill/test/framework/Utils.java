@@ -554,6 +554,9 @@ public class Utils {
               values.add(null);
             }
             break;
+          case Types.NULL:
+            values.add(null);
+            break;
           default:
             values.add(resultSet.getObject(i));
         }
