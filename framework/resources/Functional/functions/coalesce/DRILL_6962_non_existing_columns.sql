@@ -1,0 +1,1 @@
+select coalesce(n_name1, n_name2) from cp.`tpch/nation.parquet` limit 5;
