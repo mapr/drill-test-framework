@@ -129,4 +129,17 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
             Assert.fail(e.getMessage());
         }
     }
+
+    public void testGetDrillHostnames(Method method) {
+        final Properties props = Utils.createConnectionProperties();
+        final ConnectionPool pool = new ConnectionPool(props);
+        try (Connection connection = pool.getOrCreateConnection()) {
+            Utils.getDrillbitHosts(connection).forEach(LOG::info);
+
+            LOG.info(Utils.execCmd("clush -a hostname -f"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Test " + method.getName() + " failed due to " + e.getMessage());
+        }
+    }
 }

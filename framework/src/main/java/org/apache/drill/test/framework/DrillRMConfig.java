@@ -82,7 +82,6 @@ public class DrillRMConfig implements DrillConfigRenderer {
         @Override
         public String render(final int acc) {
             boolean ensureAtleastOneField = false;
-            String prefixString = indent(acc);
 
             StringBuilder sb = new StringBuilder("{\n");
             final int nextAcc = acc+2;
@@ -128,7 +127,6 @@ public class DrillRMConfig implements DrillConfigRenderer {
         @Override
         public String render(final int acc) {
             boolean ensureAtleastOneField = false;
-            String prefixString = indent(acc);
 
             StringBuilder sb = new StringBuilder("{\n");
             final int nextAcc = acc+2;

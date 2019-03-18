@@ -44,6 +44,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -889,6 +890,19 @@ public class Utils {
 		e.printStackTrace();
 	}
 	return numberOfDrillbits;
+  }
+
+  public static List<String> getDrillbitHosts(Connection connection) throws SQLException {
+    final String columnName = "hostname";
+    final String query = String.format("select %s from sys.drillbits", columnName);
+    PreparedStatement ps = connection.prepareStatement(query);
+    List<String> result = new ArrayList<>();
+    try(ResultSet resultSet = ps.executeQuery()) {
+      while(resultSet.next()) {
+        result.add(resultSet.getString(columnName));
+      }
+    }
+    return result;
   }
 
   public static boolean sanityTest(Connection connection) {

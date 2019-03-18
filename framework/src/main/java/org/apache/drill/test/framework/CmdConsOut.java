@@ -5,8 +5,7 @@ public class CmdConsOut{
   public String consoleOut;
   public String consoleErr;
   public String cmd;
-
-
+  
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder("\"CmdConsOut\":{\n");
