@@ -836,7 +836,7 @@ public class TestDriver {
 	CmdConsOut cmdConsOut;
 	try {
 	  cmdConsOut = Utils.execCmd(command);
-	  LOG.info(cmdConsOut);
+	  LOG.debug(cmdConsOut);
 	} catch (Exception e) {
 	  cmdConsOut = new CmdConsOut();
 	  cmdConsOut.cmd = command;
