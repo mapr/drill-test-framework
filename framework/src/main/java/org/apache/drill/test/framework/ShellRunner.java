@@ -45,10 +45,11 @@ public enum ShellRunner implements Closeable {
 			cmdConsOut.exitCode = exitCode;
 			if(exitCode != 0) {
 				LOG.warn("Fail to run command {}, errMgs:\n {}", cmd, standardOutputAndError[1]);
-				cmdConsOut.consoleErr = standardOutputAndError[1];
+				//Capture errors on stdout and stderr
+				cmdConsOut.consoleErr = standardOutputAndError[0] + "\n" + standardOutputAndError[1];
+			} else {
+				cmdConsOut.consoleOut = standardOutputAndError[0];
 			}
-
-			cmdConsOut.consoleOut = standardOutputAndError[0];
 			return cmdConsOut;
 		} catch (Throwable e) {
 			LOG.warn("Failed to run command " + cmd, e);
