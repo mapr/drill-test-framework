@@ -10,10 +10,10 @@ public class CmdConsOut{
   @Override
   public String toString() {
     return "\"CmdConsOut\":{\n" +
-            "\t\"command\":\"" + (cmd != null ? cmd : "") + "\",\n" +
-            "\t\"exitCode\":" + exitCode + ",\n" +
-            "\t\"output\":\"" + (consoleOut != null ? consoleOut : "") + "\",\n" +
-            "\t\"error\":\"" + (consoleErr != null ? consoleErr : "") + "\"\n" +
+            "\"command\":\"" + (cmd != null ? cmd : "") + "\",\n" +
+            "\"exitCode\":" + exitCode + ",\n" +
+            "\"output\":\"" + (consoleOut != null ? consoleOut : "") + "\",\n" +
+            "\"error\":\"" + (consoleErr != null ? consoleErr : "") + "\"\n" +
             "}\n";
   }
 }
