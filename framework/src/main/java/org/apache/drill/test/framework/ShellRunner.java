@@ -42,16 +42,19 @@ public enum ShellRunner implements Closeable {
 			exitCode = process.waitFor();
 			// check whether everything is ok for two stream consumers
 			String[] standardOutputAndError = fetchStandardOutputAndError(redirectTasks);
+			cmdConsOut.exitCode = exitCode;
 			if(exitCode != 0) {
 				LOG.warn("Fail to run command {}, errMgs:\n {}", cmd, standardOutputAndError[1]);
+				//Capture errors on stdout and stderr
+				cmdConsOut.consoleErr = standardOutputAndError[0] + "\n" + standardOutputAndError[1];
+			} else {
+				cmdConsOut.consoleOut = standardOutputAndError[0];
 			}
-			cmdConsOut.exitCode = exitCode;
-			cmdConsOut.consoleOut = "standard output : \n" + standardOutputAndError[0] + "\n standard error: \n" + standardOutputAndError[1];
 			return cmdConsOut;
 		} catch (Throwable e) {
-			LOG.warn("Fail to run command " + cmd, e);
+			LOG.warn("Failed to run command " + cmd, e);
 			cmdConsOut.exitCode = exitCode;
-			cmdConsOut.consoleOut = e.getMessage();
+			cmdConsOut.consoleErr = e.getMessage();
 			return cmdConsOut;
 		} finally {
 			// destroy process
