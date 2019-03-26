@@ -41,6 +41,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,12 +62,16 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
 
-import javax.net.ssl.*;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManagerFactory;
 
 /**
  * Collection of utilities supporting the drill test framework.
@@ -78,6 +83,32 @@ public class Utils {
   private static final Map<Integer, String> sqlNullabilities;
   private static HttpClient client;
   private static String protocol = "http://";
+
+  /**
+   * Creates connection properties from DrillTestConfig
+   * @return connection properties
+   */
+  public static Properties createConnectionProperties() {
+    Properties connectionProperties = new Properties();
+
+    if (DrillTestDefaults.AUTHENTICATION_MECHANISM.equals("PLAIN")) {
+      connectionProperties.put("auth", "PLAIN");
+    } else if (DrillTestDefaults.AUTHENTICATION_MECHANISM.equals("MAPRSASL")) {
+      connectionProperties.put("auth", "MAPRSASL");
+    } else if (DrillTestDefaults.AUTHENTICATION_MECHANISM.equals("KERBEROS")) {
+      connectionProperties.put("auth", "KERBEROS");
+      connectionProperties.put("principal", DrillTestDefaults.KERBEROS_PRINCIPAL);
+    }
+
+    if (DrillTestDefaults.SSL_ENABLED) {
+      connectionProperties.put("enableTLS", "true");
+      connectionProperties.put("disableHostVerification", "true");
+      connectionProperties.put("trustStorePath", DrillTestDefaults.TRUSTSTORE_PATH);
+      connectionProperties.put("trustStorePassword", DrillTestDefaults.TRUSTSTORE_PASSWORD);
+    }
+
+    return connectionProperties;
+  }
 
   // Accept self-signed certificate
   public static class MyHostNameVerifier implements HostnameVerifier {
@@ -618,11 +649,8 @@ public class Utils {
   public static String getExistingDrillStoragePlugin(String ipAddress,
                                                      String pluginType) throws IOException {
     StringBuilder builder = new StringBuilder();
-    builder.append("http://" + ipAddress + ":8047/storage/" + pluginType);
-    HttpUriRequest request = new HttpGet(builder.toString() + ".json");
-    DefaultHttpClient client = new DefaultHttpClient();
-    HttpResponse response = client.execute(request);
-    return getHttpResponseAsString(response);
+    builder.append("http://").append(ipAddress).append(":8047/storage/").append(pluginType).append(".json");
+    return sendHttpGETRequestGetResponseAsString(builder.toString());
   }
 
   /**
@@ -696,22 +724,77 @@ public class Utils {
     return new String(encoded, "UTF-8");
   }
 
-  private static String getHttpResponseAsString(HttpResponse response) throws IOException {
-    Reader reader = new BufferedReader(new InputStreamReader(response
-      .getEntity().getContent(), "UTF-8"));
-    StringBuilder builder = new StringBuilder();
-    char[] buffer = new char[1024];
-    int l = 0;
-    while (l >= 0) {
-      builder.append(buffer, 0, l);
-      l = reader.read(buffer);
+
+  /**
+   * Send Http GET request and return response as string.
+   *
+   * @param url
+   * @return Http GET response built as string.
+   * @throws IOException
+   */
+  public static String sendHttpGETRequestGetResponseAsString(final String url) throws IOException {
+    HttpUriRequest request = new HttpGet(url);
+    try (CloseableHttpClient client = HttpClientBuilder.create().build();
+         CloseableHttpResponse response = client.execute(request)) {
+      return getHttpResponseAsString(response);
     }
+  }
+
+  /**
+   * Convert HttpResponse to a string.
+   *
+   * @param response a HttpResponse object.
+   * @return HttpResponse as a string.
+   * @throws IOException
+   */
+  public static String getHttpResponseAsString(HttpResponse response) throws IOException {
+    BufferedReader reader = new BufferedReader(new InputStreamReader(response
+      .getEntity().getContent()));
+    StringBuilder builder = new StringBuilder();
+    reader.lines().forEach(builder::append);
     return builder.toString();
   }
 
-  private static boolean isResponseSuccessful(HttpResponse response) throws IOException {
+  /**
+   * Builds a Http GET request for getting query profile as JSON.
+   * @param ip
+   * @param queryId
+   * @return
+   */
+  public static String buildHttpGETProfileRequest(final String ip, final String queryId) {
+    StringBuilder sb = new StringBuilder("http://");
+    return sb.append(ip)
+            .append(":")
+            .append(DrillTestDefaults.DRILL_STORAGE_PLUGIN_SERVER_PORT)
+            .append("/profiles/")
+            .append(queryId)
+            .append(".json")
+            .toString();
+  }
+
+  public static boolean isResponseSuccessful(HttpResponse response) throws IOException {
     return getHttpResponseAsString(response).toLowerCase().contains(
       "\"result\" : \"success\"");
+  }
+
+  /**
+   * Returns a {@link DrillQueryProfile} instance after sending a Http GET request to
+   * a Drillbit, obtaining a response and deserializing the response into a {@link DrillQueryProfile}.
+   *
+   * @param queryId string query id (see {@link #getQueryID(ResultSet)} for more information.
+   * @return {@link DrillQueryProfile} object.
+   * @throws IOException
+   */
+  public static DrillQueryProfile getQueryProfile(final String queryId) throws IOException {
+    final String url = Utils.buildHttpGETProfileRequest(DrillTestDefaults.DRILL_STORAGE_PLUGIN_SERVER, queryId);
+    final String response = Utils.sendHttpGETRequestGetResponseAsString(url);
+    if(response.contains("error")) {
+      throw new IOException("Could not get query profile for queryId: " + queryId + ", response: " + response);
+    } else {
+      return new ObjectMapper()
+              .readerFor(DrillQueryProfile.class)
+              .readValue(response);
+    }
   }
 
   public static String generateOutputFileName(String inputFileName,
