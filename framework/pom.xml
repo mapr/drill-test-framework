@@ -458,7 +458,7 @@
       </build>
     </profile>
     <profile>
-      <id>java</id>
+      <id>testng</id>
       <build>
         <pluginManagement>
           <plugins>
@@ -467,7 +467,7 @@
               <artifactId>maven-surefire-plugin</artifactId>
               <executions>
                 <execution>
-                  <id>javatest</id>
+                  <id>testngtest</id>
                   <goals>
                     <goal>test</goal>
                   </goals>

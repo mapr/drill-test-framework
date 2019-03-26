@@ -9,7 +9,6 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeName("queryProfile")
 public class DrillQueryProfile {
-
     public String user;
 
     @JsonProperty("start")
@@ -23,9 +22,7 @@ public class DrillQueryProfile {
 
     @JsonProperty("state")
     public String rootState;
-
     public int totalFragments;
-
     public int finishedFragments;
 
     @JsonProperty("planEnd")
@@ -33,11 +30,8 @@ public class DrillQueryProfile {
 
     @JsonProperty("queueWaitEnd")
     public long queueWaitEndTime;
-
     public long totalCost;
-
     public String queueName;
-
     public String queryId;
 
     @JsonProperty("fragmentProfile")
@@ -61,31 +55,22 @@ public class DrillQueryProfile {
         StringBuilder sb = new StringBuilder(ret);
         if (fragmentProfiles != null) {
             sb.append("fragmentProfile=[");
-
             fragmentProfiles.forEach(frag -> sb.append(frag).append(", "));
             if(fragmentProfiles.size() > 0) {
                 sb.deleteCharAt(sb.length() - 1).deleteCharAt(sb.length() - 1);
             }
             sb.append("])");
         }
-
         return sb.toString();
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     @JsonTypeName("endpoint")
     public static class Endpoint {
-
-
-
         public String address;
-
         public String userPort;
-
         public String controlPort;
-
         public String dataPort;
-
         public String version;
 
         @JsonProperty("state")
@@ -107,18 +92,16 @@ public class DrillQueryProfile {
     @JsonIgnoreProperties(ignoreUnknown = true)
     @JsonTypeName("fragmentProfile")
     public static class MajorFragmentProfile {
-
-
         public int majorFragmentId;
 
         @JsonProperty("minorFragmentProfile")
         public List<MinorFragmentProfile> minorFragmentProfiles;
+
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder("MajorFragmentProfile(");
             if(minorFragmentProfiles != null) {
                 sb.append("minorFragmentProfile=[");
-
                 minorFragmentProfiles.forEach(frag -> sb.append(frag).append(", "));
                 if(minorFragmentProfiles.size() > 0) {
                     sb.deleteCharAt(sb.length() - 1).deleteCharAt(sb.length() - 1);
@@ -126,36 +109,29 @@ public class DrillQueryProfile {
                 sb.append("], ");
             }
             sb.append("majorFragmentId=").append(majorFragmentId).append(")");
-
             return sb.toString();
         }
-
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     @JsonTypeName("minorFragmentProfile")
     public static class MinorFragmentProfile {
 
-
         @JsonProperty("operatorProfile")
         public List<OperatorProfile> operatorProfiles;
-
         public long startTime;
-
         public long endTime;
-
         public long memoryUsed;
-
         public long maxMemoryUsed;
 
         @JsonProperty("endpoint")
         public Endpoint endpoint;
+
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder("MinorFragmentProfile(");
             if(operatorProfiles != null) {
                 sb.append("operatorProfile=[");
-
                 operatorProfiles.forEach(op -> sb.append(op).append(", "));
                 if(operatorProfiles.size() > 0) {
                     sb.deleteCharAt(sb.length() - 1).deleteCharAt(sb.length() - 1);
@@ -167,42 +143,32 @@ public class DrillQueryProfile {
                     .append("memoryUsed=").append(memoryUsed).append(", ")
                     .append("maxMemoryUsed=").append(maxMemoryUsed).append(", ")
                     .append("endpoint=").append(endpoint).append(")");
-
             return sb.toString();
         }
-
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     @JsonTypeName("operatorProfile")
     public static class OperatorProfile {
 
-
         @JsonProperty("inputProfile")
         public List<OperatorInputProfile> inputProfiles;
-
         public int operatorId;
-
         public int operatorType;
-
         public long setupNanos;
-
         public long processNanos;
-
         public long peakLocalMemoryAllocated;
-
         public long waitNanos;
+
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder("OperatorProfile(");
             if(inputProfiles != null) {
                 sb.append("inputProfile=[");
-
                 inputProfiles.forEach(input -> sb.append(input).append(", "));
                 if(inputProfiles.size() > 0) {
                     sb.deleteCharAt(sb.length() - 1).deleteCharAt(sb.length() - 1);
                 }
-
                 sb.append("], ");
             }
             sb.append("operatorId=").append(operatorId).append(", ")
@@ -211,22 +177,17 @@ public class DrillQueryProfile {
                     .append("processNanos=").append(processNanos).append(", ")
                     .append("peakLocalMemoryAllocated=").append(peakLocalMemoryAllocated).append(", ")
                     .append("waitNanos=").append(waitNanos).append(")");
-
             return sb.toString();
         }
-
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     @JsonTypeName("inputProfile")
     public static class OperatorInputProfile {
-
-
         public long records;
-
         public long batches;
-
         public int schemas;
+
         @Override
         public String toString() {
             return "OperatorInputProfile(" +
