@@ -9,11 +9,33 @@ public class CmdConsOut{
 
   @Override
   public String toString() {
-    return "\"CmdConsOut\":{\n" +
-            "\"command\":\"" + (cmd != null ? cmd : "") + "\",\n" +
-            "\"exitCode\":" + exitCode + ",\n" +
-            "\"output\":\"" + (consoleOut != null ? consoleOut : "") + "\",\n" +
-            "\"error\":\"" + (consoleErr != null ? consoleErr : "") + "\"\n" +
-            "}\n";
+    StringBuilder builder = new StringBuilder("\"CmdConsOut\":{\n");
+    builder
+            .append("\"command\":\"")
+            .append((cmd != null ? cmd : ""))
+            .append("\",\n")
+            .append("\"exitCode\":")
+            .append(exitCode)
+            .append(",\n");
+
+    if(consoleOut != null && !consoleOut.isEmpty()) {
+      builder
+              .append("\"output\":\"")
+              .append(consoleOut)
+              .append("\",\n");
+    }
+
+    if(consoleErr != null && !consoleErr.isEmpty()) {
+      builder
+              .append("\"error\":\"")
+              .append(consoleErr)
+              .append("\",\n");
+    }
+    builder
+            .deleteCharAt(builder.length()-1)
+            .deleteCharAt(builder.length()-1)
+            .append("}\n");
+    
+    return builder.toString();
   }
 }
