@@ -647,7 +647,6 @@ public class Utils {
                                                      String pluginType) throws IOException {
     StringBuilder builder = new StringBuilder();
     builder.append("http://").append(ipAddress).append(":8047/storage/").append(pluginType).append(".json");
-
     return sendHttpGETRequestGetResponseAsString(builder.toString());
   }
 
@@ -749,9 +748,7 @@ public class Utils {
     BufferedReader reader = new BufferedReader(new InputStreamReader(response
       .getEntity().getContent()));
     StringBuilder builder = new StringBuilder();
-
     reader.lines().forEach(builder::append);
-
     return builder.toString();
   }
 
@@ -788,7 +785,6 @@ public class Utils {
   public static DrillQueryProfile getQueryProfile(final String queryId) throws IOException {
     final String url = Utils.buildHttpGETProfileRequest(DrillTestDefaults.DRILL_STORAGE_PLUGIN_SERVER, queryId);
     final String response = Utils.sendHttpGETRequestGetResponseAsString(url);
-
     if(response.contains("error")) {
       throw new IOException("Could not get query profile for queryId: " + queryId + ", response: " + response);
     } else {

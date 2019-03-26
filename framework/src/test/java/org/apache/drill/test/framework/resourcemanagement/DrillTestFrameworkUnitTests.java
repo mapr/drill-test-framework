@@ -26,8 +26,7 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
     public void runBeforeTest() {
         LOG.debug("Running before test");
     }
-
-
+    
     /**
      * A unit test to validate that {@link Utils#getQueryProfile(String)}
      * can be used to obtain query profile. This test also validates that
