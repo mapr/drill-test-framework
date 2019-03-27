@@ -12,6 +12,9 @@ conf/drillTestConfig.properties
 *.class
 **/target/*
 logs/*
+framework/resources/Datasources/s3/minio/minio_data/.minio.sys
+framework/resources/Datasources/s3/minio/minio_data/tstbucket/tmp/ppruning/
+framework/resources/Datasources/s3/minio/minio_data/tstbucket/tmp/gitignore
 
 # Hive stuff
 metastore_db
@@ -40,6 +43,7 @@ framework/resources/Datasources/ctas/decimal/fragments/decimal_big.tsv
 framework/resources/Datasources/ctas/decimal/fragments/decimal_big_zero_prec.tsv
 framework/resources/Datasources/ctas/decimal/fragments/decimal_big_zero_scale.tsv
 framework/resources/Datasources/ctas/decimal/fragments/negative/decimal_big_zero_scale.tsv
+framework/resources/Datasources/s3/minio/minio_data/tstbucket/tmp/big_files/
 
 # Logs
 drill.log*
