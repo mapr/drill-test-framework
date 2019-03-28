@@ -1,0 +1,4 @@
+DRILL-7130/VarLenNullableFixedEntry.parquet is the table queried from DRILL-7130.sql.
+
+The table contains 100 rows with 1 column (size 100 bytes) and 1 row with column of size 50 bytes.
+Querying such a table should reproduce the issue reported in DRILL-7130.

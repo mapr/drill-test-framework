@@ -46,6 +46,11 @@
       "mode": "cp",
       "src": "Datasources/parquet_storage/DRILL_6413/DRILL_6413_test_data",
       "dest": "DRILL_6413/DRILL_6413_test_data"
+    },
+    {
+      "mode":"cp",
+      "src": "Datasources/parquet_storage/DRILL-7130/VarLenNullableFixedEntry.parquet",
+      "dest": "DRILL-7130/VarLenNullableFixedEntry.parquet"
     }
   ]
 }
