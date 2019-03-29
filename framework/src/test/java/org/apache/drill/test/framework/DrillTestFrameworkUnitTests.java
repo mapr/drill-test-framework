@@ -3,6 +3,7 @@ package org.apache.drill.test.framework;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.apache.drill.test.framework.common.DrillJavaTestBase;
+import org.apache.drill.test.framework.common.DrillTestNGDefaults;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -18,7 +19,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
-import static org.apache.drill.test.framework.common.DrillTestConstants.UNIT_GROUP;
+import static org.apache.drill.test.framework.common.DrillTestNGDefaults.UNIT_GROUP;
 
 @Test(groups = UNIT_GROUP)
 public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
@@ -155,7 +156,7 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
      */
     public void testWriteRMConfigToFile() throws IOException {
         final String fileName = "tempRMConfig.conf";
-        final String filePath = DrillTestDefaults.CWD + "/../conf/" + fileName;
+        final String filePath = DrillTestDefaults.TEST_ROOT_DIR + "/conf/" + fileName;
         File file = new File(filePath);
 
         if(file.exists()) {

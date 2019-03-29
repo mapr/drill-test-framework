@@ -5,7 +5,7 @@ public class CmdConsOut{
   public String consoleOut;
   public String consoleErr;
   public String cmd;
-  
+
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder("\"CmdConsOut\":{\n");
@@ -34,7 +34,6 @@ public class CmdConsOut{
             .deleteCharAt(builder.length()-1)
             .deleteCharAt(builder.length()-1)
             .append("}\n");
-    
     return builder.toString();
   }
 }

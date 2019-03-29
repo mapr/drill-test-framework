@@ -44,7 +44,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -229,7 +228,7 @@ public class Utils {
       List<File> testDefinitionList = new ArrayList<>();
       if (!absoluteTestDirExpressionFile.exists()) {
         //try regex then exit if failure
-        File drillTestDataDir = new File(DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR);
+        File drillTestDataDir = new File(DrillTestDefaults.TEST_ROOT_DIR + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR);
         testDefinitionList.addAll(getTestDefinitionList(drillTestDataDir,absoluteTestDirExpression));
         if(testDefinitionList.isEmpty()){
           LOG.info("No regex Found for "+relTestDirExpression);
@@ -496,7 +495,7 @@ public class Utils {
     if (filename.startsWith("/")) {
       return filename;
     }
-    return DrillTestDefaults.CWD + "/" + dataDir + "/" + filename;
+    return DrillTestDefaults.TEST_ROOT_DIR + "/" + dataDir + "/" + filename;
   }
 
   /**
@@ -680,7 +679,7 @@ public class Utils {
 
   public static void startMinio() {
     LOG.info("> Starting Apache Minio server\n");
-    String cmd = DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/Datasources/s3minio/minio/run_mn.sh";
+    String cmd = DrillTestDefaults.TEST_ROOT_DIR + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/Datasources/s3minio/minio/run_mn.sh";
     try {
       Runtime.getRuntime().exec(cmd);
     } catch (Throwable e) {
@@ -690,14 +689,16 @@ public class Utils {
 
   public static void stopMinio() {
     LOG.info("> Stopping Apache Minio server\n");
-    String cmd = DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/Datasources/s3minio/minio/stop_mn.sh";
+    String cmd = DrillTestDefaults.TEST_ROOT_DIR + "/" +
+            DrillTestDefaults.DRILL_TESTDATA_DIR + "/Datasources/s3minio/minio/stop_mn.sh";
     try {
       Runtime.getRuntime().exec(cmd);
     } catch (Throwable e) {
       LOG.warn("Fail to run command " + cmd, e);
     }
     LOG.info("> Disabling s3minio storage plugin for Minio\n");
-    String templatePath = DrillTestDefaults.CWD + "/conf/plugin-templates/common/s3minio-storage-plugin.template";
+    String templatePath = DrillTestDefaults.TEST_ROOT_DIR +
+            "/conf/plugin-templates/common/s3minio-storage-plugin.template";
 
     boolean isSuccess = Utils.disableStoragePlugin(templatePath, "s3minio");
     if(!isSuccess){
@@ -929,7 +930,7 @@ public class Utils {
    */
   public static synchronized void applyRMConfigToDrillbit(final DrillRMConfig config,
                                              final String drillbitHost) throws IOException {
-    final String drillRMConfFilePath = DrillTestDefaults.CWD + "/../conf/" + DRILL_RM_OVERRIDE_CONF_FILENAME;
+    final String drillRMConfFilePath = DrillTestDefaults.TEST_ROOT_DIR + "/conf/" + DRILL_RM_OVERRIDE_CONF_FILENAME;
 
     File drillRMConfFile = new File(drillRMConfFilePath);
 

@@ -69,6 +69,9 @@ public class DrillTestDefaults {
   // Current working directory.
   public static final String CWD = System.getProperty("user.dir");
 
+  // Drill Test root directory, CWD changes to test-root/framework for testng
+  public static final String TEST_ROOT_DIR = CWD + (CWD.endsWith("/framework") ? "/../" : "");
+
   // Default user connecting to drill as.
   public static String USERNAME = "root";
 
@@ -162,9 +165,7 @@ public class DrillTestDefaults {
     final Map<String, String> properties = Maps.newHashMap();
 
     //CWD can be {basePath}/drill-test-framework or {basePath}/drill-test-framework/framework
-    final File overrideFile = new File(CWD +
-            (!CWD.endsWith("drill-test-framework") ? "/.." : "") +
-            "/conf/"  + DRILL_TEST_CONFIG);
+    final File overrideFile = new File(TEST_ROOT_DIR + "/conf/"  + DRILL_TEST_CONFIG);
 
     final ResourceBundle bundle;
     if (overrideFile.exists() && !overrideFile.isDirectory()) {
