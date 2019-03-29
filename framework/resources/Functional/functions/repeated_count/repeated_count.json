@@ -1,0 +1,26 @@
+{
+  "testId": "repeated_count",
+  "type": "group",
+  "description": "Tests for repeated_count function",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDirComplexJson",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/complex/json/DRILL_4858/repeated_count_data.json",
+      "dest": "complex/json/DRILL_4858/repeated_count_data.json"
+    }
+  ]
+}

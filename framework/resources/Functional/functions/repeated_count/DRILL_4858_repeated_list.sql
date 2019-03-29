@@ -1,0 +1,1 @@
+select id, repeated_count(repeated_list) from `/DRILL_4858/repeated_count_data.json`;
