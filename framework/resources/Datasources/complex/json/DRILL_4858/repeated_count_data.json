@@ -1,0 +1,68 @@
+{
+	"id" : 0,
+	"repeated_list": [[false,true], [false,true]],
+	"repeated_map": [
+		{
+			"a": "b",
+			"b": "as"
+		},
+		{
+			"a": "",
+			"b": "sas"
+		},
+		{
+			"a": "",
+			"b": "sas"
+		}
+	]
+}
+{
+	"id" : 1,
+	"repeated_list": [],
+	"repeated_map": [
+		{
+			"a": "b",
+			"b": "as"
+		},
+		{
+			"a": "",
+			"b": "sas"
+		}
+	]
+}
+{
+	"id" : 2,
+	"repeated_list": [[false], [false,true], []],
+	"repeated_map": [
+	]
+}
+{
+	"id" : 3,
+	"repeated_list": [[false,true], [false,true], []],
+	"repeated_map": [
+		{
+			"a": "b"
+		},
+		{
+			"a": "",
+			"b": "sas"
+		}
+	]
+}
+{
+	"id" : 4,
+	"repeated_list": [[false,true], [false,true], []],
+	"repeated_map": [
+		{
+			"a": "b"
+		},
+		{
+			"a": null,
+			"b": "sas"
+		},
+		{
+			"a": null,
+			"b": "sas"
+		}
+	]
+}
