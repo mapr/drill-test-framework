@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.typesafe.config.ConfigFactory;
 import com.typesafe.config.ConfigRenderOptions;
+import org.apache.log4j.Logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,6 +24,7 @@ import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_EXEC_RM_CO
  * Represents a Drill RM Resource Pool configuration.
  */
 public class DrillRMConfig implements DrillConfigRenderer {
+    private static final Logger LOG = Logger.getLogger(DrillRMConfig.class);
     //Resource Pool Configurations
     public static final String RESOURCE_POOL_NAME_KEY = "pool_name";
     public static final String MEMORY_KEY = "memory";
@@ -182,17 +185,17 @@ public class DrillRMConfig implements DrillConfigRenderer {
             StringBuilder sb = new StringBuilder("{\n");
             final int nextAcc = acc+2;
 
-            if (maxQueryMemoryPerNodeInMB >= 0) {
+            if (maxQueryMemoryPerNodeInMB > 0) {
                 ensureAtleastOneField = true;
                 sb.append(formatConfig(nextAcc, QUEUE_MAX_QUERY_MEMORY_PER_NODE_KEY, maxQueryMemoryPerNodeInMB));
             }
 
-            if (maxWaitingQueries >= 0) {
+            if (maxWaitingQueries > 0) {
                 ensureAtleastOneField = true;
                 sb.append(formatConfig(nextAcc, QUEUE_MAX_WAITING_KEY, maxWaitingQueries));
             }
 
-            if (maxAdmissibleQueries >= 0) {
+            if (maxAdmissibleQueries > 0) {
                 ensureAtleastOneField = true;
                 sb.append(formatConfig(nextAcc, QUEUE_MAX_ADMISSIBLE_KEY, maxAdmissibleQueries));
             }
@@ -229,7 +232,7 @@ public class DrillRMConfig implements DrillConfigRenderer {
             sb.append(formatConfig(nextAcc, RESOURCE_POOL_NAME_KEY, poolName));
         }
 
-        if (memory >= 0) {
+        if (memory > 0) {
             ensureAtleastOneField = true;
             sb.append(formatConfig(nextAcc, MEMORY_KEY, memory));
         }
@@ -266,8 +269,14 @@ public class DrillRMConfig implements DrillConfigRenderer {
     }
 
     public static DrillRMConfig load(final String path) throws IOException {
+        final File file = new File(path);
+
+        if(!file.exists()) {
+            throw new IOException("File " + path + " does not exist");
+        }
+
         final String rmConfigString = ConfigFactory
-                .load(path)
+                .parseFile(new File(path))
                 .getConfig(DRILL_EXEC_RM_CONFIG_KEY)
                 .root()
                 .render(ConfigRenderOptions.concise());

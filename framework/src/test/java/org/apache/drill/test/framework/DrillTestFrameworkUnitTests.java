@@ -3,7 +3,6 @@ package org.apache.drill.test.framework;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.apache.drill.test.framework.common.DrillJavaTestBase;
-import org.apache.drill.test.framework.common.DrillTestNGDefaults;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -19,12 +18,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
+import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_EXEC_RM_CONFIG_KEY;
 import static org.apache.drill.test.framework.common.DrillTestNGDefaults.UNIT_GROUP;
 
 @Test(groups = UNIT_GROUP)
 public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
     private static final Logger LOG = Logger.getLogger(DrillTestFrameworkUnitTests.class);
-    private static final String SAMPLE_RM_CONFIG_NAME = "sample-drill-rm-override.conf";
+    private static final String SAMPLE_RM_CONFIG_NAME =
+            DrillTestDefaults.CWD + "/src/test/resources/sample-drill-rm-override.conf";
 
     @BeforeTest(alwaysRun = true)
     public void runBeforeTest() {
@@ -98,7 +99,7 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
     /**
      * Negative test to validate the behavior when the config file does not exist.
      */
-    @Test(groups = UNIT_GROUP, expectedExceptions = com.typesafe.config.ConfigException.class)
+    @Test(groups = UNIT_GROUP, expectedExceptions = IOException.class)
     public void testLoadConfigWhenFileDoesNotExist() throws IOException {
         final String invalidPath = "invalid-config-file.conf";
 
@@ -132,31 +133,13 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
     }
 
     /**
-     * Temporary unit test to check if testGetDrillHostnames
-     * @param method
-     */
-    public void testGetDrillHostnames(Method method) {
-        final Properties props = Utils.createConnectionProperties();
-        final ConnectionPool pool = new ConnectionPool(props);
-        try (Connection connection = pool.getOrCreateConnection()) {
-            //TODO: Validation once ISSUE-561 is merged
-            Utils.getDrillbitHosts(connection).forEach(LOG::info);
-
-            LOG.info(Utils.execCmd("clush -a hostname -f"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail("Test " + method.getName() + " failed due to " + e.getMessage());
-        }
-    }
-
-    /**
      * Test if DrillRMConfig can be serialized to a file.
-     * TODO: Read from the file to validate.
+     * Read from the file to validate.
      * @throws IOException
      */
     public void testWriteRMConfigToFile() throws IOException {
         final String fileName = "tempRMConfig.conf";
-        final String filePath = DrillTestDefaults.TEST_ROOT_DIR + "/conf/" + fileName;
+        final String filePath = DrillTestDefaults.TEST_ROOT_DIR + "conf/" + fileName;
         File file = new File(filePath);
 
         if(file.exists()) {
@@ -166,7 +149,14 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             DrillRMConfig drillRMConfig = DrillRMConfig.load(SAMPLE_RM_CONFIG_NAME);
-            writer.write(drillRMConfig.render());
+            writer.write(DRILL_EXEC_RM_CONFIG_KEY + ":" + drillRMConfig.render());
         }
+
+        DrillRMConfig drillRMConfig2 = DrillRMConfig.load(filePath);
+        Assert.assertEquals(drillRMConfig2.poolName, "root",
+                "Root resource pool name did not match");
+
+        Assert.assertEquals(drillRMConfig2.childPools.size(), 2,
+                "Number of child pools in the config did not match!");
     }
 }

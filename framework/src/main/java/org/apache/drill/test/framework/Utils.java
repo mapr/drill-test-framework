@@ -73,9 +73,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManagerFactory;
 
-import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_HOME;
-import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_RM_OVERRIDE_CONF_FILENAME;
-import static org.apache.drill.test.framework.DrillTestDefaults.USERNAME;
+import static org.apache.drill.test.framework.DrillTestDefaults.*;
 
 /**
  * Collection of utilities supporting the drill test framework.
@@ -941,13 +939,12 @@ public class Utils {
         LOG.error("Could not remove config file " +
                 drillRMConfFilePath + "\n\n" +
                 out);
-        //TODO: Change to consoleErr after ISSUE-561
-        throw new IOException(out.consoleOut);
+        throw new IOException(out.consoleErr);
       }
     }
 
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(drillRMConfFilePath))) {
-      writer.write(config.render());
+      writer.write(DRILL_EXEC_RM_CONFIG_KEY + ":" + config.render());
     }
 
     final String scpCommand = new StringBuilder("scp ")
@@ -963,8 +960,7 @@ public class Utils {
     LOG.info("Copying config " + scpCommand);
     if ((out = Utils.execCmd(scpCommand)).exitCode != 0) {
       LOG.error("Copying config to drillbit failed!\n\n" + out);
-      //TODO: Change to consoleErr after ISSUE-561
-      throw new IOException(out.consoleOut);
+      throw new IOException(out.consoleErr);
     }
   }
 
