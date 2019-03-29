@@ -8,6 +8,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
@@ -20,6 +23,7 @@ import static org.apache.drill.test.framework.common.DrillTestConstants.UNIT_GRO
 @Test(groups = UNIT_GROUP)
 public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
     private static final Logger LOG = Logger.getLogger(DrillTestFrameworkUnitTests.class);
+    private static final String SAMPLE_RM_CONFIG_NAME = "sample-drill-rm-override.conf";
 
     @BeforeTest(alwaysRun = true)
     public void runBeforeTest() {
@@ -77,10 +81,8 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
      */
     @Test(groups = UNIT_GROUP)
     public void testReadSampleRMConfigFile() {
-        final String sampleRMConfigPath = "sample-drill-rm-override.conf";
-
         try {
-            DrillRMConfig drillRMConfig = DrillRMConfig.load(sampleRMConfigPath);
+            DrillRMConfig drillRMConfig = DrillRMConfig.load(SAMPLE_RM_CONFIG_NAME);
             Assert.assertEquals(drillRMConfig.poolName, "root",
                     "Root resource pool name did not match");
 
@@ -107,10 +109,8 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
      */
     @Test(groups = UNIT_GROUP)
     public void testConfigFileRenderer() {
-        final String sampleRMConfigPath = "sample-drill-rm-override.conf";
-
         try {
-            DrillRMConfig drillRMConfig = DrillRMConfig.load(sampleRMConfigPath);
+            DrillRMConfig drillRMConfig = DrillRMConfig.load(SAMPLE_RM_CONFIG_NAME);
             Assert.assertEquals(drillRMConfig.poolName, "root",
                     "Root resource pool name did not match");
 
@@ -130,16 +130,42 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
         }
     }
 
+    /**
+     * Temporary unit test to check if testGetDrillHostnames
+     * @param method
+     */
     public void testGetDrillHostnames(Method method) {
         final Properties props = Utils.createConnectionProperties();
         final ConnectionPool pool = new ConnectionPool(props);
         try (Connection connection = pool.getOrCreateConnection()) {
+            //TODO: Validation once ISSUE-561 is merged
             Utils.getDrillbitHosts(connection).forEach(LOG::info);
 
             LOG.info(Utils.execCmd("clush -a hostname -f"));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail("Test " + method.getName() + " failed due to " + e.getMessage());
+        }
+    }
+
+    /**
+     * Test if DrillRMConfig can be serialized to a file.
+     * TODO: Read from the file to validate.
+     * @throws IOException
+     */
+    public void testWriteRMConfigToFile() throws IOException {
+        final String fileName = "tempRMConfig.conf";
+        final String filePath = DrillTestDefaults.CWD + "/../conf/" + fileName;
+        File file = new File(filePath);
+
+        if(file.exists()) {
+            LOG.warn(filePath + " exists! Removing the file");
+            Utils.execCmd("rm -rf " + filePath);
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            DrillRMConfig drillRMConfig = DrillRMConfig.load(SAMPLE_RM_CONFIG_NAME);
+            writer.write(drillRMConfig.render());
         }
     }
 }

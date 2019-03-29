@@ -74,6 +74,10 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManagerFactory;
 
+import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_HOME;
+import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_RM_OVERRIDE_CONF_FILENAME;
+import static org.apache.drill.test.framework.DrillTestDefaults.USERNAME;
+
 /**
  * Collection of utilities supporting the drill test framework.
  *
@@ -892,6 +896,13 @@ public class Utils {
 	return numberOfDrillbits;
   }
 
+  /**
+   * Get hostnames of all Drillbits in the cluster.
+   *
+   * @param connection connection instance to the drill cluster
+   * @return a list of hostnames of all Drillbits that form part of the cluster.
+   * @throws SQLException
+   */
   public static List<String> getDrillbitHosts(Connection connection) throws SQLException {
     final String columnName = "hostname";
     final String query = String.format("select %s from sys.drillbits", columnName);
@@ -903,6 +914,57 @@ public class Utils {
       }
     }
     return result;
+  }
+
+  /**
+   * Apply RM config represented by DrillRMConfig to a specified Drillbit.
+   *
+   * As a part of this method
+   * - Write the config to a temporary file (remove if file exists previously.
+   * - Copy the file to specified Drillbit node.
+   *
+   * @param config
+   * @param drillbitHost
+   * @throws IOException
+   */
+  public static synchronized void applyRMConfigToDrillbit(final DrillRMConfig config,
+                                             final String drillbitHost) throws IOException {
+    final String drillRMConfFilePath = DrillTestDefaults.CWD + "/../conf/" + DRILL_RM_OVERRIDE_CONF_FILENAME;
+
+    File drillRMConfFile = new File(drillRMConfFilePath);
+
+    CmdConsOut out;
+    if(drillRMConfFile.exists()) {
+      LOG.warn(drillRMConfFilePath + " exists! Removing the file");
+      if ((out = Utils.execCmd("rm -rf " + drillRMConfFilePath)).exitCode != 0) {
+        LOG.error("Could not remove config file " +
+                drillRMConfFilePath + "\n\n" +
+                out);
+        //TODO: Change to consoleErr after ISSUE-561
+        throw new IOException(out.consoleOut);
+      }
+    }
+
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(drillRMConfFilePath))) {
+      writer.write(config.render());
+    }
+
+    final String scpCommand = new StringBuilder("scp ")
+            .append(drillRMConfFilePath)
+            .append(" ")
+            .append(USERNAME)
+            .append("@").append(drillbitHost)
+            .append(":").append(DRILL_HOME)
+            .append("/conf/")
+            .append(DRILL_RM_OVERRIDE_CONF_FILENAME)
+            .toString();
+
+    LOG.info("Copying config " + scpCommand);
+    if ((out = Utils.execCmd(scpCommand)).exitCode != 0) {
+      LOG.error("Copying config to drillbit failed!\n\n" + out);
+      //TODO: Change to consoleErr after ISSUE-561
+      throw new IOException(out.consoleOut);
+    }
   }
 
   public static boolean sanityTest(Connection connection) {

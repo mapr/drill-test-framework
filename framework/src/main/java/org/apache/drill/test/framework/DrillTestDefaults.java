@@ -108,6 +108,8 @@ public class DrillTestDefaults {
   //Drill RM config key
   public static final String DRILL_EXEC_RM_CONFIG_KEY = "drill.exec.rm";
 
+  public static final String DRILL_RM_OVERRIDE_CONF_FILENAME = "drill-rm-override.conf";
+
   // Adding classifications for Execution Failures
   public static enum DRILL_EXCEPTION{
        VALIDATION_ERROR_INVALID_SCHEMA,
