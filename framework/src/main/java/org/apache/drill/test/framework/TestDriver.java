@@ -180,6 +180,18 @@ public class TestDriver {
   	  queryMemoryUsage();
     }
 
+    // Run Apache Minio server if s3minio tests aren't excluded
+    if(cmdParam.excludeDependencies == null || !cmdParam.excludeDependencies.contains("s3minio")) {
+      Utils.startMinio();
+    } else {
+      // Disable s3minio storage plugin if Minio server is down
+      String templatePath = DrillTestDefaults.CWD + "/conf/plugin-templates/common/s3minio-storage-plugin.template";
+      boolean isSuccess = Utils.disableStoragePlugin(templatePath, "s3minio");
+      if(!isSuccess){
+        LOG.info("> Fail to disable s3minio storage plugin");
+      }
+    }
+
     for (i = 1; i < cmdParam.iterations+1; i++) {
       
       List<DrillTest> passingTests = Lists.newArrayList();
@@ -196,6 +208,7 @@ public class TestDriver {
       }
       //PREPARATION
       stopwatch.reset().start();
+
       if (cmdParam.generate) {
         prepareData(drillTestCases);
       }
@@ -694,8 +707,8 @@ public class TestDriver {
 	} 
 	connectionPool.releaseConnection(connection);
 
-    // Stop Apache Minio server if it was started for the S3 storage
-    if(cmdParam.excludeDependencies == null || !cmdParam.excludeDependencies.contains("s3")) {
+    // Stop Apache Minio server if it was started
+    if(cmdParam.excludeDependencies == null || !cmdParam.excludeDependencies.contains("s3minio")) {
       Utils.stopMinio();
     }
   }
@@ -755,11 +768,6 @@ public class TestDriver {
     }
 
     final Stopwatch stopwatch = Stopwatch.createStarted();
-
-    // Run Apache Minio server if needed for the S3 storage
-    if(cmdParam.excludeDependencies == null || !cmdParam.excludeDependencies.contains("s3")) {
-      Utils.startMinio();
-    }
     
     LOG.info("> Copying Data");
     copyExecutor.executeAll(copyTasks);
