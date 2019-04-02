@@ -675,7 +675,7 @@ public class Utils {
 
   public static void startMinio() {
     LOG.info("> Starting Apache Minio server\n");
-    String cmd = DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/Datasources/s3/minio/run_mn.sh";
+    String cmd = DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/Datasources/s3minio/minio/run_mn.sh";
     try {
       Runtime.getRuntime().exec(cmd);
     } catch (Throwable e) {
@@ -685,18 +685,18 @@ public class Utils {
 
   public static void stopMinio() {
     LOG.info("> Stopping Apache Minio server\n");
-    String cmd = DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/Datasources/s3/minio/stop_mn.sh";
+    String cmd = DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/Datasources/s3minio/minio/stop_mn.sh";
     try {
       Runtime.getRuntime().exec(cmd);
     } catch (Throwable e) {
       LOG.warn("Fail to run command " + cmd, e);
     }
-    LOG.info("> Disabling S3 storage plugin\n");
-    String templatePath = DrillTestDefaults.CWD + "/conf/plugin-templates/common/s3-storage-plugin.template";
+    LOG.info("> Disabling s3minio storage plugin for Minio\n");
+    String templatePath = DrillTestDefaults.CWD + "/conf/plugin-templates/common/s3minio-storage-plugin.template";
 
-    boolean isSuccess = Utils.disableStoragePlugin(templatePath, "s3");
+    boolean isSuccess = Utils.disableStoragePlugin(templatePath, "s3minio");
     if(!isSuccess){
-      LOG.info(">> Fail to disable S3 storage plugin");
+      LOG.info(">> Fail to disable s3minio storage plugin for Minio");
     }
   }
 
@@ -734,7 +734,7 @@ public class Utils {
    *          type of plugin; e.g.: "dfs", "cp"
    * @return true if operation is successful
    */
-  private static boolean disableStoragePlugin(String filename, String pluginType) {
+  public static boolean disableStoragePlugin(String filename, String pluginType) {
     try {
       String content = getFileContent(filename)
           .replace("\"enabled\": true", "\"enabled\": false");
