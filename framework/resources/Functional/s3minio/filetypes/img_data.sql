@@ -1,0 +1,1 @@
+select i.FileSize, i.PixelWidth, i.PixelHeight, i.BitsPerPixel, i.Orientaion, i.DPIWidth, i.DPIHeight, i.ColorMode, i.HasAlpha, i.Duration, i.VideoCodec, i.FrameRate, i.AudioCodec, i.AudioSampleSize, i.AudioSampleRate, i.JPEG, i.ExifIFD0, i.ExifSubIFD, i.AppleMakernote, i.GPS, i.ExifThumbnail, i.ICCProfile, i.Huffman, i.FileType from s3minio.tmp.`/filetypes/IMG_0728.jpg` i;

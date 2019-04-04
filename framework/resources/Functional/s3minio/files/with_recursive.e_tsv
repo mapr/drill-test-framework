@@ -1,0 +1,10 @@
+s3minio.tmp	s3minio	tmp	filetypes	filetypes	true	false	0			rwxrwxrwx
+s3minio.tmp	s3minio	tmp	IMG_0728.jpg	filetypes/IMG_0728.jpg	false	true	3767546			rw-rw-rw-
+s3minio.tmp	s3minio	tmp	Types.avro	filetypes/Types.avro	false	true	1257			rw-rw-rw-
+s3minio.tmp	s3minio	tmp	filterPushdown.csvh	filetypes/filterPushdown.csvh	false	true	112			rw-rw-rw-
+s3minio.tmp	s3minio	tmp	filterPushdown.tsv	filetypes/filterPushdown.tsv	false	true	100			rw-rw-rw-
+s3minio.tmp	s3minio	tmp	s3src.json	filetypes/s3src.json	false	true	324			rw-rw-rw-
+s3minio.tmp	s3minio	tmp	test_10Kb_10_partitions.parquet	filetypes/test_10Kb_10_partitions.parquet	false	true	10008			rw-rw-rw-
+s3minio.tmp	s3minio	tmp	dir	filetypes/dir	true	false	0			rwxrwxrwx
+s3minio.tmp	s3minio	tmp	data1.csv	filetypes/dir/data1.csv	false	true	125			rw-rw-rw-
+s3minio.tmp	s3minio	tmp	data2.csv	filetypes/dir/data2.csv	false	true	128			rw-rw-rw-

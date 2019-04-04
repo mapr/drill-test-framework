@@ -1,0 +1,23 @@
+{
+  "testId": "s3_minio_file_types",
+  "type": "group",
+  "description": "Querying different file types from s3 on Minio",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "dependencies" : ["s3minio"],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "s3minio.tmp",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": []
+}
+

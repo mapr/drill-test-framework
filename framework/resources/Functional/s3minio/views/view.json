@@ -1,0 +1,23 @@
+{
+  "testId": "views_in_s3_minio",
+  "type": "group",
+  "description": "Creating view in the Minio S3 storage",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "dependencies" : ["s3minio"],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "s3minio.tmp",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": []
+}
+

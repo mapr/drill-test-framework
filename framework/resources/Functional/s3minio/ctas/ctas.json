@@ -1,0 +1,23 @@
+{
+  "testId": "ctas_in_s3_minio",
+  "type": "group",
+  "description": "CTAS to the S3 storage using Minio server",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "dependencies" : ["s3minio"],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "s3minio.tmp",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": []
+}
+
