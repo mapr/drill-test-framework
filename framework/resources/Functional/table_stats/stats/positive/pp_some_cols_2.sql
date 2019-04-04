@@ -1,0 +1,1 @@
+select directories from `table_stats/pp_some_cols/.stats.drill`;

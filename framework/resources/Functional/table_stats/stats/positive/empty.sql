@@ -1,0 +1,1 @@
+select directories from `table_stats/empty/.stats.drill`;

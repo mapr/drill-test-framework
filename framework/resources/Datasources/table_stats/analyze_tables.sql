@@ -20,4 +20,9 @@ analyze table `table_stats/nested_scalar_cols` compute statistics(glossary.title
 analyze table `table_stats/Tpch0.01/parquet/customer` compute statistics;
 analyze table `table_stats/Tpch0.01/parquet/part` compute statistics;
 analyze table `table_stats/Tpch0.01/parquet/partsupp` compute statistics;
+analyze table  `table_stats/empty` compute statistics;
+--tests with partition pruning
+analyze table `table_stats/pp_some_cols/1991/1` compute statistics(p_name,p_type,p_size);
+analyze table `table_stats/pp_some_cols` compute statistics(p_name,p_type,p_size);
+analyze table  `table_stats/pp_some_cols/1992/2/1/2` compute statistics(p_name,p_type,p_size,p_retailprice);
 reset `store.parquet.reader.int96_as_timestamp`;
