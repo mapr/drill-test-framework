@@ -112,6 +112,24 @@ public class Utils {
     return connectionProperties;
   }
 
+  public static Properties createConnectionProperties(final String schema,
+                                                      final String group,
+                                                      final String queryTags) {
+    Properties props = createConnectionProperties();
+    if(schema != null) {
+      props.put("schema", schema);
+    }
+
+    if(group != null) {
+      props.put("group", group);
+    }
+
+    if(queryTags != null) {
+      props.put("queryTags", queryTags);
+    }
+    return props;
+  }
+
   // Accept self-signed certificate
   public static class MyHostNameVerifier implements HostnameVerifier {
 
@@ -1067,5 +1085,50 @@ public class Utils {
         return false;
       }
     return true;
+  }
+
+
+  /**
+   * Restart drillbits, ignore IOExceptions, if any.
+   */
+  public static void restartDrillbitsIgnoreErrors() {
+    try {
+      restartDrillbits();
+    } catch (Exception e) {
+      //Ignore exception
+    }
+  }
+
+  /**
+   * Restart all drillbits in the cluster.
+   */
+  public static synchronized void restartDrillbits() throws IOException {
+    String command = DrillTestDefaults.TEST_ROOT_DIR + "/" + DrillTestDefaults.RESTART_DRILL_SCRIPT;
+    File commandFile = new File(command);
+    if (commandFile.exists() && commandFile.canExecute()) {
+      LOG.info("Restarting drillbits: " + command);
+      CmdConsOut out = Utils.execCmd(command);
+      if (out.exitCode != 0) {
+        LOG.error("Error restarting drillbits\n" + out);
+        throw new IOException(out.consoleErr);
+      }
+    } else {
+      LOG.error("Error restarting drillbits, could not find file: " + command + ". Check " + DRILL_TEST_CONFIG);
+      throw new IOException("File not found: " + command);
+    }
+  }
+
+  /**
+   * Utility method to sleep for specified amount of time (in milliseconds).
+   *
+   * @param timeInMillis
+   */
+  public static void sleepForTimeInMillis(final long timeInMillis) {
+    try {
+      LOG.info("Waiting for " + timeInMillis + "ms .. ");
+      Thread.sleep(timeInMillis);
+    } catch (Exception e) {
+      //Ignore
+    }
   }
 }

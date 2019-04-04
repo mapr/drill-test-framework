@@ -612,7 +612,7 @@ public class TestDriver {
 
     executor.close();
     connectionPool.close();
-    restartDrill();
+    Utils.restartDrillbitsIgnoreErrors();
     return totalExecutionFailures + totalDataVerificationFailures + totalPlanVerificationFailures + totalTimeoutFailures + totalRandomFailures;
   }
 
@@ -778,7 +778,7 @@ public class TestDriver {
     LOG.info("\n>> Generation duration: " + stopwatch + "\n");
 
     if (restartDrillbits) {
-      restartDrill();
+      Utils.restartDrillbitsIgnoreErrors();
     }
   }
 
@@ -966,20 +966,5 @@ public class TestDriver {
     catch(Exception e){
       e.printStackTrace();
     }
-  }
-  
-  private int restartDrill() {
-    int exitCode = 0;
-    String command = DrillTestDefaults.TEST_ROOT_DIR + "/" + DrillTestDefaults.RESTART_DRILL_SCRIPT;
-    File commandFile = new File(command);
-    if (commandFile.exists() && commandFile.canExecute()) {
-      LOG.info("\n> Executing Post Build Script");
-      LOG.info("\n>> Path: " + command);
-      exitCode = Utils.execCmd(command).exitCode;
-      if (exitCode != 0) {
-        LOG.error("\n>> Error restarting drillbits");
-      }
-    }
-    return exitCode;
   }
 }

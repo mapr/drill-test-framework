@@ -1,5 +1,7 @@
 package org.apache.drill.test.framework.common;
 
+import org.apache.drill.test.framework.ConnectionPool;
+import org.apache.drill.test.framework.Utils;
 import org.apache.log4j.Logger;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -11,9 +13,14 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
 import java.lang.reflect.Method;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Properties;
 
 public class DrillJavaTestBase {
     private static final Logger LOG = Logger.getLogger(DrillJavaTestBase.class);
+    protected ConnectionPool connectionPool;
+    protected List<String> drillbitHosts;
 
     @BeforeSuite(alwaysRun = true, description = "Invoked at the beginning of the Test Suite.")
     public void baseBeforeSuite() {
@@ -26,8 +33,16 @@ public class DrillJavaTestBase {
     }
 
     @BeforeClass(alwaysRun = true, description = "Invoked at the beginning of every Test Class.")
-    public void baseBeforeClass() {
+    public void baseBeforeClass() throws SQLException {
         LOG.debug("Running Base Before Class");
+        final Properties props = Utils.createConnectionProperties();
+        connectionPool = new ConnectionPool(props);
+        drillbitHosts = Utils.getDrillbitHosts(connectionPool.getOrCreateConnection());
+        LOG.info("Size of drillbitHosts " + drillbitHosts.size());
+        drillbitHosts.forEach(LOG::info);
+        if(drillbitHosts == null || drillbitHosts.size() == 0) {
+            throw new IllegalStateException("Cannot run test suite without connecting to drillbits!");
+        }
     }
 
     @BeforeMethod(alwaysRun = true, description = "Invoked before every Test Method.")
@@ -43,6 +58,9 @@ public class DrillJavaTestBase {
     @AfterClass(alwaysRun = true, description = "Invoked after all tests in a Test Class finish.")
     public void baseAfterClass() {
         LOG.debug("Running Base After Class");
+        if (connectionPool != null) {
+            connectionPool.close();
+        }
     }
 
     @AfterTest(alwaysRun = true, description = "Invoked once tests in all classes in the Test Module finish.")
