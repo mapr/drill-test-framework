@@ -1,0 +1,5 @@
+.*Screen.*rowcount = 1.0
+.*StreamAgg.*rowcount = 1.0
+.*HashJoin.*rowcount = 800000.000000017
+.*Scan.*rowcount = 2000.0
+.*Scan.*rowcount = 2000.0
