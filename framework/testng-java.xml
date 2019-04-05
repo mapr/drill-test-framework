@@ -2,11 +2,11 @@
 <suite name="Drill Java Test Suite">
     <test name="Resource Management Tests">
         <classes>
-            <class name="org.apache.drill.test.framework.resourcemanagement.DrillTestFrameworkUnitTests" />
+            <class name="org.apache.drill.test.framework.DrillTestFrameworkUnitTests" />
         </classes>
         <groups>
             <run>
-                <include name="functional" />
+                <include name="unit" />
                 <exclude name="broken" />
             </run>
         </groups>

@@ -69,6 +69,9 @@ public class DrillTestDefaults {
   // Current working directory.
   public static final String CWD = System.getProperty("user.dir");
 
+  // Drill Test root directory, CWD changes to test-root/framework for testng
+  public static final String TEST_ROOT_DIR = CWD + (CWD.endsWith("/framework") ? "/../" : "");
+
   // Default user connecting to drill as.
   public static String USERNAME = "root";
 
@@ -104,17 +107,22 @@ public class DrillTestDefaults {
 
   // Default line break for logging.
   static final String LINE_BREAK = "------------------------------------------------------------------------";
-  
+
+  //Drill RM config key
+  public static final String DRILL_EXEC_RM_CONFIG_KEY = "drill.exec.rm";
+
+  public static final String DRILL_RM_OVERRIDE_CONF_FILENAME = "drill-rm-override.conf";
+
   // Adding classifications for Execution Failures
   public static enum DRILL_EXCEPTION{
-       VALIDATION_ERROR_INVALID_SCHEMA, 
-       VALIDATION_ERROR_OBJECT_NOT_FOUND, 
-       INTERNAL_ERROR, 
+       VALIDATION_ERROR_INVALID_SCHEMA,
+       VALIDATION_ERROR_OBJECT_NOT_FOUND,
+       INTERNAL_ERROR,
        SQL_EXCEPTION_CONNECTION_ERROR,
-       ALREADY_CLOSED_SQL_EXCEPTION, 
+       ALREADY_CLOSED_SQL_EXCEPTION,
        SQL_EXCEPTION_RESOURCE_ERROR,
-       ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION, 
-       UNSUPPORTED_OPERATION_EXCEPTION, 
+       ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION,
+       UNSUPPORTED_OPERATION_EXCEPTION,
        SYSTEM_ERROR_ILLEGAL_EXCEPTION,
        SYSTEM_ERROR_ILLEGAL_ARGUMENT_EXCEPTION,
        SYSTEM_ERROR_CHANNEL_CLOSED_EXCEPTION,
@@ -155,7 +163,10 @@ public class DrillTestDefaults {
    */
   private static Map<String, String> getConfigProperties() {
     final Map<String, String> properties = Maps.newHashMap();
-    final File overrideFile = new File(CWD + "/conf/" + DRILL_TEST_CONFIG);
+
+    //CWD can be {basePath}/drill-test-framework or {basePath}/drill-test-framework/framework
+    final File overrideFile = new File(TEST_ROOT_DIR + "/conf/"  + DRILL_TEST_CONFIG);
+
     final ResourceBundle bundle;
     if (overrideFile.exists() && !overrideFile.isDirectory()) {
       try {
