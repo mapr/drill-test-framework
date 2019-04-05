@@ -1,0 +1,5 @@
+1	1	false	true	-9223372036854775808	-9223372036854775808	1.4E-45	1.4E-45	4.9E-324	4.9E-324		Test1
+null	10	null	true	null	10	null	10.0	null	10.0	null	Test2
+0	0	false	true	0	0	0.0	0.0	0.0	0.0	-	Test3
+1	1	false	true	1	1	1.0	1.0	1.0	1.0	-	Test4
+2147483647	2147483647	false	true	9223372036854775807	9223372036854775807	3.4028235E38	3.4028235E38	1.7976931348623157E308	1.7976931348623157E308	dhjgfklsdghldsfhgkdhgidhfsglhfghdsklfghdjsfgldsfhgldsfghdlskfghdklsfhgdklsfghkdsgfhreghklsdefghksregjkhedfrgehklrfger	Test5

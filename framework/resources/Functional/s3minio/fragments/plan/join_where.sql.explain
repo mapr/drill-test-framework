@@ -1,0 +1,20 @@
+SET planner.width.max_per_node=100;
+SET planner.slice_target=1;
+SET planner.enable_multiphase_agg=false;
+EXPLAIN PLAN FOR SELECT
+  avg(decimal_big.DECIMAL_18_8),
+  avg(decimal_big_zero_scale.DECIMAL_18_0),
+  avg(decimal_big_zero_prec.DECIMAL_18_18)
+FROM
+  s3minio.tmp.`big_files/T_DECIMAL_BIG` decimal_big
+JOIN
+  s3minio.tmp.`big_files/T_DECIMAL_BIG_ZERO_SCALE` decimal_big_zero_scale
+ON decimal_big.ID = decimal_big_zero_scale.ID
+JOIN
+  s3minio.tmp.`big_files/T_DECIMAL_BIG_ZERO_PREC` decimal_big_zero_prec
+ON decimal_big.ID = decimal_big_zero_prec.ID
+WHERE
+  decimal_big.DECIMAL_2_1 > decimal_big_zero_scale.DECIMAL_2_0;
+RESET planner.width.max_per_node;
+RESET planner.slice_target;
+RESET planner.enable_multiphase_agg;

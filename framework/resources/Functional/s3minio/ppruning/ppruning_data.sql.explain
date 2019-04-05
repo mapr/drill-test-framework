@@ -1,0 +1,1 @@
+explain plan for select * from s3minio.tmp.`ppruning` where cAge > 20;

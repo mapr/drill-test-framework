@@ -1,0 +1,29 @@
+{
+  "testId": "partition_pruning_on_s3_minio",
+  "type": "group",
+  "description": "Testing partition pruning on the Minio S3 storage",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "dependencies" : ["s3minio"],
+  "matrices": [
+    {
+      "query-file": ".*.sql.explain",
+      "schema": "s3minio.tmp",
+      "output-format": "tsv",
+      "expected-file": ".*.plan",
+      "verification-type": [
+        "regex"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "gen",
+      "src": "Datasources/s3minio/s3_pruning.sh",
+      "dest": ""
+    }
+  ]
+}
+

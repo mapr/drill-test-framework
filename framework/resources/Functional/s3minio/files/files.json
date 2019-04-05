@@ -1,0 +1,23 @@
+{
+  "testId": "files_table_for_s3_minio",
+  "type": "group",
+  "description": "Querying FILES table in the INFORMATION_SCHEMA for the s3 using Minio",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "dependencies" : ["s3minio"],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "s3minio.tmp",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": []
+}
+

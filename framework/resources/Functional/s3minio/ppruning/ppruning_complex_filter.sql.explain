@@ -1,0 +1,1 @@
+explain plan for select * from s3minio.tmp.`ppruning` where cDate = to_timestamp('1995-01-01 00:00:00.0', 'yyyy-MM-dd HH:mm:ss.S') and cAge > 20;

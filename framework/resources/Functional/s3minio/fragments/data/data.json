@@ -1,0 +1,29 @@
+{
+  "testId": "drill_fragments_on_query_s3_minio_data",
+  "type": "group",
+  "description": "Testing big files on the Minio s3 storage with major and minor fragments",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "dependencies" : ["s3minio"],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "s3minio.tmp",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+       "mode": "gen",
+       "src": "Datasources/s3minio/fragments/fragments.sh",
+       "dest": ""
+    }
+  ]
+}
+
