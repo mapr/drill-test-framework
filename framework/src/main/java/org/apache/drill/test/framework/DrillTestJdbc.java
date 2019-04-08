@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import org.apache.drill.test.framework.TestCaseModeler.TestMatrix;
 import org.apache.drill.test.framework.TestVerifier.TestStatus;
 import org.apache.drill.test.framework.TestVerifier.VerificationException;
+import org.apache.drill.test.framework.TestVerifier.PrecisionException;
 import org.apache.drill.test.framework.TestVerifier.PlanVerificationException;
 import org.apache.log4j.Logger;
 
@@ -131,7 +132,10 @@ public class DrillTestJdbc implements DrillTest {
       }
     } catch (VerificationException e) {
       fail(TestStatus.DATA_VERIFICATION_FAILURE, e);
-    } catch (PlanVerificationException e) {
+    }catch (PrecisionException e) {
+      fail(TestStatus.DATA_PRECISION_FAILURE, e);
+    }
+      catch (PlanVerificationException e) {
       fail(TestStatus.PLAN_VERIFICATION_FAILURE, e);
     } catch (Exception e) {
       fail(TestStatus.EXECUTION_FAILURE, e);

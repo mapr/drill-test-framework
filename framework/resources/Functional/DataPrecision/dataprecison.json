@@ -1,0 +1,22 @@
+{
+    "testId": "dataprecision",
+    "type": "group",
+    "description": "Test data precision queries via jdbc",
+    "submit-type": "jdbc",
+    "categories": [
+        "dataprecision"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.q",
+            "schema": "dfs.root",
+            "output-format": "tsv",
+            "expected-file": ".*.e",
+            "verification-type": [
+                "in-memory"
+            ]
+        }
+    ],
+    "datasources": [
+    ]
+}

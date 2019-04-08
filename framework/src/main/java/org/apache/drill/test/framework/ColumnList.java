@@ -19,7 +19,8 @@ package org.apache.drill.test.framework;
 
 import java.math.BigDecimal;
 import java.sql.Types;
-import java.util.List;
+import java.util.*;
+
 
 /**
  * Class modeling a row in a ResultSet. It also stores a values of types of each
@@ -31,11 +32,14 @@ public class ColumnList {
   private final List<Object> values;
   private final List<Integer> types;
   private final boolean Simba;
+  //array of every row when data precision errors  
+  private final List <Integer> flags;
+  private int precisionErrorFlag;
   public static final String SIMBA_JDBC = "sjdbc";
-
   public ColumnList(List<Integer> types, List<Object> values) {
     this.values = values;
     this.types = types;
+    flags = new ArrayList<>(Collections.nCopies(values.size(), 0));
     if (TestDriver.cmdParam.driverExt != null &&
         TestDriver.cmdParam.driverExt.equals(ColumnList.SIMBA_JDBC)) {
       this.Simba = true;
@@ -63,6 +67,11 @@ public class ColumnList {
    */
   @Override
   public boolean equals(Object object) {
+    return (compare(this, (ColumnList) object)>0);
+  }
+
+  
+  public int equallll(Object object) {
     return compare(this, (ColumnList) object);
   }
 
@@ -112,7 +121,10 @@ public class ColumnList {
           values.set(i, s1);
         }
       }
-      sb.append(values.get(i) + "\t");
+      if(precisionErrorFlag == 1 && flags.get(i) == 1)
+       sb.append("\""+values.get(i)+"\"" + "\t");
+      else
+       sb.append(values.get(i) + "\t");
     }
     int type = (Integer) (types.get(values.size()-1));
     if (Simba && (type == Types.VARCHAR)) {
@@ -128,24 +140,27 @@ public class ColumnList {
         values.set(values.size()-1, s1);
       }
     }
-    sb.append(values.get(values.size() - 1));
-    return sb.toString();
+    if(precisionErrorFlag == 1 && flags.get(values.size() - 1) == 1)
+     sb.append("\""+values.get(values.size() - 1)+"\"");
+    else
+     sb.append(values.get(values.size() - 1));
+     return sb.toString();
   }
 
-  private boolean compare(ColumnList o1, ColumnList o2) {
+  public int compare(ColumnList o1, ColumnList o2) {
     List<Object> list1 = o1.values;
     List<Object> list2 = o2.values;
-    if (list1.size() != list2.size()) return false;
+    if (list1.size() != list2.size()) return 0;
     for (int i = 0; i < list1.size(); i++) {
       if (types == null || types.size() == 0) {
-        if (!list1.get(i).equals(list2.get(i))) return false;
+        if (!list1.get(i).equals(list2.get(i))) return 0;
         continue;
       }
       if (bothNull(list1.get(i), list2.get(i))) {
         continue;
       }
       if (oneNull(list1.get(i), list2.get(i))) {
-        return false;
+        return 0;
       }
       int type = (Integer) (types.get(i));
       try {
@@ -155,9 +170,21 @@ public class ColumnList {
           float f1 = (Float) list1.get(i);
           float f2 = (Float) list2.get(i);
           if ((f1 + f2) / 2 != 0) {
-            if (!(Math.abs((f1 - f2) / ((f1 + f2) / 2)) < 1.0E-6)) return false;
+            if (!(Math.abs((f1 - f2) / ((f1 + f2) / 2)) < TestDriver.cmdParam.precisionFloat)){ 
+              if (!(Math.abs((f1 - f2) / ((f1 + f2) / 2)) < TestDriver.cmdParam.precisionFloat*10)){
+                return 0;
+              }
+              else{
+                if(Math.abs(f1-f2)>0.01)
+	          return 0;
+                precisionErrorFlag = 1;
+                flags.set(i,1);
+                return -1;
+              }
+              //return false;
+            }
           } else if (f1 != 0) {
-            return false;
+            return 0;//data verification error
           }
           break;
         case Types.DOUBLE:
@@ -168,26 +195,45 @@ public class ColumnList {
           // otherwise proceed with "loosened" logic
           if (!d1.equals(d2)) {
             if ((d1 + d2) / 2 != 0) {
-              if (!(Math.abs((d1 - d2) / ((d1 + d2) / 2)) < 1.0E-12)) return false;
+              if (!(Math.abs((d1 - d2) / ((d1 + d2) / 2)) < TestDriver.cmdParam.precisionDouble)){ 
+                if (!(Math.abs((d1 - d2) / ((d1 + d2) / 2)) < TestDriver.cmdParam.precisionDouble*10)){
+                  if (!(Math.abs((d1 - d2) / ((d1 + d2) / 2)) < TestDriver.cmdParam.precisionDouble*100)){
+                    return 0;
+                  }
+                  else{
+                    if(Math.abs(d1-d2)>0.01)
+                      return 0;
+                    precisionErrorFlag = 1;
+                    flags.set(i,1);
+                    return -1;
+                  }
+                }
+                else{
+                  precisionErrorFlag = 1;
+                  flags.set(i,1);
+                  return -1;
+                }
+                //return false;
+              }
             } else if (d1 != 0) {
-              return false;
+              return 0;
             }
           }
           break;
         case Types.DECIMAL:
           BigDecimal bd1 = (BigDecimal) list1.get(i);
           BigDecimal bd2 = (BigDecimal) list2.get(i);
-          if (!(bd1.compareTo(bd2) == 0)) return false;
+          if (!(bd1.compareTo(bd2) == 0)) return 0;
           break;
         default:
-          if (!(list1.get(i).equals(list2.get(i)))) return false;
+          if (!(list1.get(i).equals(list2.get(i)))) return 0;
           break;
         }
       } catch (Exception e) {
-        if (!(list1.get(i).equals(list2.get(i)))) return false;
+        if (!(list1.get(i).equals(list2.get(i)))) return 0;
       }
     }
-    return true;
+    return 1;
   }
 
   public static boolean bothNull(Object obj1, Object obj2) {

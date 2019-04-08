@@ -161,6 +161,7 @@ public class TestDriver {
 
     HashSet  <DrillTest> finalExecutionFailures = new HashSet<DrillTest>();
     HashSet  <DrillTest> finalDataVerificationFailures = new HashSet<DrillTest>();
+    HashSet  <DrillTest> finalDataPrecisionFailures = new HashSet<DrillTest>();
     HashSet  <DrillTest> finalPlanVerificationFailures = new HashSet<DrillTest>();
     HashSet  <DrillTest> finalCancelledFailures = new HashSet<DrillTest>();
     HashSet  <DrillTest> finalRandomFailures = new HashSet<DrillTest>();
@@ -169,6 +170,7 @@ public class TestDriver {
     int totalPassingTests = 0;
     int totalExecutionFailures = 0;
     int totalDataVerificationFailures = 0;
+    int totalDataPrecisionFailures = 0;
     int totalPlanVerificationFailures = 0;
     int totalTimeoutFailures = 0;
     int totalCancelledFailures = 0;
@@ -194,6 +196,7 @@ public class TestDriver {
       
       List<DrillTest> passingTests = Lists.newArrayList();
       List<DrillTest> dataVerificationFailures = Lists.newArrayList();
+      List<DrillTest> dataPrecisionFailures = Lists.newArrayList();
       List<DrillTest> planVerificationFailures = Lists.newArrayList();
       List<DrillTest> executionFailures = Lists.newArrayList();
       List<DrillTest> timeoutFailures = Lists.newArrayList();
@@ -282,6 +285,9 @@ public class TestDriver {
          case DATA_VERIFICATION_FAILURE:
            dataVerificationFailures.add(test);
            break;
+         case DATA_PRECISION_FAILURE:
+           dataPrecisionFailures.add(test);
+           break;
          case PLAN_VERIFICATION_FAILURE:
            planVerificationFailures.add(test);
            break;
@@ -323,6 +329,9 @@ public class TestDriver {
 	  else if(dataVerificationFailures.contains(test)){
 	    dataVerificationFailures.remove(test);
 	  }
+          else if(dataPrecisionFailures.contains(test)){
+            dataPrecisionFailures.remove(test);
+          }
 	  else if(planVerificationFailures.contains(test)){
 	    planVerificationFailures.remove(test);
 	  }
@@ -332,7 +341,7 @@ public class TestDriver {
         }
       }
 
-      if(executionFailures.size()>0 || dataVerificationFailures.size()>0 || planVerificationFailures.size()>0 || timeoutFailures.size()>0) {
+      if(executionFailures.size()>0 || dataVerificationFailures.size()>0 || dataPrecisionFailures.size()>0 || planVerificationFailures.size()>0 || timeoutFailures.size()>0) {
         LOG.info("\n"+DrillTestDefaults.LINE_BREAK+"\nITERATION FAILURES\n"+DrillTestDefaults.LINE_BREAK);
       }
 
@@ -389,6 +398,15 @@ public class TestDriver {
           LOG.info(test.getException().getMessage());
         }
       }
+      
+      if(dataPrecisionFailures.size()>0) {
+        LOG.info("\nData Precision Failures:\n");
+        for (DrillTest test : dataPrecisionFailures) {
+          LOG.info("Query: " + test.getInputFile()+ "\n" + test.getQuery());
+          LOG.info("\nBaseline: "+ test.getExpectedFile());
+          LOG.info(test.getException().getMessage());
+        }   
+      } 
 
       if(planVerificationFailures.size()>0) {
         LOG.info("\nPlan Verification Failures:\n");
@@ -422,7 +440,7 @@ public class TestDriver {
         }
       }
 
-      if(executionFailures.size()>0 || dataVerificationFailures.size()>0 || planVerificationFailures.size()>0 || timeoutFailures.size()>0 || randomFailures.size()>0) {
+      if(executionFailures.size()>0 || dataVerificationFailures.size()>0 || dataPrecisionFailures.size()>0 || planVerificationFailures.size()>0 || timeoutFailures.size()>0 || randomFailures.size()>0) {
         LOG.info("\n"+DrillTestDefaults.LINE_BREAK+"\nITERATION RESULTS\n"+DrillTestDefaults.LINE_BREAK);
       }
 
@@ -458,6 +476,13 @@ public class TestDriver {
       if(dataVerificationFailures.size()>0){
       	LOG.info("\nData Verification Failures:\n");
         for (DrillTest test : dataVerificationFailures) {
+          LOG.info(test.getInputFile());
+        }
+      }
+
+      if(dataPrecisionFailures.size()>0){
+        LOG.info("\nData Precision Failures:\n");
+        for (DrillTest test : dataPrecisionFailures) {
           LOG.info(test.getInputFile());
         }
       }
@@ -510,9 +535,10 @@ public class TestDriver {
       LOG.info(DrillTestDefaults.LINE_BREAK+"\nITERATION SUMMARY\n"+DrillTestDefaults.LINE_BREAK);
       LOG.info("Total Tests                  : " + (countTotalTests*cmdParam.clones));
       LOG.info("Passing Tests                : " + passingTests.size());
-      LOG.info("Failing Tests                : " + (executionFailures.size() + dataVerificationFailures.size() + planVerificationFailures.size() + timeoutFailures.size())+"\n");
+      LOG.info("Failing Tests                : " + (executionFailures.size() + dataVerificationFailures.size() + dataPrecisionFailures.size() + planVerificationFailures.size() + timeoutFailures.size())+"\n");
       LOG.info("> Execution Failures         : " + executionFailures.size());
       LOG.info("> Data Verification Failures : " + dataVerificationFailures.size());
+      LOG.info("> Data Precision Failures    : " + dataPrecisionFailures.size());
       LOG.info("> Plan Verification Failures : " + planVerificationFailures.size());
       LOG.info("> Timeout Failures           : " + timeoutFailures.size());
 
@@ -542,6 +568,7 @@ public class TestDriver {
       totalPassingTests += passingTests.size();
       totalExecutionFailures += executionFailures.size();
       totalDataVerificationFailures += dataVerificationFailures.size();
+      totalDataPrecisionFailures += dataPrecisionFailures.size();
       totalPlanVerificationFailures += planVerificationFailures.size();
       totalTimeoutFailures += timeoutFailures.size();
       totalRandomFailures += randomFailures.size();
@@ -549,6 +576,7 @@ public class TestDriver {
       finalRandomFailures.addAll(randomFailures);
       finalExecutionFailures.addAll(executionFailures);
       finalDataVerificationFailures.addAll(dataVerificationFailures);
+      finalDataPrecisionFailures.addAll(dataPrecisionFailures);
       finalPlanVerificationFailures.addAll(planVerificationFailures);
       finalTimeoutFailures.addAll(timeoutFailures);
     }
@@ -557,7 +585,7 @@ public class TestDriver {
       LOG.info(DrillTestDefaults.LINE_BREAK+"\n"+String.format("\nCompleted %d iterations.\n  Passing tests: %d \n  Random failures: %d \n" +
           "  Execution Failures: %d\n  Data Verification Failures: %d\n  Plan Verification Failures: %d" +
           "\n  Timeouts: %d\n  Canceled: %d", i-1, totalPassingTests, totalRandomFailures,totalExecutionFailures,
-          totalDataVerificationFailures, totalPlanVerificationFailures, totalTimeoutFailures, totalCancelledFailures));
+          totalDataVerificationFailures, totalDataPrecisionFailures, totalPlanVerificationFailures, totalTimeoutFailures, totalCancelledFailures));
         if(finalRandomFailures.size()>0){
       	  LOG.info(DrillTestDefaults.LINE_BREAK+"\nRandom Failures:");
       	  for(DrillTest test : finalRandomFailures){
@@ -583,6 +611,12 @@ public class TestDriver {
       	if(finalDataVerificationFailures.size()>0){
       	  LOG.info(DrillTestDefaults.LINE_BREAK+"\nData Verification Failures");
       	    for(DrillTest test : finalDataVerificationFailures){
+      	      LOG.info(test.getInputFile());
+      	    }
+      	}
+      	if(finalDataPrecisionFailures.size()>0){
+      	  LOG.info(DrillTestDefaults.LINE_BREAK+"\nData Precision Failures");
+      	    for(DrillTest test : finalDataPrecisionFailures){
       	      LOG.info(test.getInputFile());
       	    }
       	}
@@ -613,7 +647,7 @@ public class TestDriver {
     executor.close();
     connectionPool.close();
     restartDrill();
-    return totalExecutionFailures + totalDataVerificationFailures + totalPlanVerificationFailures + totalTimeoutFailures + totalRandomFailures;
+    return totalExecutionFailures + totalDataVerificationFailures + totalDataPrecisionFailures + totalPlanVerificationFailures + totalTimeoutFailures + totalRandomFailures;
   }
 
   public void setup() throws IOException, InterruptedException, URISyntaxException {
@@ -942,7 +976,8 @@ public class TestDriver {
         document.set("status", test.getTestStatus().toString());
         if(test.getTestStatus().equals(TestStatus.EXECUTION_FAILURE) 
         		|| test.getTestStatus().equals(TestStatus.DATA_VERIFICATION_FAILURE)
-        		|| test.getTestStatus().equals(TestStatus.PLAN_VERIFICATION_FAILURE)) {
+        		||test.getTestStatus().equals(TestStatus.DATA_PRECISION_FAILURE)
+                        || test.getTestStatus().equals(TestStatus.PLAN_VERIFICATION_FAILURE)) {
           document.set("errorMessage", test.getException().toString().replaceAll("\n",""));
         }else{
           document.set("errorMessage", "N/A");

@@ -62,7 +62,7 @@ public class TestVerifier {
 
   public enum TestStatus {
     PENDING, RUNNING, PASS, EXECUTION_FAILURE, VERIFICATION_FAILURE,
-    DATA_VERIFICATION_FAILURE, PLAN_VERIFICATION_FAILURE, ORDER_MISMATCH, TIMEOUT, CANCELED
+    DATA_VERIFICATION_FAILURE, DATA_PRECISION_FAILURE, PLAN_VERIFICATION_FAILURE, ORDER_MISMATCH, TIMEOUT, CANCELED
   };
 
   public TestVerifier(List<Integer> types, String query,
@@ -91,7 +91,7 @@ public class TestVerifier {
    * @throws Exception
    */
   public TestStatus verifySqllineResult(String expectedOutput,
-      String actualOutput, boolean verifyOrderBy) throws IOException, VerificationException,
+      String actualOutput, boolean verifyOrderBy) throws IOException, VerificationException, PrecisionException,
       													 IllegalAccessException {
     String cleanedUpFile = cleanUpSqllineOutputFile(actualOutput);
     return verifyResultSet(expectedOutput, cleanedUpFile, verifyOrderBy);
@@ -130,7 +130,7 @@ public class TestVerifier {
    * @throws Exception
    */
   public TestStatus verifyResultSet(String expectedOutput, String actualOutput) 
-		  	throws IllegalAccessException, IOException, VerificationException {
+		  	throws IllegalAccessException, IOException, VerificationException, PrecisionException {
     return verifyResultSet(expectedOutput, actualOutput, false);
   }
 
@@ -148,7 +148,7 @@ public class TestVerifier {
    * @throws Exception
    */
   public TestStatus verifyResultSet(String expectedOutput, String actualOutput, boolean verifyOrderBy) 
-		  			throws IOException, VerificationException, IllegalAccessException {
+		  			throws IOException, VerificationException, PrecisionException,  IllegalAccessException {
     
     Map<ColumnList, Integer> expectedMap = loadFromFileToMap(expectedOutput);
     if (expectedMap == null) {
@@ -158,10 +158,23 @@ public class TestVerifier {
     
     Map<ColumnList, Integer> actualMap = loadFromFileToMap(actualOutput);
     int actualCount = mapSize;
-    
-    testStatus = expectedMap.equals(actualMap) ? TestStatus.PASS : TestStatus.DATA_VERIFICATION_FAILURE;
-    
-    if (testStatus == TestStatus.DATA_VERIFICATION_FAILURE) {
+    boolean dataVerificationErrorDefiner = expectedMap.equals(actualMap);
+    testStatus = dataVerificationErrorDefiner ? TestStatus.PASS : TestStatus.DATA_VERIFICATION_FAILURE;
+    if(testStatus == TestStatus.DATA_VERIFICATION_FAILURE){
+      Iterator<Map.Entry<ColumnList, Integer>> actualMapiterator = actualMap.entrySet().iterator();
+      Iterator<Map.Entry<ColumnList, Integer>> expectedMapiterator = expectedMap.entrySet().iterator();
+        while(actualMapiterator.hasNext() && expectedMapiterator.hasNext()){
+          Map.Entry<ColumnList, Integer> expectedEntry = expectedMapiterator.next();
+          Map.Entry<ColumnList, Integer> actualEntry = actualMapiterator.next();
+          ColumnList expcl = expectedEntry.getKey();  
+          ColumnList actcl = actualEntry.getKey();
+          if(expcl.equallll(actcl) == -1){
+            testStatus = TestStatus.DATA_PRECISION_FAILURE;
+            break;
+          }  
+        }
+    } 
+    if (testStatus == TestStatus.DATA_VERIFICATION_FAILURE ||testStatus ==  TestStatus.DATA_PRECISION_FAILURE) {
       List<ColumnList> unexpectedList = new ArrayList<ColumnList>();
       int unexpectedCount = 0;
       Iterator<Map.Entry<ColumnList, Integer>> iterator = actualMap.entrySet().iterator();
@@ -174,9 +187,15 @@ public class TestVerifier {
           unexpectedCount += count;
         }
       }
-      throw new VerificationException(printSummary(unexpectedList, unexpectedCount, 
+      if( testStatus != TestStatus.DATA_PRECISION_FAILURE){
+        throw new VerificationException(printSummary(unexpectedList, unexpectedCount, 
     		expectedMap, expectedCount, actualMap, actualCount, verifyOrderBy));
-    }
+      }
+      else{
+        throw new PrecisionException(printSummary(unexpectedList, unexpectedCount,
+                expectedMap, expectedCount, actualMap, actualCount, verifyOrderBy));
+      }
+      }
 
     if (checkType) {
       Map<String,String> orderByColumns = getOrderByColumns(query, columnLabels);
@@ -188,7 +207,7 @@ public class TestVerifier {
   }
 
   private Map<ColumnList, Integer> loadFromFileToMap(String filename)
-		  throws IOException, VerificationException, IllegalAccessException {
+		  throws IOException, VerificationException, PrecisionException,  IllegalAccessException {
     return loadFromFileToMap(filename, false);
   }
   
@@ -215,7 +234,7 @@ public class TestVerifier {
    * @throws Exception
    */
   private Map<ColumnList, Integer> loadFromFileToMap(String filename, boolean ordered) 
-		  		throws VerificationException, IOException, IllegalAccessException {
+		  		throws VerificationException, PrecisionException,  IOException, IllegalAccessException {
     if (checkType && types == null) {
       throw new VerificationException("Fatal: Types in the result set is null.  "
           + "This most likely resulted from failed execution.");
@@ -240,7 +259,7 @@ public class TestVerifier {
         sb.append("\nNumber of columns in actual data: " + size);
         sb.append("\nFirst row of expected data:\n" + line);
         sb.append("\nTypes in actual data: " + Utils.getTypesInStrings(types));
-        reader.close();
+        reader.close();//to do 
         throw new VerificationException(sb.toString());
       }
       List<Object> typedFields = Lists.newArrayList();
@@ -552,7 +571,7 @@ public class TestVerifier {
    */
   public TestStatus verifyResultSetOrders(String filename,
       List<String> columnLabels, Map<String, String> orderByColumns)
-    throws IOException, VerificationException, IllegalAccessException {
+    throws IOException, VerificationException, PrecisionException,  IllegalAccessException {
     loadFromFileToMap(filename, true);
     List<IndexAndOrder> columnIndexAndOrder = getColumnIndexAndOrderList(
         columnLabels, orderByColumns, true);
@@ -926,6 +945,12 @@ public class TestVerifier {
   public static class VerificationException extends Exception {
 
     public VerificationException(String message) {
+      super(message);
+    }
+  }
+  public static class PrecisionException extends Exception {
+
+    public PrecisionException(String message) {
       super(message);
     }
   }
