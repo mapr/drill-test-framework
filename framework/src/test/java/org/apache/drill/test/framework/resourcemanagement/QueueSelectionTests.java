@@ -24,7 +24,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
     private static final Logger LOG = Logger.getLogger(QueueSelectionTests.class);
 
     /**
-     * Test to check if a connection with a valid tag is admitted into the queue.
+     * Test validates that the tag is evaluated and the right queue is picked based on the tag.
      *
      * @throws IOException
      */
@@ -35,17 +35,20 @@ public class QueueSelectionTests extends DrillJavaTestBase {
                 "ORDER BY o_orderkey " +
                 "DESC limit 1";
 
-        //Expectations
+        //Set expectations
         final long expectedOrderId = 60000;
         final String queryTag = "dev";
         final String expectedPoolName = "DevPool";
         final int expectedRowCount = 1;
 
+        //Build a connection with queryTag
         final Properties props = Utils.createConnectionProperties(
                 "dfs.drilltestdirtpch01parquet", null, queryTag);
 
         //Create a RM config from existing template
         DrillRMConfig config = DrillRMConfig.load(BASIC_RM_CONFIG_NAME);
+
+        //Apply the config to drillbits in the cluster
         for (String host : drillbitHosts) {
             Utils.applyRMConfigToDrillbit(config, host);
         }
@@ -54,26 +57,31 @@ public class QueueSelectionTests extends DrillJavaTestBase {
         Utils.sleepForTimeInMillis(DEFAULT_SLEEP_IN_MILLIS);
 
         try(Connection conn = ConnectionPool
-                .createConnection(DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(
-                        drillbitHosts.get(0)), props);
+                .createConnection(
+                        DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillbitHosts.get(0)),
+                        props);
             Statement stmt = conn.createStatement();
             ResultSet res = stmt.executeQuery(query)) {
             final String queryId = Utils.getQueryID(res); //Get query id
-            LOG.info("Query ID: " + queryId + ", Query: " + query);
+            LOG.info("QueryID: " + queryId + " - Query: " + query);
 
             final DrillQueryProfile queryProfile = Utils.getQueryProfile(queryId); //Get query profile
 
             //Validate that the query was allowed into the queue
-            Assert.assertEquals(queryProfile.queueName, expectedPoolName, "The pool names do not match!");
+            Assert.assertEquals(queryProfile.queueName, expectedPoolName,
+                    "QueryID: " + queryId + " - The pool names do not match!");
+            LOG.info("QueryID: " + queryId + ", Queue: " + queryProfile.queueName);
 
+            //Validate the data returned.
             long rowCount = 0;
             while(res.next()) {
                 rowCount++;
                 Assert.assertEquals(res.getLong("o_orderkey"), expectedOrderId,
-                        "OrderId expected did not match");
+                        "QueryID: " + queryId + " - OrderId expected did not match");
 
             }
-            Assert.assertEquals(rowCount, expectedRowCount, "Number of rows returned did not match!");
+            Assert.assertEquals(rowCount, expectedRowCount,
+                    "QueryID: " + queryId + " - Number of rows returned did not match!");
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());
@@ -81,7 +89,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
     }
 
     /**
-     * Test to check if a connection with a valid tag is admitted into the queue.
+     * Test validates that user in Acl is evaluated and the right queue is picked based on the Acl.
      *
      * @throws IOException
      */
@@ -91,14 +99,14 @@ public class QueueSelectionTests extends DrillJavaTestBase {
                 "FROM orders " +
                 "ORDER BY o_orderkey " +
                 "DESC limit 1";
-        final String queryTag = "dev,test";
 
-        //Expectations
+        //Set expectations
         final long expectedOrderId = 60000;
         final String expectedPoolName = "TestPool";
         final int expectedRowCount = 1;
         final String expectedUsername = "mapr";
 
+        //Build a connection with only schema
         final Properties props = Utils.createConnectionProperties(
                 "dfs.drilltestdirtpch01parquet", null, null);
 
@@ -112,8 +120,12 @@ public class QueueSelectionTests extends DrillJavaTestBase {
         Utils.sleepForTimeInMillis(DEFAULT_SLEEP_IN_MILLIS);
 
         try(Connection conn = ConnectionPool
-                .createConnection(DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(
-                        drillbitHosts.get(0)), expectedUsername, null, props);
+                .createConnection(
+                        DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillbitHosts.get(0)),
+                        expectedUsername, //Provide username for the connection
+                        null,
+                        props);
+
             Statement stmt = conn.createStatement();
             ResultSet res = stmt.executeQuery(query)) {
             final String queryId = Utils.getQueryID(res); //Get query id
@@ -139,7 +151,8 @@ public class QueueSelectionTests extends DrillJavaTestBase {
     }
 
     /**
-     * Test to check if a connection with a valid tag is admitted into the queue.
+     * Test validates where multiple queues are eligible to admit a query, based on tag,
+     * but the bestfit queue is selected.
      *
      * @throws IOException
      */
@@ -149,10 +162,11 @@ public class QueueSelectionTests extends DrillJavaTestBase {
                 "FROM orders " +
                 "ORDER BY o_orderkey " +
                 "DESC limit 1";
-        final String queryTag = "dev,test";
-        //Expectations
+        final String queryTag = "dev,test"; //Set tag such that both dev and test are eligible
+
+        //Set expectations
         final long expectedOrderId = 60000;
-        final String expectedPoolName = "DevPool";
+        final String expectedPoolName = "DevPool"; //As per "bestfit" policy
         final int expectedRowCount = 1;
 
         final Properties props = Utils.createConnectionProperties(
@@ -169,7 +183,9 @@ public class QueueSelectionTests extends DrillJavaTestBase {
 
         try(Connection conn = ConnectionPool
                 .createConnection(DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(
-                        drillbitHosts.get(0)), props);
+                        drillbitHosts.get(0)),
+                        props); //Create a connection based on hostname and properties
+
             Statement stmt = conn.createStatement();
             ResultSet res = stmt.executeQuery(query)) {
             final String queryId = Utils.getQueryID(res); //Get query id
@@ -195,7 +211,9 @@ public class QueueSelectionTests extends DrillJavaTestBase {
     }
 
     /**
-     * Test to check if a connection with a valid tag is admitted into the queue.
+     * Test to validate that the query is not admitted since there are no tags and Acls do not match
+     * any of the queues.
+     * Also validates the error message.
      *
      * @throws IOException
      */
@@ -219,7 +237,9 @@ public class QueueSelectionTests extends DrillJavaTestBase {
 
         try(Connection conn = ConnectionPool
                 .createConnection(DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillbitHosts.get(0)),
-                        "anonymous", null, props);
+                        "anonymous",
+                        null,
+                        props);
             Statement stmt = conn.createStatement();
             ResultSet res = stmt.executeQuery(query)) {
             final String queryId = Utils.getQueryID(res); //Get query id
