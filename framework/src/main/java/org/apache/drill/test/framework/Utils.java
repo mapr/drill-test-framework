@@ -937,11 +937,11 @@ public class Utils {
   }
 
   /**
-   * Apply RM config represented by DrillRMConfig to a specified Drillbit.
+   * Apply RM config represented by DrillRMConfig to all drillbits part of {@link DrillCluster}
    *
    * As a part of this method
    * - Write the config to a temporary file (remove if file exists previously.
-   * - Copy the file to specified Drillbit node.
+   * - Copy the file to all nodes part of the {@link DrillCluster}.
    *
    * @param config
    * @param drillCluster
@@ -963,6 +963,8 @@ public class Utils {
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(drillRMConfFilePath))) {
       writer.write(DRILL_EXEC_RM_CONFIG_KEY + ":" + config.render());
     }
+    //Remove if an override conf exists
+    drillCluster.runCommand("rm -rf " + DRILL_HOME + "/conf/" + DRILL_RM_OVERRIDE_CONF_FILENAME);
     drillCluster.copyToRemote(drillRMConfFilePath, DRILL_HOME + "/conf/" + DRILL_RM_OVERRIDE_CONF_FILENAME);
   }
 
@@ -1074,36 +1076,32 @@ public class Utils {
 
   /**
    * Restart drillbits, ignore IOExceptions, if any.
+   * This version of the utility uses the restart drillbit script configured.
+   *
+   * Refactored out of {@link TestDriver}, kept for backward compatibility.
+   * Use {@link #restartDrillbits(DrillCluster)} instead.
    */
-  public static void restartDrillbitsIgnoreErrors() {
-    try {
-      restartDrillbits();
-    } catch (Exception e) {
-      //Ignore exception
-    }
-  }
-
-  /**
-   * Restart all drillbits in the cluster.
-   */
-  public static synchronized void restartDrillbits() throws IOException {
+  @Deprecated
+  public static int restartDrill() {
+    int exitCode = 0;
     String command = DrillTestDefaults.TEST_ROOT_DIR + "/" + DrillTestDefaults.RESTART_DRILL_SCRIPT;
     File commandFile = new File(command);
     if (commandFile.exists() && commandFile.canExecute()) {
-      LOG.info("Restarting drillbits: " + command);
-      CmdConsOut out = Utils.execCmd(command);
-      if (out.exitCode != 0) {
-        LOG.error("Error restarting drillbits\n" + out);
-        throw new IOException(out.consoleErr);
+      LOG.info("\n> Executing Post Build Script");
+      LOG.info("\n>> Path: " + command);
+      exitCode = Utils.execCmd(command).exitCode;
+      if (exitCode != 0) {
+        LOG.error("\n>> Error restarting drillbits");
       }
-    } else {
-      LOG.error("Error restarting drillbits, could not find file: " + command + ". Check " + DRILL_TEST_CONFIG);
-      throw new IOException("File not found: " + command);
     }
+    return exitCode;
   }
 
-  public static synchronized void restartDrillbits(final DrillCluster drillCluster)
-          throws ExecutionException, InterruptedException {
+    /**
+     * Restart drillbits available as a part of {@link DrillCluster} instance passed.
+     * @param drillCluster instance of a drill cluster.
+     */
+  public static synchronized void restartDrillbits(final DrillCluster drillCluster) {
       Preconditions.checkNotNull(drillCluster, "drillCluster cannot be null!");
       drillCluster.runCommand(DRILL_HOME + "/bin/drillbit.sh restart");
       sleepForTimeInMillis(DEFAULT_SLEEP_IN_MILLIS);
@@ -1123,8 +1121,16 @@ public class Utils {
     }
   }
 
+  /**
+   * Passed exception is hidden from compiler but re-thrown.
+   * Used by functional interfaces that allow checked exceptions.
+   *
+   * @param e
+   * @param <E>
+   *     @throws E
+   */
   @SuppressWarnings("unchecked")
   public static <E extends Throwable> void sneakyThrow(Throwable e) throws E {
-      throw (E) e;
+    throw (E) e;
   }
 }

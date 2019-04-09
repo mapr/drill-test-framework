@@ -70,6 +70,12 @@ public class DrillJavaTestBase {
         LOG.debug("Running Base After Suite");
     }
 
+    /**
+     * Utility method to create a {@link DrillCluster} instance.
+     * @param pool
+     * @return
+     * @throws SQLException
+     */
     public DrillCluster createDrillCluster(ConnectionPool pool) throws SQLException {
         Preconditions.checkNotNull(pool, "Connection pool is not created!");
         List<String> drillbitHosts = Utils.getDrillbitHosts(pool.getOrCreateConnection());
