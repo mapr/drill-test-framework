@@ -612,7 +612,7 @@ public class TestDriver {
 
     executor.close();
     connectionPool.close();
-    Utils.restartDrillbitsIgnoreErrors();
+    Utils.restartDrill();
     return totalExecutionFailures + totalDataVerificationFailures + totalPlanVerificationFailures + totalTimeoutFailures + totalRandomFailures;
   }
 
@@ -778,7 +778,7 @@ public class TestDriver {
     LOG.info("\n>> Generation duration: " + stopwatch + "\n");
 
     if (restartDrillbits) {
-      Utils.restartDrillbitsIgnoreErrors();
+      Utils.restartDrill();
     }
   }
 
