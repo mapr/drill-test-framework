@@ -35,7 +35,7 @@ public class DrillJavaTestBase {
     }
 
     @BeforeClass(alwaysRun = true, description = "Invoked at the beginning of every Test Class.")
-    public void baseBeforeClass() throws SQLException {
+    public void baseBeforeClass() throws IllegalStateException {
         LOG.debug("Running Base Before Class");
         final Properties props = Utils.createConnectionProperties();
         connectionPool = new ConnectionPool(props);
@@ -44,6 +44,7 @@ public class DrillJavaTestBase {
 
     @BeforeMethod(alwaysRun = true, description = "Invoked before every Test Method.")
     public void baseBeforeMethod(Method method) {
+
         LOG.info("\n\n---------- Test " + method.getName() + " started ----------\n\n");
     }
 
@@ -57,6 +58,10 @@ public class DrillJavaTestBase {
         LOG.debug("Running Base After Class");
         if (connectionPool != null) {
             connectionPool.close();
+        }
+
+        if(drillCluster != null) {
+            drillCluster.shutdown();
         }
     }
 
@@ -76,11 +81,18 @@ public class DrillJavaTestBase {
      * @return
      * @throws SQLException
      */
-    public DrillCluster createDrillCluster(ConnectionPool pool) throws SQLException {
+    protected DrillCluster createDrillCluster(ConnectionPool pool) throws IllegalStateException {
         Preconditions.checkNotNull(pool, "Connection pool is not created!");
-        List<String> drillbitHosts = Utils.getDrillbitHosts(pool.getOrCreateConnection());
-        LOG.info("Size of Drill cluster " + drillbitHosts.size());
-        drillbitHosts.forEach(LOG::info);
+        List<String> drillbitHosts;
+        try {
+             drillbitHosts = Utils.getDrillbitHosts(pool.getOrCreateConnection());
+            LOG.info("Size of Drill cluster " + drillbitHosts.size());
+            drillbitHosts.forEach(LOG::info);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IllegalStateException("Could not query drillbit hosts.\n" +
+                    "[Hint: Ensure that the Drill cluster is up and ready to take take queries.]");
+        }
         return new DrillCluster(drillbitHosts);
     }
 }

@@ -1,10 +1,12 @@
 package org.apache.drill.test.framework.resourcemanagement;
 
+import com.google.common.base.Preconditions;
 import org.apache.drill.test.framework.*;
 import org.apache.drill.test.framework.common.DrillJavaTestBase;
 import org.apache.drill.test.framework.common.DrillTestNGDefaults;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -12,15 +14,26 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
-import java.util.concurrent.ExecutionException;
 
-import static org.apache.drill.test.framework.DrillTestDefaults.DEFAULT_SLEEP_IN_MILLIS;
-import static org.apache.drill.test.framework.common.DrillTestNGDefaults.*;
+import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_RM_OVERRIDE_CONF_FILENAME;
+import static org.apache.drill.test.framework.common.DrillTestNGDefaults.FUNCTIONAL_GROUP;
+import static org.apache.drill.test.framework.common.DrillTestNGDefaults.NO_RESOURCE_POOL_ERROR;
+import static org.apache.drill.test.framework.common.DrillTestNGDefaults.BASIC_RM_CONFIG_NAME;
 
 @SuppressWarnings("Duplicates")
 @Test(groups = FUNCTIONAL_GROUP)
 public class QueueSelectionTests extends DrillJavaTestBase {
     private static final Logger LOG = Logger.getLogger(QueueSelectionTests.class);
+
+    @BeforeMethod(alwaysRun = true)
+    private void cleanupBeforeTestMethod() {
+        Preconditions.checkNotNull(connectionPool,
+                "Cleanup before test failed! Connection pool has not be instantiated");
+        Preconditions.checkNotNull(drillCluster,
+                "Cleanup before test failed! Drill cluster information is unavailable");
+        drillCluster.runCommand("rm -rf " + DRILL_RM_OVERRIDE_CONF_FILENAME);
+        Utils.restartDrillbits(drillCluster);
+    }
 
     /**
      * Test validates that the tag is evaluated and the right queue is picked based on the tag.
@@ -28,7 +41,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
      * @throws IOException
      */
     @Test(groups = FUNCTIONAL_GROUP)
-    public void testTagSelectorBasic() throws IOException, ExecutionException, InterruptedException {
+    public void testTagSelectorBasic() throws IOException {
         final String query = "SELECT o_orderkey " +
                 "FROM orders " +
                 "ORDER BY o_orderkey " +
@@ -87,7 +100,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
      * @throws IOException
      */
     @Test(groups = FUNCTIONAL_GROUP)
-    public void testAclSelectorForUser() throws IOException, ExecutionException, InterruptedException {
+    public void testAclSelectorForUser() throws IOException {
         final String query = "SELECT o_orderkey " +
                 "FROM orders " +
                 "ORDER BY o_orderkey " +
@@ -146,7 +159,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
      * @throws IOException
      */
     @Test(groups = FUNCTIONAL_GROUP)
-    public void testTagSelectBestFitPool() throws IOException, ExecutionException, InterruptedException {
+    public void testTagSelectBestFitPool() throws IOException {
         final String query = "SELECT o_orderkey " +
                 "FROM orders " +
                 "ORDER BY o_orderkey " +
@@ -203,7 +216,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
      * @throws IOException
      */
     @Test(groups = FUNCTIONAL_GROUP)
-    public void testTagAndAclDoesNotAllowQuery() throws IOException, ExecutionException, InterruptedException {
+    public void testTagAndAclDoesNotAllowQuery() throws IOException {
         final String query = "SELECT o_orderkey " +
                 "FROM orders " +
                 "ORDER BY o_orderkey " +

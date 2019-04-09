@@ -37,10 +37,10 @@ public class SessionManager {
     }
 
     public void shutdown() {
-        for (SSHSession session : sessionMap.values()) {
+        sessionMap.forEach((key, session) -> {
             if (session.isConnected()) {
                 session.disconnect();
             }
-        }
+        });
     }
 }

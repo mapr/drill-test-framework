@@ -12,6 +12,11 @@ import org.slf4j.LoggerFactory;
 
 import com.jcraft.jsch.ChannelExec;
 
+/**
+ * Task to run specified command on a remote host.
+ * Code re-used from implementation of RunCommand.java in
+ * {@link - https://repository.mapr.com/nexus/content/groups/mapr-public/com/mapr/db/ycsb-driver/}
+ */
 public class RunCommand extends SSHTask<RunCommand> {
     private static final Logger LOG = LoggerFactory.getLogger(RunCommand.class);
     private static final CharsetDecoder DECODER = StandardCharsets.UTF_8.newDecoder()
