@@ -1082,7 +1082,7 @@ public class Utils {
    * Use {@link #restartDrillbits(DrillCluster)} instead.
    */
   @Deprecated
-  public static int restartDrill() {
+  public static synchronized int restartDrill() {
     int exitCode = 0;
     String command = DrillTestDefaults.TEST_ROOT_DIR + "/" + DrillTestDefaults.RESTART_DRILL_SCRIPT;
     File commandFile = new File(command);
