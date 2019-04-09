@@ -1,7 +1,9 @@
 package org.apache.drill.test.framework.common;
 
+import com.google.common.base.Preconditions;
 import org.apache.drill.test.framework.ConnectionPool;
 import org.apache.drill.test.framework.Utils;
+import org.apache.drill.test.framework.ssh.DrillCluster;
 import org.apache.log4j.Logger;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -20,7 +22,7 @@ import java.util.Properties;
 public class DrillJavaTestBase {
     private static final Logger LOG = Logger.getLogger(DrillJavaTestBase.class);
     protected ConnectionPool connectionPool;
-    protected List<String> drillbitHosts;
+    protected DrillCluster drillCluster;
 
     @BeforeSuite(alwaysRun = true, description = "Invoked at the beginning of the Test Suite.")
     public void baseBeforeSuite() {
@@ -37,12 +39,7 @@ public class DrillJavaTestBase {
         LOG.debug("Running Base Before Class");
         final Properties props = Utils.createConnectionProperties();
         connectionPool = new ConnectionPool(props);
-        drillbitHosts = Utils.getDrillbitHosts(connectionPool.getOrCreateConnection());
-        LOG.info("Size of drillbitHosts " + drillbitHosts.size());
-        drillbitHosts.forEach(LOG::info);
-        if(drillbitHosts == null || drillbitHosts.size() == 0) {
-            throw new IllegalStateException("Cannot run test suite without connecting to drillbits!");
-        }
+        drillCluster = createDrillCluster(connectionPool);
     }
 
     @BeforeMethod(alwaysRun = true, description = "Invoked before every Test Method.")
@@ -71,5 +68,13 @@ public class DrillJavaTestBase {
     @AfterSuite(alwaysRun = true, description = "Invoked once all tests in the Suite are completed.")
     public void baseAfterSuite() {
         LOG.debug("Running Base After Suite");
+    }
+
+    public DrillCluster createDrillCluster(ConnectionPool pool) throws SQLException {
+        Preconditions.checkNotNull(pool, "Connection pool is not created!");
+        List<String> drillbitHosts = Utils.getDrillbitHosts(pool.getOrCreateConnection());
+        LOG.info("Size of Drill cluster " + drillbitHosts.size());
+        drillbitHosts.forEach(LOG::info);
+        return new DrillCluster(drillbitHosts);
     }
 }

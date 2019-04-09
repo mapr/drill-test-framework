@@ -1,9 +1,6 @@
 package org.apache.drill.test.framework.resourcemanagement;
 
-import org.apache.drill.test.framework.ConnectionPool;
-import org.apache.drill.test.framework.DrillQueryProfile;
-import org.apache.drill.test.framework.DrillRMConfig;
-import org.apache.drill.test.framework.Utils;
+import org.apache.drill.test.framework.*;
 import org.apache.drill.test.framework.common.DrillJavaTestBase;
 import org.apache.drill.test.framework.common.DrillTestNGDefaults;
 import org.apache.log4j.Logger;
@@ -15,7 +12,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
 
+import static org.apache.drill.test.framework.DrillTestDefaults.DEFAULT_SLEEP_IN_MILLIS;
 import static org.apache.drill.test.framework.common.DrillTestNGDefaults.*;
 
 @SuppressWarnings("Duplicates")
@@ -29,7 +28,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
      * @throws IOException
      */
     @Test(groups = FUNCTIONAL_GROUP)
-    public void testTagSelectorBasic() throws IOException {
+    public void testTagSelectorBasic() throws IOException, ExecutionException, InterruptedException {
         final String query = "SELECT o_orderkey " +
                 "FROM orders " +
                 "ORDER BY o_orderkey " +
@@ -47,18 +46,12 @@ public class QueueSelectionTests extends DrillJavaTestBase {
 
         //Create a RM config from existing template
         DrillRMConfig config = DrillRMConfig.load(BASIC_RM_CONFIG_NAME);
-
-        //Apply the config to drillbits in the cluster
-        for (String host : drillbitHosts) {
-            Utils.applyRMConfigToDrillbit(config, host);
-        }
-
-        Utils.restartDrillbits(); //Restart drillbits
-        Utils.sleepForTimeInMillis(DEFAULT_SLEEP_IN_MILLIS);
+        Utils.applyRMConfigToDrillCluster(config, drillCluster);
+        Utils.restartDrillbits(drillCluster);
 
         try(Connection conn = ConnectionPool
                 .createConnection(
-                        DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillbitHosts.get(0)),
+                        DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillCluster.getHosts().get(0)),
                         props);
             Statement stmt = conn.createStatement();
             ResultSet res = stmt.executeQuery(query)) {
@@ -94,7 +87,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
      * @throws IOException
      */
     @Test(groups = FUNCTIONAL_GROUP)
-    public void testAclSelectorForUser() throws IOException {
+    public void testAclSelectorForUser() throws IOException, ExecutionException, InterruptedException {
         final String query = "SELECT o_orderkey " +
                 "FROM orders " +
                 "ORDER BY o_orderkey " +
@@ -112,16 +105,12 @@ public class QueueSelectionTests extends DrillJavaTestBase {
 
         //Create a RM config from existing template
         DrillRMConfig config = DrillRMConfig.load(BASIC_RM_CONFIG_NAME);
-        for (String host : drillbitHosts) {
-            Utils.applyRMConfigToDrillbit(config, host);
-        }
-
-        Utils.restartDrillbits(); //Restart drillbits
-        Utils.sleepForTimeInMillis(DEFAULT_SLEEP_IN_MILLIS);
+        Utils.applyRMConfigToDrillCluster(config, drillCluster);
+        Utils.restartDrillbits(drillCluster);
 
         try(Connection conn = ConnectionPool
                 .createConnection(
-                        DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillbitHosts.get(0)),
+                        DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillCluster.getHosts().get(0)),
                         expectedUsername, //Provide username for the connection
                         null,
                         props);
@@ -157,7 +146,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
      * @throws IOException
      */
     @Test(groups = FUNCTIONAL_GROUP)
-    public void testTagSelectBestFitPool() throws IOException {
+    public void testTagSelectBestFitPool() throws IOException, ExecutionException, InterruptedException {
         final String query = "SELECT o_orderkey " +
                 "FROM orders " +
                 "ORDER BY o_orderkey " +
@@ -174,16 +163,12 @@ public class QueueSelectionTests extends DrillJavaTestBase {
 
         //Create a RM config from existing template
         DrillRMConfig config = DrillRMConfig.load(BASIC_RM_CONFIG_NAME);
-        for (String host : drillbitHosts) {
-            Utils.applyRMConfigToDrillbit(config, host);
-        }
-
-        Utils.restartDrillbits(); //Restart drillbits
-        Utils.sleepForTimeInMillis(DEFAULT_SLEEP_IN_MILLIS);
+        Utils.applyRMConfigToDrillCluster(config, drillCluster);
+        Utils.restartDrillbits(drillCluster);
 
         try(Connection conn = ConnectionPool
                 .createConnection(DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(
-                        drillbitHosts.get(0)),
+                        drillCluster.getHosts().get(0)),
                         props); //Create a connection based on hostname and properties
 
             Statement stmt = conn.createStatement();
@@ -218,7 +203,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
      * @throws IOException
      */
     @Test(groups = FUNCTIONAL_GROUP)
-    public void testTagAndAclDoesNotAllowQuery() throws IOException {
+    public void testTagAndAclDoesNotAllowQuery() throws IOException, ExecutionException, InterruptedException {
         final String query = "SELECT o_orderkey " +
                 "FROM orders " +
                 "ORDER BY o_orderkey " +
@@ -228,15 +213,11 @@ public class QueueSelectionTests extends DrillJavaTestBase {
 
         //Create a RM config from existing template
         DrillRMConfig config = DrillRMConfig.load(BASIC_RM_CONFIG_NAME);
-        for (String host : drillbitHosts) {
-            Utils.applyRMConfigToDrillbit(config, host);
-        }
-
-        Utils.restartDrillbits(); //Restart drillbits
-        Utils.sleepForTimeInMillis(DEFAULT_SLEEP_IN_MILLIS);
+        Utils.applyRMConfigToDrillCluster(config, drillCluster);
+        Utils.restartDrillbits(drillCluster);
 
         try(Connection conn = ConnectionPool
-                .createConnection(DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillbitHosts.get(0)),
+                .createConnection(DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillCluster.getHosts().get(0)),
                         "anonymous",
                         null,
                         props);

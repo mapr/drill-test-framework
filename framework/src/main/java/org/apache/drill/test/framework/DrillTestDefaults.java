@@ -113,6 +113,8 @@ public class DrillTestDefaults {
 
   public static final String DRILL_RM_OVERRIDE_CONF_FILENAME = "drill-rm-override.conf";
 
+  public static final long DEFAULT_SLEEP_IN_MILLIS = 20000; //default sleep
+
   // Adding classifications for Execution Failures
   public static enum DRILL_EXCEPTION{
        VALIDATION_ERROR_INVALID_SCHEMA,

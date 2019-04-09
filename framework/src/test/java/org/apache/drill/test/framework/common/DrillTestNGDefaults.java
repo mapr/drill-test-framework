@@ -13,8 +13,5 @@ public final class DrillTestNGDefaults {
     public static String CONNECTION_URL_FOR_DRILLBIT(final String hostnameOrIp) {
         return String.format("jdbc:drill:drillbit=%s", hostnameOrIp);
     }
-
-    public static final long DEFAULT_SLEEP_IN_MILLIS = 20000; //20 seconds by default
     public static final String NO_RESOURCE_POOL_ERROR = "No resource pools to choose from for the query";
-
 }

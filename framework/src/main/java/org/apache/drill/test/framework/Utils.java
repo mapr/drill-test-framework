@@ -17,6 +17,7 @@
  */
 package org.apache.drill.test.framework;
 
+import com.google.common.base.Preconditions;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.*;
@@ -42,6 +43,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,6 +54,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import org.apache.drill.test.framework.ssh.DrillCluster;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -941,45 +944,26 @@ public class Utils {
    * - Copy the file to specified Drillbit node.
    *
    * @param config
-   * @param drillbitHost
+   * @param drillCluster
    * @throws IOException
    */
-  public static synchronized void applyRMConfigToDrillbit(final DrillRMConfig config,
-                                             final String drillbitHost) throws IOException {
+  public static synchronized void applyRMConfigToDrillCluster(final DrillRMConfig config,
+                                                              final DrillCluster drillCluster) throws IOException {
     final String drillRMConfFilePath = DrillTestDefaults.TEST_ROOT_DIR + "/conf/" + DRILL_RM_OVERRIDE_CONF_FILENAME;
-
     File drillRMConfFile = new File(drillRMConfFilePath);
 
     CmdConsOut out;
     if(drillRMConfFile.exists()) {
       LOG.warn(drillRMConfFilePath + " exists! Removing the file");
       if ((out = Utils.execCmd("rm -rf " + drillRMConfFilePath)).exitCode != 0) {
-        LOG.error("Could not remove config file " +
-                drillRMConfFilePath + "\n\n" +
-                out);
+        LOG.error("Could not remove config file " + drillRMConfFilePath + "\n\n" + out);
         throw new IOException(out.consoleErr);
       }
     }
-
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(drillRMConfFilePath))) {
       writer.write(DRILL_EXEC_RM_CONFIG_KEY + ":" + config.render());
     }
-
-    final String scpCommand = new StringBuilder("scp ")
-            .append(drillRMConfFilePath)
-            .append(" ")
-            .append(USERNAME)
-            .append("@").append(drillbitHost)
-            .append(":").append(DRILL_HOME)
-            .append("/conf/")
-            .append(DRILL_RM_OVERRIDE_CONF_FILENAME)
-            .toString();
-
-    LOG.info("Copying config " + scpCommand);
-    if ((out = Utils.execCmd(scpCommand)).exitCode != 0) {
-      LOG.error("Copying config to drillbit failed!\n\n" + out);
-      throw new IOException(out.consoleErr);
-    }
+    drillCluster.copyToRemote(drillRMConfFilePath, DRILL_HOME + "/conf/" + DRILL_RM_OVERRIDE_CONF_FILENAME);
   }
 
   public static boolean sanityTest(Connection connection) {
@@ -1118,6 +1102,13 @@ public class Utils {
     }
   }
 
+  public static synchronized void restartDrillbits(final DrillCluster drillCluster)
+          throws ExecutionException, InterruptedException {
+      Preconditions.checkNotNull(drillCluster, "drillCluster cannot be null!");
+      drillCluster.runCommand(DRILL_HOME + "/bin/drillbit.sh restart");
+      sleepForTimeInMillis(DEFAULT_SLEEP_IN_MILLIS);
+  }
+
   /**
    * Utility method to sleep for specified amount of time (in milliseconds).
    *
@@ -1130,5 +1121,10 @@ public class Utils {
     } catch (Exception e) {
       //Ignore
     }
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <E extends Throwable> void sneakyThrow(Throwable e) throws E {
+      throw (E) e;
   }
 }
