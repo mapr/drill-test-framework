@@ -26,7 +26,7 @@ import static org.apache.drill.test.framework.common.DrillTestNGDefaults.BASIC_R
 public class QueueSelectionTests extends DrillJavaTestBase {
     private static final Logger LOG = Logger.getLogger(QueueSelectionTests.class);
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true, description = "Invoked before every test in the class")
     private void cleanupBeforeTestMethod() {
         Preconditions.checkNotNull(connectionPool,
                 "Cleanup failed! Connection pool has not be instantiated");
@@ -36,7 +36,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
         Utils.restartDrillbits(drillCluster);
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true, description = "Invoked after all tests in the class are executed")
     private void cleanupAfterClass() {
         cleanupBeforeTestMethod();
     }
