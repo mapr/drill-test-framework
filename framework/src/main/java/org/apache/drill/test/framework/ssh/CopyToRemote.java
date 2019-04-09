@@ -19,7 +19,7 @@ import com.jcraft.jsch.ChannelExec;
 /**
  * Represent a scp or copy to remote host task.
  *
- * Code re-used from implementation of CopyToRemote.java in
+ * Code reused from implementation of CopyToRemote.java in
  * {@link - https://repository.mapr.com/nexus/content/groups/mapr-public/com/mapr/db/ycsb-driver/}
  */
 public class CopyToRemote extends SSHTask<CopyToRemote> {

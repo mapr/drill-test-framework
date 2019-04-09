@@ -8,7 +8,7 @@ import java.util.concurrent.Callable;
 /**
  * Class represents an SSH task ro be run on a host.
  *
- * Code re-used from implementation of NodeTask.java in
+ * Code reused from implementation of NodeTask.java in
  * {@link - https://repository.mapr.com/nexus/content/groups/mapr-public/com/mapr/db/ycsb-driver/}
  */
 public abstract class SSHTask<T> implements Callable<T> {

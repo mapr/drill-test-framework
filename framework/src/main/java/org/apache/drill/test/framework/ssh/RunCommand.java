@@ -14,7 +14,7 @@ import com.jcraft.jsch.ChannelExec;
 
 /**
  * Task to run specified command on a remote host.
- * Code re-used from implementation of RunCommand.java in
+ * Code reused from implementation of RunCommand.java in
  * {@link - https://repository.mapr.com/nexus/content/groups/mapr-public/com/mapr/db/ycsb-driver/}
  */
 public class RunCommand extends SSHTask<RunCommand> {

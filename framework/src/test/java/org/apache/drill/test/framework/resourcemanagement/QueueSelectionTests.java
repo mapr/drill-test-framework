@@ -6,6 +6,7 @@ import org.apache.drill.test.framework.common.DrillJavaTestBase;
 import org.apache.drill.test.framework.common.DrillTestNGDefaults;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -28,11 +29,16 @@ public class QueueSelectionTests extends DrillJavaTestBase {
     @BeforeMethod(alwaysRun = true)
     private void cleanupBeforeTestMethod() {
         Preconditions.checkNotNull(connectionPool,
-                "Cleanup before test failed! Connection pool has not be instantiated");
+                "Cleanup failed! Connection pool has not be instantiated");
         Preconditions.checkNotNull(drillCluster,
-                "Cleanup before test failed! Drill cluster information is unavailable");
+                "Cleanup failed! Drill cluster information is unavailable");
         drillCluster.runCommand("rm -rf " + DRILL_RM_OVERRIDE_CONF_FILENAME);
         Utils.restartDrillbits(drillCluster);
+    }
+
+    @AfterClass
+    private void cleanupAfterClass() {
+        cleanupBeforeTestMethod();
     }
 
     /**

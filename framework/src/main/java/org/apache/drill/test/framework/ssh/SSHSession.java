@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  * Represents a SSH session object that can be used to talk to a host as a particular user.
  * These SSH sessions are managed by {@link SessionManager}.
  *
- * Code re-used from implementation of SSHSession.java in
+ * Code reused from implementation of SSHSession.java in
  * {@link - https://repository.mapr.com/nexus/content/groups/mapr-public/com/mapr/db/ycsb-driver/}
  */
 public class SSHSession {

@@ -9,7 +9,7 @@ import com.jcraft.jsch.JSchException;
  * Represents a SSH session manager.
  * Every user and host combination has an entry in the in-memory map.
  *
- * Code re-used from implementation of
+ * Code reused from implementation of SessionManager.java in
  * {@link - https://repository.mapr.com/nexus/content/groups/mapr-public/com/mapr/db/ycsb-driver/}
  */
 public class SessionManager {
