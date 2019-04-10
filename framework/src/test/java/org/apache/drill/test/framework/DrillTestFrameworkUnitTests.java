@@ -190,6 +190,7 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
             operators.forEach(LOG::info);
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.fail(e.getMessage());
         }
     }
 }
