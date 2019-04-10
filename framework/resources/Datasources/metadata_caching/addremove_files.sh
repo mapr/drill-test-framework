@@ -70,6 +70,15 @@ if [ $generatedCachesExists -eq 0 ]; then
   hadoop fs -rm -r /drill/testdata/metadata_caching/generated_caches
 fi
 hadoop fs -mkdir -p /drill/testdata/metadata_caching/generated_caches
-hadoop fs -cp /drill/testdata/metadata_caching/fewtypes/.drill.parquet_metadata.v4 /drill/testdata/metadata_caching/generated_caches/fewtypes_cache.json
-hadoop fs -cp /drill/testdata/metadata_caching/fewtypes_varcharpartition/.drill.parquet_metadata.v4 /drill/testdata/metadata_caching/generated_caches/fewtypes_varcharpartition_cache.json
-hadoop fs -cp /drill/testdata/metadata_caching/lineitem/.drill.parquet_metadata.v4 /drill/testdata/metadata_caching/generated_caches/lineitem_cache.json
+hadoop fs -mkdir -p /drill/testdata/metadata_caching/generated_caches/fewtypes_cache
+hadoop fs -cp -f /drill/testdata/metadata_caching/fewtypes/.drill.parquet_file_metadata.v4 /drill/testdata/metadata_caching/generated_caches/fewtypes_cache/parquet_file_metadata.json
+hadoop fs -cp -f /drill/testdata/metadata_caching/fewtypes/.drill.parquet_summary_metadata.v4 /drill/testdata/metadata_caching/generated_caches/fewtypes_cache/parquet_summary_metadata.json
+
+hadoop fs -mkdir -p /drill/testdata/metadata_caching/generated_caches/fewtypes_varcharpartition_cache
+hadoop fs -cp -f /drill/testdata/metadata_caching/fewtypes_varcharpartition/.drill.parquet_file_metadata.v4 /drill/testdata/metadata_caching/generated_caches/fewtypes_varcharpartition_cache/parquet_file_metadata.json
+hadoop fs -cp -f /drill/testdata/metadata_caching/fewtypes_varcharpartition/.drill.parquet_summary_metadata.v4 /drill/testdata/metadata_caching/generated_caches/fewtypes_varcharpartition_cache/parquet_summary_metadata.json
+
+hadoop fs -mkdir -p /drill/testdata/metadata_caching/generated_caches/lineitem_cache
+hadoop fs -cp -f /drill/testdata/metadata_caching/lineitem/.drill.parquet_file_metadata.v4 /drill/testdata/metadata_caching/generated_caches/lineitem_cache/parquet_file_metadata.json
+hadoop fs -cp -f /drill/testdata/metadata_caching/lineitem/.drill.parquet_summary_metadata.v4 /drill/testdata/metadata_caching/generated_caches/lineitem_cache/parquet_summary_metadata.json
+hadoop fs -cp -f /drill/testdata/metadata_caching/lineitem/.drill.parquet_metadata_directories /drill/testdata/metadata_caching/generated_caches/lineitem_cache/parquet_metadata_directories
