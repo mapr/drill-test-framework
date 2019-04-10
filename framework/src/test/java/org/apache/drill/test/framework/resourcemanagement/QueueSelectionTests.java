@@ -6,9 +6,7 @@ import org.apache.drill.test.framework.common.DrillJavaTestBase;
 import org.apache.drill.test.framework.common.DrillTestNGDefaults;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
+import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_HOME;
 import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_RM_OVERRIDE_CONF_FILENAME;
 import static org.apache.drill.test.framework.common.DrillTestNGDefaults.FUNCTIONAL_GROUP;
 import static org.apache.drill.test.framework.common.DrillTestNGDefaults.NO_RESOURCE_POOL_ERROR;
@@ -26,19 +25,28 @@ import static org.apache.drill.test.framework.common.DrillTestNGDefaults.BASIC_R
 public class QueueSelectionTests extends DrillJavaTestBase {
     private static final Logger LOG = Logger.getLogger(QueueSelectionTests.class);
 
-    @BeforeMethod(alwaysRun = true, description = "Invoked before every test in the class")
-    private void cleanupBeforeTestMethod() {
-        Preconditions.checkNotNull(connectionPool,
-                "Cleanup failed! Connection pool has not be instantiated");
-        Preconditions.checkNotNull(drillCluster,
-                "Cleanup failed! Drill cluster information is unavailable");
-        drillCluster.runCommand("rm -rf " + DRILL_RM_OVERRIDE_CONF_FILENAME);
+    @BeforeClass(alwaysRun = true, description = "Invoked before all tests in the class")
+    private void setup() throws IOException {
+        cleanup(false);
+        DrillRMConfig config = DrillRMConfig.load(BASIC_RM_CONFIG_NAME);
+        Utils.applyRMConfigToDrillCluster(config, drillCluster);
         Utils.restartDrillbits(drillCluster);
     }
 
     @AfterClass(alwaysRun = true, description = "Invoked after all tests in the class are executed")
-    private void cleanupAfterClass() {
-        cleanupBeforeTestMethod();
+    private void cleanup() {
+        cleanup(true);
+    }
+
+    private void cleanup(final boolean restart) {
+        Preconditions.checkNotNull(connectionPool,
+                "Cleanup failed! Connection pool has not be instantiated");
+        Preconditions.checkNotNull(drillCluster,
+                "Cleanup failed! Drill cluster information is unavailable");
+        drillCluster.runCommand("rm -rf " + DRILL_HOME + "/conf/" + DRILL_RM_OVERRIDE_CONF_FILENAME);
+        if(restart) {
+            Utils.restartDrillbits(drillCluster);
+        }
     }
 
     /**
@@ -62,11 +70,6 @@ public class QueueSelectionTests extends DrillJavaTestBase {
         //Build a connection with queryTag
         final Properties props = Utils.createConnectionProperties(
                 "dfs.drilltestdirtpch01parquet", null, queryTag);
-
-        //Create a RM config from existing template
-        DrillRMConfig config = DrillRMConfig.load(BASIC_RM_CONFIG_NAME);
-        Utils.applyRMConfigToDrillCluster(config, drillCluster);
-        Utils.restartDrillbits(drillCluster);
 
         try(Connection conn = ConnectionPool
                 .createConnection(
@@ -122,11 +125,6 @@ public class QueueSelectionTests extends DrillJavaTestBase {
         final Properties props = Utils.createConnectionProperties(
                 "dfs.drilltestdirtpch01parquet", null, null);
 
-        //Create a RM config from existing template
-        DrillRMConfig config = DrillRMConfig.load(BASIC_RM_CONFIG_NAME);
-        Utils.applyRMConfigToDrillCluster(config, drillCluster);
-        Utils.restartDrillbits(drillCluster);
-
         try(Connection conn = ConnectionPool
                 .createConnection(
                         DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillCluster.getHosts().get(0)),
@@ -143,6 +141,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
 
             //Validate that the query was allowed into the queue
             Assert.assertEquals(queryProfile.queueName, expectedPoolName, "The pool names do not match!");
+            LOG.info("QueryID: " + queryId + ", Queue: " + queryProfile.queueName);
 
             long rowCount = 0;
             while(res.next()) {
@@ -180,14 +179,11 @@ public class QueueSelectionTests extends DrillJavaTestBase {
         final Properties props = Utils.createConnectionProperties(
                 "dfs.drilltestdirtpch01parquet", null, queryTag);
 
-        //Create a RM config from existing template
-        DrillRMConfig config = DrillRMConfig.load(BASIC_RM_CONFIG_NAME);
-        Utils.applyRMConfigToDrillCluster(config, drillCluster);
-        Utils.restartDrillbits(drillCluster);
-
         try(Connection conn = ConnectionPool
                 .createConnection(DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(
                         drillCluster.getHosts().get(0)),
+                        "mapr",
+                        null,
                         props); //Create a connection based on hostname and properties
 
             Statement stmt = conn.createStatement();
@@ -199,6 +195,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
 
             //Validate that the query was allowed into the queue
             Assert.assertEquals(queryProfile.queueName, expectedPoolName, "The pool names do not match!");
+            LOG.info("QueryID: " + queryId + ", Queue: " + queryProfile.queueName);
 
             long rowCount = 0;
             while(res.next()) {
@@ -229,11 +226,6 @@ public class QueueSelectionTests extends DrillJavaTestBase {
                 "DESC limit 1";
         final Properties props = Utils.createConnectionProperties("dfs.drilltestdirtpch01parquet",
                 null, null); //NO Query Tags
-
-        //Create a RM config from existing template
-        DrillRMConfig config = DrillRMConfig.load(BASIC_RM_CONFIG_NAME);
-        Utils.applyRMConfigToDrillCluster(config, drillCluster);
-        Utils.restartDrillbits(drillCluster);
 
         try(Connection conn = ConnectionPool
                 .createConnection(DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillCluster.getHosts().get(0)),
