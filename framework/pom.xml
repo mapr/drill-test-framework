@@ -209,6 +209,31 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>pl.project13.maven</groupId>
+        <artifactId>git-commit-id-plugin</artifactId>
+        <version>2.2.5</version>
+        <executions>
+          <execution>
+            <id>get-the-git-infos</id>
+            <goals>
+              <goal>revision</goal>
+            </goals>
+          </execution>
+        </executions>
+
+        <configuration>
+          <dotGitDirectory>${project.basedir}/../.git</dotGitDirectory>
+          <generateGitPropertiesFile>true</generateGitPropertiesFile>
+          <generateGitPropertiesFilename>${project.basedir}/../git.properties</generateGitPropertiesFilename>
+          <failOnNoGitDirectory>false</failOnNoGitDirectory>
+          <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
+          <gitDescribe>
+            <always>false</always>
+            <forceLongFormat>true</forceLongFormat>
+          </gitDescribe>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <profiles>

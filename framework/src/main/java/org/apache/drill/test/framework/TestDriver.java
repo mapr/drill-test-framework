@@ -106,6 +106,12 @@ public class TestDriver {
   }
 
   public int runTests() throws Exception {
+
+    LOG.info(DrillTestDefaults.LINE_BREAK +
+        "\nDRILL TEST FRAMEWORK VERSION\n" +
+        DrillTestDefaults.LINE_BREAK + "\n" +
+        Utils.getFrameworkVersion() + "\n" +
+        DrillTestDefaults.LINE_BREAK + "\n");
    
     List<List<DrillTest>> executionFailureExceptions=Lists.newArrayList(); 
     for(int ii=0;ii<DrillTestDefaults.DRILL_EXCEPTION_REGEXES.length;ii++){

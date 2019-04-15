@@ -18,6 +18,7 @@
 package org.apache.drill.test.framework;
 
 import com.google.common.base.Preconditions;
+import oadd.org.apache.drill.exec.proto.UserBitShared;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.*;
@@ -46,6 +47,7 @@ import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -53,6 +55,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.io.Resources;
 
 import org.apache.drill.test.framework.ssh.DrillCluster;
 import org.apache.http.HttpResponse;
@@ -1073,7 +1076,6 @@ public class Utils {
     return true;
   }
 
-
   /**
    * Restart drillbits, ignore IOExceptions, if any.
    * This version of the utility uses the restart drillbit script configured.
@@ -1132,5 +1134,26 @@ public class Utils {
   @SuppressWarnings("unchecked")
   public static <E extends Throwable> void sneakyThrow(Throwable e) throws E {
     throw (E) e;
+  }
+  
+  public static String getFrameworkVersion() {
+    String commitID = "";
+    String commitAuthor = "";
+    String commitEmail = "";
+    String commitMessage = "";
+    try {
+      URL u = Resources.getResource("git.properties");
+      if (u != null) {
+        Properties p = new Properties();
+        p.load(Resources.asByteSource(u).openStream());
+        commitID = p.getProperty("git.commit.id");
+        commitAuthor = p.getProperty("git.commit.user.name");
+        commitEmail = p.getProperty("git.commit.user.email");
+        commitMessage = p.getProperty("git.commit.message.short");
+      }
+    } catch (IOException | IllegalArgumentException e) {
+      LOG.warn("Failure while trying to load \"git.properties\" file.", e);
+    }
+    return String.format("Commit: %s\nAuthor: %s <%s>\n\n%s", commitID, commitAuthor, commitEmail, commitMessage);
   }
 }
