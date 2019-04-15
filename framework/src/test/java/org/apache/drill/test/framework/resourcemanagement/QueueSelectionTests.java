@@ -119,7 +119,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
         final long expectedOrderId = 60000;
         final String expectedPoolName = "TestPool";
         final int expectedRowCount = 1;
-        final String expectedUsername = "mapr";
+        final String expectedUser = "bob";
 
         //Build a connection with only schema
         final Properties props = Utils.createConnectionProperties(
@@ -128,7 +128,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
         try(Connection conn = ConnectionPool
                 .createConnection(
                         DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillCluster.getHosts().get(0)),
-                        expectedUsername, //Provide username for the connection
+                        expectedUser, //Provide username for the connection
                         null,
                         props);
 
@@ -151,6 +151,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
 
             }
             Assert.assertEquals(rowCount, expectedRowCount, "Number of rows returned did not match!");
+            Assert.assertEquals(queryProfile.user, expectedUser);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());
@@ -175,6 +176,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
         final long expectedOrderId = 60000;
         final String expectedPoolName = "DevPool"; //As per "bestfit" policy
         final int expectedRowCount = 1;
+        final String user = "bob";
 
         final Properties props = Utils.createConnectionProperties(
                 "dfs.drilltestdirtpch01parquet", null, queryTag);
@@ -182,7 +184,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
         try(Connection conn = ConnectionPool
                 .createConnection(DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(
                         drillCluster.getHosts().get(0)),
-                        "mapr",
+                        user,
                         null,
                         props); //Create a connection based on hostname and properties
 
@@ -192,6 +194,9 @@ public class QueueSelectionTests extends DrillJavaTestBase {
             LOG.info("Query ID: " + queryId + ", Query: " + query);
 
             final DrillQueryProfile queryProfile = Utils.getQueryProfile(queryId); //Get query profile
+
+            Assert.assertEquals(queryProfile.user, user, "Query user did not match for queryID: " +
+                    queryId + " !");
 
             //Validate that the query was allowed into the queue
             Assert.assertEquals(queryProfile.queueName, expectedPoolName, "The pool names do not match!");
@@ -219,7 +224,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
      * @throws IOException
      */
     @Test(groups = FUNCTIONAL_GROUP)
-    public void testTagAndAclDoesNotAllowQuery() throws IOException {
+    public void testUnknownUserDoesNotAllowQuery() throws IOException {
         final String query = "SELECT o_orderkey " +
                 "FROM orders " +
                 "ORDER BY o_orderkey " +
@@ -231,6 +236,41 @@ public class QueueSelectionTests extends DrillJavaTestBase {
                 .createConnection(DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillCluster.getHosts().get(0)),
                         "anonymous",
                         null,
+                        props);
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery(query)) {
+            final String queryId = Utils.getQueryID(res); //Get query id
+            LOG.info("Query ID: " + queryId + ", Query: " + query);
+
+            Utils.getQueryProfile(queryId); //Get query profile
+            Assert.fail("Did not receive expected exception: " + NO_RESOURCE_POOL_ERROR);
+        } catch (Exception e) {
+            if (e.getMessage().contains(NO_RESOURCE_POOL_ERROR)) {
+                LOG.info("Received expected exception: " + e.getMessage());
+            } else {
+                e.printStackTrace();
+                Assert.fail(e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Validates that an unknown tag is not wrongly admitted into the queue.
+     *
+     * @throws IOException
+     */
+    @Test(groups = FUNCTIONAL_GROUP)
+    public void testUnknownTagDoesNotAllowQuery() {
+        final String query = "SELECT o_orderkey " +
+                "FROM orders " +
+                "ORDER BY o_orderkey " +
+                "DESC limit 1";
+        final String queryTag = "marketing"; //This tag is not configured for basic RM template
+        final Properties props = Utils.createConnectionProperties("dfs.drilltestdirtpch01parquet",
+                null, queryTag); //NO Query Tags
+
+        try(Connection conn = ConnectionPool
+                .createConnection(DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillCluster.getHosts().get(0)),
                         props);
             Statement stmt = conn.createStatement();
             ResultSet res = stmt.executeQuery(query)) {
