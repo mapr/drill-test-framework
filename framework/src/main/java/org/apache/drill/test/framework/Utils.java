@@ -452,8 +452,13 @@ public class Utils {
             } else {
               // if expected results file with driver extension exists, then use it
               //     i.e. query.e_tsv.sjdbc
-              // else if expected result file with driver extension and .fail exists, and skip this test
+              // else if expected result file with driver extension and .fail exists,
+              // and skip this test
               //     i.e. query.e_tsv.sjdbc.fail
+              // else if expected result file with driver extension and .fail exists,
+              // and skip this test
+              //     i.e. query.e_tsv.xxx.sjdbc.fail where 'xxx' can be anything, such as a jira
+              //     i.e. query.e_tsv.md4862.sjdbc.fail
               // else use Apache.
               Filename = queryFile.substring(0, idx).concat(expectedFileExt.substring(2));
               FilenameJDBC = Filename.concat(".").concat(driverExt);
@@ -466,7 +471,24 @@ public class Utils {
                 if (driverFile.exists()) {
                   return null;
                 } else {
-                  return Filename;
+                  File parent = driverFile.getParentFile();
+                  String basename = Filename.substring(Filename.lastIndexOf('/') + 1);
+                  File[] listOfFiles = parent.listFiles();
+                  boolean FOUNDFAILED = false;
+                  for (File file: listOfFiles) {
+                    if (file.isFile()) {
+                      if (file.getName().startsWith(basename) &&
+                          file.getName().endsWith(".sjdbc.fail")) {
+                        FOUNDFAILED = true;
+                        break;
+                      }
+                    }
+                  }
+                  if (FOUNDFAILED) {
+                    return null;
+                  } else {
+                    return Filename;
+                  }
                 }
               }
             }

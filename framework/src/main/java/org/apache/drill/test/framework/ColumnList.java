@@ -19,6 +19,7 @@ package org.apache.drill.test.framework;
 
 import java.math.BigDecimal;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -91,6 +92,32 @@ public class ColumnList {
     return hash;
   }
 
+  // remove spaces unless they are in a string
+  private List<String> splitStringBySpace(String input) {
+    List<String> result = new ArrayList<String>();
+    int start = 0;
+    boolean inQuotes = false;
+    for (int current = 0; current < input.length(); current++) {
+        if (input.charAt(current) == '\"') inQuotes = !inQuotes; // toggle state
+        boolean atLastChar = (current == input.length() - 1);
+        if(atLastChar) result.add(input.substring(start));
+        else if (input.charAt(current) == ' ' && !inQuotes) {
+            result.add(input.substring(start, current));
+            start = current + 1;
+        }
+    }
+    return result;
+  }
+
+  private String removeStringSpace(String input) {
+    List<String> tokens = splitStringBySpace(input);
+    StringBuilder sb = new StringBuilder();
+    for(String t : tokens) {
+      sb.append(t);
+    }
+    return sb.toString();
+  }
+
   /**
    * String representation of the ColumnList object
    */
@@ -101,14 +128,17 @@ public class ColumnList {
       int type = (Integer) (types.get(i));
       if (Simba && (type == Types.VARCHAR)) {
         String s1 = String.valueOf(values.get(i));
-        // if the field has a JSON string or list, then remove newlines so that
-        // each record fits on a single line in the actual output file.
-        // sometimes Drill returns records in different orders, and by
-        // ensuring each reoord is on a single line, they can be matched in any
-        // order
+        // Sometimes Simba returns records that span multiple lines.
+        // If the field has a JSON string or list, then remove newlines
+        // so that each record fits on a single line in the actual output
+        // file.  json/json_kvgenflatten/kvgen/kvgen7.q
+        // Also, sometimes Simba returns varchars with white spaces
+        // in different places.  Remove the white space.
+        // convert/convert32.q
         if ((s1.length() > 0) &&
            ((s1.charAt(0) == '{') || (s1.charAt(0) == '[')) ) {
           s1 = Utils.removeNewLines(s1);
+          s1 = removeStringSpace(s1);
           values.set(i, s1);
         }
       }
@@ -117,14 +147,17 @@ public class ColumnList {
     int type = (Integer) (types.get(values.size()-1));
     if (Simba && (type == Types.VARCHAR)) {
       String s1 = String.valueOf(values.get(values.size()-1));
-      // if the field has a JSON string or list, then remove newlines so that
-      // each record fits on a single line in the actual output file.
-      // sometimes Drill returns records in different orders, and by
-      // ensuring each reoord is on a single line, they can be matched in any
-      // order
+      // Sometimes Simba returns records that span multiple lines.
+      // If the field has a JSON string or list, then remove newlines
+      // so that each record fits on a single line in the actual output
+      // file.  json/json_kvgenflatten/kvgen/kvgen7.q
+      // Also, sometimes Simba returns varchars with white spaces
+      // in different places.  Remove the white space.
+      // convert/convert32.q
       if ((s1.length() > 0) &&
          ((s1.charAt(0) == '{') || (s1.charAt(0) == '[')) ) {
         s1 = Utils.removeNewLines(s1);
+        s1 = removeStringSpace(s1);
         values.set(values.size()-1, s1);
       }
     }
