@@ -1,0 +1,1 @@
+select dir0 from dfs.drillTestDir.`/partition_pruning/dfs/orders` group by dir0;
