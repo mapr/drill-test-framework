@@ -36,6 +36,9 @@ public class DrillRMConfig implements DrillConfigRenderer {
     //Selector Configurations
     public static final String SELECTOR_TAG_KEY = "tag";
     public static final String SELECTOR_ACL_KEY = "acl";
+    public static final String SELECTOR_OR_KEY = "or";
+    public static final String SELECTOR_AND_KEY = "and";
+    public static final String SELECTOR_NOT_EQUAL_KEY = "not_equal";
 
     //ACL Configurations
     public static final String ACL_USERS_KEY = "users";
@@ -74,8 +77,10 @@ public class DrillRMConfig implements DrillConfigRenderer {
     public static class SelectorConfig implements DrillConfigRenderer {
 
         public String tag;
-
         public AclConfig acl;
+        public SelectorConfig not_equal;
+        public List<SelectorConfig> or;
+        public List<SelectorConfig> and;
 
         @Override
         public String render() {
@@ -96,6 +101,21 @@ public class DrillRMConfig implements DrillConfigRenderer {
             if (acl != null) {
                 ensureAtleastOneField = true;
                 sb.append(formatConfig(nextAcc, SELECTOR_ACL_KEY, acl));
+            }
+
+            if (not_equal != null) {
+                ensureAtleastOneField = true;
+                sb.append(formatConfig(nextAcc, SELECTOR_NOT_EQUAL_KEY, not_equal));
+            }
+
+            if (or != null) {
+                ensureAtleastOneField = true;
+                sb.append(formatConfig(nextAcc, SELECTOR_OR_KEY, or));
+            }
+
+            if (and != null) {
+                ensureAtleastOneField = true;
+                sb.append(formatConfig(nextAcc, SELECTOR_AND_KEY, and));
             }
 
             if(ensureAtleastOneField) {
@@ -119,7 +139,6 @@ public class DrillRMConfig implements DrillConfigRenderer {
     public static class AclConfig implements DrillConfigRenderer {
 
         public List<String> users;
-
         public List<String> groups;
 
         @Override

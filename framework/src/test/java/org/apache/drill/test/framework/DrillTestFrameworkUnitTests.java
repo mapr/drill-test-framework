@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Properties;
 
 import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_EXEC_RM_CONFIG_KEY;
+import static org.apache.drill.test.framework.common.DrillTestNGDefaults.BASIC_RM_CONFIG_FILEPATH;
 import static org.apache.drill.test.framework.common.DrillTestNGDefaults.UNIT_GROUP;
 import static org.apache.drill.test.framework.common.DrillTestNGDefaults.PROD_RM_CONFIG_FILEPATH;
 
@@ -90,6 +91,22 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
 
             Assert.assertEquals(drillRMConfig.childPools.size(), 2,
                     "Number of child pools in the config did not match!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail(e.getMessage());
+        }
+    }
+
+    /**
+     * Test reading a sample RM config file, with complex selectors, in to a Java Bean.
+     */
+    @Test(groups = UNIT_GROUP)
+    public void testReadComplexSelectorsRMConfigFile() {
+        try {
+            DrillRMConfig drillRMConfig = DrillRMConfig.load(BASIC_RM_CONFIG_FILEPATH);
+            Assert.assertEquals(drillRMConfig.childPools.get(1).selector.or.size(), 2,
+                    "Or selector should have had 2 children!");
+
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());
