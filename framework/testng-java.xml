@@ -4,6 +4,7 @@
         <classes>
             <class name="org.apache.drill.test.framework.DrillTestFrameworkUnitTests" />
             <class name="org.apache.drill.test.framework.resourcemanagement.QueueSelectionTests" />
+            <class name="org.apache.drill.test.framework.resourcemanagement.QueuePlannerTests" />
         </classes>
         <groups>
             <run>

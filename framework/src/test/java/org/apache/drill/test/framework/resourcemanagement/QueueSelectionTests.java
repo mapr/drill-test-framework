@@ -16,9 +16,7 @@ import java.util.Properties;
 
 import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_HOME;
 import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_RM_OVERRIDE_CONF_FILENAME;
-import static org.apache.drill.test.framework.common.DrillTestNGDefaults.FUNCTIONAL_GROUP;
-import static org.apache.drill.test.framework.common.DrillTestNGDefaults.NO_RESOURCE_POOL_ERROR;
-import static org.apache.drill.test.framework.common.DrillTestNGDefaults.BASIC_RM_CONFIG_NAME;
+import static org.apache.drill.test.framework.common.DrillTestNGDefaults.*;
 
 @SuppressWarnings("Duplicates")
 @Test(groups = FUNCTIONAL_GROUP)
@@ -28,7 +26,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
     @BeforeClass(alwaysRun = true, description = "Invoked before all tests in the class")
     private void setup() throws IOException {
         cleanup(false);
-        DrillRMConfig config = DrillRMConfig.load(BASIC_RM_CONFIG_NAME);
+        DrillRMConfig config = DrillRMConfig.load(BASIC_RM_CONFIG_FILEPATH);
         Utils.applyRMConfigToDrillCluster(config, drillCluster);
         Utils.restartDrillbits(drillCluster);
     }
@@ -69,7 +67,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
 
         //Build a connection with queryTag
         final Properties props = Utils.createConnectionProperties(
-                "dfs.drilltestdirtpch01parquet", null, queryTag);
+                TPCH_01_PARQUET_SCHEMA, null, queryTag);
 
         try(Connection conn = ConnectionPool
                 .createConnection(
@@ -123,7 +121,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
 
         //Build a connection with only schema
         final Properties props = Utils.createConnectionProperties(
-                "dfs.drilltestdirtpch01parquet", null, null);
+                TPCH_01_PARQUET_SCHEMA, null, null);
 
         try(Connection conn = ConnectionPool
                 .createConnection(
@@ -179,7 +177,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
         final String user = "bob";
 
         final Properties props = Utils.createConnectionProperties(
-                "dfs.drilltestdirtpch01parquet", null, queryTag);
+                TPCH_01_PARQUET_SCHEMA, null, queryTag);
 
         try(Connection conn = ConnectionPool
                 .createConnection(DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(
@@ -229,7 +227,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
                 "FROM orders " +
                 "ORDER BY o_orderkey " +
                 "DESC limit 1";
-        final Properties props = Utils.createConnectionProperties("dfs.drilltestdirtpch01parquet",
+        final Properties props = Utils.createConnectionProperties(TPCH_01_PARQUET_SCHEMA,
                 null, null); //NO Query Tags
 
         try(Connection conn = ConnectionPool
@@ -266,7 +264,7 @@ public class QueueSelectionTests extends DrillJavaTestBase {
                 "ORDER BY o_orderkey " +
                 "DESC limit 1";
         final String queryTag = "marketing"; //This tag is not configured for basic RM template
-        final Properties props = Utils.createConnectionProperties("dfs.drilltestdirtpch01parquet",
+        final Properties props = Utils.createConnectionProperties(TPCH_01_PARQUET_SCHEMA,
                 null, queryTag); //NO Query Tags
 
         try(Connection conn = ConnectionPool

@@ -163,7 +163,7 @@ public class DrillRMConfig implements DrillConfigRenderer {
     public static class QueueConfig implements DrillConfigRenderer {
 
         @JsonProperty(QUEUE_MAX_QUERY_MEMORY_PER_NODE_KEY)
-        public long maxQueryMemoryPerNodeInMB;
+        public long maxQueryMemoryPerNode; //in bytes
 
         @JsonProperty(QUEUE_MAX_WAITING_KEY)
         public int maxWaitingQueries;
@@ -185,9 +185,9 @@ public class DrillRMConfig implements DrillConfigRenderer {
             StringBuilder sb = new StringBuilder("{\n");
             final int nextAcc = acc+2;
 
-            if (maxQueryMemoryPerNodeInMB > 0) {
+            if (maxQueryMemoryPerNode > 0) {
                 ensureAtleastOneField = true;
-                sb.append(formatConfig(nextAcc, QUEUE_MAX_QUERY_MEMORY_PER_NODE_KEY, maxQueryMemoryPerNodeInMB));
+                sb.append(formatConfig(nextAcc, QUEUE_MAX_QUERY_MEMORY_PER_NODE_KEY, maxQueryMemoryPerNode));
             }
 
             if (maxWaitingQueries > 0) {
