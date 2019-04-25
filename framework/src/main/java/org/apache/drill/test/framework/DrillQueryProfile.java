@@ -234,15 +234,14 @@ public class DrillQueryProfile {
                 .collect(Collectors.groupingBy(m -> m.endpoint.address))
                 .entrySet()
                 .stream()
-                .collect(Collectors
-                                .toMap(Map.Entry::getKey,
-                                        e -> e.getValue()
-                                                .stream()
-                                                .flatMap(m -> m.operatorProfiles
-                                                        .stream()
-                                                        .filter(o -> o.operatorId == operator.getNumber()))
-                                        .mapToLong(o -> o.optimalMemAllocation)
-                                        .sum()))
+                .collect(Collectors.toMap(Map.Entry::getKey,
+                        e -> e.getValue()
+                                .stream()
+                                .flatMap(m -> m.operatorProfiles
+                                        .stream()
+                                        .filter(o -> o.operatorId == operator.getNumber()))
+                                .mapToLong(o -> o.optimalMemAllocation)
+                                .sum()))
                 .entrySet()
                 .stream()
                 .mapToLong(Map.Entry::getValue)
