@@ -5,6 +5,8 @@ cd ${bin}/../framework
 source ../conf/drillTestConfig.properties
 if [[ $1 == "-Dtest="* ]]; then
   mvn test $*
+elif [[ $1 == "-h" || $1 == "-help" ]]; then
+  echo "bin/runtestng [-Dtest=<class_name>[#<method_name>]]"
 else
   echo "Running the entire Suite"
   mvn test -Ptestng $*
