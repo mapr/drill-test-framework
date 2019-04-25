@@ -227,8 +227,10 @@ public class DrillQueryProfile {
      * @return
      */
     public long getOptimalMemoryPerOperatorPerNode(final UserBitShared.CoreOperatorType operator) {
-        return this.fragmentProfiles.stream().flatMap(f -> f.minorFragmentProfiles
-                .stream())
+        return this.fragmentProfiles
+                .stream()
+                .flatMap(f -> f.minorFragmentProfiles
+                        .stream())
                 .collect(Collectors.groupingBy(m -> m.endpoint.address))
                 .entrySet()
                 .stream()
