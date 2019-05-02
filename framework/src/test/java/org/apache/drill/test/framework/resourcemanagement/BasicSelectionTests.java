@@ -20,8 +20,8 @@ import static org.apache.drill.test.framework.common.DrillTestNGDefaults.*;
 
 @SuppressWarnings("Duplicates")
 @Test(groups = FUNCTIONAL_GROUP)
-public class QueueSelectionTests extends DrillJavaTestBase {
-    private static final Logger LOG = Logger.getLogger(QueueSelectionTests.class);
+public class BasicSelectionTests extends DrillJavaTestBase {
+    private static final Logger LOG = Logger.getLogger(BasicSelectionTests.class);
 
     @BeforeClass(alwaysRun = true, description = "Invoked before all tests in the class")
     private void setup() throws IOException {
@@ -284,6 +284,61 @@ public class QueueSelectionTests extends DrillJavaTestBase {
                 e.printStackTrace();
                 Assert.fail(e.getMessage());
             }
+        }
+    }
+
+    /**
+     * Test validates that user in Acl is evaluated and the right queue is picked based on the Acl.
+     *
+     * @throws IOException
+     */
+    @Test(groups = FUNCTIONAL_GROUP)
+    public void testAclComplexUserOr() throws IOException {
+        final String query = "SELECT o_orderkey " +
+                "FROM orders " +
+                "ORDER BY o_orderkey " +
+                "DESC limit 1";
+
+        //Set expectations
+        final long expectedOrderId = 60000;
+        final String expectedPoolName = "TestPool";
+        final int expectedRowCount = 1;
+        final String expectedUser = "alice";
+
+        //Build a connection with only schema
+        final Properties props = Utils.createConnectionProperties(
+                TPCH_01_PARQUET_SCHEMA, null, null);
+
+        try(Connection conn = ConnectionPool
+                .createConnection(
+                        DrillTestNGDefaults.CONNECTION_URL_FOR_DRILLBIT(drillCluster.getHosts().get(0)),
+                        expectedUser, //Provide username for the connection
+                        null,
+                        props);
+
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery(query)) {
+            final String queryId = Utils.getQueryID(res); //Get query id
+            LOG.info("Query ID: " + queryId + ", Query: " + query);
+
+            final DrillQueryProfile queryProfile = Utils.getQueryProfile(queryId); //Get query profile
+
+            //Validate that the query was allowed into the queue
+            Assert.assertEquals(queryProfile.queueName, expectedPoolName, "The pool names do not match!");
+            LOG.info("QueryID: " + queryId + ", Queue: " + queryProfile.queueName);
+
+            long rowCount = 0;
+            while(res.next()) {
+                rowCount++;
+                Assert.assertEquals(res.getLong("o_orderkey"), expectedOrderId,
+                        "OrderId expected did not match");
+
+            }
+            Assert.assertEquals(rowCount, expectedRowCount, "Number of rows returned did not match!");
+            Assert.assertEquals(queryProfile.user, expectedUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail(e.getMessage());
         }
     }
 }

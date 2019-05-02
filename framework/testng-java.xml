@@ -3,7 +3,9 @@
     <test name="Resource Management Tests">
         <classes>
             <class name="org.apache.drill.test.framework.DrillTestFrameworkUnitTests" />
-            <class name="org.apache.drill.test.framework.resourcemanagement.QueueSelectionTests" />
+            <class name="org.apache.drill.test.framework.resourcemanagement.BasicSelectionTests" />
+            <class name="org.apache.drill.test.framework.resourcemanagement.AdvancedSelectionTests" />
+            <class name="org.apache.drill.test.framework.resourcemanagement.CustomSelectionTests" />
             <class name="org.apache.drill.test.framework.resourcemanagement.QueuePlannerTests" />
         </classes>
         <groups>
