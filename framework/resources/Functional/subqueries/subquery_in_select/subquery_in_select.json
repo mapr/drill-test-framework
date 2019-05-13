@@ -1,0 +1,28 @@
+{
+  "testId": "subqueries_in_select_statement",
+  "type": "group",
+  "description": "Testing subqueries in the SELECT statement. Initiated by DRILL-7050",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+       "mode": "gen",
+       "src": "Datasources/ctas/subqueries/subqueries_select.sh",
+       "dest": ""
+    }
+  ]
+}
+
