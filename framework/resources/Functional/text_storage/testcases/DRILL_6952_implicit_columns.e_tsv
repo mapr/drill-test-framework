@@ -1,0 +1,10 @@
+["0","AFRICA","lar deposits. blithely final packages cajole. regular waters are final requests. regular accounts are according to "]	null	null	VARCHAR	VARCHAR
+["1","AMERICA","hs use ironic, even requests. s"]	null	null	VARCHAR	VARCHAR
+["2","ASIA","ges. thinly even pinto beans ca"]	null	null	VARCHAR	VARCHAR
+["3","EUROPE","ly final courts cajole furiously final excuse"]	null	null	VARCHAR	VARCHAR
+["4","MIDDLE EAST","uickly special accounts cajole carefully blithely close requests. carefully final asymptotes haggle furiousl"]	null	null	VARCHAR	VARCHAR
+["0","AFRICA","lar deposits. blithely final packages cajole. regular waters are final requests. regular accounts are according to "]	nested	null	VARCHAR	VARCHAR
+["1","AMERICA","hs use ironic, even requests. s"]	nested	null	VARCHAR	VARCHAR
+["2","ASIA","ges. thinly even pinto beans ca"]	nested	null	VARCHAR	VARCHAR
+["3","EUROPE","ly final courts cajole furiously final excuse"]	nested	null	VARCHAR	VARCHAR
+["4","MIDDLE EAST","uickly special accounts cajole carefully blithely close requests. carefully final asymptotes haggle furiousl"]	nested	null	VARCHAR	VARCHAR

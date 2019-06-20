@@ -547,6 +547,12 @@
         "extensions" : [ "csv" ],
         "delimiter" : ","
       },
+      "csvh": {
+        "type": "text",
+        "extensions": [ "csvh" ],
+        "extractHeader": true,
+        "delimiter": ","
+      },
       "tsv" : {
         "type" : "text",
         "extensions" : [ "tsv" ],
