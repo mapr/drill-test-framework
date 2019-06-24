@@ -1,31 +1,31 @@
 {
-    "testId": "textRead",
-    "type": "group",
-    "description": "Test text read queries",
-    "categories": [
-        "functional"
-    ],
-    "matrices": [
-        {
-            "query-file": ".*.q",
-            "schema": "dfs",
-            "output-format": "tsv",
-            "expected-file": ".*.e_tsv",
-            "verification-type": [
-                "in-memory"
-            ]
-        }
-    ],
-    "datasources": [
-	{
-		"mode": "cp",
-		"src": "Datasources/text_storage",
-		"dest": "text_storage"
-	},
-        {
-         "mode": "gen",
-         "src": "Datasources/text_storage/drill-4484.sh",
-         "dest": ""
-      }
-    ]
+  "testId": "textRead",
+  "type": "group",
+  "description": "Test text read queries",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/text_storage",
+      "dest": "text_storage"
+    },
+    {
+      "mode": "gen",
+      "src": "Datasources/text_storage/drill-4484.sh",
+      "dest": ""
+    }
+  ]
 }
