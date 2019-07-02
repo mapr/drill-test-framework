@@ -1,2 +1,2 @@
-Filter\(condition=\[>\(\$0, 94700\.999\)\]\)
+Filter\(condition=\[>\(\$0, 94700\.999:DECIMAL\(\d+, \d+\)\)\]\)
 Scan.*numFiles=9.*numRowGroups=9.*usedMetadataFile=false.*columns=\[`l_extendedprice`, `l_orderkey`, `l_shipmode`, `l_tax`\]
