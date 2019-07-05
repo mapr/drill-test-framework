@@ -1,2 +1,2 @@
-Filter\(condition=\[>\(\$1, 999\.9\)\]\)
+Filter\(condition=\[>\(\$1, 999\.9:DECIMAL\(\d+, \d+\)\)\]\)
 Scan.*HiveDrillNativeParquetScan.*numFiles=18.*numRowGroups=18.*columns=\[`ps_availqty`, `ps_supplycost`, `ps_comment`\]

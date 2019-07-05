@@ -11,7 +11,7 @@ select
  		--sum(case when a.d28 = 0 then 100 else round(a.d28/12) end) as case_in_sum_d28,
  		cast(sum(case when a.d28 = 0 then 100 else round(a.d28/12) end) as bigint) as case_in_sum_d28,
  		--coalesce(sum(case when a.d28 = 0 then 100 else round(a.d28/12) end), 0) as case_in_sum_d28
- 		cast(coalesce(sum(case when a.d28 = 0 then 100 else round(a.d28/12) end), 0) as bigint) as case_in_sum_d28
+ 		cast(coalesce(sum(case when a.d28 = 0 then 100 else round(a.d28/12) end), 0) as bigint) as case_in_sum_d28_0
  
 from
  		alltypes_with_nulls_v a

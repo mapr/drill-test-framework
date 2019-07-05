@@ -1,4 +1,4 @@
-Filter\(condition=\[AND\(<=\(\$1, 1\), >=\(\$2, 0\.08\), <=\(\$2, 0\.09\), =\(\$3, 0\)\)\]\)
+Filter\(condition=\[AND\(<=\(\$1, 1\), >=\(\$2, 0\.08:DECIMAL\(\d+, \d+\)\), <=\(\$2, 0\.09:DECIMAL\(\d+, \d+\)\), =\(\$3, 0\)\)\]\)
 Scan.*numFiles=5.*numRowGroups=5.*usedMetadataFile=false.*columns=\[`l_partkey`, `l_quantity`, `l_discount`, `l_tax`, `l_suppkey`\]
 .*
 Filter\(condition=\[<\(\$1, 5\)\]\)
