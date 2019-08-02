@@ -91,6 +91,10 @@ public class TestCaseModeler {
     // TODO: The below code can be reused when we decide to have username & password at suite level
     public String username = DrillTestDefaults.USERNAME;
     public String password = DrillTestDefaults.PASSWORD;
+    @JsonProperty("float-precision")
+    public double floatPrecision = 1.0E-6;
+    @JsonProperty("double-precision")
+    public double doublePrecision = 1.0E-12;
     @JsonProperty("verification-type")
     public List<String> verificationTypes;
 

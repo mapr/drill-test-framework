@@ -12,6 +12,7 @@
             "schema": "mfs.tpch_sf1_maprdb_json",
             "output-format": "tsv",
             "expected-file": ".*.e_tsv",
+            "double-precision": 1.0E-11,
             "verification-type": [
                 "in-memory"
             ]

@@ -107,7 +107,7 @@ public class DrillTestOdbc implements DrillTest{
 
       switch (cmdConsOut.exitCode) {
       case 0:
-        TestVerifier testVerifier = new TestVerifier(columnTypes, query, columnLabels, matrix.verificationTypes);
+        TestVerifier testVerifier = new TestVerifier(columnTypes, query, columnLabels, matrix);
         try {
           if (query.startsWith("explain") || matrix.verificationTypes.get(0).equalsIgnoreCase("regex") ||
                 matrix.verificationTypes.get(0).equalsIgnoreCase("regex-no-order") ||
