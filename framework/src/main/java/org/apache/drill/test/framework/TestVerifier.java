@@ -41,6 +41,7 @@ import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.Lists;
+import org.apache.drill.test.framework.TestCaseModeler.TestMatrix;
 import org.apache.log4j.Logger;
 
 /**
@@ -57,7 +58,7 @@ public class TestVerifier {
   private List<Integer> types = null;
   private String query;
   private List<String> columnLabels;
-  private List<String> verificationTypes;
+  private TestMatrix matrix;
   private boolean checkType = true;
 
   public enum TestStatus {
@@ -67,11 +68,11 @@ public class TestVerifier {
 
   public TestVerifier(List<Integer> types, String query,
                       List<String> columnLabels,
-                      List<String> verificationType) {
+                      TestMatrix matrix) {
     this.types = types;
     this.query = query;
     this.columnLabels = columnLabels;
-    this.verificationTypes = verificationType;
+    this.matrix = matrix;
   }
 
   public TestVerifier() {
@@ -196,7 +197,7 @@ public class TestVerifier {
    * Detects the number of unexpected entries in the actual map
    *
    * @param count
-   * 	    value of a particular entry in actual map 
+   * 	    value of a particular entry in actual map
    * @return unexpected count for that entry
    */
   private int getUnexpectedCount(Map<ColumnList, Integer> map, Map.Entry<ColumnList, Integer> entry){
@@ -280,7 +281,7 @@ public class TestVerifier {
           typedFields.add(fields[i]);
         }
       }
-      ColumnList cl = new ColumnList(types, typedFields);
+      ColumnList cl = new ColumnList(types, typedFields, matrix);
       if (ordered) {
         resultSet.add(cl);
       } else {
@@ -699,6 +700,7 @@ public class TestVerifier {
 
     String actual = new String(Files.readAllBytes(Paths.get(actualOutput)));
     boolean verified = false;
+    List<String> verificationTypes = matrix.verificationTypes;
     if (verificationTypes.get(0).equalsIgnoreCase("regex")) {
       verified = matchesAll(actual, expected);
     } else if (verificationTypes.get(0).equalsIgnoreCase("regex-no-order")) {

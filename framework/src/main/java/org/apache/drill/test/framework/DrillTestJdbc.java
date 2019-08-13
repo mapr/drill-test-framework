@@ -115,7 +115,7 @@ public class DrillTestJdbc implements DrillTest {
       executeQuery(query);
       
       if (getTestStatus()!= testStatus.CANCELED) { //Not to verify again if deliberately cancelled  
-      	testVerifier = new TestVerifier(columnTypes, query, columnLabels, matrix.verificationTypes);
+      	testVerifier = new TestVerifier(columnTypes, query, columnLabels, matrix);
      	if (query.startsWith("explain") || matrix.verificationTypes.get(0).equalsIgnoreCase("regex") ||
           	matrix.verificationTypes.get(0).equalsIgnoreCase("regex-no-order") ||
           	matrix.verificationTypes.get(0).equalsIgnoreCase("filter-ratio")) {
@@ -253,7 +253,7 @@ public class DrillTestJdbc implements DrillTest {
       if (resultSet != null) {
         while (resultSet.next()) {
           List<Object> values = Utils.getRowValues(resultSet);
-          ColumnList columnList = new ColumnList(columnTypes, values);
+          ColumnList columnList = new ColumnList(columnTypes, values, matrix);
           writer.write(columnList + "\n");
         }
       }
