@@ -1,0 +1,9 @@
+id,date_format_col,varchar_date_format_col
+1,22+Sep  10,22+Sep  10
+2,11+Oct  01,11+Oct  01
+3,99+Sep  10,99+Sep  10
+4,22+Nov  22,22+Nov  22
+5,11+Jan  30,11+Jan  30
+6,10+Dec  42,10+Dec  42
+7,01+May  31,01+May  31
+8,00+Aug  67,00+Aug  67

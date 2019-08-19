@@ -1,0 +1,33 @@
+{
+  "testId": "PLAN_Drill_schema_file",
+  "type": "group",
+  "description": "Testing plan for querying the Drill schema file",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "dependencies" : ["schema"],
+  "matrices": [
+    {
+      "query-file": ".*.sql.explain",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.plan",
+      "verification-type": [
+        "regex"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/nullable_double.csvh",
+      "dest": "table_schema/nullable_double_tfunc_plan/nullable_double.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/nullable_double.csvh",
+      "dest": "table_schema/nullable_double_plan/nullable_double.csvh"
+    }
+  ]
+}
