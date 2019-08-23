@@ -1,0 +1,203 @@
+{
+  "testId": "CRUD_Drill_schema_file",
+  "type": "group",
+  "description": "Testing CRUD for the Drill schema file",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "dependencies" : ["schema"],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/integer.csvh",
+      "dest": "table_schema/integer/integer.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/bigint.csvh",
+      "dest": "table_schema/bigint/bigint.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/double.csvh",
+      "dest": "table_schema/double/double.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/double_1.csvh",
+      "dest": "table_schema/double_2_files/double_1.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/double_2.csvh",
+      "dest": "table_schema/double_2_files/double_2.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/nullable_double.csvh",
+      "dest": "table_schema/nullable_double_5/nullable_double.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/nullable_double.csvh",
+      "dest": "table_schema/nullable_double_6/nullable_double.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/nullable_double.csvh",
+      "dest": "table_schema/nullable_double_7/nullable_double.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/nullable_double.csvh",
+      "dest": "table_schema/nullable_double_8/nullable_double.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/float.csvh",
+      "dest": "table_schema/float/float.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/decimal.csvh",
+      "dest": "table_schema/decimal/decimal.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/boolean.csvh",
+      "dest": "table_schema/boolean/boolean.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/varchar.csvh",
+      "dest": "table_schema/varchar/varchar.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/varchar.csvh",
+      "dest": "table_schema/varchar_12/varchar.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/varchar.csvh",
+      "dest": "table_schema/varchar_13/varchar.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/varchar.csvh",
+      "dest": "table_schema/varchar_14/varchar.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/timestamp.csvh",
+      "dest": "table_schema/timestamp/timestamp.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/date.csvh",
+      "dest": "table_schema/date/date.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/date_custom_format.csvh",
+      "dest": "table_schema/date_custom_format/date_custom_format.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/time.csvh",
+      "dest": "table_schema/time/time.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/time_custom_format.csvh",
+      "dest": "table_schema/time_custom_format/time_custom_format.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval.csvh",
+      "dest": "table_schema/interval/interval.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval.csvh",
+      "dest": "table_schema/interval_21/interval.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval.csvh",
+      "dest": "table_schema/interval_22/interval.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval_day.csvh",
+      "dest": "table_schema/interval_day/interval_day.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval_day.csvh",
+      "dest": "table_schema/interval_day_24/interval_day.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval_hour.csvh",
+      "dest": "table_schema/interval_hour/interval_hour.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval_hour.csvh",
+      "dest": "table_schema/interval_hour_26/interval_hour.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval_minute.csvh",
+      "dest": "table_schema/interval_minute/interval_minute.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval_minute.csvh",
+      "dest": "table_schema/interval_minute_28/interval_minute.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval_month.csvh",
+      "dest": "table_schema/interval_month/interval_month.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval_month.csvh",
+      "dest": "table_schema/interval_month_30/interval_month.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval_second.csvh",
+      "dest": "table_schema/interval_second/interval_second.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval_second.csvh",
+      "dest": "table_schema/interval_second_32/interval_second.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval_year.csvh",
+      "dest": "table_schema/interval_year/interval_year.csvh"
+    },
+    {
+      "mode": "cp",
+      "src": "Datasources/table_schema/interval_year.csvh",
+      "dest": "table_schema/interval_year_34/interval_year.csvh"
+    }
+  ]
+}
