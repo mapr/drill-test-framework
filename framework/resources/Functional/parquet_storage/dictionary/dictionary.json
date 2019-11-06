@@ -21,7 +21,7 @@
     {
       "mode": "cp",
       "src": "Datasources/parquet_storage/bigIntDictionary.parquet",
-      "dest": "/drill/testdata/bigIntDictionary.parquet"
+      "dest": "parquet/bigIntDictionary/bigIntDictionary.parquet"
     }
   ]
 }
