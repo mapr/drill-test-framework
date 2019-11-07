@@ -1,0 +1,27 @@
+{
+  "testId": "parquet_dictionary_enc",
+  "type": "group",
+  "description": "Test querying parquet files in the dictionary encoding.",
+  "submit-type": "jdbc",
+  "categories": [
+    "functional"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drilltestdir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/parquet_storage/bigIntDictionary.parquet",
+      "dest": "parquet/bigIntDictionary/bigIntDictionary.parquet"
+    }
+  ]
+}
