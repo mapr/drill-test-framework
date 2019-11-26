@@ -3,10 +3,8 @@ package org.apache.drill.test.framework;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import oadd.org.apache.drill.exec.proto.UserBitShared;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeName("queryProfile")
@@ -161,7 +159,6 @@ public class DrillQueryProfile {
         public long processNanos;
         public long peakLocalMemoryAllocated;
         public long waitNanos;
-        public long optimalMemAllocation;
 
         @Override
         public String toString() {
@@ -179,8 +176,7 @@ public class DrillQueryProfile {
                     .append("setupNanos=").append(setupNanos).append(", ")
                     .append("processNanos=").append(processNanos).append(", ")
                     .append("peakLocalMemoryAllocated=").append(peakLocalMemoryAllocated).append(", ")
-                    .append("waitNanos=").append(waitNanos).append(", ")
-                    .append("optimalMemAllocation=").append(optimalMemAllocation).append(")");
+                    .append("waitNanos=").append(waitNanos).append(")");
             return sb.toString();
         }
     }
@@ -200,49 +196,6 @@ public class DrillQueryProfile {
                     "schemas=" + schemas + ") ";
 
         }
-    }
-
-    /**
-     * Get optimal memory allocated per operator.
-     * Utility parses the DrillQueryProfile
-     * @param operator
-     * @return
-     */
-    public long getOptimalMemoryPerOperator(final UserBitShared.CoreOperatorType operator) {
-        return this.fragmentProfiles
-                .stream()
-                .flatMap(f -> f.minorFragmentProfiles
-                        .stream()
-                        .flatMap(m -> m.operatorProfiles.stream())
-                ).filter(o -> o.operatorId == operator.getNumber())
-                .mapToLong(o -> o.optimalMemAllocation)
-                .sum();
-    }
-
-    /**
-     * Get different operators in the profile.
-     * @return a list of operators in the query profile.
-     */
-    public List<UserBitShared.CoreOperatorType> getOperatorsFromProfile() {
-        return this.fragmentProfiles
-                .stream().flatMap(f -> f.minorFragmentProfiles
-                        .stream()
-                        .flatMap(m -> m.operatorProfiles.stream())
-                ).mapToInt(o -> o.operatorId)
-                .distinct()
-                .mapToObj(UserBitShared.CoreOperatorType::forNumber)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Total optimal memory required for the query.
-     * @return total optimal memory required for the query (as estimated by the RM planner).
-     */
-    public long getTotalOptimalMemoryEstimate() {
-        return getOperatorsFromProfile()
-                .stream()
-                .mapToLong(this::getOptimalMemoryPerOperator)
-                .sum();
     }
 }
 

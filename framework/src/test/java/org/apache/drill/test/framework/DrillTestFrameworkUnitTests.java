@@ -2,7 +2,6 @@ package org.apache.drill.test.framework;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-import oadd.org.apache.drill.exec.proto.UserBitShared;
 import org.apache.drill.test.framework.common.DrillJavaTestBase;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
@@ -17,7 +16,6 @@ import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.List;
 import java.util.Properties;
 
 import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_EXEC_RM_CONFIG_KEY;
@@ -139,7 +137,6 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
      * Read from the file to validate.
      * @throws IOException
      */
-    @Test(groups = UNIT_GROUP)
     public void testWriteRMConfigToFile() throws IOException {
         final String fileName = "tempRMConfig.conf";
         final String filePath = DrillTestDefaults.TEST_ROOT_DIR + "conf/" + fileName;
@@ -161,36 +158,5 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
 
         Assert.assertEquals(drillRMConfig2.childPools.size(), 2,
                 "Number of child pools in the config did not match!");
-    }
-
-    /**
-     * Test parsing operator memory and type from QueryProfile.
-     */
-    @Test
-    public void testTotalMemoryForQueryProfile() {
-        final Properties props = Utils.createConnectionProperties();
-        final ConnectionPool pool = new ConnectionPool(props);
-        final String sqlStatement = "select name, val, status from sys.options where name like \'%runtime%\'";
-
-        try (Connection connection = pool.getOrCreateConnection()) {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sqlStatement);
-
-            final String queryId = Utils.getQueryID(resultSet);
-            DrillQueryProfile profile = Utils.getQueryProfile(queryId);
-            Assert.assertEquals(profile.queryId, queryId);
-
-            long rmMemEstimate = profile.getTotalOptimalMemoryEstimate();
-            LOG.info("Memory estimated by RM planner: " + rmMemEstimate);
-            Assert.assertTrue(rmMemEstimate > 0,
-                    "RM estimated memory should be greater than 0");
-            List<UserBitShared.CoreOperatorType> operators = profile.getOperatorsFromProfile();
-            Assert.assertTrue(operators.size() > 0,
-                    "Number of operators in the profile should be greater than 0");
-            operators.forEach(LOG::info);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail(e.getMessage());
-        }
     }
 }

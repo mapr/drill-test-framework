@@ -17,7 +17,6 @@
  */
 package org.apache.drill.test.framework;
 
-import oadd.org.apache.drill.exec.proto.UserBitShared;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.*;
@@ -45,7 +44,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonNode;
