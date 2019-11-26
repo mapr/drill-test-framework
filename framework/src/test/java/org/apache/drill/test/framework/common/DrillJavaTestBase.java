@@ -10,8 +10,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
-import java.lang.reflect.Method;
-
 public class DrillJavaTestBase {
     private static final Logger LOG = Logger.getLogger(DrillJavaTestBase.class);
 
@@ -31,13 +29,13 @@ public class DrillJavaTestBase {
     }
 
     @BeforeMethod(alwaysRun = true, description = "Invoked before every Test Method.")
-    public void baseBeforeMethod(Method method) {
-        LOG.info("\n\n---------- Test " + method.getName() + " started ----------\n\n");
+    public void baseBeforeMethod() {
+        LOG.debug("Running Base Before Method");
     }
 
     @AfterMethod(alwaysRun = true, description = "Invoked after every Test Method")
-    public void baseAfterMethod(Method method) {
-        LOG.info("\n\n---------- Test " + method.getName() + " finished ----------\n\n");
+    public void baseAfterMethod() {
+        LOG.debug("Running Base After Method");
     }
 
     @AfterClass(alwaysRun = true, description = "Invoked after all tests in a Test Class finish.")

@@ -74,8 +74,6 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManagerFactory;
 
-import static org.apache.drill.test.framework.DrillTestDefaults.*;
-
 /**
  * Collection of utilities supporting the drill test framework.
  *
@@ -227,7 +225,7 @@ public class Utils {
       List<File> testDefinitionList = new ArrayList<>();
       if (!absoluteTestDirExpressionFile.exists()) {
         //try regex then exit if failure
-        File drillTestDataDir = new File(DrillTestDefaults.TEST_ROOT_DIR + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR);
+        File drillTestDataDir = new File(DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR);
         testDefinitionList.addAll(getTestDefinitionList(drillTestDataDir,absoluteTestDirExpression));
         if(testDefinitionList.isEmpty()){
           LOG.info("No regex Found for "+relTestDirExpression);
@@ -494,7 +492,7 @@ public class Utils {
     if (filename.startsWith("/")) {
       return filename;
     }
-    return DrillTestDefaults.TEST_ROOT_DIR + "/" + dataDir + "/" + filename;
+    return DrillTestDefaults.CWD + "/" + dataDir + "/" + filename;
   }
 
   /**
@@ -678,7 +676,7 @@ public class Utils {
 
   public static void startMinio() {
     LOG.info("> Starting Apache Minio server\n");
-    String cmd = DrillTestDefaults.TEST_ROOT_DIR + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/Datasources/s3minio/minio/run_mn.sh";
+    String cmd = DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/Datasources/s3minio/minio/run_mn.sh";
     try {
       Runtime.getRuntime().exec(cmd);
     } catch (Throwable e) {
@@ -688,16 +686,14 @@ public class Utils {
 
   public static void stopMinio() {
     LOG.info("> Stopping Apache Minio server\n");
-    String cmd = DrillTestDefaults.TEST_ROOT_DIR + "/" +
-            DrillTestDefaults.DRILL_TESTDATA_DIR + "/Datasources/s3minio/minio/stop_mn.sh";
+    String cmd = DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/Datasources/s3minio/minio/stop_mn.sh";
     try {
       Runtime.getRuntime().exec(cmd);
     } catch (Throwable e) {
       LOG.warn("Fail to run command " + cmd, e);
     }
     LOG.info("> Disabling s3minio storage plugin for Minio\n");
-    String templatePath = DrillTestDefaults.TEST_ROOT_DIR +
-            "/conf/plugin-templates/common/s3minio-storage-plugin.template";
+    String templatePath = DrillTestDefaults.CWD + "/conf/plugin-templates/common/s3minio-storage-plugin.template";
 
     boolean isSuccess = Utils.disableStoragePlugin(templatePath, "s3minio");
     if(!isSuccess){
@@ -894,75 +890,6 @@ public class Utils {
 		e.printStackTrace();
 	}
 	return numberOfDrillbits;
-  }
-
-  /**
-   * Get hostnames of all Drillbits in the cluster.
-   *
-   * @param connection connection instance to the drill cluster
-   * @return a list of hostnames of all Drillbits that form part of the cluster.
-   * @throws SQLException
-   */
-  public static List<String> getDrillbitHosts(Connection connection) throws SQLException {
-    final String columnName = "hostname";
-    final String query = String.format("select %s from sys.drillbits", columnName);
-    PreparedStatement ps = connection.prepareStatement(query);
-    List<String> result = new ArrayList<>();
-    try(ResultSet resultSet = ps.executeQuery()) {
-      while(resultSet.next()) {
-        result.add(resultSet.getString(columnName));
-      }
-    }
-    return result;
-  }
-
-  /**
-   * Apply RM config represented by DrillRMConfig to a specified Drillbit.
-   *
-   * As a part of this method
-   * - Write the config to a temporary file (remove if file exists previously.
-   * - Copy the file to specified Drillbit node.
-   *
-   * @param config
-   * @param drillbitHost
-   * @throws IOException
-   */
-  public static synchronized void applyRMConfigToDrillbit(final DrillRMConfig config,
-                                             final String drillbitHost) throws IOException {
-    final String drillRMConfFilePath = DrillTestDefaults.TEST_ROOT_DIR + "/conf/" + DRILL_RM_OVERRIDE_CONF_FILENAME;
-
-    File drillRMConfFile = new File(drillRMConfFilePath);
-
-    CmdConsOut out;
-    if(drillRMConfFile.exists()) {
-      LOG.warn(drillRMConfFilePath + " exists! Removing the file");
-      if ((out = Utils.execCmd("rm -rf " + drillRMConfFilePath)).exitCode != 0) {
-        LOG.error("Could not remove config file " +
-                drillRMConfFilePath + "\n\n" +
-                out);
-        throw new IOException(out.consoleErr);
-      }
-    }
-
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(drillRMConfFilePath))) {
-      writer.write(DRILL_EXEC_RM_CONFIG_KEY + ":" + config.render());
-    }
-
-    final String scpCommand = new StringBuilder("scp ")
-            .append(drillRMConfFilePath)
-            .append(" ")
-            .append(USERNAME)
-            .append("@").append(drillbitHost)
-            .append(":").append(DRILL_HOME)
-            .append("/conf/")
-            .append(DRILL_RM_OVERRIDE_CONF_FILENAME)
-            .toString();
-
-    LOG.info("Copying config " + scpCommand);
-    if ((out = Utils.execCmd(scpCommand)).exitCode != 0) {
-      LOG.error("Copying config to drillbit failed!\n\n" + out);
-      throw new IOException(out.consoleErr);
-    }
   }
 
   public static boolean sanityTest(Connection connection) {

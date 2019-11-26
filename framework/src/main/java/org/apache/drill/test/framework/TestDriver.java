@@ -47,6 +47,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.DatabaseMetaData;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TestDriver {
   private static final Logger LOG = Logger.getLogger("DrillTestLogger");
@@ -628,17 +630,17 @@ public class TestDriver {
     }
 
     LOG.info("> Uploading storage plugins");
-    String templatePath = DrillTestDefaults.TEST_ROOT_DIR + "/conf/plugin-templates/common/";
+    String templatePath = DrillTestDefaults.CWD + "/conf/plugin-templates/common/";
     Utils.updateDrillStoragePlugins(templatePath);
 
     if (DrillTestDefaults.IS_SECURE_CLUSTER) {
-      templatePath = DrillTestDefaults.TEST_ROOT_DIR + "/conf/plugin-templates/secure/";
+      templatePath = DrillTestDefaults.CWD + "/conf/plugin-templates/secure/";
     } else {
-      templatePath = DrillTestDefaults.TEST_ROOT_DIR + "/conf/plugin-templates/unsecure/";
+      templatePath = DrillTestDefaults.CWD + "/conf/plugin-templates/unsecure/";
     }
     Utils.updateDrillStoragePlugins(templatePath);
 
-    String beforeRunQueryFilename = DrillTestDefaults.TEST_ROOT_DIR + "/" + cmdParam.beforeRunQueryFilename;
+    String beforeRunQueryFilename = DrillTestDefaults.CWD + "/" + cmdParam.beforeRunQueryFilename;
     LOG.info("\n> Executing init queries\n");
     LOG.info(">> Path: " + beforeRunQueryFilename + "\n");
     try {
@@ -685,7 +687,7 @@ public class TestDriver {
   }
   
   private void teardown() {
-	String afterRunQueryFilename = DrillTestDefaults.TEST_ROOT_DIR + "/" + cmdParam.afterRunQueryFilename;
+	String afterRunQueryFilename = DrillTestDefaults.CWD + "/" + cmdParam.afterRunQueryFilename;
   LOG.info("> Executing queries\n");
   LOG.info(">> Path: " + afterRunQueryFilename + "\n");
 	try {
@@ -744,7 +746,7 @@ public class TestDriver {
           @Override
           public void run() {
             try {
-              Path src = new Path(DrillTestDefaults.TEST_ROOT_DIR + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/" + datasource.src);
+              Path src = new Path(DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/" + datasource.src);
               Path dest = new Path(DrillTestDefaults.DRILL_TESTDATA, datasource.dest);
               dfsCopy(src, dest, DrillTestDefaults.FS_MODE);
             } catch (IOException e) {
@@ -826,7 +828,7 @@ public class TestDriver {
   }
 
   private void runGenerateScript(DataSource datasource) {
-	String command = DrillTestDefaults.TEST_ROOT_DIR + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/" + datasource.src;
+	String command = DrillTestDefaults.CWD + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/" + datasource.src;
 	LOG.info("Running command " + command);
 	CmdConsOut cmdConsOut;
 	try {
@@ -865,7 +867,7 @@ public class TestDriver {
 			"sum(jvm_direct_current) as jvm_direct_current from sys.memory";
 
 	if (memUsageFilename == null) {
-	  memUsageFilename = Utils.generateOutputFileName(DrillTestDefaults.TEST_ROOT_DIR, "/memComsumption", false);
+	  memUsageFilename = Utils.generateOutputFileName(DrillTestDefaults.CWD, "/memComsumption", false);
 	}
     BufferedWriter writer = new BufferedWriter(new FileWriter(new File(memUsageFilename), true));
     ResultSet resultSet = null;
@@ -926,7 +928,7 @@ public class TestDriver {
         if (!drillReportDir.mkdir()) {
           LOG.debug("Cannot create directory " + DrillTestDefaults.DRILL_REPORTS_DIR
                   + ".  Using current working directory for drill output");
-          DrillTestDefaults.DRILL_REPORTS_DIR = DrillTestDefaults.TEST_ROOT_DIR;
+          DrillTestDefaults.DRILL_REPORTS_DIR = DrillTestDefaults.CWD;
         }
       }
 
@@ -976,7 +978,7 @@ public class TestDriver {
   
   private int restartDrill() {
     int exitCode = 0;
-    String command = DrillTestDefaults.TEST_ROOT_DIR + "/" + DrillTestDefaults.RESTART_DRILL_SCRIPT;
+    String command = DrillTestDefaults.CWD + "/" + DrillTestDefaults.RESTART_DRILL_SCRIPT;
     File commandFile = new File(command);
     if (commandFile.exists() && commandFile.canExecute()) {
       LOG.info("\n> Executing Post Build Script");
