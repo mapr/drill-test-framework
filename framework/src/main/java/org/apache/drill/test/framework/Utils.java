@@ -17,7 +17,6 @@
  */
 package org.apache.drill.test.framework;
 
-import com.google.common.base.Preconditions;
 import oadd.org.apache.drill.exec.proto.UserBitShared;
 import org.apache.commons.io.FilenameUtils;
 
@@ -44,7 +43,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -57,7 +55,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.io.Resources;
 
-import org.apache.drill.test.framework.ssh.DrillCluster;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -116,24 +113,6 @@ public class Utils {
     }
 
     return connectionProperties;
-  }
-
-  public static Properties createConnectionProperties(final String schema,
-                                                      final String group,
-                                                      final String queryTags) {
-    Properties props = createConnectionProperties();
-    if(schema != null) {
-      props.put("schema", schema);
-    }
-
-    if(group != null) {
-      props.put("group", group);
-    }
-
-    if(queryTags != null) {
-      props.put("queryTags", queryTags);
-    }
-    return props;
   }
 
   // Accept self-signed certificate
@@ -940,35 +919,52 @@ public class Utils {
   }
 
   /**
-   * Apply RM config represented by DrillRMConfig to all drillbits part of {@link DrillCluster}
+   * Apply RM config represented by DrillRMConfig to a specified Drillbit.
    *
    * As a part of this method
    * - Write the config to a temporary file (remove if file exists previously.
-   * - Copy the file to all nodes part of the {@link DrillCluster}.
+   * - Copy the file to specified Drillbit node.
    *
    * @param config
-   * @param drillCluster
+   * @param drillbitHost
    * @throws IOException
    */
-  public static synchronized void applyRMConfigToDrillCluster(final DrillRMConfig config,
-                                                              final DrillCluster drillCluster) throws IOException {
+  public static synchronized void applyRMConfigToDrillbit(final DrillRMConfig config,
+                                             final String drillbitHost) throws IOException {
     final String drillRMConfFilePath = DrillTestDefaults.TEST_ROOT_DIR + "/conf/" + DRILL_RM_OVERRIDE_CONF_FILENAME;
+
     File drillRMConfFile = new File(drillRMConfFilePath);
 
     CmdConsOut out;
     if(drillRMConfFile.exists()) {
       LOG.warn(drillRMConfFilePath + " exists! Removing the file");
       if ((out = Utils.execCmd("rm -rf " + drillRMConfFilePath)).exitCode != 0) {
-        LOG.error("Could not remove config file " + drillRMConfFilePath + "\n\n" + out);
+        LOG.error("Could not remove config file " +
+                drillRMConfFilePath + "\n\n" +
+                out);
         throw new IOException(out.consoleErr);
       }
     }
+
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(drillRMConfFilePath))) {
       writer.write(DRILL_EXEC_RM_CONFIG_KEY + ":" + config.render());
     }
-    //Remove if an override conf exists
-    drillCluster.runCommand("rm -rf " + DRILL_HOME + "/conf/" + DRILL_RM_OVERRIDE_CONF_FILENAME);
-    drillCluster.copyToRemote(drillRMConfFilePath, DRILL_HOME + "/conf/" + DRILL_RM_OVERRIDE_CONF_FILENAME);
+
+    final String scpCommand = new StringBuilder("scp ")
+            .append(drillRMConfFilePath)
+            .append(" ")
+            .append(USERNAME)
+            .append("@").append(drillbitHost)
+            .append(":").append(DRILL_HOME)
+            .append("/conf/")
+            .append(DRILL_RM_OVERRIDE_CONF_FILENAME)
+            .toString();
+
+    LOG.info("Copying config " + scpCommand);
+    if ((out = Utils.execCmd(scpCommand)).exitCode != 0) {
+      LOG.error("Copying config to drillbit failed!\n\n" + out);
+      throw new IOException(out.consoleErr);
+    }
   }
 
   public static boolean sanityTest(Connection connection) {
@@ -1076,66 +1072,6 @@ public class Utils {
     return true;
   }
 
-  /**
-   * Restart drillbits, ignore IOExceptions, if any.
-   * This version of the utility uses the restart drillbit script configured.
-   *
-   * Refactored out of {@link TestDriver}, kept for backward compatibility.
-   * Use {@link #restartDrillbits(DrillCluster)} instead.
-   */
-  @Deprecated
-  public static synchronized int restartDrill() {
-    int exitCode = 0;
-    String command = DrillTestDefaults.TEST_ROOT_DIR + "/" + DrillTestDefaults.RESTART_DRILL_SCRIPT;
-    File commandFile = new File(command);
-    if (commandFile.exists() && commandFile.canExecute()) {
-      LOG.info("\n> Executing Post Build Script");
-      LOG.info("\n>> Path: " + command);
-      exitCode = Utils.execCmd(command).exitCode;
-      if (exitCode != 0) {
-        LOG.error("\n>> Error restarting drillbits");
-      }
-    }
-    return exitCode;
-  }
-
-    /**
-     * Restart drillbits available as a part of {@link DrillCluster} instance passed.
-     * @param drillCluster instance of a drill cluster.
-     */
-  public static synchronized void restartDrillbits(final DrillCluster drillCluster) {
-      Preconditions.checkNotNull(drillCluster, "drillCluster cannot be null!");
-      drillCluster.runCommand(DRILL_HOME + "/bin/drillbit.sh restart");
-      sleepForTimeInMillis(DEFAULT_SLEEP_IN_MILLIS);
-  }
-
-  /**
-   * Utility method to sleep for specified amount of time (in milliseconds).
-   *
-   * @param timeInMillis
-   */
-  public static void sleepForTimeInMillis(final long timeInMillis) {
-    try {
-      LOG.info("Waiting for " + timeInMillis + "ms .. ");
-      Thread.sleep(timeInMillis);
-    } catch (Exception e) {
-      //Ignore
-    }
-  }
-
-  /**
-   * Passed exception is hidden from compiler but re-thrown.
-   * Used by functional interfaces that allow checked exceptions.
-   *
-   * @param e
-   * @param <E>
-   *     @throws E
-   */
-  @SuppressWarnings("unchecked")
-  public static <E extends Throwable> void sneakyThrow(Throwable e) throws E {
-    throw (E) e;
-  }
-  
   public static String getFrameworkVersion() {
     String commitID = "";
     String commitAuthor = "";

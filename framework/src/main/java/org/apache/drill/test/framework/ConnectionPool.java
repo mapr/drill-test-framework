@@ -90,32 +90,8 @@ public class ConnectionPool implements AutoCloseable {
   }
 
   @VisibleForTesting
-  public static Connection createConnection(Properties connectionProperties) throws SQLException {
-    return createConnection(DrillTestDefaults.CONNECTION_STRING, connectionProperties);
-  }
-
-  /**
-   * Create a connection with a custom URL and properties.
-   *
-   * @param url
-   * @param props
-   * @return Connection instance to drill cluster.
-   * @throws SQLException
-   */
-  @VisibleForTesting
-  public static Connection createConnection(final String url,
-                                            final Properties props) throws SQLException {
-    return createConnection(url, DrillTestDefaults.USERNAME, DrillTestDefaults.PASSWORD, props);
-  }
-
-  @VisibleForTesting
-  public static synchronized Connection createConnection(final String url,
-                                                         final String username,
-                                                         final String password,
-                                                         final Properties props) throws SQLException {
-    props.put("user", username == null ? DrillTestDefaults.USERNAME : username);
-    props.put("password", password == null ? DrillTestDefaults.PASSWORD : password);
-    return DriverManager.getConnection(url, props);
+  public Connection createConnection(Properties connectionProperties) throws SQLException {
+    return DriverManager.getConnection(DrillTestDefaults.CONNECTION_STRING, connectionProperties);
   }
 
   /**

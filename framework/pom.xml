@@ -130,11 +130,6 @@
       <artifactId>config</artifactId>
       <version>1.3.2</version>
     </dependency>
-    <dependency>
-      <groupId>com.jcraft</groupId>
-      <artifactId>jsch</artifactId>
-      <version>0.1.53</version>
-    </dependency>
   </dependencies>
   <repositories>
     <repository>

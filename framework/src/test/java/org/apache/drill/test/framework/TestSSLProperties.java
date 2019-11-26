@@ -12,7 +12,7 @@ import static org.junit.Assert.fail;
 public class TestSSLProperties {
 
   @Test
-  public void testSSLDisabled() {
+  public void testSSLDisabled() throws Exception {
     Properties connectionProperties = new Properties();
 
     connectionProperties.put("auth", DrillTestDefaults.AUTHENTICATION_MECHANISM);
@@ -20,8 +20,9 @@ public class TestSSLProperties {
     connectionProperties.put("user", DrillTestDefaults.USERNAME);
     connectionProperties.put("password", DrillTestDefaults.PASSWORD);
 
-    try (Connection conn = ConnectionPool.createConnection(connectionProperties)){
-      fail("Establishing connection succeeded, but should have failed!");
+    ConnectionPool connectionPool = new ConnectionPool(connectionProperties);
+    try {
+      connectionPool.createConnection(connectionProperties);
     } catch (SQLException ex) {
       String message = "Error setting/closing connection. Details: HANDSHAKE_COMMUNICATION";
       assertTrue(ex.getMessage().contains(message));
@@ -29,7 +30,7 @@ public class TestSSLProperties {
   }
 
   @Test
-  public void testSSLEnabled() {
+  public void testSSLEnabled() throws Exception {
     Properties connectionProperties = new Properties();
 
     connectionProperties.put("auth", DrillTestDefaults.AUTHENTICATION_MECHANISM);
@@ -39,11 +40,17 @@ public class TestSSLProperties {
     connectionProperties.put("user", DrillTestDefaults.USERNAME);
     connectionProperties.put("password", DrillTestDefaults.PASSWORD);
 
-    try (Connection conn = ConnectionPool.createConnection(connectionProperties)){
-      assertTrue(Utils.sanityTest(conn));
+    ConnectionPool connectionPool = new ConnectionPool(connectionProperties);
+    try {
+      connectionPool.createConnection(connectionProperties);
     } catch (SQLException ex) {
       ex.printStackTrace();
       fail("Establishing connection failed.");
+    } finally {
+      Connection connection = connectionPool.createConnection(connectionProperties);
+      assertTrue(Utils.sanityTest(connection));
+      connection.close();
+      connectionPool.close();
     }
   }
 

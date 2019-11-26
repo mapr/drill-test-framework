@@ -22,12 +22,12 @@ import java.util.Properties;
 
 import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_EXEC_RM_CONFIG_KEY;
 import static org.apache.drill.test.framework.common.DrillTestNGDefaults.UNIT_GROUP;
-import static org.apache.drill.test.framework.common.DrillTestNGDefaults.SAMPLE_RM_CONFIG_NAME;
 
 @Test(groups = UNIT_GROUP)
 public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
     private static final Logger LOG = Logger.getLogger(DrillTestFrameworkUnitTests.class);
-
+    private static final String SAMPLE_RM_CONFIG_NAME =
+            DrillTestDefaults.CWD + "/src/test/resources/sample-drill-rm-override.conf";
 
     @BeforeTest(alwaysRun = true)
     public void runBeforeTest() {
@@ -44,9 +44,11 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
      */
     @Test(groups = UNIT_GROUP)
     public void testGetQueryProfile(Method method) {
+        final Properties props = Utils.createConnectionProperties();
+        final ConnectionPool pool = new ConnectionPool(props);
         final String sqlStatement = "select name, val, status from sys.options where name like \'%runtime%\'";
 
-        try (Connection connection = connectionPool.getOrCreateConnection()) {
+        try (Connection connection = pool.getOrCreateConnection()) {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sqlStatement);
 

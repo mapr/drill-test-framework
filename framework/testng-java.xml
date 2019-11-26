@@ -3,12 +3,10 @@
     <test name="Resource Management Tests">
         <classes>
             <class name="org.apache.drill.test.framework.DrillTestFrameworkUnitTests" />
-            <class name="org.apache.drill.test.framework.resourcemanagement.QueueSelectionTests" />
         </classes>
         <groups>
             <run>
                 <include name="unit" />
-                <include name="functional" />
                 <exclude name="broken" />
             </run>
         </groups>
