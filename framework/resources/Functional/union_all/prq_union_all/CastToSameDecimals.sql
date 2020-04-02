@@ -1,0 +1,3 @@
+SELECT cast(1000 as decimal(10,3))
+UNION ALL
+SELECT 596.000;
