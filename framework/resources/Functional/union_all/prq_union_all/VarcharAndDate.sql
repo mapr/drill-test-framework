@@ -1,0 +1,3 @@
+SELECT 'Awesome text'
+UNION ALL
+SELECT date '2017-04-06';

@@ -8,10 +8,10 @@
     ],
     "matrices": [
         {
-            "query-file": ".*.q",
+            "query-file": ".*.sql",
             "schema": "dfs.union_all",
             "output-format": "tsv",
-            "expected-file": ".*.e",
+            "expected-file": ".*.e_tsv",
             "verification-type": [
                 "in-memory"
             ]
