@@ -2,6 +2,11 @@
 .idea/
 *.iml
 
+# Eclipse
+.project
+.classpath
+.settings
+
 # Mac stuff
 *.DS_Store
 
