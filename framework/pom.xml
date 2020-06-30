@@ -246,7 +246,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>http://apache-drill.s3.amazonaws.com/files/tpcds_hivegenerated_parquet.tgz</url>
+                  <url>http://apache-drill-s3.s3.amazonaws.com/files/tpcds_hivegenerated_parquet.tgz</url>
                   <outputFileName>tpcds_hivegenerated_parquet.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources</outputDirectory>
@@ -260,7 +260,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>http://apache-drill.s3.amazonaws.com/files/tpcds1_hive1dot2_withdate.tgz</url>
+                  <url>http://apache-drill-s3.s3.amazonaws.com/files/tpcds1_hive1dot2_withdate.tgz</url>
                   <outputFileName>tpcds1_hive1dot2_withdate.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources</outputDirectory>
@@ -273,7 +273,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>http://apache-drill.s3.amazonaws.com/files/complexga100k.json.tgz</url>
+                  <url>http://apache-drill-s3.s3.amazonaws.com/files/complexga100k.json.tgz</url>
                   <outputFileName>complexga100k.json.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/complex/json</outputDirectory>
@@ -286,7 +286,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>http://apache-drill.s3.amazonaws.com/files/complex.json.tgz</url>
+                  <url>http://apache-drill-s3.s3.amazonaws.com/files/complex.json.tgz</url>
                   <outputFileName>complex.json.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/complex/json</outputDirectory>
@@ -299,7 +299,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>http://apache-drill.s3.amazonaws.com/files/mondrian_parquet.tgz</url>
+                  <url>http://apache-drill-s3.s3.amazonaws.com/files/mondrian_parquet.tgz</url>
                   <outputFileName>mondrian_parquet.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/mondrian</outputDirectory>
@@ -312,7 +312,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>https://s3.amazonaws.com/apache-drill/files/schema_change_empty_batch.tgz</url>
+                  <url>http://apache-drill-s3.s3.amazonaws.com/files/schema_change_empty_batch.tgz</url>
                   <outputFileName>schema_change_empty_batch.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/schema_change_empty_batch/</outputDirectory>
@@ -325,7 +325,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>https://s3.amazonaws.com/apache-drill/files/func-passing-widestrings-large.tgz</url>
+                  <url>http://apache-drill-s3.s3.amazonaws.com/files/func-passing-widestrings-large.tgz</url>
                   <outputFileName>func-passing-widestrings-large.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>
@@ -340,7 +340,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>https://s3.amazonaws.com/apache-drill/files/flatten-operators-100000rows.tgz</url>
+                  <url>http://apache-drill-s3.s3.amazonaws.com/files/flatten-operators-100000rows.tgz</url>
                   <outputFileName>flatten-operators-100000rows.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/flatten_operators/</outputDirectory>
@@ -353,7 +353,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>https://s3.amazonaws.com/apache-drill/files/func-passing-flatten-operators-large.tgz</url>
+                  <url>http://apache-drill-s3.s3.amazonaws.com/files/func-passing-flatten-operators-large.tgz</url>
                   <outputFileName>func-passing-flatten-operators-large.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Functional/flatten_operators/100000rows/
@@ -367,7 +367,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>https://s3-us-west-1.amazonaws.com/drill-public/tpch/sf1/tpch_sf1_parquet.tar.gz</url>
+                  <url>https://s3-us-west-1.amazonaws.com/apache-drill-s3/tpch/sf1/tpch_sf1_parquet.tar.gz</url>
                   <outputFileName>tpch_sf1_parquet.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/tpch/sf1/parquet</outputDirectory>
@@ -380,7 +380,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>https://s3-us-west-1.amazonaws.com/drill-public/tpch/sf1/tpch_sf1_json.tar.gz</url>
+                  <url>https://s3-us-west-1.amazonaws.com/apache-drill-s3/tpch/sf1/tpch_sf1_json.tar.gz</url>
                   <outputFileName>tpch_sf1_json.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/tpch/sf1/json</outputDirectory>
@@ -393,7 +393,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>https://s3-us-west-1.amazonaws.com/drill-public/tpch/sf1/tpch_sf1_text.tar.gz</url>
+                  <url>https://s3-us-west-1.amazonaws.com/apache-drill-s3/tpch/sf1/tpch_sf1_text.tar.gz</url>
                   <outputFileName>tpch_sf1_text.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/tpch/sf1/text</outputDirectory>
@@ -406,7 +406,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>https://s3-us-west-1.amazonaws.com/drill-public/tpch/sf1/tpch_sf1_maprdb_json.tar.gz</url>
+                  <url>https://s3-us-west-1.amazonaws.com/apache-drill-s3/tpch/sf1/tpch_sf1_maprdb_json.tar.gz</url>
                   <outputFileName>tpch_sf1_maprdb_json.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/tpch/sf1/maprdb/json</outputDirectory>
@@ -419,7 +419,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>https://s3.amazonaws.com/apache-drill/files/tpcds/tpcds_sf1_parquet.tar.gz</url>
+                  <url>http://apache-drill-s3.s3.amazonaws.com/files/tpcds/tpcds_sf1_parquet.tar.gz</url>
                   <outputFileName>tpcds_sf1_parquet.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/tpcds/sf1/parquet</outputDirectory>
@@ -432,7 +432,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>https://s3.amazonaws.com/apache-drill/files/tpcds/tpcds_sf1_json.tar.gz</url>
+                  <url>http://apache-drill-s3.s3.amazonaws.com/files/tpcds/tpcds_sf1_json.tar.gz</url>
                   <outputFileName>tpcds_sf1_json.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/tpcds/sf1/json</outputDirectory>
@@ -445,7 +445,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>https://s3.amazonaws.com/apache-drill/files/tpcds/tpcds_sf1_text.tar.gz</url>
+                  <url>http://apache-drill-s3.s3.amazonaws.com/files/tpcds/tpcds_sf1_text.tar.gz</url>
                   <outputFileName>tpcds_text_sf1.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/tpcds/sf1/text</outputDirectory>
@@ -458,7 +458,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>https://s3-us-west-1.amazonaws.com/drill-public/tpcds/sf1/tpcds_sf1_maprdb_json.tar.gz</url>
+                  <url>https://s3-us-west-1.amazonaws.com/apache-drill-s3/tpcds/sf1/tpcds_sf1_maprdb_json.tar.gz</url>
                   <outputFileName>tpcds_sf1_maprdb_json.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/tpcds/sf1/maprdb/json</outputDirectory>
@@ -471,7 +471,7 @@
                   <goal>wget</goal>
                 </goals>
                 <configuration>
-                  <url>http://apache-drill.s3.amazonaws.com/files/md1119_parquet.tgz</url>
+                  <url>http://apache-drill-s3.s3.amazonaws.com/files/md1119_parquet.tgz</url>
                   <outputFileName>md1119_parquet.tgz</outputFileName>
                   <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources/hive_storage/</outputDirectory>
