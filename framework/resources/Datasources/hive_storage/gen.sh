@@ -1,3 +1,5 @@
+#!/bin/sh
+
 framework/resources/Datasources/hive/execHive.sh framework/resources/Datasources/hive_storage/unionall.ddl
 framework/resources/Datasources/hive/execHive.sh framework/resources/Datasources/hive_storage/avro_nullable.q
 framework/resources/Datasources/hive/execHive.sh framework/resources/Datasources/hive_storage/avro_partitioned.q
