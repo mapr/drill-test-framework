@@ -9,15 +9,15 @@ if [ ! -d ${DRILL_TEST_DATA_DIR}/Datasources/schema_change_empty_batch/data/json
 
         echo "Creating directory ${DRILL_TEST_DATA_DIR}/Datasources/schema_change_empty_batch/data/json/part"
 
-        mkdir ${DRILL_TEST_DATA_DIR}/Datasources/schema_change_empty_batch/data/json/part
+        mkdir -p ${DRILL_TEST_DATA_DIR}/Datasources/schema_change_empty_batch/data/json/part
 
         echo "Creating directory ${DRILL_TEST_DATA_DIR}/Datasources/schema_change_empty_batch/data/json/partsupp"
 
-        mkdir ${DRILL_TEST_DATA_DIR}/Datasources/schema_change_empty_batch/data/json/partsupp
+        mkdir -p ${DRILL_TEST_DATA_DIR}/Datasources/schema_change_empty_batch/data/json/partsupp
 
         echo "Creating directory ${DRILL_TEST_DATA_DIR}/Datasources/schema_change_empty_batch/data/json/empty"
 
-        mkdir ${DRILL_TEST_DATA_DIR}/Datasources/schema_change_empty_batch/data/json/empty
+        mkdir -p ${DRILL_TEST_DATA_DIR}/Datasources/schema_change_empty_batch/data/json/empty
 
         echo "Creating source files"
 

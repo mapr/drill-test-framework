@@ -13,6 +13,7 @@
     <hadoop.version>${env.HADOOP_VERSION}</hadoop.version>
     <runtimeDepenencies>${env.DRILL_HOME}/conf</runtimeDepenencies>
     <maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
+    <mapr.release.version>6.2.0.0-mapr-SNAPSHOT</mapr.release.version>
   </properties>
   <dependencies>
     <dependency>
@@ -80,6 +81,41 @@
         <exclusion>
           <groupId>com.sun.jersey</groupId>
           <artifactId>jersey-json</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.mapr.hadoop</groupId>
+      <artifactId>maprfs</artifactId>
+      <version>${mapr.release.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.yaml</groupId>
+          <artifactId>snakeyaml</artifactId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-logging</artifactId>
+          <groupId>commons-logging</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>log4j</artifactId>
+          <groupId>log4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <groupId>io.netty</groupId>
+          <artifactId>netty</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>io.netty</groupId>
+          <artifactId>netty-all</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.json</groupId>
+          <artifactId>json</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
