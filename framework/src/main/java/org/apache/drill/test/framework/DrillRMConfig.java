@@ -36,6 +36,9 @@ public class DrillRMConfig implements DrillConfigRenderer {
     //Selector Configurations
     public static final String SELECTOR_TAG_KEY = "tag";
     public static final String SELECTOR_ACL_KEY = "acl";
+    public static final String SELECTOR_OR_KEY = "or";
+    public static final String SELECTOR_AND_KEY = "and";
+    public static final String SELECTOR_NOT_EQUAL_KEY = "not_equal";
 
     //ACL Configurations
     public static final String ACL_USERS_KEY = "users";
@@ -74,8 +77,10 @@ public class DrillRMConfig implements DrillConfigRenderer {
     public static class SelectorConfig implements DrillConfigRenderer {
 
         public String tag;
-
         public AclConfig acl;
+        public SelectorConfig not_equal;
+        public List<SelectorConfig> or;
+        public List<SelectorConfig> and;
 
         @Override
         public String render() {
@@ -96,6 +101,21 @@ public class DrillRMConfig implements DrillConfigRenderer {
             if (acl != null) {
                 ensureAtleastOneField = true;
                 sb.append(formatConfig(nextAcc, SELECTOR_ACL_KEY, acl));
+            }
+
+            if (not_equal != null) {
+                ensureAtleastOneField = true;
+                sb.append(formatConfig(nextAcc, SELECTOR_NOT_EQUAL_KEY, not_equal));
+            }
+
+            if (or != null) {
+                ensureAtleastOneField = true;
+                sb.append(formatConfig(nextAcc, SELECTOR_OR_KEY, or));
+            }
+
+            if (and != null) {
+                ensureAtleastOneField = true;
+                sb.append(formatConfig(nextAcc, SELECTOR_AND_KEY, and));
             }
 
             if(ensureAtleastOneField) {
@@ -119,7 +139,6 @@ public class DrillRMConfig implements DrillConfigRenderer {
     public static class AclConfig implements DrillConfigRenderer {
 
         public List<String> users;
-
         public List<String> groups;
 
         @Override
@@ -163,7 +182,7 @@ public class DrillRMConfig implements DrillConfigRenderer {
     public static class QueueConfig implements DrillConfigRenderer {
 
         @JsonProperty(QUEUE_MAX_QUERY_MEMORY_PER_NODE_KEY)
-        public long maxQueryMemoryPerNodeInMB;
+        public long maxQueryMemoryPerNode; //in bytes
 
         @JsonProperty(QUEUE_MAX_WAITING_KEY)
         public int maxWaitingQueries;
@@ -185,9 +204,9 @@ public class DrillRMConfig implements DrillConfigRenderer {
             StringBuilder sb = new StringBuilder("{\n");
             final int nextAcc = acc+2;
 
-            if (maxQueryMemoryPerNodeInMB > 0) {
+            if (maxQueryMemoryPerNode > 0) {
                 ensureAtleastOneField = true;
-                sb.append(formatConfig(nextAcc, QUEUE_MAX_QUERY_MEMORY_PER_NODE_KEY, maxQueryMemoryPerNodeInMB));
+                sb.append(formatConfig(nextAcc, QUEUE_MAX_QUERY_MEMORY_PER_NODE_KEY, maxQueryMemoryPerNode));
             }
 
             if (maxWaitingQueries > 0) {

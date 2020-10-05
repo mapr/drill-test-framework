@@ -21,8 +21,9 @@ import java.util.List;
 import java.util.Properties;
 
 import static org.apache.drill.test.framework.DrillTestDefaults.DRILL_EXEC_RM_CONFIG_KEY;
+import static org.apache.drill.test.framework.common.DrillTestNGDefaults.BASIC_RM_CONFIG_FILEPATH;
 import static org.apache.drill.test.framework.common.DrillTestNGDefaults.UNIT_GROUP;
-import static org.apache.drill.test.framework.common.DrillTestNGDefaults.SAMPLE_RM_CONFIG_NAME;
+import static org.apache.drill.test.framework.common.DrillTestNGDefaults.PROD_RM_CONFIG_FILEPATH;
 
 @Test(groups = UNIT_GROUP)
 public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
@@ -84,12 +85,28 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
     @Test(groups = UNIT_GROUP)
     public void testReadSampleRMConfigFile() {
         try {
-            DrillRMConfig drillRMConfig = DrillRMConfig.load(SAMPLE_RM_CONFIG_NAME);
+            DrillRMConfig drillRMConfig = DrillRMConfig.load(PROD_RM_CONFIG_FILEPATH);
             Assert.assertEquals(drillRMConfig.poolName, "root",
                     "Root resource pool name did not match");
 
             Assert.assertEquals(drillRMConfig.childPools.size(), 2,
                     "Number of child pools in the config did not match!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail(e.getMessage());
+        }
+    }
+
+    /**
+     * Test reading a sample RM config file, with complex selectors, in to a Java Bean.
+     */
+    @Test(groups = UNIT_GROUP)
+    public void testReadComplexSelectorsRMConfigFile() {
+        try {
+            DrillRMConfig drillRMConfig = DrillRMConfig.load(BASIC_RM_CONFIG_FILEPATH);
+            Assert.assertEquals(drillRMConfig.childPools.get(1).selector.or.size(), 2,
+                    "Or selector should have had 2 children!");
+
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());
@@ -112,7 +129,7 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
     @Test(groups = UNIT_GROUP)
     public void testConfigFileRenderer() {
         try {
-            DrillRMConfig drillRMConfig = DrillRMConfig.load(SAMPLE_RM_CONFIG_NAME);
+            DrillRMConfig drillRMConfig = DrillRMConfig.load(PROD_RM_CONFIG_FILEPATH);
             Assert.assertEquals(drillRMConfig.poolName, "root",
                     "Root resource pool name did not match");
 
@@ -149,7 +166,7 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            DrillRMConfig drillRMConfig = DrillRMConfig.load(SAMPLE_RM_CONFIG_NAME);
+            DrillRMConfig drillRMConfig = DrillRMConfig.load(PROD_RM_CONFIG_FILEPATH);
             writer.write(DRILL_EXEC_RM_CONFIG_KEY + ":" + drillRMConfig.render());
         }
 
@@ -178,14 +195,15 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
             DrillQueryProfile profile = Utils.getQueryProfile(queryId);
             Assert.assertEquals(profile.queryId, queryId);
 
-            long rmMemEstimate = profile.getTotalOptimalMemoryEstimate();
+            long rmMemEstimate = profile.getTotalOptimalMemoryPerNode();
             LOG.info("Memory estimated by RM planner: " + rmMemEstimate);
             Assert.assertTrue(rmMemEstimate > 0,
                     "RM estimated memory should be greater than 0");
             List<UserBitShared.CoreOperatorType> operators = profile.getOperatorsFromProfile();
             Assert.assertTrue(operators.size() > 0,
                     "Number of operators in the profile should be greater than 0");
-            operators.forEach(LOG::info);
+            operators.forEach(o -> LOG.info("Operator: " + o + ", Optimal Memory per Node in bytes: " +
+                    profile.getOptimalMemoryPerOperatorPerNode(o)));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());

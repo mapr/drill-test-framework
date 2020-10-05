@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import oadd.org.apache.drill.exec.proto.UserBitShared;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -203,12 +204,12 @@ public class DrillQueryProfile {
     }
 
     /**
-     * Get optimal memory allocated per operator.
-     * Utility parses the DrillQueryProfile
+     * Get total optimal memory allocated (in bytes) for specified operator, across all drillbits.
+     *
      * @param operator
      * @return
      */
-    public long getOptimalMemoryPerOperator(final UserBitShared.CoreOperatorType operator) {
+    public long getTotalOptimalMemoryPerOperator(final UserBitShared.CoreOperatorType operator) {
         return this.fragmentProfiles
                 .stream()
                 .flatMap(f -> f.minorFragmentProfiles
@@ -216,6 +217,57 @@ public class DrillQueryProfile {
                         .flatMap(m -> m.operatorProfiles.stream())
                 ).filter(o -> o.operatorId == operator.getNumber())
                 .mapToLong(o -> o.optimalMemAllocation)
+                .sum();
+    }
+
+    /**
+     * Returns the max of optimal memory allocated (in bytes) to specified operator on a drillbit.
+     *
+     * @param operator
+     * @return
+     */
+    public long getOptimalMemoryPerOperatorPerNode(final UserBitShared.CoreOperatorType operator) {
+        return this.fragmentProfiles
+                .stream()
+                .flatMap(f -> f.minorFragmentProfiles
+                        .stream())
+                .collect(Collectors.groupingBy(m -> m.endpoint.address))
+                .entrySet()
+                .stream()
+                .collect(Collectors.toMap(Map.Entry::getKey,
+                        e -> e.getValue()
+                                .stream()
+                                .flatMap(m -> m.operatorProfiles
+                                        .stream()
+                                        .filter(o -> o.operatorId == operator.getNumber()))
+                                .mapToLong(o -> o.optimalMemAllocation)
+                                .sum()))
+                .entrySet()
+                .stream()
+                .mapToLong(Map.Entry::getValue)
+                .max()
+                .orElse(0);
+    }
+
+    /**
+     * Total optimal memory required (in bytes) for the query.
+     * @return total optimal memory required for the query (as estimated by the RM planner).
+     */
+    public long getTotalOptimalMemory() {
+        return getOperatorsFromProfile()
+                .stream()
+                .mapToLong(this::getTotalOptimalMemoryPerOperator)
+                .sum();
+    }
+
+    /**
+     * Returns the maximum of estimated optimal memory (in bytes) required on a drillbit.
+     * @return total optimal memory required for the query (as estimated by the RM planner).
+     */
+    public long getTotalOptimalMemoryPerNode() {
+        return getOperatorsFromProfile()
+                .stream()
+                .mapToLong(this::getOptimalMemoryPerOperatorPerNode)
                 .sum();
     }
 
@@ -232,17 +284,6 @@ public class DrillQueryProfile {
                 .distinct()
                 .mapToObj(UserBitShared.CoreOperatorType::forNumber)
                 .collect(Collectors.toList());
-    }
-
-    /**
-     * Total optimal memory required for the query.
-     * @return total optimal memory required for the query (as estimated by the RM planner).
-     */
-    public long getTotalOptimalMemoryEstimate() {
-        return getOperatorsFromProfile()
-                .stream()
-                .mapToLong(this::getOptimalMemoryPerOperator)
-                .sum();
     }
 }
 
