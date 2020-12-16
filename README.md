@@ -30,9 +30,132 @@ datasets (configured in [pom.xml](framework/pom.xml)).
 
 ```
 git clone git@github.com:mapr/drill-test-framework.git
-cd drill-test-framework
+cd drill-test-framework/conf
+cp drillTestConfig.properties.example drillTestConfig.properties
+nano drillTestConfig.properties
 bin/build_framework -Pdownload
 ```
+
+## Configuring drillTestConfig.properties for run on singlenode cluster 
+<pre><code>
+
+</code></pre>
+
+just uncomment property
+<pre><code>
+# Drillbits
+########################################
+DRILLBITS=localhost
+########################################
+</code></pre>
+
+just uncomment property
+<pre><code>
+# Number of Drillbits
+########################################
+NUMBER_OF_CLUSTER_NODES=1
+########################################
+</code></pre>
+
+set path to drill install dir
+<pre><code>
+# Drill home
+########################################
+DRILL_HOME=/opt/mapr/drill/drill-1.16.1
+########################################
+</code></pre>
+
+
+just uncomment property
+<pre><code>
+# Drill test data dir
+########################################
+DRILL_TEST_DATA_DIR=framework/resources
+########################################
+# Drill actual resultset dir
+########################################
+DRILL_OUTPUT_DIR=drill-output
+########################################
+# Drill report dir
+########################################
+DRILL_REPORTS_DIR=drill-reports
+DRILL_REPORTS_DFS_DIR=/drill/reports
+########################################
+</code></pre>
+
+set location of hadoop system drill is installed
+<pre><code>
+########################################
+HADOOP_INSTALL_LOC=/opt/mapr
+########################################
+</code></pre>
+
+just uncoment propery
+<pre><code>
+########################################
+DRILL_TESTDATA=/drill/testdata
+########################################
+</code></pre>
+
+
+set zookeeper. For example - if you used singlenode cluster, with ip  192.168.121.91, set:
+<pre><code>
+########################################
+ZOOKEEPERS=192.168.121.91:5181/drill/drillbits1
+########################################
+</code></pre>
+
+just uncoment propery
+<pre><code>
+# DRILL JDBC driver
+########################################
+# MapR DRILL JDBC driver
+JDBC_DRIVER=com.mapr.drill.jdbc41.Driver
+# Apache DRILL JDBC driver
+#JDBC_DRIVER=org.apache.drill.jdbc.Driver
+########################################
+# JDBC DRIVER CLASSPATH
+########################################
+#JDBC_DRIVER_CP=/root/DrillJDBC41/*
+JDBC_DRIVER_CP=${DRILL_HOME}/jars/jdbc-driver/*
+########################################
+</code></pre>
+
+
+set zookeeper. For example - if you used singlenode cluster, with ip  192.168.121.91, set:
+<pre><code>
+########################################
+CONNECTION_STRING=jdbc:drill:zk\=192.168.121.91:5181/zk_root/cluster_id
+########################################
+</code></pre>
+
+just uncoment propery
+<pre><code>
+# Drill storage plugin server
+########################################
+DRILL_STORAGE_PLUGIN_SERVER=192.168.121.91
+########################################
+</code></pre>
+
+set example properyes
+<pre><code>
+USERNAME=mapr
+PASSWORD=mapr
+export ZOOKEEPER_HOST=192.168.121.91
+export CLUSTER_NAME=Drill-ATS
+export ZK_ROOT=drill-ats-build
+export DRILL_USER=root
+export CLUSH_GROUP=all
+export DRILL_STORAGE_PLUGIN_SERVER
+export DRILL_HOME=${DRILL_HOME}
+export M2_HOME=/usr/share/maven
+export M2=$M2_HOME/bin
+export PATH=.:$M2:$PATH
+export DRILL_VERSION=$(grep 'git.build.version' ${DRILL_HOME}/git.properties | tr '=' '\n' | tail -1)
+export HADOOP_VERSION=2.7.4.0-mapr-700
+export USERNAME
+export PASSWORD
+</code></pre>
 
 If you've already downloaded the datasets previously, you can simply skip the download.
 
@@ -62,6 +185,70 @@ Example:
      Use this option to provide the usage of the command, which includes additional options
 </code></pre>
 
+## List of used tests
+
+<pre><code>
+bin/run_tests -s Functional/aggregates -g functional -t 180 -d
+bin/run_tests -s Functional/amplab -g functional -t 180 -d
+bin/run_tests -s Functional/case_expr -g functional -t 180 -d
+bin/run_tests -s Functional/complex -g functional -t 180 -d
+bin/run_tests -s Functional/convert -g functional -t 180 -d
+bin/run_tests -s Functional/crossjoin -g functional -t 180 -d
+bin/run_tests -s Functional/cross-sources -g functional -t 180 -d
+bin/run_tests -s Functional/ctas -g functional -t 180 -d
+bin/run_tests -s Functional/data-shapes -g functional -t 180 -d
+bin/run_tests -s Functional/datetime -g functional -t 180 -d
+bin/run_tests -s Functional/date_trunc -g functional -t 180 -d
+bin/run_tests -s Functional/decimal -g functional -t 180 -d
+bin/run_tests -s Functional/decimal_avro -g functional -t 180 -d
+bin/run_tests -s Functional/decimal_negative -g functional -t 180 -d
+bin/run_tests -s Functional/decimal_parquet -g functional -t 180 -d
+bin/run_tests -s Functional/drill_fragments -g functional -t 180 -d
+bin/run_tests -s Functional/droptable -g functional -t 180 -d
+bin/run_tests -s Functional/explicit_cast -g functional -t 180 -d
+bin/run_tests -s Functional/filter -g functional -t 180 -d
+bin/run_tests -s Functional/flatten_operators -g functional -t 180 -d
+bin/run_tests -s Functional/functions -g functional -t 180 -d
+bin/run_tests -s Functional/group_by_alias, -g functional -t 180 -d
+bin/run_tests -s Functional/hbase -g functional -t 180 -d
+bin/run_tests -s Functional/hive -g functional -t 180 -d
+bin/run_tests -s Functional/hive_functions_nonhivedata -g functional -t 180 -d
+bin/run_tests -s Functional/identifiers -g functional -t 180 -d
+bin/run_tests -s Functional/impersonation -g functional -t 180 -d
+bin/run_tests -s Functional/implicit_cast -g functional -t 180 -d
+bin/run_tests -s Functional/int96 -g functional -t 180 -d
+bin/run_tests -s Functional/interpreted_partition_pruning -g functional -t 180 -d
+bin/run_tests -s Functional/joins -g functional -t 180 -d
+bin/run_tests -s Functional/json -g functional -t 180 -d
+bin/run_tests -s Functional/limit0 -g functional -t 180 -d
+bin/run_tests -s Functional/metadata_caching -g functional -t 180 -d
+bin/run_tests -s Functional/min_max_dir -g functional -t 180 -d
+bin/run_tests -s Functional/misc -g functional -t 180 -d
+bin/run_tests -s Functional/morefiles -g functional -t 180 -d
+bin/run_tests -s Functional/no_result_set -g functional -t 180 -d
+bin/run_tests -s Functional/orderby -g functional -t 180 -d
+bin/run_tests -s Functional/p1tests -g functional -t 180 -d
+bin/run_tests -s Functional/parquet_storage -g functional -t 180 -d
+bin/run_tests -s Functional/partition_pruning -g functional -t 180 -d
+bin/run_tests -s Functional/query_parser -g functional -t 180 -d
+bin/run_tests -s Functional/s3minio -g functional -t 180 -d
+bin/run_tests -s Functional/schema_change_empty_batch -g functional -t 180 -d
+bin/run_tests -s Functional/schema-changes -g functional -t 180 -d
+bin/run_tests -s Functional/semijoin -g functional -t 180 -d
+bin/run_tests -s Functional/subqueries -g functional -t 180 -d
+bin/run_tests -s Functional/table_function -g functional -t 180 -d
+bin/run_tests -s Functional/table_stats -g functional -t 180 -d
+bin/run_tests -s Functional/text_storage -g functional -t 180 -d
+bin/run_tests -s Functional/timestamp_functions -g functional -t 180 -d
+bin/run_tests -s Functional/tpcds -g functional -t 180 -d
+bin/run_tests -s Functional/tpch -g functional -t 180 -d
+bin/run_tests -s Functional/udfs -g functional -t 180 -d
+bin/run_tests -s Functional/union -g functional -t 180 -d
+bin/run_tests -s Functional/union_all -g functional -t 180 -d
+bin/run_tests -s Functional/values -g functional -t 180 -d
+bin/run_tests -s Functional/views -g functional -t 180 -d
+bin/run_tests -s Functional/window_functions -g functional -t 180 -d
+</code></pre>
 ## Contributing
 
 We encourage contributions from users! You can fix bugs, make enhancements or add new tests. Create a PR here on GitHub for your change.
@@ -71,3 +258,6 @@ Refer to [CONTRIBUTING.md](CONTRIBUTING.md) for details on the test framework st
 ## License
 
 Licensed under the Apache License 2.0. Please see [LICENSE.md](LICENSE.md)
+
+
+
