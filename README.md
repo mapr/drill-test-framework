@@ -36,12 +36,12 @@ git clone git@github.com:mapr/drill-test-framework.git
 ```
 
 ## Step 2
-Chose proper branch for tested drill version
+Choose proper branch for tested drill version
 for example: if you will test Drill 1.16.1 - switch to the branch `1.16.1-mapr`
 ```
 git checkout 1.16.1-mapr
 ```
-Also, you can check existed branches and chose branch for tested drill version
+Also, you can check existed branches and choose branch for tested drill version
 
 ## Step 3
 you need create and configure `drillTestConfig.properties`
@@ -77,7 +77,7 @@ DRILL_HOME=/opt/mapr/drill/drill-1.16.1
 ########################################
 </code></pre>
 
-###Just uncomment properties, and leave it as default
+### Just uncomment properties, and leave it as default
 <pre><code>
 # Drill test data dir
 ########################################
@@ -170,8 +170,8 @@ export USERNAME
 export PASSWORD
 </pre>
 
-## step 4
-Build framwork
+## Step 4
+Build framework
 
 ```
 cd drill-test-framework
