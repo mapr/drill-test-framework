@@ -13,7 +13,7 @@
     <hadoop.version>${env.HADOOP_VERSION}</hadoop.version>
     <runtimeDepenencies>${env.DRILL_HOME}/conf</runtimeDepenencies>
     <maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
-    <mapr.release.version>6.2.0.0-mapr-SNAPSHOT</mapr.release.version>
+    <mapr.release.version>6.1.0-mapr</mapr.release.version>
   </properties>
   <dependencies>
     <dependency>
