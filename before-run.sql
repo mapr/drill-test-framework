@@ -5,7 +5,7 @@ alter system set `planner.enable_limit0_optimization` = true;
 alter system set `exec.errors.verbose` = true;
 alter system set `drill.exec.hashagg.fallback.enabled` = true;
 alter system set `drill.exec.hashjoin.fallback.enabled` = true;
-alter system set `planner.memory.max_query_memory_per_node` = 8000000000;
+alter system set `planner.memory.max_query_memory_per_node` = 4000000000;
 select * from sys.options where status = 'CHANGED';
 select * from sys.version;
 select * from sys.drillbits;
