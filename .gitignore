@@ -10,9 +10,6 @@
 # Mac stuff
 *.DS_Store
 
-# Don't check in main configuration file (only example)
-conf/drillTestConfig.properties
-
 # Drill and Framework stuff
 *.class
 **/target/*
