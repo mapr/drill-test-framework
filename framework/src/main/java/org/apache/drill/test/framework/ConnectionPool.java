@@ -35,12 +35,12 @@ public class ConnectionPool implements AutoCloseable {
 
   public ConnectionPool(Properties connectionProperties) {
     this.connectionProperties = connectionProperties;
-    try {
-      Class.forName(DrillTestDefaults.JDBC_DRIVER);
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-      System.exit(-1);
-    }
+    // try {
+      // Class.forName(DrillTestDefaults.JDBC_DRIVER);
+    // } catch (ClassNotFoundException e) {
+      // e.printStackTrace();
+      // System.exit(-1);
+    // }
     //Driver.load();
     connections = new HashMap<>();
   }
