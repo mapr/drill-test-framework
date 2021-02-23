@@ -2,7 +2,7 @@ package org.apache.drill.test.framework;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-import oadd.org.apache.drill.exec.proto.UserBitShared;
+// import oadd.org.apache.drill.exec.proto.UserBitShared;
 import org.apache.drill.test.framework.common.DrillJavaTestBase;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
@@ -178,6 +178,7 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
             DrillQueryProfile profile = Utils.getQueryProfile(queryId);
             Assert.assertEquals(profile.queryId, queryId);
 
+/*
             long rmMemEstimate = profile.getTotalOptimalMemoryEstimate();
             LOG.info("Memory estimated by RM planner: " + rmMemEstimate);
             Assert.assertTrue(rmMemEstimate > 0,
@@ -186,6 +187,7 @@ public class DrillTestFrameworkUnitTests extends DrillJavaTestBase {
             Assert.assertTrue(operators.size() > 0,
                     "Number of operators in the profile should be greater than 0");
             operators.forEach(LOG::info);
+*/
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(e.getMessage());
