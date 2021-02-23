@@ -18,7 +18,7 @@
 package org.apache.drill.test.framework;
 
 import com.google.common.base.Preconditions;
-import oadd.org.apache.drill.exec.proto.UserBitShared;
+// import oadd.org.apache.drill.exec.proto.UserBitShared;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.*;
@@ -426,6 +426,7 @@ public class Utils {
 	    byte[] jsonData = Files.readAllBytes(Paths.get(testDefFile));
 	    ObjectMapper objectMapper = new ObjectMapper();
             // check if submitType should be over-ridden to odbc
+	    LOG.info("TestCaseModeler: " + testDefFile );
             TestCaseModeler testCaseModeler = objectMapper.readValue(new String(jsonData), TestCaseModeler.class);
             if (TestDriver.cmdParam.driverExt != null &&
                 TestDriver.cmdParam.driverExt.equals(TestDriver.cmdParam.SIMBA_ODBC)) {
@@ -718,6 +719,7 @@ public class Utils {
     } catch (Throwable e) {
       LOG.warn("Fail to run command " + cmd, e);
     }
+/*
     LOG.info("> Disabling s3minio storage plugin for Minio\n");
     String templatePath = DrillTestDefaults.TEST_ROOT_DIR +
             "/conf/plugin-templates/common/s3minio-storage-plugin.template";
@@ -726,6 +728,7 @@ public class Utils {
     if(!isSuccess){
       LOG.info(">> Fail to disable s3minio storage plugin for Minio");
     }
+*/
   }
 
   /**
@@ -991,6 +994,14 @@ public class Utils {
 	return ShellRunner.INSTANCE.execCmd(cmd);
   }
   
+  public static CmdConsOut execCmdNoWarn(String cmd){
+	return ShellRunner.INSTANCE.execCmdNoWarn(cmd);
+  }
+  
+  public static CmdConsOut execCmdPB(String cmd, String outputFile){
+	return ShellRunner.INSTANCE.execCmdPB(cmd, outputFile);
+  }
+  
   public static ResultSet execSQL(String sql, Connection connection) throws SQLException {
 	try {
 	  Statement statement = connection.createStatement();
@@ -1029,6 +1040,7 @@ public class Utils {
   }
 
   /* Get query ID.  This matches the profile ID */
+/*
   public static String getQueryID(ResultSet resultSet) throws SQLException {
     org.apache.drill.jdbc.DrillResultSet drs = (org.apache.drill.jdbc.DrillResultSet)resultSet;
     String queryId = null;
@@ -1041,6 +1053,7 @@ public class Utils {
     }
     return queryId;
   }
+*/
 
   /* Remove new lines in a varchar except within quotes */
   public static String removeNewLines(String input) {
