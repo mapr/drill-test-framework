@@ -41,6 +41,7 @@ import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang.StringUtils;
 import org.apache.drill.test.framework.TestCaseModeler.TestMatrix;
 import org.apache.log4j.Logger;
 
@@ -72,6 +73,10 @@ public class TestVerifier {
     this.types = types;
     this.query = query;
     this.columnLabels = columnLabels;
+    this.matrix = matrix;
+  }
+
+  public TestVerifier(TestMatrix matrix) {
     this.matrix = matrix;
   }
 
@@ -707,6 +712,10 @@ public class TestVerifier {
       verified = matchesAll(actual, expected, false);
     } else if (verificationTypes.get(0).equalsIgnoreCase("filter-ratio")) {
       verified = matchAndCompareAll(actual, expected);
+    } else if (verificationTypes.get(0).equalsIgnoreCase("spark-pi")) {
+      verified = matchPi(actual, expected);
+    } else if (verificationTypes.get(0).equalsIgnoreCase("maprdbjson")) {
+      verified = matchDBJson(actual, expected);
     } else {
       verified = containsAll(actual, expected);
     }
@@ -736,8 +745,11 @@ public class TestVerifier {
     int i = 0;
     for (String string : expectedLines) {
       string = string.trim();
+      // LOG.info ("expected string: " + string);
       Matcher matcher = Pattern.compile(string).matcher(actual);
       if (!matcher.find()) {
+        // LOG.info ("actual");
+        // LOG.info (actual);
         return false;
       }
       // if checkOrder is false, do nothing.  check remaining expectedLines
@@ -849,6 +861,67 @@ public class TestVerifier {
   }
 
   /**
+   * Used to verify the value of pi
+   *
+   * @param actual
+   *          actual results
+   * @param expected
+   *          expected results
+   * @return true/false
+   */
+  private static boolean matchPi(String actual, String expected) {
+    actual = actual.trim();
+    Matcher matcher = Pattern.compile("Pi is roughly 3.1").matcher(actual);
+    if (!matcher.find()) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Used to verify the output of MapR DB Shell for MapR DB JSON
+   *
+   * @param actual
+   *          actual results
+   * @param expected
+   *          expected results
+   * @return true/false
+   */
+  private static boolean matchDBJson(String actual, String expected) {
+    String[] expectedLines = expected.split("\n");
+    int skipFirst=Integer.parseInt(expectedLines[0]);
+    int skipFirstIndex = StringUtils.ordinalIndexOf(actual, "\n", skipFirst);
+    // LOG.info ("matchDBJson " + skipFirstIndex);
+    actual = actual.substring(skipFirstIndex+1); // add 1 to skip \n
+    String[] actualLines = actual.split("\n");
+    int skipLast=Integer.parseInt(expectedLines[1]);
+    int skipLastIndex = StringUtils.ordinalIndexOf(actual, "\n", actualLines.length-skipLast);
+    // LOG.info ("length " + expectedLines.length);
+    // LOG.info ("matchDBJson " + skipLastIndex);
+    actual = actual.substring(0,skipLastIndex);
+    skipFirstIndex = StringUtils.ordinalIndexOf(expected, "\n", 2);
+    expected = expected.substring(skipFirstIndex+1);  // add 1 to skip \n
+    expected = expected.substring(0,expected.length()-1);  // subtract 1 to skip EOF
+    if (actual.equals(expected)) {
+      // LOG.info ("actual equals expected");
+      return true;
+    } else {
+      // LOG.info ("actual does not equal expected");
+      // expectedLines = expected.split("\n");
+      // LOG.info ("expectedLines " + expectedLines.length);
+      // actualLines = actual.split("\n");
+      // LOG.info ("actualLines " + actualLines.length);
+      // LOG.info ("actual");
+      // LOG.info (actual);
+      // LOG.info ("end actual");
+      // LOG.info ("expected");
+      // LOG.info (expected);
+      // LOG.info ("end expected");
+      return false;
+    }
+  }
+
+  /**
    * Create a map containing the names of the columns in the order-by clause and
    * whether they are being ordered in ascending or descending order.
    * Remove the table name from the column name because the column name in the
@@ -921,6 +994,18 @@ public class TestVerifier {
     return block.trim();
   }
 
+  public TestStatus verifyExitCode(CmdConsOut cmdConsOut)
+      throws VerificationException {
+    StringBuilder sb = new StringBuilder();
+    // LOG.info ("exit code is " + cmdConsOut);
+    if (cmdConsOut.exitCode == 0) {
+      return TestStatus.PASS;
+    }
+    sb.append("\nExpected exit code 0");
+    sb.append("\nActual:  " + cmdConsOut.exitCode);
+    throw new VerificationException(sb.toString());
+  }
+
   public static boolean isOrderByQuery(String statement) {
     return !getOrderByBlock(statement).isEmpty();
   }
@@ -934,6 +1019,12 @@ public class TestVerifier {
   public static class PlanVerificationException extends Exception {
 
     public PlanVerificationException(String message) {
+      super(message);
+    }
+  }
+  public static class ExecutionException extends Exception {
+
+    public ExecutionException(String message) {
       super(message);
     }
   }

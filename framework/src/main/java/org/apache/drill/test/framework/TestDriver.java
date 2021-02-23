@@ -59,6 +59,7 @@ public class TestDriver {
   private ConnectionPool connectionPool;
   private int countTotalTests;
   private Properties connectionProperties;
+  private int test;
 
   private static Configuration conf = new Configuration();
   public static final CmdParam cmdParam = new CmdParam();
@@ -124,15 +125,16 @@ public class TestDriver {
 
     final Stopwatch stopwatch = Stopwatch.createStarted();
     try {
-      connection = connectionPool.getOrCreateConnection();
-    } catch (SQLException e) {
+      // connection = connectionPool.getOrCreateConnection();
+      test = 1;
+    } catch (Exception e) {
       e.printStackTrace();
       System.exit(-1);
     }
     
     //Record JDBC driver name, version and other metadata info
-    DatabaseMetaData dm = connection.getMetaData();
-    LOG.info(DrillTestDefaults.LINE_BREAK +"\nJDBC DRIVER METADATA CATALOG\n"+DrillTestDefaults.LINE_BREAK+"\n"+ new DBMetaData(dm).toString() + DrillTestDefaults.LINE_BREAK);
+    // DatabaseMetaData dm = connection.getMetaData();
+    // LOG.info(DrillTestDefaults.LINE_BREAK +"\nJDBC DRIVER METADATA CATALOG\n"+DrillTestDefaults.LINE_BREAK+"\n"+ new DBMetaData(dm).toString() + DrillTestDefaults.LINE_BREAK);
 /*    LOG.info(DrillTestDefaults.LINE_BREAK + "Product name = " + dm.getDatabaseProductName() + "\n"
     		 + "Product version = " + dm.getDatabaseProductVersion() + "\n"
     		 + "Product major version = " + dm.getDatabaseMajorVersion() + "\n"
@@ -143,6 +145,7 @@ public class TestDriver {
     		 + "Driver minor version = " + dm.getDriverMinorVersion() + "\n" + DrillTestDefaults.LINE_BREAK); */
 
     //Check number of drillbits equals number of cluster nodes    
+/*
     int numberOfDrillbits = Utils.getNumberOfDrillbits(connection);
     connectionPool.releaseConnection(connection);
     int numberOfClusterNodes = DrillTestDefaults.NUMBER_OF_CLUSTER_NODES;
@@ -151,6 +154,7 @@ public class TestDriver {
     			+ numberOfClusterNodes + ";\n\t>> Number of drillbits = " + numberOfDrillbits);
     	System.exit(-1);
     }
+*/
     stopwatch.reset().start();
     LOG.info("\n"+DrillTestDefaults.LINE_BREAK+"\nINIT\n"+DrillTestDefaults.LINE_BREAK);
     setup();
@@ -184,6 +188,7 @@ public class TestDriver {
   	  queryMemoryUsage();
     }
 
+/*
     // Run Apache Minio server if s3minio tests aren't excluded
     if(cmdParam.excludeDependencies == null || !cmdParam.excludeDependencies.contains("s3minio")) {
       Utils.startMinio();
@@ -195,6 +200,7 @@ public class TestDriver {
         LOG.info("> Fail to disable s3minio storage plugin");
       }
     }
+*/
 
     for (i = 1; i < cmdParam.iterations+1; i++) {
       
@@ -390,7 +396,8 @@ public class TestDriver {
       if(dataVerificationFailures.size()>0) {
         LOG.info("\nData Verification Failures:\n");
         for (DrillTest test : dataVerificationFailures) {
-          LOG.info("Query: " + test.getInputFile()+ "\n" + test.getQuery());
+          // LOG.info("Query: " + test.getInputFile()+ "\n" + test.getQuery());
+          LOG.info("Query: " + test.getInputFile());
           LOG.info("\nBaseline: "+ test.getExpectedFile());
           LOG.info(test.getException().getMessage());
         }
@@ -617,7 +624,7 @@ public class TestDriver {
     teardown();
 
     executor.close();
-    connectionPool.close();
+    // connectionPool.close();
     Utils.restartDrill();
     return totalExecutionFailures + totalDataVerificationFailures + totalPlanVerificationFailures + totalTimeoutFailures + totalRandomFailures;
   }
@@ -627,6 +634,7 @@ public class TestDriver {
       new File(DrillTestDefaults.DRILL_OUTPUT_DIR).mkdir();
     }
 
+/*
     LOG.info("> Uploading storage plugins");
     String templatePath = DrillTestDefaults.TEST_ROOT_DIR + "/conf/plugin-templates/common/";
     Utils.updateDrillStoragePlugins(templatePath);
@@ -637,7 +645,9 @@ public class TestDriver {
       templatePath = DrillTestDefaults.TEST_ROOT_DIR + "/conf/plugin-templates/unsecure/";
     }
     Utils.updateDrillStoragePlugins(templatePath);
+*/
 
+/*
     String beforeRunQueryFilename = DrillTestDefaults.TEST_ROOT_DIR + "/" + cmdParam.beforeRunQueryFilename;
     LOG.info("\n> Executing init queries\n");
     LOG.info(">> Path: " + beforeRunQueryFilename + "\n");
@@ -651,7 +661,9 @@ public class TestDriver {
           LOG.info(Utils.getSqlResult(resultSet));
         }
       }
+*/
 
+/*
       // Initializing variables for reporting
       String getCommitId = "SELECT version, commit_id from sys.version";
       ResultSet resultSet = Utils.execSQL(getCommitId, connection);
@@ -659,7 +671,9 @@ public class TestDriver {
         commitId = resultSet.getString("commit_id");
         version = resultSet.getString("version");
       }
+*/
       
+/*
       // Setup injection map
       for (int i = 0; i < injectionKeys.length; i++) {
     	switch (injectionKeys[i]) {
@@ -681,6 +695,7 @@ public class TestDriver {
 			e1.printStackTrace();
 		}
 	}
+*/
     Thread.sleep(1000);
   }
   
@@ -688,6 +703,7 @@ public class TestDriver {
 	String afterRunQueryFilename = DrillTestDefaults.TEST_ROOT_DIR + "/" + cmdParam.afterRunQueryFilename;
   LOG.info("> Executing queries\n");
   LOG.info(">> Path: " + afterRunQueryFilename + "\n");
+/*
 	try {
 	  connection = connectionPool.getOrCreateConnection();
 	  String[] teardownQueries = Utils.getSqlStatements(afterRunQueryFilename);
@@ -710,11 +726,14 @@ public class TestDriver {
 		}
 	} 
 	connectionPool.releaseConnection(connection);
+*/
 
+/*
     // Stop Apache Minio server if it was started
     if(cmdParam.excludeDependencies == null || !cmdParam.excludeDependencies.contains("s3minio")) {
       Utils.stopMinio();
     }
+*/
   }
 
   private void prepareData(List<DrillTestCase> tests) throws Exception {
@@ -744,9 +763,7 @@ public class TestDriver {
           @Override
           public void run() {
             try {
-              Path src = new Path(DrillTestDefaults.TEST_ROOT_DIR + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/" + datasource.src);
-              Path dest = new Path(DrillTestDefaults.DRILL_TESTDATA, datasource.dest);
-              dfsCopy(src, dest, DrillTestDefaults.FS_MODE);
+              k8sCopy(datasource.src, datasource.dest);
             } catch (IOException e) {
               throw new RuntimeException(e);
             }
@@ -825,6 +842,121 @@ public class TestDriver {
     }
   }
 
+  private void k8sCopy(String src, String dest)
+          throws IOException {
+
+    File f = new File(src);
+    String srcFile = f.getName();
+    String command = "kubectl exec -i admincli-0 -n dataplatform -- rm -r /tmp/" + srcFile;
+    CmdConsOut cmdConsOut;
+    // LOG.info ("1k8sCopy command: " + command);
+    try {
+      cmdConsOut = Utils.execCmd(command);
+      // LOG.info("1"+cmdConsOut);
+    } catch (Exception e) {
+      cmdConsOut = new CmdConsOut();
+      cmdConsOut.cmd = command;
+      cmdConsOut.consoleErr = e.getMessage();
+      LOG.error("Error: Failed to execute the command " + cmdConsOut);
+      throw new RuntimeException(e);
+    }
+
+/*
+    command = "kubectl exec -i admincli-0 -n dataplatform -- ls /tmp";
+    LOG.info ("2k8sCopy command: " + command);
+    cmdConsOut = Utils.execCmd(command);
+    LOG.info("2"+cmdConsOut);
+*/
+
+    command = "kubectl cp " + src + " dataplatform/admincli-0:/tmp";
+    // LOG.info ("3k8sCopy command: " + command);
+    try {
+      cmdConsOut = Utils.execCmd(command);
+      // LOG.info("3"+cmdConsOut);
+    } catch (Exception e) {
+      cmdConsOut = new CmdConsOut();
+      cmdConsOut.cmd = command;
+      cmdConsOut.consoleErr = e.getMessage();
+      LOG.error("Error: Failed to execute the command " + cmdConsOut);
+      throw new RuntimeException(e);
+    }
+    if (cmdConsOut.exitCode != 0) {
+      throw new RuntimeException("Error executing the command " + command
+              + " has return code " + cmdConsOut.exitCode);
+    }
+/*
+    command = "kubectl exec -i admincli-0 -n dataplatform -- ls /tmp";
+    LOG.info ("4k8sCopy command: " + command);
+    cmdConsOut = Utils.execCmd(command);
+    LOG.info("4"+cmdConsOut);
+
+    command = "kubectl exec -i admincli-0 -n dataplatform -- hadoop fs -ls /tmp";
+    LOG.info ("5k8sCopy command: " + command);
+    cmdConsOut = Utils.execCmd(command);
+    LOG.info("5"+cmdConsOut);
+
+    command = "kubectl exec -i admincli-0 -n dataplatform -- hadoop fs -ls /user/mapr";
+    LOG.info ("7k8sCopy command: " + command);
+    cmdConsOut = Utils.execCmd(command);
+    LOG.info("7"+cmdConsOut);
+*/
+
+    command = "kubectl exec -i admincli-0 -n dataplatform -- hadoop fs -rm -r " + dest + "/" + srcFile;
+    // LOG.info ("6k8sCopy command: " + command);
+    try {
+      cmdConsOut = Utils.execCmd(command);
+      // LOG.info("6"+cmdConsOut);
+    } catch (Exception e) {
+      cmdConsOut = new CmdConsOut();
+      cmdConsOut.cmd = command;
+      cmdConsOut.consoleErr = e.getMessage();
+      LOG.error("Error: Failed to execute the command " + cmdConsOut);
+      throw new RuntimeException(e);
+    }
+
+/*
+    command = "kubectl exec -i admincli-0 -n dataplatform -- hadoop fs -ls /tmp";
+    LOG.info ("7k8sCopy command: " + command);
+    cmdConsOut = Utils.execCmd(command);
+    LOG.info("7"+cmdConsOut);
+
+    command = "kubectl exec -i admincli-0 -n dataplatform -- hadoop fs -ls /user/mapr";
+    LOG.info ("7k8sCopy command: " + command);
+    cmdConsOut = Utils.execCmd(command);
+    LOG.info("7"+cmdConsOut);
+*/
+
+    command = "kubectl exec -i admincli-0 -n dataplatform -- hadoop fs -copyFromLocal /tmp/" + srcFile + " " + dest;
+    // LOG.info ("8k8sCopy command: " + command);
+    try {
+      cmdConsOut = Utils.execCmd(command);
+      // LOG.info("8"+cmdConsOut);
+    } catch (Exception e) {
+      cmdConsOut = new CmdConsOut();
+      cmdConsOut.cmd = command;
+      cmdConsOut.consoleErr = e.getMessage();
+      LOG.error("Error: Failed to execute the command " + cmdConsOut);
+      throw new RuntimeException(e);
+    }
+    if (cmdConsOut.exitCode != 0) {
+      throw new RuntimeException("Error executing the command " + command
+              + " has return code " + cmdConsOut.exitCode);
+    }
+
+/*
+    command = "kubectl exec -i admincli-0 -n dataplatform -- hadoop fs -ls /tmp";
+    LOG.info ("9k8sCopy command: " + command);
+    cmdConsOut = Utils.execCmd(command);
+    LOG.info("9"+cmdConsOut);
+
+    command = "kubectl exec -i admincli-0 -n dataplatform -- hadoop fs -ls /user/mapr";
+    LOG.info ("7k8sCopy command: " + command);
+    cmdConsOut = Utils.execCmd(command);
+    LOG.info("7"+cmdConsOut);
+*/
+
+  }
+
   private void runGenerateScript(DataSource datasource) {
 	String command = DrillTestDefaults.TEST_ROOT_DIR + "/" + DrillTestDefaults.DRILL_TESTDATA_DIR + "/" + datasource.src;
 	LOG.info("Running command " + command);
@@ -870,7 +1002,7 @@ public class TestDriver {
     BufferedWriter writer = new BufferedWriter(new FileWriter(new File(memUsageFilename), true));
     ResultSet resultSet = null;
     try {
-      connection = connectionPool.getOrCreateConnection();
+      // connection = connectionPool.getOrCreateConnection();
       resultSet = Utils.execSQL(query, connection);
 
       List columnLabels = new ArrayList<String>();
@@ -897,7 +1029,7 @@ public class TestDriver {
           }
         }
       }
-      connectionPool.releaseConnection(connection);
+      // connectionPool.releaseConnection(connection);
     } catch (IllegalArgumentException | IllegalAccessException e1) {
 	  e1.printStackTrace();
     } catch (IOException e1) {

@@ -9,8 +9,10 @@ import com.google.common.base.Strings;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ProcessBuilder;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -45,6 +47,90 @@ public enum ShellRunner implements Closeable {
 			cmdConsOut.exitCode = exitCode;
 			if(exitCode != 0) {
 				LOG.warn("Fail to run command {}, errMgs:\n {}", cmd, standardOutputAndError[1]);
+				//Capture errors on stdout and stderr
+				cmdConsOut.consoleErr = standardOutputAndError[0] + "\n" + standardOutputAndError[1];
+                                LOG.warn ("exit code: " + exitCode);
+                                LOG.warn ("conoleErr: " + standardOutputAndError[0] + "\n" + standardOutputAndError[1]);
+			} else {
+				cmdConsOut.consoleOut = standardOutputAndError[0];
+			}
+			return cmdConsOut;
+		} catch (Throwable e) {
+			LOG.warn("Failed to run command " + cmd, e);
+			cmdConsOut.exitCode = exitCode;
+			cmdConsOut.consoleErr = e.getMessage();
+                        LOG.warn ("exit code: " + exitCode);
+                        LOG.warn ("error message: " + e.getMessage());
+                        e.printStackTrace();
+			return cmdConsOut;
+		} finally {
+			// destroy process
+			if (process != null) {
+				process.destroy();
+				process = null;
+			}
+		}
+	}
+
+        // Same as execCmd but does not generate warning if exitCode != 0
+	public  CmdConsOut execCmdNoWarn(String cmd)  {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(cmd), "cmd is invalid");
+		Process process = null;
+		int exitCode = -1;
+		CmdConsOut cmdConsOut = new CmdConsOut();
+		cmdConsOut.cmd = cmd;
+		try {
+			process = Runtime.getRuntime().exec(cmd);
+			// create two stream consumers which are working simultaneously, one for consuming standard output stream, the other one for consuming error stream
+			Future<String>[] redirectTasks = createStreamConsumerTasks(process);
+			exitCode = process.waitFor();
+			// check whether everything is ok for two stream consumers
+			String[] standardOutputAndError = fetchStandardOutputAndError(redirectTasks);
+			cmdConsOut.exitCode = exitCode;
+			if(exitCode != 0) {
+				cmdConsOut.consoleErr = standardOutputAndError[0] + "\n" + standardOutputAndError[1];
+			} else {
+				cmdConsOut.consoleOut = standardOutputAndError[0];
+			}
+			return cmdConsOut;
+		} catch (Throwable e) {
+			LOG.warn("Failed to run command " + cmd, e);
+			cmdConsOut.exitCode = exitCode;
+			cmdConsOut.consoleErr = e.getMessage();
+                        LOG.warn ("exit code: " + exitCode);
+                        LOG.warn ("error message: " + e.getMessage());
+                        e.printStackTrace();
+			return cmdConsOut;
+		} finally {
+			// destroy process
+			if (process != null) {
+				process.destroy();
+				process = null;
+			}
+		}
+	}
+
+        // Execute command using Process Builder in order to capture stderr and stdout in the same output file
+	public  CmdConsOut execCmdPB(String cmd, String output)  {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(cmd), "cmd is invalid");
+		Process process = null;
+		int exitCode = -1;
+		CmdConsOut cmdConsOut = new CmdConsOut();
+		cmdConsOut.cmd = cmd;
+		try {
+                        ProcessBuilder builder = new ProcessBuilder ("/bin/bash", cmd);
+                        File outputFile = new File(output);
+                        builder.redirectErrorStream(true);
+                        builder.redirectOutput(ProcessBuilder.Redirect.appendTo(outputFile));
+			process = builder.start();
+			// create two stream consumers which are working simultaneously, one for consuming standard output stream, the other one for consuming error stream
+			Future<String>[] redirectTasks = createStreamConsumerTasks(process);
+			exitCode = process.waitFor();
+			// check whether everything is ok for two stream consumers
+			String[] standardOutputAndError = fetchStandardOutputAndError(redirectTasks);
+			cmdConsOut.exitCode = exitCode;
+			if(exitCode != 0) {
+				// LOG.warn("Fail to run command {}, errMgs:\n {}", cmd, standardOutputAndError[1]);
 				//Capture errors on stdout and stderr
 				cmdConsOut.consoleErr = standardOutputAndError[0] + "\n" + standardOutputAndError[1];
 			} else {

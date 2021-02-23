@@ -3,7 +3,7 @@ package org.apache.drill.test.framework;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import oadd.org.apache.drill.exec.proto.UserBitShared;
+// import oadd.org.apache.drill.exec.proto.UserBitShared;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -208,6 +208,7 @@ public class DrillQueryProfile {
      * @param operator
      * @return
      */
+/*
     public long getOptimalMemoryPerOperator(final UserBitShared.CoreOperatorType operator) {
         return this.fragmentProfiles
                 .stream()
@@ -218,11 +219,13 @@ public class DrillQueryProfile {
                 .mapToLong(o -> o.optimalMemAllocation)
                 .sum();
     }
+*/
 
     /**
      * Get different operators in the profile.
      * @return a list of operators in the query profile.
      */
+/*
     public List<UserBitShared.CoreOperatorType> getOperatorsFromProfile() {
         return this.fragmentProfiles
                 .stream().flatMap(f -> f.minorFragmentProfiles
@@ -233,17 +236,20 @@ public class DrillQueryProfile {
                 .mapToObj(UserBitShared.CoreOperatorType::forNumber)
                 .collect(Collectors.toList());
     }
+*/
 
     /**
      * Total optimal memory required for the query.
      * @return total optimal memory required for the query (as estimated by the RM planner).
      */
+/*
     public long getTotalOptimalMemoryEstimate() {
         return getOperatorsFromProfile()
                 .stream()
                 .mapToLong(this::getOptimalMemoryPerOperator)
                 .sum();
     }
+*/
 }
 
 
