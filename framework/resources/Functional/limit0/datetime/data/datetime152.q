@@ -1,1 +1,0 @@
-select extract(month from now())=extract(month from current_date) from sys.drillbits limit 1;

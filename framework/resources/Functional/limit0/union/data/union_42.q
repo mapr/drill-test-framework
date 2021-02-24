@@ -1,1 +1,0 @@
-SELECT c8 FROM `union_01_v` WHERE c8 > 1000.00 UNION SELECT c2 FROM `union_02_v`;
