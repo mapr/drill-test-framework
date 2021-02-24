@@ -1,1 +1,0 @@
-select * from `filter/pushdown/DRILL_6259_test_data` t where not t.complex_field.nested_list_of_complex_fields[0].nested_field is null;

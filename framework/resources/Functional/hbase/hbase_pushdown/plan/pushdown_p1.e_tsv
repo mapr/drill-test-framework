@@ -1,3 +1,0 @@
-Screen
-Scan(groupscan=[HBaseGroupScan [HBaseScanSpec=HBaseScanSpec [tableName=student, startRow=750\x00, stopRow=800, filter=FilterList AND (2/2): [RowFilter (LESS, 800), RowFilter (GREATER, 750)]], columns=[
-]]])

@@ -1,2 +1,0 @@
-.*
-Scan.*selectionRoot=.*/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intint.*numFiles=8.*files=.*

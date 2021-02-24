@@ -1,1 +1,0 @@
-select registration, total_contribution, rank() over(order by t.total_contribution desc) as ranks from (select registration, sum(contributions) as total_contribution from voter_hive group by registration) t;

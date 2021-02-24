@@ -1,1 +1,0 @@
-select filename from emptyheaderfooter;

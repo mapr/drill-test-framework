@@ -1,3 +1,0 @@
-.*
-StreamAgg.*COUNT.*
-Scan.*selectionRoot=.*/drill/testdata/partition_pruning/dfs/lineitempart.*numFiles=3.*files.*

@@ -1,1 +1,0 @@
-select coalesce(c1, c2) from (select coalesce(n_name1, n_name2) c1, c2 from cp.`tpch/nation.parquet`) limit 5;

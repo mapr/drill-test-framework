@@ -1,1 +1,0 @@
-select t.c1.values_list[3] from (select * from `filter/pushdown/DRILL_6118_complex.parquet`) t where c2='value_4_6';

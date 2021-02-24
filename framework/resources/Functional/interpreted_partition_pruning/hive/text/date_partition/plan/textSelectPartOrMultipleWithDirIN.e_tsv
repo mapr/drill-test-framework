@@ -1,3 +1,0 @@
-.*
-Filter.*OR.*AND.*=.*2014-10-22.*>.*29600.*AND.*=.*2014-10-23.*>.*29700.*
-HiveScan.*tableName:lineitem_text_partitioned_hive_date.*columns.*`l_orderkey`.*`l_partkey`.*`l_quantity`.*`l_shipdate`.*`l_shipinstruct`.*`dt`.*numPartitions=2, partitions= \[Partition\(values:\[2014-10-22\]\), Partition\(values:\[2014-10-23\]\)\]*

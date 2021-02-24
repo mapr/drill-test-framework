@@ -1,1 +1,0 @@
-select * from `filter/pushdown/DRILL_5796_test_data.parquet` t1 left join `filter/pushdown/DRILL_5796_test_data.parquet` t2 on t1.id = t2.int_col[0] where t1.float_col < 0 order by t1.id limit 5;

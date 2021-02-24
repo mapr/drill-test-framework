@@ -1,2 +1,0 @@
-Filter\(condition=\[>\(\$0, 999\.9:DECIMAL\(\d+, \d+\)\)\]\)
-Scan.*numFiles=1.*numRowGroups=18.*usedMetadataFile=false.*columns=\[`ps_supplycost`, `ps_availqty`, `ps_comment`\]

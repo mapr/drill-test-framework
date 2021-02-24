@@ -1,1 +1,0 @@
-select * from (select * from (select * from `filter/pushdown/DRILL_6118_parquet_partitioned_by_folders`)) where c1 < 3;

@@ -1,1 +1,0 @@
-select fqn from emptyheaderfooter;
