@@ -1,4 +1,0 @@
-.*
-  Filter.*AND.*=.*1993.*>.*29600.*
-    .*
-      Scan.*selectionRoot=.*partition_pruning/dfs/lineitempart.*numFiles=1.*columns=\[`dir0`, `columns`\[0\], `columns`\[1\], `columns`\[4\], `columns`\[10\], `columns`\[13\]\].*files=.*partition_pruning/dfs/lineitempart/1993/lineitemac.tbl.*

@@ -1,2 +1,0 @@
-.*
-HiveScan.*tableName:lineitem_text_partitioned_hive_hier_intint.*numPartitions=2, partitions= \[Partition\(values:\[1993, 10\]\), Partition\(values:\[1994, 5\]\)\]*

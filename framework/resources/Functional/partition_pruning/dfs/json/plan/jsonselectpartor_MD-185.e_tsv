@@ -1,9 +1,0 @@
-.*Filter.*OR.*AND.*=.*1993.*>.*40000.*=.*1994
-.*Scan
-.*selectionRoot=
-.*partition_pruning/dfs/ordersjson
-.*numFiles=2
-.*columns=
-.*files=
-.*partition_pruning/dfs/ordersjson/1994/xae.json
-.*partition_pruning/dfs/ordersjson/1993/xad.json

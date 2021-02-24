@@ -1,2 +1,0 @@
-.*
-HiveScan.*tableName:lineitem_text_partitioned_hive_date.*columns.*l_orderkey.*l_partkey.*l_quantity.*l_shipdate.*l_shipinstruct.*partitions.*2014-10-22.*
