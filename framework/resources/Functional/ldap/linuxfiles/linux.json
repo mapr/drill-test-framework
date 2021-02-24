@@ -1,0 +1,28 @@
+{
+    "testId": "ldap_linux",
+    "type": "group",
+    "description": "Test linux users via shell scripts",
+    "submit-type": "script",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.sh",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.output",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+          "mode": "gen",
+          "src": "Datasources/ldap/setup_ldap.sh",
+          "dest": ""
+        }
+    ]
+
+}

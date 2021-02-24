@@ -1,0 +1,26 @@
+cat: 'ldapuser1owner/*': Permission denied
+
+This file is accessible by ldapuser1 group
+This file is accessible by ldapuser1 other
+cat: ldapuser1group/ldapuser1owner: Permission denied
+cat: ldapuser1group/ldapuser2group: Permission denied
+This file is accessible by ldapuser2 other
+cat: ldapuser1group/ldapuser2owner: Permission denied
+
+This file is accessible by ldapuser1 group
+This file is accessible by ldapuser1 other
+cat: ldapuser1other/ldapuser1owner: Permission denied
+cat: ldapuser1other/ldapuser2group: Permission denied
+This file is accessible by ldapuser2 other
+cat: ldapuser1other/ldapuser2owner: Permission denied
+
+cat: 'ldapuser2owner/*': Permission denied
+
+cat: 'ldapuser2group/*': Permission denied
+
+This file is accessible by ldapuser1 group
+This file is accessible by ldapuser1 other
+cat: ldapuser2other/ldapuser1owner: Permission denied
+cat: ldapuser2other/ldapuser2group: Permission denied
+This file is accessible by ldapuser2 other
+cat: ldapuser2other/ldapuser2owner: Permission denied

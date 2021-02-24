@@ -1,0 +1,127 @@
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1owner
+
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1group
+
+/tmp/linuxfiles/linuxuser1other/linuxuser1group \(Input/output error\)
+This file is accessible by linuxuser1 other
+/tmp/linuxfiles/linuxuser1other/linuxuser1owner \(Input/output error\)
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner
+
+/tmp/linuxfiles/linuxuser2owner/linuxuser1group \(Input/output error\)
+This file is accessible by linuxuser1 other
+/tmp/linuxfiles/linuxuser2owner/linuxuser1owner \(Input/output error\)
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner
+
+/tmp/linuxfiles/linuxuser2group/linuxuser1group \(Input/output error\)
+This file is accessible by linuxuser1 other
+/tmp/linuxfiles/linuxuser2group/linuxuser1owner \(Input/output error\)
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner
+
+/tmp/linuxfiles/linuxuser2other/linuxuser1group \(Input/output error\)
+This file is accessible by linuxuser1 other
+/tmp/linuxfiles/linuxuser2other/linuxuser1owner \(Input/output error\)
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner
+copyFromLocal: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1owner/linuxuser1group2cp
+copyFromLocal: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1owner/linuxuser1other2cp
+copyFromLocal: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1owner/linuxuser1owner2cp
+copyFromLocal: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1owner/linuxuser2group2cp
+copyFromLocal: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1owner/linuxuser2other2cp
+copyFromLocal: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1owner/linuxuser2owner2cp
+
+copyFromLocal: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1group/linuxuser1group2cp
+copyFromLocal: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1group/linuxuser1other2cp
+copyFromLocal: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1group/linuxuser1owner2cp
+copyFromLocal: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1group/linuxuser2group2cp
+copyFromLocal: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1group/linuxuser2other2cp
+copyFromLocal: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1group/linuxuser2owner2cp
+
+copyFromLocal: /tmp/linuxfiles/linuxuser1other/linuxuser1group \(Permission denied\)
+copyFromLocal: Could not set owner/group linuxuser1/linuxuser1 for path maprfs:///tmp/linuxfiles/linuxuser1other/linuxuser1other2cp
+copyFromLocal: /tmp/linuxfiles/linuxuser1other/linuxuser1owner \(Permission denied\)
+
+copyFromLocal: /tmp/linuxfiles/linuxuser2owner/linuxuser1group \(Permission denied\)
+copyFromLocal: Could not set owner/group linuxuser1/linuxuser1 for path maprfs:///tmp/linuxfiles/linuxuser2owner/linuxuser1other2cp
+copyFromLocal: /tmp/linuxfiles/linuxuser2owner/linuxuser1owner \(Permission denied\)
+
+copyFromLocal: /tmp/linuxfiles/linuxuser2group/linuxuser1group \(Permission denied\)
+copyFromLocal: Could not set owner/group linuxuser1/linuxuser1 for path maprfs:///tmp/linuxfiles/linuxuser2group/linuxuser1other2cp
+copyFromLocal: /tmp/linuxfiles/linuxuser2group/linuxuser1owner \(Permission denied\)
+
+copyFromLocal: /tmp/linuxfiles/linuxuser2other/linuxuser1group \(Permission denied\)
+copyFromLocal: Could not set owner/group linuxuser1/linuxuser1 for path maprfs:///tmp/linuxfiles/linuxuser2other/linuxuser1other2cp
+copyFromLocal: /tmp/linuxfiles/linuxuser2other/linuxuser1owner \(Permission denied\)
+rm: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1owner/linuxuser1group2cp
+rm: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1owner/linuxuser1other2cp
+rm: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1owner/linuxuser1owner2cp
+rm: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1owner/linuxuser2group2cp
+rm: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1owner/linuxuser2other2cp
+rm: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1owner/linuxuser2owner2cp
+rm: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1group/linuxuser1group2cp
+rm: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1group/linuxuser1other2cp
+rm: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1group/linuxuser1owner2cp
+rm: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1group/linuxuser2group2cp
+rm: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1group/linuxuser2other2cp
+rm: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1group/linuxuser2owner2cp
+rm: `/tmp/linuxfiles/linuxuser1other/linuxuser1group2cp': No such file or directory
+Deleted /tmp/linuxfiles/linuxuser1other/linuxuser1other2cp
+rm: `/tmp/linuxfiles/linuxuser1other/linuxuser1owner2cp': No such file or directory
+Deleted /tmp/linuxfiles/linuxuser1other/linuxuser2group2cp
+Deleted /tmp/linuxfiles/linuxuser1other/linuxuser2other2cp
+Deleted /tmp/linuxfiles/linuxuser1other/linuxuser2owner2cp
+rm: `/tmp/linuxfiles/linuxuser2owner/linuxuser1group2cp': No such file or directory
+Deleted /tmp/linuxfiles/linuxuser2owner/linuxuser1other2cp
+rm: `/tmp/linuxfiles/linuxuser2owner/linuxuser1owner2cp': No such file or directory
+Deleted /tmp/linuxfiles/linuxuser2owner/linuxuser2group2cp
+Deleted /tmp/linuxfiles/linuxuser2owner/linuxuser2other2cp
+Deleted /tmp/linuxfiles/linuxuser2owner/linuxuser2owner2cp
+rm: `/tmp/linuxfiles/linuxuser2group/linuxuser1group2cp': No such file or directory
+Deleted /tmp/linuxfiles/linuxuser2group/linuxuser1other2cp
+rm: `/tmp/linuxfiles/linuxuser2group/linuxuser1owner2cp': No such file or directory
+Deleted /tmp/linuxfiles/linuxuser2group/linuxuser2group2cp
+Deleted /tmp/linuxfiles/linuxuser2group/linuxuser2other2cp
+Deleted /tmp/linuxfiles/linuxuser2group/linuxuser2owner2cp
+rm: `/tmp/linuxfiles/linuxuser2other/linuxuser1group2cp': No such file or directory
+Deleted /tmp/linuxfiles/linuxuser2other/linuxuser1other2cp
+rm: `/tmp/linuxfiles/linuxuser2other/linuxuser1owner2cp': No such file or directory
+Deleted /tmp/linuxfiles/linuxuser2other/linuxuser2group2cp
+Deleted /tmp/linuxfiles/linuxuser2other/linuxuser2other2cp
+Deleted /tmp/linuxfiles/linuxuser2other/linuxuser2owner2cp
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1ownernox
+
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1groupnox
+
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1othernox/linuxuser1group
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1othernox/linuxuser1other
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1othernox/linuxuser1owner
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1othernox/linuxuser2group
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1othernox/linuxuser2other
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser1othernox/linuxuser2owner
+
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser2ownernox/linuxuser1group
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser2ownernox/linuxuser1other
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser2ownernox/linuxuser1owner
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser2ownernox/linuxuser2group
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser2ownernox/linuxuser2other
+cat: User linuxuser2\(user id 6102\)  does not have access to maprfs:/tmp/linuxfiles/linuxuser2ownernox/linuxuser2owner
+
+/tmp/linuxfiles/linuxuser2groupnox/linuxuser1group \(Input/output error\)
+This file is accessible by linuxuser1 other
+/tmp/linuxfiles/linuxuser2groupnox/linuxuser1owner \(Input/output error\)
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner
+
+/tmp/linuxfiles/linuxuser2othernox/linuxuser1group \(Input/output error\)
+This file is accessible by linuxuser1 other
+/tmp/linuxfiles/linuxuser2othernox/linuxuser1owner \(Input/output error\)
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner

@@ -1,0 +1,4 @@
+./copy.sh
+
+./runTests.sh
+

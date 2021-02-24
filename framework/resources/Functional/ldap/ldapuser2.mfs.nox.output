@@ -1,0 +1,31 @@
+cat: User ldapuser2(user id 6002)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1ownernox
+
+cat: User ldapuser2(user id 6002)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1groupnox
+
+cat: User ldapuser2(user id 6002)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1othernox/ldapuser1group
+cat: User ldapuser2(user id 6002)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1othernox/ldapuser1other
+cat: User ldapuser2(user id 6002)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1othernox/ldapuser1owner
+cat: User ldapuser2(user id 6002)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1othernox/ldapuser2group
+cat: User ldapuser2(user id 6002)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1othernox/ldapuser2other
+cat: User ldapuser2(user id 6002)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1othernox/ldapuser2owner
+
+cat: User ldapuser2(user id 6002)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2ownernox/ldapuser1group
+cat: User ldapuser2(user id 6002)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2ownernox/ldapuser1other
+cat: User ldapuser2(user id 6002)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2ownernox/ldapuser1owner
+cat: User ldapuser2(user id 6002)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2ownernox/ldapuser2group
+cat: User ldapuser2(user id 6002)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2ownernox/ldapuser2other
+cat: User ldapuser2(user id 6002)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2ownernox/ldapuser2owner
+
+/tmp/ldapfiles/ldapuser2groupnox/ldapuser1group (Input/output error)
+This file is accessible by ldapuser1 other
+/tmp/ldapfiles/ldapuser2groupnox/ldapuser1owner (Input/output error)
+This file is accessible by ldapuser2 group
+This file is accessible by ldapuser2 other
+This file is accessible by ldapuser2 owner
+
+/tmp/ldapfiles/ldapuser2othernox/ldapuser1group (Input/output error)
+This file is accessible by ldapuser1 other
+/tmp/ldapfiles/ldapuser2othernox/ldapuser1owner (Input/output error)
+This file is accessible by ldapuser2 group
+This file is accessible by ldapuser2 other
+This file is accessible by ldapuser2 owner

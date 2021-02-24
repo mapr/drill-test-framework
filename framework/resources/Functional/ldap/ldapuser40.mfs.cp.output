@@ -1,0 +1,77 @@
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser1group40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser1other40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser1owner40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser2group40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser2other40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser2owner40cp
+
+copyFromLocal: Could not set owner/group ldapuser1/ldapuser1 for path maprfs:///tmp/ldapfiles/ldapuser1group/ldapuser1group40cp
+copyFromLocal: Could not set owner/group ldapuser1/ldapuser1 for path maprfs:///tmp/ldapfiles/ldapuser1group/ldapuser1other40cp
+copyFromLocal: /tmp/ldapfiles/ldapuser1group/ldapuser1owner (Permission denied)
+copyFromLocal: /tmp/ldapfiles/ldapuser1group/ldapuser2group (Permission denied)
+copyFromLocal: Could not set owner/group ldapuser2/ldapuser2 for path maprfs:///tmp/ldapfiles/ldapuser1group/ldapuser2other40cp
+copyFromLocal: /tmp/ldapfiles/ldapuser1group/ldapuser2owner (Permission denied)
+
+copyFromLocal: Could not set owner/group ldapuser1/ldapuser1 for path maprfs:///tmp/ldapfiles/ldapuser1other/ldapuser1group40cp
+copyFromLocal: Could not set owner/group ldapuser1/ldapuser1 for path maprfs:///tmp/ldapfiles/ldapuser1other/ldapuser1other40cp
+copyFromLocal: /tmp/ldapfiles/ldapuser1other/ldapuser1owner (Permission denied)
+copyFromLocal: /tmp/ldapfiles/ldapuser1other/ldapuser2group (Permission denied)
+copyFromLocal: Could not set owner/group ldapuser2/ldapuser2 for path maprfs:///tmp/ldapfiles/ldapuser1other/ldapuser2other40cp
+copyFromLocal: /tmp/ldapfiles/ldapuser1other/ldapuser2owner (Permission denied)
+
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2owner/ldapuser1group40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2owner/ldapuser1other40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2owner/ldapuser1owner40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2owner/ldapuser2group40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2owner/ldapuser2other40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2owner/ldapuser2owner40cp
+
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2group/ldapuser1group40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2group/ldapuser1other40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2group/ldapuser1owner40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2group/ldapuser2group40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2group/ldapuser2other40cp
+copyFromLocal: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2group/ldapuser2owner40cp
+
+copyFromLocal: Could not set owner/group ldapuser1/ldapuser1 for path maprfs:///tmp/ldapfiles/ldapuser2other/ldapuser1group40cp
+copyFromLocal: Could not set owner/group ldapuser1/ldapuser1 for path maprfs:///tmp/ldapfiles/ldapuser2other/ldapuser1other40cp
+copyFromLocal: /tmp/ldapfiles/ldapuser2other/ldapuser1owner (Permission denied)
+copyFromLocal: /tmp/ldapfiles/ldapuser2other/ldapuser2group (Permission denied)
+copyFromLocal: Could not set owner/group ldapuser2/ldapuser2 for path maprfs:///tmp/ldapfiles/ldapuser2other/ldapuser2other40cp
+copyFromLocal: /tmp/ldapfiles/ldapuser2other/ldapuser2owner (Permission denied)
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser1group40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser1other40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser1owner40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser2group40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser2other40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser2owner40cp
+Deleted /tmp/ldapfiles/ldapuser1group/ldapuser1group40cp
+Deleted /tmp/ldapfiles/ldapuser1group/ldapuser1other40cp
+rm: `/tmp/ldapfiles/ldapuser1group/ldapuser1owner40cp': No such file or directory
+rm: `/tmp/ldapfiles/ldapuser1group/ldapuser2group40cp': No such file or directory
+Deleted /tmp/ldapfiles/ldapuser1group/ldapuser2other40cp
+rm: `/tmp/ldapfiles/ldapuser1group/ldapuser2owner40cp': No such file or directory
+Deleted /tmp/ldapfiles/ldapuser1other/ldapuser1group40cp
+Deleted /tmp/ldapfiles/ldapuser1other/ldapuser1other40cp
+rm: `/tmp/ldapfiles/ldapuser1other/ldapuser1owner40cp': No such file or directory
+rm: `/tmp/ldapfiles/ldapuser1other/ldapuser2group40cp': No such file or directory
+Deleted /tmp/ldapfiles/ldapuser1other/ldapuser2other40cp
+rm: `/tmp/ldapfiles/ldapuser1other/ldapuser2owner40cp': No such file or directory
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2owner/ldapuser1group40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2owner/ldapuser1other40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2owner/ldapuser1owner40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2owner/ldapuser2group40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2owner/ldapuser2other40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2owner/ldapuser2owner40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2group/ldapuser1group40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2group/ldapuser1other40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2group/ldapuser1owner40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2group/ldapuser2group40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2group/ldapuser2other40cp
+rm: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2group/ldapuser2owner40cp
+Deleted /tmp/ldapfiles/ldapuser2other/ldapuser1group40cp
+Deleted /tmp/ldapfiles/ldapuser2other/ldapuser1other40cp
+rm: `/tmp/ldapfiles/ldapuser2other/ldapuser1owner40cp': No such file or directory
+rm: `/tmp/ldapfiles/ldapuser2other/ldapuser2group40cp': No such file or directory
+Deleted /tmp/ldapfiles/ldapuser2other/ldapuser2other40cp
+rm: `/tmp/ldapfiles/ldapuser2other/ldapuser2owner40cp': No such file or directory

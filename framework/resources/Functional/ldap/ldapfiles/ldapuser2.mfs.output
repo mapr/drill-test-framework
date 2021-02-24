@@ -1,0 +1,127 @@
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner
+
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1group
+
+/tmp/ldapfiles/ldapuser1other/ldapuser1group \(Input/output error\)
+This file is accessible by ldapuser1 other
+/tmp/ldapfiles/ldapuser1other/ldapuser1owner \(Input/output error\)
+This file is accessible by ldapuser2 group
+This file is accessible by ldapuser2 other
+This file is accessible by ldapuser2 owner
+
+/tmp/ldapfiles/ldapuser2owner/ldapuser1group \(Input/output error\)
+This file is accessible by ldapuser1 other
+/tmp/ldapfiles/ldapuser2owner/ldapuser1owner \(Input/output error\)
+This file is accessible by ldapuser2 group
+This file is accessible by ldapuser2 other
+This file is accessible by ldapuser2 owner
+
+/tmp/ldapfiles/ldapuser2group/ldapuser1group \(Input/output error\)
+This file is accessible by ldapuser1 other
+/tmp/ldapfiles/ldapuser2group/ldapuser1owner \(Input/output error\)
+This file is accessible by ldapuser2 group
+This file is accessible by ldapuser2 other
+This file is accessible by ldapuser2 owner
+
+/tmp/ldapfiles/ldapuser2other/ldapuser1group \(Input/output error\)
+This file is accessible by ldapuser1 other
+/tmp/ldapfiles/ldapuser2other/ldapuser1owner \(Input/output error\)
+This file is accessible by ldapuser2 group
+This file is accessible by ldapuser2 other
+This file is accessible by ldapuser2 owner
+copyFromLocal: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser1group2cp
+copyFromLocal: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser1other2cp
+copyFromLocal: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser1owner2cp
+copyFromLocal: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser2group2cp
+copyFromLocal: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser2other2cp
+copyFromLocal: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser2owner2cp
+
+copyFromLocal: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1group/ldapuser1group2cp
+copyFromLocal: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1group/ldapuser1other2cp
+copyFromLocal: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1group/ldapuser1owner2cp
+copyFromLocal: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1group/ldapuser2group2cp
+copyFromLocal: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1group/ldapuser2other2cp
+copyFromLocal: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1group/ldapuser2owner2cp
+
+copyFromLocal: /tmp/ldapfiles/ldapuser1other/ldapuser1group \(Permission denied\)
+copyFromLocal: Could not set owner/group ldapuser1/ldapuser1 for path maprfs:///tmp/ldapfiles/ldapuser1other/ldapuser1other2cp
+copyFromLocal: /tmp/ldapfiles/ldapuser1other/ldapuser1owner \(Permission denied\)
+
+copyFromLocal: /tmp/ldapfiles/ldapuser2owner/ldapuser1group \(Permission denied\)
+copyFromLocal: Could not set owner/group ldapuser1/ldapuser1 for path maprfs:///tmp/ldapfiles/ldapuser2owner/ldapuser1other2cp
+copyFromLocal: /tmp/ldapfiles/ldapuser2owner/ldapuser1owner \(Permission denied\)
+
+copyFromLocal: /tmp/ldapfiles/ldapuser2group/ldapuser1group \(Permission denied\)
+copyFromLocal: Could not set owner/group ldapuser1/ldapuser1 for path maprfs:///tmp/ldapfiles/ldapuser2group/ldapuser1other2cp
+copyFromLocal: /tmp/ldapfiles/ldapuser2group/ldapuser1owner \(Permission denied\)
+
+copyFromLocal: /tmp/ldapfiles/ldapuser2other/ldapuser1group \(Permission denied\)
+copyFromLocal: Could not set owner/group ldapuser1/ldapuser1 for path maprfs:///tmp/ldapfiles/ldapuser2other/ldapuser1other2cp
+copyFromLocal: /tmp/ldapfiles/ldapuser2other/ldapuser1owner \(Permission denied\)
+rm: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser1group2cp
+rm: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser1other2cp
+rm: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser1owner2cp
+rm: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser2group2cp
+rm: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser2other2cp
+rm: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner/ldapuser2owner2cp
+rm: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1group/ldapuser1group2cp
+rm: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1group/ldapuser1other2cp
+rm: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1group/ldapuser1owner2cp
+rm: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1group/ldapuser2group2cp
+rm: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1group/ldapuser2other2cp
+rm: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1group/ldapuser2owner2cp
+rm: `/tmp/ldapfiles/ldapuser1other/ldapuser1group2cp': No such file or directory
+Deleted /tmp/ldapfiles/ldapuser1other/ldapuser1other2cp
+rm: `/tmp/ldapfiles/ldapuser1other/ldapuser1owner2cp': No such file or directory
+Deleted /tmp/ldapfiles/ldapuser1other/ldapuser2group2cp
+Deleted /tmp/ldapfiles/ldapuser1other/ldapuser2other2cp
+Deleted /tmp/ldapfiles/ldapuser1other/ldapuser2owner2cp
+rm: `/tmp/ldapfiles/ldapuser2owner/ldapuser1group2cp': No such file or directory
+Deleted /tmp/ldapfiles/ldapuser2owner/ldapuser1other2cp
+rm: `/tmp/ldapfiles/ldapuser2owner/ldapuser1owner2cp': No such file or directory
+Deleted /tmp/ldapfiles/ldapuser2owner/ldapuser2group2cp
+Deleted /tmp/ldapfiles/ldapuser2owner/ldapuser2other2cp
+Deleted /tmp/ldapfiles/ldapuser2owner/ldapuser2owner2cp
+rm: `/tmp/ldapfiles/ldapuser2group/ldapuser1group2cp': No such file or directory
+Deleted /tmp/ldapfiles/ldapuser2group/ldapuser1other2cp
+rm: `/tmp/ldapfiles/ldapuser2group/ldapuser1owner2cp': No such file or directory
+Deleted /tmp/ldapfiles/ldapuser2group/ldapuser2group2cp
+Deleted /tmp/ldapfiles/ldapuser2group/ldapuser2other2cp
+Deleted /tmp/ldapfiles/ldapuser2group/ldapuser2owner2cp
+rm: `/tmp/ldapfiles/ldapuser2other/ldapuser1group2cp': No such file or directory
+Deleted /tmp/ldapfiles/ldapuser2other/ldapuser1other2cp
+rm: `/tmp/ldapfiles/ldapuser2other/ldapuser1owner2cp': No such file or directory
+Deleted /tmp/ldapfiles/ldapuser2other/ldapuser2group2cp
+Deleted /tmp/ldapfiles/ldapuser2other/ldapuser2other2cp
+Deleted /tmp/ldapfiles/ldapuser2other/ldapuser2owner2cp
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1ownernox
+
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1groupnox
+
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1othernox/ldapuser1group
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1othernox/ldapuser1other
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1othernox/ldapuser1owner
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1othernox/ldapuser2group
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1othernox/ldapuser2other
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1othernox/ldapuser2owner
+
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2ownernox/ldapuser1group
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2ownernox/ldapuser1other
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2ownernox/ldapuser1owner
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2ownernox/ldapuser2group
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2ownernox/ldapuser2other
+cat: User ldapuser2\(user id 6002\)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2ownernox/ldapuser2owner
+
+/tmp/ldapfiles/ldapuser2groupnox/ldapuser1group \(Input/output error\)
+This file is accessible by ldapuser1 other
+/tmp/ldapfiles/ldapuser2groupnox/ldapuser1owner \(Input/output error\)
+This file is accessible by ldapuser2 group
+This file is accessible by ldapuser2 other
+This file is accessible by ldapuser2 owner
+
+/tmp/ldapfiles/ldapuser2othernox/ldapuser1group \(Input/output error\)
+This file is accessible by ldapuser1 other
+/tmp/ldapfiles/ldapuser2othernox/ldapuser1owner \(Input/output error\)
+This file is accessible by ldapuser2 group
+This file is accessible by ldapuser2 other
+This file is accessible by ldapuser2 owner
