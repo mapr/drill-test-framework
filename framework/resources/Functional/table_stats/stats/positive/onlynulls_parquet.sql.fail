@@ -1,1 +1,0 @@
-select directories from `table_stats/onlynulls_parquet/.stats.drill`;

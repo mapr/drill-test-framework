@@ -1,4 +1,0 @@
-1	aaa	bbb
-2	ccc	ddd
-3	eee	
-4	fff	ggg

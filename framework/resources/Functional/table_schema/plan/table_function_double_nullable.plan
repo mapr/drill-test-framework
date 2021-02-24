@@ -1,1 +1,0 @@
-.+schema=\[TupleSchema \[PrimitiveColumnMetadata \[`nullable_double_col` \(FLOAT8:REQUIRED\)\], properties: \{drill.default=777.11\}\]\].+
