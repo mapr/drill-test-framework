@@ -1,3 +1,0 @@
-.*
-Filter.condition=.OR.AND.=.*1993.*=.*12.*>.*29600.*=.*1994.*
-Scan.*tableName:lineitem_text_partitioned_hive_hier_intint.*numPartitions=13, partitions= \[Partition\(values:\[1993, 12\]\), Partition\(values:\[1994, 1\]\), Partition\(values:\[1994, 10\]\), Partition\(values:\[1994, 11\]\), Partition\(values:\[1994, 12\]\), Partition\(values:\[1994, 2\]\), Partition\(values:\[1994, 3\]\), Partition\(values:\[1994, 4\]\), Partition\(values:\[1994, 5\]\), Partition\(values:\[1994, 6\]\), Partition\(values:\[1994, 7\]\), Partition\(values:\[1994, 8\]\), Partition\(values:\[1994, 9\]\)\]*

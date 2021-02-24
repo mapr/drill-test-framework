@@ -1,1 +1,0 @@
-select distinct dir0 from dfs.drillTestDir.`/partition_pruning/dfs/orders`;
