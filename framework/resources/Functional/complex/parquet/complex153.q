@@ -1,1 +1,0 @@
-select a.id, b.gbyi, a.str, b.sia from `complex.json` a inner join `complex.json` b on a.str=b.str order by a.id limit 20;

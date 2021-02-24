@@ -1,1 +1,0 @@
-SELECT (CASE WHEN true THEN 1 ELSE 0 end) FROM (VALUES(1)) sub_query ORDER BY (CASE WHEN true THEN 1 ELSE 0 end);

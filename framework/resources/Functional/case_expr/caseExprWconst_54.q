@@ -1,1 +1,0 @@
-SELECT (CASE WHEN true THEN COALESCE(null,true) ELSE false END) FROM (VALUES(1)) test_tbl;

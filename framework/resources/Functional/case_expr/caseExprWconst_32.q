@@ -1,1 +1,0 @@
-SELECT NULLIF(-1,cast(null as integer)) FROM (VALUES(1)) test_tbl;

@@ -1,1 +1,0 @@
-select tt.gbyi, sum(tt.id), sum(tt.sia[0]) from (select t.id, t.gbyi, t.sia sia from `complex.json` t) tt group by tt.gbyi order by tt.gbyi;

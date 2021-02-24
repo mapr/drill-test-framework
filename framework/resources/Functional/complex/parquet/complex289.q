@@ -1,1 +1,0 @@
- select tt.gbyi, count(tt.gbyi), count(tt.ooosoab.oabc) from ( select t.gbyi gbyi, t.ooos.oa.oab ooosoab from `complex.json` t) tt group by tt.gbyi order by tt.gbyi;

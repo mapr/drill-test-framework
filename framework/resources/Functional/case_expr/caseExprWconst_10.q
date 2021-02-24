@@ -1,1 +1,0 @@
-SELECT (CASE WHEN (strpos('sdfsdfdsf?sdfsd','?')-1) <> '-1' THEN 1 ELSE 0 END) FROM (VALUES(1)) test_tbl;

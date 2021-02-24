@@ -1,7 +1,0 @@
-.*
-.*HashAgg.*
-.*Scan.*
-.*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart/0_0_84.parquet.*
-.*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart/0_0_1.parquet.*
-.*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart/0_0_167.parquet.*
-.*selectionRoot.*/drill/testdata/ctas_auto_partition/tpch_multiple_partitions/lineitem_twopart.*numFiles=3.*columns=\[`l_modline`.*`l_moddate`\].*

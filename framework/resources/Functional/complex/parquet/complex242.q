@@ -1,1 +1,0 @@
-select t.id, sqrt(t.ooof.oa.oab.oabc) from `complex.json` t order by t.id limit 11;

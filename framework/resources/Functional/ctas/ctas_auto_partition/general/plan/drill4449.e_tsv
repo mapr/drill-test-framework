@@ -1,3 +1,0 @@
-.*UnionAll.*all.*true.*
-.*Scan.*ParquetGroupScan.*path.*ctas_auto_partition/tpch_single_partition1/drill4449.*numFiles=5.*numRowGroups=5.*usedMetadataFile=true.*cacheFileRoot.*ctas_auto_partition/tpch_single_partition1/drill4449.*columns.*\[\]
-.*Scan.*ParquetGroupScan.*path.*ctas_auto_partition/tpch_single_partition1/drill4449.*numFiles=8.*numRowGroups=8.*usedMetadataFile=true.*cacheFileRoot.*ctas_auto_partition/tpch_single_partition1/drill4449.*columns.*\[\]

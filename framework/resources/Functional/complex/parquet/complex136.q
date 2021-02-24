@@ -1,1 +1,0 @@
-select mod(t.ooa[0].`in`,10) ooamod, count(t.id) countid from `complex.json` t group by mod(t.ooa[0].`in`,10) order by mod(t.ooa[0].`in`,10);
