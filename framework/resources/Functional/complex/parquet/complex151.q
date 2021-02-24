@@ -1,1 +1,0 @@
-select a.id, b.fl, a.nul, b.bool from `complex.json` a inner join `complex.json` b on a.id=b.id order by a.id limit 20;

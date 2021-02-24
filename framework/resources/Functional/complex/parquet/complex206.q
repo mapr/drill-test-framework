@@ -1,1 +1,0 @@
-select t.gbyi, avg(t.sia[0]) avgsia from `complex.json` t group by t.gbyi having avg(t.sia[0]) < 499189 order by avgsia;

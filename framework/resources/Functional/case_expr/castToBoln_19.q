@@ -1,1 +1,0 @@
-SELECT CAST('y' AS BOOLEAN) bln FROM (VALUES(1)) test;

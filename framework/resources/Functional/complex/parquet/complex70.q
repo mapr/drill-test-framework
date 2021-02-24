@@ -1,1 +1,0 @@
-select t.id, t.oooi, t.oooi.oa.oab.oabc from `complex.json` t where t.oooi.oa.oab.oabc < 25 or t.oooi.oa.oab.oabc > 500000 order by t.oooi.oa.oab.oabc limit 50;

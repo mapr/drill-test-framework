@@ -1,1 +1,0 @@
-select stddev_samp(t.soa[2].fl) from `complex.json` t;

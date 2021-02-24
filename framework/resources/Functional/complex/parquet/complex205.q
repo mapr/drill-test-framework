@@ -1,1 +1,0 @@
-select t.gbyt, count(t.str) countstr from `complex.json` t group by t.gbyt having count(t.str) <> 55995 order by countstr;

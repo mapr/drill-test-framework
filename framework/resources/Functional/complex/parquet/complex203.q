@@ -1,1 +1,0 @@
-select t.gbyi, count(t.nul) countnul from `complex.json` t group by t.gbyi having count(t.nul) <= 33364 order by countnul;

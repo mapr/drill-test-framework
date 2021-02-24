@@ -1,3 +1,0 @@
-.*
-Filter.*AND\(OR\(=.*1993.*=.*1996\).*OR\(.*=.*'jun'.*AND\(>.*25000.*=.*1995\)\)\).*
-Scan.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring/0_0_31.parquet.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring/0_0_67.parquet.*selectionRoot=.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring.*numFiles=2.*columns=\[`\*\*`, `dir0`, `dir1`, `columns`\].*

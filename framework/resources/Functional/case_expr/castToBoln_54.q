@@ -1,1 +1,0 @@
-SELECT columns[0],CAST(columns[1] AS BOOLEAN),columns[2],columns[3] FROM `bools.csv` order by CAST(columns[1] AS BOOLEAN);

@@ -1,1 +1,0 @@
-select count(t.nul) from `complex.json` t;

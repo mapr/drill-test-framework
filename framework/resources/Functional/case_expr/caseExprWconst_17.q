@@ -1,1 +1,0 @@
-SELECT (CASE WHEN (false) THEN 0 END) FROM (VALUES(1)) test_tbl;

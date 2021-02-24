@@ -1,1 +1,0 @@
-select t.id, div(t.soa[2].fl, t.soa[1].fl) from `complex.json` t order by t.id limit 10;

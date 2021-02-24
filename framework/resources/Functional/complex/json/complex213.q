@@ -1,1 +1,0 @@
-select t.gbyt, count(t.ooos.oa.oab.oabc) countooos from `complex.json` t group by t.gbyt having count(t.ooos.oa.oab.oabc) <= 55544 order by countooos;

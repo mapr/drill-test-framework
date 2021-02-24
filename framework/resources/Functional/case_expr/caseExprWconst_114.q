@@ -1,1 +1,0 @@
-SELECT (CASE WHEN false THEN (99/3) ELSE (169/13) END) FROM (VALUES(1)) test_tbl;

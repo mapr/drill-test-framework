@@ -1,2 +1,0 @@
-.*
-Scan.*selectionRoot.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring.*numFiles=3.*columns=\[`\*\*`, `dir0`, `dir1`\].*

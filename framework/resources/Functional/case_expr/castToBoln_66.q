@@ -1,1 +1,0 @@
-SELECT columns[0], CAST(columns[1] AS BOOLEAN) FROM (SELECT * FROM `bools.csv` WHERE CAST(columns[1] AS BOOLEAN) IN (true)) subquery;
