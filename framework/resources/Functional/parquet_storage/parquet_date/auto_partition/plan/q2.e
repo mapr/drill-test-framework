@@ -1,1 +1,0 @@
-.*ParquetGroupScan.*/drill/testdata/parquet_date/auto_partition/item_multipart_autorefresh/0_0_15\.parquet.*numFiles=1.*usedMetadataFile=true.*cacheFileRoot=/drill/testdata/parquet_date/auto_partition/item_multipart_autorefresh.*

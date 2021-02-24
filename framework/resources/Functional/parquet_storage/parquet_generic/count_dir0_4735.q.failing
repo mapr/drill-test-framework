@@ -1,1 +1,0 @@
-select count(dir0) from `DRILL-4735`;
