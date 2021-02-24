@@ -1,1 +1,0 @@
-SELECT cast(1234.56 as DECIMAL(3, 2));

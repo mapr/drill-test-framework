@@ -1,1 +1,0 @@
-SELECT sqlTypeOf(MAX(decimal_with_null_9_4)), MAX(decimal_with_null_9_4) FROM dfs.drillTestDir.`CTAS_CSV_PARQUET_DECIMAL9`;

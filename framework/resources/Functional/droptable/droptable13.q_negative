@@ -1,3 +1,0 @@
-use hive;
-drop table droptable.droptable13_parquet;
-use dfs;

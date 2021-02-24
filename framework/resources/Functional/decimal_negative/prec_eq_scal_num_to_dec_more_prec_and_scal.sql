@@ -1,1 +1,0 @@
-SELECT cast(123.456 as DECIMAL(2, 2));

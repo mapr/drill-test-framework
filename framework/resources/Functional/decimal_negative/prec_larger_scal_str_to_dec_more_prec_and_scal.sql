@@ -1,1 +1,0 @@
-SELECT cast('1234.5678' as DECIMAL(3, 2));

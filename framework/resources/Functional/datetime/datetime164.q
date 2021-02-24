@@ -1,1 +1,0 @@
-select now()=localtimestamp from sys.drillbits limit 1;
