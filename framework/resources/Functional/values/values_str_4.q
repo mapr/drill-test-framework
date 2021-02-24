@@ -1,1 +1,0 @@
-SELECT DISTINCT NULLIF(id, '') FROM (VALUES('1234'),('3456'),(''),('')) tbl(id);

@@ -1,1 +1,0 @@
-SELECT PERCENT_RANK () OVER (ORDER by col_bgint ) prcnt_rank FROM `smlTbl.parquet`;

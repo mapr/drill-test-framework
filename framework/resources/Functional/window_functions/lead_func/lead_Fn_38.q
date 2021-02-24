@@ -1,1 +1,0 @@
-SELECT LEAD(col1) OVER (ORDER BY col0 ) LEAD_col1 FROM `fewRowsAllData.parquet`;

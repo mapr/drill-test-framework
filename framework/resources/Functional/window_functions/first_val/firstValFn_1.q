@@ -1,1 +1,0 @@
-SELECT col7 , col0 , FIRST_VALUE(col0) OVER(PARTITION BY col7 ORDER BY col0) FIRST_VALUE_col0 FROM `allTypsUniq.parquet`;

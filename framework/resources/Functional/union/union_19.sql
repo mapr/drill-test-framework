@@ -1,1 +1,0 @@
-SELECT c9 FROM `union_01.parquet` UNION SELECT c9 FROM `union_02.parquet`;

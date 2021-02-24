@@ -1,1 +1,0 @@
-SELECT col5, MAX(MIN(col5)) OVER ( PARTITION BY col7 ORDER BY col0 ) max_col5, col7 FROM `allTypsUniq.parquet` GROUP BY col0,col5,col7;

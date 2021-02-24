@@ -1,1 +1,0 @@
-SELECT c2, COUNT(MAX(c2)) OVER ( PARTITION BY c2 ) FROM `tblWnulls.parquet` GROUP BY c2;

@@ -1,1 +1,0 @@
-SELECT COUNT(DISTINCT c1), COUNT(COUNT(DISTINCT c1)) OVER( ) FROM `tblWnulls.parquet`;
