@@ -1,1 +1,0 @@
-select * from `parquet_storage/customer_snappyimpala.parquet`;
