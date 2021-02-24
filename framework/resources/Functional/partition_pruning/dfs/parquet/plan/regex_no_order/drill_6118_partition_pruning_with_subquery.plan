@@ -1,6 +1,0 @@
-Scan
-path=.*/DRILL_6118_parquet_partitioned_by_files/0_0_4.parquet
-path=.*/DRILL_6118_parquet_partitioned_by_files/0_0_3.parquet
-path=.*/DRILL_6118_parquet_partitioned_by_files/0_0_2.parquet
-numFiles=3
-numRowGroups=3

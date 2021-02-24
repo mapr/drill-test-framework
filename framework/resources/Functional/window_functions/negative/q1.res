@@ -1,3 +1,0 @@
-0\t
-VALIDATION ERROR
-.*ROW/RANGE not allowed with RANK, DENSE_RANK or ROW_NUMBER functions

@@ -1,1 +1,0 @@
-SELECT col1, MIN(MAX(col1)) OVER ( PARTITION BY col7 ORDER BY col0 ) avg_col1, col7 FROM `allTypsUniq.parquet` GROUP BY col0,col1,col7;

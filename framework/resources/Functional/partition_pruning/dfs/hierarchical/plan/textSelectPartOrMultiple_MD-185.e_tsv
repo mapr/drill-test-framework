@@ -1,5 +1,0 @@
-.*
-  Project.*
-    Scan.*selectionRoot=.*partition_pruning/hive/text/lineitem_hierarchical_intstring.*numFiles=2.*columns=\[`columns`\[0\], `columns`\[1\], `columns`\[4\], `columns`\[10\], `columns`\[13\]\].*files=
-.*partition_pruning/hive/text/lineitem_hierarchical_intstring/1994/may/lineitemae.tbl
-.*partition_pruning/hive/text/lineitem_hierarchical_intstring/1993/oct/lineitemaj.tbl

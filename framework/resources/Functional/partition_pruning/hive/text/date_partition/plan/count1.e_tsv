@@ -1,2 +1,0 @@
-.*
-Scan.*tableName:lineitem_text_partitioned_hive_date.*columns=\[\].*numPartitions=7, partitions= \[Partition\(values:\[2014\-10\-20\]\), Partition\(values:\[2014\-10\-21\]\), Partition\(values:\[2014\-10\-22\]\), Partition\(values:\[2014\-10\-23\]\), Partition\(values:\[2014\-10\-24\]\), Partition\(values:\[2014\-10\-25\]\), Partition\(values:\[2014\-10\-26\]\)\]*

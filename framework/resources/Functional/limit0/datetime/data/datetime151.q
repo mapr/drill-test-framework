@@ -1,1 +1,0 @@
-select extract(year from now())=extract(year from current_date) from sys.drillbits limit 1;

@@ -1,1 +1,0 @@
-SELECT ROW_NUMBER () OVER (ORDER by col_tmstmp ) row_numbr FROM `smlTbl.parquet`;

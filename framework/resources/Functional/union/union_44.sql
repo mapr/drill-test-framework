@@ -1,1 +1,0 @@
-SELECT c8 FROM `union_01.parquet` WHERE c8 < 1000.00 UNION SELECT c2 FROM `union_02.parquet` WHERE c2 < 1000.00;

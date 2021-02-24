@@ -1,1 +1,0 @@
-SELECT id FROM (VALUES(''),(''),('non-null-value')) tbl(id) WHERE NULLIF(id,'') IS NOT NULL;

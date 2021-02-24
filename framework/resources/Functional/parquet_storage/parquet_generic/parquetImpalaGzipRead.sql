@@ -1,1 +1,0 @@
-select * from `parquet_storage/nation_gzip.impala.parquet`;

@@ -1,1 +1,0 @@
-set `exec.storage.enable_v3_text_reader`;

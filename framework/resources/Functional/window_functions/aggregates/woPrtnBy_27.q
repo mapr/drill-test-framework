@@ -1,1 +1,0 @@
-SELECT RANK () OVER (ORDER by col_tm ) rnk FROM `smlTbl.parquet`;
