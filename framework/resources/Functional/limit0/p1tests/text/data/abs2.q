@@ -1,1 +1,0 @@
-select abs(voter_id), abs(age), abs(contributions),abs(voterzone) from voter_csv_v where abs(voter_id)=10;
