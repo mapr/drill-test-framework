@@ -1,1 +1,0 @@
-select directories from `table_stats/pp_some_cols/1991/1/.stats.drill`;
