@@ -1,7 +1,0 @@
-hive_describe.default	\{
-  \"type\" : \"hive\",
-  \"configProps\" : \{
-    .*
-  \}
-  \"enabled\" : true
-\}

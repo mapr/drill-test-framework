@@ -1,1 +1,0 @@
-select * from `json_storage/employeeObjectMissingField.json`;

@@ -1,1 +1,0 @@
-explain plan for select * from ps_5level where dir0=2000 and dir1='q1' and dir2='jan' and dir3=1 and dir4=1.0 order by ps_partket limit 10;

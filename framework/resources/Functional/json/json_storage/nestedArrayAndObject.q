@@ -1,1 +1,0 @@
-select age,`favorites.color` from `json_storage/employeeNestedArrayAndObject.json`;
