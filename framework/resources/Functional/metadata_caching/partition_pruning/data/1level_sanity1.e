@@ -1,2 +1,0 @@
-1991	294	Customer#000000294	hSaNqI1P2IyEFHY0r0PsPkMqt	18	28-187-946-4260	-994.79	BUILDING	bold packages. regular, final asymptotes use quickly fluffily even waters. blithely express requests wake into th
-1991	128	Customer#000000128	AmKUMlJf2NRHcKGmKjLS	4	14-280-874-8044	-986.96	HOUSEHOLD	ing packages integrate across the slyly unusual dugouts. blithely silent ideas sublate carefully. blithely expr

@@ -1,4 +1,0 @@
-Screen
-.*Project
-.*Project
-.*Scan.*path=/drill/testdata/metadata_caching/nation/0_0_5.parquet.*selectionRoot=.*/drill/testdata/metadata_caching/nation.*numFiles=1.*columns=\[`\*\*`, `n_regionkey`\].*

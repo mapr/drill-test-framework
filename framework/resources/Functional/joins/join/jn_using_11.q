@@ -1,1 +1,0 @@
-SELECT t1.col_varstr t1_varstr, t2.col_varstr t2_varstr FROM using_f1 t1 JOIN using_f2 t2 USING(col_varstr);

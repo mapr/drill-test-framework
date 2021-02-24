@@ -1,1 +1,0 @@
-NaN	Infinity	0.0
