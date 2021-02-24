@@ -1,1 +1,0 @@
-select `value` from dest4_sequencefile where `key` > 90;

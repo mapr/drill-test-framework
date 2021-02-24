@@ -1,1 +1,0 @@
-select filepath from emptyheaderfooter;

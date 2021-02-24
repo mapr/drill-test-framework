@@ -1,3 +1,0 @@
-Scan
-path=maprfs://.*/filter/pushdown/DRILL_6118_parquet_without_partitioning
-columns=\[`c3`, `c1`\]

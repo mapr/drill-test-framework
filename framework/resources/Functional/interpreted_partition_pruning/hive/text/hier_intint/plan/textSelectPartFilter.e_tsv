@@ -1,3 +1,0 @@
-.*
-Filter.condition=.AND.=.*1993.* >.*29600.*=.*11.*
-numPartitions=1, partitions= \[Partition\(values:\[1993, 11\]\)\]*

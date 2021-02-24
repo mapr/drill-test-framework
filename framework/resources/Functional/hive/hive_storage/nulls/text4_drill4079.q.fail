@@ -1,1 +1,0 @@
-select * from hive.null_schemachange where varchar_col=' ';

@@ -1,1 +1,0 @@
-select registration, name, create_time, count(voter_id) over(partition by registration ,name order by name nulls first,create_time nulls first) from voter_hive order by registration nulls first, name nulls first, create_time nulls first;

@@ -1,2 +1,0 @@
-Filter\(condition=\[>\(\$0, 1900\.989:DECIMAL\(\d+, \d+\)\)\]\)
-Scan.*numFiles=1.*numRowGroups=5.*usedMetadataFile=false.*columns=\[`p_retailprice`, `p_name`, `p_brand`\]

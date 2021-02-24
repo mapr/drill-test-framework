@@ -1,4 +1,0 @@
-.*
-  Filter.*OR.*AND.*=.*1993.*>.*29600.*AND.*=.*1994.*>.*29700.*
-    .*
-      Scan.*selectionRoot=.*/drill/testdata/partition_pruning/hive/text/lineitem_hierarchical_intstring.*numFiles=24.*

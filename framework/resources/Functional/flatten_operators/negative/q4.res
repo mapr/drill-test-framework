@@ -1,1 +1,0 @@
-.*UNSUPPORTED_OPERATION ERROR: Flatten does not support inputs of non-list values.

@@ -1,1 +1,0 @@
-explain plan for select * from `filter/pushdown/DRILL_5796_test_data.parquet` limit 5;

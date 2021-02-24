@@ -1,4 +1,0 @@
-Scan
-path=.*/filter/pushdown/DRILL_6174_test_data/d1/0_0_0.parquet
-numFiles=1
-numRowGroups=1

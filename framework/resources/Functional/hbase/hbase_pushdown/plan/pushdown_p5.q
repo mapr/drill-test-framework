@@ -1,1 +1,0 @@
-explain plan for select cast(s.twocf.age as integer) * cast(s.threecf.gpa as float) from student s where s.row_key = '800';

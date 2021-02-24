@@ -1,1 +1,0 @@
-select registration,dense_rank() over(partition by registration order by registration nulls first,create_time nulls first) as DR,create_time from voter_hive order by registration nulls first, create_time nulls first;
