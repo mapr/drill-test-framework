@@ -1,1 +1,0 @@
-select max(length(str_var)), max(length(str_null)), min(length(str_fixed)), max(length(str_empty_null)), min(length(str_var_null_empty)), max(length(str_fixed_null_empty)) from widestrings group by str_empty;

@@ -1,1 +1,0 @@
-select cast(1111.05 as decimal(0,5));
