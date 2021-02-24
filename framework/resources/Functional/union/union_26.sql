@@ -1,1 +1,0 @@
-SELECT avg(c1),c3 FROM `union_01.parquet` group BY c3 UNION SELECT avg(c1),c3 FROM `union_02.parquet` group BY c3;

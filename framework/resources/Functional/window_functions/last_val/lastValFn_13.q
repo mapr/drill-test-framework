@@ -1,1 +1,0 @@
-SELECT col7 , col3 , LAST_VALUE(col3) OVER(PARTITION BY col7 ORDER BY col3) LAST_VALUE_col3 FROM `allTypsUniq.parquet`;

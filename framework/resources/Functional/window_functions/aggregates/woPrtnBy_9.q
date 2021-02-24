@@ -1,1 +1,0 @@
-SELECT col_bgint, AVG(col_bgint) OVER (ORDER by col_tmstmp) avg_bgint FROM `smlTbl.parquet`;

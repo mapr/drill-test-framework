@@ -1,1 +1,0 @@
-SELECT  id FROM (VALUES('aeiou'),('abcdef'),('afdrgt'),('abcdt'),('aaaa'),('a'),('aeiou'),(''),('a aa')) tbl(id);

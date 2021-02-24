@@ -1,1 +1,0 @@
-SELECT LEAD(col4) OVER ( PARTITION BY col3 ORDER BY col1 ) LEAD_col4 FROM `fewRowsAllData.parquet`;

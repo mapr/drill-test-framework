@@ -1,1 +1,0 @@
-select col2 , lead(col2) over(partition by col7 order by col2) lead_col2 from `allTypsUniq.parquet` where col2 > 0.9999 and col2 < 256.0;

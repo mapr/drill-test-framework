@@ -1,1 +1,0 @@
-SELECT c1, c2 FROM `union_01.parquet` WHERE c2 IS NOT null AND c1 IS NOT null UNION SELECT c1, c2 FROM `union_02.parquet` WHERE c2 IS NOT null AND c1 IS NOT null;
