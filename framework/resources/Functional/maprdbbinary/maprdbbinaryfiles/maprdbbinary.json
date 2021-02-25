@@ -1,0 +1,21 @@
+{
+    "testId": "maprdbbinary",
+    "type": "group",
+    "description": "Test binary database via shell scripts",
+    "submit-type": "script",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        {
+            "query-file": "bt.sh",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.output",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ]
+
+}
