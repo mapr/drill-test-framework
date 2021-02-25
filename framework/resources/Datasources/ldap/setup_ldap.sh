@@ -20,20 +20,22 @@ kubectl exec -i -n dataplatform admincli-0 -- sudo ls -al /tmp
 tar cf - ./ldapfiles | kubectl exec -i -n dataplatform admincli-0 -- sudo tar xf - -C /tmp
 
 # setup linux users on all pods, so that when linuxfiles are copied there, the owners are defined
+# all cldb pods need to have linux users defined since maprlogin may use any of them to verify users
+# tenant pod needs to have linux users for submitting spark jobs
 kubectl cp ./linuxuser_setup.sh dataplatform/admincli-0:/tmp
 kubectl exec -i -n dataplatform admincli-0 -- sudo /tmp/linuxuser_setup.sh
 
-# kubectl cp ./linuxuser_setup.sh dataplatform/cldb-0:/tmp
-# kubectl exec -i -n dataplatform cldb-0 -- sudo /tmp/linuxuser_setup.sh
+kubectl cp ./linuxuser_setup.sh dataplatform/cldb-0:/tmp
+kubectl exec -i -n dataplatform cldb-0 -- sudo /tmp/linuxuser_setup.sh
 
-# kubectl cp ./linuxuser_setup.sh dataplatform/cldb-1:/tmp
-# kubectl exec -i -n dataplatform cldb-1 -- sudo /tmp/linuxuser_setup.sh
+kubectl cp ./linuxuser_setup.sh dataplatform/cldb-1:/tmp
+kubectl exec -i -n dataplatform cldb-1 -- sudo /tmp/linuxuser_setup.sh
 
-# kubectl cp ./linuxuser_setup.sh dataplatform/cldb-2:/tmp
-# kubectl exec -i -n dataplatform cldb-2 -- sudo /tmp/linuxuser_setup.sh
+kubectl cp ./linuxuser_setup.sh dataplatform/cldb-2:/tmp
+kubectl exec -i -n dataplatform cldb-2 -- sudo /tmp/linuxuser_setup.sh
 
-# kubectl cp ./linuxuser_setup.sh internaltenant/tenantcli-0:/tmp
-# kubectl exec -i -n internaltenant tenantcli-0 -- sudo /tmp/linuxuser_setup.sh
+kubectl cp ./linuxuser_setup.sh internaltenant/tenantcli-0:/tmp
+kubectl exec -i -n internaltenant tenantcli-0 -- sudo /tmp/linuxuser_setup.sh
 
 # copy linuxfiles to admincli pod
 kubectl exec -i -n dataplatform admincli-0 -- sudo /bin/rm -r /tmp/linuxfiles
