@@ -1,0 +1,26 @@
+cat: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser1owner
+
+This file is accessible by ldapuser1 group
+This file is accessible by ldapuser1 other
+/tmp/ldapuser1group/ldapuser1owner (Input/output error)
+/tmp/ldapuser1group/ldapuser2group (Input/output error)
+This file is accessible by ldapuser2 other
+/tmp/ldapuser1group/ldapuser2owner (Input/output error)
+
+This file is accessible by ldapuser1 group
+This file is accessible by ldapuser1 other
+/tmp/ldapuser1other/ldapuser1owner (Input/output error)
+/tmp/ldapuser1other/ldapuser2group (Input/output error)
+This file is accessible by ldapuser2 other
+/tmp/ldapuser1other/ldapuser2owner (Input/output error)
+
+cat: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2owner
+
+cat: User ldapuser40(user id 6040)  does not have access to maprfs:/tmp/ldapfiles/ldapuser2group
+
+This file is accessible by ldapuser1 group
+This file is accessible by ldapuser1 other
+/tmp/ldapuser2other/ldapuser1owner (Input/output error)
+/tmp/ldapuser2other/ldapuser2group (Input/output error)
+This file is accessible by ldapuser2 other
+/tmp/ldapuser2other/ldapuser2owner (Input/output error)

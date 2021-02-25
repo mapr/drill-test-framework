@@ -1,0 +1,109 @@
+cat: '/tmp/linuxfiles/linuxuser1owner/\*': Permission denied
+
+cat: '/tmp/linuxfiles/linuxuser1group/\*': Permission denied
+
+cat: /tmp/linuxfiles/linuxuser1other/linuxuser1group: Permission denied
+This file is accessible by linuxuser1 other
+cat: /tmp/linuxfiles/linuxuser1other/linuxuser1owner: Permission denied
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner
+
+cat: /tmp/linuxfiles/linuxuser2owner/linuxuser1group: Permission denied
+This file is accessible by linuxuser1 other
+cat: /tmp/linuxfiles/linuxuser2owner/linuxuser1owner: Permission denied
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner
+
+cat: /tmp/linuxfiles/linuxuser2group/linuxuser1group: Permission denied
+This file is accessible by linuxuser1 other
+cat: /tmp/linuxfiles/linuxuser2group/linuxuser1owner: Permission denied
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner
+
+cat: /tmp/linuxfiles/linuxuser2other/linuxuser1group: Permission denied
+This file is accessible by linuxuser1 other
+cat: /tmp/linuxfiles/linuxuser2other/linuxuser1owner: Permission denied
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner
+
+cp: failed to access '/tmp/linuxfiles/linuxuser1owner/linuxuser1group2cp': Permission denied
+cp: failed to access '/tmp/linuxfiles/linuxuser1owner/linuxuser1other2cp': Permission denied
+cp: failed to access '/tmp/linuxfiles/linuxuser1owner/linuxuser1owner2cp': Permission denied
+cp: failed to access '/tmp/linuxfiles/linuxuser1owner/linuxuser2group2cp': Permission denied
+cp: failed to access '/tmp/linuxfiles/linuxuser1owner/linuxuser2other2cp': Permission denied
+cp: failed to access '/tmp/linuxfiles/linuxuser1owner/linuxuser2owner2cp': Permission denied
+
+cp: failed to access '/tmp/linuxfiles/linuxuser1group/linuxuser1group2cp': Permission denied
+cp: failed to access '/tmp/linuxfiles/linuxuser1group/linuxuser1other2cp': Permission denied
+cp: failed to access '/tmp/linuxfiles/linuxuser1group/linuxuser1owner2cp': Permission denied
+cp: failed to access '/tmp/linuxfiles/linuxuser1group/linuxuser2group2cp': Permission denied
+cp: failed to access '/tmp/linuxfiles/linuxuser1group/linuxuser2other2cp': Permission denied
+cp: failed to access '/tmp/linuxfiles/linuxuser1group/linuxuser2owner2cp': Permission denied
+
+cp: cannot open '/tmp/linuxfiles/linuxuser1other/linuxuser1group' for reading: Permission denied
+cp: cannot open '/tmp/linuxfiles/linuxuser1other/linuxuser1owner' for reading: Permission denied
+
+cp: cannot open '/tmp/linuxfiles/linuxuser2owner/linuxuser1group' for reading: Permission denied
+cp: cannot open '/tmp/linuxfiles/linuxuser2owner/linuxuser1owner' for reading: Permission denied
+
+cp: cannot open '/tmp/linuxfiles/linuxuser2group/linuxuser1group' for reading: Permission denied
+cp: cannot open '/tmp/linuxfiles/linuxuser2group/linuxuser1owner' for reading: Permission denied
+
+cp: cannot open '/tmp/linuxfiles/linuxuser2other/linuxuser1group' for reading: Permission denied
+cp: cannot open '/tmp/linuxfiles/linuxuser2other/linuxuser1owner' for reading: Permission denied
+rm: cannot remove '/tmp/linuxfiles/linuxuser1owner/linuxuser1group2cp': Permission denied
+rm: cannot remove '/tmp/linuxfiles/linuxuser1owner/linuxuser1other2cp': Permission denied
+rm: cannot remove '/tmp/linuxfiles/linuxuser1owner/linuxuser1owner2cp': Permission denied
+rm: cannot remove '/tmp/linuxfiles/linuxuser1owner/linuxuser2group2cp': Permission denied
+rm: cannot remove '/tmp/linuxfiles/linuxuser1owner/linuxuser2other2cp': Permission denied
+rm: cannot remove '/tmp/linuxfiles/linuxuser1owner/linuxuser2owner2cp': Permission denied
+rm: cannot remove '/tmp/linuxfiles/linuxuser1group/linuxuser1group2cp': Permission denied
+rm: cannot remove '/tmp/linuxfiles/linuxuser1group/linuxuser1other2cp': Permission denied
+rm: cannot remove '/tmp/linuxfiles/linuxuser1group/linuxuser1owner2cp': Permission denied
+rm: cannot remove '/tmp/linuxfiles/linuxuser1group/linuxuser2group2cp': Permission denied
+rm: cannot remove '/tmp/linuxfiles/linuxuser1group/linuxuser2other2cp': Permission denied
+rm: cannot remove '/tmp/linuxfiles/linuxuser1group/linuxuser2owner2cp': Permission denied
+rm: cannot remove '/tmp/linuxfiles/linuxuser1other/linuxuser1group2cp': No such file or directory
+rm: cannot remove '/tmp/linuxfiles/linuxuser1other/linuxuser1owner2cp': No such file or directory
+rm: cannot remove '/tmp/linuxfiles/linuxuser2owner/linuxuser1group2cp': No such file or directory
+rm: cannot remove '/tmp/linuxfiles/linuxuser2owner/linuxuser1owner2cp': No such file or directory
+rm: cannot remove '/tmp/linuxfiles/linuxuser2group/linuxuser1group2cp': No such file or directory
+rm: cannot remove '/tmp/linuxfiles/linuxuser2group/linuxuser1owner2cp': No such file or directory
+rm: cannot remove '/tmp/linuxfiles/linuxuser2other/linuxuser1group2cp': No such file or directory
+rm: cannot remove '/tmp/linuxfiles/linuxuser2other/linuxuser1owner2cp': No such file or directory
+
+cat: '/tmp/linuxfiles/linuxuser1ownernox/\*': Permission denied
+
+cat: '/tmp/linuxfiles/linuxuser1groupnox/\*': Permission denied
+
+cat: /tmp/linuxfiles/linuxuser1othernox/linuxuser1group: Permission denied
+cat: /tmp/linuxfiles/linuxuser1othernox/linuxuser1other: Permission denied
+cat: /tmp/linuxfiles/linuxuser1othernox/linuxuser1owner: Permission denied
+cat: /tmp/linuxfiles/linuxuser1othernox/linuxuser2group: Permission denied
+cat: /tmp/linuxfiles/linuxuser1othernox/linuxuser2other: Permission denied
+cat: /tmp/linuxfiles/linuxuser1othernox/linuxuser2owner: Permission denied
+
+cat: /tmp/linuxfiles/linuxuser2ownernox/linuxuser1group: Permission denied
+cat: /tmp/linuxfiles/linuxuser2ownernox/linuxuser1other: Permission denied
+cat: /tmp/linuxfiles/linuxuser2ownernox/linuxuser1owner: Permission denied
+cat: /tmp/linuxfiles/linuxuser2ownernox/linuxuser2group: Permission denied
+cat: /tmp/linuxfiles/linuxuser2ownernox/linuxuser2other: Permission denied
+cat: /tmp/linuxfiles/linuxuser2ownernox/linuxuser2owner: Permission denied
+
+cat: /tmp/linuxfiles/linuxuser2groupnox/linuxuser1group: Permission denied
+This file is accessible by linuxuser1 other
+cat: /tmp/linuxfiles/linuxuser2groupnox/linuxuser1owner: Permission denied
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner
+
+cat: /tmp/linuxfiles/linuxuser2othernox/linuxuser1group: Permission denied
+This file is accessible by linuxuser1 other
+cat: /tmp/linuxfiles/linuxuser2othernox/linuxuser1owner: Permission denied
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner

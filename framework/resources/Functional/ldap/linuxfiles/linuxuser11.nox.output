@@ -1,0 +1,31 @@
+cat: 'linuxuser1ownernox/*': Permission denied
+
+cat: linuxuser1groupnox/linuxuser1group: Permission denied
+cat: linuxuser1groupnox/linuxuser1other: Permission denied
+cat: linuxuser1groupnox/linuxuser1owner: Permission denied
+cat: linuxuser1groupnox/linuxuser2group: Permission denied
+cat: linuxuser1groupnox/linuxuser2other: Permission denied
+cat: linuxuser1groupnox/linuxuser2owner: Permission denied
+
+This file is accessible by linuxuser1 group
+This file is accessible by linuxuser1 other
+cat: linuxuser1othernox/linuxuser1owner: Permission denied
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+cat: linuxuser1othernox/linuxuser2owner: Permission denied
+
+cat: 'linuxuser2ownernox/*': Permission denied
+
+cat: linuxuser2groupnox/linuxuser1group: Permission denied
+cat: linuxuser2groupnox/linuxuser1other: Permission denied
+cat: linuxuser2groupnox/linuxuser1owner: Permission denied
+cat: linuxuser2groupnox/linuxuser2group: Permission denied
+cat: linuxuser2groupnox/linuxuser2other: Permission denied
+cat: linuxuser2groupnox/linuxuser2owner: Permission denied
+
+This file is accessible by linuxuser1 group
+This file is accessible by linuxuser1 other
+cat: linuxuser2othernox/linuxuser1owner: Permission denied
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+cat: linuxuser2othernox/linuxuser2owner: Permission denied

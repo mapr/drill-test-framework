@@ -1,0 +1,31 @@
+cat: 'linuxuser1owner/*': Permission denied
+
+cat: 'linuxuser1group/*': Permission denied
+
+cat: linuxuser1other/linuxuser1group: Permission denied
+This file is accessible by linuxuser1 other
+cat: linuxuser1other/linuxuser1owner: Permission denied
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner
+
+cat: linuxuser2owner/linuxuser1group: Permission denied
+This file is accessible by linuxuser1 other
+cat: linuxuser2owner/linuxuser1owner: Permission denied
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner
+
+cat: linuxuser2group/linuxuser1group: Permission denied
+This file is accessible by linuxuser1 other
+cat: linuxuser2group/linuxuser1owner: Permission denied
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner
+
+cat: linuxuser2other/linuxuser1group: Permission denied
+This file is accessible by linuxuser1 other
+cat: linuxuser2other/linuxuser1owner: Permission denied
+This file is accessible by linuxuser2 group
+This file is accessible by linuxuser2 other
+This file is accessible by linuxuser2 owner
