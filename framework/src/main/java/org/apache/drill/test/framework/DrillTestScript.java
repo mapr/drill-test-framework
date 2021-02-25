@@ -135,8 +135,7 @@ public class DrillTestScript implements DrillTest {
       if (testStatus == TestStatus.PASS && !TestDriver.cmdParam.outputQueryResult) {
           // Utils.deleteFile(outputFilename);
       }
-      LOG.info(testStatus + " (" + stopwatch + ") " + modeler.script + " " 
-    		  			+ modeler.queryFilename);
+      LOG.info("[" + testStatus + "] (" + stopwatch + ") " + modeler.queryFilename);
     }
   }
 
