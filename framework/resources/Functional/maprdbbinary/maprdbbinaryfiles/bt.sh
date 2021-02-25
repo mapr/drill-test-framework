@@ -1,5 +1,4 @@
-if [ "`pwd`" == "/root/drill-test-framework" ]
-then
-  cd /root/drill-test-framework/framework/resources/Functional/maprdbbinary/maprdbbinaryfiles/
-fi
+source conf/drillTestConfig.properties
+
+cd ${DRILL_TEST_DATA_DIR}/Functional/maprdbbinary/maprdbbinaryfiles
 ./execScriptOnPod.sh admincli-0 btadmincli.sh
