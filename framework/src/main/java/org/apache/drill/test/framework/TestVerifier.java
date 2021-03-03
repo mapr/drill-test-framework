@@ -742,21 +742,54 @@ public class TestVerifier {
                                     boolean checkOrder) {
     String[] expectedLines = expected.split("\n");
     actual = actual.trim();
+    StringBuilder sb = new StringBuilder();
+
+
     int i = 0;
     for (String string : expectedLines) {
       string = string.trim();
-      // LOG.info ("expected string: " + string);
+      if (TestDriver.cmdParam.matchExpected==true) {
+        // LOG.info ("expected string: " + string);
+        sb.append("\n" + string);
+      }
       Matcher matcher = Pattern.compile(string).matcher(actual);
       if (!matcher.find()) {
         // LOG.info ("actual");
         // LOG.info (actual);
+        if (TestDriver.cmdParam.matchExpected==true) {
+          LOG.info ("expected string: ");
+          LOG.info (sb);
+          LOG.info ("end expected string");
+        }
         return false;
       }
-      // if checkOrder is false, do nothing.  check remaining expectedLines
+      String matched = matcher.group();
+      i = actual.indexOf(matched);
       if (checkOrder) {
-        String matched = matcher.group();
-        i = actual.indexOf(matched);
+        // if checkOrder, update actual so it has the rest of the output after this expected line
+        // and continue checking
         actual = actual.substring(i + matched.length()).trim();
+      } else {
+        // checkOrder is false, meaning the results can be in any order,
+        // update actual to pull out this expected line
+        // grab the part of actual before and after this expected line, and continue checking
+        if (i == 0) {
+          actual = actual.substring(matched.length());
+        }
+        if (i > 0) {
+          actual = actual.substring(0,i) + actual.substring(i + matched.length());
+        }
+        // LOG.info ("index: " + i + ", actual: ");
+        // int length = 0;
+        // if (actual.length() > 1000) {
+          // length = 1000;
+        // } else {
+          // length = actual.length()-1;
+        // }
+        // if (length > 0) {
+          // LOG.info (actual.substring(0,length));
+          // LOG.info ("end actual");
+        // }
       }
     }
     return true;

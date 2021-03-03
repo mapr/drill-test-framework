@@ -38,6 +38,9 @@ import com.beust.jcommander.Parameter;
     @Parameter(names = {"-m"}, description = "track memory usage", required=false)
     public boolean trackMemory = false;
     
+    @Parameter(names = {"-me"}, description = "show expected rows that have matched", required=false)
+    public boolean matchExpected = false;
+    
     @Parameter(names = {"-n"}, description = "number of threads", required=false)
     public int threads = 1;
 
