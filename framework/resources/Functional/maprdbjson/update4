@@ -1,0 +1,9 @@
+echo 'insert /apps/scores --value '\''{"_id":"abcd","class_id":5,"scores":[{"score":70.1,"type":"quiz"}]}'\' | mapr dbshell
+echo 'insert /apps/scores --value '\''{"_id":"abce","class_id":5,"scores":[{"score":70.1,"type":"quiz"},{"score":31.2,"type":"exam"}]}'\' | mapr dbshell
+echo 'update /apps/scores --id abcd --m '\''{ "$set":{"class_id":6}}'\' | mapr dbshell
+echo 'update /apps/scores --id abcd --m '\''{ "$set":[{"class_id":7}]}'\' | mapr dbshell
+
+echo 'find /apps/scores --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":7}}}' | mapr dbshell
+
+echo 'delete /apps/scores --id "abcd"' | mapr dbshell
+echo 'delete /apps/scores --id "abce"' | mapr dbshell

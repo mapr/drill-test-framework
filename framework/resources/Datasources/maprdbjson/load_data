@@ -1,0 +1,30 @@
+set -x
+
+echo "mapr" | maprlogin password -user mapr
+
+hadoop fs -rm /tmp/grades.json
+hadoop fs -rm /tmp/scores.json
+hadoop fs -rm /tmp/values.json
+hadoop fs -rm /tmp/valuesm1.json
+# hadoop fs -rm /tmp/valuesm1e.json
+hadoop fs -rm /apps/grades
+hadoop fs -rm /apps/scores
+hadoop fs -rm /apps/values
+# hadoop fs -rm /apps/valuesm1
+# hadoop fs -rm /apps/valuesm1e
+
+# sudo rpm -i /tmp/mapr-hadoop-client-2.7.4.0.202009090155-1.x86_64.rpm
+hadoop fs -copyFromLocal /tmp/grades.json /tmp
+mapr importJSON -idField _id -src /tmp/grades.json -dst /apps/grades -mapreduce false -bulkload false
+hadoop fs -copyFromLocal /tmp/scores.json /tmp
+mapr importJSON -idField _id -src /tmp/scores.json -dst /apps/scores -mapreduce false -bulkload false
+hadoop fs -copyFromLocal /tmp/values.json /tmp
+mapr importJSON -idField _id -src /tmp/values.json -dst /apps/values -mapreduce false -bulkload false
+hadoop fs -copyFromLocal /tmp/valuesm1.json /tmp
+mapr importJSON -idField _id -src /tmp/valuesm1.json -dst /apps/valuesm1 -mapreduce false -bulkload false
+# hadoop fs -copyFromLocal /tmp/valuesm1e.json /tmp
+# mapr importJSON -idField _id -src /tmp/valuesm1e.json -dst /apps/valuesm1e -mapreduce false -bulkload false
+mapr importJSON -idField _id -src /tmp/grades.json -dst /apps/gradesm1 -mapreduce false -bulkload false
+
+hadoop fs -ls /tmp
+hadoop fs -ls /apps

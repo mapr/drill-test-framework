@@ -1,0 +1,1 @@
+echo 'find /apps/grades --query {"$select":["_id","class_id","scores"],"$where":{"$and":[{"$gt":{"scores[2].score":0}},{"$lt":{"scores[2].score":5}}]},"$limit":3}' | mapr dbshell

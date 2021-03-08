@@ -1,0 +1,1 @@
+echo 'find /apps/grades --query {"$select":["_id","scores"],"$where":{"$and":[{"$exists":"scores[5]"},{"$eq":{"class_id":23}},{"$between":{"scores[0].score":[60,70]}}]}}' | mapr dbshell

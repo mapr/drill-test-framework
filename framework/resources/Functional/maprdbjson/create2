@@ -1,0 +1,8 @@
+set -x
+
+echo 'create /apps/table1' | mapr dbshell
+echo 'insert /apps/table1 --value '\''{"_id":"abcg","class_id":5,"scores":[{"score":70.1,"type":"quiz"},{"score":31.2,"type":"exam"}]}'\' | mapr dbshell
+echo 'find /apps/table1' | mapr dbshell
+echo 'delete /apps/table1 --id "abcg"' | mapr dbshell
+echo 'find /apps/table1' | mapr dbshell
+echo 'drop /apps/table1' | mapr dbshell

@@ -1,0 +1,12 @@
+
+set -x
+
+mapr exporttable -src /apps/grades -dst /apps/export -mapreduce false
+hadoop fs -ls /apps/export
+echo 'create /apps/import' | mapr dbshell
+mapr importtable -src /apps/export -dst /apps/import -mapreduce false
+
+echo 'find /apps/import' | mapr dbshell
+
+hadoop fs -rm -r /apps/export
+echo 'drop /apps/import' | mapr dbshell

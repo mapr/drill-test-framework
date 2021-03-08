@@ -1,0 +1,13 @@
+
+set -x
+
+mapr copytable -src /apps/grades -dst /apps/gradesdiff -mapreduce false
+echo 'insert /apps/gradesdiff --value '\''{"_id":"abcd","class_id":5,"scores":[{"score":70.1,"type":"quiz"}]}'\' | mapr dbshell
+mapr difftables -src /apps/grades -dst /apps/gradesdiff -outdir /apps/diff -mapreduce false
+mapr formatresult -indir /apps/diff/OpsForSrcTable -outdir /apps/diffsrc
+
+hadoop fs -cat /apps/diffsrc/opsforsrc_0.diff.txt
+
+hadoop fs -rm -r /apps/diff
+hadoop fs -rm -r /apps/diffsrc
+echo 'drop /apps/gradesdiff' | mapr dbshell

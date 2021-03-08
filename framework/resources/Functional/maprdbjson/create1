@@ -1,0 +1,3 @@
+echo 'create /apps/table1' | mapr dbshell
+hadoop fs -ls /apps
+echo 'drop /apps/table1' | mapr dbshell

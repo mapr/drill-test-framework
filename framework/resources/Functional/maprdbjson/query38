@@ -1,0 +1,1 @@
+echo 'find /apps/grades --where {"$and":[{"$gt":{"scores[2].score":0}},{"$lt":{"scores[2].score":5}}]} --limit 3 --offset 5' | mapr dbshell

@@ -1,0 +1,26 @@
+\{
+        "status":"OK",
+        "total":1,
+        "data":\[
+                \{
+                        "cluster":"dataplatform",
+                        "table":"/apps/valuesreplica",
+                        "type":"MapRDB",
+                        "replicaPath":"/apps/valuesreplica",
+                        "replicaState":"REPLICA_STATE_REPLICATING",
+                        "paused":false,
+                        "throttle":false,
+                        "networkencryption":false,
+                        "synchronous":false,
+                        "networkcompression":"lz4",
+                        "propagateExistingData":false,
+                        "isUptodate":true,
+                        "minPendingTS":0,
+                        "maxPendingTS":0,
+                        "bytesPending":0,
+                        "putsPending":0,
+                        "bucketsPending":0,
+                        "copyTableCompletionPercentage":100
+                \}
+        \]
+\}

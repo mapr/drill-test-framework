@@ -1,0 +1,5 @@
+maprcli table index add -path /apps/grades -index idx_student -indexedfields 'student_id:1'
+
+echo 'find /apps/grades --query {"$select":["_id","student_id","scores"],"$orderby":{"class_id":"desc"}}' | mapr dbshell
+
+maprcli table index remove -path /apps/grades -index idx_student

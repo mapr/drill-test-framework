@@ -1,0 +1,16 @@
+set -x
+
+echo 'create /apps/table1' | mapr dbshell
+echo 'insert /apps/table1 --value '\''{"_id":"abcg","class_id":5,"scores":[{"score":70.1,"type":"quiz"},{"score":31.2,"type":"exam"}]}'\' | mapr dbshell
+echo 'insert /apps/table1 --value '\''{"_id":"abcd","class_id":5,"scores":[{"score":70.5,"type":"quiz"},{"score":31.3,"type":"exam"}]}'\' | mapr dbshell
+echo 'insert /apps/table1 --value '\''{"_id":"abcd","class_id":5,"scores":[{"score":90.5,"type":"quiz"},{"score":51.3,"type":"exam"}]}'\' | mapr dbshell
+echo 'insert /apps/table1 --value '\''{"_id":"abce","class_id":5,"scores":[{"score":70.5,"type":"quiz"},{"score":71.3,"type":"exam"}]}'\' | mapr dbshell
+echo 'update /apps/table1 --id abce --m '\''{ "$set":{"class_id":6}}'\' | mapr dbshell
+echo 'find /apps/table1' | mapr dbshell
+echo 'delete /apps/table1 --id "abcg"' | mapr dbshell
+echo 'find /apps/table1' | mapr dbshell
+echo 'delete /apps/table1 --id "abcd"' | mapr dbshell
+echo 'find /apps/table1' | mapr dbshell
+echo 'delete /apps/table1 --id "abce"' | mapr dbshell
+echo 'find /apps/table1' | mapr dbshell
+echo 'drop /apps/table1' | mapr dbshell
