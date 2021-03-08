@@ -154,7 +154,7 @@ function cleanup {
   rm -rf $ofile2
   rm -rf $ofile3
   rm -rf $sn
-  maprlogin logout
+  # maprlogin logout
 }
 
 cleanup
