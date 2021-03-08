@@ -1,0 +1,8 @@
+Document with id: "abcg" inserted.
+Document with id: "abcd" inserted.
+Document with id: "abcd" inserted.
+Document with id: "abce" inserted.
+\{"_id":"abcd","class_id":5,"scores":\[\{"score":90.5,"type":"quiz"\},\{"score":51.3,"type":"exam"\}\]\}
+\{"_id":"abce","class_id":5,"scores":\[\{"score":70.5,"type":"quiz"\},\{"score":71.3,"type":"exam"\}\]\}
+\{"_id":"abcg","class_id":5,"scores":\[\{"score":70.1,"type":"quiz"\},\{"score":31.2,"type":"exam"\}\]\}
+3 document\(s\) found.

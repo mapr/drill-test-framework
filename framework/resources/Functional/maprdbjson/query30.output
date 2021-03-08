@@ -1,0 +1,7 @@
+9
+1
+{"_id":"50b59cd75bed76f46522c365","class_id":11,"scores":[{"score":95.79505,"type":"exam"},{"score":99.70947,"type":"quiz"},{"score":91.73962,"type":"homework"},{"score":96.83139,"type":"homework"},{"score":50.2671,"type":"homework"}],"student_id":3}
+{"_id":"50b59cd75bed76f46522c39d","class_id":22,"scores":[{"score":93.68723,"type":"exam"},{"score":97.44391,"type":"quiz"},{"score":22.11304,"type":"homework"},{"score":81.86156,"type":"homework"},{"score":0.43214,"type":"homework"},{"score":21.43022,"type":"homework"}],"student_id":13}
+{"_id":"50b59cd75bed76f46522c3c8","class_id":25,"scores":[{"score":47.16859,"type":"exam"},{"score":99.90921,"type":"quiz"},{"score":8.16653,"type":"homework"},{"score":98.53813,"type":"homework"},{"score":42.31572,"type":"homework"},{"score":49.6301,"type":"homework"}],"student_id":21}
+{"_id":"50b59cd75bed76f46522c42f","class_id":28,"scores":[{"score":49.46085,"type":"exam"},{"score":97.31951,"type":"quiz"},{"score":26.17235,"type":"homework"}],"student_id":39}
+4 document(s) found.

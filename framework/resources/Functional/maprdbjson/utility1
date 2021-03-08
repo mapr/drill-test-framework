@@ -1,0 +1,5 @@
+mapr copytable -src /apps/grades -dst /apps/gradescopy -mapreduce false
+
+echo 'find /apps/gradescopy' | mapr dbshell
+
+echo 'drop /apps/gradescopy' | mapr dbshell

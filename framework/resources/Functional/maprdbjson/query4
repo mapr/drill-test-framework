@@ -1,0 +1,1 @@
+echo 'find /apps/grades --query {"$select":["_id","scores"]}' | mapr dbshell

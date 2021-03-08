@@ -1,0 +1,37 @@
+\{
+	"status":"OK",
+	"total":2,
+	"data":\[
+		\{
+			"cluster":"dataplatform",
+			"type":"maprdb.si",
+			"indexName":"idx_student",
+			"hashed":false,
+			"indexState":"REPLICA_STATE_REPLICATING",
+			"indexedFields":"student_id:ASC",
+			"isUptodate":true,
+			"minPendingTS":0,
+			"maxPendingTS":0,
+			"bytesPending":0,
+			"putsPending":0,
+			"bucketsPending":0,
+			"copyTableCompletionPercentage":100,
+		\},
+		\{
+			"cluster":"dataplatform",
+			"type":"maprdb.si",
+			"indexName":"idx_studentd",
+			"hashed":true,
+			"numHashPartitions":10,
+			"indexState":"REPLICA_STATE_REPLICATING",
+			"indexedFields":"student_id:DESC",
+			"isUptodate":true,
+			"minPendingTS":0,
+			"maxPendingTS":0,
+			"bytesPending":0,
+			"putsPending":0,
+			"bucketsPending":0,
+			"copyTableCompletionPercentage":100,
+		\}
+	\]
+\}

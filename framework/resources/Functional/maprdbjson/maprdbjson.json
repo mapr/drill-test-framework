@@ -1,0 +1,28 @@
+{
+    "testId": "maprdbjson",
+    "type": "group",
+    "description": "Test MapR DB Json via shell scripts",
+    "submit-type": "script",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.sh",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.output",
+            "verification-type": [
+                "maprdbjson"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+          "mode": "gen",
+          "src": "Datasources/maprdbjson/setup.sh",
+          "dest": ""
+        }
+    ]
+
+}

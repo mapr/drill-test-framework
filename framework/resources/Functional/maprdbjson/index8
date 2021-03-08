@@ -1,0 +1,9 @@
+set -x
+
+maprcli table index add -path /apps/grades -index idx_student -indexedfields 'student_id:1'
+maprcli table index add -path /apps/grades -index idx_studentd -indexedfields 'student_id:desc' -hashed true
+
+maprcli table index list -path /apps/grades -json
+
+maprcli table index remove -path /apps/grades -index idx_student
+maprcli table index remove -path /apps/grades -index idx_studentd

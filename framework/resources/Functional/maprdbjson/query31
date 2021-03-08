@@ -1,0 +1,1 @@
+echo 'find /apps/grades --where {"$and":[{"$lt":{"scores[2].score":1.2}}]}' | mapr dbshell

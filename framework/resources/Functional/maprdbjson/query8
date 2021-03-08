@@ -1,0 +1,1 @@
+echo 'find /apps/grades --query {"$select":["_id","scores[1].score"],"$where":{"$and":[{"$gt":{"scores[1].score":97.3}}]}}' | mapr dbshell

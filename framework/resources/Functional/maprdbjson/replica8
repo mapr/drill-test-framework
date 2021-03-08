@@ -1,0 +1,15 @@
+set -x
+
+maprcli table replica autosetup -path /apps/values -replica /apps/valuesreplica
+
+echo 'insert /apps/values --value '\''{"_id":"abc","class_id":5}'\' | mapr dbshell
+echo 'insert /apps/values --value '\''{"_id":"abcd","class_id":5,"scores":[{"score":70.1,"type":"quiz"}]}'\' | mapr dbshell
+echo 'insert /apps/values --value '\''{"_id":"abcd","class_id":5,"scores":[{"score":70.1,"type":"quiz"},{"score":31.2,"type":"exam"}]}'\' | mapr dbshell
+echo 'update /apps/values --id abcd --m '\''{ "$set":{"class_id":6}}'\' | mapr dbshell
+
+echo 'find /apps/values --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":6}}}' | mapr dbshell
+
+echo 'delete /apps/values --id "abc"' | mapr dbshell
+echo 'delete /apps/values --id "abcd"' | mapr dbshell
+maprcli table replica remove -path /apps/values -replica /apps/valuesreplica
+maprcli table delete -path /apps/valuesreplica

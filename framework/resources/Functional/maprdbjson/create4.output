@@ -1,0 +1,14 @@
+Document with id: "abce" updated.
+\{"_id":"abcd","class_id":5,"scores":\[\{"score":90.5,"type":"quiz"\},\{"score":51.3,"type":"exam"\}\]\}
+\{"_id":"abce","class_id":6,"scores":\[\{"score":70.5,"type":"quiz"\},\{"score":71.3,"type":"exam"\}\]\}
+\{"_id":"abcg","class_id":5,"scores":\[\{"score":70.1,"type":"quiz"\},\{"score":31.2,"type":"exam"\}\]\}
+3 document\(s\) found.
+Document with id: "abcg" deleted.
+\{"_id":"abcd","class_id":5,"scores":\[\{"score":90.5,"type":"quiz"\},\{"score":51.3,"type":"exam"\}\]\}
+\{"_id":"abce","class_id":6,"scores":\[\{"score":70.5,"type":"quiz"\},\{"score":71.3,"type":"exam"\}\]\}
+2 document\(s\) found.
+Document with id: "abcd" deleted.
+\{"_id":"abce","class_id":6,"scores":\[\{"score":70.5,"type":"quiz"\},\{"score":71.3,"type":"exam"\}\]\}
+1 document\(s\) found.
+Document with id: "abce" deleted.
+0 document\(s\) found.

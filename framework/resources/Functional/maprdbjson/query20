@@ -1,0 +1,1 @@
+echo 'find /apps/scores --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":6}}}' | mapr dbshell

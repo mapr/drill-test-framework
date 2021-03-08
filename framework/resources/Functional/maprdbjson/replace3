@@ -1,0 +1,5 @@
+echo 'insert /apps/scores --value '\''{"_id":"abcg","class_id":5,"scores":[{"score":70.1,"type":"quiz"},{"score":31.2,"type":"exam"}]}'\' | mapr dbshell
+echo 'find /apps/scores --query {"$where":{"$eq":{"_id":"abcg"}}}' | mapr dbshell
+echo 'replace /apps/scores --value '\''{"_id":"abcg","class_id":5,"type":"quiz"}'\' | mapr dbshell
+echo 'find /apps/scores --query {"$where":{"$eq":{"_id":"abcg"}}}' | mapr dbshell
+echo 'delete /apps/scores --id "abcg"' | mapr dbshell

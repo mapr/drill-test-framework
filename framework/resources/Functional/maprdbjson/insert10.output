@@ -1,0 +1,2 @@
+com.fasterxml.jackson.core.JsonParseException: Unrecognized token 'abcd': was expecting \(JSON String, Number, Array, Object or token 'null', 'true' or 'false'\)
+ at \[Source: \(ByteArrayInputStream\); line: 1, column: 13\]

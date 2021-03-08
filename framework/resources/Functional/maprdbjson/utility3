@@ -1,0 +1,8 @@
+
+set -x
+
+mapr exporttable -src /apps/grades -dst /apps/export -mapreduce false
+
+hadoop fs -ls /apps/export
+
+hadoop fs -rm -r /apps/export

@@ -1,0 +1,1 @@
+echo 'insert /apps/scores --value '\''{"_id":abcd,"class_id":5,"scores":[{"score":70.1,"type":"quiz"}]}'\' | mapr dbshell
