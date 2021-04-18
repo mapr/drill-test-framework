@@ -716,6 +716,8 @@ public class TestVerifier {
       verified = matchPi(actual, expected);
     } else if (verificationTypes.get(0).equalsIgnoreCase("maprdbjson")) {
       verified = matchDBJson(actual, expected);
+    } else if (verificationTypes.get(0).equalsIgnoreCase("multiple-tests")) {
+      verified = matchMultiple(actual, expected);
     } else {
       verified = containsAll(actual, expected);
     }
@@ -791,6 +793,45 @@ public class TestVerifier {
           // LOG.info ("end actual");
         // }
       }
+    }
+    return true;
+  }
+
+  /**
+   * matchMultiple is used when a shell script has multiple tests
+   * The output will record whether each test passes or fails
+   * PASS Test1
+   * FAIL Test2
+   * PASS Test3
+   * matchMultiple will generate a PASS/FAIL message for each
+   * test so the PASS/FAIL can be reported
+   */
+  private static boolean matchMultiple(String actual, String expected) {
+    String[] expectedLines = expected.split("\n");
+    actual = actual.trim();
+
+    int i = 0;
+    int failures=0;
+    String testName;
+    for (String string : expectedLines) {
+      string = string.trim();
+      Matcher matcher = Pattern.compile(string).matcher(actual);
+      if (!matcher.find()) {
+        failures++;
+      }
+      // LOG.info (string);
+      if ((string.startsWith("PASS ")) && (string.split(" ").length == 2)) {
+        testName = string.split(" ")[1];
+        LOG.info ("[PASS] (0 s) " + testName);
+      } else if ((string.startsWith("FAIL ")) && (string.split(" ").length == 2)) {
+        testName = string.split(" ")[1];
+        LOG.info ("[FAIL] (0 s) " + testName);
+      }
+      String matched = matcher.group();
+      i = actual.indexOf(matched);
+      // update actual so it has the rest of the output after this expected line
+      // and continue checking
+      actual = actual.substring(i + matched.length()).trim();
     }
     return true;
   }
