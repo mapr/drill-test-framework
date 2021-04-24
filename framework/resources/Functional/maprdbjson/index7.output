@@ -16,9 +16,6 @@
 			"putsPending":0,
 			"bucketsPending":0,
 			"copyTableCompletionPercentage":100,
-			"numTablets":1,
-			"numRows":280,
-			"totalSize":32768
 		\}
 	\]
 \}

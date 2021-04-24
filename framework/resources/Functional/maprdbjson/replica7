@@ -10,5 +10,7 @@ echo 'find /apps/valuesreplica --query {"$select":["_id","class_id","scores"],"$
 
 echo 'delete /apps/values --id "abc"' | mapr dbshell
 echo 'delete /apps/values --id "abcd"' | mapr dbshell
+/tmp/waitForReplicationToComplete
 maprcli table replica remove -path /apps/values -replica /apps/valuesreplica
 maprcli table delete -path /apps/valuesreplica
+sleep 10
