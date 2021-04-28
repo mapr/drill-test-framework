@@ -43,5 +43,7 @@ tar cf - ./linuxfiles | kubectl exec -i -n dataplatform admincli-0 -- sudo tar x
 
 # copy ldapfiles and linuxfiles to mfs from within admincli pod
 kubectl cp copyToMfs.sh dataplatform/admincli-0:/tmp
+password=$(get_mapr_password.sh)
+kubectl exec -i -n dataplatform admincli-0 -- bash -c "echo \"$password\" | maprlogin password -user mapr"
 kubectl exec -i -n dataplatform admincli-0 -- sudo /tmp/copyToMfs.sh
 
