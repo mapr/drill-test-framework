@@ -4,13 +4,14 @@ set -x
 timeout=90
 while [[ $timeout -gt 0 ]]
 do
-  kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c 'maprcli table replica list -path /apps/values -json | grep "Pending\""' | grep 0
+  kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c 'maprcli table replica list -path /apps/values -json
+  # kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c 'maprcli table replica list -path /apps/values -json | grep "Pending\""' | grep 0
   ret=$(kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c 'maprcli table replica list -path /apps/values -json | grep "Pending\""' | grep 0 | wc -l)
   if [[ $ret -eq 3 ]]
   then
     break
   fi
   ((timeout-=2))
-  echo timeout
-  sleep 2000
+  echo timeout $timeout
+  sleep 2
 done
