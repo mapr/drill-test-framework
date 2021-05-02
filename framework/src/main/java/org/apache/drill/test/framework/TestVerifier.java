@@ -953,7 +953,17 @@ public class TestVerifier {
   }
 
   /**
-   * Used to verify the output of MapR DB Shell for MapR DB JSON
+   * Used to verify the output of MapR DB Shell for some MapR DB JSON tests
+   * Compare output using String.equals because java Pattern requires that braces
+   * be escaped with backslash, and DB JSON has too many braces
+   * These tests will only compare the rows from DB JSON, and not the output lines
+   * before and after the rows (such as maprcli commands that replicate tables)
+   * First number in output file indicates how many lines in actual output before
+   * the DB JSON output.   These lines will not be checked.
+   * Second number in output file indicates how many rows there are from DB JSON.
+   * These lines will be checked.
+   * The rest of the lines in the output are ignored.  The number of lines after
+   * the DB JSON rows is variable because we need to wait for the replica to be deleted
    *
    * @param actual
    *          actual results
@@ -968,11 +978,14 @@ public class TestVerifier {
     // LOG.info ("matchDBJson " + skipFirstIndex);
     actual = actual.substring(skipFirstIndex+1); // add 1 to skip \n
     String[] actualLines = actual.split("\n");
-    int skipLast=Integer.parseInt(expectedLines[1]);
-    int skipLastIndex = StringUtils.ordinalIndexOf(actual, "\n", actualLines.length-skipLast);
+    int checkRows=Integer.parseInt(expectedLines[1]);
+    int afterRowsIndex = StringUtils.ordinalIndexOf(actual, "\n", checkRows);
     // LOG.info ("length " + expectedLines.length);
-    // LOG.info ("matchDBJson " + skipLastIndex);
-    actual = actual.substring(0,skipLastIndex);
+    // LOG.info ("matchDBJson " + afterRowsIndex);
+    actual = actual.substring(0,afterRowsIndex); // add 1 to skip \n
+    // LOG.info ("actual: ");
+    // LOG.info (actual);
+    // LOG.info ("end actual");
     skipFirstIndex = StringUtils.ordinalIndexOf(expected, "\n", 2);
     expected = expected.substring(skipFirstIndex+1);  // add 1 to skip \n
     expected = expected.substring(0,expected.length()-1);  // subtract 1 to skip EOF
@@ -981,9 +994,9 @@ public class TestVerifier {
       return true;
     } else {
       // LOG.info ("actual does not equal expected");
-      // expectedLines = expected.split("\n");
+      expectedLines = expected.split("\n");
       // LOG.info ("expectedLines " + expectedLines.length);
-      // actualLines = actual.split("\n");
+      actualLines = actual.split("\n");
       // LOG.info ("actualLines " + actualLines.length);
       // LOG.info ("actual");
       // LOG.info (actual);
