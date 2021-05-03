@@ -4,11 +4,15 @@ maprcli table replica autosetup -path /apps/values -replica /apps/valuesreplica
 
 echo 'insert /apps/values --value '\''{"_id":"abc","class_id":5}'\' | mapr dbshell
 echo 'insert /apps/values --value '\''{"_id":"abcd","class_id":5,"scores":[{"score":70.1,"type":"quiz"}]}'\' | mapr dbshell
+echo 'insert /apps/values --value '\''{"_id":"abce","class_id":5,"scores":[{"score":71.1,"type":"quiz"},{"score":33.2,"type":"exam"}]}'\' | mapr dbshell
+echo 'insert /apps/values --value '\''{"_id":"abcf","class_id":5,"scores":[{"score":80.1,"type":"quiz"},{"score":41.2,"type":"exam"}]}'\' | mapr dbshell
 
 echo 'find /apps/valuesreplica --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell
 
 echo 'delete /apps/values --id "abc"' | mapr dbshell
 echo 'delete /apps/values --id "abcd"' | mapr dbshell
+echo 'delete /apps/values --id "abce"' | mapr dbshell
+echo 'delete /apps/values --id "abcf"' | mapr dbshell
 /tmp/waitForReplicationToComplete
 maprcli table replica remove -path /apps/values -replica /apps/valuesreplica
 maprcli table delete -path /apps/valuesreplica
