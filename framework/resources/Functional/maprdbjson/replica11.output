@@ -1,5 +1,5 @@
 72
-29
+10
 {"_id":"50b59cd75bed76f46522c355","class_id":6,"scores":[{"score":56.81981,"type":"exam"},{"score":15.03004,"type":"quiz"},{"score":59.58797,"type":"homework"},{"score":67.42173,"type":"homework"},{"score":71.25502,"type":"homework"},{"score":94.46662,"type":"homework"}]}
 {"_id":"50b59cd75bed76f46522c3a1","class_id":6,"scores":[{"score":99.4938,"type":"exam"},{"score":20.6187,"type":"quiz"},{"score":1.8235,"type":"homework"},{"score":26.09772,"type":"homework"}]}
 {"_id":"50b59cd75bed76f46522c3a5","class_id":6,"scores":[{"score":4.43967,"type":"exam"},{"score":15.02882,"type":"quiz"},{"score":48.34414,"type":"homework"},{"score":9.72904,"type":"homework"},{"score":69.76955,"type":"homework"},{"score":34.02044,"type":"homework"}]}
