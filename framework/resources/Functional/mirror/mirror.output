@@ -1,0 +1,198 @@
+maprcli volume create -name jsonv -path /jsonv -type rw
+mapr importJSON -idField _id -src /tmp/scores.json -dst /jsonv/scores -mapreduce false -bulkload false
+/jsonv/scores
+maprcli table replica autosetup -path /jsonv/scores -replica /jsonv/scoresreplica
+maprcli table replica list -path /jsonv/scores -json
+\{
+	"status":"OK",
+	"total":1,
+	"data":\[
+		\{
+			"cluster":"dataplatform",
+			"table":"/jsonv/scoresreplica",
+			"type":"MapRDB",
+			"replicaPath":"/jsonv/scoresreplica",
+			"replicaState":"REPLICA_STATE_REPLICATING",
+			"paused":false,
+			"throttle":false,
+			"networkencryption":false,
+			"synchronous":false,
+			"networkcompression":"lz4",
+			"propagateExistingData":false,
+			"isUptodate":true,
+			"minPendingTS":0,
+			"maxPendingTS":0,
+		\}
+	\]
+\}
+mapr dbshell
+Document with id: "abc" inserted.
+find /jsonv/scores --query \{"\$select":\["_id","class_id","scores"\],"\$where":\{"\$eq":\{"class_id":5\}\}\}'
+\{"_id":"abc","class_id":5\}
+11 document
+find /jsonv/scoresreplica --query \{"\$select":\["_id","class_id","scores"\],"\$where":\{"\$eq":\{"class_id":5\}\}\}'
+\{"_id":"abc","class_id":5\}
+11 document
+hadoop fs -copyFromLocal /tmp/scores.json /jsonv
+hbase shell /tmp/hbase.replicate1
+0 row
+0 row
+ROW  COLUMN\+CELL
+1 row
+maprcli table replica autosetup -path /jsonv/t1 -replica /jsonv/t2
+/jsonv/scores
+/jsonv/scores.json
+/jsonv/scoresreplica
+/jsonv/t1
+/jsonv/t2
+hbase shell /tmp/hbase.replicate2
+0 row
+ROW  COLUMN\+CELL
+2 row
+ROW  COLUMN\+CELL
+1 row
+hbase shell /tmp/hbase.replicate3
+ROW  COLUMN\+CELL
+2 row
+ROW  COLUMN\+CELL
+2 row
+maprcli schedule create -schedule '\{"id":10,"name":"Schedule-m","rules":\[\{"frequency":"minute","retain":"1w"\}\]\}'
+Schedule-m                   0                                                                                                ...    5   
+PASS RVolumeMirrorCreateSchedule
+maprcli volume create -name jsonv_mirror -source jsonv@dataplatform -path /jsonv_mirror -type mirror -schedule 5
+maprcli volume mirror start -name jsonv_mirror -full true
+Started mirror operation for volume\(s\) 'jsonv_mirror'   
+hadoop fs -ls /jsonv
+/jsonv/scores
+/jsonv/scores.json
+/jsonv/scoresreplica
+/jsonv/t1
+/jsonv/t2
+hadoop fs -ls /jsonv_mirror
+/jsonv_mirror/scores
+/jsonv_mirror/scores.json
+/jsonv_mirror/scoresreplica
+/jsonv_mirror/t1
+/jsonv_mirror/t2
+echo 'find /jsonv_mirror/scores --query \{"\$select":\["_id","class_id","scores"\],"\$where":\{"\$eq":\{"class_id":5\}\}\}'
+\{"_id":"abc","class_id":5\}
+11 document
+echo 'find /jsonv_mirror/scoresreplica --query \{"\$select":\["_id","class_id","scores"\],"\$where":\{"\$eq":\{"class_id":5\}\}\}'
+\{"_id":"abc","class_id":5\}
+11 document
+hbase shell /tmp/hbase.replicate8
+ROW  COLUMN\+CELL
+2 row
+ROW  COLUMN\+CELL
+2 row
+hadoop fs -copyFromLocal /tmp/values.json /tmp
+mapr importJSON -idField _id -src /tmp/values.json -dst /jsonv/values -mapreduce false -bulkload false
+hadoop fs -copyFromLocal /tmp/values.json /jsonv
+maprcli table replica autosetup -path /jsonv/values -replica /jsonv/valuesreplica
+maprcli table replica list -path /jsonv/values -json
+\{
+	"status":"OK",
+	"total":1,
+	"data":\[
+		\{
+			"cluster":"dataplatform",
+			"table":"/jsonv/valuesreplica",
+			"type":"MapRDB",
+			"replicaPath":"/jsonv/valuesreplica",
+			"replicaState":"REPLICA_STATE_REPLICATING",
+			"paused":false,
+			"throttle":false,
+			"idx":1,
+			"networkencryption":false,
+			"synchronous":false,
+			"networkcompression":"lz4",
+			"propagateExistingData":false,
+			"isUptodate":true,
+			"minPendingTS":0,
+			"maxPendingTS":0,
+		\}
+	\]
+\}
+insert /jsonv/values --value '\{"_id":"abc","class_id":5\}'
+Document with id: "abc" inserted.
+find /jsonv/values --query \{"\$select":\["_id","class_id","scores"\],"\$where":\{"\$eq":\{"class_id":5\}\}\}
+\{"_id":"abc","class_id":5\}
+11 document
+find /jsonv/valuesreplica --query \{"\$select":\["_id","class_id","scores"\],"\$where":\{"\$eq":\{"class_id":5\}\}\}
+11 document
+hbase shell /tmp/hbase.replicate5
+0 row
+0 row
+ROW  COLUMN\+CELL
+1 row
+maprcli table replica autosetup -path /jsonv/t3 -replica /jsonv/t4
+hbase shell /tmp/hbase.replicate6
+0 row
+hbase shell /tmp/hbase.replicate7
+ROW  COLUMN\+CELL
+2 row
+ROW  COLUMN\+CELL
+2 row
+hadoop fs -ls /jsonv
+/jsonv/scores
+/jsonv/scores.json
+/jsonv/scoresreplica
+/jsonv/t1
+/jsonv/t2
+/jsonv/t3
+/jsonv/t4
+/jsonv/values
+/jsonv/values.json
+/jsonv/valuesreplica
+hadoop fs -ls /jsonv_mirror
+/jsonv_mirror/scores
+/jsonv_mirror/scores.json
+/jsonv_mirror/scoresreplica
+/jsonv_mirror/t1
+/jsonv_mirror/t2
+maprcli volume mirror start -name jsonv_mirror
+Started mirror operation for volume\(s\) 'jsonv_mirror'   
+hadoop fs -ls /jsonv
+/jsonv/scores
+/jsonv/scores.json
+/jsonv/scoresreplica
+/jsonv/t1
+/jsonv/t2
+/jsonv/t3
+/jsonv/t4
+/jsonv/values
+/jsonv/values.json
+/jsonv/valuesreplica
+hadoop fs -ls /jsonv_mirror
+/jsonv_mirror/scores
+/jsonv_mirror/scores.json
+/jsonv_mirror/scoresreplica
+/jsonv_mirror/t1
+/jsonv_mirror/t2
+/jsonv_mirror/t3
+/jsonv_mirror/t4
+/jsonv_mirror/values
+/jsonv_mirror/values.json
+/jsonv_mirror/valuesreplica
+find /jsonv_mirror/scores --query \{"\$select":\["_id","class_id","scores"\],"\$where":\{"\$eq":\{"class_id":5\}\}\}
+\{"_id":"abc","class_id":5\}
+11 document
+find /jsonv_mirror/scoresreplica --query \{"\$select":\["_id","class_id","scores"\],"\$where":\{"\$eq":\{"class_id":5\}\}\}
+\{"_id":"abc","class_id":5\}
+11 document
+hbase shell /tmp/hbase.replicate8
+ROW  COLUMN\+CELL
+2 row
+ROW  COLUMN\+CELL
+2 row
+hbase shell /tmp/hbase.replicate9
+ROW  COLUMN\+CELL
+2 row
+ROW  COLUMN\+CELL
+2 row
+find /jsonv_mirror/values --query \{"\$select":\["_id","class_id","scores"\],"\$where":\{"\$eq":\{"class_id":5\}\}\}
+\{"_id":"abc","class_id":5\}
+11 document
+find /jsonv_mirror/valuesreplica --query \{"\$select":\["_id","class_id","scores"\],"\$where":\{"\$eq":\{"class_id":5\}\}\}
+\{"_id":"abc","class_id":5\}
+11 document

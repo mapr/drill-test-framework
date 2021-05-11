@@ -1,0 +1,28 @@
+{
+    "testId": "mirror",
+    "type": "group",
+    "description": "Test volume mirroring",
+    "submit-type": "script",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.sh",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.output",
+            "verification-type": [
+                "multiple-tests"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+          "mode": "gen",
+          "src": "Datasources/volume/setup.sh",
+          "dest": ""
+        }
+    ]
+
+}

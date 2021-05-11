@@ -1,0 +1,186 @@
+set -x
+
+# local volume testing
+
+echo "mapr" | maprlogin password -user mapr
+maprcli volume remove -force 1 -name jsonv
+maprcli volume remove -force 1 -name jsonv_mirror
+
+hadoop fs -ls /
+hadoop fs -ls /tmp
+hadoop fs -copyFromLocal /tmp/scores.json /tmp
+hadoop fs -ls /tmp
+
+maprcli volume create -name jsonv -path /jsonv -type rw
+# create json table
+mapr importJSON -idField _id -src /tmp/scores.json -dst /jsonv/scores -mapreduce false -bulkload false
+
+hadoop fs -ls /
+hadoop fs -ls /jsonv
+
+# create replica of json table
+maprcli table replica autosetup -path /jsonv/scores -replica /jsonv/scoresreplica
+maprcli table replica list  -path /jsonv/scores -json
+cat << EOF | mapr dbshell
+insert /jsonv/scores --value '{"_id":"abc","class_id":5}'
+EOF
+echo 'find /jsonv/scores --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell
+echo 'find /jsonv/scoresreplica --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell
+
+hadoop fs -copyFromLocal /tmp/scores.json /jsonv
+
+# create binary table and insert one record
+hbase shell /tmp/hbase.replicate1
+# create replica of binary table
+maprcli table replica autosetup -path /jsonv/t1 -replica /jsonv/t2
+sleep 10
+hadoop fs -ls /jsonv
+# insert second record into binary table and see if it replicates to the replica binary table
+# usually it does not replicate
+hbase shell /tmp/hbase.replicate2
+sleep 10
+# wait 10 seconds and check if second record replicates
+# it should be replicated
+hbase shell /tmp/hbase.replicate3
+
+hadoop fs -ls /jsonv
+
+# create a schedule for volume mirror
+maprcli schedule list
+scheduleID=$(maprcli schedule list | grep Schedule-m | awk '{print $4}')
+maprcli schedule remove -id $scheduleID
+maprcli schedule list
+# maprcli schedule create -schedule '{"name":"Schedule-1","rules":[{"frequency":"fiveminutes","retain":"1w"}]}'
+maprcli schedule create -schedule '{"id":10,"name":"Schedule-m","rules":[{"frequency":"minute","retain":"1w"}]}'
+ret=$(maprcli schedule list)
+if [[ $ret == *"Schedule-m"* ]]
+then
+  echo PASS RVolumeMirrorCreateSchedule
+else
+  echo FAIL RVolumeMirrorCreateSchedule
+fi
+scheduleID=$(maprcli schedule list | grep Schedule-m | awk '{print $4}')
+echo scheduleID $scheduleID
+maprcli volume create -name jsonv_mirror -source jsonv@dataplatform -path /jsonv_mirror -type mirror -schedule $scheduleID
+# start volume mirror
+ret=$(maprcli volume mirror start -name jsonv_mirror -full true)
+if [[ $ret == *"Started mirror operation for volume"* ]] && [[ $ret == *"jsonv_mirror"* ]]
+then
+  echo PASS RVolumeMirrorStarted
+else
+  echo FAIL RVolumeMirrorStarted
+fi
+sleep 20
+
+hadoop fs -ls /jsonv
+ret=$(hadoop fs -ls /jsonv_mirror)
+if [[ $ret == *"/jsonv_mirror/scores"* ]] && [[ $ret == *"/jsonv_mirror/scores.json"* ]] && [[ $ret == *"/jsonv_mirror/scoresreplica"* ]] && [[ $ret == *"/jsonv_mirror/t1"* ]] && [[ $ret == *"/jsonv_mirror/t2"* ]]
+then
+  echo PASS RVolumeMirrorObjectsCreated
+else
+  echo FAIL RVolumeMirrorObjectsCreated
+fi
+
+# verify json tables have been mirrored in volume mirror
+echo 'find /jsonv_mirror/scores --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell
+ret=$(echo 'find /jsonv_mirror/scoresreplica --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell)
+if [[ $ret == *"abc"* ]] && [[ $ret == *"5"* ]]
+then
+  echo PASS RVolumeMirrorJsonReplicaRow
+else
+  echo FAIL RVolumeMirrorJsonReplicaRow
+fi
+
+# verify binary tables have been mirrored in volume mirror
+ret=$(hbase shell /tmp/hbase.replicate8)
+if [[ $ret == *"r1 column=cf1:c1"* ]] && [[ $ret == *"value=v1"* ]]
+then
+  echo PASS RVolumeMirrorBinaryReplicaRow
+else
+  echo FAIL RVolumeMirrorBinaryReplicaRow
+fi
+
+echo add new data to jsonv and see if it is mirrored to jsonv_mirror
+
+# create new json table
+hadoop fs -copyFromLocal /tmp/values.json /tmp
+mapr importJSON -idField _id -src /tmp/values.json -dst /jsonv/values -mapreduce false -bulkload false
+# create new json file
+hadoop fs -copyFromLocal /tmp/values.json /jsonv
+
+# create replica of new json table
+maprcli table replica autosetup -path /jsonv/values -replica /jsonv/valuesreplica
+maprcli table replica list  -path /jsonv/values -json
+cat << EOF | mapr dbshell
+insert /jsonv/values --value '{"_id":"abc","class_id":5}'
+EOF
+# verify values in new json table
+echo 'find /jsonv/values --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell
+# verify values in replica of new json table
+echo 'find /jsonv/valuesreplica --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell
+
+# create new binary table and add one record
+hbase shell /tmp/hbase.replicate5
+# create replica of new binary table
+maprcli table replica autosetup -path /jsonv/t3 -replica /jsonv/t4
+sleep 10
+# insert second record into binary table
+hbase shell /tmp/hbase.replicate6
+sleep 10
+# verify records are in binary table and replica
+hbase shell /tmp/hbase.replicate7
+
+echo see if it is mirrored to jsonv_mirror
+# likely not mirrored yet
+
+hadoop fs -ls /jsonv
+hadoop fs -ls /jsonv_mirror
+
+# echo push data to jsonv_mirror
+
+# maprcli volume mirror push -name jsonv_mirror -verbose true
+
+# echo see if it is mirrored to jsonv_mirror
+# # should be mirrored now
+
+# sleep 20
+# hadoop fs -ls /jsonv
+# hadoop fs -ls /jsonv_mirror
+
+# echo 'find /jsonv_mirror/scores --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell
+# echo 'find /jsonv_mirror/scoresreplica --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell
+# hbase shell /tmp/hbase.replicate8
+# hbase shell /tmp/hbase.replicate9
+# echo 'find /jsonv_mirror/values --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell
+# echo 'find /jsonv_mirror/valuesreplica --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell
+
+maprcli volume mirror start -name jsonv_mirror
+# should be mirrored now
+sleep 20
+
+hadoop fs -ls /jsonv
+hadoop fs -ls /jsonv_mirror
+
+echo 'find /jsonv_mirror/scores --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell
+echo 'find /jsonv_mirror/scoresreplica --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell
+
+# verify binary tables t1 and t2
+hbase shell /tmp/hbase.replicate8
+# verify binary tables t3 and t4
+ret=$(hbase shell /tmp/hbase.replicate9)
+if [[ $ret == *"r1 column=cf1:c1"* ]] && [[ $ret == *"value=v1"* ]]
+then
+  echo PASS RVolumeMirrorNewBinaryReplicaRow
+else
+  echo FAIL RVolumeMirrorNewBinaryReplicaRow
+fi
+
+echo 'find /jsonv_mirror/values --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell
+ret=$(echo 'find /jsonv_mirror/valuesreplica --query {"$select":["_id","class_id","scores"],"$where":{"$eq":{"class_id":5}}}' | mapr dbshell)
+if [[ $ret == *"abc"* ]] && [[ $ret == *"5"* ]]
+then
+  echo PASS RVolumeMirrorNewJsonReplicaRow
+else
+  echo FAIL RVolumeMirrorNewJsonReplicaRow
+fi
+

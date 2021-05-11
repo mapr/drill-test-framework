@@ -1,0 +1,3 @@
+scan '/jsonv/t1'
+scan '/jsonv/t2'
+exit
