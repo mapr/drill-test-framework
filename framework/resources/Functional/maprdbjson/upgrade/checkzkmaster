@@ -1,0 +1,54 @@
+#!/bin/bash
+
+set -x
+
+if [[ $# -ne 2 ]]
+then
+  echo checkzkmaster needs a current error count and timeout
+  exit 1
+fi
+
+errors=$1
+timeoutvalue=$2
+echo checkzkmaster timeout $timeoutvalue
+
+interval=30
+((end_time=${SECONDS}+$timeoutvalue))
+start_time=$SECONDS
+ready="0"
+echo "START SECONDS", $SECONDS
+while ((${SECONDS} < ${end_time}))
+do
+  sumf=0
+  suml=0
+  count=0
+  for i in $(kubectl get pods -n dataplatform | grep "^zk-" | awk '{print $1}')
+  do
+    follower=$(kubectl exec -i $i -n dataplatform -- /bin/bash -c "echo srvr | nc localhost 5181 | grep -o 'Mode:'.* | grep follower | wc -l")
+    leader=$(kubectl exec -i $i -n dataplatform -- /bin/bash -c "echo srvr | nc localhost 5181 | grep -o 'Mode:'.* | grep leader | wc -l")
+    echo $i $follower $leader
+    sumf=$(($sumf+$follower))
+    suml=$(($suml+$leader))
+    ((count++))
+  done
+  echo $count
+  # check if there are two followers
+  if [[ $sumf -eq $(($count-1)) && $suml -eq 1 ]]
+  then
+    ready="1"
+    break
+  fi
+  echo "There are $sumf followers and $suml leader after " $(($SECONDS - $start_time)) " seconds"
+  sleep ${interval}
+done
+
+if [ $ready -eq "0" ]
+then
+  echo "There are not enough followers and leader after " $(($end_time - $start_time)) " seconds"
+  kubectl get pods -n dataplatform
+  ((errors++))
+  exit $errors
+fi
+
+echo "There are $sumf zk followers and $suml zk leader"
+exit $errors

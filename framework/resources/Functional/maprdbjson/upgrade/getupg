@@ -1,0 +1,2 @@
+kubectl describe pods $1 -n dataplatform | grep Image:
+kubectl describe pods $1 -n dataplatform | grep -A 12 Limits

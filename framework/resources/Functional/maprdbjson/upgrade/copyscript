@@ -1,0 +1,6 @@
+hadoop fs -rm -r /tmp/resources
+hadoop fs -ls /
+hadoop fs -ls /tmp
+hadoop fs -copyFromLocal /tmp/resources /tmp
+hadoop fs -ls /tmp/
+hadoop fs -ls /tmp/resources

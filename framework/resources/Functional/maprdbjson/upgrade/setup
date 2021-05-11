@@ -1,0 +1,9 @@
+set -x
+
+# cd framework/resources/Datasources/upgrade
+
+/bin/rm full.all.yaml
+cp full.all.yaml.save full.all.yaml
+baseimage=$(kubectl describe pod admincli-0 -n dataplatform | grep -i image: | cut -d: -f3)
+sed -i "s/BASE_IMAGE/$baseimage/g" full.all.yaml
+

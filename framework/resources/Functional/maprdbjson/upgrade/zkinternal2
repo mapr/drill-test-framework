@@ -1,0 +1,37 @@
+#!/bin/bash
+
+set -x
+
+date
+
+/bin/rm collect.sh
+cp zkcollect.sh collect.sh
+
+if [[ $# -ne 2 ]]
+then
+  echo zkinternal needs the number of pods to upgrade and a timeout
+  exit 1
+fi
+
+numberpods=$1
+timeoutvalue=$2
+echo zkinternal number of pods $numberpods upgradezktimeout $timeoutvalue
+
+errors=0
+
+./upgradezk $numberpods $timeoutvalue
+ret=$?
+if [[ $ret -gt 0 ]]
+then
+  echo upgrade zk has returned error $ret
+  kubectl get pods -n dataplatform | grep zk
+  exit $ret
+fi
+
+kubectl get pods -n dataplatform -o wide
+
+./checkcmzhealth 0 10
+
+date
+
+exit 0

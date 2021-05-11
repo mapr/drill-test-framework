@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -x
+
+if [ $# -ne 4 ]
+then
+  echo "checklogsall pod, loglevel, timeout and last log message"
+  exit 1
+fi
+pod=$1
+loglevel=$2
+timeoutvalue=$3
+lastlogmsg=$4
+
+for i in $(kubectl get pods -n dataplatform | grep $pod | awk '{print $1}')
+do
+  echo $i
+  ./checklogs $i $loglevel $timeoutvalue "$lastlogmsg"
+done
+
+exit 0

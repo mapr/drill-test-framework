@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -x
+
+for i in $(kubectl get pods -n dataplatform | grep $1 | awk '{print $1}') ; do
+  pod=$(echo $i | sed -e 's/\(^[^-]*\)-.*/\1/')
+  echo get logs for $pod
+  kubectl logs -n dataplatform $i | tail
+  ret=$(kubectl logs -n dataplatform $i | tail)
+  if [[ $ret == *"pod is now really ready"* ]]
+  then
+    echo PASS RUpgradeLog$1
+  else
+    echo FAIL RUpgradeLog$1
+  fi
+done

@@ -1,0 +1,441 @@
+apply -f full.all.yaml
+All dataplatform pods are up and running
+    Image: *gcr.io/mapr-252711/admincli
+    Limits:
+      cpu: *2001
+      ephemeral-storage: *31Gi
+      memory: *1Gi
+    Requests:
+      cpu: *501m
+      ephemeral-storage: *21Gi
+      memory: *1Gi
+      LOG_LEVEL: *DEBUG
+    Image: *gcr.io/mapr-252711/cldb
+    Image: *gcr.io/mapr-252711/cldb
+    Image: *gcr.io/mapr-252711/cldb
+    Limits:
+      cpu: *20001
+      ephemeral-storage: *61Gi
+      memory: *71Gi
+    Requests:
+      cpu: *8001
+      ephemeral-storage: *31Gi
+      memory: *21Gi
+      LOG_LEVEL: *DEBUG
+    Limits:
+      cpu: *20001
+      ephemeral-storage: *61Gi
+      memory: *71Gi
+    Requests:
+      cpu: *8001
+      ephemeral-storage: *31Gi
+      memory: *21Gi
+      LOG_LEVEL: *DEBUG
+    Limits:
+      cpu: *20001
+      ephemeral-storage: *61Gi
+      memory: *71Gi
+    Requests:
+      cpu: *8001
+      ephemeral-storage: *31Gi
+      memory: *21Gi
+      LOG_LEVEL: *DEBUG
+    Image: *gcr.io/mapr-252711/collectd
+    Limits:
+      cpu: *2001
+      ephemeral-storage: *31Gi
+      memory: *1Gi
+    Requests:
+      cpu: *201m
+      ephemeral-storage: *21Gi
+      memory: *1Gi
+      LOG_LEVEL: *DEBUG
+    Image: *gcr.io/mapr-252711/elasticsearch
+    Limits:
+      cpu: *2001
+      ephemeral-storage: *31Gi
+      memory: *11Gi
+    Requests:
+      cpu: *501m
+      ephemeral-storage: *21Gi
+      memory: *11Gi
+      LOG_LEVEL: *DEBUG
+    Image: *gcr.io/mapr-252711/fluent
+    Image: *gcr.io/mapr-252711/fluent
+    Image: *gcr.io/mapr-252711/fluent
+    Image: *gcr.io/mapr-252711/fluent
+    Image: *gcr.io/mapr-252711/fluent
+    Limits:
+      cpu: *2001
+      ephemeral-storage: *31Gi
+      memory: *1Gi
+    Requests:
+      cpu: *501m
+      ephemeral-storage: *21Gi
+      memory: *1Gi
+      LOG_LEVEL: *DEBUG
+    Limits:
+      cpu: *2001
+      ephemeral-storage: *31Gi
+      memory: *1Gi
+    Requests:
+      cpu: *501m
+      ephemeral-storage: *21Gi
+      memory: *1Gi
+      LOG_LEVEL: *DEBUG
+    Limits:
+      cpu: *2001
+      ephemeral-storage: *31Gi
+      memory: *1Gi
+    Requests:
+      cpu: *501m
+      ephemeral-storage: *21Gi
+      memory: *1Gi
+      LOG_LEVEL: *DEBUG
+    Limits:
+      cpu: *2001
+      ephemeral-storage: *31Gi
+      memory: *1Gi
+    Requests:
+      cpu: *501m
+      ephemeral-storage: *21Gi
+      memory: *1Gi
+      LOG_LEVEL: *DEBUG
+    Limits:
+      cpu: *2001
+      ephemeral-storage: *31Gi
+      memory: *1Gi
+    Requests:
+      cpu: *501m
+      ephemeral-storage: *21Gi
+      memory: *1Gi
+      LOG_LEVEL: *DEBUG
+    Image: *gcr.io/mapr-252711/grafana
+    Limits:
+      cpu: *2001
+      ephemeral-storage: *31Gi
+      memory: *1Gi
+    Requests:
+      cpu: *501m
+      ephemeral-storage: *21Gi
+      memory: *1Gi
+      LOG_LEVEL: *DEBUG
+    Image: *gcr.io/mapr-252711/hivemeta
+    Limits:
+      cpu: *4001
+      ephemeral-storage: *41Gi
+      memory: *1Gi
+    Requests:
+      cpu: *1001
+      ephemeral-storage: *21Gi
+      memory: *1Gi
+      LOG_LEVEL: *DEBUG
+    Image: *gcr.io/mapr-252711/httpfs
+    Limits:
+      cpu: *2001
+      ephemeral-storage: *31Gi
+      memory: *1Gi
+    Requests:
+      cpu: *501m
+      ephemeral-storage: *21Gi
+      memory: *1Gi
+      LOG_LEVEL: *DEBUG
+    Image: *gcr.io/mapr-252711/kibana
+    Limits:
+      cpu: *2001
+      ephemeral-storage: *31Gi
+      memory: *11Gi
+    Requests:
+      cpu: *501m
+      ephemeral-storage: *21Gi
+      memory: *11Gi
+      LOG_LEVEL: *DEBUG
+    Image: *gcr.io/mapr-252711/webserver
+    Limits:
+      cpu: *2001
+      ephemeral-storage: *31Gi
+      memory: *11Gi
+    Requests:
+      cpu: *1001
+      ephemeral-storage: *21Gi
+      memory: *11Gi
+      LOG_LEVEL: *DEBUG
+    Image: *gcr.io/mapr-252711/mfs
+    Image: *gcr.io/mapr-252711/mfs
+    Limits:
+      cpu: *12001
+      ephemeral-storage: *51Gi
+      memory: *71Gi
+    Requests:
+      cpu: *4001
+      ephemeral-storage: *21Gi
+      memory: *21Gi
+      LOG_LEVEL: *DEBUG
+    Limits:
+      cpu: *12001
+      ephemeral-storage: *51Gi
+      memory: *71Gi
+    Requests:
+      cpu: *4001
+      ephemeral-storage: *21Gi
+      memory: *21Gi
+      LOG_LEVEL: *DEBUG
+    Image: *gcr.io/mapr-252711/objectstore
+    Limits:
+      cpu: *4001
+      ephemeral-storage: *31Gi
+      memory: *11Gi
+    Requests:
+      cpu: *1001
+      ephemeral-storage: *21Gi
+      memory: *11Gi
+      LOG_LEVEL: *DEBUG
+    Image: *gcr.io/mapr-252711/opentsdb
+    Limits:
+      cpu: *6001
+      ephemeral-storage: *51Gi
+      memory: *21Gi
+    Requests:
+      cpu: *2001
+      ephemeral-storage: *21Gi
+      memory: *21Gi
+      LOG_LEVEL: *DEBUG
+    Image: *gcr.io/mapr-252711/zookeeper
+    Image: *gcr.io/mapr-252711/zookeeper
+    Image: *gcr.io/mapr-252711/zookeeper
+    Limits:
+      cpu: *3001
+      ephemeral-storage: *31Gi
+      memory: *1Gi
+    Requests:
+      cpu: *1001
+      ephemeral-storage: *21Gi
+      memory: *1Gi
+      LOG_LEVEL: *DEBUG
+    Limits:
+      cpu: *3001
+      ephemeral-storage: *31Gi
+      memory: *1Gi
+    Requests:
+      cpu: *1001
+      ephemeral-storage: *21Gi
+      memory: *1Gi
+      LOG_LEVEL: *DEBUG
+    Limits:
+      cpu: *3001
+      ephemeral-storage: *31Gi
+      memory: *1Gi
+    Requests:
+      cpu: *1001
+      ephemeral-storage: *21Gi
+      memory: *1Gi
+      LOG_LEVEL: *DEBUG
+checklogs admincli-0 DEBUG
+Checklogs 0
+checklogs cldb-0 DEBUG
+Checklogs 0
+checklogs cldb-1 DEBUG
+Checklogs 0
+checklogs cldb-2 DEBUG
+Checklogs 0
+checklogsall collectd DEBUG
+Checklogs 0
+checklogs elasticsearch-0 DEBUG
+Checklogs 0
+checklogsall fluent DEBUG
+Checklogs 0
+checklogsall grafana DEBUG
+Checklogs 0
+checklogs hivemeta-0 DEBUG
+Checklogs 0
+checklogs httpfs-0 DEBUG
+Checklogs 0
+checklogsall kibana DEBUG
+Checklogs 0
+checklogs mcs-0 DEBUG
+Checklogs 0
+checklogs mfs-group1-0 DEBUG
+Checklogs 0
+checklogs mfs-group2-0 DEBUG
+Checklogs 0
+checklogs objectstore-zone1-0 DEBUG
+Checklogs 0
+checklogs opentsdb-0 DEBUG
+Checklogs 0
+checklogs zk-0 DEBUG
+Checklogs 0
+checklogs zk-1 DEBUG
+Checklogs 0
+checklogs zk-2 DEBUG
+Checklogs 0
+taillogs admincli
+kld admincli-0
+ADMINCLI pod is now really ready...
+=== Sleeping forever to keep container up ===
+taillogs cldb
+kld cldb-0
+CLDB pod is now really ready...
+Sleeping forever to keep container up ===
+kld cldb-1
+CLDB pod is now really ready...
+Sleeping forever to keep container up ===
+kld cldb-2
+CLDB pod is now really ready...
+Sleeping forever to keep container up ===
+taillogs collectd
+kld collectd
+COLLECTD pod is now really ready...
+Sleeping forever to keep container up ===
+taillogs elasticsearch
+kld elasticsearch-0
+ELASTICSEARCH pod is now really ready...
+=== Sleeping forever to keep container up ===
+taillogs fluent
+kld fluent
+FLUENT pod is now really ready...
+=== Sleeping forever to keep container up ===
+kld fluent
+FLUENT pod is now really ready...
+=== Sleeping forever to keep container up ===
+kld fluent
+FLUENT pod is now really ready...
+=== Sleeping forever to keep container up ===
+kld fluent
+FLUENT pod is now really ready...
+=== Sleeping forever to keep container up ===
+kld fluent
+FLUENT pod is now really ready...
+=== Sleeping forever to keep container up ===
+taillogs grafana
+kld grafana
+GRAFANA pod is now really ready...
+Sleeping forever to keep container up ===
+taillogs hivemeta
+kld hivemeta-0
+HIVEMETA pod is now really ready...
+Sleeping forever to keep container up ===
+taillogs httpfs
+kld httpfs-0
+HTTPFS pod is now really ready...
+=== Sleeping forever to keep container up ===
+taillogs kibana
+kld kibana
+KIBANA pod is now really ready...
+=== Sleeping forever to keep container up ===
+taillogs mcs
+kld mcs-0
+APISERVER pod is now really ready...
+Sleeping forever to keep container up ===
+taillogs mfs
+kld mfs-group1-0
+MFS pod is now really ready...
+Sleeping forever to keep container up ===
+kld mfs-group2-0
+MFS pod is now really ready...
+Sleeping forever to keep container up ===
+taillogs objectstore
+kld objectstore-zone1-0
+OBJECTSTORE pod is now really ready...
+=== Sleeping forever to keep container up ===
+taillogs opentsdb
+kld opentsdb-0
+OPENTSDB pod is now really ready...
+Sleeping forever to keep container up ===
+taillogs zk
+kld zk-0
+ZOOKEEPER pod is now really ready...
+Sleeping forever to keep container up ===
+kld zk-1
+ZOOKEEPER pod is now really ready...
+Sleeping forever to keep container up ===
+kld zk-2
+ZOOKEEPER pod is now really ready...
+Sleeping forever to keep container up ===
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin

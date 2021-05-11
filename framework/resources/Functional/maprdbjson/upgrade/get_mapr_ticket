@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -x
+
+password=$(kubectl get secret system-user-secrets -n hpe-secure -o yaml | grep MAPR_PASSWORD | head -1 | awk '{print $2}' | base64 --decode)
+for i in $(kubectl get pods -n dataplatform | grep $1 | awk '{print $1}')
+do
+  echo $i
+  kubectl exec -i $i -n dataplatform -- /bin/bash -c "echo \"$password\" | maprlogin password -user mapr"
+done
