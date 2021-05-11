@@ -1,0 +1,2 @@
+put '/jsonv/t3', 'r2', 'cf1:c1', 'v2'
+exit

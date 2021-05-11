@@ -1,0 +1,4 @@
+create '/jsonv/t3','cf1'
+put '/jsonv/t3','r1', 'cf1:c1', 'v1'
+scan '/jsonv/t3'
+exit
