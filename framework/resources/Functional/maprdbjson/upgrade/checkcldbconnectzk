@@ -1,0 +1,51 @@
+set -x
+
+if [[ $# -ne 2 ]]
+then
+  echo checkcldbconnectzk needs error count and timeout
+  exit 1
+fi
+
+errors=$1
+timeoutvalue=$2
+echo checkcldbconnectzk errors $errors timeout $timeoutvalue
+
+kubectl exec -i -n dataplatform admincli-0 -- bash -c 'echo mapr | maprlogin password -user mapr'
+
+interval=30
+((end_time=${SECONDS}+$timeoutvalue))
+start_time=$SECONDS
+ready="0"
+echo "START SECONDS", $SECONDS
+while ((${SECONDS} < ${end_time}))
+do
+  matches=0
+  kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c "maprcli dump cldbstate"
+  num_slaves=$(kubectl get pods -n dataplatform | grep "^cldb-" | wc -l)
+  ((num_slaves--))
+  slave=$(kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c "maprcli dump cldbstate" | grep CLDB_IS_SLAVE_READ_ONLY | wc -l)
+  master=$(kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c "maprcli dump cldbstate" | grep CLDB_IS_MASTER_READ_WRITE | wc -l)
+
+  if [[ $slave -eq $num_slaves && $master -eq 1 ]]
+  then
+    # there are 2 cldb slaves and 1 cldb master
+    ready="1"
+    break
+  fi
+
+  echo "There are $slave slave cldbs and $master master cldb after " $(($SECONDS - $start_time)) " seconds"
+  sleep ${interval}
+done
+
+if [ $ready -eq "0" ]
+then
+  echo "There are only $slave slave cldbs and $master master cldb after " $(($end_time - $start_time)) " seconds"
+  echo "There should be $num_slaves slave cldbs and 1 master cldb after " $(($end_time - $start_time)) " seconds"
+  kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c "maprcli dump cldbstate"
+  kubectl get pods -n dataplatform
+  ((errors++))
+  exit $errors
+fi
+
+echo "There are $slave slave cldbs and $master master cldb"
+exit $errors

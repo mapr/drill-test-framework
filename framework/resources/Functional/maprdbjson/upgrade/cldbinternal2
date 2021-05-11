@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -x
+
+cp cldbcollect.sh collect.sh
+
+if [[ $# -ne 2 ]]
+then
+  echo cldbinternal needs the number of pods to upgrade and a timeout
+  exit 1
+fi
+
+numberpods=$1
+timeoutvalue=$2
+echo cldbinternal2 number of pods $numberpods upgradecldbtimeout $timeoutvalue
+
+errors=0
+
+./upgradecldb $numberpods $timeoutvalue
+ret=$?
+if [[ $ret -gt 0 ]]
+then
+  echo upgrade cldb has returned error $ret
+  kubectl get pods -n dataplatform | grep cldb
+  exit $ret
+fi
+
+./checkcldbvalid $errors 10
+
+./checkcldbmaster $errors 10
+
+checkcldbconnectzk $errors 10
+
+date
+
+exit $errors

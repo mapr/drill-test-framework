@@ -1,0 +1,12 @@
+
+set -x
+
+# sleep 2700
+
+cd framework/resources/Functional/upgrade/
+
+./cldbinternal2 3 10800
+errors=$?
+
+exit $errors
+

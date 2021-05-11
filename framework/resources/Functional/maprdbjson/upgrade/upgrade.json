@@ -1,0 +1,28 @@
+{
+    "testId": "upgrade",
+    "type": "group",
+    "description": "Test Picasso",
+    "submit-type": "script",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.sh",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.output",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ],
+    "datasources": [
+        {
+          "mode": "gen",
+          "src": "Datasources/maprdbjson/setup.sh",
+          "dest": ""
+        }
+    ]
+
+}

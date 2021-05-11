@@ -1,0 +1,14 @@
+
+set -x
+
+# sleep 2700
+
+kubectl get pods -n dataplatform
+
+cd framework/resources/Functional/upgrade/
+
+./zkinternal2 3 14400
+errors=$?
+
+exit $errors
+

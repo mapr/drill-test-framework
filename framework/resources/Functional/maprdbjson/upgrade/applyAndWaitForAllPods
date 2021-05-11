@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -x
+
+yaml=$1
+echo applyAndWaitForAllPods yaml $yaml
+
+kubectl apply -f $yaml
+echo kubectl apply -f $yaml
+
+echo "## Verify that all dataplatform pods are up and running"
+interval=60
+((end_time=${SECONDS}+1500))
+start_time=$SECONDS
+ready="0"
+echo "START SECONDS", $SECONDS
+sleep 360
+while ((${SECONDS} < ${end_time}))
+do
+  ret=`kubectl get pods -n dataplatform | grep Running | grep "1/1" | wc -l`
+  if [ $ret -eq 26 ]
+  then
+    echo "All dataplatform pods are up and running"
+    ready="1"
+    break
+  fi
+  echo "All dataplatform pods are not yet available after " $(($SECONDS - $start_time)) " seconds"
+  sleep ${interval}
+done
+if [ $ready -eq "0" ]
+then
+  echo "Cluster is not ready after " $(($end_time - $start_time)) " seconds"
+  kubectl get pods --all-namespaces
+  echo "Cluster is not ready after " $(($end_time - $start_time)) " seconds" >> /tmp/errormsgs
+  kubectl get pods --all-namespaces >> /tmp/errormsgs
+  ((errors++))
+fi
+echo "ENDSECONDS", $SECONDS
+kubectl get pods -n dataplatform
+
+exit $errors

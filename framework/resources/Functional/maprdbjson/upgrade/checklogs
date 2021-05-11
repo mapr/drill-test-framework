@@ -1,0 +1,60 @@
+#!/bin/bash
+
+set -x
+
+if [ $# -ne 4 ]
+then
+  echo "checklogs pod, loglevel, timeout and last log message"
+  exit 1
+fi
+pod=$1
+loglevel=$2
+timeoutvalue=$3
+lastlogmsg=$4
+
+echo checklogs $pod $loglevel
+
+start_time=$SECONDS
+((end_time=$SECONDS+$timeoutvalue))
+interval=20
+while ((${SECONDS} < ${end_time}))
+do
+  ret=$(kubectl logs $pod -n dataplatform | grep "$lastlogmsg" | wc -l)
+  if [[ $ret -eq 1 ]]
+  then
+    break;
+  fi
+  sleep ${interval}
+done
+
+if [[ ${SECONDS} -ge ${end_time} ]]
+then
+  echo Checklogs kubectl log does not end with expected message
+  exit 1
+fi
+
+debugLines=$(kubectl logs $pod -n dataplatform | grep "\[DEBUG\]" | wc -l)
+infoLines=$(kubectl logs $pod -n dataplatform | grep "\[INFO\]" | wc -l)
+errorLines=$(kubectl logs $pod -n dataplatform | grep "\[ERROR\]" | wc -l)
+if [[ $loglevel = "DEBUG" && ($debugLines -eq 0 || infoLines -eq 0 ) ]] ;
+then
+  # this is an error
+  echo Checklogs DEBUG
+  exit 1
+fi
+if [[ $loglevel = "INFO" && ( $infoLines -eq 0 || $debugLines -gt 0 ) ]] ;
+then
+  # this is an error
+  echo Checklogs INFO
+  exit 1
+fi
+if [[ $loglevel = "ERROR" && ( $debugLines -gt 0 || $infoLines -gt 0 ) ]] ;
+then
+  # this is an error
+  echo Checklogs ERROR
+  exit 1
+fi
+
+echo Checklogs 0
+
+exit 0

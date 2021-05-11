@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -x
+
+if [[ $# -ne 2 ]]
+then
+  echo upgradecldb needs the number of pods to upgrade and a timeout
+  exit 1
+fi
+
+numberpods=$1
+timeoutvalue=$2
+echo upgradecldb number of pods $numberpods timeout $timeoutvalue
+
+timeout $timeoutvalue kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c 'edf upgrade cldb -n'
+ret=$?
+if [[ $ret -gt 0 ]]
+then
+  echo timeout edf upgrade cldb returned error $ret
+  exit $ret
+fi
+
+interval=20
+((end_time=${SECONDS}+120))
+start_time=$SECONDS
+ready="0"
+echo "START SECONDS", $SECONDS
+while ((${SECONDS} < ${end_time}))
+do
+  ret=`kubectl get pods -n dataplatform | grep cldb | grep Running | grep "1/1" | wc -l`
+  if [ $ret -eq $numberpods ]
+  then
+    echo "All cldb pods are up and running"
+    ready="1"
+    break
+  fi
+  echo "All cldb pods are not yet available after " $(($SECONDS - $start_time)) " seconds"
+  sleep ${interval}
+done

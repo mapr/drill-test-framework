@@ -1,0 +1,20 @@
+
+
+if [[ $# -ne 2 ]]
+then
+  echo checkcmzhealth needs errors and timeout
+  exit 1
+fi
+
+errors=$1
+timeout=$2
+
+kubectl exec -i -n dataplatform admincli-0 -- bash -c 'echo mapr | maprlogin password -user mapr'
+
+./checkcldbvalid $errors $timeout
+
+checkcldbconnectzk $errors $timeout
+
+./checkcldbmaster $errors $timeout
+
+./checkzkmaster $errors $timeout

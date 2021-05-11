@@ -1,0 +1,311 @@
+apiVersion: hcp.hpe.com/v1
+kind: DataPlatform
+metadata:
+  name: dataplatform
+spec:
+  baseimagetag: "BASE_IMAGE"
+  imageregistry: gcr.io/mapr-252711
+  imagepullsecret: hpe-imagepull-secrets
+  environmenttype: hcp
+  disableha: false
+  dnsdomain: cluster.local
+  loglocation: /var/log/mapr
+  corelocation: /var/mapr/cores
+  podinfolocation: /var/mapr/podinfo
+  security:
+    disablesecurity: false
+    systemusersecret: system-user-secrets
+    usedare: false
+    selinuxinfo:
+      overwriteselinux: false
+      level: "s0:c123,c456"
+  debuginfo:
+    loglevel: INFO
+    preservefailedpods: false
+    wipelogs: false
+    version: 6.2.0
+  core:
+    init:
+      image: init-6.2.0:BASE_IMAGE
+      requestcpu: "1000m"
+      limitcpu: "4000m"
+      requestmemory: 1Gi
+      limitmemory: 1Gi
+      requestdisk: 10Gi
+      limitdisk: 20Gi
+      loglevel: INFO
+    zookeeper:
+      failurecount: 1
+      image: zookeeper-6.2.0:BASE_IMAGE
+      requestcpu: "1001m"
+      limitcpu: "3001m"
+      requestmemory: 1Gi
+      limitmemory: 1Gi
+      requestdisk: 21Gi
+      limitdisk: 31Gi
+      loglevel: DEBUG
+    cldb:
+      failurecount: 1
+      image: cldb-6.2.0:BASE_IMAGE
+      diskinfo:
+        diskcount: 3
+        disktype: HDD
+        storagepoolsize: 0
+        storagepoolsperinstance: 0
+      requestcpu: "8001m"
+      limitcpu: "20001m"
+      requestmemory: 21Gi
+      limitmemory: 71Gi
+      requestdisk: 31Gi
+      limitdisk: 61Gi
+      hostports:
+        - hostport: 7220
+        - hostport: 7443
+        - hostport: 7222
+        - hostport: 5660
+        - hostport: 5692
+        - hostport: 5724
+        - hostport: 5756
+        - hostport: 8660
+      sshport: 5000
+      loglevel: DEBUG
+    mfs:
+      image: mfs-6.2.0:BASE_IMAGE
+      groups:
+        - name: group1
+          count: 1
+          diskinfo:
+            diskcount: 3
+            disktype: HDD
+            storagepoolsize: 1
+            storagepoolsperinstance: 1
+          sshport: 5001
+          hostports:
+            - hostport: 5660
+            - hostport: 5692
+            - hostport: 5724
+            - hostport: 5756
+            - hostport: 8660
+          requestcpu: "4001m"
+          limitcpu: "12001m"
+          requestmemory: 21Gi
+          limitmemory: 71Gi
+          requestdisk: 21Gi
+          limitdisk: 51Gi
+          loglevel: DEBUG
+        - name: group2
+          count: 1
+          diskinfo:
+            diskcount: 3
+            disktype: HDD
+            storagepoolsize: 2
+            storagepoolsperinstance: 2
+          sshport: 5001
+          hostports:
+            - hostport: 5660
+            - hostport: 5692
+            - hostport: 5724
+            - hostport: 5756
+            - hostport: 8660
+          requestcpu: "4001m"
+          limitcpu: "12001m"
+          requestmemory: 21Gi
+          limitmemory: 71Gi
+          requestdisk: 21Gi
+          limitdisk: 51Gi
+          loglevel: DEBUG
+    webserver:
+      count: 1
+      image: webserver-6.2.0:BASE_IMAGE
+      sshport: 5002
+      requestcpu: "1001m"
+      limitcpu: "2001m"
+      requestmemory: 11Gi
+      limitmemory: 11Gi
+      requestdisk: 21Gi
+      limitdisk: 31Gi
+      loglevel: DEBUG
+    admincli:
+      count: 1
+      image: admincli-6.2.0:BASE_IMAGE
+      sshport: 5003
+      requestcpu: "501m"
+      limitcpu: "2001m"
+      requestmemory: 1Gi
+      limitmemory: 1Gi
+      requestdisk: 21Gi
+      limitdisk: 31Gi
+      loglevel: DEBUG
+  monitoring:
+    monitorlogs: true
+    monitormetrics: true
+    collectd:
+      image: collectd-5.10.0:BASE_IMAGE
+      sshport: 5004
+      requestcpu: "201m"
+      limitcpu: "2001m"
+      requestmemory: 1Gi
+      limitmemory: 1Gi
+      requestdisk: 21Gi
+      limitdisk: 31Gi
+      loglevel: DEBUG
+    opentsdb:
+      count: 1
+      image: opentsdb-2.4.0:BASE_IMAGE
+      sshport: 5005
+      requestcpu: "2001m"
+      limitcpu: "6001m"
+      requestmemory: 21Gi
+      limitmemory: 21Gi
+      requestdisk: 21Gi
+      limitdisk: 51Gi
+      loglevel: DEBUG
+    grafana:
+      count: 1
+      image: grafana-6.7.4:BASE_IMAGE
+      sshport: 5006
+      requestcpu: "501m"
+      limitcpu: "2001m"
+      requestmemory: 1Gi
+      limitmemory: 1Gi
+      requestdisk: 21Gi
+      limitdisk: 31Gi
+      loglevel: DEBUG
+    fluent:
+      image: fluent-1.10.3:BASE_IMAGE
+      sshport: 5007
+      requestcpu: "501m"
+      limitcpu: "2001m"
+      requestmemory: 1Gi
+      limitmemory: 1Gi
+      requestdisk: 21Gi
+      limitdisk: 31Gi
+      loglevel: DEBUG
+    elasticsearch:
+      count: 1
+      image: elasticsearch-6.8.8:BASE_IMAGE
+      sshport: 5008
+      requestcpu: "501m"
+      limitcpu: "2001m"
+      requestmemory: 11Gi
+      limitmemory: 11Gi
+      requestdisk: 21Gi
+      limitdisk: 31Gi
+      loglevel: DEBUG
+    kibana:
+      count: 1
+      image: kibana-6.8.8:BASE_IMAGE
+      sshport: 5009
+      requestcpu: "501m"
+      limitcpu: "2001m"
+      requestmemory: 11Gi
+      limitmemory: 11Gi
+      requestdisk: 21Gi
+      limitdisk: 31Gi
+      loglevel: DEBUG
+  gateways:
+    nfs: true
+    mast: true
+    objectstore:
+      image: objectstore-2.0.0:BASE_IMAGE
+      zones:
+        - name: zone1
+          count: 1
+          sshport: 5010
+          size: 5Gi
+          fspath: ""
+          hostports:
+            - hostport: 9000
+              nodeport: 31900
+          requestcpu: "1001m"
+          limitcpu: "4001m"
+          requestmemory: 11Gi
+          limitmemory: 11Gi
+          requestdisk: 21Gi
+          limitdisk: 31Gi
+          loglevel: DEBUG
+    httpfs:
+      count: 1
+      image: httpfs-1.0:BASE_IMAGE
+      sshport: 5012
+      hostports:
+        - hostport: 14000
+      requestcpu: "501m"
+      limitcpu: "2001m"
+      requestmemory: 1Gi
+      limitmemory: 1Gi
+      requestdisk: 21Gi
+      limitdisk: 31Gi
+      loglevel: DEBUG
+    maprgateway:
+      count: 1
+      image: maprgateway-6.2.0:BASE_IMAGE
+      sshport: 5013
+      requestcpu: "2001m"
+      limitcpu: "8001m"
+      requestmemory: 1Gi
+      limitmemory: 1Gi
+      requestdisk: 21Gi
+      limitdisk: 41Gi
+      loglevel: DEBUG
+    dag:
+      count: 1
+      image: dataaccessgateway-3.0:BASE_IMAGE
+      sshport: 5014
+      requestcpu: "1001m"
+      limitcpu: "1001m"
+      requestmemory: 11Gi
+      limitmemory: 11Gi
+      requestdisk: 21Gi
+      limitdisk: 41Gi
+      loglevel: DEBUG
+    kafkarest:
+      count: 1
+      image: kafkarest-5.1.2:BASE_IMAGE
+      sshport: 5015
+      requestcpu: "2001m"
+      limitcpu: "8001m"
+      requestmemory: 1Gi
+      limitmemory: 1Gi
+      requestdisk: 21Gi
+      limitdisk: 31Gi
+      loglevel: DEBUG
+  coreservices:
+    hivemetastore:
+      count: 1
+      image: hivemeta-2.3:BASE_IMAGE
+      useexternaldb: false
+      externaldbserver: myserver.com
+      sshport: 5016
+      requestcpu: "1001m"
+      limitcpu: "4001m"
+      requestmemory: 1Gi
+      limitmemory: 1Gi
+      requestdisk: 21Gi
+      limitdisk: 41Gi
+      loglevel: DEBUG
+#  clustercustomizationfiles:
+#      podsecuritypolicy: dataplatform-psp
+#      role: dataplatform-role
+#      userrole: dataplatform-userrole
+#      sslsecret: ssl-secrets
+#      sshsecret: ssh-secrets
+#      sssdsecret: sssd-secrets
+#      ldapcertsecret: ldapcert-secret
+#      ldapconfig: ldapclient-cm
+#      zkconfig: zookeeper-cm
+#      cldbconfig: cldb-cm
+#      mfsconfig: mfs-cm
+#      webconfig: webserver-cm
+#      admincliconfig: admincli-cm
+#      collectdconfig: collectd-cm
+#      fluentconfig: fluent-cm
+#      opentsdbconfig: opentsdb-cm
+#      esconfig: elasticsearch-cm
+#      grafanaconfig: grafana-cm
+#      kibanaconfig: kibana-cm
+#      nfsconfig: nfsserver-cm
+#      objectstoreconfig: objectstore-cm
+#      httpfsconfig: httpfs-cm
+#      kafkarestconfig: kafkarest-cm
+#      hivemetaconfig: hivemetastore-cm

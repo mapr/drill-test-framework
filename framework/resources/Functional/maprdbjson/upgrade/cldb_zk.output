@@ -1,0 +1,19 @@
+upgradecldb
+Restarting CLDB pods
+All CLDB pods have been successfully restarted
+All cldb pods are up and running
+checkcldbvalid
+There are 3 valid cldbs
+checkcldbmaster
+Each cldb reports a cldb master, and they are all the same
+checkcldbconnectzk
+There are 2 slave cldbs and 1 master cldb
+upgradezk
+checkcldbvalid
+There are 3 valid cldbs
+checkcldbconnectzk
+There are 2 slave cldbs and 1 master cldb
+checkcldbmaster
+Each cldb reports a cldb master, and they are all the same
+checkzkmaster
+There are 2 zk followers and 1 zk leader
