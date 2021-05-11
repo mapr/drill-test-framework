@@ -1,6 +1,6 @@
 set -x
 
-cd framework/resources/Functional/volume
+cd framework/resources/Functional/mirror
 
 kubectl cp mirror dataplatform/cldb-0:/tmp
 kubectl cp hbase.replicate1 dataplatform/cldb-0:/tmp

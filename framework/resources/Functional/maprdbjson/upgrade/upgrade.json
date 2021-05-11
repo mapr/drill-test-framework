@@ -8,7 +8,7 @@
     ],
     "matrices": [
         {
-            "query-file": ".*.sh",
+            "query-file": ".*.shu",
             "schema": "dfs.drillTestDir",
             "output-format": "tsv",
             "expected-file": ".*.output",

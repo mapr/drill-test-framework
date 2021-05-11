@@ -1,7 +1,7 @@
 
 set -x
 
-cd framework/resources/Functional/upgrade/
+cd framework/resources/Functional/maprdbjson/upgrade/
 
 ./load_data
 ./setup
