@@ -18,11 +18,6 @@
         }
     ],
     "datasources": [
-        {
-          "mode": "gen",
-          "src": "Datasources/maprdbjson/setup.sh",
-          "dest": ""
-        }
     ]
 
 }
