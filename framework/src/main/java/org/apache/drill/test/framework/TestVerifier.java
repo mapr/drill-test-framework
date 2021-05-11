@@ -808,31 +808,44 @@ public class TestVerifier {
    */
   private static boolean matchMultiple(String actual, String expected) {
     String[] expectedLines = expected.split("\n");
+    String[] actualLines = actual.split("\n");
     actual = actual.trim();
-
     int i = 0;
-    int failures=0;
     String testName;
+
+    for (String string : actualLines) {
+      string = string.trim();
+      // LOG.info (string);
+      if ((string.startsWith("PASS ")) && (string.split(" ").length == 2)) {
+        testName = string.split(" ")[1];
+        LOG.info ("[PASS] (1.0 s) " + testName);
+      } else if ((string.startsWith("FAIL ")) && (string.split(" ").length == 2)) {
+        testName = string.split(" ")[1];
+        LOG.info ("[FAIL] (1.0 s) " + testName);
+      }
+    }
+
     for (String string : expectedLines) {
       string = string.trim();
       Matcher matcher = Pattern.compile(string).matcher(actual);
       if (!matcher.find()) {
-        failures++;
+        return false;
       }
       // LOG.info (string);
-      if ((string.startsWith("PASS ")) && (string.split(" ").length == 2)) {
-        testName = string.split(" ")[1];
-        LOG.info ("[PASS] (0 s) " + testName);
-      } else if ((string.startsWith("FAIL ")) && (string.split(" ").length == 2)) {
-        testName = string.split(" ")[1];
-        LOG.info ("[FAIL] (0 s) " + testName);
-      }
+      // if ((string.startsWith("PASS ")) && (string.split(" ").length == 2)) {
+        // testName = string.split(" ")[1];
+        // LOG.info ("[PASS] (0 s) " + testName);
+      // } else if ((string.startsWith("FAIL ")) && (string.split(" ").length == 2)) {
+        // testName = string.split(" ")[1];
+        // LOG.info ("[FAIL] (0 s) " + testName);
+      // }
       String matched = matcher.group();
       i = actual.indexOf(matched);
       // update actual so it has the rest of the output after this expected line
       // and continue checking
       actual = actual.substring(i + matched.length()).trim();
     }
+
     return true;
   }
 
