@@ -2,7 +2,7 @@ set -x
 
 # cd framework/resources/Datasources/upgrade
 
-kubectl cp ../../../resources dataplatform/mfs-group1-0:/tmp
-kubectl cp copyscript dataplatform/mfs-group1-0:/tmp
-./get_mapr_ticket mfs
-kubectl exec -i mfs-group1-0 -n dataplatform -- bash -c "/tmp/copyscript"
+kubectl cp ${DRILL_TEST_DATA_DIR} dataplatform/admincli-0:/tmp
+kubectl cp copyscript dataplatform/admincli-0:/tmp
+./get_mapr_ticket admincli
+kubectl exec -i admincli-0 -n dataplatform -- bash -c "/tmp/copyscript"
