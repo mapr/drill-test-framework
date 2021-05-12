@@ -18,6 +18,11 @@
         }
     ],
     "datasources": [
+        {
+          "mode": "gen",
+          "src": "Datasources/mirror/setup.sh",
+          "dest": ""
+        }
     ]
 
 }
