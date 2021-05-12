@@ -1,7 +1,9 @@
 
 set -x
 
-cd framework/resources/Functional/maprdbjson/upgrade/
+source conf/drillTestConfig.properties
+
+cd ${DRILL_TEST_DATA_DIR}/Advanced/upgrade
 
 ./load_data
 ./setup
@@ -42,6 +44,8 @@ fi
 ./checkcldbmaster $errors 600
 # checkcldbconnectzk $errors 3600
 ./checkcldbconnectzk $errors 600
+
+kubectl get pods -n dataplatform
 
 ./getupg admincli
 ./getupg cldb
@@ -295,4 +299,3 @@ fi
 date
 
 exit $errors
-

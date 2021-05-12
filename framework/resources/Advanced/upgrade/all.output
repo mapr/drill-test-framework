@@ -268,11 +268,11 @@ checklogs zk-1 DEBUG
 Checklogs 0
 checklogs zk-2 DEBUG
 Checklogs 0
-taillogs admincli
+taillogs.really.ready admincli
 kld admincli-0
 ADMINCLI pod is now really ready...
 === Sleeping forever to keep container up ===
-taillogs cldb
+taillogs.really.ready cldb
 kld cldb-0
 CLDB pod is now really ready...
 Sleeping forever to keep container up ===
@@ -282,15 +282,15 @@ Sleeping forever to keep container up ===
 kld cldb-2
 CLDB pod is now really ready...
 Sleeping forever to keep container up ===
-taillogs collectd
+taillogs.really.ready collectd
 kld collectd
 COLLECTD pod is now really ready...
 Sleeping forever to keep container up ===
-taillogs elasticsearch
+taillogs.really.ready elasticsearch
 kld elasticsearch-0
 ELASTICSEARCH pod is now really ready...
 === Sleeping forever to keep container up ===
-taillogs fluent
+taillogs.really.ready fluent
 kld fluent
 FLUENT pod is now really ready...
 === Sleeping forever to keep container up ===
@@ -306,42 +306,42 @@ FLUENT pod is now really ready...
 kld fluent
 FLUENT pod is now really ready...
 === Sleeping forever to keep container up ===
-taillogs grafana
+taillogs.really.ready grafana
 kld grafana
 GRAFANA pod is now really ready...
 Sleeping forever to keep container up ===
-taillogs hivemeta
+taillogs.really.ready hivemeta
 kld hivemeta-0
 HIVEMETA pod is now really ready...
 Sleeping forever to keep container up ===
-taillogs httpfs
+taillogs.really.ready httpfs
 kld httpfs-0
 HTTPFS pod is now really ready...
 === Sleeping forever to keep container up ===
-taillogs kibana
+taillogs.really.ready kibana
 kld kibana
 KIBANA pod is now really ready...
 === Sleeping forever to keep container up ===
-taillogs mcs
+taillogs.really.ready mcs
 kld mcs-0
 APISERVER pod is now really ready...
 Sleeping forever to keep container up ===
-taillogs mfs
+taillogs.really.ready mfs
 kld mfs-group1-0
 MFS pod is now really ready...
 Sleeping forever to keep container up ===
 kld mfs-group2-0
 MFS pod is now really ready...
 Sleeping forever to keep container up ===
-taillogs objectstore
+taillogs.really.ready objectstore
 kld objectstore-zone1-0
 OBJECTSTORE pod is now really ready...
 === Sleeping forever to keep container up ===
-taillogs opentsdb
+taillogs.really.ready opentsdb
 kld opentsdb-0
 OPENTSDB pod is now really ready...
 Sleeping forever to keep container up ===
-taillogs zk
+taillogs.really.ready zk
 kld zk-0
 ZOOKEEPER pod is now really ready...
 Sleeping forever to keep container up ===
@@ -373,6 +373,10 @@ MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/
 MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
 MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
 MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+/tmp/resources/Datasources
+/tmp/resources/Functional
+/tmp/resources/bin
 /tmp/resources/Datasources
 /tmp/resources/Functional
 /tmp/resources/bin
