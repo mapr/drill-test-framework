@@ -2,9 +2,12 @@
 
 set -x
 
+echo taillogs.really.ready $1
+
 for i in $(kubectl get pods -n dataplatform | grep $1 | awk '{print $1}') ; do
   pod=$(echo $i | sed -e 's/\(^[^-]*\)-.*/\1/')
-  echo get logs for $pod
+  echo kld $i
+  kld $i
   kubectl logs -n dataplatform $i | tail
   ret=$(kubectl logs -n dataplatform $i | tail)
   if [[ $ret == *"pod is now really ready"* ]]
