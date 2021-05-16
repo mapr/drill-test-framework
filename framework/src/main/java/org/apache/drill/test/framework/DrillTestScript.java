@@ -110,7 +110,8 @@ public class DrillTestScript implements DrillTest {
                 matrix.verificationTypes.get(0).equalsIgnoreCase("regex-no-order") ||
                 matrix.verificationTypes.get(0).equalsIgnoreCase("spark-pi") ||
                 matrix.verificationTypes.get(0).equalsIgnoreCase("maprdbjson") ||
-                matrix.verificationTypes.get(0).equalsIgnoreCase("multiple-tests")) {
+                matrix.verificationTypes.get(0).equalsIgnoreCase("multiple-tests") ||
+                matrix.verificationTypes.get(0).equalsIgnoreCase("regex-multiple-tests")) {
                 setTestStatus(testVerifier.verifyTextPlan(modeler.expectedFilename, outputFilename));
         } else if (matrix.verificationTypes.get(0).equalsIgnoreCase("self-check")) {
                 setTestStatus(testVerifier.verifyExitCode(cmdConsOut));
