@@ -647,6 +647,9 @@ public class TestDriver {
     Utils.updateDrillStoragePlugins(templatePath);
 */
 
+    // Run commands in before-run.sh
+    k8sStartup();
+
 /*
     String beforeRunQueryFilename = DrillTestDefaults.TEST_ROOT_DIR + "/" + cmdParam.beforeRunQueryFilename;
     LOG.info("\n> Executing init queries\n");
@@ -697,6 +700,28 @@ public class TestDriver {
 	}
 */
     Thread.sleep(1000);
+  }
+
+  private void k8sStartup()
+          throws IOException {
+
+    String command = "./before-run.sh";
+    CmdConsOut cmdConsOut;
+    LOG.info ("Executing startup commands");
+    try {
+      cmdConsOut = Utils.execCmd(command);
+      if (cmdConsOut.exitCode != 0) {
+        LOG.error("Error: Failed to execute the command " + cmdConsOut);
+        throw new RuntimeException();
+        }
+    } catch (Exception e) {
+      cmdConsOut = new CmdConsOut();
+      cmdConsOut.cmd = command;
+      cmdConsOut.consoleErr = e.getMessage();
+      LOG.error("Error: Failed to execute the command " + cmdConsOut);
+      throw new RuntimeException(e);
+    }
+
   }
   
   private void teardown() {
