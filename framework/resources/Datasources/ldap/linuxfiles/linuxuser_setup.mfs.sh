@@ -1,2 +1,2 @@
 
-echo "mapr" | maprlogin password -user $1
+# echo "mapr" | maprlogin password -user $1
