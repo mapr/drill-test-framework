@@ -4,5 +4,5 @@ set -x
 
 kubectl cp ../../../resources dataplatform/admincli-0:/tmp
 kubectl cp copyscript dataplatform/admincli-0:/tmp
-./get_mapr_ticket admincli
+./get_mapr_ticket_for_pod admincli
 kubectl exec -i admincli-0 -n dataplatform -- bash -c "/tmp/copyscript"

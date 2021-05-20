@@ -266,20 +266,20 @@ fi
 ./taillogs.really.ready zk-1
 ./taillogs.really.ready zk-2
 
-./get_mapr_ticket admincli
-./get_mapr_ticket cldb
-./get_mapr_ticket collectd
-./get_mapr_ticket elasticsearch
-./get_mapr_ticket fluent
-./get_mapr_ticket grafana
-./get_mapr_ticket hivemeta
-./get_mapr_ticket httpfs
-./get_mapr_ticket kibana
-./get_mapr_ticket mcs
-./get_mapr_ticket mfs
-./get_mapr_ticket objectstore
-./get_mapr_ticket opentsdb
-./get_mapr_ticket zk
+./get_mapr_ticket_for_pod admincli
+./get_mapr_ticket_for_pod cldb
+./get_mapr_ticket_for_pod collectd
+./get_mapr_ticket_for_pod elasticsearch
+./get_mapr_ticket_for_pod fluent
+./get_mapr_ticket_for_pod grafana
+./get_mapr_ticket_for_pod hivemeta
+./get_mapr_ticket_for_pod httpfs
+./get_mapr_ticket_for_pod kibana
+./get_mapr_ticket_for_pod mcs
+./get_mapr_ticket_for_pod mfs
+./get_mapr_ticket_for_pod objectstore
+./get_mapr_ticket_for_pod opentsdb
+./get_mapr_ticket_for_pod zk
 
 ./check_for_data admincli
 ./check_for_data cldb
