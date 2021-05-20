@@ -10,7 +10,8 @@ errors=$1
 timeoutvalue=$2
 echo checkcldbconnectzk errors $errors timeout $timeoutvalue
 
-kubectl exec -i -n dataplatform admincli-0 -- bash -c 'echo mapr | maprlogin password -user mapr'
+# kubectl exec -i -n dataplatform admincli-0 -- bash -c 'echo mapr | maprlogin password -user mapr'
+./get_mapr_password_for_pod admincli
 
 interval=30
 ((end_time=${SECONDS}+$timeoutvalue))
