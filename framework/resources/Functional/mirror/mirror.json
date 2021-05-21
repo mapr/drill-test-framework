@@ -13,7 +13,7 @@
             "output-format": "tsv",
             "expected-file": ".*.output",
             "verification-type": [
-                "multiple-tests"
+                "regex-multiple-tests"
             ]
         }
     ],
