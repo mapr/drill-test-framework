@@ -1,7 +1,7 @@
 {
     "testId": "upgrade",
     "type": "group",
-    "description": "Test Picasso",
+    "description": "Test upgrades",
     "submit-type": "script",
     "categories": [
         "functional"
