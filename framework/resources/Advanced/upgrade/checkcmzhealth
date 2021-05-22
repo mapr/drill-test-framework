@@ -10,7 +10,7 @@ errors=$1
 timeout=$2
 
 # kubectl exec -i -n dataplatform admincli-0 -- bash -c 'echo mapr | maprlogin password -user mapr'
-./get_mapr_password_for_pod admincli
+./get_mapr_ticket_for_pod admincli
 
 ./checkcldbvalid $errors $timeout
 
