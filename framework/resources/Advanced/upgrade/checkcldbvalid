@@ -11,7 +11,7 @@ timeoutvalue=$2
 echo checkcldbvalid timeout $timeoutvalue
 
 # kubectl exec -i -n dataplatform admincli-0 -- bash -c 'echo mapr | maprlogin password -user mapr'
-./get_mapr_password_for_pod admincli
+./get_mapr_ticket_for_pod admincli
 
 interval=30
 ((end_time=${SECONDS}+$timeoutvalue))
