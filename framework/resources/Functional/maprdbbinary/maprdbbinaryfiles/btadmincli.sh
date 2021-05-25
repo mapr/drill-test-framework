@@ -1,4 +1,5 @@
 # script to be executed on the admincli pod to verify binary tables
+echo $BASHPID >> /tmp/scriptPID.lis
 
 ofile=/tmp/out.lis
 ofile2=/tmp/out2.lis
@@ -23,9 +24,10 @@ lastxcmdstatus=/tmp/lastxcmdstatus.lis
 # $5 the string to check for in the output
 # $6 unique identifier for this check - use $LINENO
 function xchkcmd {
+  . /tmp/checkStop.sh
   printf "."
-  #echo mapr for the login command, all other commands will simply ignore this
-  echo "mapr" | $1 >$ofile 2>&1
+  #echo /tmp/MaprPasswd for the login command, all other commands will simply ignore this
+  echo /tmp/MaprPasswd | $1 >$ofile 2>&1
   status=$?
   #echo `date` executed command: $1 $2 $3 $4 $5 $6 return status: $status
   #cat $ofile
@@ -55,6 +57,7 @@ function xchkcmd {
       lines=`cat $ofile | wc -l`
       if [ "$3" != "$lines" ] # if we didn't get the number of lines expected
         then
+        ((ucount++))
         echo $1 expected $3 lines of output but got $lines of output, output follows
         cat $ofile
       fi
@@ -107,6 +110,7 @@ sn=/tmp/hscript
 #$1 - the command to be executed, note multiple commands may be executed at once with CR/LF between each command
 #$2 - if passed should exist in execution output
 function xhbasecmd {
+  . /tmp/checkStop.sh
   ((count++))
   echo -e "$1" > $sn
   echo "/usr/bin/hbase shell $sn 2>&1 > $ofile" > $ofile2
@@ -129,7 +133,9 @@ function xhbasecmd {
 # note: configure.sh command does not appear to be available on either admincli or cldb, file a defect for this - see: https://docs.datafabric.hpe.com/62/ReferenceGuide/mapr-clusters.conf.html - defect filed
 # note: command help options for table replica has a section for elastic search, but there is not documentation that references it - see: https://docs.datafabric.hpe.com/62/ReferenceGuide/tablereplica.html - defect filed
 # maprlogin - login before cleanup
-xchkcmd "maprlogin password" EXACT 1
+sh /tmp/maprLogin.sh
+cd /tmp
+cname=`./getDPName.sh`
 
 td=/var/mapr/bttest
 tp=$td/1
@@ -148,24 +154,26 @@ function cleanup {
   xchkcmd "maprcli table delete -path /tmp/weblog" EXPECTED
   xchkcmd "maprcli table delete -path /tmp/testtable" EXPECTED
   xchkcmd "maprcli table delete -path /tmp/a0" EXPECTED
+  xchkcmd "maprcli volume snapshot remove -snapshotname tmpvolsnap -volume mapr.tmp" EXPECTED
+  xchkcmd "maprcli table delete -path /tmp/t1" EXPECTED
   
   xchkcmd "hadoop fs -rmdir $td" EXPECTED
   rm -rf $ofile
   rm -rf $ofile2
   rm -rf $ofile3
   rm -rf $sn
-  # maprlogin logout
 }
 
 cleanup
 
 # cleanup logs us out, so login again
-xchkcmd "maprlogin password" EXACT 1
+sh /tmp/maprLogin.sh
 
 # create a table with data
 # 1 - the table to be created
 # 2 - the number of rows of data to create - takes about 1 min for every 15 rows
 function tableData {
+  . /tmp/checkStop.sh
   cmd="create '$tp', {NAME => 'cf1'}, {NAME => 'cf2'}, {NAME => 'nf1'}"
   xhbasecmd "$cmd"
   rcount=0
@@ -214,11 +222,11 @@ function mt {
   xchkcmd "maprcli table region pack -path $tp -fid all -nthreads 1" EXACT 0
   xchkcmd "maprcli table region pack -path $tp -fid all -nthreads 160" EXACT 0
   xchkcmd "maprcli table region stat -path $tp" EXACT 2
-  xchkcmd "maprcli table region stat -path $tp -json" EXACT 72 
+  xchkcmd "maprcli table region stat -path $tp -json" IGNORE
   xchkcmd "maprcli table replica list -path $tp" EXACT 0
   xchkcmd "maprcli table changelog list -path $tp" EXACT 0
   cmd="maprcli table info -path $tp -json"
-  xchkcmd "$cmd" EXACT 40
+  xchkcmd "$cmd" IGNORE
   verifyOutput "$cmd" "\"autosplit\":true," $LINENO
   verifyOutput "$cmd" "\"regionsizemb\":4096," $LINENO
   verifyOutput "$cmd" "\"bulkload\":false," $LINENO
@@ -227,7 +235,7 @@ function mt {
   verifyOutput "$cmd" "\"metricsinterval\":60," $LINENO
   xchkcmd "maprcli table cf create -path $tp -cfname bttest1" EXACT 0
   cmd="maprcli table cf list -path $tp -cfname bttest1 -json"
-  xchkcmd "$cmd" EXACT 22
+  xchkcmd "$cmd" IGNORE
   verifyOutput "$cmd" "\"maxversions\":1," $LINENO
   verifyOutput "$cmd" "\"minversions\":0," $LINENO
   verifyOutput "$cmd" "\"ttl\":2147483647," $LINENO
@@ -237,7 +245,7 @@ function mt {
   xchkcmd "maprcli table cf edit -path $tp -cfname bttest1 -newcfname bttest2 -minversions 2 -maxversions 3 -ttl 400 -inmemory true -compression lzf" EXACT 0
   xchkcmd "maprcli table cf list -path $tp -cfname bttest1" NEGATIVE
   cmd="maprcli table cf list -path $tp -cfname bttest2 -json"
-  xchkcmd "$cmd" EXACT 22
+  xchkcmd "$cmd" IGNORE
   verifyOutput "$cmd" "\"maxversions\":3," $LINENO
   verifyOutput "$cmd" "\"minversions\":2," $LINENO
   verifyOutput "$cmd" "\"ttl\":400," $LINENO
@@ -245,7 +253,7 @@ function mt {
   verifyOutput "$cmd" "\"compression\":\"lzf\"," $LINENO
   xchkcmd "maprcli table cf edit -path $tp -cfname bttest2 -compression zlib" EXACT 0
   cmd="maprcli table cf list -path $tp -cfname bttest2 -json"
-  xchkcmd "$cmd" EXACT 22
+  xchkcmd "$cmd" IGNORE
   verifyOutput "$cmd" "\"maxversions\":3," $LINENO
   verifyOutput "$cmd" "\"minversions\":2," $LINENO
   verifyOutput "$cmd" "\"ttl\":400," $LINENO
@@ -255,7 +263,7 @@ function mt {
   xchkcmd "maprcli table upstream list -path $tp" EXACT 0
   xchkcmd "maprcli table cf create -path $tp -cfname bttest3 -minversions 1 -maxversions 2 -ttl 300 -inmemory true -compression off" EXACT 0
   cmd="maprcli table cf list -path $tp -cfname bttest3 -json"
-  xchkcmd "$cmd" EXACT 22
+  xchkcmd "$cmd" IGNORE
   verifyOutput "$cmd" "\"maxversions\":2," $LINENO
   verifyOutput "$cmd" "\"minversions\":1," $LINENO
   verifyOutput "$cmd" "\"ttl\":300," $LINENO
@@ -267,14 +275,14 @@ function mt {
 
   xchkcmd "maprcli table create -path $tp2 -copymetafrom $tp -copymetatype cfs,aces,splits,attrs -regionsizemb 500 -autosplit false -bulkload true -audit true -tabletype binary -metricsinterval 10" EXACT 5
   cmd="maprcli table info -path $tp2 -json"
-  xchkcmd "$cmd" EXACT 40
+  xchkcmd "$cmd" IGNORE
   verifyOutput "$cmd" "\"regionsizemb\":4096," $LINENO   #uses default value when autosplit is set to false
   verifyOutput "$cmd" "\"bulkload\":true," $LINENO
   verifyOutput "$cmd" "\"tabletype\":\"binary\"," $LINENO
 
   xchkcmd "maprcli table edit -path $tp2 -regionsizemb 501 -autosplit false -bulkload false -audit true  -metricsinterval 600 -deletettl 300" EXACT 0
   cmd="maprcli table info -path $tp2 -json"
-  xchkcmd "$cmd" EXACT 41
+  xchkcmd "$cmd" IGNORE
   # note regionsizemb should be ignored when autosplit is set to false, value should be 4096 - defect filed
   verifyOutput "$cmd" "\"regionsizemb\":501," $LINENO   #uses default value when autosplit is set to false
   verifyOutput "$cmd" "\"bulkload\":false," $LINENO
@@ -289,7 +297,7 @@ function mt {
   # uncomment next 4 lines when this defect is fixed
   #xchkcmd "maprcli table edit -path $tp2 -indexperm u:mapr,u:metrics" EXACT 0
   #cmd="maprcli table info -path $tp2 -json"
-  #xchkcmd "$cmd" EXACT 41
+  #xchkcmd "$cmd" IGNORE
   #verifyOutput "$cmd" "\"indexperm\":\"u:mapr,u:metrics\"," $LINENO
   xchkcmd "maprcli table delete -path $tp2" EXACT 0
 
@@ -328,9 +336,9 @@ xchkcmd "maprcli node list -columns hostname" IGNORE
 xchkcmd "maprcli cluster gateway local -format dns" EXACT 4
 xchkcmd "maprcli cluster gateway local" EXACT 2
 xchkcmd "maprcli cluster gateway list" EXACT 2
-xchkcmd "maprcli cluster gateway get -dstcluster dataplatform" EXACT 2
-xchkcmd "maprcli cluster gateway delete -dstcluster dataplatform" NEGATIVE
-xchkcmd "maprcli cluster gateway set -dstcluster dataplatform -gateways maprgateway-svc.dataplatform.svc.cluster.local" EXACT 0
+xchkcmd "maprcli cluster gateway get -dstcluster $cname" EXACT 2
+xchkcmd "maprcli cluster gateway delete -dstcluster $cname" EXACT 0
+xchkcmd "maprcli cluster gateway set -dstcluster $cname -gateways maprgateway-svc.$cname.svc.cluster.local" EXACT 0
 xchkcmd "maprcli table replica autosetup -path $tp -replica $tp3" EXACT 0
 # Ignore number of lines returned for next command - depends on how fast replication is
 cmd="maprcli table replica list -path $tp -refreshnow true -json"
@@ -355,9 +363,9 @@ cmd="scan '$tp'"
 cmd=$cmd"\nexit"
 xhbasecmd "$cmd"
 verifyOutput "$cmd" "row6col2" $LINENO
-sleep 30
+sleep 120
 cmd="maprcli table replica list -path $tp -json"
-xchkcmd "$cmd" EXACT 30
+xchkcmd "$cmd" IGNORE
 verifyOutput "$cmd" "copyTableCompletionPercentage\":100" $LINENO
 cmd="\nscan '$tp3'"
 cmd=$cmd"\nexit"
@@ -541,7 +549,7 @@ cmd=$cmd"\nput '$tp2','r4','nf1:value','4'"
 cmd=$cmd"\nexit"
 count=$((count+6))
 xhbasecmd "$cmd"
-sleep 10
+sleep 20
 cmd="maprcli table replica list -path $tp -json"
 xchkcmd "$cmd" EXACT 30
 verifyOutput "$cmd" "copyTableCompletionPercentage\":100" $LINENO
@@ -648,6 +656,24 @@ cmd=$cmd"\nexit"
 count=$((count+6))
 xhbasecmd "$cmd" EXPECTED
 
+cmd="create '/tmp/t1', 'cf1'"
+cmd=$cmd"\nput '/tmp/t1', 'r1', 'cf1:c1', 'v1'"
+cmd=$cmd"\nscan '/tmp/t1'"
+count=$((count+2))
+xhbasecmd "$cmd"
+verifyOutput "$cmd" "column=cf1:c1, timestamp=" $LINENO
+verifyOutput "$cmd" ", value=v1" $LINENO
+xchkcmd "maprcli volume snapshot create -snapshotname tmpvolsnap -volume mapr.tmp" EXACT 0
+cmd="maprcli volume snapshot list"
+xchkcmd "$cmd" IGNORE
+verifyOutput "$cmd" "tmpvolsnap" $LINENO
+cmd="\nscan '/tmp/.snapshot/tmpvolsnap/t1'"
+xhbasecmd "$cmd"
+verifyOutput "$cmd" "column=cf1:c1, timestamp=" $LINENO
+verifyOutput "$cmd" ", value=v1" $LINENO
+xchkcmd "maprcli volume snapshot remove -snapshotname tmpvolsnap -volume mapr.tmp" EXACT 0
+xchkcmd "maprcli table delete -path /tmp/t1" EXACT 0
+
 cleanup
 echo ""
 echo "`date` $count command executions, including $dcount known defect executions and $ucount unexpected failures"
@@ -657,4 +683,4 @@ if [ $ucount -eq 0 ]
 else
   echo "FAIL"
 fi
-exit
+rm -rf /tmp/scriptPID.lis

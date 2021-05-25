@@ -1,4 +1,11 @@
-source conf/drillTestConfig.properties
+echo $BASHPID >> /tmp/scriptPID.lis
 
-cd ${DRILL_TEST_DATA_DIR}/Functional/maprdbbinary/maprdbbinaryfiles
+. /tmp/header.sh
+
+if [ "`pwd`" == "/root/drill-test-framework" ]
+then
+  cd /root/drill-test-framework/framework/resources/Functional/maprdbbinary/maprdbbinaryfiles/
+fi
 ./execScriptOnPod.sh admincli-0 btadmincli.sh
+
+./removePID.sh
