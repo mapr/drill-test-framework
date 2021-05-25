@@ -4,8 +4,11 @@ source conf/drillTestConfig.properties
 
 cd ${DRILL_TEST_DATA_DIR}/Datasources/ldap echo `pwd`
 
-# set up mapr user, and linux users.  ldap users provided by ldap server
+# set up mapr user, ldap users and linux users.
+# ldapusers are needed because file ownership/permissions are
+# set up on the host before copying to the pods.
 ./mapr_setup.sh
+./ldapuser_setup.sh
 ./linuxuser_setup.sh
 
 # set ownership and permission bits on ldap files
