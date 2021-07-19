@@ -1,3 +1,4 @@
+#!/bin/bash
 # $1 - the name of the pod to copy the scripts to
 cname=`./getDPName.sh`
 

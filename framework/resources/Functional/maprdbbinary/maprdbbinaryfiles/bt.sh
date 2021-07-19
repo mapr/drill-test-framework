@@ -1,11 +1,13 @@
+#!/bin/bash
 echo $BASHPID >> /tmp/scriptPID.lis
 
-. /tmp/header.sh
 
-if [ "`pwd`" == "/root/drill-test-framework" ]
+if [ "`pwd`" != "/root" ]
 then
-  cd /root/drill-test-framework/framework/resources/Functional/maprdbbinary/maprdbbinaryfiles/
+  cd framework/resources/Functional/maprdbbinary/maprdbbinaryfiles/
 fi
+. ./header.sh
+./getMaprPass.sh
 ./execScriptOnPod.sh admincli-0 btadmincli.sh
 
 ./removePID.sh

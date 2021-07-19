@@ -1,3 +1,4 @@
+#!/bin/bash
 #output several blank lines to screen for visual seperator
 count=0
 while [ $count -lt 20 ]
