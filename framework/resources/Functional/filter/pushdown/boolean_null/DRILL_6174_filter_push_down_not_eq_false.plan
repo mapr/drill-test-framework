@@ -1,5 +1,6 @@
 Scan
 path=.*/filter/pushdown/DRILL_6174_test_data/d3/0_0_0.parquet
 path=.*/filter/pushdown/DRILL_6174_test_data/d2/0_0_0.parquet
-numFiles=2
-numRowGroups=2
+path=.*/filter/pushdown/DRILL_6174_test_data/d1/0_0_0.parquet
+numFiles=3
+numRowGroups=3
