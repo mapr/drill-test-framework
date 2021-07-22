@@ -1,0 +1,23 @@
+{
+    "testId": "pbs",
+    "type": "group",
+    "description": "Test policy based security",
+    "submit-type": "script",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.sh",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.output",
+            "verification-type": [
+                "regex-multiple-tests"
+            ]
+        }
+    ],
+    "datasources": [
+    ]
+
+}
