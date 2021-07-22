@@ -1,0 +1,5 @@
+Volume with a policy was created successfully
+Dir in volume was created successfully
+File was put to dir successfully
+put: User qa2
+does not have access to maprfs:/v1/test/testUserFile

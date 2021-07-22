@@ -1,0 +1,71 @@
+#Preconfig
+
+# set -x
+
+maprcli volume remove -name v1
+
+sudo -u dev1 maprlogin password -user dev1 <<< admin123
+# sudo -u mapr maprlogin password -user mapr <<< mapr
+sudo -u qa2 maprlogin password -user qa2 <<< admin123
+maprcli config save -values {"cldb.pbs.global.master":"1"}
+maprcli config save -values {"cldb.pbs.access.control.enabled":"1"}
+
+policyName="p1-"$(date +%s)
+
+#Tests
+maprcli security policy create -name $policyName -user dev1:r,a -readdirace u:dev1 -addchildace  u:dev1 -deletechildace  u:dev1 -lookupdirace  u:dev1 -executefileace u:dev1 -writefileace u:dev1 -readfileace u:dev1 -allowtagging   true -accesscontrol Armed
+result=$?
+if [ $result -ne 0 ]; then
+    echo "Failed to create policy"
+    echo "Test 1 failed"
+    echo FAIL PBSPolicyCreated
+else
+    echo "Policy was created successfully"
+    echo "Test 1 passed"
+    echo PASS PBSPolicyCreated
+fi 
+sleep 30
+maprcli volume create  -securitypolicy $policyName  -name v1 -path /v1 -enforcementmode PolicyAceOnly
+result=$?
+if [ $result -ne 0 ]; then
+    echo "Failed to create volume with a policy"
+    echo "Test 2 failed"
+    echo FAIL PBSVolumeCreated
+else
+    echo "Volume with a policy was created successfully"
+    echo "Test 2 passed"
+    echo PASS PBSVolumeCreated
+fi 
+sudo -u dev1 hadoop fs -mkdir /v1/test
+read result < <(sudo -u dev1 echo $?)
+if [ $result -ne 0 ]; then
+    echo "Failed to create dir in volume"
+    echo "Test 3 failed"
+    echo FAIL PBSDirInVolumeCreated
+else
+    echo "Dir in volume was created successfully"
+    echo "Test 3 passed"
+    echo PASS PBSDirInVolumeCreated
+fi 
+sudo -u dev1 hadoop fs -put /opt/mapr/conf/mapr-clusters.conf /v1/test
+read result < <(sudo -u dev1 echo $?)
+if [ $result -ne 0 ]; then
+    echo "Failed to put file to dir"
+    echo "Test 4 failed"
+    echo FAIL PBSPutFileInDir
+else
+    echo "File was put to dir successfully"
+    echo "Test 4 passed"
+    echo PASS PBSPutFileInDir
+fi 
+sudo -u qa2 hadoop fs -put /opt/mapr/conf/mapr-clusters.conf /v1/test/testUserFile
+read result < <(sudo -u qa2 echo $?)
+if [ $result -ne 0 ]; then
+    echo "Policy rule works fine"
+    echo "Test 5 passed"
+    echo PASS PBSQA2CAnnotPutFileInDir
+else
+    echo "Policy rule doesn't work"
+    echo "Test 5 failed"
+    echo FAIL PBSQA2CAnnotPutFileInDir
+fi
