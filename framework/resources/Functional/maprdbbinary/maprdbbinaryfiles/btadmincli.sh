@@ -25,7 +25,7 @@ lastxcmdstatus=/tmp/lastxcmdstatus.lis
 # $6 unique identifier for this check - use $LINENO
 function xchkcmd {
   . /tmp/checkStop.sh
-  printf "."
+  # printf "."
   #echo /tmp/MaprPasswd for the login command, all other commands will simply ignore this
   echo /tmp/MaprPasswd | $1 >$ofile 2>&1
   status=$?
@@ -93,6 +93,7 @@ function xchkcmd {
 #1 - the command that was previously executed
 #2 - the string to check for
 #3 - the line number where this check is made: $LINENO
+#4 - the test name
 function verifyOutput {
   grep "$2" $ofile 2>&1 >> /dev/null
   if [ $? -ne 0 ]
@@ -102,6 +103,9 @@ function verifyOutput {
     echo command execution output follows:
     cat $ofile
    ((ucount++))
+    echo FAIL $4
+  else
+    echo PASS $4
   fi 
 }
 
@@ -125,8 +129,8 @@ function xhbasecmd {
    ((ucount++))
    #echo following hbase commands were executed: $1, output had errors, they follow:
    cat $ofile
-  else
-    printf "."
+  # else
+    # printf "."
   fi
 }
 
@@ -203,7 +207,7 @@ function tableData {
   done
   cmd="\nscan '$ltp'"
   xhbasecmd "$cmd"
-  verifyOutput "$cmd" "$rcount row" $LINENO
+  verifyOutput "$cmd" "$rcount row" $LINENO BinaryRCount1
 }
 
 xchkcmd "hadoop fs -mkdir $td" EXPECTED
@@ -227,48 +231,48 @@ function mt {
   xchkcmd "maprcli table changelog list -path $tp" EXACT 0
   cmd="maprcli table info -path $tp -json"
   xchkcmd "$cmd" IGNORE
-  verifyOutput "$cmd" "\"autosplit\":true," $LINENO
-  verifyOutput "$cmd" "\"regionsizemb\":4096," $LINENO
-  verifyOutput "$cmd" "\"bulkload\":false," $LINENO
-  verifyOutput "$cmd" "\"audit\":false," $LINENO
-  verifyOutput "$cmd" "\"tabletype\":\"binary\"," $LINENO
-  verifyOutput "$cmd" "\"metricsinterval\":60," $LINENO
+  verifyOutput "$cmd" "\"autosplit\":true," $LINENO BinaryAutoSplit2
+  verifyOutput "$cmd" "\"regionsizemb\":4096," $LINENO BinaryRegion3
+  verifyOutput "$cmd" "\"bulkload\":false," $LINENO BinaryBulk4
+  verifyOutput "$cmd" "\"audit\":false," $LINENO BinaryAudit5
+  verifyOutput "$cmd" "\"tabletype\":\"binary\"," $LINENO BinaryTableType6
+  verifyOutput "$cmd" "\"metricsinterval\":60," $LINENO BinaryMetrics7
   xchkcmd "maprcli table cf create -path $tp -cfname bttest1" EXACT 0
   cmd="maprcli table cf list -path $tp -cfname bttest1 -json"
   xchkcmd "$cmd" IGNORE
-  verifyOutput "$cmd" "\"maxversions\":1," $LINENO
-  verifyOutput "$cmd" "\"minversions\":0," $LINENO
-  verifyOutput "$cmd" "\"ttl\":2147483647," $LINENO
-  verifyOutput "$cmd" "\"inmemory\":false," $LINENO
-  verifyOutput "$cmd" "\"compression\":\"lz4\"," $LINENO
+  verifyOutput "$cmd" "\"maxversions\":1," $LINENO BinaryMaxVersion8
+  verifyOutput "$cmd" "\"minversions\":0," $LINENO BinaryMinVersion9
+  verifyOutput "$cmd" "\"ttl\":2147483647," $LINENO BinaryTTL10
+  verifyOutput "$cmd" "\"inmemory\":false," $LINENO BinaryInMemory11
+  verifyOutput "$cmd" "\"compression\":\"lz4\"," $LINENO BinaryCompression12
   xchkcmd "maprcli table cf colperm get -path $tp -cfname bttest1 -json" EXACT 9
   xchkcmd "maprcli table cf edit -path $tp -cfname bttest1 -newcfname bttest2 -minversions 2 -maxversions 3 -ttl 400 -inmemory true -compression lzf" EXACT 0
   xchkcmd "maprcli table cf list -path $tp -cfname bttest1" NEGATIVE
   cmd="maprcli table cf list -path $tp -cfname bttest2 -json"
   xchkcmd "$cmd" IGNORE
-  verifyOutput "$cmd" "\"maxversions\":3," $LINENO
-  verifyOutput "$cmd" "\"minversions\":2," $LINENO
-  verifyOutput "$cmd" "\"ttl\":400," $LINENO
-  verifyOutput "$cmd" "\"inmemory\":true," $LINENO
-  verifyOutput "$cmd" "\"compression\":\"lzf\"," $LINENO
+  verifyOutput "$cmd" "\"maxversions\":3," $LINENO BinaryMaxVersion13
+  verifyOutput "$cmd" "\"minversions\":2," $LINENO BinaryMinVersion14
+  verifyOutput "$cmd" "\"ttl\":400," $LINENO BinaryTTL15
+  verifyOutput "$cmd" "\"inmemory\":true," $LINENO BinaryInMemory16
+  verifyOutput "$cmd" "\"compression\":\"lzf\"," $LINENO BinaryCompression17
   xchkcmd "maprcli table cf edit -path $tp -cfname bttest2 -compression zlib" EXACT 0
   cmd="maprcli table cf list -path $tp -cfname bttest2 -json"
   xchkcmd "$cmd" IGNORE
-  verifyOutput "$cmd" "\"maxversions\":3," $LINENO
-  verifyOutput "$cmd" "\"minversions\":2," $LINENO
-  verifyOutput "$cmd" "\"ttl\":400," $LINENO
-  verifyOutput "$cmd" "\"inmemory\":true," $LINENO
-  verifyOutput "$cmd" "\"compression\":\"zlib\"," $LINENO
+  verifyOutput "$cmd" "\"maxversions\":3," $LINENO BinaryMaxVersion18
+  verifyOutput "$cmd" "\"minversions\":2," $LINENO BinaryMinVersion19
+  verifyOutput "$cmd" "\"ttl\":400," $LINENO BinaryTTL20
+  verifyOutput "$cmd" "\"inmemory\":true," $LINENO BinaryInMemory21
+  verifyOutput "$cmd" "\"compression\":\"zlib\"," $LINENO BinaryCompression22
   xchkcmd "maprcli table listrecent" IGNORE
   xchkcmd "maprcli table upstream list -path $tp" EXACT 0
   xchkcmd "maprcli table cf create -path $tp -cfname bttest3 -minversions 1 -maxversions 2 -ttl 300 -inmemory true -compression off" EXACT 0
   cmd="maprcli table cf list -path $tp -cfname bttest3 -json"
   xchkcmd "$cmd" IGNORE
-  verifyOutput "$cmd" "\"maxversions\":2," $LINENO
-  verifyOutput "$cmd" "\"minversions\":1," $LINENO
-  verifyOutput "$cmd" "\"ttl\":300," $LINENO
-  verifyOutput "$cmd" "\"inmemory\":true," $LINENO
-  verifyOutput "$cmd" "\"compression\":\"off\"," $LINENO
+  verifyOutput "$cmd" "\"maxversions\":2," $LINENO BinaryMaxVersion23
+  verifyOutput "$cmd" "\"minversions\":1," $LINENO BinaryMinVersion24
+  verifyOutput "$cmd" "\"ttl\":300," $LINENO BinaryTTL25
+  verifyOutput "$cmd" "\"inmemory\":true," $LINENO BinaryInMemory26
+  verifyOutput "$cmd" "\"compression\":\"off\"," $LINENO BinaryCompression27
 
   # indexes not supported on binary tables
   xchkcmd "maprcli table index list -path $tp" NEGATIVE
@@ -276,18 +280,18 @@ function mt {
   xchkcmd "maprcli table create -path $tp2 -copymetafrom $tp -copymetatype cfs,aces,splits,attrs -regionsizemb 500 -autosplit false -bulkload true -audit true -tabletype binary -metricsinterval 10" EXACT 5
   cmd="maprcli table info -path $tp2 -json"
   xchkcmd "$cmd" IGNORE
-  verifyOutput "$cmd" "\"regionsizemb\":4096," $LINENO   #uses default value when autosplit is set to false
-  verifyOutput "$cmd" "\"bulkload\":true," $LINENO
-  verifyOutput "$cmd" "\"tabletype\":\"binary\"," $LINENO
+  verifyOutput "$cmd" "\"regionsizemb\":4096," $LINENO BinaryRegion28   #uses default value when autosplit is set to false
+  verifyOutput "$cmd" "\"bulkload\":true," $LINENO BinaryBulkload29
+  verifyOutput "$cmd" "\"tabletype\":\"binary\"," $LINENO BinaryTableType30
 
   xchkcmd "maprcli table edit -path $tp2 -regionsizemb 501 -autosplit false -bulkload false -audit true  -metricsinterval 600 -deletettl 300" EXACT 0
   cmd="maprcli table info -path $tp2 -json"
   xchkcmd "$cmd" IGNORE
   # note regionsizemb should be ignored when autosplit is set to false, value should be 4096 - defect filed
-  verifyOutput "$cmd" "\"regionsizemb\":501," $LINENO   #uses default value when autosplit is set to false
-  verifyOutput "$cmd" "\"bulkload\":false," $LINENO
-  verifyOutput "$cmd" "\"tabletype\":\"binary\"," $LINENO
-  verifyOutput "$cmd" "\"deletettl\":300," $LINENO
+  verifyOutput "$cmd" "\"regionsizemb\":501," $LINENO BinaryRegion31  #uses default value when autosplit is set to false
+  verifyOutput "$cmd" "\"bulkload\":false," $LINENO BinaryBulkload32
+  verifyOutput "$cmd" "\"tabletype\":\"binary\"," $LINENO BinaryTableType33
+  verifyOutput "$cmd" "\"deletettl\":300," $LINENO BinaryDeleteTTL34
 
   # note table edit command allows changing value of indexperm but it is not displayed via table info command - log defect
   # admin not a valid username so next command returns an error
@@ -298,7 +302,7 @@ function mt {
   #xchkcmd "maprcli table edit -path $tp2 -indexperm u:mapr,u:metrics" EXACT 0
   #cmd="maprcli table info -path $tp2 -json"
   #xchkcmd "$cmd" IGNORE
-  #verifyOutput "$cmd" "\"indexperm\":\"u:mapr,u:metrics\"," $LINENO
+  #verifyOutput "$cmd" "\"indexperm\":\"u:mapr,u:metrics\"," $LINENO BinaryIndex35
   xchkcmd "maprcli table delete -path $tp2" EXACT 0
 
   xchkcmd "maprcli table cf delete -path $tp -cfname bttest2" EXACT 0
@@ -343,11 +347,11 @@ xchkcmd "maprcli table replica autosetup -path $tp -replica $tp3" EXACT 0
 # Ignore number of lines returned for next command - depends on how fast replication is
 cmd="maprcli table replica list -path $tp -refreshnow true -json"
 xchkcmd "$cmd" IGNORE
-verifyOutput "$cmd" "$tp3" $LINENO
-verifyOutput "$cmd" "\"synchronous\":false" $LINENO
-verifyOutput "$cmd" "\"throttle\":false" $LINENO
-verifyOutput "$cmd" "\"networkencryption\":false" $LINENO
-verifyOutput "$cmd" "\"networkcompression\":\"lz4\"" $LINENO
+verifyOutput "$cmd" "$tp3" $LINENO BinaryTP336
+verifyOutput "$cmd" "\"synchronous\":false" $LINENO BinarySync37
+verifyOutput "$cmd" "\"throttle\":false" $LINENO BinaryThrottle38
+verifyOutput "$cmd" "\"networkencryption\":false" $LINENO BinaryEncrytion39
+verifyOutput "$cmd" "\"networkcompression\":\"lz4\"" $LINENO BinaryCompression40
 # sleep to allow replication to complete
 sleep 2
 cmd="\nput '$tp','r5','cf1:value','row5col1'"
@@ -362,15 +366,15 @@ xhbasecmd "$cmd"
 cmd="scan '$tp'"
 cmd=$cmd"\nexit"
 xhbasecmd "$cmd"
-verifyOutput "$cmd" "row6col2" $LINENO
+verifyOutput "$cmd" "row6col2" $LINENO BinaryRow6Col241
 sleep 120
 cmd="maprcli table replica list -path $tp -json"
 xchkcmd "$cmd" IGNORE
-verifyOutput "$cmd" "copyTableCompletionPercentage\":100" $LINENO
+verifyOutput "$cmd" "copyTableCompletionPercentage\":100" $LINENO BinaryPercentage42
 cmd="\nscan '$tp3'"
 cmd=$cmd"\nexit"
 xhbasecmd "$cmd"
-verifyOutput "$cmd" "row6col2" $LINENO
+verifyOutput "$cmd" "row6col2" $LINENO BinaryRow6Col243
 
 xchkcmd "maprcli table replica remove -path $tp -replica $tp3" EXACT 0
 #table is not deleted with the replica remove
@@ -384,12 +388,12 @@ xchkcmd "maprcli table delete -path $tp3" EXACT 0
 #xchkcmd "maprcli table replica autosetup -path $tp -replica $tp4 -columns cf1:value -synchronous true -multimaster true -throttle true -networkencryption true -networkcompression zlib -directcopy false" EXACT 5
 #cmd="maprcli table replica list -path $tp -refreshnow true -json"
 #xchkcmd "$cmd" EXACT 33
-#verifyOutput "$cmd" "$tp4" $LINENO
-#verifyOutput "$cmd" "value" $LINENO
-#verifyOutput "$cmd" "\"synchronous\":true" $LINENO
-#verifyOutput "$cmd" "\"throttle\":true" $LINENO
-#verifyOutput "$cmd" "\"networkencryption\":true" $LINENO
-#verifyOutput "$cmd" "\"networkcompression\":\"zlib\"" $LINENO
+#verifyOutput "$cmd" "$tp4" $LINENO BinaryTP444
+#verifyOutput "$cmd" "value" $LINENO BinaryValue45
+#verifyOutput "$cmd" "\"synchronous\":true" $LINENO BinarySync46
+#verifyOutput "$cmd" "\"throttle\":true" $LINENO BinaryThrottle47
+#verifyOutput "$cmd" "\"networkencryption\":true" $LINENO BinaryEncryption48
+#verifyOutput "$cmd" "\"networkcompression\":\"zlib\"" $LINENO BinaryCompression49
 #xchkcmd "maprcli table replica remove -path $tp -replica $tp4" EXACT 0
 #xchkcmd "maprcli table delete -path $tp4" EXACT 0
 #xchkcmd "maprcli table create -path $tp4" EXACT 0
@@ -406,26 +410,26 @@ xchkcmd "maprcli table changelog list -path $tp" EXACT 0
 cmd="maprcli table changelog list -path $tp -json"
 xchkcmd "$cmd" EXACT 9
 # note following are commented out until changelog add is working
-#verifyOutput "$cmd" "\"useexistingtopic\":false" $LINENO
-#verifyOutput "$cmd" "\"propagateexistingdata\":true" $LINENO
-#verifyOutput "$cmd" "\"paused\":false" $LINENO
-#verifyOutput "$cmd" "\"throttle\":false" $LINENO
-#verifyOutput "$cmd" "\"synchronous\":false" $LINENO
-#verifyOutput "$cmd" "\"networkencryption\":false" $LINENO
-#verifyOutput "$cmd" "\"networkcompression\":\"lz4\"" $LINENO
+#verifyOutput "$cmd" "\"useexistingtopic\":false" $LINENO BinaryTopic50
+#verifyOutput "$cmd" "\"propagateexistingdata\":true" $LINENO BinaryData51
+#verifyOutput "$cmd" "\"paused\":false" $LINENO BinaryPaused52
+#verifyOutput "$cmd" "\"throttle\":false" $LINENO BinaryThrottle53
+#verifyOutput "$cmd" "\"synchronous\":false" $LINENO BinarySync54
+#verifyOutput "$cmd" "\"networkencryption\":false" $LINENO BinaryEncryption55
+#verifyOutput "$cmd" "\"networkcompression\":\"lz4\"" $LINENO BinaryCompression56
 #xchkcmd "maprcli table changelog remove -path $tp -changelog $st" EXACT 0
 # note next commands are commented out due to defects above
 #xchkcmd "maprcli table changelog add -path $tp -changelog $st:tn -columns cf1 -propagateexistingdata false -paused true -throttle true -synchronous true -networkencryption true -networkcompression off" EXACT 0
 #xchkcmd "$cmd" EXACT 0
-#verifyOutput "$cmd" "$cl" $LINENO
-#verifyOutput "$cmd" "cf1" $LINENO
-#verifyOutput "$cmd" "\"useexistingtopic\":false" $LINENO
-#verifyOutput "$cmd" "\"propagateexistingdata\":false" $LINENO
-#verifyOutput "$cmd" "\"paused\":true" $LINENO
-#verifyOutput "$cmd" "\"throttle\":true" $LINENO
-#verifyOutput "$cmd" "\"synchronous\":true" $LINENO
-#verifyOutput "$cmd" "\"networkencryption\":true" $LINENO
-#verifyOutput "$cmd" "\"networkcompression\":\"off\"" $LINENO
+#verifyOutput "$cmd" "$cl" $LINENO BinaryChangeLog57
+#verifyOutput "$cmd" "cf1" $LINENO BinaryCF58
+#verifyOutput "$cmd" "\"useexistingtopic\":false" $LINENO BinaryTopic59
+#verifyOutput "$cmd" "\"propagateexistingdata\":false" $LINENO BinaryData60
+#verifyOutput "$cmd" "\"paused\":true" $LINENO BinaryPaused61
+#verifyOutput "$cmd" "\"throttle\":true" $LINENO BinaryThrottle62
+#verifyOutput "$cmd" "\"synchronous\":true" $LINENO BinarySync63
+#verifyOutput "$cmd" "\"networkencryption\":true" $LINENO BinaryEncyption64
+#verifyOutput "$cmd" "\"networkcompression\":\"off\"" $LINENO BinaryCompression65
 #xchkcmd "maprcli table changelog remove -path $tp -changelog $cl" EXACT 0
 xchkcmd "maprcli stream delete -path $st" EXACT 0
 cmd="\nscan '$tp'"
@@ -438,9 +442,9 @@ cmd=$cmd"\ndrop '$tp'"
 cmd=$cmd"\nexit"
 count=$((count+6))
 xhbasecmd "$cmd"
-verifyOutput "$cmd" "row6col2" $LINENO
-verifyOutput "$cmd" "does exist" $LINENO
-verifyOutput "$cmd" " r6 column=nf1:value, timestamp=" $LINENO
+verifyOutput "$cmd" "row6col2" $LINENO BinaryRow6Col266
+verifyOutput "$cmd" "does exist" $LINENO BinaryExist67
+verifyOutput "$cmd" " r6 column=nf1:value, timestamp=" $LINENO BinaryValue68
 
 #note defect filed for process and status commands - status command is not supported, process command is in neither the supported or unsupported list - if commands are not supported they should not be in the usage message - see: https://docs.datafabric.hpe.com/62/ReferenceGuide/HBaseShellforMapR-DB.html
 #cmd="\nprocesslist"
@@ -460,8 +464,8 @@ cmd="\nwhoami"
 cmd=$cmd"\nexit"
 count=$((count+1))
 xhbasecmd "$cmd"
-verifyOutput "$cmd" "mapr (auth:CUSTOM)" $LINENO
-verifyOutput "$cmd" "    groups: mapr, root" $LINENO
+verifyOutput "$cmd" "mapr (auth:CUSTOM)" $LINENO BinaryMapr69
+verifyOutput "$cmd" "    groups: mapr, root" $LINENO BinaryGroups70
 
 #cmd="create '$tp'"
 #cmd=$cmd"\nexit"
@@ -486,16 +490,16 @@ verifyOutput "$cmd" "    groups: mapr, root" $LINENO
 #sleep 30
 #cmd="maprcli table replica list -path $tp -refreshnow true -json"
 #xchkcmd "$cmd" IGNORE
-#verifyOutput "$cmd" "jody" $LINENO
+#verifyOutput "$cmd" "jody" $LINENO BinaryJody71
 #cmd="\nscan '$tp'"
 #cmd=$cmd"\nexit"
 #xhbasecmd "$cmd"
-#verifyOutput "$cmd" "jody" $LINENO
+#verifyOutput "$cmd" "jody" $LINENO BinaryJody72
 #cmd="\nscan '$tp3'"
 #cmd=$cmd"\nexit"
 #xhbasecmd "$cmd"
 ## note if this is working should get 2 rows, maybe 6 rows of output, comment out till working
-#verifyOutput "$cmd" "jody" $LINENO
+#verifyOutput "$cmd" "jody" $LINENO BinaryJody73
 #xchkcmd "maprcli table replica remove -path $tp -replica $tp3" EXACT 0
 #xchkcmd "maprcli table delete -path $tp" EXACT 0
 
@@ -507,21 +511,21 @@ verifyOutput "$cmd" "    groups: mapr, root" $LINENO
 #cmd="\nscan '$tp3'"
 #cmd=$cmd"\nexit"
 #xhbasecmd "$cmd"
-#verifyOutput "$cmd" "row2col2" $LINENO
+#verifyOutput "$cmd" "row2col2" $LINENO BinaryRow2Col274
 #xchkcmd "maprcli table delete -path $tp3" EXACT 0
  
 #xchkcmd "hbase com.mapr.fs.hbase.tools.mapreduce.CopyTable -src $tp -dst $tp3 -mapreduce false -columns cf2 -maxversions 1 -starttime 0 -endtime 9423226300000 -bulkload false -numthreads 1" EXACT 2
 #cmd="\nscan '$tp3'"
 #cmd=$cmd"\nexit"
 #xhbasecmd "$cmd"
-#verifyOutput "$cmd" "row2col2" $LINENO
+#verifyOutput "$cmd" "row2col2" $LINENO BinaryRow2Col275
 #xchkcmd "maprcli table delete -path $tp3" EXACT 0
 
 #xchkcmd "hbase com.mapr.fs.hbase.tools.mapreduce.CopyTable -src $tp -dst $tp3 -mapreduce false -numthreads 9999 -bulkload false" EXACT 2
 #cmd="\nscan '$tp3'"
 #cmd=$cmd"\nexit"
 #xhbasecmd "$cmd"
-#verifyOutput "$cmd" "row2col2" $LINENO
+#verifyOutput "$cmd" "row2col2" $LINENO BinaryRow2Col276
 #xchkcmd "maprcli table delete -path $tp3" EXACT 0
 #xchkcmd "maprcli table delete -path $tp" EXACT 0
 #tableData $tp 10
@@ -552,15 +556,15 @@ xhbasecmd "$cmd"
 sleep 20
 cmd="maprcli table replica list -path $tp -json"
 xchkcmd "$cmd" EXACT 30
-verifyOutput "$cmd" "copyTableCompletionPercentage\":100" $LINENO
+verifyOutput "$cmd" "copyTableCompletionPercentage\":100" $LINENO BinaryPercentage77
 cmd="\nscan '$tp'"
 cmd=$cmd"\nexit"
 xhbasecmd "$cmd"
-verifyOutput "$cmd" "row4col2" $LINENO
+verifyOutput "$cmd" "row4col2" $LINENO BinaryRow4Col278
 cmd="\nscan '$tp2'"
 cmd=$cmd"\nexit"
 xhbasecmd "$cmd"
-verifyOutput "$cmd" "row2col2" $LINENO
+verifyOutput "$cmd" "row2col2" $LINENO BinaryRow2Col279
 xchkcmd "maprcli table replica remove -path $tp -replica $tp2" EXACT 0
 xchkcmd "maprcli table delete -path $tp" EXACT 0
 xchkcmd "maprcli table delete -path $tp2" EXACT 0
@@ -577,10 +581,10 @@ cmd=$cmd"\ndrop '/tmp/weblog'"
 cmd=$cmd"\nexit"
 count=$((count+7))
 xhbasecmd "$cmd"
-verifyOutput "$cmd" "column=stats:daily, timestamp=" $LINENO
-verifyOutput "$cmd" "column=stats:weekly, timestamp=" $LINENO
-verifyOutput "$cmd" ", value=test-daily-value" $LINENO
-verifyOutput "$cmd" "COLUMN+CELL" $LINENO
+verifyOutput "$cmd" "column=stats:daily, timestamp=" $LINENO BinaryDaily80
+verifyOutput "$cmd" "column=stats:weekly, timestamp=" $LINENO BinaryWeekly81
+verifyOutput "$cmd" ", value=test-daily-value" $LINENO BinaryValue82
+verifyOutput "$cmd" "COLUMN+CELL" $LINENO BinaryCell83
 
 maprcli table delete -path /tmp/a0 2>&1 >> /dev/null
 cmd="create '/tmp/a0','f1', BULKLOAD => 'true'"
@@ -601,12 +605,12 @@ cmd=$cmd"\nlist_perm '$tp'"
 cmd=$cmd"\nexit"
 count=$((count+7))
 xhbasecmd "$cmd"
-verifyOutput "$cmd" "defaultreadperm               u:mapr" $LINENO
-verifyOutput "$cmd" "cf1                compressionperm               u:mapr" $LINENO
-verifyOutput "$cmd" "cf1                writeperm                     u:mapr" $LINENO
-verifyOutput "$cmd" "defaultreadperm               u:root | u:mapr" $LINENO
-verifyOutput "$cmd" "cf1                compressionperm               u:root | u:mapr" $LINENO
-verifyOutput "$cmd" "cf1:c1             writeperm                     u:root | u:mapr" $LINENO
+verifyOutput "$cmd" "defaultreadperm               u:mapr" $LINENO BinaryReadPerm84
+verifyOutput "$cmd" "cf1                compressionperm               u:mapr" $LINENO BinaryCompressionPerm85
+verifyOutput "$cmd" "cf1                writeperm                     u:mapr" $LINENO BinaryWritePerm86
+verifyOutput "$cmd" "defaultreadperm               u:root | u:mapr" $LINENO BinaryReadPerm87
+verifyOutput "$cmd" "cf1                compressionperm               u:root | u:mapr" $LINENO BinaryCompressionPerm88
+verifyOutput "$cmd" "cf1:c1             writeperm                     u:root | u:mapr" $LINENO BinaryWritePerm89
 maprcli table delete -path $tp 2>&1 >> /dev/null
 
 echo "create '/tmp/testtable', 'cf'" > $sn
@@ -623,7 +627,7 @@ echo "exit" >> $sn
 cmd="/usr/bin/hbase shell $sn"
 count=$((count+85))
 xchkcmd "$cmd" IGNORE
-verifyOutput "$cmd" ", value=password-20" $LINENO
+verifyOutput "$cmd" ", value=password-20" $LINENO BinaryPassword90
 rm -rf $sn
 
 echo "create '/tmp/a0','f1', {SPLITS => ['10', '20', '30']}" > $sn
@@ -661,16 +665,16 @@ cmd=$cmd"\nput '/tmp/t1', 'r1', 'cf1:c1', 'v1'"
 cmd=$cmd"\nscan '/tmp/t1'"
 count=$((count+2))
 xhbasecmd "$cmd"
-verifyOutput "$cmd" "column=cf1:c1, timestamp=" $LINENO
-verifyOutput "$cmd" ", value=v1" $LINENO
+verifyOutput "$cmd" "column=cf1:c1, timestamp=" $LINENO BinaryTimestamp91
+verifyOutput "$cmd" ", value=v1" $LINENO BinaryValueV192
 xchkcmd "maprcli volume snapshot create -snapshotname tmpvolsnap -volume mapr.tmp" EXACT 0
 cmd="maprcli volume snapshot list"
 xchkcmd "$cmd" IGNORE
-verifyOutput "$cmd" "tmpvolsnap" $LINENO
+verifyOutput "$cmd" "tmpvolsnap" $LINENO BinarySnap93
 cmd="\nscan '/tmp/.snapshot/tmpvolsnap/t1'"
 xhbasecmd "$cmd"
-verifyOutput "$cmd" "column=cf1:c1, timestamp=" $LINENO
-verifyOutput "$cmd" ", value=v1" $LINENO
+verifyOutput "$cmd" "column=cf1:c1, timestamp=" $LINENO BinaryTimestamp94
+verifyOutput "$cmd" ", value=v1" $LINENO BinaryValueV195
 xchkcmd "maprcli volume snapshot remove -snapshotname tmpvolsnap -volume mapr.tmp" EXACT 0
 xchkcmd "maprcli table delete -path /tmp/t1" EXACT 0
 
@@ -679,8 +683,8 @@ echo ""
 echo "`date` $count command executions, including $dcount known defect executions and $ucount unexpected failures"
 if [ $ucount -eq 0 ]
   then
-  echo "PASS"
+  echo "PASSED"
 else
-  echo "FAIL"
+  echo "FAILED"
 fi
 rm -rf /tmp/scriptPID.lis
