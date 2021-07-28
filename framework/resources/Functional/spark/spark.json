@@ -1,0 +1,21 @@
+{
+    "testId": "spark",
+    "type": "group",
+    "description": "Test spark",
+    "submit-type": "script",
+    "categories": [
+        "functional"
+    ],
+    "matrices": [
+        {
+            "query-file": ".*.yaml",
+            "schema": "dfs.drillTestDir",
+            "output-format": "tsv",
+            "expected-file": ".*.output",
+            "verification-type": [
+                "regex"
+            ]
+        }
+    ]
+
+}
