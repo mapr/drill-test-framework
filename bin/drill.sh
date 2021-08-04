@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+
+set -e
+
+#######################################################################
+# Globals definition
+#######################################################################
+export MAPR_MAVEN_REPO=http://repository.mapr.com/maven
+#######################################################################
+# Functions definition
+#######################################################################
+
+
+function print_usage() {
+    cat <<EOM
+Usage: $(basename $0) [-b|--build] [-r|--run] [-d|--debug] [-t|--test] [--download] [-s| --sanity] [-h|--help]
+Options:
+    --build     If specified, all required packages for tests execution will be built.
+    --download  If specified, datasources will be downloaded before building
+    --run       If specified, all required packages for tests execution will be built.
+    --debug     Enable remote debug for tests on port 5005 (not for drill jobs)
+    --test      Specifies tests, which will be run. Here, 'Functional/aggregates,Functional/joins' are directories
+                  inside [framework/resources/Functional](framework/resources/Functional).
+                  All directories within this parent directory are included
+    --sanity    If specified,  tests will be executed.
+    --help      Prints usage information.
+Usage examples:
+'./drill.sh --run'                                    Run all tests drill. Tests should be built before.
+'./drill.sh --build'                                  Build all tests without running them.
+'./drill.sh --build --run'                            Build and run all tests drill.
+'./drill.sh --run --sanity'                           run sanity tests drill.
+'./drill.sh --run --test Functional/aggregates'       Run only 'Functional/aggregates'. Tests should be built before.
+EOM
+}
+
+#######################################################################
+# Parse options
+#######################################################################
+
+buildTests=false
+download=false
+runTests=false
+debugEnable=false
+sanity=false
+test=""
+test_profile="Functional/*"
+
+OPTS=`getopt -o hbrdfqlst: --long help,build,download,run,debug,sanity,test: -n 'drill.sh' -- "$@"`
+eval set -- "${OPTS}"
+
+while true ; do
+    case "$1" in
+        -h|--help)  print_usage ; exit 0 ;;
+        -b|--build) buildTests=true ; shift ;;
+        --download) download=true ; shift ;;
+        -r|--run)   runTests=true ; shift ;;
+        -d|--debug) debugEnable=true ; shift ;;
+        -s|--sanity) sanity=true ; shift ;;
+        -t|--test)
+            case "$2" in
+                "") shift 2 ;;
+                *) test=$2 ; shift 2 ;;
+            esac ;;
+        --) shift ; break ;;
+
+        *) break ;;
+    esac
+done
+
+if [[ "$buildTests" = false ]] && [[ "$runTests" == false ]]; then
+  echo "At least one of the options '--build' or '--run' must be specified"
+  print_usage
+  exit 1
+fi
+
+export MAVEN_OPTS="-Xmx1600m"
+
+if [ "$buildTests" = true ]; then
+    echo "Building drill..."
+    ./bin/build_framework
+fi
+
+if [[ "$buildTests" = true ]] && [[ "$download" = true ]]; then
+    echo "Download and building drill..."
+    ./bin/build_framework -Pdownload
+fi
+
+if [ "$debugEnable" = true ]; then
+    extra_profile=" -Dmaven.surefire.debug"
+fi
+
+if [[ $test != "" ]]; then
+    test_profile="$test"
+fi
+
+if [ "$sanity" = true ]; then
+    ./bin/run_jdbc_sanity_tests
+    exit $?;
+fi
+
+if [ "$runTests" = true ]; then
+    ./bin/run_tests -s $test_profile $extra_profile
+fi

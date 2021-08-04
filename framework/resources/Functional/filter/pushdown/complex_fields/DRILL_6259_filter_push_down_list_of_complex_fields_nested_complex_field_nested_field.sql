@@ -1,1 +1,1 @@
-select * from `filter/pushdown/DRILL_6259_test_data` t where t.list_of_complex_fields[2].nested_complex_field.nested_field > 200;
+select * from `filter/pushdown/DRILL_6259_test_data` t where t.list_of_complex_fields[2].nested_complex_field.nested_field BETWEEN 200 AND 300;
