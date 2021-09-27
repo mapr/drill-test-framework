@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source conf/drillTestConfig.properties
 
 if [ -z "$PASSWORD" ]

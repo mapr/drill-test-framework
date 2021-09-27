@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source conf/drillTestConfig.properties
 
 hadoop fs -mkdir /drill/testdata/ctas_auto_partition

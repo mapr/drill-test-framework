@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source conf/drillTestConfig.properties
 
 hadoop fs -rm -r /drill/testdata/subqueries/optional_type_v.view.drill
