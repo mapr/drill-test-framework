@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source conf/drillTestConfig.properties
 
 ${DRILL_TEST_DATA_DIR}/Datasources/metadata_caching/delete_cache.sh "/drill/testdata/$1"
