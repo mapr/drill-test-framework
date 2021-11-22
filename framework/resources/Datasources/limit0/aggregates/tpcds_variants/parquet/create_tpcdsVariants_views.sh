@@ -1,10 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 source conf/drillTestConfig.properties
 
 set -x
 set -e
 
-if $SSL_ENABLED
+if [ "$AUTH_MECHANISM" == "MAPRSASL" ]
+then
+  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.tpcds_sf1_parquet;drillbit=${DRILL_STORAGE_PLUGIN_SERVER};auth=maprsasl"  --run=${DRILL_TEST_DATA_DIR}/Datasources/limit0/aggregates/tpcds_variants/parquet/create_tpcdsVariants_views.sql
+elif $SSL_ENABLED
 then
   ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=dfs.tpcds_sf1_parquet;drillbit=${DRILL_STORAGE_PLUGIN_SERVER};enableTLS=true;trustStorePath=${TRUSTSTORE_PATH};
   trustStorePassword=${TRUSTSTORE_PASSWORD};disableHostVerification=true"
