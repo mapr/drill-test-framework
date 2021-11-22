@@ -1,3 +1,4 @@
+#!/bin/bash
 #export MAVEN_OPTS=$MAVEN_OPTS" -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5006"
 bin=`dirname "${BASH_SOURCE-$0}"`
 bin=`cd "$bin">/dev/null; pwd`
@@ -32,9 +33,13 @@ done
 # java -cp conf/:${JDBC_DRIVER_CP}:framework/target/framework-1.0.0-SNAPSHOT-shaded.jar:${HADOOP_INSTALL_LOC}/lib/* org.apache.drill.test.framework.TestDriver $*
 
 # use the following line when testing apache drill JDBC driver
-if [[ $HADOOP_VERSION == *"mapr"* ]]
+if [[ $HADOOP_VERSION == *"mapr"* ]] || [[ $HADOOP_VERSION == *"eep"* ]]
 then
-  java $DRILL_TEST_FRAMEWORK_JAVA_OPTS -Xss40m -cp .:conf/:${DRILL_HOME}/jars/jdbc-driver/drill-jdbc-all-${DRILL_VERSION}.jar:framework/target/framework-1.0.0-SNAPSHOT-shaded.jar -Dfs.mapr.bailout.on.library.mismatch=false -Djava.io.tmpdir=/tmp/drill/tests -Djava.security.auth.login.config=/opt/mapr/conf/mapr.login.conf -Dzookeeper.sasl.client=false org.apache.drill.test.framework.TestDriver "${ARGS[@]}"
+  if [ ${AUTH_MECHANISM} == "MAPRSASL" ]; then
+      java $DRILL_TEST_FRAMEWORK_JAVA_OPTS -Xss40m --add-opens java.base/jdk.internal.misc=ALL-UNNAMED -cp .:conf/:${DRILL_CP}:${JDBC_DRIVER_CP}:framework/target/framework-1.0.0-SNAPSHOT-shaded.jar:/opt/mapr/lib/* -Ddrill.customAuthFactories=org.apache.drill.exec.rpc.security.maprsasl.MapRSaslFactory -Dzookeeper.sasl.client=true -Dfs.mapr.bailout.on.library.mismatch=false -Djava.io.tmpdir=/tmp/drill/tests -Djava.security.auth.login.config=/opt/mapr/conf/mapr.login.conf -Dzookeeper.saslprovider=com.mapr.security.maprsasl.MaprSaslProvider org.apache.drill.test.framework.TestDriver "${ARGS[@]}"
+    else
+      java $DRILL_TEST_FRAMEWORK_JAVA_OPTS -Xss40m -cp .:conf/:${DRILL_CP}:${JDBC_DRIVER_CP}:framework/target/framework-1.0.0-SNAPSHOT-shaded.jar:/opt/mapr/lib/* -Dfs.mapr.bailout.on.library.mismatch=false -Djava.io.tmpdir=/tmp/drill/tests -Djava.security.auth.login.config=/opt/mapr/conf/mapr.login.conf -Dzookeeper.sasl.client=false org.apache.drill.test.framework.TestDriver "${ARGS[@]}"
+  fi
 else
   java $DRILL_TEST_FRAMEWORK_JAVA_OPTS -Xss40m -cp .:conf/:${DRILL_HOME}/jars/jdbc-driver/drill-jdbc-all-${DRILL_VERSION}.jar:framework/target/framework-1.0.0-SNAPSHOT-shaded.jar org.apache.drill.test.framework.TestDriver "${ARGS[@]}"
 fi
