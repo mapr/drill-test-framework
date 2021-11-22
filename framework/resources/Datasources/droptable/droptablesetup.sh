@@ -2,15 +2,21 @@
 source conf/drillTestConfig.properties
 
 #droptable1.q
-if [ -z "$PASSWORD" ]
+if [ "$AUTH_MECHANISM" == "MAPRSASL" ]
 then
-  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptable1.ddl
+  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER};auth=maprsasl" --run=${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptable1.ddl
+elif [ -z "$PASSWORD" ]
+then
+  ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptable1.ddl
 else
   ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -p ${PASSWORD} -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptable1.ddl
 fi
 
 #droptableif1.q
-if [ -z "$PASSWORD" ]
+if [ "$AUTH_MECHANISM" == "MAPRSASL" ]
+then
+  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER};auth=maprsasl" --run=${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptableif1.ddl
+elif [ -z "$PASSWORD" ]
 then
   ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptableif1.ddl
 else
@@ -38,7 +44,10 @@ hadoop fs -rm -r ${DRILL_TESTDATA}/droptable/droptableif23
 hadoop fs -mkdir ${DRILL_TESTDATA}/droptable/droptableif23
 
 #droptable32.q
-if [ -z "$PASSWORD" ]
+if [ "$AUTH_MECHANISM" == "MAPRSASL" ]
+then
+  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER};auth=maprsasl" --run=${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptable32.ddl
+elif [ -z "$PASSWORD" ]
 then
   ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptable32.ddl
 else
@@ -46,7 +55,10 @@ else
 fi
 
 #droptableif32.q
-if [ -z "$PASSWORD" ]
+if [ "$AUTH_MECHANISM" == "MAPRSASL" ]
+then
+  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER};auth=maprsasl" --run=${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptableif32.ddl
+elif [ -z "$PASSWORD" ]
 then
   ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=dfs.$1;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}"  --run=${DRILL_TEST_DATA_DIR}/Datasources/droptable/droptableif32.ddl
 else

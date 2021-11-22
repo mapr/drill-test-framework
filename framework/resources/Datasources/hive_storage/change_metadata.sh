@@ -4,7 +4,10 @@ source conf/drillTestConfig.properties
 set -x
 ${DRILL_TEST_DATA_DIR}/Datasources/hive/execHive.sh ${DRILL_TEST_DATA_DIR}/Datasources/hive_storage/change_metadata1.ddl
 
-if [ -z "$PASSWORD" ]
+if [ "$AUTH_MECHANISM" == "MAPRSASL" ]
+then
+  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.ctasAutoPartition;drillbit=${DRILL_STORAGE_PLUGIN_SERVER};auth=maprsasl" --run=${DRILL_TEST_DATA_DIR}/Datasources/hive_storage/change_metadata_drill.sql
+elif [ -z "$PASSWORD" ]
 then
   ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=dfs.ctasAutoPartition;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}" --run=${DRILL_TEST_DATA_DIR}/Datasources/hive_storage/change_metadata_drill.sql
 else

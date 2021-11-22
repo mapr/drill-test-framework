@@ -5,7 +5,10 @@ ${DRILL_TEST_DATA_DIR}/Datasources/min_max_dir/scripts/delete_cache.sh ${DRILL_T
 
 wait
 
-if [ -z "$PASSWORD" ]
+if [ "$AUTH_MECHANISM" == "MAPRSASL" ]
+then
+  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.drillTestDir;drillbit=${DRILL_STORAGE_PLUGIN_SERVER};auth=maprsasl"  --run=${DRILL_TEST_DATA_DIR}/Datasources/min_max_dir/scripts/refresh_metadata.ddl
+elif [ -z "$PASSWORD" ]
 then
   ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=dfs.drillTestDir;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}" --run=${DRILL_TEST_DATA_DIR}/Datasources/min_max_dir/scripts/refresh_metadata.ddl
 else
