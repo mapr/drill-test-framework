@@ -1,10 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 source conf/drillTestConfig.properties
 
 hadoop fs -rm -r /drill/testdata/subqueries/optional_type_v.view.drill
 hadoop fs -rm -r /drill/testdata/subqueries/required_type_v.view.drill
 
-if [ -z "$PASSWORD" ]
+if [ "$AUTH_MECHANISM" == "MAPRSASL" ]
+then
+  ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=dfs.subqueries;drillbit=${DRILL_STORAGE_PLUGIN_SERVER};auth=maprsasl"  --run=${DRILL_TEST_DATA_DIR}/Datasources/subqueries/create_views.sql
+elif [ -z "$PASSWORD" ]
 then
   ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=dfs.subqueries;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}" --run=${DRILL_TEST_DATA_DIR}/Datasources/subqueries/create_views.sql
 else

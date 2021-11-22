@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source conf/drillTestConfig.properties
 
 hadoop fs -test -d /drill/testdata/tpcds_sf1/json ;if [ `echo $?` -eq 0 ]; then hadoop fs -rmr /drill/testdata/tpcds_sf1/json; hadoop fs -mkdir /drill/testdata/tpcds_sf1/json; else hadoop fs -mkdir /drill/testdata/tpcds_sf1/json; fi
