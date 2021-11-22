@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ ! -z "$(top -bn1 |grep minio |grep -oE '^[ ]*[0-9]+' |grep -oE '[0-9]+')" ]
 then

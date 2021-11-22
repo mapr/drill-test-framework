@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source conf/drillTestConfig.properties
 
 export MINIO_ACCESS_KEY=ZYVR33VM12IAHETIJYF9

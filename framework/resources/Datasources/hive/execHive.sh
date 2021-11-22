@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # The below command causes the shell to exit immediately if any command fails
 set -e

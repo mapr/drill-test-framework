@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source conf/drillTestConfig.properties
 
 set -x
@@ -13,9 +13,9 @@ if ! $(hadoop fs -test -d ${DRILL_TESTDATA}/schema_change_empty_batch/maprdb/jso
 
 fi
 
-javac -cp ${HADOOP_INSTALL_LOC}/lib/*:${HADOOP_INSTALL_LOC}/hadoop/hadoop-2.7.0/share/hadoop/common/hadoop-common-2.7.0-mapr*.jar:framework/target/* ${DRILL_TEST_DATA_DIR}/Datasources/schema_change_empty_batch/maprdb/json/CreateTable.java
+javac -cp ${HADOOP_INSTALL_LOC}/lib/*:${HADOOP_INSTALL_LOC}/hadoop/hadoop-${HADOOP_MAPR_VERSION}/share/hadoop/common/hadoop-common-${HADOOP_MAPR_VERSION}*.jar:framework/target/* ${DRILL_TEST_DATA_DIR}/Datasources/schema_change_empty_batch/maprdb/json/CreateTable.java
 
-java -cp ${HADOOP_INSTALL_LOC}/lib/*:${HADOOP_INSTALL_LOC}/hadoop/hadoop-2.7.0/share/hadoop/common/hadoop-common-2.7.0-mapr*.jar:framework/target/*:${DRILL_TEST_DATA_DIR}/Datasources/schema_change_empty_batch/maprdb/json CreateTable
+java -cp ${HADOOP_INSTALL_LOC}/lib/*:${HADOOP_INSTALL_LOC}/hadoop/hadoop-${HADOOP_MAPR_VERSION}/share/hadoop/common/hadoop-common-${HADOOP_MAPR_VERSION}*.jar:framework/target/*:${DRILL_TEST_DATA_DIR}/Datasources/schema_change_empty_batch/maprdb/json CreateTable
 
 mapr importJSON -src ${DRILL_TESTDATA}/schema_change_empty_batch/maprdb/json/part.json -dst ${DRILL_TESTDATA}/schema_change_empty_batch/maprdb/json/part -idfield row_key -bulkload true -mapreduce true
 
