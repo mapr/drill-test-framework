@@ -96,7 +96,7 @@ if [[ "$buildTests" = true ]] && [[ "$download" = true ]]; then
 fi
 
 if [ "$debugEnable" = true ]; then
-    extra_profile=" -Dmaven.surefire.debug"
+    extra_profile=" --debug"
 fi
 
 if [[ $test != "" ]]; then
