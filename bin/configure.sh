@@ -25,29 +25,41 @@ fi
 echo "Create drillTestConfig file..."
 
 cat << EOF > ./conf/drillTestConfig.properties
-NUMBER_OF_CLUSTER_NODES=1
-DRILL_TEST_DATA_DIR=framework/resources
+M2_HOME=$(pwd)/apache-maven-3.6.3
 HADOOP_INSTALL_LOC=/opt/mapr
+HADOOP_HOME=${HADOOP_INSTALL_LOC$}/hadoop/hadoop-{HADOOP_MAPR_VERSION}
 DRILL_HOME=${DRILL_HOME}
+
+DRILL_TEST_DATA_DIR=framework/resources
 DRILL_TESTDATA=/drill/testdata
-JDBC_DRIVER=org.apache.drill.jdbc.Driver
+TIME_OUT_SECONDS=1500
+NUMBER_OF_CLUSTER_NODES=1
+
 DRILL_CP=${DRILL_CP}
 JDBC_DRIVER_CP=${JDBC_DRIVER_CP}
+JDBC_DRIVER=org.apache.drill.jdbc.Driver
 CONNECTION_STRING=jdbc:drill:drillbit\=${hostname}:31010
 DRILL_STORAGE_PLUGIN_SERVER=${hostname}
 DRILL_STORAGE_PLUGIN_SERVER_PORT=8047
-TIME_OUT_SECONDS=1500
+
+IS_SECURE_CLUSTER=false
+SSL_ENABLED=false
+HTTPS_ENABLED=false
+TRUSTSTORE_PATH=/opt/mapr/conf/ssl_truststore
+TRUSTSTORE_PASSWORD=
 AUTH_MECHANISM=PLAIN
+
 USERNAME=mapr
 PASSWORD=mapr
-M2_HOME=$(pwd)/apache-maven-3.6.3
 
 export PATH=$M2_HOME:$PATH
-export DRILL_STORAGE_PLUGIN_SERVER
+export HADOOP_HOME
 export DRILL_HOME
 export DRILL_VERSION=${DRILL_VERSION}
-export HADOOP_MAPR_VERSION
-export HADOOP_VERSION=2.7.0-mapr-1808
+export HADOOP_MAPR_VERSION=${HADOOP_MAPR_VERSION}
+export DRILL_STORAGE_PLUGIN_SERVER
+# TODO: create auto-generation
+export HADOOP_VERSION=${HADOOP_MAPR_VERSION}
 export USERNAME
 export PASSWORD
 EOF
