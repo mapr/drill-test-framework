@@ -8,7 +8,7 @@ ddl_location="${DRILL_TEST_DATA_DIR}/Datasources/parquet_storage/DRILL-6118/DRIL
 execute_ddl () {
   local ddl=$1
   if [ "$AUTH_MECHANISM" == "MAPRSASL" ]; then
-    ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=$schema;drillbit=${DRILL_STORAGE_PLUGIN_SERVER};auth=$AUTH_MECHANISM" --run=$ddl
+    ${DRILL_HOME}/bin/sqlline -u "jdbc:drill:schema=$schema;drillbit=${DRILL_STORAGE_PLUGIN_SERVER};auth=$AUTH_MECHANISM" --run=$ddl
   elif [ -z "$PASSWORD" ]
   then
     ${DRILL_HOME}/bin/sqlline -n ${USERNAME} -u "jdbc:drill:schema=$schema;drillbit=${DRILL_STORAGE_PLUGIN_SERVER}" --run=$ddl
