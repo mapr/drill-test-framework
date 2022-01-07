@@ -22,10 +22,15 @@
 		"src": "Datasources/partition_pruning/dfs",
 		"dest": "partition_pruning/dfs"
 	},
-        {
-                "mode": "cp",
-                "src": "Datasources/partition_pruning/hive",
-                "dest": "partition_pruning/hive"
-        }
+    {
+        "mode": "gen",
+        "src": "Datasources/partition_pruning/dfs/md6191.sh",
+        "dest": ""
+    },
+    {
+        "mode": "cp",
+        "src": "Datasources/partition_pruning/hive",
+        "dest": "partition_pruning/hive"
+    }
     ]
 }
