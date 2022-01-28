@@ -12,13 +12,14 @@ errors=0
 
 ./applyAndWaitForAllPods full.all.yaml
 
+
+
 ./upgradecldb 3 7200
 ret=$?
 if [[ $ret -gt 0 ]]
 then
   echo upgrade cldb has returned error $ret
   kubectl get pods -n dataplatform | grep cldb
-  # exit $ret
 fi
 
 ./checkcldbvalid $errors 600
@@ -34,7 +35,6 @@ if [[ $ret -gt 0 ]]
 then
   echo upgrade zk has returned error $ret
   kubectl get pods -n dataplatform | grep zk
-  # exit $ret
 fi
 
 # don't check cldb because cldb will be upgraded anyway
@@ -50,12 +50,15 @@ kubectl get pods -n dataplatform
 ./getupg admincli
 ./getupg cldb
 ./getupg collectd
+./getupg dataaccessgateway
 ./getupg elasticsearch
 ./getupg fluent
 ./getupg grafana
 ./getupg hivemeta
 ./getupg httpfs
+./getupg kafkarest
 ./getupg kibana
+./getupg maprgateway
 ./getupg mcs
 ./getupg mfs
 ./getupg objectstore
@@ -106,6 +109,13 @@ then
 else
   echo FAIL RUpgradeCollectd
 fi
+ret=$(./getupg dataaccessgateway | grep -o DEBUG | wc -l)
+if [[ $ret -eq 1 ]]
+then
+  echo PASS RUpgradeDataaccessgateway
+else
+  echo FAIL RUpgradeDataaccessgateway
+fi
 ret=$(./getupg elasticsearch | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
@@ -141,12 +151,26 @@ then
 else
   echo FAIL RUpgradeHttpfs
 fi
+ret=$(./getupg kafkarest | grep -o DEBUG | wc -l)
+if [[ $ret -eq 1 ]]
+then
+  echo PASS RUpgradeKafkarest
+else
+  echo FAIL RUpgradeKafkarest
+fi
 ret=$(./getupg kibana | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
   echo PASS RUpgradeKibana
 else
   echo FAIL RUpgradeKibana
+fi
+ret=$(./getupg maprgateway | grep -o DEBUG | wc -l)
+if [[ $ret -eq 1 ]]
+then
+  echo PASS RUpgradeMaprgateway
+else
+  echo FAIL RUpgradeMaprgateway
 fi
 ret=$(./getupg mcs | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
@@ -231,15 +255,18 @@ fi
 ./checklogsall cldb-1 DEBUG 600 "CLDB pod is now really ready"
 ./checklogsall cldb-2 DEBUG 600 "CLDB pod is now really ready"
 ./checklogsall collectd DEBUG 600 "COLLECTD pod is now really ready"
+./checklogsall dataaccessgateway-0 DEBUG 600 "DAG pod is now really ready"
 ./checklogsall elasticsearch-0 DEBUG 600 "ELASTICSEARCH pod is now really ready"
 ./checklogsall fluent DEBUG 600 "FLUENT pod is now really ready"
 ./checklogsall grafana DEBUG 600 "GRAFANA pod is now really ready"
 ./checklogsall hivemeta-0 DEBUG 600 "HIVEMETA pod is now really ready"
 ./checklogsall httpfs-0 DEBUG 600 "HTTPFS pod is now really ready"
+./checklogsall kafkarest-0 DEBUG 600 "KAFKAREST pod is now really ready"
 ./checklogsall kibana DEBUG 600 "KIBANA pod is now really ready"
+./checklogsall maprgateway-0 DEBUG 600 "MAPRGW pod is now really ready"
 ./checklogsall mcs-0 DEBUG 600 "APISERVER pod is now really ready"
-./checklogsall mfs-group1-0 DEBUG 600 "MFS pod is now really ready"
-./checklogsall mfs-group2-0 DEBUG 600 "MFS pod is now really ready"
+./checklogsall mfs-0 DEBUG 600 "MFS pod is now really ready"
+./checklogsall mfs-1 DEBUG 600 "MFS pod is now really ready"
 ./checklogsall objectstore-zone1-0 DEBUG 600 "OBJECTSTORE pod is now really ready"
 ./checklogsall opentsdb-0 DEBUG 600 "OPENTSDB pod is now really ready"
 ./checklogsall zk-0 DEBUG 600 "ZOOKEEPER pod is now really ready"
@@ -251,15 +278,18 @@ fi
 ./taillogs.really.ready cldb-1
 ./taillogs.really.ready cldb-2
 ./taillogs.really.ready collectd
+./taillogs.really.ready dataaccessgateway
 ./taillogs.really.ready elasticsearch
 ./taillogs.really.ready fluent
 ./taillogs.really.ready grafana
 ./taillogs.really.ready hivemeta
 ./taillogs.really.ready httpfs
+./taillogs.really.ready kafkarest
 ./taillogs.really.ready kibana
+./taillogs.really.ready maprgateway
 ./taillogs.really.ready mcs
-./taillogs.really.ready mfs-group1-0
-./taillogs.really.ready mfs-group2-0
+./taillogs.really.ready mfs-0
+./taillogs.really.ready mfs-1
 ./taillogs.really.ready objectstore
 ./taillogs.really.ready opentsdb
 ./taillogs.really.ready zk-0
@@ -269,12 +299,15 @@ fi
 ./get_mapr_ticket_for_pod admincli
 ./get_mapr_ticket_for_pod cldb
 ./get_mapr_ticket_for_pod collectd
+./get_mapr_ticket_for_pod dataaccessgateway
 ./get_mapr_ticket_for_pod elasticsearch
 ./get_mapr_ticket_for_pod fluent
 ./get_mapr_ticket_for_pod grafana
 ./get_mapr_ticket_for_pod hivemeta
 ./get_mapr_ticket_for_pod httpfs
+./get_mapr_ticket_for_pod kafkarest
 ./get_mapr_ticket_for_pod kibana
+./get_mapr_ticket_for_pod maprgateway
 ./get_mapr_ticket_for_pod mcs
 ./get_mapr_ticket_for_pod mfs
 ./get_mapr_ticket_for_pod objectstore
@@ -284,12 +317,15 @@ fi
 ./check_for_data admincli
 ./check_for_data cldb
 ./check_for_data collectd
+./check_for_data dataaccessgateway
 ./check_for_data elasticsearch
 ./check_for_data fluent
 ./check_for_data grafana
 ./check_for_data hivemeta
 ./check_for_data httpfs
+./check_for_data kafkarest
 ./check_for_data kibana
+./check_for_data maprgateway
 ./check_for_data mcs
 ./check_for_data mfs
 ./check_for_data objectstore

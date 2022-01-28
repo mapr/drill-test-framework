@@ -26,11 +26,14 @@ spec:
     version: 6.2.0
   core:
     init:
+      pauselayout: false
+      pausemfsstartup: false
+      readinesstimeout: 1800
       image: init-6.2.0:BASE_IMAGE
       requestcpu: "1000m"
-      limitcpu: "4000m"
+      limitcpu: "16000m"
       requestmemory: 1Gi
-      limitmemory: 1Gi
+      limitmemory: 4Gi
       requestdisk: 10Gi
       limitdisk: 20Gi
       loglevel: INFO
@@ -39,19 +42,14 @@ spec:
       image: zookeeper-6.2.0:BASE_IMAGE
       requestcpu: "1001m"
       limitcpu: "3001m"
-      requestmemory: 1Gi
-      limitmemory: 1Gi
+      requestmemory: 11Gi
+      limitmemory: 11Gi
       requestdisk: 21Gi
       limitdisk: 31Gi
       loglevel: DEBUG
     cldb:
       failurecount: 1
       image: cldb-6.2.0:BASE_IMAGE
-      diskinfo:
-        diskcount: 3
-        disktype: HDD
-        storagepoolsize: 0
-        storagepoolsperinstance: 0
       requestcpu: "8001m"
       limitcpu: "20001m"
       requestmemory: 21Gi
@@ -62,6 +60,7 @@ spec:
         - hostport: 7220
         - hostport: 7443
         - hostport: 7222
+        - hostport: 7223
         - hostport: 5660
         - hostport: 5692
         - hostport: 5724
@@ -71,49 +70,21 @@ spec:
       loglevel: DEBUG
     mfs:
       image: mfs-6.2.0:BASE_IMAGE
-      groups:
-        - name: group1
-          count: 1
-          diskinfo:
-            diskcount: 3
-            disktype: HDD
-            storagepoolsize: 1
-            storagepoolsperinstance: 1
-          sshport: 5001
-          hostports:
-            - hostport: 5660
-            - hostport: 5692
-            - hostport: 5724
-            - hostport: 5756
-            - hostport: 8660
-          requestcpu: "4001m"
-          limitcpu: "12001m"
-          requestmemory: 21Gi
-          limitmemory: 71Gi
-          requestdisk: 21Gi
-          limitdisk: 51Gi
-          loglevel: DEBUG
-        - name: group2
-          count: 1
-          diskinfo:
-            diskcount: 3
-            disktype: HDD
-            storagepoolsize: 2
-            storagepoolsperinstance: 2
-          sshport: 5001
-          hostports:
-            - hostport: 5660
-            - hostport: 5692
-            - hostport: 5724
-            - hostport: 5756
-            - hostport: 8660
-          requestcpu: "4001m"
-          limitcpu: "12001m"
-          requestmemory: 21Gi
-          limitmemory: 71Gi
-          requestdisk: 21Gi
-          limitdisk: 51Gi
-          loglevel: DEBUG
+      count: 2
+      sshport: 5001
+      hostports:
+        - hostport: 5660
+        - hostport: 5692
+        - hostport: 5724
+        - hostport: 5756
+        - hostport: 8660
+      requestcpu: "4001m"
+      limitcpu: "12001m"
+      requestmemory: 21Gi
+      limitmemory: 71Gi
+      requestdisk: 21Gi
+      limitdisk: 51Gi
+      loglevel: DEBUG
     webserver:
       count: 1
       image: webserver-6.2.0:BASE_IMAGE
@@ -131,8 +102,8 @@ spec:
       sshport: 5003
       requestcpu: "501m"
       limitcpu: "2001m"
-      requestmemory: 1Gi
-      limitmemory: 1Gi
+      requestmemory: 11Gi
+      limitmemory: 11Gi
       requestdisk: 21Gi
       limitdisk: 31Gi
       loglevel: DEBUG
@@ -144,8 +115,8 @@ spec:
       sshport: 5004
       requestcpu: "201m"
       limitcpu: "2001m"
-      requestmemory: 1Gi
-      limitmemory: 1Gi
+      requestmemory: 11Gi
+      limitmemory: 11Gi
       requestdisk: 21Gi
       limitdisk: 31Gi
       loglevel: DEBUG
@@ -166,8 +137,8 @@ spec:
       sshport: 5006
       requestcpu: "501m"
       limitcpu: "2001m"
-      requestmemory: 1Gi
-      limitmemory: 1Gi
+      requestmemory: 11Gi
+      limitmemory: 11Gi
       requestdisk: 21Gi
       limitdisk: 31Gi
       loglevel: DEBUG
@@ -176,8 +147,8 @@ spec:
       sshport: 5007
       requestcpu: "501m"
       limitcpu: "2001m"
-      requestmemory: 1Gi
-      limitmemory: 1Gi
+      requestmemory: 11Gi
+      limitmemory: 11Gi
       requestdisk: 21Gi
       limitdisk: 31Gi
       loglevel: DEBUG
@@ -207,7 +178,7 @@ spec:
     nfs: true
     mast: true
     objectstore:
-      image: objectstore-2.0.0:BASE_IMAGE
+      image: objectstore-2.2.0:BASE_IMAGE
       zones:
         - name: zone1
           count: 1
@@ -232,8 +203,8 @@ spec:
         - hostport: 14000
       requestcpu: "501m"
       limitcpu: "2001m"
-      requestmemory: 1Gi
-      limitmemory: 1Gi
+      requestmemory: 11Gi
+      limitmemory: 11Gi
       requestdisk: 21Gi
       limitdisk: 31Gi
       loglevel: DEBUG
@@ -243,8 +214,8 @@ spec:
       sshport: 5013
       requestcpu: "2001m"
       limitcpu: "8001m"
-      requestmemory: 1Gi
-      limitmemory: 1Gi
+      requestmemory: 11Gi
+      limitmemory: 11Gi
       requestdisk: 21Gi
       limitdisk: 41Gi
       loglevel: DEBUG
@@ -265,8 +236,8 @@ spec:
       sshport: 5015
       requestcpu: "2001m"
       limitcpu: "8001m"
-      requestmemory: 1Gi
-      limitmemory: 1Gi
+      requestmemory: 11Gi
+      limitmemory: 11Gi
       requestdisk: 21Gi
       limitdisk: 31Gi
       loglevel: DEBUG
@@ -279,8 +250,8 @@ spec:
       sshport: 5016
       requestcpu: "1001m"
       limitcpu: "4001m"
-      requestmemory: 1Gi
-      limitmemory: 1Gi
+      requestmemory: 11Gi
+      limitmemory: 11Gi
       requestdisk: 21Gi
       limitdisk: 41Gi
       loglevel: DEBUG
