@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+sources ./conf/drillTestConfig.properties
 set -e
 
 #######################################################################
@@ -49,11 +49,13 @@ Functional/min_max_dir,Functional/orderby,Functional/table_function,Functional/t
 Functional/crossjoin,Functional/datetime,Functional/drill_fragments,Functional/functions,Functional/identifiers,\
 Functional/joins,Functional/misc,Functional/p1tests,Functional/schema-changes,Functional/table_stats,Functional/udfs,\
 Functional/case_expr,Functional/ctas,Functional/decimal,Functional/droptable,Functional/group_by_alias,Functional/json,\
-Functional/morefiles,Functional/parquet_storage,Functional/schema_change_empty_batch,Functional/text_storage,\
-Functional/complex,Functional/cttas,Functional/decimal_avro,Functional/explicit_cast,Functional/hbase,\
-Functional/implicit_cast,Functional/no_result_set,Functional/partition_pruning,Functional/semijoin,\
+Functional/morefiles,Functional/parquet_storage,Functional/text_storage,\
+Functional/complex,Functional/cttas,Functional/decimal_avro,Functional/explicit_cast,\
+Functional/implicit_cast,Functional/no_result_set,Functional/semijoin,\
 Functional/timestamp_functions,Functional/union_all,Functional/convert,Functional/data-shapes,\
 Functional/decimal_negative,Functional/query_parser,Functional/values,Functional/tpcds,Functional/subqueries"
+
+# TODO: unstable tests: Functional/schema_change_empty_batch, Functional/partition_pruning
 
 OPTS=`getopt -o hbrdfqlst: --long help,build,download,run,debug,sanity,test: -n 'drill.sh' -- "$@"`
 eval set -- "${OPTS}"
@@ -109,5 +111,5 @@ if [ "$sanity" = true ]; then
 fi
 
 if [ "$runTests" = true ]; then
-    ./bin/run_tests -g functional -t 1200 -d -n 100 -s $test_profile $extra_profile
+    ./bin/run_tests -g functional -t 1200 -d -n 20 -s $test_profile $extra_profile
 fi
