@@ -13,7 +13,7 @@ The framework is built for regression, integration & sanity testing. Includes te
 ## Build Project
 To begin using the test framework, you need to build the project and download dependent datasets (configured in [pom.xml](framework/pom.xml)). 
 ```
-git clone -b 1.16.0-mapr git@github.com:mapr/drill-test-framework.git
+git clone -b 1.16.1-mapr git@github.com:mapr/drill-test-framework.git
 cd drill-test-framework
 ./bin/configure.sh
 ./bin/drill.sh -b --download
