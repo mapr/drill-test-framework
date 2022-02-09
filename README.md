@@ -13,34 +13,39 @@ The framework is built for regression, integration & sanity testing. Includes te
 ## Build Project
 To begin using the test framework, you need to build the project and download dependent datasets (configured in [pom.xml](framework/pom.xml)). 
 ```
-git clone git@github.com:mapr/drill-test-framework.git
+git clone -b 1.16.0-mapr git@github.com:mapr/drill-test-framework.git
 cd drill-test-framework
-bin/build_framework -Pdownload
+./bin/configure.sh
+./bin/drill.sh -b --download
 ``` 
 If you've already downloaded the datasets previously, you can simply skip the download.
 
 ## Execute Tests
 In the root directory of your repository, execute the following command to run tests:
-
-`bin/run_tests -s <suites> -g <groups> -t <Timeout> -x <Exclude> -n <Concurrency> -d`
+Usage examples:
+`.bin/drill.sh --run --test <group/suite>`</br>
 
 Example:
- <pre><code> bin/run_tests -s Functional/aggregates,Functional/joins -g functional -x hbase -t 180 -n 20 -d
-  -s suites (required)
-     Here, 'Functional/aggregates,Functional/joins' are directories inside [framework/resources/Functional](framework/resources/Functional). All directories within this parent directory are included
-  -g groups (required)
-     Here, 'functional' is category of tests to execute
-  -t timeout (optional)
-     Here, '180' seconds is the max time for a query to execute
-  -d data generation (required on first run and upon pulling in new changes. Optional otherwise)
-     Here, it turns on data copy and data generation
-  -n concurrency (optional)
-     Here, '20' queries can execute concurrently
-  -x exclude dependencies (optional)
-     Here, any 'hbase' test suites within the specified directory are excluded
-  -h help (optional)
-     Use this option to provide the usage of the command, which includes additional options
-</code></pre>
+<pre><code> ./drill.sh --run --test Functional/aggregates</code></pre>
+
+[comment]: <> (OLD USAGE)
+[comment]: <> (`bin/run_tests -s <suites> -g <groups> -t <Timeout> -x <Exclude> -n <Concurrency> -d`)
+[comment]: <> (<pre><code> bin/run_tests -s Functional/aggregates,Functional/joins -g functional -x hbase -t 180 -n 20 -d)
+[comment]: <> (  -s suites &#40;required&#41;)
+[comment]: <> (     Here, 'Functional/aggregates,Functional/joins' are directories inside [framework/resources/Functional]&#40;framework/resources/Functional&#41;. All directories within this parent directory are included)
+[comment]: <> (  -g groups &#40;required&#41;)
+[comment]: <> (     Here, 'functional' is category of tests to execute)
+[comment]: <> (  -t timeout &#40;optional&#41;)
+[comment]: <> (     Here, '180' seconds is the max time for a query to execute)
+[comment]: <> (  -d data generation &#40;required on first run and upon pulling in new changes. Optional otherwise&#41;)
+[comment]: <> (     Here, it turns on data copy and data generation)
+[comment]: <> (  -n concurrency &#40;optional&#41;)
+[comment]: <> (     Here, '20' queries can execute concurrently)
+[comment]: <> (  -x exclude dependencies &#40;optional&#41;)
+[comment]: <> (     Here, any 'hbase' test suites within the specified directory are excluded)
+[comment]: <> (  -h help &#40;optional&#41;)
+[comment]: <> (     Use this option to provide the usage of the command, which includes additional options)
+[comment]: <> (</code></pre>)
 
 ## Contributing
 
