@@ -20,6 +20,7 @@ maven_setup() {
 
 if [ ! -d ./apache-maven-3.6.3 ]; then
   maven_setup
+  M2_HOME=$(pwd)/apache-maven-3.6.3
 fi
 
 echo "Creating link on drill-distrib.conf and drill-override.conf"
@@ -46,11 +47,11 @@ gen_config() {
     if [ -f /opt/mapr/conf/store-passwords.txt ]; then
         sslKey=$(grep ssl.client.truststore.password /opt/mapr/conf/store-passwords.txt | tr '=' '\n'| tail -1)
     else
-        print "WARN: ssl keystore password wasn't set to config"
+      # TODO: Read keystore password from /opt/mapr/conf/ssl-client.xml
+        echo "WARN: ssl keystore password wasn't set to config, please add it from /opt/mapr/conf/ssl-client.xml"
     fi
 
 cat << EOF > ./conf/drillTestConfig.properties
-M2_HOME=$(pwd)/apache-maven-3.6.3
 HADOOP_INSTALL_LOC=/opt/mapr
 HADOOP_HOME=${HADOOP_INSTALL_LOC}/hadoop/hadoop-${HADOOP_MAPR_VERSION}
 DRILL_HOME=${DRILL_HOME}
@@ -77,7 +78,7 @@ AUTH_MECHANISM=${authMethod}
 USERNAME=mapr
 PASSWORD=mapr
 
-export PATH=${M2_HOME}:${PATH}
+export PATH=${M2_HOME}/bin:${PATH}
 export HADOOP_HOME
 export DRILL_HOME
 export DRILL_VERSION=${DRILL_VERSION}
