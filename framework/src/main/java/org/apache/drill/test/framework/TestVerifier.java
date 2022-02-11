@@ -20,17 +20,16 @@ package org.apache.drill.test.framework;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Types;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -196,7 +195,7 @@ public class TestVerifier {
   /**
    * Detects the number of unexpected entries in the actual map
    *
-   * @param count
+   * @param entry
    * 	    value of a particular entry in actual map
    * @return unexpected count for that entry
    */
@@ -229,7 +228,7 @@ public class TestVerifier {
     } else {
       map = new HashMap<ColumnList, Integer>();
     }
-    BufferedReader reader = new BufferedReader(new FileReader(filename));
+    BufferedReader reader = new BufferedReader(Files.newBufferedReader(Paths.get(filename), StandardCharsets.UTF_16));
     String line = "";
     mapSize = 0;
     while ((line = reader.readLine()) != null) {

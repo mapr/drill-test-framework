@@ -26,14 +26,15 @@ import org.apache.drill.test.framework.TestVerifier.PlanVerificationException;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -201,8 +202,7 @@ public class DrillTestJdbc implements DrillTest {
 
   private void executeQuery(String query) throws IOException, SQLException {
     outputFilename = Utils.generateOutputFileName(modeler.queryFilename, modeler.testId, false) + "_" + id;
-    BufferedWriter writer = new BufferedWriter(new FileWriter(new File(
-            outputFilename)));
+    BufferedWriter writer = Files.newBufferedWriter(Paths.get(outputFilename), StandardCharsets.UTF_8);
     final boolean cancelQuery = rand.nextInt(100) < TestDriver.cmdParam.cancelPercent;
     CancelQuery c = null;
     try {
@@ -279,7 +279,7 @@ public class DrillTestJdbc implements DrillTest {
 		return;
 	}
 	
-	BufferedWriter writer = new BufferedWriter(new FileWriter(new File(outputFilename),true));	
+	BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilename,true));
     statement = connection.createStatement();
     ResultSet resultSet = statement.execute(query) ? statement.getResultSet() : null;
     List columnLabels = new ArrayList<String>();
