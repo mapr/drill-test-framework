@@ -508,19 +508,18 @@ public class Utils {
   public static String[] getSqlStatements(String queryFileName)
       throws IOException {
     StringBuilder builder = new StringBuilder();
-    BufferedReader reader = new BufferedReader(new FileReader(new File(
-        queryFileName)));
-    String line = null;
-    while ((line = reader.readLine()) != null) {
-      line = line.trim();
-      //skip comment line
-      if (line.startsWith("--") && !line.startsWith("--@test")) {
-    	//do nothing
-      } else {
-        builder.append(line + "\n");
+    try (BufferedReader reader = new BufferedReader(Files.newBufferedReader(Paths.get(queryFileName), StandardCharsets.UTF_8))) {
+      String line = null;
+      while ((line = reader.readLine()) != null) {
+        line = line.trim();
+        //skip comment line
+        if (line.startsWith("--") && !line.startsWith("--@test")) {
+          //do nothing
+        } else {
+          builder.append(line + "\n");
+        }
       }
     }
-    reader.close();
     String[] statements = builder.toString().trim().split(";");
     for(int i=0; i<statements.length; i++) {
       statements[i]=statements[i].trim();
