@@ -2,11 +2,13 @@
 hostname=$(hostname -f)
 mainDir="$(pwd)"
 
-DRILL_HOME=/opt/mapr/drill/drill-$(cat /opt/mapr/drill/drillversion)
+HADOOP_INSTALL_LOC=/opt/mapr
+DRILL_HOME=${HADOOP_INSTALL_LOC}/drill/drill-$(cat /opt/mapr/drill/drillversion)
 if [ $? -ne 0 ]; then
   print "The Drill not installed"
   exit 1
 fi
+
 DRILL_VERSION=$(grep 'git.build.version' ${DRILL_HOME}/git.properties | tr '=' '\n' | tail -1)
 HADOOP_MAPR_VERSION=$(cat /opt/mapr/hadoop/hadoopversion)
 DRILL_CP="${DRILL_HOME}/jars/*:${DRILL_HOME}/jars/ext/*:${DRILL_HOME}/jars/3rdparty/*:${DRILL_HOME}/jars/classb/*"
@@ -47,9 +49,8 @@ gen_config() {
     # TODO: Read keystore password from /opt/mapr/conf/ssl-client.xml
     echo "WARN: ssl keystore password wasn't set to config, please add it from /opt/mapr/conf/ssl-client.xml"
 
-
 cat << EOF > ./conf/drillTestConfig.properties
-HADOOP_INSTALL_LOC=/opt/mapr
+HADOOP_INSTALL_LOC=${HADOOP_INSTALL_LOC}
 HADOOP_HOME=${HADOOP_INSTALL_LOC}/hadoop/hadoop-${HADOOP_MAPR_VERSION}
 DRILL_HOME=${DRILL_HOME}
 
