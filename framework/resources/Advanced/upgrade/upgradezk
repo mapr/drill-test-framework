@@ -2,17 +2,18 @@
 
 set -x
 
-if [[ $# -ne 2 ]]
+if [[ $# -ne 3 ]]
 then
-  echo upgradezk needs the number of pods to upgrade and a timeout
+  echo upgradezk needs the cluster name, the number of pods to upgrade and a timeout
   exit 1
 fi
 
-numberpods=$1
-timeoutvalue=$2
-echo upgradezk number of pods $numberpods timeout $timeoutvalue
+cluster=$1
+numberpods=$2
+timeoutvalue=$3
+echo upgradezk cluster $cluster number of pods $numberpods timeout $timeoutvalue
 
-timeout $timeoutvalue kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c 'edf upgrade zookeeper -n'
+timeout $timeoutvalue kubectl exec -i admincli-0 -n $cluster -- /bin/bash -c 'edf upgrade zookeeper -n'
 ret=$?
 if [[ $ret -gt 0 ]]
 then
@@ -27,7 +28,7 @@ ready="0"
 echo "START SECONDS", $SECONDS
 while ((${SECONDS} < ${end_time}))
 do
-  ret=`kubectl get pods -n dataplatform | grep zk | grep Running | grep "1/1" | wc -l`
+  ret=`kubectl get pods -n $cluster | grep zk | grep Running | grep "1/1" | wc -l`
   if [ $ret -eq $numberpods ]
   then
     echo "All zookeeper pods are up and running"

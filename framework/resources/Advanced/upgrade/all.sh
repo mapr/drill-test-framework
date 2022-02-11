@@ -5,81 +5,81 @@ source conf/drillTestConfig.properties
 
 cd ${DRILL_TEST_DATA_DIR}/Advanced/upgrade
 
-./load_data
-./setup
+cluster=$(./get_cluster)
+
+./load_data $cluster
+./setup $cluster
 
 errors=0
 
 ./applyAndWaitForAllPods full.all.yaml
 
-
-
-./upgradecldb 3 7200
+./upgradecldb $cluster 3 7200
 ret=$?
 if [[ $ret -gt 0 ]]
 then
   echo upgrade cldb has returned error $ret
-  kubectl get pods -n dataplatform | grep cldb
+  kubectl get pods -n $cluster | grep cldb
 fi
 
-./checkcldbvalid $errors 600
+./checkcldbvalid $cluster $errors 600
 
-./checkcldbmaster $errors 600
+./checkcldbmaster $cluster $errors 600
 
-# checkcldbconnectzk 0 3600
-checkcldbconnectzk 0 600
+# checkcldbconnectzk $cluster 0 3600
+checkcldbconnectzk $cluster 0 600
 
-./upgradezk 3 10800
+./upgradezk $cluster 3 10800
 ret=$?
 if [[ $ret -gt 0 ]]
 then
   echo upgrade zk has returned error $ret
-  kubectl get pods -n dataplatform | grep zk
+  kubectl get pods -n $cluster | grep zk
 fi
 
 # don't check cldb because cldb will be upgraded anyway
 # new edf code makes sure that cldb is valid and has correct cldbstate
-./checkzkmaster $errors 600
-./checkcldbvalid $errors 600
-./checkcldbmaster $errors 600
-# checkcldbconnectzk $errors 3600
-./checkcldbconnectzk $errors 600
+./checkzkmaster $cluster $errors 600
+./checkcldbvalid $cluster $errors 600
+./checkcldbmaster $cluster $errors 600
+# checkcldbconnectzk $cluster $errors 3600
+./checkcldbconnectzk $cluster $errors 600
 
-kubectl get pods -n dataplatform
+kubectl get pods -n $cluster
 
-./getupg admincli
-./getupg cldb
-./getupg collectd
-./getupg dataaccessgateway
-./getupg elasticsearch
-./getupg fluent
-./getupg grafana
-./getupg hivemeta
-./getupg httpfs
-./getupg kafkarest
-./getupg kibana
-./getupg maprgateway
-./getupg mcs
-./getupg mfs
-./getupg objectstore
-./getupg opentsdb
-./getupg zk
+./getupg $cluster admincli
+./getupg $cluster cldb
+./getupg $cluster collectd
+./getupg $cluster dataaccessgateway
+./getupg $cluster elasticsearch
+./getupg $cluster fluent
+./getupg $cluster grafana
+./getupg $cluster hivemeta
+./getupg $cluster httpfs
+./getupg $cluster kafkarest
+./getupg $cluster kibana
+./getupg $cluster maprgateway
+./getupg $cluster mcs
+./getupg $cluster mfs
+./getupg $cluster objectstore
+./getupg $cluster opentsdb
+./getupg $cluster zk
 
-ret=$(./getupg admincli | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster admincli | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
   echo PASS RUpgradeAdmincli
 else
   echo FAIL RUpgradeAdmincli
 fi
-ret=$(./getupg cldb | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster cldb | grep -o DEBUG | wc -l)
 if [[ $ret -eq 3 ]]
 then
   echo PASS RUpgradeCLDB0
   echo PASS RUpgradeCLDB1
   echo PASS RUpgradeCLDB2
 else
-  ret=$(./getupg cldb | grep -o "INFO\|DEBUG\|ERROR")
+  ret=$(./getupg $cluster cldb | grep -o "INFO\|DEBUG\|ERROR")
   first=$(echo $ret | cut -d" " -f1)
   second=$(echo $ret | cut -d" " -f2)
   third=$(echo $ret | cut -d" " -f3)
@@ -102,90 +102,90 @@ else
     echo FAIL RUpgradeCLDB2
   fi
 fi
-ret=$(./getupg collectd | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster collectd | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
   echo PASS RUpgradeCollectd
 else
   echo FAIL RUpgradeCollectd
 fi
-ret=$(./getupg dataaccessgateway | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster dataaccessgateway | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
   echo PASS RUpgradeDataaccessgateway
 else
   echo FAIL RUpgradeDataaccessgateway
 fi
-ret=$(./getupg elasticsearch | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster elasticsearch | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
   echo PASS RUpgradeElasticSearch
 else
   echo FAIL RUpgradeElasticSearch
 fi
-ret=$(./getupg fluent | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster fluent | grep -o DEBUG | wc -l)
 if [[ $ret -eq 5 ]]
 then
   echo PASS RUpgradeFluent
 else
   echo FAIL RUpgradeFluent
 fi
-ret=$(./getupg grafana | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster grafana | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
   echo PASS RUpgradeGrafana
 else
   echo FAIL RUpgradeGrafana
 fi
-ret=$(./getupg hivemeta | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster hivemeta | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
   echo PASS RUpgradeHivemeta
 else
   echo FAIL RUpgradeHivemeta
 fi
-ret=$(./getupg httpfs | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster httpfs | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
   echo PASS RUpgradeHttpfs
 else
   echo FAIL RUpgradeHttpfs
 fi
-ret=$(./getupg kafkarest | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster kafkarest | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
   echo PASS RUpgradeKafkarest
 else
   echo FAIL RUpgradeKafkarest
 fi
-ret=$(./getupg kibana | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster kibana | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
   echo PASS RUpgradeKibana
 else
   echo FAIL RUpgradeKibana
 fi
-ret=$(./getupg maprgateway | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster maprgateway | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
   echo PASS RUpgradeMaprgateway
 else
   echo FAIL RUpgradeMaprgateway
 fi
-ret=$(./getupg mcs | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster mcs | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
   echo PASS RUpgradeMCS
 else
   echo FAIL RUpgradeMCS
 fi
-ret=$(./getupg mfs | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster mfs | grep -o DEBUG | wc -l)
 if [[ $ret -eq 2 ]]
 then
   echo PASS RUpgradeMFS0
   echo PASS RUpgradeMFS1
 else
-  ret=$(./getupg mfs | grep -o "INFO\|DEBUG\|ERROR")
+  ret=$(./getupg $cluster mfs | grep -o "INFO\|DEBUG\|ERROR")
   first=$(echo $ret | cut -d" " -f1)
   second=$(echo $ret | cut -d" " -f2)
   if [[ $first == "DEBUG" ]]
@@ -201,28 +201,28 @@ else
     echo FAIL RUpgradeMFS1
   fi
 fi
-ret=$(./getupg objectstore | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster objectstore | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
   echo PASS RUpgradeObjectstore
 else
   echo FAIL RUpgradeObjectstore
 fi
-ret=$(./getupg opentsdb | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster opentsdb | grep -o DEBUG | wc -l)
 if [[ $ret -eq 1 ]]
 then
   echo PASS RUpgradeOpentsdb
 else
   echo FAIL RUpgradeOpentsdb
 fi
-ret=$(./getupg zk | grep -o DEBUG | wc -l)
+ret=$(./getupg $cluster zk | grep -o DEBUG | wc -l)
 if [[ $ret -eq 3 ]]
 then
   echo PASS RUpgradeZK0
   echo PASS RUpgradeZK1
   echo PASS RUpgradeZK2
 else
-  ret=$(./getupg zk | grep -o "INFO\|DEBUG\|ERROR")
+  ret=$(./getupg $cluster zk | grep -o "INFO\|DEBUG\|ERROR")
   first=$(echo $ret | cut -d" " -f1)
   second=$(echo $ret | cut -d" " -f2)
   third=$(echo $ret | cut -d" " -f3)
@@ -247,90 +247,90 @@ else
 fi
 
 
-./checklogsall admincli-0 DEBUG 3600 "ADMINCLI pod is now really ready"
-# ./checklogsall cldb-0 DEBUG 3600 "CLDB pod is now really ready"
-# ./checklogsall cldb-1 DEBUG 3600 "CLDB pod is now really ready"
-# ./checklogsall cldb-2 DEBUG 3600 "CLDB pod is now really ready"
-./checklogsall cldb-0 DEBUG 600 "CLDB pod is now really ready"
-./checklogsall cldb-1 DEBUG 600 "CLDB pod is now really ready"
-./checklogsall cldb-2 DEBUG 600 "CLDB pod is now really ready"
-./checklogsall collectd DEBUG 600 "COLLECTD pod is now really ready"
-./checklogsall dataaccessgateway-0 DEBUG 600 "DAG pod is now really ready"
-./checklogsall elasticsearch-0 DEBUG 600 "ELASTICSEARCH pod is now really ready"
-./checklogsall fluent DEBUG 600 "FLUENT pod is now really ready"
-./checklogsall grafana DEBUG 600 "GRAFANA pod is now really ready"
-./checklogsall hivemeta-0 DEBUG 600 "HIVEMETA pod is now really ready"
-./checklogsall httpfs-0 DEBUG 600 "HTTPFS pod is now really ready"
-./checklogsall kafkarest-0 DEBUG 600 "KAFKAREST pod is now really ready"
-./checklogsall kibana DEBUG 600 "KIBANA pod is now really ready"
-./checklogsall maprgateway-0 DEBUG 600 "MAPRGW pod is now really ready"
-./checklogsall mcs-0 DEBUG 600 "APISERVER pod is now really ready"
-./checklogsall mfs-0 DEBUG 600 "MFS pod is now really ready"
-./checklogsall mfs-1 DEBUG 600 "MFS pod is now really ready"
-./checklogsall objectstore-zone1-0 DEBUG 600 "OBJECTSTORE pod is now really ready"
-./checklogsall opentsdb-0 DEBUG 600 "OPENTSDB pod is now really ready"
-./checklogsall zk-0 DEBUG 600 "ZOOKEEPER pod is now really ready"
-./checklogsall zk-1 DEBUG 600 "ZOOKEEPER pod is now really ready"
-./checklogsall zk-2 DEBUG 600 "ZOOKEEPER pod is now really ready"
+./checklogsall $cluster admincli-0 DEBUG 3600 "ADMINCLI pod is now really ready"
+# ./checklogsall $cluster cldb-0 DEBUG 3600 "CLDB pod is now really ready"
+# ./checklogsall $cluster cldb-1 DEBUG 3600 "CLDB pod is now really ready"
+# ./checklogsall $cluster cldb-2 DEBUG 3600 "CLDB pod is now really ready"
+./checklogsall $cluster cldb-0 DEBUG 600 "CLDB pod is now really ready"
+./checklogsall $cluster cldb-1 DEBUG 600 "CLDB pod is now really ready"
+./checklogsall $cluster cldb-2 DEBUG 600 "CLDB pod is now really ready"
+./checklogsall $cluster collectd DEBUG 600 "COLLECTD pod is now really ready"
+./checklogsall $cluster dataaccessgateway-0 DEBUG 600 "DAG pod is now really ready"
+./checklogsall $cluster elasticsearch-0 DEBUG 600 "ELASTICSEARCH pod is now really ready"
+./checklogsall $cluster fluent DEBUG 600 "FLUENT pod is now really ready"
+./checklogsall $cluster grafana DEBUG 600 "GRAFANA pod is now really ready"
+./checklogsall $cluster hivemeta-0 DEBUG 600 "HIVEMETA pod is now really ready"
+./checklogsall $cluster httpfs-0 DEBUG 600 "HTTPFS pod is now really ready"
+./checklogsall $cluster kafkarest-0 DEBUG 600 "KAFKAREST pod is now really ready"
+./checklogsall $cluster kibana DEBUG 600 "KIBANA pod is now really ready"
+./checklogsall $cluster maprgateway-0 DEBUG 600 "MAPRGW pod is now really ready"
+./checklogsall $cluster mcs-0 DEBUG 600 "APISERVER pod is now really ready"
+./checklogsall $cluster mfs-0 DEBUG 600 "MFS pod is now really ready"
+./checklogsall $cluster mfs-1 DEBUG 600 "MFS pod is now really ready"
+./checklogsall $cluster objectstore-zone1-0 DEBUG 600 "OBJECTSTORE pod is now really ready"
+./checklogsall $cluster opentsdb-0 DEBUG 600 "OPENTSDB pod is now really ready"
+./checklogsall $cluster zk-0 DEBUG 600 "ZOOKEEPER pod is now really ready"
+./checklogsall $cluster zk-1 DEBUG 600 "ZOOKEEPER pod is now really ready"
+./checklogsall $cluster zk-2 DEBUG 600 "ZOOKEEPER pod is now really ready"
 
-./taillogs.really.ready admincli
-./taillogs.really.ready cldb-0
-./taillogs.really.ready cldb-1
-./taillogs.really.ready cldb-2
-./taillogs.really.ready collectd
-./taillogs.really.ready dataaccessgateway
-./taillogs.really.ready elasticsearch
-./taillogs.really.ready fluent
-./taillogs.really.ready grafana
-./taillogs.really.ready hivemeta
-./taillogs.really.ready httpfs
-./taillogs.really.ready kafkarest
-./taillogs.really.ready kibana
-./taillogs.really.ready maprgateway
-./taillogs.really.ready mcs
-./taillogs.really.ready mfs-0
-./taillogs.really.ready mfs-1
-./taillogs.really.ready objectstore
-./taillogs.really.ready opentsdb
-./taillogs.really.ready zk-0
-./taillogs.really.ready zk-1
-./taillogs.really.ready zk-2
+./taillogs.really.ready $cluster admincli
+./taillogs.really.ready $cluster cldb-0
+./taillogs.really.ready $cluster cldb-1
+./taillogs.really.ready $cluster cldb-2
+./taillogs.really.ready $cluster collectd
+./taillogs.really.ready $cluster dataaccessgateway
+./taillogs.really.ready $cluster elasticsearch
+./taillogs.really.ready $cluster fluent
+./taillogs.really.ready $cluster grafana
+./taillogs.really.ready $cluster hivemeta
+./taillogs.really.ready $cluster httpfs
+./taillogs.really.ready $cluster kafkarest
+./taillogs.really.ready $cluster kibana
+./taillogs.really.ready $cluster maprgateway
+./taillogs.really.ready $cluster mcs
+./taillogs.really.ready $cluster mfs-0
+./taillogs.really.ready $cluster mfs-1
+./taillogs.really.ready $cluster objectstore
+./taillogs.really.ready $cluster opentsdb
+./taillogs.really.ready $cluster zk-0
+./taillogs.really.ready $cluster zk-1
+./taillogs.really.ready $cluster zk-2
 
-./get_mapr_ticket_for_pod admincli
-./get_mapr_ticket_for_pod cldb
-./get_mapr_ticket_for_pod collectd
-./get_mapr_ticket_for_pod dataaccessgateway
-./get_mapr_ticket_for_pod elasticsearch
-./get_mapr_ticket_for_pod fluent
-./get_mapr_ticket_for_pod grafana
-./get_mapr_ticket_for_pod hivemeta
-./get_mapr_ticket_for_pod httpfs
-./get_mapr_ticket_for_pod kafkarest
-./get_mapr_ticket_for_pod kibana
-./get_mapr_ticket_for_pod maprgateway
-./get_mapr_ticket_for_pod mcs
-./get_mapr_ticket_for_pod mfs
-./get_mapr_ticket_for_pod objectstore
-./get_mapr_ticket_for_pod opentsdb
-./get_mapr_ticket_for_pod zk
+./get_mapr_ticket_for_pod $cluster admincli
+./get_mapr_ticket_for_pod $cluster cldb
+./get_mapr_ticket_for_pod $cluster collectd
+./get_mapr_ticket_for_pod $cluster dataaccessgateway
+./get_mapr_ticket_for_pod $cluster elasticsearch
+./get_mapr_ticket_for_pod $cluster fluent
+./get_mapr_ticket_for_pod $cluster grafana
+./get_mapr_ticket_for_pod $cluster hivemeta
+./get_mapr_ticket_for_pod $cluster httpfs
+./get_mapr_ticket_for_pod $cluster kafkarest
+./get_mapr_ticket_for_pod $cluster kibana
+./get_mapr_ticket_for_pod $cluster maprgateway
+./get_mapr_ticket_for_pod $cluster mcs
+./get_mapr_ticket_for_pod $cluster mfs
+./get_mapr_ticket_for_pod $cluster objectstore
+./get_mapr_ticket_for_pod $cluster opentsdb
+./get_mapr_ticket_for_pod $cluster zk
 
-./check_for_data admincli
-./check_for_data cldb
-./check_for_data collectd
-./check_for_data dataaccessgateway
-./check_for_data elasticsearch
-./check_for_data fluent
-./check_for_data grafana
-./check_for_data hivemeta
-./check_for_data httpfs
-./check_for_data kafkarest
-./check_for_data kibana
-./check_for_data maprgateway
-./check_for_data mcs
-./check_for_data mfs
-./check_for_data objectstore
-./check_for_data opentsdb
-./check_for_data zk
+./check_for_data $cluster admincli
+./check_for_data $cluster cldb
+./check_for_data $cluster collectd
+./check_for_data $cluster dataaccessgateway
+./check_for_data $cluster elasticsearch
+./check_for_data $cluster fluent
+./check_for_data $cluster grafana
+./check_for_data $cluster hivemeta
+./check_for_data $cluster httpfs
+./check_for_data $cluster kafkarest
+./check_for_data $cluster kibana
+./check_for_data $cluster maprgateway
+./check_for_data $cluster mcs
+./check_for_data $cluster mfs
+./check_for_data $cluster objectstore
+./check_for_data $cluster opentsdb
+./check_for_data $cluster zk
 
 date
 

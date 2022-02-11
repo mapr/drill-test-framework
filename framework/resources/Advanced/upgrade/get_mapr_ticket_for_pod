@@ -2,10 +2,20 @@
 
 set -x
 
+if [ $# -ne 2 ]
+then
+  echo "get_mapr_ticket_for_pod needs cluster and pod"
+  exit 1
+fi
+
+cluster=$1
+pod=$2
+echo get_mapr_ticket_for_pod cluster $cluster pod $pod
+
 #  password=$(kubectl get secret system-user-secrets -n hpe-secure -o yaml | grep MAPR_PASSWORD | head -1 | awk '{print $2}' | base64 --decode)
-password=$(kubectl get secret system -n dataplatform -o yaml | grep MAPR_PASSWORD | head -1 | awk '{print $2}' | base64 --decode)
-for i in $(kubectl get pods -n dataplatform | grep $1 | awk '{print $1}')
+password=$(kubectl get secret system -n $cluster -o yaml | grep MAPR_PASSWORD | head -1 | awk '{print $2}' | base64 --decode)
+for i in $(kubectl get pods -n $cluster | grep $pod | awk '{print $1}')
 do
   echo $i
-  kubectl exec -i $i -n dataplatform -- /bin/bash -c "echo \"$password\" | maprlogin password -user mapr"
+  kubectl exec -i $i -n $cluster -- /bin/bash -c "echo \"$password\" | maprlogin password -user mapr"
 done

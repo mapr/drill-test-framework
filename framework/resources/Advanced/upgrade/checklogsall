@@ -2,20 +2,26 @@
 
 set -x
 
-if [ $# -ne 4 ]
+if [ $# -ne 5 ]
 then
-  echo "checklogsall pod, loglevel, timeout and last log message"
+  echo "checklogsall needs cluster, pod, loglevel, timeout and last log message"
   exit 1
 fi
-pod=$1
-loglevel=$2
-timeoutvalue=$3
-lastlogmsg=$4
 
-for i in $(kubectl get pods -n dataplatform | grep $pod | awk '{print $1}')
+cluster=$1
+pod=$2
+loglevel=$3
+timeoutvalue=$4
+lastlogmsg=$5
+# echo command to provide output for debugging purposes
+echo checklogsall cluster $cluster pod $pod loglevel $loglevel timeout $timeout lastlogmsg $lastlogmsg
+# repeat echo command to provide output that can be matched with all.output
+echo checklogsall pod $pod loglevel $loglevel timeout $timeout lastlogmsg $lastlogmsg
+
+for i in $(kubectl get pods -n $cluster | grep $pod | awk '{print $1}')
 do
   echo $i
-  ./checklogs $i $loglevel $timeoutvalue "$lastlogmsg"
+  ./checklogs $cluster $i $loglevel $timeoutvalue "$lastlogmsg"
 done
 
 exit 0

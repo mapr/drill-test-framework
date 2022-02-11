@@ -1,21 +1,23 @@
 
 
-if [[ $# -ne 2 ]]
+if [[ $# -ne 3 ]]
 then
-  echo checkcmzhealth needs errors and timeout
+  echo checkcmzhealth needs cluster, errors and timeout
   exit 1
 fi
 
-errors=$1
-timeout=$2
+cluster=$1
+errors=$2
+timeout=$3
+echo checkcmzhealth cluster $cluster errors $errors timeout $timeout
 
-# kubectl exec -i -n dataplatform admincli-0 -- bash -c 'echo mapr | maprlogin password -user mapr'
-./get_mapr_ticket_for_pod admincli
+# kubectl exec -i -n $cluster admincli-0 -- bash -c 'echo mapr | maprlogin password -user mapr'
+./get_mapr_ticket_for_pod $cluster admincli
 
-./checkcldbvalid $errors $timeout
+./checkcldbvalid $cluster $errors $timeout
 
-checkcldbconnectzk $errors $timeout
+checkcldbconnectzk $cluster $errors $timeout
 
-./checkcldbmaster $errors $timeout
+./checkcldbmaster $cluster $errors $timeout
 
-./checkzkmaster $errors $timeout
+./checkzkmaster $cluster $errors $timeout

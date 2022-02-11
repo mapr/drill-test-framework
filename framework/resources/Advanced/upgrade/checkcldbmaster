@@ -2,30 +2,31 @@
 
 set -x
 
-if [[ $# -ne 2 ]]
+if [[ $# -ne 3 ]]
 then
-  echo checkcldbmaster needs a current error count and timeout
+  echo checkcldbmaster needs a cluster name, current error count and timeout
   exit 1
 fi
 
-errors=$1
-timeoutvalue=$2
-echo checkcldbmaster timeout $timeoutvalue
+cluster=$1
+errors=$2
+timeoutvalue=$3
+echo checkcldbmaster cluster $cluster errors $errors timeout $timeoutvalue
 
 interval=30
 ((end_time=${SECONDS}+$timeoutvalue))
 start_time=$SECONDS
 ready="0"
 echo "START SECONDS", $SECONDS
-count=$(kubectl get pods -n dataplatform | grep "^cldb-" | wc -l)
+count=$(kubectl get pods -n $cluster | grep "^cldb-" | wc -l)
 while ((${SECONDS} < ${end_time}))
 do
   matches=0
-  master=$(kubectl exec -i cldb-0 -n dataplatform -- /bin/bash -c "maprcli node cldbmaster -cluster dataplatform" 2> /tmp/null | grep -v cldbmaster | awk '{print $4}' | cut -d. -f 1)
+  master=$(kubectl exec -i cldb-0 -n $cluster -- /bin/bash -c "maprcli node cldbmaster -cluster $cluster" 2> /tmp/null | grep -v cldbmaster | awk '{print $4}' | cut -d. -f 1)
   echo cldb-0 thinks the master is $master
-  for i in $(kubectl get pods -n dataplatform | grep "^cldb-" | grep -v "^cldb-0" | awk '{print $1}')
+  for i in $(kubectl get pods -n $cluster | grep "^cldb-" | grep -v "^cldb-0" | awk '{print $1}')
   do
-    master2=$(kubectl exec -i $i -n dataplatform -- /bin/bash -c "maprcli node cldbmaster -cluster dataplatform" 2> /tmp/null | grep -v cldbmaster | awk '{print $4}' | cut -d. -f 1)
+    master2=$(kubectl exec -i $i -n $cluster -- /bin/bash -c "maprcli node cldbmaster -cluster $cluster" 2> /tmp/null | grep -v cldbmaster | awk '{print $4}' | cut -d. -f 1)
     echo $i thinks the master is $master2
     if [[ "$master2" == "$master" ]]
     then
@@ -52,7 +53,7 @@ if [ $ready -eq "0" ]
 then
   echo "The cldbs do not report the same cldb master after " $(($end_time - $start_time)) " seconds"
   echo "cldb-0 thinks the cldbmaster is " $master
-  kubectl get pods -n dataplatform
+  kubectl get pods -n $cluster
   ((errors++))
   exit $errors
 fi

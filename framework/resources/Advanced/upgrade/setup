@@ -2,8 +2,26 @@ set -x
 
 # cd framework/resources/Datasources/upgrade
 
+if [[ $# -ne 1 ]]
+then
+  echo setup needs the cluster name
+  exit 1
+fi
+
+cluster=$1
+echo setup cluster $cluster
+
 /bin/rm full.all.yaml
 cp full.all.yaml.save full.all.yaml
-baseimage=$(kubectl describe pod admincli-0 -n dataplatform | grep -i image: | cut -d: -f3)
+baseimage=$(kubectl describe pod admincli-0 -n $cluster | grep -i image: | cut -d: -f3)
 sed -i "s/BASE_IMAGE/$baseimage/g" full.all.yaml
+sed -i "s/CLUSTER/$cluster/g" full.all.yaml
+
+/bin/rm all.output
+cp all.output.save all.output
+sed -i "s/CLUSTER/$cluster/g" all.output
+
+/bin/rm cldb40.output
+cp cldb40.output.save cldb40.output
+sed -i "s/CLUSTER/$cluster/g" cldb40.output
 

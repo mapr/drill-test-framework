@@ -1,7 +1,16 @@
 
 set -x
 
-./cldbinternal2 3 10800
+if [[ $# -ne 1 ]]
+then
+  echo cldb40.sh2 needs the cluster name
+  exit 1
+fi
+
+cluster=$1
+echo cldb40.sh2 cluster $cluster
+
+./cldbinternal2 $cluster 3 10800
 errors=$?
 
 exit $errors
