@@ -84,8 +84,10 @@ public class ConnectionPool implements AutoCloseable {
       final Queue<Connection> connectionQueue = Queues.newLinkedBlockingQueue();
       connections.put(connectionKey, connectionQueue);
     }
-    connectionProperties.put("user", username);
-    connectionProperties.put("password", password);
+    if (!DrillTestDefaults.AUTHENTICATION_MECHANISM.equalsIgnoreCase("MAPRSASL")) {
+      connectionProperties.put("user", username);
+      connectionProperties.put("password", password);
+    }
     return DriverManager.getConnection(DrillTestDefaults.CONNECTION_STRING, connectionProperties);
   }
 
