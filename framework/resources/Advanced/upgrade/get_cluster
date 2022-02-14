@@ -1,0 +1,4 @@
+
+set -x
+
+kubectl get dataplatform | grep -v NAME | awk '{print $1}'

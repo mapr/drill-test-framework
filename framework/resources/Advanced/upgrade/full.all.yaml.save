@@ -1,7 +1,7 @@
 apiVersion: hcp.hpe.com/v1
 kind: DataPlatform
 metadata:
-  name: dataplatform
+  name: CLUSTER
 spec:
   baseimagetag: "BASE_IMAGE"
   imageregistry: gcr.io/mapr-252711

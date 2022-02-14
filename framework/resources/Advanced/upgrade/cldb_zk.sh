@@ -1,5 +1,8 @@
 cd framework/resources/Advanced/upgrade
-./cldb40.sh2
-./zk40.sh2
 
-kubectl get pods -n dataplatform
+cluster=$(get_cluster)
+
+./cldb40.sh2 $cluster
+./zk40.sh2 $cluster
+
+kubectl get pods -n $cluster

@@ -1,9 +1,18 @@
 
 set -x
 
-kubectl get pods -n dataplatform
+if [[ $# -ne 1 ]]
+then
+  echo zk40.sh2 needs the cluster name
+  exit 1
+fi
 
-./zkinternal2 3 14400
+cluster=$1
+echo zk40.sh2 cluster $cluster
+
+kubectl get pods -n $cluster
+
+./zkinternal2 $cluster 3 14400
 errors=$?
 
 exit $errors

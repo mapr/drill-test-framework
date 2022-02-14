@@ -1,5 +1,5 @@
 apply -f full.all.yaml
-All dataplatform pods are up and running
+All CLUSTER pods are up and running
     Image: *gcr.io/mapr-252711/admincli
     Limits:
       cpu: *2001
@@ -268,25 +268,25 @@ checklogs cldb-1 DEBUG
 Checklogs 0
 checklogs cldb-2 DEBUG
 Checklogs 0
-checklogsall collectd DEBUG
+checklogsall pod collectd loglevel DEBUG 
 Checklogs 0
-checklogsall dataaccessgateway-0 DEBUG
+checklogs dataaccessgateway-0 DEBUG
 Checklogs 0
 checklogs elasticsearch-0 DEBUG
 Checklogs 0
-checklogsall fluent DEBUG
+checklogsall pod fluent loglevel DEBUG
 Checklogs 0
-checklogsall grafana DEBUG
+checklogsall pod grafana loglevel DEBUG
 Checklogs 0
 checklogs hivemeta-0 DEBUG
 Checklogs 0
 checklogs httpfs-0 DEBUG
 Checklogs 0
-checklogsall kafkarest-0 DEBUG
+checklogs kafkarest-0 DEBUG
 Checklogs 0
-checklogsall kibana DEBUG
+checklogsall pod kibana loglevel DEBUG
 Checklogs 0
-checklogsall maprgateway-0 DEBUG
+checklogs maprgateway-0 DEBUG
 Checklogs 0
 checklogs mcs-0 DEBUG
 Checklogs 0
@@ -305,126 +305,126 @@ Checklogs 0
 checklogs zk-2 DEBUG
 Checklogs 0
 taillogs.really.ready admincli
-kld admincli-0
+get_logs admincli-0
 ADMINCLI pod is now really ready...
 === Sleeping forever to keep container up ===
 taillogs.really.ready cldb
-kld cldb-0
+get_logs cldb-0
 CLDB pod is now really ready...
 Sleeping forever to keep container up ===
-kld cldb-1
+get_logs cldb-1
 CLDB pod is now really ready...
 Sleeping forever to keep container up ===
-kld cldb-2
+get_logs cldb-2
 CLDB pod is now really ready...
 Sleeping forever to keep container up ===
 taillogs.really.ready collectd
-kld collectd
+get_logs collectd
 COLLECTD pod is now really ready...
 Sleeping forever to keep container up ===
 taillogs.really.ready dataaccessgateway
-kld dataaccessgateway
+get_logs dataaccessgateway
 DAG pod is now really ready...
 Sleeping forever to keep container up ===
 taillogs.really.ready elasticsearch
-kld elasticsearch-0
+get_logs elasticsearch-0
 ELASTICSEARCH pod is now really ready...
 === Sleeping forever to keep container up ===
 taillogs.really.ready fluent
-kld fluent
+get_logs fluent
 FLUENT pod is now really ready...
 === Sleeping forever to keep container up ===
-kld fluent
+get_logs fluent
 FLUENT pod is now really ready...
 === Sleeping forever to keep container up ===
-kld fluent
+get_logs fluent
 FLUENT pod is now really ready...
 === Sleeping forever to keep container up ===
-kld fluent
+get_logs fluent
 FLUENT pod is now really ready...
 === Sleeping forever to keep container up ===
-kld fluent
+get_logs fluent
 FLUENT pod is now really ready...
 === Sleeping forever to keep container up ===
 taillogs.really.ready grafana
-kld grafana
+get_logs grafana
 GRAFANA pod is now really ready...
 Sleeping forever to keep container up ===
 taillogs.really.ready hivemeta
-kld hivemeta-0
+get_logs hivemeta-0
 HIVEMETA pod is now really ready...
 Sleeping forever to keep container up ===
 taillogs.really.ready httpfs
-kld httpfs-0
+get_logs httpfs-0
 HTTPFS pod is now really ready...
 === Sleeping forever to keep container up ===
 taillogs.really.ready kafkarest
-kld kafkarest-0
+get_logs kafkarest-0
 KAFKAREST pod is now really ready...
 === Sleeping forever to keep container up ===
 taillogs.really.ready kibana
-kld kibana
+get_logs kibana
 KIBANA pod is now really ready...
 === Sleeping forever to keep container up ===
 taillogs.really.ready maprgateway
-kld maprgateway-0
+get_logs maprgateway-0
 MAPRGW pod is now really ready...
 === Sleeping forever to keep container up ===
 taillogs.really.ready mcs
-kld mcs-0
+get_logs mcs-0
 APISERVER pod is now really ready...
 Sleeping forever to keep container up ===
 taillogs.really.ready mfs
-kld mfs-0
+get_logs mfs-0
 MFS pod is now really ready...
 Sleeping forever to keep container up ===
-kld mfs-1
+get_logs mfs-1
 MFS pod is now really ready...
 Sleeping forever to keep container up ===
 taillogs.really.ready objectstore
-kld objectstore-zone1-0
+get_logs objectstore-zone1-0
 OBJECTSTORE pod is now really ready...
 === Sleeping forever to keep container up ===
 taillogs.really.ready opentsdb
-kld opentsdb-0
+get_logs opentsdb-0
 OPENTSDB pod is now really ready...
 Sleeping forever to keep container up ===
 taillogs.really.ready zk
-kld zk-0
+get_logs zk-0
 ZOOKEEPER pod is now really ready...
 Sleeping forever to keep container up ===
-kld zk-1
+get_logs zk-1
 ZOOKEEPER pod is now really ready...
 Sleeping forever to keep container up ===
-kld zk-2
+get_logs zk-2
 ZOOKEEPER pod is now really ready...
 Sleeping forever to keep container up ===
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
 /tmp/resources/Datasources
 /tmp/resources/Functional
 /tmp/resources/bin

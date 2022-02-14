@@ -2,8 +2,18 @@
 
 set -x
 
-for i in $(kubectl get pods -n dataplatform | grep $1 | awk '{print $1}')
+if [ $# -ne 2 ]
+then
+  echo "check_for_data needs cluster and pod"
+  exit 1
+fi
+
+cluster=$1
+pod=$2
+echo check_for_data cluster $cluster pod $pod
+
+for i in $(kubectl get pods -n $cluster | grep $pod | awk '{print $1}')
 do
   echo $i
-  kubectl exec -i $i -n dataplatform -- /bin/bash -c "hadoop fs -ls /tmp/resources"
+  kubectl exec -i $i -n $cluster -- /bin/bash -c "hadoop fs -ls /tmp/resources"
 done

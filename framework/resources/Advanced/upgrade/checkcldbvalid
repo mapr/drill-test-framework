@@ -1,17 +1,18 @@
 set -x
 
-if [[ $# -ne 2 ]]
+if [[ $# -ne 3 ]]
 then
-  echo checkcldbvalid needs a current error count and timeout
+  echo checkcldbvalid needs the cluster name, a current error count and timeout
   exit 1
 fi
 
-errors=$1
-timeoutvalue=$2
-echo checkcldbvalid timeout $timeoutvalue
+cluster=$1
+errors=$2
+timeoutvalue=$3
+echo checkcldbvalid cluster $cluster errors $errors timeout $timeoutvalue
 
-# kubectl exec -i -n dataplatform admincli-0 -- bash -c 'echo mapr | maprlogin password -user mapr'
-./get_mapr_ticket_for_pod admincli
+# kubectl exec -i -n $cluster admincli-0 -- bash -c 'echo mapr | maprlogin password -user mapr'
+./get_mapr_ticket_for_pod $cluster admincli
 
 interval=30
 ((end_time=${SECONDS}+$timeoutvalue))
@@ -20,8 +21,8 @@ ready="0"
 echo "START SECONDS", $SECONDS
 while ((${SECONDS} < ${end_time}))
 do
-  kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c "maprcli dump containerinfo -ids 1 -json | jq .data[0].ActiveServers.IP"
-  valid=$(kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c "maprcli dump containerinfo -ids 1 -json | jq .data[0].ActiveServers.IP" | grep VALID | wc -l)
+  kubectl exec -i admincli-0 -n $cluster -- /bin/bash -c "maprcli dump containerinfo -ids 1 -json | jq .data[0].ActiveServers.IP"
+  valid=$(kubectl exec -i admincli-0 -n $cluster -- /bin/bash -c "maprcli dump containerinfo -ids 1 -json | jq .data[0].ActiveServers.IP" | grep VALID | wc -l)
   if [[ $valid -eq 3 ]]
   then
     # there are 3 valid cldb pods
@@ -36,8 +37,8 @@ done
 if [ $ready -eq "0" ]
 then
   echo "There are not 3 valid cldbs after " $(($end_time - $start_time)) " seconds"
-  kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c "maprcli dump containerinfo -ids 1 -json | jq .data[0].ActiveServers.IP"
-  kubectl get pods -n dataplatform
+  kubectl exec -i admincli-0 -n $cluster -- /bin/bash -c "maprcli dump containerinfo -ids 1 -json | jq .data[0].ActiveServers.IP"
+  kubectl get pods -n $cluster
   ((errors++))
   exit $errors
 fi

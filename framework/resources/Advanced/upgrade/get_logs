@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -x
+
+if [ $# -ne 2 ]
+then
+  echo "get_logs needs cluster, pod"
+  exit 1
+fi
+
+cluster=$1
+pod=$2
+# echo command to provide output for debugging purposes
+echo get_logs cluster $cluster pod $pod
+# repeat echo command to provide output that can be matched with all.output
+echo get_logs $pod
+
+kubectl logs -n $cluster $pod | tail
+

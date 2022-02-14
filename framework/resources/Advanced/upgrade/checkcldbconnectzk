@@ -1,17 +1,18 @@
 set -x
 
-if [[ $# -ne 2 ]]
+if [[ $# -ne 3 ]]
 then
-  echo checkcldbconnectzk needs error count and timeout
+  echo checkcldbconnectzk needs cluster name, error count and timeout
   exit 1
 fi
 
-errors=$1
-timeoutvalue=$2
-echo checkcldbconnectzk errors $errors timeout $timeoutvalue
+cluster=$1
+errors=$2
+timeoutvalue=$3
+echo checkcldbconnectzk cluster $cluster errors $errors timeout $timeoutvalue
 
-# kubectl exec -i -n dataplatform admincli-0 -- bash -c 'echo mapr | maprlogin password -user mapr'
-./get_mapr_ticket_for_pod admincli
+# kubectl exec -i -n $cluster admincli-0 -- bash -c 'echo mapr | maprlogin password -user mapr'
+./get_mapr_ticket_for_pod $cluster admincli
 
 interval=30
 ((end_time=${SECONDS}+$timeoutvalue))
@@ -21,11 +22,11 @@ echo "START SECONDS", $SECONDS
 while ((${SECONDS} < ${end_time}))
 do
   matches=0
-  kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c "maprcli dump cldbstate"
-  num_slaves=$(kubectl get pods -n dataplatform | grep "^cldb-" | wc -l)
+  kubectl exec -i admincli-0 -n $cluster -- /bin/bash -c "maprcli dump cldbstate"
+  num_slaves=$(kubectl get pods -n $cluster | grep "^cldb-" | wc -l)
   ((num_slaves--))
-  slave=$(kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c "maprcli dump cldbstate" | grep CLDB_IS_SLAVE_READ_ONLY | wc -l)
-  master=$(kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c "maprcli dump cldbstate" | grep CLDB_IS_MASTER_READ_WRITE | wc -l)
+  slave=$(kubectl exec -i admincli-0 -n $cluster -- /bin/bash -c "maprcli dump cldbstate" | grep CLDB_IS_SLAVE_READ_ONLY | wc -l)
+  master=$(kubectl exec -i admincli-0 -n $cluster -- /bin/bash -c "maprcli dump cldbstate" | grep CLDB_IS_MASTER_READ_WRITE | wc -l)
 
   if [[ $slave -eq $num_slaves && $master -eq 1 ]]
   then
@@ -42,8 +43,8 @@ if [ $ready -eq "0" ]
 then
   echo "There are only $slave slave cldbs and $master master cldb after " $(($end_time - $start_time)) " seconds"
   echo "There should be $num_slaves slave cldbs and 1 master cldb after " $(($end_time - $start_time)) " seconds"
-  kubectl exec -i admincli-0 -n dataplatform -- /bin/bash -c "maprcli dump cldbstate"
-  kubectl get pods -n dataplatform
+  kubectl exec -i admincli-0 -n $cluster -- /bin/bash -c "maprcli dump cldbstate"
+  kubectl get pods -n $cluster
   ((errors++))
   exit $errors
 fi

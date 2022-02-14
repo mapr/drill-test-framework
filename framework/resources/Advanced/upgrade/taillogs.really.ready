@@ -2,18 +2,29 @@
 
 set -x
 
-echo taillogs.really.ready $1
+if [[ $# -ne 2 ]]
+then
+  echo taillogs.really.ready needs the cluster name, and name of the pod
+  exit 1
+fi
 
-for i in $(kubectl get pods -n dataplatform | grep $1 | awk '{print $1}') ; do
+cluster=$1
+pod=$2
+# echo command to provide output for debugging purposes
+echo taillogs.really.ready cluster $cluster pod $pod
+# repeat echo command to provide output that can be matched with all.output
+echo taillogs.really.ready $pod
+
+for i in $(kubectl get pods -n $cluster | grep $pod | awk '{print $1}') ; do
   pod=$(echo $i | sed -e 's/\(^[^-]*\)-.*/\1/')
-  echo kld $i
-  kld $i
-  kubectl logs -n dataplatform $i | tail
-  ret=$(kubectl logs -n dataplatform $i | tail)
+  echo get_logs $cluster $i
+  get_logs $cluster $i
+  kubectl logs -n $cluster $i | tail
+  ret=$(kubectl logs -n $cluster $i | tail)
   if [[ $ret == *"pod is now really ready"* ]]
   then
-    echo PASS RUpgradeLog$1
+    echo PASS RUpgradeLog$pod
   else
-    echo FAIL RUpgradeLog$1
+    echo FAIL RUpgradeLog$pod
   fi
 done

@@ -3,7 +3,7 @@ Updating CLDB pods
 All CLDB pods have been successfully updated
 All cldb pods are up and running
 checkcldbvalid
-MapR credentials of user 'mapr' for cluster 'dataplatform' are written to '/tmp/maprticket_5000'
+MapR credentials of user 'mapr' for cluster 'CLUSTER' are written to '/tmp/maprticket_5000'
 There are 3 valid cldbs
 checkcldbmaster
 Each cldb reports a cldb master, and they are all the same

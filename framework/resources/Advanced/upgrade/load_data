@@ -2,7 +2,16 @@ set -x
 
 # cd framework/resources/Datasources/upgrade
 
-kubectl cp ../../../resources dataplatform/admincli-0:/tmp
-kubectl cp copyscript dataplatform/admincli-0:/tmp
-./get_mapr_ticket_for_pod admincli
-kubectl exec -i admincli-0 -n dataplatform -- bash -c "/tmp/copyscript"
+if [[ $# -ne 1 ]]
+then
+  echo load_data needs the cluster name
+  exit 1
+fi
+
+cluster=$1
+echo load_data cluster $cluster
+
+kubectl cp ../../../resources $cluster/admincli-0:/tmp
+kubectl cp copyscript $cluster/admincli-0:/tmp
+./get_mapr_ticket_for_pod $cluster admincli
+kubectl exec -i admincli-0 -n $cluster -- bash -c "/tmp/copyscript"
