@@ -4,8 +4,8 @@ mainDir="$(pwd)"
 
 DRILL_HOME=/opt/mapr/drill/drill-$(cat /opt/mapr/drill/drillversion)
 if [ $? -ne 0 ]; then
-  print "The Drill not installed"
-  exit 1
+    print "The Drill not installed"
+    exit 1
 fi
 DRILL_VERSION=$(grep 'git.build.version' ${DRILL_HOME}/git.properties | tr '=' '\n' | tail -1)
 HADOOP_MAPR_VERSION=$(cat /opt/mapr/hadoop/hadoopversion)
@@ -13,9 +13,12 @@ DRILL_CP="${mainDir}/jars/*"
 JDBC_DRIVER_CP="${DRILL_HOME}/jars/jdbc-driver/drill-jdbc-all-${DRILL_VERSION}.jar"
 
 maven_setup() {
-  echo "Download and install maven"
-  local mvn_url="https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz"
-  curl "${mvn_url}" | tar -C "${mainDir}" -xz
+    if [ ! -d ./apache-maven-3.6.3 ]; then
+      echo "Download and install maven"
+      local mvn_url="https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz"
+      curl "${mvn_url}" | tar -C "${mainDir}" -xz
+      M2_HOME=$(pwd)/apache-maven-3.6.3
+    fi
 }
 
 gen_config() {
@@ -83,6 +86,13 @@ EOF
 }
 
 update_symlinks() {
+    echo "Creating/Updating symlinks for necessary drill's jars"
+
+    if [ ! -d ${mainDir}/jars ]; then
+        echo "Creating jars directory"
+        mkdir ${mainDir}/jars
+    fi
+
     ln -sf ${DRILL_HOME}/jars/drill-hive-exec-shaded-* ${mainDir}/jars/.
     ln -sf ${DRILL_HOME}/jars/drill-auth-mechanism-maprsasl-* ${mainDir}/jars/.
     ln -sf ${DRILL_HOME}/jars/drill-common-* ${mainDir}/jars/.
@@ -124,22 +134,12 @@ update_symlinks() {
     ln -sf ${DRILL_HOME}/jars/3rdparty/xml-apis-*.jar ${mainDir}/jars/.
 }
 
-if [ ! -d ./apache-maven-3.6.3 ]; then
-  maven_setup
-  M2_HOME=$(pwd)/apache-maven-3.6.3
-fi
+maven_setup
+update_symlinks
 
 echo "Creating link on drill-distrib.conf and drill-override.conf"
 ln -sf ${DRILL_HOME}/conf/drill-distrib.conf ./conf/drill-distrib.conf
 ln -sf ${DRILL_HOME}/conf/drill-override.conf ./conf/drill-override.conf
-
-echo "Creating jars directory if not exist"
-if [ ! -d ${mainDir}/jars ]; then
-    mkdir ${mainDir}/jars
-fi
-
-echo "Creating/Updating symlinks for necessary drill's jars"
-update_symlinks
 
 if [ ! -f ./conf/drillTestConfig.properties ]; then
     gen_config
