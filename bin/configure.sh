@@ -4,28 +4,22 @@ mainDir="$(pwd)"
 
 DRILL_HOME=/opt/mapr/drill/drill-$(cat /opt/mapr/drill/drillversion)
 if [ $? -ne 0 ]; then
-  print "The Drill not installed"
-  exit 1
+    print "The Drill not installed"
+    exit 1
 fi
 DRILL_VERSION=$(grep 'git.build.version' ${DRILL_HOME}/git.properties | tr '=' '\n' | tail -1)
 HADOOP_MAPR_VERSION=$(cat /opt/mapr/hadoop/hadoopversion)
-DRILL_CP="${DRILL_HOME}/jars/*:${DRILL_HOME}/jars/ext/*:${DRILL_HOME}/jars/3rdparty/*:${DRILL_HOME}/jars/classb/*"
+DRILL_CP="${mainDir}/jars/*"
 JDBC_DRIVER_CP="${DRILL_HOME}/jars/jdbc-driver/drill-jdbc-all-${DRILL_VERSION}.jar"
 
 maven_setup() {
-  echo "Download and install maven"
-  local mvn_url="https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz"
-  curl "${mvn_url}" | tar -C "${mainDir}" -xz
+    if [ ! -d ./apache-maven-3.6.3 ]; then
+      echo "Download and install maven"
+      local mvn_url="https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz"
+      curl "${mvn_url}" | tar -C "${mainDir}" -xz
+      M2_HOME=$(pwd)/apache-maven-3.6.3
+    fi
 }
-
-if [ ! -d ./apache-maven-3.6.3 ]; then
-  maven_setup
-  M2_HOME=$(pwd)/apache-maven-3.6.3
-fi
-
-echo "Creating link on drill-distrib.conf and drill-override.conf"
-ln -s ${DRILL_HOME}/conf/drill-distrib.conf ./conf/drill-distrib.conf
-ln -s ${DRILL_HOME}/conf/drill-override.conf ./conf/drill-override.conf
 
 gen_config() {
     echo "Create drillTestConfig file..."
@@ -90,6 +84,62 @@ export PASSWORD
 EOF
 
 }
+
+update_symlinks() {
+    echo "Creating/Updating symlinks for necessary drill's jars"
+
+    if [ ! -d ${mainDir}/jars ]; then
+        echo "Creating jars directory"
+        mkdir ${mainDir}/jars
+    fi
+
+    ln -sf ${DRILL_HOME}/jars/drill-hive-exec-shaded-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/drill-auth-mechanism-maprsasl-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/drill-common-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/drill-java-exec-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/drill-jdbc-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/drill-memory-base-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/drill-protocol-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/drill-rpc-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/drill-shaded-guava-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/vector-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/ext/zookeeper-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/classb/reflections-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/classb/javax.servlet-api-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/avatica-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/commons-codec-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/commons-collections-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/commons-configuration-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/config-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/curator-client-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/curator-framework-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/curator-recipes-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/curator-x-discovery-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/guava-shaded-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/hadoop-auth-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/hadoop-common-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/hadoop-yarn-common-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/hppc-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/jackson-annotations-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/jackson-core-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/jackson-databind-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/jetty-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/jcl-over-slf4j-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/maprfs-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/metrics-core-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/metrics-jmx-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/metrics-jvm-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/netty-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/protobuf-java-* ${mainDir}/jars/.
+    ln -sf ${DRILL_HOME}/jars/3rdparty/xml-apis-*.jar ${mainDir}/jars/.
+}
+
+maven_setup
+update_symlinks
+
+echo "Creating link on drill-distrib.conf and drill-override.conf"
+ln -sf ${DRILL_HOME}/conf/drill-distrib.conf ./conf/drill-distrib.conf
+ln -sf ${DRILL_HOME}/conf/drill-override.conf ./conf/drill-override.conf
 
 if [ ! -f ./conf/drillTestConfig.properties ]; then
     gen_config
