@@ -1,25 +1,24 @@
 dfs_describe.drilltestdircsv	\{
   \"type\" : \"file\",
   \"connection\" : \"maprfs:///\",
-  \"config\" : null,
   \"formats\" : \{
     \"psv\" : \{
       \"type\" : \"text\",
       \"extensions\" : \[ \"tbl\" \],
+      \"fieldDelimiter\" : \"\|\",
       \"quote\" : \"!\",
       \"escape\" : \"`\",
       \"comment\" : \"\^\",
-      \"skipFirstLine\" : true,
-      \"delimiter\" : \"\|\"
+      \"skipFirstLine\" : true
     \},
     \"dsv\" : \{
       \"type\" : \"text\",
       \"extensions\" : \[ \"dat\" \],
+      \"fieldDelimiter\" : \"\|\",
       \"quote\" : \"'\",
       \"escape\" : \"!\",
       \"comment\" : \"@\",
-      \"extractHeader\" : true,
-      \"delimiter\" : \"\|\"
+      \"extractHeader\" : true
     \},
     \"csv\" : \{
       \"type\" : \"text\",
@@ -27,17 +26,16 @@ dfs_describe.drilltestdircsv	\{
       \"quote\" : \"!\",
       \"escape\" : \"`\",
       \"comment\" : \"\^\",
-      \"skipFirstLine\" : true,
-      \"delimiter\" : \",\"
+      \"skipFirstLine\" : true
     \},
     \"tsv\" : \{
       \"type\" : \"text\",
       \"extensions\" : \[ \"tsv\" \],
+      \"fieldDelimiter\" : \"\\t\",
       \"quote\" : \"'\",
       \"escape\" : \"!\",
       \"comment\" : \"@\",
-      \"extractHeader\" : true,
-      \"delimiter\" : \"\\t\"
+      \"extractHeader\" : true
     \},
     \"parquet\" : \{
       \"type\" : \"parquet\"

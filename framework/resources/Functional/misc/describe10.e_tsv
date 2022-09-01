@@ -1,17 +1,15 @@
 cp_describe.default	\{
   \"type\" : \"file\",
   \"connection\" : \"classpath:///\",
-  \"config\" : null,
   \"formats\" : \{
     \"csv\" : \{
       \"type\" : \"text\",
-      \"extensions\" : \[ \"csv\" \],
-      \"delimiter\" : \",\"
+      \"extensions\" : \[ \"csv\" \]
     \},
     \"tsv\" : \{
       \"type\" : \"text\",
       \"extensions\" : \[ \"tsv\" \],
-      \"delimiter\" : \"\\t\"
+      \"fieldDelimiter\" : \"\\t\"
     \},
     \"json\" : \{
       \"type\" : \"json\",
@@ -26,8 +24,7 @@ cp_describe.default	\{
     \"csvh\" : \{
       \"type\" : \"text\",
       \"extensions\" : \[ \"csvh\" \],
-      \"extractHeader\" : true,
-      \"delimiter\" : \",\"
+      \"extractHeader\" : true
     \}
   \}
   \"enabled\" : true
