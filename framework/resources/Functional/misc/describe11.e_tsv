@@ -5,6 +5,5 @@ hbase_describe	\{
     \"hbase.security.authentication\": \"maprsasl\",
     \"hbase.zookeeper.property.clientPort\" : \"5181\"
   \},
-  \"size.calculator.enabled\" : false,
   \"enabled\" : true
 \}
