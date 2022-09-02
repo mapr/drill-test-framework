@@ -1,4 +1,3 @@
     Screen
-      Project(EXPR$0=[CAST($0):VARCHAR(20) CHARACTER SET "UTF-16LE" COLLATE "UTF-16LE$en_US$primary" NOT NULL], name=[CAST($1):VARCHAR(30) CHARACTER SET "UTF-16LE" COLLATE "UTF-16LE$en_US$primary"])
-        Project(row_key=[$0], ITEM=[ITEM($1, 'name')])
-          Scan(table=[[hbase, student]], groupscan=[HBaseGroupScan [HBaseScanSpec=HBaseScanSpec [tableName=student, startRow=1, stopRow=2, filter=FilterList AND (2/2): [RowFilter (EQUAL, ^\x5CQ1\x5CE.*$), RowFilter (NOT_EQUAL, 100)]], columns=[`row_key`, `onecf`.`name`]]])
+      Project(EXPR$0=[CAST($0):VARCHAR(20) NOT NULL], name=[CAST(ITEM($1, 'name')):VARCHAR(30)])
+        Scan(table=[[hbase, student]], groupscan=[HBaseGroupScan [HBaseScanSpec=HBaseScanSpec [tableName="student", startRow="1", stopRow="2", filter="FilterList AND (2/2): [RowFilter (EQUAL, ^\x5CQ1\x5CE.*$), RowFilter (NOT_EQUAL, 100)]"], columns=[`row_key`, `onecf`.`name`]]])

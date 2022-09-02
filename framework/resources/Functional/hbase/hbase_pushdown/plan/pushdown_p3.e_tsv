@@ -1,4 +1,3 @@
     Screen
-      Project(EXPR$0=[/(CAST($1):INTEGER, CAST($2):FLOAT)])
-        Project(row_key=[$0], ITEM=[ITEM($1, 'age')], ITEM2=[ITEM($2, 'gpa')])
-          Scan(table=[[hbase, student]], groupscan=[HBaseGroupScan [HBaseScanSpec=HBaseScanSpec [tableName=student, startRow=750\x00, stopRow=800, filter=FilterList AND (2/2): [RowFilter (LESS, 800), RowFilter (GREATER, 750)]], columns=[`row_key`, `twocf`.`age`, `threecf`.`gpa`]]])
+      Project(EXPR$0=[/(CAST(ITEM($0, 'age')):INTEGER, CAST(ITEM($1, 'gpa')):FLOAT)])
+        Scan(table=[[hbase, student]], groupscan=[HBaseGroupScan [HBaseScanSpec=HBaseScanSpec [tableName="student", startRow="750\x00", stopRow="800", filter="FilterList AND (2/2): [RowFilter (LESS, 800), RowFilter (GREATER, 750)]"], columns=[`twocf`.`age`, `threecf`.`gpa`]]])

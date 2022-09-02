@@ -2,8 +2,8 @@ hbase_describe	\{
   \"type\" : \"hbase\",
   \"config\" : \{
     \"hbase.zookeeper.quorum\" : \".*\",
+    \"hbase.security.authentication\" : \"maprsasl\",
     \"hbase.zookeeper.property.clientPort\" : \"5181\"
   \},
-  \"size.calculator.enabled\" : false,
   \"enabled\" : true
 \}

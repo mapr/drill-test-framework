@@ -1,3 +1,3 @@
 .*
-Filter.*AND.*=.*1993.*=.*'nov'.*>.*29600.*
-Scan.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring/0_0_34.parquet.*selectionRoot=maprfs:/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring.*numFiles=1.*columns.*dir0.*dir1.*`columns`\[0\].*`columns`\[1\].*`columns`\[4\].*`columns`\[10\].*`columns`\[13\]\]\]\].*
+Filter.*>.*29600.*
+Scan.*/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring/0_0_34.parquet.*selectionRoot=maprfs:/drill/testdata/ctas_auto_partition/existing_partition_pruning/lineitem_hierarchical_intstring.*numFiles=1.*columns.*`columns`\[0\].*`columns`\[1\].*`columns`\[4\].*`columns`\[10\].*`columns`\[13\]\]\]\].*

@@ -1,4 +1,4 @@
 Screen
 Project(row_key=[$0], fivecf=[$1], fourcf=[$2], onecf=[$3], threecf=[$4], twocf=[$5])
-Scan(table=[[hbase, student]], groupscan=[HBaseGroupScan [HBaseScanSpec=HBaseScanSpec [tableName=student, startRow=101\x00, stopRow=201, filter=FilterList AND (3/3): [RowFilter (GREATER, 101), RowFilter (LESS, 201), RowFilter (NOT_EQUAL, 200)]], columns=[
+Scan(table=[[hbase, student]], groupscan=[HBaseGroupScan [HBaseScanSpec=HBaseScanSpec [tableName="student", startRow="101\x00", stopRow="201", filter="FilterList AND (3/3): [RowFilter (GREATER, 101), RowFilter (LESS, 201), RowFilter (NOT_EQUAL, 200)]"], columns=[
 ]]])
