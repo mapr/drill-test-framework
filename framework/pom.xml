@@ -130,16 +130,6 @@
     </dependency>
   </dependencies>
   <repositories>
-    <repository>
-      <id>mapr-releases</id>
-      <url>http://repository.mapr.com/maven/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
   </repositories>
   <build>
     <plugins>
