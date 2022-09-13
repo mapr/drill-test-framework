@@ -1,6 +1,3 @@
-Scan
-/user/hive/warehouse/drill_6331_managed_table/part_col=Partition_three/000000_0
-/user/hive/warehouse/drill_6331_managed_table/part_col=Partition_two/000000_0
-/user/hive/warehouse/drill_6331_managed_table/part_col=Partition_one/000000_0
+DirectScan
 numFiles = 3
 DynamicPojoRecordReader.*records.*=.*12
