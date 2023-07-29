@@ -6,14 +6,15 @@
   <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
   <properties>
-    <testng.version>6.4</testng.version>
+    <testng.version>6.14.3</testng.version>
     <log4j.version>1.2.17</log4j.version>
     <jackson.version>2.8.11</jackson.version>
+    <encoding.format>UTF-8</encoding.format>
+    <java.version>11</java.version>
     <drill.version>${env.DRILL_VERSION}</drill.version>
     <hadoop.version>${env.HADOOP_VERSION}</hadoop.version>
     <runtimeDepenencies>${env.DRILL_HOME}/conf</runtimeDepenencies>
-    <maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
-    <mapr.release.version>6.2.0.0-mapr-SNAPSHOT</mapr.release.version>
+    <mapr.core.version>7.4.0.0-mapr-SNAPSHOT</mapr.core.version>
   </properties>
   <dependencies>
     <dependency>
@@ -29,7 +30,7 @@
     <dependency>
       <groupId>org.apache.zookeeper</groupId>
       <artifactId>zookeeper</artifactId>
-      <version>3.4.6</version>
+      <version>3.5.6.0-mapr-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>
@@ -87,7 +88,7 @@
     <dependency>
       <groupId>com.mapr.hadoop</groupId>
       <artifactId>maprfs</artifactId>
-      <version>${mapr.release.version}</version>
+      <version>${mapr.core.version}</version>
       <exclusions>
         <exclusion>
           <groupId>org.yaml</groupId>
@@ -166,11 +167,31 @@
     <repository>
       <id>mapr-releases</id>
       <url>http://repository.mapr.com/maven/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>dev_repo</id>
+      <url>http://df-mvn-dev.mip.storage.hpecorp.net/nexus/content/repositories/public/</url>
       <releases>
         <enabled>true</enabled>
       </releases>
       <snapshots>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>mapr-snapshot_ebf</id>
+      <url>http://df-mvn-stage.mip.storage.hpecorp.net/nexus/content/repositories/releases/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
       </snapshots>
     </repository>
   </repositories>
@@ -283,7 +304,7 @@
           <plugin>
             <groupId>com.googlecode.maven-download-plugin</groupId>
             <artifactId>download-maven-plugin</artifactId>
-            <version>1.2.0</version>
+            <version>1.6.0</version>
             <executions>
               <execution>
                 <id>install-tpcds-hivegenerate-parquet</id>
@@ -553,8 +574,9 @@
             <plugin>
               <artifactId>maven-compiler-plugin</artifactId>
               <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
+                <source>${java.version}</source>
+                <target>${java.version}</target>
+                <encoding>${encoding.format}</encoding>
               </configuration>
             </plugin>
           </plugins>

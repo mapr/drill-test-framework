@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 hostname=$(hostname -f)
 mainDir="$(pwd)"
+SETTINGS_XML_TEMPLATE="./conf/settings.xml.template"
+SETTINGS_XML_LOCATION="$HOME/.m2/settings.xml"
 
 DRILL_HOME=/opt/mapr/drill/drill-$(cat /opt/mapr/drill/drillversion)
 if [ $? -ne 0 ]; then
@@ -11,6 +13,18 @@ DRILL_VERSION=$(grep 'git.build.version' ${DRILL_HOME}/git.properties | tr '=' '
 HADOOP_MAPR_VERSION=$(cat /opt/mapr/hadoop/hadoopversion)
 DRILL_CP="${DRILL_HOME}/jars/*:${DRILL_HOME}/jars/ext/*:${DRILL_HOME}/jars/3rdparty/*:${DRILL_HOME}/jars/classb/*"
 JDBC_DRIVER_CP="${DRILL_HOME}/jars/jdbc-driver/drill-jdbc-all-${DRILL_VERSION}.jar"
+
+echo "Configuring ~/.m2/settings.xml file to be able to download test resources"
+
+# Create the ~/.m2 directory if it doesn't exist
+if [ ! -d "$HOME/.m2" ]; then
+  mkdir -p "$HOME/.m2"
+fi
+
+# Copy the source file to the target location, overwriting it if it already exists
+cp -f "$SETTINGS_XML_TEMPLATE" "$SETTINGS_XML_LOCATION"
+
+echo "The file $SETTINGS_XML_TEMPLATE has been successfully copied to $SETTINGS_XML_LOCATION."
 
 maven_setup() {
   echo "Download and install maven"

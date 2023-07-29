@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	<proxies>
+		<proxy>
+			<id>hp-proxy</id>
+			<active>true</active>
+			<protocol>http</protocol>
+			<host>web-proxy.corp.hpecorp.net</host>
+			<port>8080</port>
+			<nonProxyHosts>df-mvn-dev.mip.storage.hpecorp.net</nonProxyHosts>
+		</proxy>
+		<proxy>
+			<id>drill-proxy</id>
+			<active>true</active>
+			<protocol>https</protocol>
+			<host>web-proxy.corp.hpecorp.net</host>
+			<port>8080</port>
+			<nonProxyHosts>s3-us-west-1.amazonaws.com</nonProxyHosts>
+		</proxy>
+	</proxies>
+</settings>
