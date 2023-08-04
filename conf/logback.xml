@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  Built in 2022-11-22 12:26 by logback-translator            -->
+<!--                                                             -->
+<!--  For sponsoring SLF4J/logback/reload4j projects see         -->
+<!--    [https://github.com/sponsors/qos-ch](https://github.com/sponsors/qos-ch)                       -->
+<!--                                                             -->
+<!--  Contact sales(at)qos.ch about licensing this tool or   -->
+<!--  custom development.-->
+<configuration>
+    <!-- Errors were reported during translation. -->
+    <!-- Could not find transformer for org.apache.log4j.rolling.RollingFileAppender -->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/drill.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>logs/drill.log.%i</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>10</maxIndex>
+        </rollingPolicy>
+
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>100MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>%date{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="Drill" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.out</Target>
+        <encoder>
+            <pattern>%m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.out</Target>
+        <encoder>
+            <pattern>%m%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.apache.zookeeper" level="WARN"/>
+    <logger name="DrillTestLogger" additivity="false" level="INFO">
+        <appender-ref ref="file"/>
+        <appender-ref ref="Drill"/>
+    </logger>
+    <logger name="org.apache.curator" level="WARN"/>
+    <root level="ERROR">
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>

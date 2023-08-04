@@ -4,7 +4,8 @@
     "type" : "hbase",
     "config" : {
       "hbase.zookeeper.quorum" : "localhost",
-      "hbase.zookeeper.property.clientPort" : "5181"
+      "hbase.zookeeper.property.clientPort" : "5181",
+      "hbase.security.authentication": "maprsasl"
     },
     "size.calculator.enabled" : false,
     "enabled" : true
