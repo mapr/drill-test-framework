@@ -11,9 +11,12 @@ The framework is built for regression, integration & sanity testing. Includes te
  4. Cluster information are set in the [conf/drillTestConfig.properties](conf/drillTestConfig.properties) file. This is the main configuration file for the framework. It needs to be modified with local cluster info before compile the framework and run tests. 
 
 ## Build Project
+Note: `drill-1.20.x-eep9-master` test branch is created specifically for `eep-9.x` line and contain a number of fixes and simplification to make build & run process easier and less faulty.
+
 To begin using the test framework, you need to build the project and download dependent datasets (configured in [pom.xml](framework/pom.xml)). 
+
 ```
-git clone -b 1.16.1-mapr git@github.com:mapr/drill-test-framework.git
+git clone -b drill-1.20.x-eep9-master --depth 1 --single-branch https://github.com/mapr/drill-test-framework.git
 cd drill-test-framework
 ./bin/configure.sh
 ./bin/drill.sh -b --download

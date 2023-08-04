@@ -66,8 +66,7 @@ gen_config() {
     fi
 
 cat << EOF > ./conf/drillTestConfig.properties
-HADOOP_INSTALL_LOC=/opt/mapr
-HADOOP_HOME=${HADOOP_INSTALL_LOC}/hadoop/hadoop-${HADOOP_MAPR_VERSION}
+HADOOP_HOME=/opt/mapr/hadoop/hadoop-${HADOOP_MAPR_VERSION}
 DRILL_HOME=${DRILL_HOME}
 
 DRILL_TEST_DATA_DIR=framework/resources
