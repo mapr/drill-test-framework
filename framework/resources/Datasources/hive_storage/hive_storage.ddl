@@ -29,7 +29,7 @@ create external table if not exists hive_storage.fewtypes_parquet (
 STORED AS PARQUET
 LOCATION '/drill/testdata/hive_storage/fewtypes_parquet';
 
-create view if not exists hive_storage.fewtypes_null_parquet_nonullsview
+CREATE OR REPLACE VIEW hive_storage.fewtypes_null_parquet_nonullsview
 as select int_col, bigint_col, date_col, time_col, timestamp_col, interval_col, varchar_col, float_col, double_col, bool_col
 from hive_storage.fewtypes_null_parquet 
 where int_col is not null and 
