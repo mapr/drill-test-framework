@@ -104,6 +104,28 @@ EOF
 
 }
 
+update_components_build_version_in_pom_file(){
+  mapr_home='/opt/mapr'
+  hadoop_version=$(cat ${mapr_home}/hadoop/hadoopversion)
+
+  drill_build_version=$(ls ${DRILL_HOME}/jars/ | grep "drill-jdbc-storage" | head -n 1 | sed 's/^drill-jdbc-storage-\(.*\).jar$/\1/')
+  hadoop_build_version=$(ls ${mapr_home}/hadoop/hadoop-${hadoop_version}/share/hadoop/common | grep hadoop | head -n 1 | sed 's/.jar//;s/-tests//' | awk '{ split($0,a,/^([a-zA-Z]*-)*/); print a[2] }')
+  mapr_core_build_version=$(ls ${mapr_home}/lib/ | grep maprfs | head -n 1 | sed 's/.jar//;s/-tests//' | awk '{ split($0,a,/^([a-zA-Z]*-)*/); print a[2] }')
+  zookeeper_build_version=$(ls ${mapr_home}/lib/ | grep "zookeeper" | head -n 1 | sed 's/^zookeeper-\(.*\).jar$/\1/')
+
+  echo Drill build version ${drill_build_version} will be set in pom.xml
+  echo Hadoop version ${hadoop_build_version} will be set in pom.xml
+  echo Mapr core build version ${mapr_core_build_version} will be set in pom.xml
+  echo Zookeeper build version ${zookeeper_build_version} will be set in pom.xml
+
+  sed -i "1,/<drill.version>.*<\/drill.version>/ s/<drill.version>.*<\/drill.version>/<drill.version>${drill_build_version}<\/drill.version>/1" framework/pom.xml
+  sed -i "1,/<hadoop.version>.*<\/hadoop.version>/ s/<hadoop.version>.*<\/hadoop.version>/<hadoop.version>${hadoop_build_version}<\/hadoop.version>/1" framework/pom.xml
+  sed -i "1,/<mapr.core.version>.*<\/mapr.core.version>/ s/<mapr.core.version>.*<\/mapr.core.version>/<mapr.core.version>${mapr_core_build_version}<\/mapr.core.version>/1" framework/pom.xml
+  sed -i "1,/<zookeeper.version>.*<\/zookeeper.version>/ s/<zookeeper.version>.*<\/zookeeper.version>/<zookeeper.version>${zookeeper_build_version}<\/zookeeper.version>/1" framework/pom.xml
+}
+
+update_components_build_version_in_pom_file
+
 if [ ! -f ./conf/drillTestConfig.properties ]; then
     gen_config
 fi
