@@ -15,9 +15,9 @@
     <!--NOTE: those version (4) will be automatically picked up from the cluser
     If you would like to change this - make canges to bin/configure.sh and remove
     the usage of update_components_build_version_in_pom_file method -->
-    <drill.version>1.20.3.0-eep-911</drill.version>
-    <hadoop.version>3.3.5.0-eep-912</hadoop.version>
-    <mapr.core.version>7.4.0.0-mapr</mapr.core.version>
+    <drill.version>1.20.3.200-eep-921</drill.version>
+    <hadoop.version>3.3.5.200-eep-921</hadoop.version>
+    <mapr.core.version>7.6.0.0-mapr</mapr.core.version>
     <zookeeper.version>3.5.6.0-mapr-2210</zookeeper.version>
   </properties>
   <dependencies>
@@ -249,8 +249,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
+          <source>11</source>
+          <target>11</target>
         </configuration>
       </plugin>
       <plugin>
@@ -306,246 +306,79 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>com.googlecode.maven-download-plugin</groupId>
-            <artifactId>download-maven-plugin</artifactId>
-            <version>1.6.0</version>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.2.0</version>
             <executions>
               <execution>
-                <id>install-tpcds-hivegenerate-parquet</id>
+                <id>copy-resources</id>
                 <phase>prepare-package</phase>
                 <goals>
-                  <goal>wget</goal>
+                  <goal>copy-resources</goal>
                 </goals>
                 <configuration>
-                  <url>http://apache-drill-s3.s3.amazonaws.com/files/tpcds_hivegenerated_parquet.tgz</url>
-                  <outputFileName>tpcds_hivegenerated_parquet.tgz</outputFileName>
-                  <unpack>true</unpack>
                   <outputDirectory>${project.basedir}/resources/Datasources</outputDirectory>
-                  <md5>b585a419fb5ceda6daa91a8bc19c2365</md5>
+                  <resources>
+                    <resource>
+                      <directory>/home/mapr/drill_res</directory>
+                      <includes>
+                        <include>**/*.tgz</include>
+                      </includes>
+                    </resource>
+                  </resources>
                 </configuration>
               </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
               <execution>
-                <id>install-tpcds1-hive1dot2-withdate</id>
+                <id>unpack</id>
                 <phase>prepare-package</phase>
                 <goals>
-                  <goal>wget</goal>
+                  <goal>run</goal>
                 </goals>
                 <configuration>
-                  <url>http://apache-drill-s3.s3.amazonaws.com/files/tpcds1_hive1dot2_withdate.tgz</url>
-                  <outputFileName>tpcds1_hive1dot2_withdate.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>install-complexga100k-tgz-json</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>http://apache-drill-s3.s3.amazonaws.com/files/complexga100k.json.tgz</url>
-                  <outputFileName>complexga100k.json.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/complex/json</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>install-complex-tgz-json</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>http://apache-drill-s3.s3.amazonaws.com/files/complex.json.tgz</url>
-                  <outputFileName>complex.json.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/complex/json</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>install-mondrian-tgz-parquet</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>http://apache-drill-s3.s3.amazonaws.com/files/mondrian_parquet.tgz</url>
-                  <outputFileName>mondrian_parquet.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/mondrian</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>schema_change_empty_batch</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>http://apache-drill-s3.s3.amazonaws.com/files/schema_change_empty_batch.tgz</url>
-                  <outputFileName>schema_change_empty_batch.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/schema_change_empty_batch/</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>func-passing-widestrings-large</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>http://apache-drill-s3.s3.amazonaws.com/files/func-passing-widestrings-large.tgz</url>
-                  <outputFileName>func-passing-widestrings-large.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>
-                    ${project.basedir}/resources/Functional/data-shapes/wide-columns/5000/1000rows/parquet/
-                  </outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>flatten-operators-100000rows</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>http://apache-drill-s3.s3.amazonaws.com/files/flatten-operators-100000rows.tgz</url>
-                  <outputFileName>flatten-operators-100000rows.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/flatten_operators/</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>func-passing-flatten-operators-large</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>http://apache-drill-s3.s3.amazonaws.com/files/func-passing-flatten-operators-large.tgz</url>
-                  <outputFileName>func-passing-flatten-operators-large.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Functional/flatten_operators/100000rows/
-                  </outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>tpch_sf1_parquet</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>https://s3-us-west-1.amazonaws.com/apache-drill-s3/tpch/sf1/tpch_sf1_parquet.tar.gz</url>
-                  <outputFileName>tpch_sf1_parquet.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/tpch/sf1/parquet</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>tpch_sf1_json</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>https://s3-us-west-1.amazonaws.com/apache-drill-s3/tpch/sf1/tpch_sf1_json.tar.gz</url>
-                  <outputFileName>tpch_sf1_json.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/tpch/sf1/json</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>tpch_sf1_text</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>https://s3-us-west-1.amazonaws.com/apache-drill-s3/tpch/sf1/tpch_sf1_text.tar.gz</url>
-                  <outputFileName>tpch_sf1_text.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/tpch/sf1/text</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>tpch_sf1_maprdb_json</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>https://s3-us-west-1.amazonaws.com/apache-drill-s3/tpch/sf1/tpch_sf1_maprdb_json.tar.gz</url>
-                  <outputFileName>tpch_sf1_maprdb_json.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/tpch/sf1/maprdb/json</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>tpcds_sf1_parquet</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>http://apache-drill-s3.s3.amazonaws.com/files/tpcds/tpcds_sf1_parquet.tar.gz</url>
-                  <outputFileName>tpcds_sf1_parquet.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/tpcds/sf1/parquet</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>tpcds_sf1_json</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>http://apache-drill-s3.s3.amazonaws.com/files/tpcds/tpcds_sf1_json.tar.gz</url>
-                  <outputFileName>tpcds_sf1_json.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/tpcds/sf1/json</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>tpcds_text_sf1</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>http://apache-drill-s3.s3.amazonaws.com/files/tpcds/tpcds_sf1_text.tar.gz</url>
-                  <outputFileName>tpcds_text_sf1.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/tpcds/sf1/text</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>tpcds_sf1_maprdb_json</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>https://s3-us-west-1.amazonaws.com/apache-drill-s3/tpcds/sf1/tpcds_sf1_maprdb_json.tar.gz</url>
-                  <outputFileName>tpcds_sf1_maprdb_json.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/tpcds/sf1/maprdb/json</outputDirectory>
-                </configuration>
-              </execution>
-              <execution>
-                <id>md1119_parquet</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>wget</goal>
-                </goals>
-                <configuration>
-                  <url>http://apache-drill-s3.s3.amazonaws.com/files/md1119_parquet.tgz</url>
-                  <outputFileName>md1119_parquet.tgz</outputFileName>
-                  <unpack>true</unpack>
-                  <outputDirectory>${project.basedir}/resources/Datasources/hive_storage/</outputDirectory>
+                  <target>
+                    <!-- Copies and unpacks all .tgz resources -->
+                    <untar src="${project.basedir}/resources/Datasources/tpcds_hivegenerated_parquet.tgz"
+                           dest="${project.basedir}/resources/Datasources" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/tpcds1_hive1dot2_withdate.tgz"
+                           dest="${project.basedir}/resources/Datasources" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/complexga100k.json.tgz"
+                           dest="${project.basedir}/resources/Datasources/complex/json" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/complex.json.tgz"
+                           dest="${project.basedir}/resources/Datasources/complex/json" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/mondrian_parquet.tgz"
+                           dest="${project.basedir}/resources/Datasources/mondrian" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/schema_change_empty_batch.tgz"
+                           dest="${project.basedir}/resources/Datasources/schema_change_empty_batch" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/func-passing-widestrings-large.tgz"
+                           dest="${project.basedir}/resources/Functional/data-shapes/wide-columns/5000/1000rows/parquet" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/flatten-operators-100000rows.tgz"
+                           dest="${project.basedir}/resources/Datasources/flatten_operators" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/func-passing-flatten-operators-large.tgz"
+                           dest="${project.basedir}/resources/Functional/flatten_operators/100000rows" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/tpch_sf1_parquet.tgz"
+                           dest="${project.basedir}/resources/Datasources/tpch/sf1/parquet" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/tpch_sf1_json.tgz"
+                           dest="${project.basedir}/resources/Datasources/tpch/sf1/json" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/tpch_sf1_text.tgz"
+                           dest="${project.basedir}/resources/Datasources/tpch/sf1/text" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/tpch_sf1_maprdb_json.tgz"
+                           dest="${project.basedir}/resources/Datasources/tpch/sf1/maprdb/json" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/tpcds_sf1_parquet.tgz"
+                           dest="${project.basedir}/resources/Datasources/tpcds/sf1/parquet" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/tpcds_text_sf1.tgz"
+                           dest="${project.basedir}/resources/Datasources/tpcds/sf1/text" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/tpcds_sf1_maprdb_json.tgz"
+                           dest="${project.basedir}/resources/Datasources/tpcds/sf1/maprdb/json" compression="gzip" />
+                    <untar src="${project.basedir}/resources/Datasources/md1119_parquet.tgz"
+                           dest="${project.basedir}/resources/Datasources/hive_storage" compression="gzip" />
+                  </target>
                 </configuration>
               </execution>
             </executions>
