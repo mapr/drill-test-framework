@@ -11,17 +11,43 @@ The framework is built for regression, integration & sanity testing. Includes te
  4. Cluster information are set in the [conf/drillTestConfig.properties](conf/drillTestConfig.properties) file. This is the main configuration file for the framework. It needs to be modified with local cluster info before compile the framework and run tests. 
 
 ## Build Project
-Note: `drill-1.20.x-eep9-master` test branch is created specifically for `eep-9.x` line and contain a number of fixes and simplification to make build & run process easier and less faulty.
+Note: `drill-1.20.x-eep9-master-local-res` test branch is created specifically for `eep-9.x` line and contain a number of fixes and simplification to make build & run process easier and less faulty.
 
 To begin using the test framework, you need to build the project and download dependent datasets (configured in [pom.xml](framework/pom.xml)). 
 
+This is a branch created to use locally downloaded resources.
+
+> Nodes with a copy of test resources in root home dir: 
+
+| ip            |
+|---------------|
+| 10.163.165.33 |
+| 10.163.165.53 |
+| 10.163.165.15 |
+
+All tests are passed with this type of configuration. 
+
+See required preconditions:
+
 ```
-git clone -b drill-1.20.x-eep9-master --depth 1 --single-branch https://github.com/mapr/drill-test-framework.git
-cd drill-test-framework
+git clone -b drill-1.20.x-eep9-master-local-res --depth 1 --single-branch https://github.com/mapr/drill-test-framework.git
+
+scp -r root@<HOST>:/root/drill_test_data_do_not_remove/* /home/mapr/drill_res/
+
+chown -R mapr:mapr /home/mapr/drill_res
+
+cd /home/mapr/drill_res
+
+cp * /home/mapr/drill-test-framework/framework/resources/Datasources/
+
+cd /home/mapr/drill-test-framework/
+
 ./bin/configure.sh
+
 ./bin/drill.sh -b --download
-``` 
-If you've already downloaded the datasets previously, you can simply skip the download.
+
+bin/drill.sh --run
+```
 
 ## Execute Tests
 In the root directory of your repository, execute the following command to run tests:
