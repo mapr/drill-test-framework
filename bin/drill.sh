@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-sources ./conf/drillTestConfig.properties
+source ./conf/drillTestConfig.properties
 set -e
 
 #######################################################################

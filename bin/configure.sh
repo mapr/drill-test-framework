@@ -1,25 +1,45 @@
 #!/usr/bin/env bash
 hostname=$(hostname -f)
 mainDir="$(pwd)"
+SETTINGS_XML_TEMPLATE="./conf/settings.xml.template"
+SETTINGS_XML_LOCATION="$HOME/.m2/settings.xml"
 
 DRILL_HOME=/opt/mapr/drill/drill-$(cat /opt/mapr/drill/drillversion)
 if [ $? -ne 0 ]; then
-    print "The Drill not installed"
-    exit 1
+  print "The Drill not installed"
+  exit 1
 fi
 DRILL_VERSION=$(grep 'git.build.version' ${DRILL_HOME}/git.properties | tr '=' '\n' | tail -1)
 HADOOP_MAPR_VERSION=$(cat /opt/mapr/hadoop/hadoopversion)
-DRILL_CP="${mainDir}/jars/*"
+DRILL_CP="${DRILL_HOME}/jars/*:${DRILL_HOME}/jars/ext/*:${DRILL_HOME}/jars/3rdparty/*:${DRILL_HOME}/jars/classb/*"
 JDBC_DRIVER_CP="${DRILL_HOME}/jars/jdbc-driver/drill-jdbc-all-${DRILL_VERSION}.jar"
 
+echo "Configuring ~/.m2/settings.xml file to be able to download test resources"
+
+# Create the ~/.m2 directory if it doesn't exist
+if [ ! -d "$HOME/.m2" ]; then
+  mkdir -p "$HOME/.m2"
+fi
+
+# Copy the source file to the target location, overwriting it if it already exists
+cp -f "$SETTINGS_XML_TEMPLATE" "$SETTINGS_XML_LOCATION"
+
+echo "The file $SETTINGS_XML_TEMPLATE has been successfully copied to $SETTINGS_XML_LOCATION."
+
 maven_setup() {
-    if [ ! -d ./apache-maven-3.6.3 ]; then
-      echo "Download and install maven"
-      local mvn_url="https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz"
-      curl "${mvn_url}" | tar -C "${mainDir}" -xz
-      M2_HOME=$(pwd)/apache-maven-3.6.3
-    fi
+  echo "Download and install maven"
+  local mvn_url="https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz"
+  curl "${mvn_url}" | tar -C "${mainDir}" -xz
 }
+
+if [ ! -d ./apache-maven-3.6.3 ]; then
+  maven_setup
+  M2_HOME=$(pwd)/apache-maven-3.6.3
+fi
+
+echo "Creating link on drill-distrib.conf and drill-override.conf"
+ln -s ${DRILL_HOME}/conf/drill-distrib.conf ./conf/drill-distrib.conf
+ln -s ${DRILL_HOME}/conf/drill-override.conf ./conf/drill-override.conf
 
 gen_config() {
     echo "Create drillTestConfig file..."
@@ -46,8 +66,7 @@ gen_config() {
     fi
 
 cat << EOF > ./conf/drillTestConfig.properties
-HADOOP_INSTALL_LOC=/opt/mapr
-HADOOP_HOME=${HADOOP_INSTALL_LOC}/hadoop/hadoop-${HADOOP_MAPR_VERSION}
+HADOOP_HOME=/opt/mapr/hadoop/hadoop-${HADOOP_MAPR_VERSION}
 DRILL_HOME=${DRILL_HOME}
 
 DRILL_TEST_DATA_DIR=framework/resources
@@ -85,61 +104,27 @@ EOF
 
 }
 
-update_symlinks() {
-    echo "Creating/Updating symlinks for necessary drill's jars"
+update_components_build_version_in_pom_file(){
+  mapr_home='/opt/mapr'
+  hadoop_version=$(cat ${mapr_home}/hadoop/hadoopversion)
 
-    if [ ! -d ${mainDir}/jars ]; then
-        echo "Creating jars directory"
-        mkdir ${mainDir}/jars
-    fi
+  drill_build_version=$(ls ${DRILL_HOME}/jars/ | grep "drill-jdbc-storage" | head -n 1 | sed 's/^drill-jdbc-storage-\(.*\).jar$/\1/')
+  hadoop_build_version=$(ls ${mapr_home}/hadoop/hadoop-${hadoop_version}/share/hadoop/common | grep hadoop | head -n 1 | sed 's/.jar//;s/-tests//' | awk '{ split($0,a,/^([a-zA-Z]*-)*/); print a[2] }')
+  mapr_core_build_version=$(ls ${mapr_home}/lib/ | grep maprfs | head -n 1 | sed 's/.jar//;s/-tests//' | awk '{ split($0,a,/^([a-zA-Z]*-)*/); print a[2] }')
+  zookeeper_build_version=$(ls ${mapr_home}/lib/ | grep "zookeeper" | head -n 1 | sed 's/^zookeeper-\(.*\).jar$/\1/')
 
-    ln -sf ${DRILL_HOME}/jars/drill-hive-exec-shaded-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/drill-auth-mechanism-maprsasl-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/drill-common-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/drill-java-exec-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/drill-jdbc-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/drill-memory-base-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/drill-protocol-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/drill-rpc-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/drill-shaded-guava-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/vector-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/ext/zookeeper-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/classb/reflections-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/classb/javax.servlet-api-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/avatica-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/commons-codec-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/commons-collections-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/commons-configuration-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/config-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/curator-client-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/curator-framework-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/curator-recipes-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/curator-x-discovery-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/guava-shaded-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/hadoop-auth-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/hadoop-common-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/hadoop-yarn-common-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/hppc-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/jackson-annotations-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/jackson-core-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/jackson-databind-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/jetty-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/jcl-over-slf4j-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/maprfs-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/metrics-core-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/metrics-jmx-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/metrics-jvm-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/netty-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/protobuf-java-* ${mainDir}/jars/.
-    ln -sf ${DRILL_HOME}/jars/3rdparty/xml-apis-*.jar ${mainDir}/jars/.
+  echo Drill build version ${drill_build_version} will be set in pom.xml
+  echo Hadoop version ${hadoop_build_version} will be set in pom.xml
+  echo Mapr core build version ${mapr_core_build_version} will be set in pom.xml
+  echo Zookeeper build version ${zookeeper_build_version} will be set in pom.xml
+
+  sed -i "1,/<drill.version>.*<\/drill.version>/ s/<drill.version>.*<\/drill.version>/<drill.version>${drill_build_version}<\/drill.version>/1" framework/pom.xml
+  sed -i "1,/<hadoop.version>.*<\/hadoop.version>/ s/<hadoop.version>.*<\/hadoop.version>/<hadoop.version>${hadoop_build_version}<\/hadoop.version>/1" framework/pom.xml
+  sed -i "1,/<mapr.core.version>.*<\/mapr.core.version>/ s/<mapr.core.version>.*<\/mapr.core.version>/<mapr.core.version>${mapr_core_build_version}<\/mapr.core.version>/1" framework/pom.xml
+  sed -i "1,/<zookeeper.version>.*<\/zookeeper.version>/ s/<zookeeper.version>.*<\/zookeeper.version>/<zookeeper.version>${zookeeper_build_version}<\/zookeeper.version>/1" framework/pom.xml
 }
 
-maven_setup
-update_symlinks
-
-echo "Creating link on drill-distrib.conf and drill-override.conf"
-ln -sf ${DRILL_HOME}/conf/drill-distrib.conf ./conf/drill-distrib.conf
-ln -sf ${DRILL_HOME}/conf/drill-override.conf ./conf/drill-override.conf
+update_components_build_version_in_pom_file
 
 if [ ! -f ./conf/drillTestConfig.properties ]; then
     gen_config
