@@ -37,8 +37,41 @@ done
 # This version of test launching is simplified and only appiciable for EEP-9.x Maprsasl secure clusters.
 # TODO: later on, after making all tests stable - add the ability to launch tests for PAM auth.
 
-java $DRILL_TEST_FRAMEWORK_JAVA_OPTS -Xss40m --add-opens java.base/jdk.internal.misc=ALL-UNNAMED -cp .:conf/:${DRILL_CP}:${JDBC_DRIVER_CP}:framework/target/framework-1.0.0-SNAPSHOT-shaded.jar -Ddrill.customAuthFactories=org.apache.drill.exec.rpc.security.maprsasl.MapRSaslFactory -Dzookeeper.sasl.client=true -Dfs.mapr.bailout.on.library.mismatch=false -Djava.io.tmpdir=/tmp/drill/tests -Djava.security.auth.login.config=/opt/mapr/conf/mapr.login.conf -Dzookeeper.saslprovider=com.mapr.security.maprsasl.MaprSaslProvider org.apache.drill.test.framework.TestDriver "${ARGS[@]}"
-
+# Detect the major Java version
+JAVA_VERSION=$(java -version 2>&1 | awk -F[\".] '/version/ {print $2}')
+if [[ "$JAVA_VERSION" -ge 17 ]]; then
+  # Java 17 or 21
+  java $DRILL_TEST_FRAMEWORK_JAVA_OPTS -Xss40m \
+    --add-opens java.base/java.lang=ALL-UNNAMED \
+    -XX:+UseParallelGC \
+    --add-opens java.base/java.net=ALL-UNNAMED \
+    --add-opens java.base/java.nio=ALL-UNNAMED \
+    --add-opens java.base/java.util=ALL-UNNAMED \
+    --add-opens java.base/java.util.concurrent.atomic=ALL-UNNAMED \
+    --add-opens java.base/java.util.regex=ALL-UNNAMED \
+    --add-opens java.base/java.time=ALL-UNNAMED \
+    --add-opens java.base/jdk.internal.misc=ALL-UNNAMED \
+    -cp .:conf/:${DRILL_CP}:${JDBC_DRIVER_CP}:framework/target/framework-1.0.0-SNAPSHOT-shaded.jar \
+    -Ddrill.customAuthFactories=org.apache.drill.exec.rpc.security.maprsasl.MapRSaslFactory \
+    -Dzookeeper.sasl.client=true \
+    -Dfs.mapr.bailout.on.library.mismatch=false \
+    -Djava.io.tmpdir=/tmp/drill/tests \
+    -Djava.security.auth.login.config=/opt/mapr/conf/mapr.login.conf \
+    -Dzookeeper.saslprovider=com.mapr.security.maprsasl.MaprSaslProvider \
+    org.apache.drill.test.framework.TestDriver "${ARGS[@]}"
+else
+  # Java 8 or 11
+  java $DRILL_TEST_FRAMEWORK_JAVA_OPTS -Xss40m \
+    --add-opens java.base/jdk.internal.misc=ALL-UNNAMED \
+    -cp .:conf/:${DRILL_CP}:${JDBC_DRIVER_CP}:framework/target/framework-1.0.0-SNAPSHOT-shaded.jar \
+    -Ddrill.customAuthFactories=org.apache.drill.exec.rpc.security.maprsasl.MapRSaslFactory \
+    -Dzookeeper.sasl.client=true \
+    -Dfs.mapr.bailout.on.library.mismatch=false \
+    -Djava.io.tmpdir=/tmp/drill/tests \
+    -Djava.security.auth.login.config=/opt/mapr/conf/mapr.login.conf \
+    -Dzookeeper.saslprovider=com.mapr.security.maprsasl.MaprSaslProvider \
+    org.apache.drill.test.framework.TestDriver "${ARGS[@]}"
+fi
 #if [[ $HADOOP_VERSION == *"mapr"* ]] || [[ $HADOOP_VERSION == *"eep"* ]]
 #then
 #  if [ ${AUTH_MECHANISM} == "MAPRSASL" ]; then
