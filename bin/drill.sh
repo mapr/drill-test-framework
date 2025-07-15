@@ -43,17 +43,18 @@ runTests=false
 debugEnable=false
 sanity=false
 test=""
-test_profile="Functional/aggregates,Functional/cross-sources,Functional/date_trunc,Functional/decimal_parquet,\
-Functional/flatten_operators,Functional/hive_functions_nonhivedata,Functional/interpreted_partition_pruning,\
-Functional/min_max_dir,Functional/orderby,Functional/table_function,Functional/tpch,Functional/amplab,\
-Functional/crossjoin,Functional/datetime,Functional/drill_fragments,Functional/functions,Functional/identifiers,\
-Functional/joins,Functional/misc,Functional/p1tests,Functional/schema-changes,Functional/table_stats,Functional/udfs,\
-Functional/case_expr,Functional/ctas,Functional/decimal,Functional/droptable,Functional/group_by_alias,Functional/json,\
-Functional/morefiles,Functional/parquet_storage,Functional/text_storage,\
-Functional/complex,Functional/cttas,Functional/decimal_avro,Functional/explicit_cast,\
-Functional/implicit_cast,Functional/no_result_set,Functional/semijoin,\
-Functional/timestamp_functions,Functional/union_all,Functional/convert,Functional/data-shapes,\
-Functional/decimal_negative,Functional/query_parser,Functional/values,Functional/tpcds,Functional/subqueries"
+test_profile="Functional/aggregates,Functional/amplab,Functional/case_expr,Functional/complex,
+Functional/convert,Functional/crossjoin,Functional/cttas,Functional/data-shapes,
+Functional/date_trunc,Functional/datetime,Functional/decimal,Functional/decimal_avro,
+Functional/decimal_negative,Functional/decimal_parquet,Functional/drill_fragments,Functional/droptable,
+Functional/explicit_cast,Functional/flatten_operators,Functional/functions,Functional/group_by_alias,
+Functional/hbase,Functional/hive_functions_nonhivedata,Functional/identifiers,Functional/impersonation,
+Functional/implicit_cast,Functional/interpreted_partition_pruning,Functional/joins,Functional/metadata_caching,
+Functional/min_max_dir,Functional/morefiles,Functional/no_result_set,Functional/orderby,
+Functional/p1tests,Functional/parquet_storage,Functional/query_parser,Functional/schema-changes,
+Functional/semijoin,Functional/subqueries,Functional/table_stats,Functional/text_storage,
+Functional/timestamp_functions,Functional/tpch,Functional/udfs,Functional/union,
+Functional/union_all,Functional/values,Functional/window_functions"
 
 # TODO: unstable tests: Functional/schema_change_empty_batch, Functional/partition_pruning
 

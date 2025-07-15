@@ -1,0 +1,252 @@
+def utils
+
+def vmlabBranch = params.VMLAB_BRANCH
+def core = params.CORE
+def mep = params.MEP
+def testsBranch = params.TESTS_BRANCH
+def security = params.SECURITY
+def centos_version = params.CENTOS_VERSION
+def java_version = params.JAVA_VERSION
+def tests = params.TESTS
+def stageType = params.STAGE
+def runSanity = params.RUN_SANITY
+def enableCleanup = params.ENABLE_CLEANUP
+def sendSlackReport = params.SLACK
+
+def MASTER_CPU = 24
+def MASTER_RAM = 74000
+def SLAVE_CPU = 8
+def SLAVE_RAM = 32000
+
+def MIRROR_HOST = '10.163.165.47/repos'
+def mepLC = mep.toLowerCase()
+
+def junitReports = 'junitReports'
+
+def uniqueJobId = System.currentTimeMillis()
+String workspace = """drill-$uniqueJobId"""
+String hostnamePrefix = "node"
+String vmlabDir = """drill-vmlab-$uniqueJobId"""
+
+def node1RemoteConfig = [:]
+
+node1RemoteConfig.name = """${hostnamePrefix}1"""
+node1RemoteConfig.user = 'mapr'
+node1RemoteConfig.password = 'mapr'
+node1RemoteConfig.allowAnyHosts = true
+
+String interfaceIp = ''
+
+def maprHomeDir = '/home/mapr'
+def drillTestsHomeDir = './'
+def repoName = "drill-test-framework";
+
+pipeline {
+    options {
+        timeout(time: 7, unit: 'HOURS')
+    }
+
+    agent {
+        node {
+            label 'worker'
+            customWorkspace """$workspace"""
+        }
+    }
+
+    parameters {
+        //using Hive branch on purpose. There are not so many differences to create a new one
+        string(name: 'VMLAB_BRANCH', defaultValue: 'hive-jenkins-vmlab', description: 'VMLAB branch to checkout. In this case hive-jenkins-vmlab is a special branch for Hive&Drill Jenkins')
+        choice(name: 'CORE', choices: ['v7.10.0', 'v7.9.0', 'v7.8.0', 'v7.7.0', 'v7.6.0', 'v7.5.0','v7.4.0', 'v7.3.0', 'v7.2.0', 'v7.1.0'], description: 'Specify CORE version. Please see the matrix: https://docs.ezmeral.hpe.com/datafabric-customer-managed/73/InteropMatrix/Component_versions_all_MEPs.html, make sure you are using correct repo for dev packages')
+        choice(name: 'MEP', choices: ['MEP-9.4.1', 'MEP-9.4.0', 'MEP-9.3.2', 'MEP-9.3.1', 'MEP-9.3.0', 'MEP-9.2.2', 'MEP-9.2.1', 'MEP-9.2.0', 'MEP-9.1.2', 'MEP-9.1.1', 'MEP-9.1.0'], description: 'Specify MEP/EEP version. Please see the matrix: https://docs.ezmeral.hpe.com/datafabric-customer-managed/73/InteropMatrix/Component_versions_all_MEPs.html, make sure you are using correct repo for dev packages')
+        string(name: 'TESTS_BRANCH', defaultValue: 'drill-1.21.x-eep9-master-local-res', description: 'the default branch is drill-1.21.x-eep9-master-local-res')
+        choice(name: 'SECURITY', choices: ['maprsasl', 'kerberos', 'none'], description: 'currently works and tested only with maprsasl')
+        choice(name: 'CENTOS_VERSION', choices: ['rocky84', 'centos83', 'centos82', 'centos81', 'ubuntu1804', 'ubuntu2004'], description: 'Please see a matrix: https://docs.ezmeral.hpe.com/datafabric-customer-managed/73/InteropMatrix/r_EEP_6.4.0_OS_support.html')
+        choice(name: 'JAVA_VERSION', choices: ['openjdk11'], description: 'Java 8 only for MEP 6.x, Java 11 for all others, Java 17 is not supported by Jenkins infrastructure so far')
+        string(name: 'TESTS', defaultValue: '*', description: 'Tests to be executed. Use * for all. Single/multiple test format: subqueries, tpch, hbase, etc')
+        choice(name: 'STAGE', choices: ['releasesdev', 'releases', 'prestage', 'stage', 'package'], description: 'The repo for Core and MEP/EEP, PAY ATTENTION: some version might not be available in package')
+        booleanParam(name: 'RUN_SANITY', defaultValue: false, description: 'Run only sanity tests, make sure to specify tests in TESTS if RUN_SANITY is unchecked')
+        booleanParam(name: 'ENABLE_CLEANUP', defaultValue: true, description: 'If disabled, created env will not be cleaned up automatically')
+        booleanParam(name: 'SLACK', defaultValue: true, description: 'If disabled, slack reports will not be send')
+    }
+
+    stages {
+
+        stage('VM cleanup') {
+            steps {
+                script {
+                    utils = load("./jenkins/pipeline_utils.groovy")
+
+                    String vmsRequestOutput = sh returnStdout: true, script: """virsh list --all | while read a b c; do echo \$b; done"""
+                    String[] vms = vmsRequestOutput.split("\n")
+
+                    for (String vm : vms) {
+                        if (vm.contains("node")) {
+                            sh returnStatus: false, script: "virsh destroy $vm || true"
+                            sh returnStatus: false, script: "virsh undefine $vm || true"
+                        }
+                    }
+                    sh returnStatus: true, script: 'find /var/lib/libvirt/images/ ! -name \'http*\' -type f -exec rm -f {} +'
+                }
+            }
+        }
+
+        stage('Prepare VMLAB') {
+            steps {
+                dir(vmlabDir) {
+                    git branch: vmlabBranch,
+                            changelog: false,
+                            poll: false,
+                            url: "git@github.com:mapr/private-vmlab.git",
+                            credentialsId: 'wildass-ssh'
+
+                    echo "Updating nodes.yaml"
+
+                    sh "rm nodes.yaml"
+                    sh "cp tests-nodes-drill.yaml nodes.yaml"
+
+                    script {
+
+                        for (int nodeIndex = 1; nodeIndex < 4; nodeIndex++) {
+                            oldNodeName = """node$nodeIndex"""
+                            newNodeName = """$hostnamePrefix$nodeIndex"""
+
+                            sh """sed -i "s@"$oldNodeName"@"$newNodeName"@g" nodes.yaml"""
+                        }
+                    }
+
+                    echo 'Updating config.rb'
+
+                    script {
+                        String freeNetIpPrefix = utils.getFreeNetworkIpPrefix()
+                        node1RemoteConfig.host = """${freeNetIpPrefix}11"""
+                        interfaceIp = """${freeNetIpPrefix}1"""
+
+                        echo """Picked IP address: $interfaceIp"""
+
+                        utils.removeHostFromKnownHosts(node1RemoteConfig.host)
+
+                        sh """
+                            sed -i "s~  {:use => true, :values => \\[RAM, CPU, 'nodes.yaml'\\]}, # node1~  {:use => true, :values => [$MASTER_RAM, $MASTER_CPU, 'nodes.yaml']}, # node1~g" config.rb
+                            sed -i 's/version_core:.*/version_core: "$core"/' nodes.yaml
+                            sed -i 's/version_eco:.*/version_eco: "$mep"/' nodes.yaml
+                            sed -i 's/repo:.*/repo: "$stageType"/' nodes.yaml
+                            sed -i 's/security:.*/security: $security/' nodes.yaml
+                            sed -i "s/java_version:.*/java_version: $java_version/g" nodes.yaml
+                            cat > overrides.rb <<EOF
+RAM = $SLAVE_RAM
+CPU = $SLAVE_CPU
+OS = '$centos_version'
+NETWORK_HOST = -> (n) { "$hostnamePrefix#{n}.cluster.com" }
+NETWORK_IP = -> (n) { "$freeNetIpPrefix#{n + 10}/24" }
+PROXY_URL = ''
+CACHE_MODE = 'unsafe'
+EOF
+                        """
+                }
+
+                    sh """
+                        sed -i "s/      version.*/      version: $testsBranch/g" roles/tests-hive/tasks/main.yaml
+                     """
+                }
+            }
+        }
+
+        stage('Vagrant UP') {
+            steps {
+                retry(3) {
+                    dir(vmlabDir) {
+                        sh 'vagrant up'
+                    }
+                }
+            }
+        }
+
+        stage('Clone Repo, Copy Tests and Test Data') {
+            steps {
+                dir(vmlabDir) {
+                    script {
+                        utils.cloneDrillTests(testsBranch)
+                        sh """sshpass -p${node1RemoteConfig.password} scp -r -o StrictHostKeyChecking=no ${repoName} ${node1RemoteConfig.user}@${node1RemoteConfig.host}:${maprHomeDir}/${repoName}"""
+                        //dir with test data was preliminary copied to each Jenkins node where tests are going to be executed. Contact Olga Andreychenko or Konstantin Harasov if you need another copy
+                        def testDataDirOnJenkinsHost = "/root/drill_test_data_do_not_remove"
+                        sh """sshpass -p${node1RemoteConfig.password} scp -r -o StrictHostKeyChecking=no ${testDataDirOnJenkinsHost}/* ${node1RemoteConfig.user}@${node1RemoteConfig.host}:${maprHomeDir}/${repoName}/framework/resources/Datasources/"""
+                    }
+                }
+            }
+        }
+
+        stage('Configure tests') {
+            steps {
+                script {
+                    sshCommand remote: node1RemoteConfig, command: """cd ${maprHomeDir}/${repoName} && ./bin/configure.sh && ./bin/drill.sh -b --download"""
+                }
+            }
+        }
+
+        stage('Run tests') {
+            steps {
+                script {
+                    catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+
+                        def sanityTests = [
+                            'aggregates', 'decimal_parquet', 'joins', 'subqueries', 'tpch', 'hbase'
+                        ]
+
+                        def otherTests = [
+                            'amplab', 'case_expr', 'complex', 'convert', 'crossjoin', 'cttas', 'data-shapes',
+                            'date_trunc', 'datetime', 'decimal', 'decimal_avro', 'decimal_negative', 'drill_fragments',
+                            'droptable', 'explicit_cast', 'flatten_operators', 'functions', 'group_by_alias',
+                            'hive_functions_nonhivedata', 'identifiers', 'impersonation', 'implicit_cast',
+                            'interpreted_partition_pruning', 'metadata_caching', 'min_max_dir', 'morefiles',
+                            'no_result_set', 'orderby', 'p1tests', 'parquet_storage', 'query_parser', 'schema-changes',
+                            'semijoin', 'table_stats', 'text_storage', 'timestamp_functions', 'udfs', 'union',
+                            'union_all', 'window_functions'
+                        ]
+
+                        def runTest = { String test ->
+                            def command = "cd ${maprHomeDir}/${repoName} && ./bin/drill.sh --run --test Functional/${test}"
+                            sshCommand remote: node1RemoteConfig, command: command
+                        }
+
+                        if (runSanity.toBoolean()) {
+                            echo "The following tests are going to be executed: ${sanityTests.join(', ')}"
+                            sanityTests.each { runTest(it) }
+                        } else if (tests != '*') {
+                            echo "The following tests are going to be executed: ${tests}"
+                            tests.split(',').collect { it.trim() }.each { runTest(it) }
+                        } else {
+                            def allTests = sanityTests + otherTests
+                            echo "The following tests are going to be executed: ${allTests.join(', ')}"
+                            allTests.each { runTest(it) }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                if (sendSlackReport.toBoolean()) {
+                    def details = "Please, check build Console Output for details."
+                    def info_message = """MEP: ${mep}\nCore: ${core}\nSecurity Type: ${security}\nTest branch: ${testsBranch}\n${details}"""
+                    utils.slack_send(currentBuild.result, info_message)
+                }
+
+                if (enableCleanup.toBoolean()) {
+                    dir(vmlabDir) {
+                        sh 'if pgrep ruby; then pkill ruby; fi'
+                        sh 'vagrant destroy -f'
+                    }
+
+                    utils.destroyVirtualNetworkByIp(interfaceIp)
+                    utils.removeHostFromKnownHosts(node1RemoteConfig.host)
+                    cleanWs()
+                } else {
+                    echo """Cleanup disabled. Make sure to shut down VMs manually. Workspace location: $workspace"""
+                }
+            }
+        }
+    }
+}
