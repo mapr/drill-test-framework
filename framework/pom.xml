@@ -166,6 +166,27 @@
       <artifactId>testng</artifactId>
       <version>${testng.version}</version>
     </dependency>
+        <!-- Lock the FIPS 2.x family -->
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bc-fips</artifactId>
+      <version>2.1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcutil-fips</artifactId>
+      <version>2.1.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bctls-fips</artifactId>
+      <version>2.1.22</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcpkix-fips</artifactId>
+      <version>2.1.10</version>
+    </dependency>
   </dependencies>
   <repositories>
     <repository>
