@@ -199,7 +199,7 @@
   <repositories>
     <repository>
       <id>mapr-releases</id>
-      <url>https://repository.mapr.com/maven/</url>
+      <url>http://repository.mapr.com/maven/</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
