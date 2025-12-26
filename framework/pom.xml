@@ -199,7 +199,7 @@
   <repositories>
     <repository>
       <id>mapr-releases</id>
-      <url>http://repository.mapr.com/maven/</url>
+      <url>https://repository.mapr.com/maven/</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
@@ -219,7 +219,7 @@
     </repository>
     <repository>
       <id>mapr-snapshot_ebf</id>
-      <url>http://df-mvn-stage.mip.storage.hpecorp.net/nexus/content/repositories/releases/</url>
+      <url>http://df-mvn-stage.ftc.hcocto.hpecorp.net/nexus/content/repositories/releases/</url>
       <releases>
         <enabled>true</enabled>
       </releases>
