@@ -7,7 +7,7 @@
 			<protocol>http</protocol>
 			<host>web-proxy.corp.hpecorp.net</host>
 			<port>8080</port>
-			<nonProxyHosts>df-mvn-dev.mip.storage.hpecorp.net</nonProxyHosts>
+			<nonProxyHosts>df-mvn-dev.ftc.hcocto.hpecorp.net</nonProxyHosts>
 		</proxy>
 		<proxy>
 			<id>drill-proxy</id>
