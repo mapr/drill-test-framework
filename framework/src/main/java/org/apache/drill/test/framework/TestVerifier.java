@@ -40,6 +40,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.common.collect.Lists;
 import org.apache.drill.test.framework.TestCaseModeler.TestMatrix;
 import org.apache.log4j.Logger;
@@ -78,7 +80,50 @@ public class TestVerifier {
   public TestVerifier() {
 	this.checkType = false;
   }
-  
+
+  /**
+   * ObjectMapper used to canonicalize JSON-string column values. Field entries
+   * are ordered by key so field ordering never affects comparison.
+   */
+  private static final ObjectMapper JSON_NORMALIZER =
+      new ObjectMapper().configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
+
+  /**
+   * Canonicalizes a JSON object/array string so that JVM-dependent numeric
+   * formatting does not cause spurious data-verification failures. Complex
+   * columns (e.g. a map produced by {@code flatten}) arrive as opaque JSON
+   * strings and are compared via {@code String.equals}, which is sensitive to
+   * {@code Double.toString} changing between JDK versions (17 emits up to 17
+   * significant digits, 19+ emit the shortest round-trippable form). Parsing
+   * each floating-point literal into a {@code double} and re-serializing it
+   * through the running JVM makes expected and actual converge on the same
+   * text regardless of the JDK, since both files are normalized identically.
+   * Non-JSON strings (and anything that fails to parse) are returned unchanged.
+   *
+   * @param value raw column value read from a result-set file
+   * @return canonicalized value, or the original if it is not JSON
+   */
+  private static String canonicalizeJson(String value) {
+    if (value == null) {
+      return null;
+    }
+    String trimmed = value.trim();
+    if (trimmed.isEmpty()) {
+      return value;
+    }
+    char first = trimmed.charAt(0);
+    if (first != '{' && first != '[') {
+      return value;
+    }
+    try {
+      JsonNode node = JSON_NORMALIZER.readTree(trimmed);
+      return JSON_NORMALIZER.writeValueAsString(node);
+    } catch (IOException e) {
+      // Not valid JSON; leave it untouched and compare as-is.
+      return value;
+    }
+  }
+
   /**
    * Verifies query output from sqlline execution.
    * 
@@ -247,7 +292,7 @@ public class TestVerifier {
       List<Object> typedFields = Lists.newArrayList();
       for (int i = 0; i < fields.length; i++) {
         if (!checkType || types.size() == 0) {
-          typedFields.add(fields[i]);
+          typedFields.add(canonicalizeJson(fields[i]));
           continue;
         }
         if (fields[i].equals("null")) {
@@ -274,11 +319,11 @@ public class TestVerifier {
             typedFields.add(new BigDecimal(fields[i]));
             break;
           default:
-            typedFields.add(fields[i]);
+            typedFields.add(canonicalizeJson(fields[i]));
             break;
           }
         } catch (Exception e) {
-          typedFields.add(fields[i]);
+          typedFields.add(canonicalizeJson(fields[i]));
         }
       }
       ColumnList cl = new ColumnList(types, typedFields, matrix);
