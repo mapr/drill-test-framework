@@ -374,8 +374,11 @@
                 <configuration>
                   <target>
                     <!-- Copies and unpacks all .tgz resources -->
-                    <untar src="${project.basedir}/resources/Datasources/tpcds_hivegenerated_parquet.tgz"
-                           dest="${project.basedir}/resources/Datasources" compression="gzip" />
+                    <!-- DATA LOSS 2026-07: tpcds_hivegenerated_parquet.tgz is gone (not in the drill_res backup).
+                         Disabled so the build can complete. Affects Advanced/tpcds/tpcds_sf1/hive-generated-parquet/* only.
+                         Re-enable if the archive is ever recovered. -->
+                    <!-- <untar src="${project.basedir}/resources/Datasources/tpcds_hivegenerated_parquet.tgz"
+                           dest="${project.basedir}/resources/Datasources" compression="gzip" /> -->
                     <untar src="${project.basedir}/resources/Datasources/tpcds1_hive1dot2_withdate.tgz"
                            dest="${project.basedir}/resources/Datasources" compression="gzip" />
                     <untar src="${project.basedir}/resources/Datasources/complexga100k.json.tgz"
@@ -404,8 +407,11 @@
                            dest="${project.basedir}/resources/Datasources/tpcds/sf1/parquet" compression="gzip" />
                     <untar src="${project.basedir}/resources/Datasources/tpcds_text_sf1.tgz"
                            dest="${project.basedir}/resources/Datasources/tpcds/sf1/text" compression="gzip" />
-                    <untar src="${project.basedir}/resources/Datasources/tpcds_sf1_maprdb_json.tgz"
-                           dest="${project.basedir}/resources/Datasources/tpcds/sf1/maprdb/json" compression="gzip" />
+                    <!-- DATA LOSS 2026-07: tpcds_sf1_maprdb_json.tgz is gone (not in the drill_res backup).
+                         Disabled so the build can complete. Affects Advanced/tpcds/tpcds_sf1/{original,sanity}/maprdb/json only.
+                         Re-enable if the archive is ever recovered. -->
+                    <!-- <untar src="${project.basedir}/resources/Datasources/tpcds_sf1_maprdb_json.tgz"
+                           dest="${project.basedir}/resources/Datasources/tpcds/sf1/maprdb/json" compression="gzip" /> -->
                     <untar src="${project.basedir}/resources/Datasources/md1119_parquet.tgz"
                            dest="${project.basedir}/resources/Datasources/hive_storage" compression="gzip" />
                   </target>
