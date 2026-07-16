@@ -7,7 +7,9 @@
 			<protocol>http</protocol>
 			<host>web-proxy.corp.hpecorp.net</host>
 			<port>8080</port>
-			<nonProxyHosts>df-mvn-dev.ftc.hcocto.hpecorp.net</nonProxyHosts>
+			<!-- Must cover BOTH internal Nexus hosts (df-mvn-dev and df-mvn-stage);
+			     routing df-mvn-stage through web-proxy returns 504 and fails dependency resolution. -->
+			<nonProxyHosts>*.ftc.hcocto.hpecorp.net</nonProxyHosts>
 		</proxy>
 		<proxy>
 			<id>drill-proxy</id>
