@@ -21,4 +21,7 @@ chown "$ATS_USER" "$PWFILE"; chmod 600 "$PWFILE"
 mkdir -p /home/$U/data
 printf 'id,name\n1,alice\n2,bob\n3,carol\n' > /home/$U/data/people.csvh
 chown -R $U:$U /home/$U/data
+# Drill checks workspace access as the Drill user via FileSystem.access(); over SFTP the owner is a numeric
+# uid, so a 700 dir makes the workspace silently disappear. Keep the test data world-readable.
+chmod 755 /home/$U /home/$U/data; chmod 644 /home/$U/data/people.csvh
 echo "sftp test user $U ready (password in $PWFILE)"
