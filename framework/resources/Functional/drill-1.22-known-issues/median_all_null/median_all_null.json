@@ -1,0 +1,28 @@
+{
+  "testId": "drill-1.22-known-median-all-null",
+  "type": "group",
+  "negative": false,
+  "description": "NEW (MD-6687 verification): MEDIAN over an all-NULL group returns 0 instead of NULL",
+  "categories": [
+    "functional",
+    "known_issue"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/drill-1.22-delta/median",
+      "dest": "drill-1.22-delta/median"
+    }
+  ]
+}

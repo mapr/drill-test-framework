@@ -1,0 +1,29 @@
+{
+  "testId": "drill-1.22-known-http-csv-header-extraction",
+  "type": "group",
+  "negative": false,
+  "description": "NEW (MD-6687 verification): HTTP csvOptions.headerExtractionEnabled=true consumes the header twice (first data row becomes the header)",
+  "categories": [
+    "functional",
+    "known_issue",
+    "http_mock"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "gen",
+      "src": "Datasources/drill-1.22-delta/http_mock/setup_http.sh",
+      "dest": ""
+    }
+  ]
+}

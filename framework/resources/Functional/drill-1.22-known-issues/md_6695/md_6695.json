@@ -1,0 +1,22 @@
+{
+  "testId": "drill-1.22-known-md-6695",
+  "type": "group",
+  "negative": false,
+  "description": "MD-6695 native regexp_extract(str,pat,idx) NPE when the pattern does not match",
+  "categories": [
+    "functional",
+    "known_issue"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": []
+}
