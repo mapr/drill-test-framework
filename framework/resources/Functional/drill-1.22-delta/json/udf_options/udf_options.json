@@ -1,0 +1,22 @@
+{
+  "testId": "drill-1.22-delta-json-udf-options",
+  "type": "group",
+  "negative": false,
+  "description": "DRILL-8501 convert_fromJSON honours session JSON options (MD-6687 delta)",
+  "categories": [
+    "functional",
+    "drill-1.22-delta"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": []
+}

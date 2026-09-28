@@ -1,0 +1,22 @@
+{
+  "testId": "drill-1.22-delta-dns",
+  "type": "group",
+  "negative": false,
+  "description": "DRILL-8413 DNS UDFs, loopback only (MD-6687 delta)",
+  "categories": [
+    "functional",
+    "drill-1.22-delta"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.res",
+      "verification-type": [
+        "regex"
+      ]
+    }
+  ],
+  "datasources": []
+}

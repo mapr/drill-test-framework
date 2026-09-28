@@ -1,0 +1,29 @@
+{
+  "testId": "drill-1.22-delta-http-offset",
+  "type": "group",
+  "negative": false,
+  "description": "DRILL-8524 OFFSET paginator must not duplicate offset/limit params (MD-6687 delta)",
+  "categories": [
+    "functional",
+    "drill-1.22-delta",
+    "http_mock"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "gen",
+      "src": "Datasources/drill-1.22-delta/http_mock/setup_http.sh",
+      "dest": ""
+    }
+  ]
+}

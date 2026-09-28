@@ -1,0 +1,28 @@
+{
+  "testId": "drill-1.22-delta-parquet-micros",
+  "type": "group",
+  "negative": false,
+  "description": "DRILL-8492 TIME/TIMESTAMP_MICROS read as BIGINT (MD-6687 delta)",
+  "categories": [
+    "functional",
+    "drill-1.22-delta"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.e_tsv",
+      "verification-type": [
+        "in-memory"
+      ]
+    }
+  ],
+  "datasources": [
+    {
+      "mode": "cp",
+      "src": "Datasources/drill-1.22-delta/parquet_micros",
+      "dest": "drill-1.22-delta/parquet_micros"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "testId": "drill-1.22-delta-regexp-extract-negative",
+  "type": "group",
+  "negative": true,
+  "description": "DRILL-8402 REGEXP_EXTRACT invalid pattern must raise an error (MD-6687 delta)",
+  "categories": [
+    "functional",
+    "drill-1.22-delta",
+    "negative"
+  ],
+  "matrices": [
+    {
+      "query-file": ".*.sql",
+      "schema": "dfs.drillTestDir",
+      "output-format": "tsv",
+      "expected-file": ".*.res",
+      "verification-type": [
+        "regex"
+      ]
+    }
+  ],
+  "datasources": []
+}

@@ -1,0 +1,2 @@
+-- expected: from the file + DRILL-8450 Typifier: numerics->FLOAT8, true/false->BIT, ISO date->DATE, ISO instant->TIMESTAMP, time/other->VARCHAR (matches upstream TestXMLReader.testAllTextMode)
+select typeof(int_field) a, typeof(bigint_field) b, typeof(float_field) c, typeof(double_field) d, typeof(boolean_field) e, typeof(date_field) f, typeof(time_field) g, typeof(timestamp_field) h, typeof(string_field) i from table(`drill-1.22-delta/xml/simple_with_datatypes.xml`(type => 'xml', dataLevel => 2, allTextMode => 'false')) limit 1

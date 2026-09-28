@@ -1,0 +1,66 @@
+{
+  "name": "md6687_http",
+  "config": {
+    "type": "http",
+    "enabled": true,
+    "enhanced": true,
+    "connections": {
+      "echo_headers": {
+        "url": "http://127.0.0.1:@PORT@/echo/headers",
+        "requireTail": false,
+        "method": "GET",
+        "inputType": "json",
+        "params": [
+          "header.X-Md6687-Token"
+        ]
+      },
+      "header_index": {
+        "url": "http://127.0.0.1:@PORT@/paged/headerindex",
+        "requireTail": false,
+        "method": "GET",
+        "inputType": "json",
+        "paginator": {
+          "method": "HEADER_INDEX",
+          "nextPageParam": "link",
+          "pageSize": 10
+        }
+      },
+      "offset_paged": {
+        "url": "http://127.0.0.1:@PORT@/paged/offset?offset=0&limit=5",
+        "requireTail": false,
+        "method": "GET",
+        "inputType": "json",
+        "paginator": {
+          "method": "OFFSET",
+          "limitParam": "limit",
+          "offsetParam": "offset",
+          "pageSize": 5
+        }
+      },
+      "csv_custom": {
+        "url": "http://127.0.0.1:@PORT@/csv/custom",
+        "requireTail": false,
+        "method": "GET",
+        "inputType": "csv",
+        "csvOptions": {
+          "delimiter": ";",
+          "quote": "'"
+        }
+      },
+      "csv_header_extraction": {
+        "url": "http://127.0.0.1:@PORT@/csv/custom",
+        "requireTail": false,
+        "method": "GET",
+        "inputType": "csv",
+        "csvOptions": {
+          "delimiter": ";",
+          "quote": "'",
+          "headerExtractionEnabled": true
+        }
+      }
+    },
+    "timeout": 10,
+    "proxyType": "direct",
+    "authMode": "SHARED_USER"
+  }
+}
